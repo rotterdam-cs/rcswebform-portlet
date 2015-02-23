@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 6.2.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_6_2_0.dtd">
+<service-builder package-path="com.rcs.dbService">
+	<author>rikad.ramadhan@rotterdam-cs.com</author>
+	<namespace>RcsWebform</namespace>
+	
+	<entity name="WebformTable" local-service="true" remote-service="true">
+		
+		<!-- Primary Key -->
+		<column name="webformTableId" type="long" primary="true" />
+		
+		<column name="portletId" type="String" />
+		<column name="webformCounter" type="String" />
+		
+		<!-- Finder Method -->
+		<finder return-type="WebformTable" name="PortletId">
+			<finder-column name="portletId" />
+		</finder>
+		
+		<finder return-type="WebformTable" name="PortletIdAndCounter">
+			<finder-column name="portletId" />
+			<finder-column name="webformCounter" />
+		</finder>
+		
+	</entity>
+	
+	<entity name="WebformColumn" local-service="true" remote-service="true">
+		
+		<!-- Primary Key -->
+		<column name="webformColumnId" type="long" primary="true" />
+		
+		<column name="webformTableId" type="long" />
+		<column name="name" type="String" />
+		<column name="type" type="int" />
+		<column name="inputType" type="int" />
+		<column name="isRequired" type="boolean" />
+ 		<column name="placeHolder" type="String" />
+		<column name="validation" type="String" />
+		<column name="customValidation" type="String" />
+		<column name="labelClass" type="String" />
+		<column name="inputClass" type="String" />
+		<column name="maxLength" type="String" />
+		
+		<finder return-type="Collection" name="WebformTableId">
+			<finder-column name="webformTableId"></finder-column>
+		</finder>
+		
+	</entity>
+	
+	<entity name="WebformRow" local-service="true" remote-service="true">
+		
+		<!-- Primary Key -->
+		<column name="webformRowId" type="long" primary="true" />
+		
+		<column name="webformTableId" type="long" />
+		<column name="updateDate" type="Date" />
+		
+		<finder return-type="Collection" name="WebformTableId">
+			<finder-column name="webformTableId" />
+		</finder>
+		
+	</entity>
+	
+	<entity name="WebformValue">
+		<!-- Primary Key -->
+		<column name="webformValueId" type="long" primary="true"/>
+		
+		<column name="webformTableId" type="long" />
+		<column name="webformColumnId" type="long" />
+		<column name="webformRowId" type="long" />
+		<column name="data" type="long" />
+		
+		<order by="asc">
+			<order-column name="webformTableId" />
+			<order-column name="webformRowId" />
+			<order-column name="webformColumnId" />
+		</order>
+		
+		<finder return-type="Collection" name="WebformTableId">
+			<finder-column name="webformTableId" />
+		</finder>
+	</entity>
+	
+</service-builder>
