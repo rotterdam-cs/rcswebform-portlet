@@ -1,7 +1,0 @@
-.classpath
-
-.settings/
-*sass-cache*
-
-*.class
-
