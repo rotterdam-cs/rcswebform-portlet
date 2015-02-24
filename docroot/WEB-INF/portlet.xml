@@ -18,6 +18,12 @@
 			<short-title>rcswebform</short-title>
 			<keywords>rcswebform</keywords>
 		</portlet-info>
+		<portlet-preferences>
+			<preference>
+				<name>title</name>
+				<value>Sugestion</value>
+			</preference>
+		</portlet-preferences>
 		<security-role-ref>
 			<role-name>administrator</role-name>
 		</security-role-ref>

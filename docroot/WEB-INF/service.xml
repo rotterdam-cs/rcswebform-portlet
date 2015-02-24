@@ -11,6 +11,7 @@
 		
 		<column name="portletId" type="String" />
 		<column name="webformCounter" type="String" />
+		<column name="name" type="String" />
 		
 		<!-- Finder Method -->
 		<finder return-type="WebformTable" name="PortletId">
@@ -20,6 +21,10 @@
 		<finder return-type="WebformTable" name="PortletIdAndCounter">
 			<finder-column name="portletId" />
 			<finder-column name="webformCounter" />
+		</finder>
+		
+		<finder return-type="WebformTable" name="name">
+			<finder-column name="name" />
 		</finder>
 		
 	</entity>
