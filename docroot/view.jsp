@@ -23,6 +23,8 @@ boolean requireCaptcha = GetterUtil.getBoolean(portletPreferences.getValue("requ
 String successURL = portletPreferences.getValue("successURL", StringPool.BLANK);
 %>
 
+
+
 <portlet:actionURL var="saveDataURL">
 	<portlet:param name="<%= ActionRequest.ACTION_NAME %>" value="saveData" />
 </portlet:actionURL>
@@ -46,7 +48,7 @@ String successURL = portletPreferences.getValue("successURL", StringPool.BLANK);
 		<c:if test='<%= PortletPropsValues.VALIDATION_SCRIPT_ENABLED && SessionErrors.contains(renderRequest, "validationScriptError") %>'>
 			<liferay-util:include page="/script_error.jsp" />
 		</c:if>
-
+		<table>
 		<%
 		int i = 1;
 
@@ -64,6 +66,7 @@ String successURL = portletPreferences.getValue("successURL", StringPool.BLANK);
 			String fieldValidationErrorMessage = portletPreferences.getValue("fieldValidationErrorMessage" + i, StringPool.BLANK);
 			String position = portletPreferences.getValue("position" + i, StringPool.BLANK);
 			String placeholder = portletPreferences.getValue("placeholder" + i, StringPool.BLANK);
+			System.out.println("position "+position);
 		%>
 
 			<c:if test="<%= PortletPropsValues.VALIDATION_SCRIPT_ENABLED %>">
@@ -76,24 +79,88 @@ String successURL = portletPreferences.getValue("successURL", StringPool.BLANK);
 				</c:if>
 			</c:if>
 
-			<c:if test="<%= !fieldOptional %>">
-				<div class="hide" id="<portlet:namespace />fieldOptionalError<%= fieldName %>">
-					<span class="alert alert-error"><liferay-ui:message key="this-field-is-mandatory" /></span>
-				</div>
-			</c:if>
-
+			
+			
+			
 			<c:choose>
 				<c:when test='<%= fieldType.equals("paragraph") %>'>
 					<p class="lfr-webform" id="<portlet:namespace /><%= fieldName %>"><%= HtmlUtil.escape(fieldOptions) %></p>
 				</c:when>
-				<c:when test='<%= fieldType.equals("text") %>'>
-					<aui:input cssClass='<%= fieldOptional ? "optional" : StringPool.BLANK %>' label="<%= HtmlUtil.escape(fieldLabel) %>" name="<%= fieldName %>" value="<%= HtmlUtil.escape(fieldValue) %>" placeholder="<%= placeholder %>" />
+					<c:when test='<%= fieldType.equals("text") %>'>
+						<c:choose>
+							<c:when test='<%= position.equals("horizontal") %>'>
+								<tr>
+									<td valign="top"><%= fieldLabel %></td>
+									<td valign="top"><aui:input cssClass='<%= fieldOptional ? "optional" : StringPool.BLANK %>' label=""  name="<%= fieldName %>" value="<%= HtmlUtil.escape(fieldValue) %>" /></td> 
+									<td valign="top">
+										<c:if test="<%= !fieldOptional %>">
+											<div class="hide" id="<portlet:namespace />fieldOptionalError<%= fieldName %>">
+												<span class="alert alert-error"><liferay-ui:message key="this-field-is-mandatory" /></span>
+											</div>
+										</c:if>
+									</td>
+								</tr>
+							</c:when>
+							<c:when test='<%= position.equals("vertical") %>'>
+								<tr>
+									<td valign="top" colspan="3"><%= fieldLabel  %></td>
+								</tr>
+								<tr>
+									<td valign="top" colspan="2">
+										<aui:input cssClass='<%= fieldOptional ? "optional" : StringPool.BLANK %>' label=""  name="<%= fieldName %>" value="<%= HtmlUtil.escape(fieldValue) %>" />
+									</td>
+									<td valign="top">
+										<c:if test="<%= !fieldOptional %>">
+											<div class="hide" id="<portlet:namespace />fieldOptionalError<%= fieldName %>">
+												<span class="alert alert-error"><liferay-ui:message key="this-field-is-mandatory" /></span>
+											</div>
+										</c:if>
+									</td>
+								</tr>
+							</c:when>
+						</c:choose>
+					
 				</c:when>
 				<c:when test='<%= fieldType.equals("textarea") %>'>
-					<aui:input cssClass='<%= (fieldOptional ? "optional" : StringPool.BLANK) %>' label="<%= HtmlUtil.escape(fieldLabel) %>" name="<%= fieldName %>" type="textarea" value="<%= HtmlUtil.escape(fieldValue) %>" wrap="soft" wrapperCssClass="lfr-textarea-container" placeholder="<%= placeholder %>" />
+						<c:choose>
+							<c:when test='<%= position.equals("horizontal") %>'>
+								<tr>
+									<td valign="top"><%= fieldLabel %></td>
+									<td valign="top"><aui:input cssClass='<%= (fieldOptional ? "optional" : StringPool.BLANK) %>' label="" name="<%= fieldName %>" type="textarea" value="<%= HtmlUtil.escape(fieldValue) %>" wrap="soft" wrapperCssClass="lfr-textarea-container" /></td> 
+									<td valign="top">
+										<c:if test="<%= !fieldOptional %>">
+											<div class="hide" id="<portlet:namespace />fieldOptionalError<%= fieldName %>">
+												<span class="alert alert-error"><liferay-ui:message key="this-field-is-mandatory" /></span>
+											</div>
+										</c:if>
+									</td>
+								</tr>
+							</c:when>
+							<c:when test='<%= position.equals("vertical") %>'>
+								<tr>
+									<td valign="top" colspan="3"><%= fieldLabel  %></td>
+								</tr>
+								<tr>
+									<td valign="top" colspan="2">
+										<aui:input cssClass='<%= (fieldOptional ? "optional" : StringPool.BLANK) %>' label="" name="<%= fieldName %>" type="textarea" value="<%= HtmlUtil.escape(fieldValue) %>" wrap="soft" wrapperCssClass="lfr-textarea-container" />
+									</td>
+									<td valign="top">
+										<c:if test="<%= !fieldOptional %>">
+											<div class="hide" id="<portlet:namespace />fieldOptionalError<%= fieldName %>">
+												<span class="alert alert-error"><liferay-ui:message key="this-field-is-mandatory" /></span>
+											</div>
+										</c:if>
+									</td>
+								</tr>
+							</c:when>
+						</c:choose>	
+					
 				</c:when>
 				<c:when test='<%= fieldType.equals("checkbox") %>'>
-					<aui:input cssClass='<%= fieldOptional ? "optional" : StringPool.BLANK %>' label="<%= HtmlUtil.escape(fieldLabel) %>" name="<%= fieldName %>" type="checkbox" value="<%= GetterUtil.getBoolean(fieldValue) %>" />
+					<tr>
+						<td valign="top"><%= fieldLabel %></td>
+						<td valign="top"><input   name="<%= fieldName %>" type="checkbox" value="<%= GetterUtil.getBoolean(fieldValue) %>" /></td> 
+					</tr>
 				</c:when>
 				<c:when test='<%= fieldType.equals("radio") %>'>
 					<aui:field-wrapper cssClass='<%= fieldOptional ? "optional" : StringPool.BLANK %>' label="<%= HtmlUtil.escape(fieldLabel) %>" name="<%= fieldName %>">
@@ -111,21 +178,70 @@ String successURL = portletPreferences.getValue("successURL", StringPool.BLANK);
 					</aui:field-wrapper>
 				</c:when>
 				<c:when test='<%= fieldType.equals("options") %>'>
-					<aui:select cssClass='<%= fieldOptional ? "optional" : StringPool.BLANK %>' label="<%= HtmlUtil.escape(fieldLabel) %>" name="<%= fieldName %>">
-
-						<%
-						for (String fieldOptionValue : WebFormUtil.split(fieldOptions)) {
-						%>
-
-							<aui:option selected="<%= fieldValue.equals(fieldOptionValue) %>" value="<%= HtmlUtil.escape(fieldOptionValue) %>"><%= HtmlUtil.escape(fieldOptionValue) %></aui:option>
-
-						<%
-						}
-						%>
-
-					</aui:select>
+						<c:choose>
+							<c:when test='<%= position.equals("horizontal") %>'>
+								<tr>
+									<td valign="top"><%= fieldLabel %></td>
+									<td valign="top">
+										<aui:select cssClass='<%= fieldOptional ? "optional" : StringPool.BLANK %>' label="" name="<%= fieldName %>">
+			
+											<%
+											for (String fieldOptionValue : WebFormUtil.split(fieldOptions)) {
+											%>
+					
+												<aui:option selected="<%= fieldValue.equals(fieldOptionValue) %>" value="<%= HtmlUtil.escape(fieldOptionValue) %>"><%= HtmlUtil.escape(fieldOptionValue) %></aui:option>
+					
+											<%
+											}
+											%>
+					
+										</aui:select>
+									</td> 
+									<td valign="top">
+										<c:if test="<%= !fieldOptional %>">
+											<div class="hide" id="<portlet:namespace />fieldOptionalError<%= fieldName %>">
+												<span class="alert alert-error"><liferay-ui:message key="this-field-is-mandatory" /></span>
+											</div>
+										</c:if>
+									</td>
+								</tr>
+							</c:when>
+							<c:when test='<%= position.equals("vertical") %>'>
+								<tr>
+									<td valign="top" colspan="3"><%= fieldLabel  %></td>
+								</tr>
+								<tr>
+									<td valign="top" colspan="2">
+										
+										<aui:select cssClass='<%= fieldOptional ? "optional" : StringPool.BLANK %>' label="" name="<%= fieldName %>">
+			
+											<%
+											for (String fieldOptionValue : WebFormUtil.split(fieldOptions)) {
+											%>
+					
+												<aui:option selected="<%= fieldValue.equals(fieldOptionValue) %>" value="<%= HtmlUtil.escape(fieldOptionValue) %>"><%= HtmlUtil.escape(fieldOptionValue) %></aui:option>
+					
+											<%
+											}
+											%>
+					
+										</aui:select>
+										
+									</td>
+									<td valign="top">
+										<c:if test="<%= !fieldOptional %>">
+											<div class="hide" id="<portlet:namespace />fieldOptionalError<%= fieldName %>">
+												<span class="alert alert-error"><liferay-ui:message key="this-field-is-mandatory" /></span>
+											</div>
+										</c:if>
+									</td>
+								</tr>
+							</c:when>
+						</c:choose>		
+					
 				</c:when>
 			</c:choose>
+	
 
 		<%
 			i++;
@@ -142,7 +258,7 @@ String successURL = portletPreferences.getValue("successURL", StringPool.BLANK);
 			System.out.println("///////////////////////////");
 		}
 		%>
-
+		</table>
 		<c:if test="<%= requireCaptcha %>">
 			<portlet:resourceURL var="captchaURL">
 				<portlet:param name="<%= Constants.CMD %>" value="captcha" />
