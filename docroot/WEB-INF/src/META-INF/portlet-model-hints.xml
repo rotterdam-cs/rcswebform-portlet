@@ -24,6 +24,7 @@
 		<field name="webformTableId" type="long" />
 		<field name="portletId" type="String" />
 		<field name="webformCounter" type="String" />
+		<field name="name" type="String" />
 	</model>
 	<model name="com.rcs.dbService.model.WebformValue">
 		<field name="webformValueId" type="long" />

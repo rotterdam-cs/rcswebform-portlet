@@ -22,7 +22,8 @@ create table RcsWebform_WebformRow (
 create table RcsWebform_WebformTable (
 	webformTableId LONG not null primary key,
 	portletId VARCHAR(75) null,
-	webformCounter VARCHAR(75) null
+	webformCounter VARCHAR(75) null,
+	name VARCHAR(75) null
 );
 
 create table RcsWebform_WebformValue (

@@ -65,9 +65,10 @@ public class WebformTableModelImpl extends BaseModelImpl<WebformTable>
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "webformTableId", Types.BIGINT },
 			{ "portletId", Types.VARCHAR },
-			{ "webformCounter", Types.VARCHAR }
+			{ "webformCounter", Types.VARCHAR },
+			{ "name", Types.VARCHAR }
 		};
-	public static final String TABLE_SQL_CREATE = "create table RcsWebform_WebformTable (webformTableId LONG not null primary key,portletId VARCHAR(75) null,webformCounter VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table RcsWebform_WebformTable (webformTableId LONG not null primary key,portletId VARCHAR(75) null,webformCounter VARCHAR(75) null,name VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table RcsWebform_WebformTable";
 	public static final String ORDER_BY_JPQL = " ORDER BY webformTable.webformTableId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY RcsWebform_WebformTable.webformTableId ASC";
@@ -83,9 +84,10 @@ public class WebformTableModelImpl extends BaseModelImpl<WebformTable>
 	public static final boolean COLUMN_BITMASK_ENABLED = GetterUtil.getBoolean(com.liferay.util.service.ServiceProps.get(
 				"value.object.column.bitmask.enabled.com.rcs.dbService.model.WebformTable"),
 			true);
-	public static long PORTLETID_COLUMN_BITMASK = 1L;
-	public static long WEBFORMCOUNTER_COLUMN_BITMASK = 2L;
-	public static long WEBFORMTABLEID_COLUMN_BITMASK = 4L;
+	public static long NAME_COLUMN_BITMASK = 1L;
+	public static long PORTLETID_COLUMN_BITMASK = 2L;
+	public static long WEBFORMCOUNTER_COLUMN_BITMASK = 4L;
+	public static long WEBFORMTABLEID_COLUMN_BITMASK = 8L;
 
 	/**
 	 * Converts the soap model instance into a normal model instance.
@@ -103,6 +105,7 @@ public class WebformTableModelImpl extends BaseModelImpl<WebformTable>
 		model.setWebformTableId(soapModel.getWebformTableId());
 		model.setPortletId(soapModel.getPortletId());
 		model.setWebformCounter(soapModel.getWebformCounter());
+		model.setName(soapModel.getName());
 
 		return model;
 	}
@@ -170,6 +173,7 @@ public class WebformTableModelImpl extends BaseModelImpl<WebformTable>
 		attributes.put("webformTableId", getWebformTableId());
 		attributes.put("portletId", getPortletId());
 		attributes.put("webformCounter", getWebformCounter());
+		attributes.put("name", getName());
 
 		return attributes;
 	}
@@ -192,6 +196,12 @@ public class WebformTableModelImpl extends BaseModelImpl<WebformTable>
 
 		if (webformCounter != null) {
 			setWebformCounter(webformCounter);
+		}
+
+		String name = (String)attributes.get("name");
+
+		if (name != null) {
+			setName(name);
 		}
 	}
 
@@ -258,6 +268,32 @@ public class WebformTableModelImpl extends BaseModelImpl<WebformTable>
 		return GetterUtil.getString(_originalWebformCounter);
 	}
 
+	@JSON
+	@Override
+	public String getName() {
+		if (_name == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _name;
+		}
+	}
+
+	@Override
+	public void setName(String name) {
+		_columnBitmask |= NAME_COLUMN_BITMASK;
+
+		if (_originalName == null) {
+			_originalName = _name;
+		}
+
+		_name = name;
+	}
+
+	public String getOriginalName() {
+		return GetterUtil.getString(_originalName);
+	}
+
 	public long getColumnBitmask() {
 		return _columnBitmask;
 	}
@@ -292,6 +328,7 @@ public class WebformTableModelImpl extends BaseModelImpl<WebformTable>
 		webformTableImpl.setWebformTableId(getWebformTableId());
 		webformTableImpl.setPortletId(getPortletId());
 		webformTableImpl.setWebformCounter(getWebformCounter());
+		webformTableImpl.setName(getName());
 
 		webformTableImpl.resetOriginalValues();
 
@@ -348,6 +385,8 @@ public class WebformTableModelImpl extends BaseModelImpl<WebformTable>
 
 		webformTableModelImpl._originalWebformCounter = webformTableModelImpl._webformCounter;
 
+		webformTableModelImpl._originalName = webformTableModelImpl._name;
+
 		webformTableModelImpl._columnBitmask = 0;
 	}
 
@@ -373,12 +412,20 @@ public class WebformTableModelImpl extends BaseModelImpl<WebformTable>
 			webformTableCacheModel.webformCounter = null;
 		}
 
+		webformTableCacheModel.name = getName();
+
+		String name = webformTableCacheModel.name;
+
+		if ((name != null) && (name.length() == 0)) {
+			webformTableCacheModel.name = null;
+		}
+
 		return webformTableCacheModel;
 	}
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(7);
+		StringBundler sb = new StringBundler(9);
 
 		sb.append("{webformTableId=");
 		sb.append(getWebformTableId());
@@ -386,6 +433,8 @@ public class WebformTableModelImpl extends BaseModelImpl<WebformTable>
 		sb.append(getPortletId());
 		sb.append(", webformCounter=");
 		sb.append(getWebformCounter());
+		sb.append(", name=");
+		sb.append(getName());
 		sb.append("}");
 
 		return sb.toString();
@@ -393,7 +442,7 @@ public class WebformTableModelImpl extends BaseModelImpl<WebformTable>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(13);
+		StringBundler sb = new StringBundler(16);
 
 		sb.append("<model><model-name>");
 		sb.append("com.rcs.dbService.model.WebformTable");
@@ -411,6 +460,10 @@ public class WebformTableModelImpl extends BaseModelImpl<WebformTable>
 			"<column><column-name>webformCounter</column-name><column-value><![CDATA[");
 		sb.append(getWebformCounter());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>name</column-name><column-value><![CDATA[");
+		sb.append(getName());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -426,6 +479,8 @@ public class WebformTableModelImpl extends BaseModelImpl<WebformTable>
 	private String _originalPortletId;
 	private String _webformCounter;
 	private String _originalWebformCounter;
+	private String _name;
+	private String _originalName;
 	private long _columnBitmask;
 	private WebformTable _escapedModel;
 }

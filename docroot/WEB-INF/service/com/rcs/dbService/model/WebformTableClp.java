@@ -76,6 +76,7 @@ public class WebformTableClp extends BaseModelImpl<WebformTable>
 		attributes.put("webformTableId", getWebformTableId());
 		attributes.put("portletId", getPortletId());
 		attributes.put("webformCounter", getWebformCounter());
+		attributes.put("name", getName());
 
 		return attributes;
 	}
@@ -98,6 +99,12 @@ public class WebformTableClp extends BaseModelImpl<WebformTable>
 
 		if (webformCounter != null) {
 			setWebformCounter(webformCounter);
+		}
+
+		String name = (String)attributes.get("name");
+
+		if (name != null) {
+			setName(name);
 		}
 	}
 
@@ -164,6 +171,29 @@ public class WebformTableClp extends BaseModelImpl<WebformTable>
 						String.class);
 
 				method.invoke(_webformTableRemoteModel, webformCounter);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public String getName() {
+		return _name;
+	}
+
+	@Override
+	public void setName(String name) {
+		_name = name;
+
+		if (_webformTableRemoteModel != null) {
+			try {
+				Class<?> clazz = _webformTableRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setName", String.class);
+
+				method.invoke(_webformTableRemoteModel, name);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -243,6 +273,7 @@ public class WebformTableClp extends BaseModelImpl<WebformTable>
 		clone.setWebformTableId(getWebformTableId());
 		clone.setPortletId(getPortletId());
 		clone.setWebformCounter(getWebformCounter());
+		clone.setName(getName());
 
 		return clone;
 	}
@@ -295,7 +326,7 @@ public class WebformTableClp extends BaseModelImpl<WebformTable>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(7);
+		StringBundler sb = new StringBundler(9);
 
 		sb.append("{webformTableId=");
 		sb.append(getWebformTableId());
@@ -303,6 +334,8 @@ public class WebformTableClp extends BaseModelImpl<WebformTable>
 		sb.append(getPortletId());
 		sb.append(", webformCounter=");
 		sb.append(getWebformCounter());
+		sb.append(", name=");
+		sb.append(getName());
 		sb.append("}");
 
 		return sb.toString();
@@ -310,7 +343,7 @@ public class WebformTableClp extends BaseModelImpl<WebformTable>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(13);
+		StringBundler sb = new StringBundler(16);
 
 		sb.append("<model><model-name>");
 		sb.append("com.rcs.dbService.model.WebformTable");
@@ -328,6 +361,10 @@ public class WebformTableClp extends BaseModelImpl<WebformTable>
 			"<column><column-name>webformCounter</column-name><column-value><![CDATA[");
 		sb.append(getWebformCounter());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>name</column-name><column-value><![CDATA[");
+		sb.append(getName());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -337,6 +374,7 @@ public class WebformTableClp extends BaseModelImpl<WebformTable>
 	private long _webformTableId;
 	private String _portletId;
 	private String _webformCounter;
+	private String _name;
 	private BaseModel<?> _webformTableRemoteModel;
 	private Class<?> _clpSerializerClass = com.rcs.dbService.service.ClpSerializer.class;
 }

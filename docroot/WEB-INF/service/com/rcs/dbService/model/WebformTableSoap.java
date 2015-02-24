@@ -33,6 +33,7 @@ public class WebformTableSoap implements Serializable {
 		soapModel.setWebformTableId(model.getWebformTableId());
 		soapModel.setPortletId(model.getPortletId());
 		soapModel.setWebformCounter(model.getWebformCounter());
+		soapModel.setName(model.getName());
 
 		return soapModel;
 	}
@@ -109,7 +110,16 @@ public class WebformTableSoap implements Serializable {
 		_webformCounter = webformCounter;
 	}
 
+	public String getName() {
+		return _name;
+	}
+
+	public void setName(String name) {
+		_name = name;
+	}
+
 	private long _webformTableId;
 	private String _portletId;
 	private String _webformCounter;
+	private String _name;
 }

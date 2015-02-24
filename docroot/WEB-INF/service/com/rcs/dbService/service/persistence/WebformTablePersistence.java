@@ -161,6 +161,64 @@ public interface WebformTablePersistence extends BasePersistence<WebformTable> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
+	* Returns the webform table where name = &#63; or throws a {@link com.rcs.dbService.NoSuchWebformTableException} if it could not be found.
+	*
+	* @param name the name
+	* @return the matching webform table
+	* @throws com.rcs.dbService.NoSuchWebformTableException if a matching webform table could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.rcs.dbService.model.WebformTable findByname(
+		java.lang.String name)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.rcs.dbService.NoSuchWebformTableException;
+
+	/**
+	* Returns the webform table where name = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	*
+	* @param name the name
+	* @return the matching webform table, or <code>null</code> if a matching webform table could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.rcs.dbService.model.WebformTable fetchByname(
+		java.lang.String name)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the webform table where name = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	*
+	* @param name the name
+	* @param retrieveFromCache whether to use the finder cache
+	* @return the matching webform table, or <code>null</code> if a matching webform table could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.rcs.dbService.model.WebformTable fetchByname(
+		java.lang.String name, boolean retrieveFromCache)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Removes the webform table where name = &#63; from the database.
+	*
+	* @param name the name
+	* @return the webform table that was removed
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.rcs.dbService.model.WebformTable removeByname(
+		java.lang.String name)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.rcs.dbService.NoSuchWebformTableException;
+
+	/**
+	* Returns the number of webform tables where name = &#63;.
+	*
+	* @param name the name
+	* @return the number of matching webform tables
+	* @throws SystemException if a system exception occurred
+	*/
+	public int countByname(java.lang.String name)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
 	* Caches the webform table in the entity cache if it is enabled.
 	*
 	* @param webformTable the webform table
