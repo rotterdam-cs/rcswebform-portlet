@@ -1,6 +1,6 @@
 
 
-package com.rcs.util;
+package com.rcs.webform.util;
 
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.util.portlet.PortletProps;

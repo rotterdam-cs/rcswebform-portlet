@@ -1,6 +1,6 @@
 
 
-package com.rcs.util;
+package com.rcs.webform.util;
 
 
 public interface PortletPropsKeys {

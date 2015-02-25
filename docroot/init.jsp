@@ -41,9 +41,9 @@ page import="com.liferay.portal.kernel.util.Validator" %><%@
 page import="com.liferay.portal.security.permission.ActionKeys" %><%@
 page import="com.liferay.portal.util.PortalUtil" %><%@
 page import="com.liferay.portlet.expando.DuplicateColumnNameException" %><%@
-page import="com.rcs.util.PortletPropsValues" %><%@
-page import="com.rcs.util.PortletPropsKeys" %><%@
-page import="com.rcs.util.WebFormUtil" %>
+page import="com.rcs.webform.util.PortletPropsValues" %><%@
+page import="com.rcs.webform.util.PortletPropsKeys" %><%@
+page import="com.rcs.webform.util.WebFormUtil" %>
 
 <%@ page import="javax.portlet.ActionRequest" %>
 

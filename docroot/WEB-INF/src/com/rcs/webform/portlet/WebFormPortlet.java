@@ -1,6 +1,6 @@
 
 
-package com.rcs.portlet;
+package com.rcs.webform.portlet;
 
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.mail.service.MailServiceUtil;
@@ -9,7 +9,6 @@ import com.liferay.portal.kernel.captcha.CaptchaUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
-
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.util.CharPool;
@@ -32,11 +31,11 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.util.bridges.mvc.MVCPortlet;
-import com.rcs.util.PortletPropsValues;
-import com.rcs.util.WebFormUtil;
 import com.rcs.webform.util.FieldOptions;
 import com.rcs.webform.util.FormComponent;
 import com.rcs.webform.util.FormModel;
+import com.rcs.webform.util.PortletPropsValues;
+import com.rcs.webform.util.WebFormUtil;
 
 import java.io.IOException;
 import java.util.ArrayList;
