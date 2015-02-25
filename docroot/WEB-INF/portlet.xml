@@ -4,7 +4,7 @@
 	<portlet>
 		<portlet-name>rcswebform</portlet-name>
 		<display-name>rcswebform</display-name>
-		<portlet-class>com.liferay.util.bridges.mvc.MVCPortlet</portlet-class>
+		 <portlet-class>com.rcs.portlet.WebFormPortlet</portlet-class>
 		<init-param>
 			<name>view-template</name>
 			<value>/view.jsp</value>
