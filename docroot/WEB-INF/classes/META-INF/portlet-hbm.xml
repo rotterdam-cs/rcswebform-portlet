@@ -38,7 +38,7 @@
 		</id>
 		<property name="portletId" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="webformCounter" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="name" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="webformName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 	</class>
 	<class name="com.rcs.dbService.model.impl.WebformValueImpl" table="RcsWebform_WebformValue">
 		<cache usage="read-write" />
@@ -48,6 +48,6 @@
 		<property name="webformTableId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="webformColumnId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="webformRowId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
-		<property name="data" type="com.liferay.portal.dao.orm.hibernate.LongType" column="data_" />
+		<property name="data" type="com.liferay.portal.dao.orm.hibernate.StringType" column="data_" />
 	</class>
 </hibernate-mapping>

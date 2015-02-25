@@ -14,6 +14,7 @@
 
 package com.rcs.dbService.model;
 
+import com.liferay.portal.kernel.bean.AutoEscape;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.model.CacheModel;
 import com.liferay.portal.service.ServiceContext;
@@ -117,14 +118,15 @@ public interface WebformValueModel extends BaseModel<WebformValue> {
 	 *
 	 * @return the data of this webform value
 	 */
-	public long getData();
+	@AutoEscape
+	public String getData();
 
 	/**
 	 * Sets the data of this webform value.
 	 *
 	 * @param data the data of this webform value
 	 */
-	public void setData(long data);
+	public void setData(String data);
 
 	@Override
 	public boolean isNew();

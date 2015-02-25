@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.json.JSON;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ProxyUtil;
 import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.CacheModel;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.service.ServiceContext;
@@ -66,9 +67,9 @@ public class WebformValueModelImpl extends BaseModelImpl<WebformValue>
 			{ "webformTableId", Types.BIGINT },
 			{ "webformColumnId", Types.BIGINT },
 			{ "webformRowId", Types.BIGINT },
-			{ "data_", Types.BIGINT }
+			{ "data_", Types.VARCHAR }
 		};
-	public static final String TABLE_SQL_CREATE = "create table RcsWebform_WebformValue (webformValueId LONG not null primary key,webformTableId LONG,webformColumnId LONG,webformRowId LONG,data_ LONG)";
+	public static final String TABLE_SQL_CREATE = "create table RcsWebform_WebformValue (webformValueId LONG not null primary key,webformTableId LONG,webformColumnId LONG,webformRowId LONG,data_ VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table RcsWebform_WebformValue";
 	public static final String ORDER_BY_JPQL = " ORDER BY webformValue.webformTableId ASC, webformValue.webformRowId ASC, webformValue.webformColumnId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY RcsWebform_WebformValue.webformTableId ASC, RcsWebform_WebformValue.webformRowId ASC, RcsWebform_WebformValue.webformColumnId ASC";
@@ -205,7 +206,7 @@ public class WebformValueModelImpl extends BaseModelImpl<WebformValue>
 			setWebformRowId(webformRowId);
 		}
 
-		Long data = (Long)attributes.get("data");
+		String data = (String)attributes.get("data");
 
 		if (data != null) {
 			setData(data);
@@ -274,12 +275,17 @@ public class WebformValueModelImpl extends BaseModelImpl<WebformValue>
 
 	@JSON
 	@Override
-	public long getData() {
-		return _data;
+	public String getData() {
+		if (_data == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _data;
+		}
 	}
 
 	@Override
-	public void setData(long data) {
+	public void setData(String data) {
 		_data = data;
 	}
 
@@ -426,6 +432,12 @@ public class WebformValueModelImpl extends BaseModelImpl<WebformValue>
 
 		webformValueCacheModel.data = getData();
 
+		String data = webformValueCacheModel.data;
+
+		if ((data != null) && (data.length() == 0)) {
+			webformValueCacheModel.data = null;
+		}
+
 		return webformValueCacheModel;
 	}
 
@@ -492,7 +504,7 @@ public class WebformValueModelImpl extends BaseModelImpl<WebformValue>
 	private boolean _setOriginalWebformTableId;
 	private long _webformColumnId;
 	private long _webformRowId;
-	private long _data;
+	private String _data;
 	private long _columnBitmask;
 	private WebformValue _escapedModel;
 }

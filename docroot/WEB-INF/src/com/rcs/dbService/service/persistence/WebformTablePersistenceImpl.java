@@ -644,36 +644,36 @@ public class WebformTablePersistenceImpl extends BasePersistenceImpl<WebformTabl
 		"webformTable.webformCounter = ?";
 	private static final String _FINDER_COLUMN_PORTLETIDANDCOUNTER_WEBFORMCOUNTER_3 =
 		"(webformTable.webformCounter IS NULL OR webformTable.webformCounter = '')";
-	public static final FinderPath FINDER_PATH_FETCH_BY_NAME = new FinderPath(WebformTableModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_FETCH_BY_WEBFORMNAME = new FinderPath(WebformTableModelImpl.ENTITY_CACHE_ENABLED,
 			WebformTableModelImpl.FINDER_CACHE_ENABLED, WebformTableImpl.class,
-			FINDER_CLASS_NAME_ENTITY, "fetchByname",
+			FINDER_CLASS_NAME_ENTITY, "fetchByWebformName",
 			new String[] { String.class.getName() },
-			WebformTableModelImpl.NAME_COLUMN_BITMASK);
-	public static final FinderPath FINDER_PATH_COUNT_BY_NAME = new FinderPath(WebformTableModelImpl.ENTITY_CACHE_ENABLED,
+			WebformTableModelImpl.WEBFORMNAME_COLUMN_BITMASK);
+	public static final FinderPath FINDER_PATH_COUNT_BY_WEBFORMNAME = new FinderPath(WebformTableModelImpl.ENTITY_CACHE_ENABLED,
 			WebformTableModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByname",
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByWebformName",
 			new String[] { String.class.getName() });
 
 	/**
-	 * Returns the webform table where name = &#63; or throws a {@link com.rcs.dbService.NoSuchWebformTableException} if it could not be found.
+	 * Returns the webform table where webformName = &#63; or throws a {@link com.rcs.dbService.NoSuchWebformTableException} if it could not be found.
 	 *
-	 * @param name the name
+	 * @param webformName the webform name
 	 * @return the matching webform table
 	 * @throws com.rcs.dbService.NoSuchWebformTableException if a matching webform table could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public WebformTable findByname(String name)
+	public WebformTable findByWebformName(String webformName)
 		throws NoSuchWebformTableException, SystemException {
-		WebformTable webformTable = fetchByname(name);
+		WebformTable webformTable = fetchByWebformName(webformName);
 
 		if (webformTable == null) {
 			StringBundler msg = new StringBundler(4);
 
 			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("name=");
-			msg.append(name);
+			msg.append("webformName=");
+			msg.append(webformName);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -688,41 +688,42 @@ public class WebformTablePersistenceImpl extends BasePersistenceImpl<WebformTabl
 	}
 
 	/**
-	 * Returns the webform table where name = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 * Returns the webform table where webformName = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	 *
-	 * @param name the name
+	 * @param webformName the webform name
 	 * @return the matching webform table, or <code>null</code> if a matching webform table could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public WebformTable fetchByname(String name) throws SystemException {
-		return fetchByname(name, true);
+	public WebformTable fetchByWebformName(String webformName)
+		throws SystemException {
+		return fetchByWebformName(webformName, true);
 	}
 
 	/**
-	 * Returns the webform table where name = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 * Returns the webform table where webformName = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	 *
-	 * @param name the name
+	 * @param webformName the webform name
 	 * @param retrieveFromCache whether to use the finder cache
 	 * @return the matching webform table, or <code>null</code> if a matching webform table could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public WebformTable fetchByname(String name, boolean retrieveFromCache)
-		throws SystemException {
-		Object[] finderArgs = new Object[] { name };
+	public WebformTable fetchByWebformName(String webformName,
+		boolean retrieveFromCache) throws SystemException {
+		Object[] finderArgs = new Object[] { webformName };
 
 		Object result = null;
 
 		if (retrieveFromCache) {
-			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_NAME,
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_WEBFORMNAME,
 					finderArgs, this);
 		}
 
 		if (result instanceof WebformTable) {
 			WebformTable webformTable = (WebformTable)result;
 
-			if (!Validator.equals(name, webformTable.getName())) {
+			if (!Validator.equals(webformName, webformTable.getWebformName())) {
 				result = null;
 			}
 		}
@@ -732,18 +733,18 @@ public class WebformTablePersistenceImpl extends BasePersistenceImpl<WebformTabl
 
 			query.append(_SQL_SELECT_WEBFORMTABLE_WHERE);
 
-			boolean bindName = false;
+			boolean bindWebformName = false;
 
-			if (name == null) {
-				query.append(_FINDER_COLUMN_NAME_NAME_1);
+			if (webformName == null) {
+				query.append(_FINDER_COLUMN_WEBFORMNAME_WEBFORMNAME_1);
 			}
-			else if (name.equals(StringPool.BLANK)) {
-				query.append(_FINDER_COLUMN_NAME_NAME_3);
+			else if (webformName.equals(StringPool.BLANK)) {
+				query.append(_FINDER_COLUMN_WEBFORMNAME_WEBFORMNAME_3);
 			}
 			else {
-				bindName = true;
+				bindWebformName = true;
 
-				query.append(_FINDER_COLUMN_NAME_NAME_2);
+				query.append(_FINDER_COLUMN_WEBFORMNAME_WEBFORMNAME_2);
 			}
 
 			String sql = query.toString();
@@ -757,20 +758,20 @@ public class WebformTablePersistenceImpl extends BasePersistenceImpl<WebformTabl
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				if (bindName) {
-					qPos.add(name);
+				if (bindWebformName) {
+					qPos.add(webformName);
 				}
 
 				List<WebformTable> list = q.list();
 
 				if (list.isEmpty()) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_NAME,
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_WEBFORMNAME,
 						finderArgs, list);
 				}
 				else {
 					if ((list.size() > 1) && _log.isWarnEnabled()) {
 						_log.warn(
-							"WebformTablePersistenceImpl.fetchByname(String, boolean) with parameters (" +
+							"WebformTablePersistenceImpl.fetchByWebformName(String, boolean) with parameters (" +
 							StringUtil.merge(finderArgs) +
 							") yields a result set with more than 1 result. This violates the logical unique restriction. There is no order guarantee on which result is returned by this finder.");
 					}
@@ -781,15 +782,15 @@ public class WebformTablePersistenceImpl extends BasePersistenceImpl<WebformTabl
 
 					cacheResult(webformTable);
 
-					if ((webformTable.getName() == null) ||
-							!webformTable.getName().equals(name)) {
-						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_NAME,
+					if ((webformTable.getWebformName() == null) ||
+							!webformTable.getWebformName().equals(webformName)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_WEBFORMNAME,
 							finderArgs, webformTable);
 					}
 				}
 			}
 			catch (Exception e) {
-				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_NAME,
+				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_WEBFORMNAME,
 					finderArgs);
 
 				throw processException(e);
@@ -808,32 +809,32 @@ public class WebformTablePersistenceImpl extends BasePersistenceImpl<WebformTabl
 	}
 
 	/**
-	 * Removes the webform table where name = &#63; from the database.
+	 * Removes the webform table where webformName = &#63; from the database.
 	 *
-	 * @param name the name
+	 * @param webformName the webform name
 	 * @return the webform table that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public WebformTable removeByname(String name)
+	public WebformTable removeByWebformName(String webformName)
 		throws NoSuchWebformTableException, SystemException {
-		WebformTable webformTable = findByname(name);
+		WebformTable webformTable = findByWebformName(webformName);
 
 		return remove(webformTable);
 	}
 
 	/**
-	 * Returns the number of webform tables where name = &#63;.
+	 * Returns the number of webform tables where webformName = &#63;.
 	 *
-	 * @param name the name
+	 * @param webformName the webform name
 	 * @return the number of matching webform tables
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public int countByname(String name) throws SystemException {
-		FinderPath finderPath = FINDER_PATH_COUNT_BY_NAME;
+	public int countByWebformName(String webformName) throws SystemException {
+		FinderPath finderPath = FINDER_PATH_COUNT_BY_WEBFORMNAME;
 
-		Object[] finderArgs = new Object[] { name };
+		Object[] finderArgs = new Object[] { webformName };
 
 		Long count = (Long)FinderCacheUtil.getResult(finderPath, finderArgs,
 				this);
@@ -843,18 +844,18 @@ public class WebformTablePersistenceImpl extends BasePersistenceImpl<WebformTabl
 
 			query.append(_SQL_COUNT_WEBFORMTABLE_WHERE);
 
-			boolean bindName = false;
+			boolean bindWebformName = false;
 
-			if (name == null) {
-				query.append(_FINDER_COLUMN_NAME_NAME_1);
+			if (webformName == null) {
+				query.append(_FINDER_COLUMN_WEBFORMNAME_WEBFORMNAME_1);
 			}
-			else if (name.equals(StringPool.BLANK)) {
-				query.append(_FINDER_COLUMN_NAME_NAME_3);
+			else if (webformName.equals(StringPool.BLANK)) {
+				query.append(_FINDER_COLUMN_WEBFORMNAME_WEBFORMNAME_3);
 			}
 			else {
-				bindName = true;
+				bindWebformName = true;
 
-				query.append(_FINDER_COLUMN_NAME_NAME_2);
+				query.append(_FINDER_COLUMN_WEBFORMNAME_WEBFORMNAME_2);
 			}
 
 			String sql = query.toString();
@@ -868,8 +869,8 @@ public class WebformTablePersistenceImpl extends BasePersistenceImpl<WebformTabl
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				if (bindName) {
-					qPos.add(name);
+				if (bindWebformName) {
+					qPos.add(webformName);
 				}
 
 				count = (Long)q.uniqueResult();
@@ -889,9 +890,9 @@ public class WebformTablePersistenceImpl extends BasePersistenceImpl<WebformTabl
 		return count.intValue();
 	}
 
-	private static final String _FINDER_COLUMN_NAME_NAME_1 = "webformTable.name IS NULL";
-	private static final String _FINDER_COLUMN_NAME_NAME_2 = "webformTable.name = ?";
-	private static final String _FINDER_COLUMN_NAME_NAME_3 = "(webformTable.name IS NULL OR webformTable.name = '')";
+	private static final String _FINDER_COLUMN_WEBFORMNAME_WEBFORMNAME_1 = "webformTable.webformName IS NULL";
+	private static final String _FINDER_COLUMN_WEBFORMNAME_WEBFORMNAME_2 = "webformTable.webformName = ?";
+	private static final String _FINDER_COLUMN_WEBFORMNAME_WEBFORMNAME_3 = "(webformTable.webformName IS NULL OR webformTable.webformName = '')";
 
 	public WebformTablePersistenceImpl() {
 		setModelClass(WebformTable.class);
@@ -915,8 +916,8 @@ public class WebformTablePersistenceImpl extends BasePersistenceImpl<WebformTabl
 				webformTable.getPortletId(), webformTable.getWebformCounter()
 			}, webformTable);
 
-		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_NAME,
-			new Object[] { webformTable.getName() }, webformTable);
+		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_WEBFORMNAME,
+			new Object[] { webformTable.getWebformName() }, webformTable);
 
 		webformTable.resetOriginalValues();
 	}
@@ -1010,11 +1011,11 @@ public class WebformTablePersistenceImpl extends BasePersistenceImpl<WebformTabl
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_PORTLETIDANDCOUNTER,
 				args, webformTable);
 
-			args = new Object[] { webformTable.getName() };
+			args = new Object[] { webformTable.getWebformName() };
 
-			FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_NAME, args,
+			FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_WEBFORMNAME, args,
 				Long.valueOf(1));
-			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_NAME, args,
+			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_WEBFORMNAME, args,
 				webformTable);
 		}
 		else {
@@ -1044,13 +1045,13 @@ public class WebformTablePersistenceImpl extends BasePersistenceImpl<WebformTabl
 			}
 
 			if ((webformTableModelImpl.getColumnBitmask() &
-					FINDER_PATH_FETCH_BY_NAME.getColumnBitmask()) != 0) {
-				Object[] args = new Object[] { webformTable.getName() };
+					FINDER_PATH_FETCH_BY_WEBFORMNAME.getColumnBitmask()) != 0) {
+				Object[] args = new Object[] { webformTable.getWebformName() };
 
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_NAME, args,
-					Long.valueOf(1));
-				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_NAME, args,
-					webformTable);
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_WEBFORMNAME,
+					args, Long.valueOf(1));
+				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_WEBFORMNAME,
+					args, webformTable);
 			}
 		}
 	}
@@ -1093,17 +1094,17 @@ public class WebformTablePersistenceImpl extends BasePersistenceImpl<WebformTabl
 				args);
 		}
 
-		args = new Object[] { webformTable.getName() };
+		args = new Object[] { webformTable.getWebformName() };
 
-		FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_NAME, args);
-		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_NAME, args);
+		FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_WEBFORMNAME, args);
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_WEBFORMNAME, args);
 
 		if ((webformTableModelImpl.getColumnBitmask() &
-				FINDER_PATH_FETCH_BY_NAME.getColumnBitmask()) != 0) {
-			args = new Object[] { webformTableModelImpl.getOriginalName() };
+				FINDER_PATH_FETCH_BY_WEBFORMNAME.getColumnBitmask()) != 0) {
+			args = new Object[] { webformTableModelImpl.getOriginalWebformName() };
 
-			FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_NAME, args);
-			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_NAME, args);
+			FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_WEBFORMNAME, args);
+			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_WEBFORMNAME, args);
 		}
 	}
 
@@ -1268,7 +1269,7 @@ public class WebformTablePersistenceImpl extends BasePersistenceImpl<WebformTabl
 		webformTableImpl.setWebformTableId(webformTable.getWebformTableId());
 		webformTableImpl.setPortletId(webformTable.getPortletId());
 		webformTableImpl.setWebformCounter(webformTable.getWebformCounter());
-		webformTableImpl.setName(webformTable.getName());
+		webformTableImpl.setWebformName(webformTable.getWebformName());
 
 		return webformTableImpl;
 	}

@@ -14,6 +14,13 @@
 
 package com.rcs.dbService.service.http;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+
+import com.rcs.dbService.service.WebformRowServiceUtil;
+
+import java.rmi.RemoteException;
+
 /**
  * Provides the SOAP utility for the
  * {@link com.rcs.dbService.service.WebformRowServiceUtil} service utility. The
@@ -55,4 +62,19 @@ package com.rcs.dbService.service.http;
  * @generated
  */
 public class WebformRowServiceSoap {
+	public static int getRowsCount(java.lang.String tableName)
+		throws RemoteException {
+		try {
+			int returnValue = WebformRowServiceUtil.getRowsCount(tableName);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	private static Log _log = LogFactoryUtil.getLog(WebformRowServiceSoap.class);
 }

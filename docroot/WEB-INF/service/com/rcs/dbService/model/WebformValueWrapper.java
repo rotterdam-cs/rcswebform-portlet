@@ -84,7 +84,7 @@ public class WebformValueWrapper implements WebformValue,
 			setWebformRowId(webformRowId);
 		}
 
-		Long data = (Long)attributes.get("data");
+		String data = (String)attributes.get("data");
 
 		if (data != null) {
 			setData(data);
@@ -197,7 +197,7 @@ public class WebformValueWrapper implements WebformValue,
 	* @return the data of this webform value
 	*/
 	@Override
-	public long getData() {
+	public java.lang.String getData() {
 		return _webformValue.getData();
 	}
 
@@ -207,7 +207,7 @@ public class WebformValueWrapper implements WebformValue,
 	* @param data the data of this webform value
 	*/
 	@Override
-	public void setData(long data) {
+	public void setData(java.lang.String data) {
 		_webformValue.setData(data);
 	}
 

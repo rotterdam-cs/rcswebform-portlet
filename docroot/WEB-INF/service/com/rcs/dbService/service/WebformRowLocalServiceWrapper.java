@@ -285,6 +285,13 @@ public class WebformRowLocalServiceWrapper implements WebformRowLocalService,
 			arguments);
 	}
 
+	@Override
+	public int getRowsCount(java.lang.String tableName)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _webformRowLocalService.getRowsCount(tableName);
+	}
+
 	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */

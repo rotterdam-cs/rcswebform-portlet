@@ -15,6 +15,7 @@
 package com.rcs.dbService.model.impl;
 
 import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.CacheModel;
 
 import com.rcs.dbService.model.WebformValue;
@@ -60,7 +61,13 @@ public class WebformValueCacheModel implements CacheModel<WebformValue>,
 		webformValueImpl.setWebformTableId(webformTableId);
 		webformValueImpl.setWebformColumnId(webformColumnId);
 		webformValueImpl.setWebformRowId(webformRowId);
-		webformValueImpl.setData(data);
+
+		if (data == null) {
+			webformValueImpl.setData(StringPool.BLANK);
+		}
+		else {
+			webformValueImpl.setData(data);
+		}
 
 		webformValueImpl.resetOriginalValues();
 
@@ -73,7 +80,7 @@ public class WebformValueCacheModel implements CacheModel<WebformValue>,
 		webformTableId = objectInput.readLong();
 		webformColumnId = objectInput.readLong();
 		webformRowId = objectInput.readLong();
-		data = objectInput.readLong();
+		data = objectInput.readUTF();
 	}
 
 	@Override
@@ -83,12 +90,18 @@ public class WebformValueCacheModel implements CacheModel<WebformValue>,
 		objectOutput.writeLong(webformTableId);
 		objectOutput.writeLong(webformColumnId);
 		objectOutput.writeLong(webformRowId);
-		objectOutput.writeLong(data);
+
+		if (data == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(data);
+		}
 	}
 
 	public long webformValueId;
 	public long webformTableId;
 	public long webformColumnId;
 	public long webformRowId;
-	public long data;
+	public String data;
 }

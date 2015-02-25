@@ -106,7 +106,7 @@ public class WebformValueClp extends BaseModelImpl<WebformValue>
 			setWebformRowId(webformRowId);
 		}
 
-		Long data = (Long)attributes.get("data");
+		String data = (String)attributes.get("data");
 
 		if (data != null) {
 			setData(data);
@@ -206,19 +206,19 @@ public class WebformValueClp extends BaseModelImpl<WebformValue>
 	}
 
 	@Override
-	public long getData() {
+	public String getData() {
 		return _data;
 	}
 
 	@Override
-	public void setData(long data) {
+	public void setData(String data) {
 		_data = data;
 
 		if (_webformValueRemoteModel != null) {
 			try {
 				Class<?> clazz = _webformValueRemoteModel.getClass();
 
-				Method method = clazz.getMethod("setData", long.class);
+				Method method = clazz.getMethod("setData", String.class);
 
 				method.invoke(_webformValueRemoteModel, data);
 			}
@@ -433,7 +433,7 @@ public class WebformValueClp extends BaseModelImpl<WebformValue>
 	private long _webformTableId;
 	private long _webformColumnId;
 	private long _webformRowId;
-	private long _data;
+	private String _data;
 	private BaseModel<?> _webformValueRemoteModel;
 	private Class<?> _clpSerializerClass = com.rcs.dbService.service.ClpSerializer.class;
 }

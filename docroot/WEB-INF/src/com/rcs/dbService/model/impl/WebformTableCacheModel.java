@@ -44,8 +44,8 @@ public class WebformTableCacheModel implements CacheModel<WebformTable>,
 		sb.append(portletId);
 		sb.append(", webformCounter=");
 		sb.append(webformCounter);
-		sb.append(", name=");
-		sb.append(name);
+		sb.append(", webformName=");
+		sb.append(webformName);
 		sb.append("}");
 
 		return sb.toString();
@@ -71,11 +71,11 @@ public class WebformTableCacheModel implements CacheModel<WebformTable>,
 			webformTableImpl.setWebformCounter(webformCounter);
 		}
 
-		if (name == null) {
-			webformTableImpl.setName(StringPool.BLANK);
+		if (webformName == null) {
+			webformTableImpl.setWebformName(StringPool.BLANK);
 		}
 		else {
-			webformTableImpl.setName(name);
+			webformTableImpl.setWebformName(webformName);
 		}
 
 		webformTableImpl.resetOriginalValues();
@@ -88,7 +88,7 @@ public class WebformTableCacheModel implements CacheModel<WebformTable>,
 		webformTableId = objectInput.readLong();
 		portletId = objectInput.readUTF();
 		webformCounter = objectInput.readUTF();
-		name = objectInput.readUTF();
+		webformName = objectInput.readUTF();
 	}
 
 	@Override
@@ -110,16 +110,16 @@ public class WebformTableCacheModel implements CacheModel<WebformTable>,
 			objectOutput.writeUTF(webformCounter);
 		}
 
-		if (name == null) {
+		if (webformName == null) {
 			objectOutput.writeUTF(StringPool.BLANK);
 		}
 		else {
-			objectOutput.writeUTF(name);
+			objectOutput.writeUTF(webformName);
 		}
 	}
 
 	public long webformTableId;
 	public String portletId;
 	public String webformCounter;
-	public String name;
+	public String webformName;
 }

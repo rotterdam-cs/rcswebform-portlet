@@ -45,7 +45,7 @@
 			<id name="webformTableId" />
 			<basic name="portletId" />
 			<basic name="webformCounter" />
-			<basic name="name" />
+			<basic name="webformName" />
 			<transient name="modelAttributes" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />
