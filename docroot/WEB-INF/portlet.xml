@@ -18,6 +18,7 @@
 			<short-title>rcswebform</short-title>
 			<keywords>rcswebform</keywords>
 		</portlet-info>
+	
 		<security-role-ref>
 			<role-name>administrator</role-name>
 		</security-role-ref>

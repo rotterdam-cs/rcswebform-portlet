@@ -36,7 +36,7 @@ public class WebformTableCacheModel implements CacheModel<WebformTable>,
 	Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(7);
+		StringBundler sb = new StringBundler(9);
 
 		sb.append("{webformTableId=");
 		sb.append(webformTableId);
@@ -44,6 +44,8 @@ public class WebformTableCacheModel implements CacheModel<WebformTable>,
 		sb.append(portletId);
 		sb.append(", webformCounter=");
 		sb.append(webformCounter);
+		sb.append(", name=");
+		sb.append(name);
 		sb.append("}");
 
 		return sb.toString();
@@ -69,6 +71,13 @@ public class WebformTableCacheModel implements CacheModel<WebformTable>,
 			webformTableImpl.setWebformCounter(webformCounter);
 		}
 
+		if (name == null) {
+			webformTableImpl.setName(StringPool.BLANK);
+		}
+		else {
+			webformTableImpl.setName(name);
+		}
+
 		webformTableImpl.resetOriginalValues();
 
 		return webformTableImpl;
@@ -79,6 +88,7 @@ public class WebformTableCacheModel implements CacheModel<WebformTable>,
 		webformTableId = objectInput.readLong();
 		portletId = objectInput.readUTF();
 		webformCounter = objectInput.readUTF();
+		name = objectInput.readUTF();
 	}
 
 	@Override
@@ -99,9 +109,17 @@ public class WebformTableCacheModel implements CacheModel<WebformTable>,
 		else {
 			objectOutput.writeUTF(webformCounter);
 		}
+
+		if (name == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(name);
+		}
 	}
 
 	public long webformTableId;
 	public String portletId;
 	public String webformCounter;
+	public String name;
 }

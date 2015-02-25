@@ -275,7 +275,7 @@ public class WebformValueWrapper implements WebformValue,
 	}
 
 	@Override
-	public int compareTo(WebformValue webformValue) {
+	public int compareTo(com.rcs.dbService.model.WebformValue webformValue) {
 		return _webformValue.compareTo(webformValue);
 	}
 
@@ -285,17 +285,17 @@ public class WebformValueWrapper implements WebformValue,
 	}
 
 	@Override
-	public com.liferay.portal.model.CacheModel<WebformValue> toCacheModel() {
+	public com.liferay.portal.model.CacheModel<com.rcs.dbService.model.WebformValue> toCacheModel() {
 		return _webformValue.toCacheModel();
 	}
 
 	@Override
-	public WebformValue toEscapedModel() {
+	public com.rcs.dbService.model.WebformValue toEscapedModel() {
 		return new WebformValueWrapper(_webformValue.toEscapedModel());
 	}
 
 	@Override
-	public WebformValue toUnescapedModel() {
+	public com.rcs.dbService.model.WebformValue toUnescapedModel() {
 		return new WebformValueWrapper(_webformValue.toUnescapedModel());
 	}
 
