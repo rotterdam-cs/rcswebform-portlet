@@ -52,19 +52,138 @@
 				<aui:input name="saveToFile" type="checkbox" value="${configModel.saveToFile}" />
 				<c:choose>
 					<c:when test="${dataFilePathChangeable}">
-					<aui:input label="path-and-file-name" name="preferences--fileName--" value="${configModel.fileName }" wrapperCssClass="lfr-input-text-container" />
-				</c:when>
-				<c:otherwise>
-					<liferay-ui:message arguments="${fileName}" key="form-data-will-be-saved-to-x" />
-				</c:otherwise>
+						<aui:input label="path-and-file-name" name="preferences--fileName--" value="${configModel.fileName }" wrapperCssClass="lfr-input-text-container" />
+					</c:when>
+					<c:otherwise>
+						<liferay-ui:message arguments="${fileName}" key="form-data-will-be-saved-to-x" />
+					</c:otherwise>
 				</c:choose>
 				
 			</aui:fieldset>
 			
 		</liferay-ui:panel>
+		
+		<liferay-ui:panel collapsible="true" extended="true" id="webFormFields" persistState="true" title="form-fields">
+			<aui:fieldset cssClass="rows-container webFields">
+				<c:if test="${isEditable==false}">
+					<div class="alert">
+						<liferay-ui:message key="there-is-existing-form-data-please-export-and-delete-it-before-making-changes-to-the-fields" />
+					</div>
+				</c:if>
+				
+				<aui:input name="updateFields" type="hidden" value="${configModel.isEditable}" />
+				<c:set var="index" value="1" />
+				
+				<c:forEach items="${webformFieldModelList}" var="fieldModel" varStatus="countStatus">
+					<div class="lfr-form-row" id="<portlet:namespace />fieldset${countStatus.count}">
+						<div class="row-fields">
+							<liferay-util:include page="/fieldPage.jsp" servletContext="<%= application %>" />
+						</div>
+					</div>
+				</c:forEach>
+					
+			</aui:fieldset>
+		</liferay-ui:panel>
+		
 	</liferay-ui:panel-container>
 	
 	<aui:button-row>
 		<aui:button type="submit" />
 	</aui:button-row>
 </aui:form>
+
+<c:if test="${configModel.isEditable}">
+	<aui:script use="aui-base,liferay-auto-fields">
+		var toggleOptions = function(event) {
+			var select = this;
+
+			var formRow = select.ancestor('.lfr-form-row');
+			var value = select.val();
+
+			var optionsDiv = formRow.one('.options');
+
+			if ((value == 'options') || (value == 'radio')) {
+				optionsDiv.all('label').show();
+				optionsDiv.show();
+			}
+			else if (value == 'paragraph') {
+
+				// Show just the text field and not the labels since there
+				// are multiple choice inputs
+
+				optionsDiv.all('label').hide();
+				optionsDiv.show();
+			}
+			else {
+				optionsDiv.hide();
+			}
+
+			var optionalControl = formRow.one('.optional-control').ancestor();
+			var labelName = formRow.one('.label-name');
+
+			if (value == 'paragraph') {
+				var inputName = labelName.one('input.field');
+
+				var formFieldsIndex = select.attr('id').match(/\d+$/);
+
+				inputName.val('<liferay-ui:message key="paragraph" />' + formFieldsIndex);
+				inputName.fire('change');
+
+				labelName.hide();
+				optionalControl.hide();
+
+				optionalControl.all('input[type="checkbox"]').attr('checked', 'true');
+				optionalControl.all('input[type="hidden"]').attr('value', 'true');
+			}
+			else {
+				optionalControl.show();
+				labelName.show();
+			}
+		};
+
+		var webFields = A.one('.webFields');
+
+		webFields.all('select').each(toggleOptions);
+
+		webFields.delegate(['change', 'click', 'keydown'], toggleOptions, 'select');
+
+		<c:if test="<%= PortletPropsValues.VALIDATION_SCRIPT_ENABLED %>">
+			var toggleValidationOptions = function(event) {
+				this.next().toggle();
+			};
+
+			webFields.delegate('click', toggleValidationOptions, '.validation-link');
+		</c:if>
+
+		webFields.delegate(
+			'change',
+			function(event) {
+				var input = event.currentTarget;
+				var row = input.ancestor('.field-row');
+				var label = row.one('.field-title');
+
+				if (label) {
+					label.html(input.get('value'));
+				}
+			},
+			'.label-name input'
+		);
+
+		new Liferay.AutoFields(
+			{
+				contentBox: webFields,
+				fieldIndexes: '<portlet:namespace />${formFieldsIndexes}',
+				namespace: '<portlet:namespace />',
+				sortable: true,
+				sortableHandle: '.field-label',
+
+				<liferay-portlet:renderURL portletConfiguration="true" var="editFieldURL" windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>">
+					<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.ADD %>" />
+					<portlet:param name="isEditable" value="${isEditable }"/>
+				</liferay-portlet:renderURL>
+
+				url: '<%= editFieldURL %>'
+			}
+		).render();
+	</aui:script>
+</c:if>
