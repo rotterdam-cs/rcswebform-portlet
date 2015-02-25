@@ -102,19 +102,19 @@ public interface WebformTableModel extends BaseModel<WebformTable> {
 	public void setWebformCounter(String webformCounter);
 
 	/**
-	 * Returns the name of this webform table.
+	 * Returns the webform name of this webform table.
 	 *
-	 * @return the name of this webform table
+	 * @return the webform name of this webform table
 	 */
 	@AutoEscape
-	public String getName();
+	public String getWebformName();
 
 	/**
-	 * Sets the name of this webform table.
+	 * Sets the webform name of this webform table.
 	 *
-	 * @param name the name of this webform table
+	 * @param webformName the webform name of this webform table
 	 */
-	public void setName(String name);
+	public void setWebformName(String webformName);
 
 	@Override
 	public boolean isNew();

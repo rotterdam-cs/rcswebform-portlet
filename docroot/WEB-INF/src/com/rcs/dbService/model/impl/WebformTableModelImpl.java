@@ -66,9 +66,9 @@ public class WebformTableModelImpl extends BaseModelImpl<WebformTable>
 			{ "webformTableId", Types.BIGINT },
 			{ "portletId", Types.VARCHAR },
 			{ "webformCounter", Types.VARCHAR },
-			{ "name", Types.VARCHAR }
+			{ "webformName", Types.VARCHAR }
 		};
-	public static final String TABLE_SQL_CREATE = "create table RcsWebform_WebformTable (webformTableId LONG not null primary key,portletId VARCHAR(75) null,webformCounter VARCHAR(75) null,name VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table RcsWebform_WebformTable (webformTableId LONG not null primary key,portletId VARCHAR(75) null,webformCounter VARCHAR(75) null,webformName VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table RcsWebform_WebformTable";
 	public static final String ORDER_BY_JPQL = " ORDER BY webformTable.webformTableId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY RcsWebform_WebformTable.webformTableId ASC";
@@ -84,9 +84,9 @@ public class WebformTableModelImpl extends BaseModelImpl<WebformTable>
 	public static final boolean COLUMN_BITMASK_ENABLED = GetterUtil.getBoolean(com.liferay.util.service.ServiceProps.get(
 				"value.object.column.bitmask.enabled.com.rcs.dbService.model.WebformTable"),
 			true);
-	public static long NAME_COLUMN_BITMASK = 1L;
-	public static long PORTLETID_COLUMN_BITMASK = 2L;
-	public static long WEBFORMCOUNTER_COLUMN_BITMASK = 4L;
+	public static long PORTLETID_COLUMN_BITMASK = 1L;
+	public static long WEBFORMCOUNTER_COLUMN_BITMASK = 2L;
+	public static long WEBFORMNAME_COLUMN_BITMASK = 4L;
 	public static long WEBFORMTABLEID_COLUMN_BITMASK = 8L;
 
 	/**
@@ -105,7 +105,7 @@ public class WebformTableModelImpl extends BaseModelImpl<WebformTable>
 		model.setWebformTableId(soapModel.getWebformTableId());
 		model.setPortletId(soapModel.getPortletId());
 		model.setWebformCounter(soapModel.getWebformCounter());
-		model.setName(soapModel.getName());
+		model.setWebformName(soapModel.getWebformName());
 
 		return model;
 	}
@@ -173,7 +173,7 @@ public class WebformTableModelImpl extends BaseModelImpl<WebformTable>
 		attributes.put("webformTableId", getWebformTableId());
 		attributes.put("portletId", getPortletId());
 		attributes.put("webformCounter", getWebformCounter());
-		attributes.put("name", getName());
+		attributes.put("webformName", getWebformName());
 
 		return attributes;
 	}
@@ -198,10 +198,10 @@ public class WebformTableModelImpl extends BaseModelImpl<WebformTable>
 			setWebformCounter(webformCounter);
 		}
 
-		String name = (String)attributes.get("name");
+		String webformName = (String)attributes.get("webformName");
 
-		if (name != null) {
-			setName(name);
+		if (webformName != null) {
+			setWebformName(webformName);
 		}
 	}
 
@@ -270,28 +270,28 @@ public class WebformTableModelImpl extends BaseModelImpl<WebformTable>
 
 	@JSON
 	@Override
-	public String getName() {
-		if (_name == null) {
+	public String getWebformName() {
+		if (_webformName == null) {
 			return StringPool.BLANK;
 		}
 		else {
-			return _name;
+			return _webformName;
 		}
 	}
 
 	@Override
-	public void setName(String name) {
-		_columnBitmask |= NAME_COLUMN_BITMASK;
+	public void setWebformName(String webformName) {
+		_columnBitmask |= WEBFORMNAME_COLUMN_BITMASK;
 
-		if (_originalName == null) {
-			_originalName = _name;
+		if (_originalWebformName == null) {
+			_originalWebformName = _webformName;
 		}
 
-		_name = name;
+		_webformName = webformName;
 	}
 
-	public String getOriginalName() {
-		return GetterUtil.getString(_originalName);
+	public String getOriginalWebformName() {
+		return GetterUtil.getString(_originalWebformName);
 	}
 
 	public long getColumnBitmask() {
@@ -328,7 +328,7 @@ public class WebformTableModelImpl extends BaseModelImpl<WebformTable>
 		webformTableImpl.setWebformTableId(getWebformTableId());
 		webformTableImpl.setPortletId(getPortletId());
 		webformTableImpl.setWebformCounter(getWebformCounter());
-		webformTableImpl.setName(getName());
+		webformTableImpl.setWebformName(getWebformName());
 
 		webformTableImpl.resetOriginalValues();
 
@@ -385,7 +385,7 @@ public class WebformTableModelImpl extends BaseModelImpl<WebformTable>
 
 		webformTableModelImpl._originalWebformCounter = webformTableModelImpl._webformCounter;
 
-		webformTableModelImpl._originalName = webformTableModelImpl._name;
+		webformTableModelImpl._originalWebformName = webformTableModelImpl._webformName;
 
 		webformTableModelImpl._columnBitmask = 0;
 	}
@@ -412,12 +412,12 @@ public class WebformTableModelImpl extends BaseModelImpl<WebformTable>
 			webformTableCacheModel.webformCounter = null;
 		}
 
-		webformTableCacheModel.name = getName();
+		webformTableCacheModel.webformName = getWebformName();
 
-		String name = webformTableCacheModel.name;
+		String webformName = webformTableCacheModel.webformName;
 
-		if ((name != null) && (name.length() == 0)) {
-			webformTableCacheModel.name = null;
+		if ((webformName != null) && (webformName.length() == 0)) {
+			webformTableCacheModel.webformName = null;
 		}
 
 		return webformTableCacheModel;
@@ -433,8 +433,8 @@ public class WebformTableModelImpl extends BaseModelImpl<WebformTable>
 		sb.append(getPortletId());
 		sb.append(", webformCounter=");
 		sb.append(getWebformCounter());
-		sb.append(", name=");
-		sb.append(getName());
+		sb.append(", webformName=");
+		sb.append(getWebformName());
 		sb.append("}");
 
 		return sb.toString();
@@ -461,8 +461,8 @@ public class WebformTableModelImpl extends BaseModelImpl<WebformTable>
 		sb.append(getWebformCounter());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>name</column-name><column-value><![CDATA[");
-		sb.append(getName());
+			"<column><column-name>webformName</column-name><column-value><![CDATA[");
+		sb.append(getWebformName());
 		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
@@ -479,8 +479,8 @@ public class WebformTableModelImpl extends BaseModelImpl<WebformTable>
 	private String _originalPortletId;
 	private String _webformCounter;
 	private String _originalWebformCounter;
-	private String _name;
-	private String _originalName;
+	private String _webformName;
+	private String _originalWebformName;
 	private long _columnBitmask;
 	private WebformTable _escapedModel;
 }

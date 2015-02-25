@@ -52,7 +52,7 @@ public class WebformTableWrapper implements WebformTable,
 		attributes.put("webformTableId", getWebformTableId());
 		attributes.put("portletId", getPortletId());
 		attributes.put("webformCounter", getWebformCounter());
-		attributes.put("name", getName());
+		attributes.put("webformName", getWebformName());
 
 		return attributes;
 	}
@@ -77,10 +77,10 @@ public class WebformTableWrapper implements WebformTable,
 			setWebformCounter(webformCounter);
 		}
 
-		String name = (String)attributes.get("name");
+		String webformName = (String)attributes.get("webformName");
 
-		if (name != null) {
-			setName(name);
+		if (webformName != null) {
+			setWebformName(webformName);
 		}
 	}
 
@@ -165,23 +165,23 @@ public class WebformTableWrapper implements WebformTable,
 	}
 
 	/**
-	* Returns the name of this webform table.
+	* Returns the webform name of this webform table.
 	*
-	* @return the name of this webform table
+	* @return the webform name of this webform table
 	*/
 	@Override
-	public java.lang.String getName() {
-		return _webformTable.getName();
+	public java.lang.String getWebformName() {
+		return _webformTable.getWebformName();
 	}
 
 	/**
-	* Sets the name of this webform table.
+	* Sets the webform name of this webform table.
 	*
-	* @param name the name of this webform table
+	* @param webformName the webform name of this webform table
 	*/
 	@Override
-	public void setName(java.lang.String name) {
-		_webformTable.setName(name);
+	public void setWebformName(java.lang.String webformName) {
+		_webformTable.setWebformName(webformName);
 	}
 
 	@Override

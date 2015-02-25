@@ -63,6 +63,12 @@ public class WebformRowServiceUtil {
 		return getService().invokeMethod(name, parameterTypes, arguments);
 	}
 
+	public static int getRowsCount(java.lang.String tableName)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().getRowsCount(tableName);
+	}
+
 	public static void clearService() {
 		_service = null;
 	}

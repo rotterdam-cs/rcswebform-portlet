@@ -56,6 +56,13 @@ public class WebformRowServiceWrapper implements WebformRowService,
 		return _webformRowService.invokeMethod(name, parameterTypes, arguments);
 	}
 
+	@Override
+	public int getRowsCount(java.lang.String tableName)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _webformRowService.getRowsCount(tableName);
+	}
+
 	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */

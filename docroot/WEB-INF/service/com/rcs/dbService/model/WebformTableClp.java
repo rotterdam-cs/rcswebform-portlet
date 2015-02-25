@@ -76,7 +76,7 @@ public class WebformTableClp extends BaseModelImpl<WebformTable>
 		attributes.put("webformTableId", getWebformTableId());
 		attributes.put("portletId", getPortletId());
 		attributes.put("webformCounter", getWebformCounter());
-		attributes.put("name", getName());
+		attributes.put("webformName", getWebformName());
 
 		return attributes;
 	}
@@ -101,10 +101,10 @@ public class WebformTableClp extends BaseModelImpl<WebformTable>
 			setWebformCounter(webformCounter);
 		}
 
-		String name = (String)attributes.get("name");
+		String webformName = (String)attributes.get("webformName");
 
-		if (name != null) {
-			setName(name);
+		if (webformName != null) {
+			setWebformName(webformName);
 		}
 	}
 
@@ -179,21 +179,21 @@ public class WebformTableClp extends BaseModelImpl<WebformTable>
 	}
 
 	@Override
-	public String getName() {
-		return _name;
+	public String getWebformName() {
+		return _webformName;
 	}
 
 	@Override
-	public void setName(String name) {
-		_name = name;
+	public void setWebformName(String webformName) {
+		_webformName = webformName;
 
 		if (_webformTableRemoteModel != null) {
 			try {
 				Class<?> clazz = _webformTableRemoteModel.getClass();
 
-				Method method = clazz.getMethod("setName", String.class);
+				Method method = clazz.getMethod("setWebformName", String.class);
 
-				method.invoke(_webformTableRemoteModel, name);
+				method.invoke(_webformTableRemoteModel, webformName);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -273,7 +273,7 @@ public class WebformTableClp extends BaseModelImpl<WebformTable>
 		clone.setWebformTableId(getWebformTableId());
 		clone.setPortletId(getPortletId());
 		clone.setWebformCounter(getWebformCounter());
-		clone.setName(getName());
+		clone.setWebformName(getWebformName());
 
 		return clone;
 	}
@@ -334,8 +334,8 @@ public class WebformTableClp extends BaseModelImpl<WebformTable>
 		sb.append(getPortletId());
 		sb.append(", webformCounter=");
 		sb.append(getWebformCounter());
-		sb.append(", name=");
-		sb.append(getName());
+		sb.append(", webformName=");
+		sb.append(getWebformName());
 		sb.append("}");
 
 		return sb.toString();
@@ -362,8 +362,8 @@ public class WebformTableClp extends BaseModelImpl<WebformTable>
 		sb.append(getWebformCounter());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>name</column-name><column-value><![CDATA[");
-		sb.append(getName());
+			"<column><column-name>webformName</column-name><column-value><![CDATA[");
+		sb.append(getWebformName());
 		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
@@ -374,7 +374,7 @@ public class WebformTableClp extends BaseModelImpl<WebformTable>
 	private long _webformTableId;
 	private String _portletId;
 	private String _webformCounter;
-	private String _name;
+	private String _webformName;
 	private BaseModel<?> _webformTableRemoteModel;
 	private Class<?> _clpSerializerClass = com.rcs.dbService.service.ClpSerializer.class;
 }

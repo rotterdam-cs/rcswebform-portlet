@@ -24,13 +24,13 @@
 		<field name="webformTableId" type="long" />
 		<field name="portletId" type="String" />
 		<field name="webformCounter" type="String" />
-		<field name="name" type="String" />
+		<field name="webformName" type="String" />
 	</model>
 	<model name="com.rcs.dbService.model.WebformValue">
 		<field name="webformValueId" type="long" />
 		<field name="webformTableId" type="long" />
 		<field name="webformColumnId" type="long" />
 		<field name="webformRowId" type="long" />
-		<field name="data" type="long" />
+		<field name="data" type="String" />
 	</model>
 </model-hints>

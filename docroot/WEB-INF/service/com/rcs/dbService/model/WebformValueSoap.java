@@ -119,11 +119,11 @@ public class WebformValueSoap implements Serializable {
 		_webformRowId = webformRowId;
 	}
 
-	public long getData() {
+	public String getData() {
 		return _data;
 	}
 
-	public void setData(long data) {
+	public void setData(String data) {
 		_data = data;
 	}
 
@@ -131,5 +131,5 @@ public class WebformValueSoap implements Serializable {
 	private long _webformTableId;
 	private long _webformColumnId;
 	private long _webformRowId;
-	private long _data;
+	private String _data;
 }

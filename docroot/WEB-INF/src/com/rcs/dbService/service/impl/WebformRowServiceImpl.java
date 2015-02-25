@@ -14,6 +14,9 @@
 
 package com.rcs.dbService.service.impl;
 
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
+import com.rcs.dbService.model.WebformTable;
 import com.rcs.dbService.service.base.WebformRowServiceBaseImpl;
 
 /**
@@ -36,4 +39,15 @@ public class WebformRowServiceImpl extends WebformRowServiceBaseImpl {
 	 *
 	 * Never reference this interface directly. Always use {@link com.rcs.dbService.service.WebformRowServiceUtil} to access the webform row remote service.
 	 */
+	public int getRowsCount(String tableName) throws SystemException, PortalException{
+		int countResult = 0;
+		
+		WebformTable table = webformTablePersistence.fetchByWebformName(tableName);
+		
+		if(table!=null){
+			countResult = webformRowPersistence.countByWebformTableId(table.getWebformTableId());
+		}
+		
+		return countResult;
+	}
 }
