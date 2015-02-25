@@ -2,6 +2,8 @@
 
 <%@ include file="/init.jsp" %>
 
+
+
 <portlet:actionURL var="saveDataURL">
 	<portlet:param name="<%= ActionRequest.ACTION_NAME %>" value="saveData" />
 </portlet:actionURL>
@@ -28,7 +30,7 @@
 		<table>
 	
 		
-		<c:forEach items="${formMoodel.formComponentSet}" var="item">
+		<c:forEach items="${formMoodel.formComponentSet}" var="item" varStatus="i">
 		   <c:if test="${item.validationScriptEnabled}">
 				<liferay-ui:error key='"error"${item.fieldLabel}' message="${item.fieldValidationErrorMessage}" />
 
@@ -46,7 +48,7 @@
 							<c:when test="${item.position == 'horizontal'}">
 								<tr>
 									<td valign="top">${item.fieldLabel}</td>
-									<td valign="top"><aui:input label=""  name="${item.fieldName}" value="${item.fieldValue}" /></td> 
+									<td valign="top"><aui:input label=""  name="${item.fieldName}" value="${item.fieldValue}" placeholder="${item.placeholder}" /></td> 
 									<td valign="top">
 										<c:if test="${! item.fieldOptional}">
 											<div class="hide" id="<portlet:namespace />fieldOptionalError${item.fieldName}">
@@ -62,7 +64,7 @@
 								</tr>
 								<tr>
 									<td valign="top" colspan="2">
-										<aui:input label=""  name="${item.fieldName}" value="${item.fieldValue}" />
+										<aui:input label=""  name="${item.fieldName}" value="${item.fieldValue}" placeholder="${item.placeholder}" />
 									</td>
 									<td valign="top">
 										<c:if test="${! item.fieldOptional}">
@@ -81,8 +83,8 @@
 							<c:when test="${item.position == 'horizontal'}">
 								<tr>
 									<td valign="top">${item.fieldLabel}</td>
-									<td><aui:input label="" name="${item.fieldName}" type="textarea" value="${item.fieldValue}" wrap="soft" wrapperCssClass="lfr-textarea-container" /></td> 
-									<td>
+									<td><aui:input label="" name="${item.fieldName}" type="textarea" placeholder="${item.placeholder}" value="${item.fieldValue}" wrap="soft" wrapperCssClass="lfr-textarea-container" /></td> 
+									<td valign="top">
 										<c:if test="${! item.fieldOptional}">
 											<div class="hide" id="<portlet:namespace />fieldOptionalError${item.fieldName}">
 												<span class="alert alert-error"><liferay-ui:message key="this-field-is-mandatory" /></span>
@@ -97,7 +99,7 @@
 								</tr>
 								<tr>
 									<td colspan="2" valign="top">
-										<aui:input label="" name="${item.fieldName}" type="textarea" value="${item.fieldValue}" wrap="soft" wrapperCssClass="lfr-textarea-container" />
+										<aui:input label="" name="${item.fieldName}" placeholder="${item.placeholder}" type="textarea" value="${item.fieldValue}" wrap="soft" wrapperCssClass="lfr-textarea-container" />
 									</td>
 									<td valign="top">
 										<c:if test="${! item.fieldOptional}">
@@ -250,30 +252,18 @@
 				var fieldValidationFunctions = {};
 				var fieldsMap = {};
 
-				<%
-				int i = 1;
+				<c:forEach items="${formMoodel.formComponentSet}" var="item" varStatus="i">
 
-				String fieldName = "field" + i;
-				String fieldLabel = portletPreferences.getValue("fieldLabel" + i, StringPool.BLANK);
-
-				while ((i == 1) || Validator.isNotNull(fieldLabel)) {
-					boolean fieldOptional = PrefsParamUtil.getBoolean(portletPreferences, request, "fieldOptional" + i, false);
-					String fieldType = portletPreferences.getValue("fieldType" + i, "text");
-					String fieldValidationScript = portletPreferences.getValue("fieldValidationScript" + i, StringPool.BLANK);
-					String fieldValidationErrorMessage = portletPreferences.getValue("fieldValidationErrorMessage" + i, StringPool.BLANK);
-				%>
-
-					var key = '<%= fieldName %>';
-
-					keys[<%= i %>] = key;
-
-					fieldLabels[key] = '<%= HtmlUtil.escape(fieldLabel) %>';
-					fieldValidationErrorMessages[key] = '<%= fieldValidationErrorMessage %>';
-
-					function fieldValidationFunction<%= i %>(currentFieldValue, fieldsMap) {
+					var key = '${item.fieldName}';
+					
+					keys[${i.count}] = key;
+					
+					fieldLabels[key] = '${item.fieldLabel}';
+					fieldValidationErrorMessages[key] = '${item.fieldValidationErrorMessage}';
+					function fieldValidationFunction${i.count}(currentFieldValue, fieldsMap) {
 						<c:choose>
-							<c:when test="<%= PortletPropsValues.VALIDATION_SCRIPT_ENABLED && Validator.isNotNull(fieldValidationScript) %>">
-								<%= fieldValidationScript %>
+							<c:when test="${formMoodel.validateScriptEnable}">
+								${item.fieldValidationScript}
 							</c:when>
 							<c:otherwise>
 								return true;
@@ -281,12 +271,15 @@
 						</c:choose>
 					};
 
-					fieldOptional[key] = <%= fieldOptional %>;
-					fieldValidationFunctions[key] = fieldValidationFunction<%= i %>;
-
+					fieldOptional[key] = ${item.fieldOptional};
+					
+				
+					fieldValidationFunctions[key] = fieldValidationFunction${i.count};
+			
+					
 					<c:choose>
-						<c:when test='<%= fieldType.equals("radio") %>'>
-							var radioButton = A.one('input[name=<portlet:namespace />field<%= i %>]:checked');
+						<c:when test="${item.fileType == 'radio'}">
+							var radioButton = A.one('input[name=<portlet:namespace />field${i.count}]:checked');
 
 							fieldsMap[key] = '';
 
@@ -295,30 +288,24 @@
 							}
 						</c:when>
 						<c:otherwise>
-							var inputField = A.one('#<portlet:namespace />field<%= i %>');
+							var inputField = A.one('#<portlet:namespace />field${i.count}');
 
 							fieldsMap[key] = (inputField && inputField.val()) || '';
 						</c:otherwise>
 					</c:choose>
 
-				<%
-					i++;
-
-					fieldName = "field" + i;
-					fieldLabel = portletPreferences.getValue("fieldLabel" + i, "");
-				}
-				%>
+				</c:forEach>
 
 				var validationErrors = false;
-
+				
 				for (var i = 1; i < keys.length; i++) {
 					var key = keys [i];
 
 					var currentFieldValue = fieldsMap[key];
-
+					
 					var optionalFieldError = A.one('#<portlet:namespace />fieldOptionalError' + key);
 					var validationError = A.one('#<portlet:namespace />validationError' + key);
-
+				
 					if (!fieldOptional[key] && currentFieldValue.match(/^\s*$/)) {
 						validationErrors = true;
 

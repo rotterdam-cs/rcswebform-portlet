@@ -116,7 +116,7 @@ public class WebFormPortlet extends MVCPortlet {
 		String fieldLabel = LocalizationUtil.getPreferencesValue(portletPreferences, "fieldLabel" + i, themeDisplay.getLanguageId());
 		boolean fieldOptional = PrefsParamUtil.getBoolean(portletPreferences, request, "fieldOptional" + i, false);
 		String fieldValue = ParamUtil.getString(request, fieldName);
-		Set<FormComponent> formComponentSet = new HashSet<FormComponent>();
+		List<FormComponent> formComponentSet = new ArrayList<FormComponent>();
 		
 		while ((i == 1) || Validator.isNotNull(fieldLabel)) {
 			FormComponent formComponent=new FormComponent();
@@ -124,14 +124,16 @@ public class WebFormPortlet extends MVCPortlet {
 			formComponent.setFieldOptions(LocalizationUtil.getPreferencesValue(portletPreferences, "fieldOptions" + i, themeDisplay.getLanguageId()));
 			formComponent.setFieldValidationScript(portletPreferences.getValue("fieldValidationScript" + i, StringPool.BLANK));
 			formComponent.setFieldValidationErrorMessage(portletPreferences.getValue("fieldValidationErrorMessage" + i, StringPool.BLANK));
-			formComponent.setPosition(portletPreferences.getValue("position" + i, StringPool.BLANK));
-			formComponent.setPlaceholder(portletPreferences.getValue("placeholder" + i, StringPool.BLANK));
+			//formComponent.setPosition(portletPreferences.getValue("position" + i, StringPool.BLANK));
+			formComponent.setPosition("horizontal");
+			/*formComponent.setPlaceholder(portletPreferences.getValue("placeholder" + i, StringPool.BLANK));*/
+			formComponent.setPlaceholder("Input Text Here");
 			formComponent.setFieldOptional(fieldOptional);
 			formComponent.setFieldValue(fieldValue);
 			formComponent.setFieldLabel(fieldLabel);
 			formComponent.setFieldName(fieldName);
 			if(formComponent.getFileType().equalsIgnoreCase("options") || formComponent.getFileType().equalsIgnoreCase("radio")){
-				Set<FieldOptions> fieldOptionsSet = new HashSet<FieldOptions>();
+				List<FieldOptions> fieldOptionsSet = new ArrayList<FieldOptions>();
 				for (String fieldOptionValue : WebFormUtil.split(formComponent.getFieldOptions())) {
 					FieldOptions fieldOptions=new FieldOptions();
 					fieldOptions.setOptionLabel(fieldOptionValue);
@@ -143,7 +145,6 @@ public class WebFormPortlet extends MVCPortlet {
 			formComponentSet.add(formComponent);
 			i++;
 			
-			System.out.println(formComponent.getFileType());
 			fieldName = "field" + i;
 			fieldLabel = LocalizationUtil.getPreferencesValue(portletPreferences, "fieldLabel" + i, themeDisplay.getLanguageId());
 			fieldOptional = PrefsParamUtil.getBoolean(portletPreferences, request, "fieldOptional" + i, false);

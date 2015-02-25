@@ -1,6 +1,8 @@
 package com.rcs.webform.util;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class FormModel {
@@ -21,7 +23,7 @@ public class FormModel {
 	private Boolean validatorDescription;
 	private Boolean validateScriptEnable;
 	
-	private Set<FormComponent> formComponentSet = new HashSet<FormComponent>();
+	private List<FormComponent> formComponentSet = new ArrayList<FormComponent>();
 
 	public String getTitle() {
 		return title;
@@ -128,13 +130,15 @@ public class FormModel {
 		this.validateScriptEnable = validateScriptEnable;
 	}
 
-	public Set<FormComponent> getFormComponentSet() {
+	public List<FormComponent> getFormComponentSet() {
 		return formComponentSet;
 	}
 
-	public void setFormComponentSet(Set<FormComponent> formComponentSet) {
+	public void setFormComponentSet(List<FormComponent> formComponentSet) {
 		this.formComponentSet = formComponentSet;
 	}
+
+
 
 	
 	

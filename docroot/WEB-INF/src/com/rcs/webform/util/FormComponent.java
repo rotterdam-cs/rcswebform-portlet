@@ -1,6 +1,8 @@
 package com.rcs.webform.util;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class FormComponent {
@@ -22,7 +24,7 @@ public class FormComponent {
 	private Boolean validationScriptEnabled;
 	private Boolean fvalidatorFieldValidationErrorMessage;
 	
-	private Set<FieldOptions> fieldOptionsSet = new HashSet<FieldOptions>();
+	private List<FieldOptions> fieldOptionsSet = new ArrayList<FieldOptions>();
 	public String getFileType() {
 		return fileType;
 	}
@@ -96,12 +98,13 @@ public class FormComponent {
 			Boolean fvalidatorFieldValidationErrorMessage) {
 		this.fvalidatorFieldValidationErrorMessage = fvalidatorFieldValidationErrorMessage;
 	}
-	public Set<FieldOptions> getFieldOptionsSet() {
+	public List<FieldOptions> getFieldOptionsSet() {
 		return fieldOptionsSet;
 	}
-	public void setFieldOptionsSet(Set<FieldOptions> fieldOptionsSet) {
+	public void setFieldOptionsSet(List<FieldOptions> fieldOptionsSet) {
 		this.fieldOptionsSet = fieldOptionsSet;
 	}
+
 	
 	
 	
