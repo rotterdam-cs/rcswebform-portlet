@@ -16,14 +16,14 @@ package com.rcs.dbservice.service.impl;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
-import com.rcs.dbService.model.WebformTable;
+import com.rcs.dbservice.model.WebformTable;
 import com.rcs.dbservice.service.base.WebformRowLocalServiceBaseImpl;
 
 /**
  * The implementation of the webform row local service.
  *
  * <p>
- * All custom service methods should be put in this class. Whenever methods are added, rerun ServiceBuilder to copy their definitions into the {@link com.rcs.dbService.service.WebformRowLocalService} interface.
+ * All custom service methods should be put in this class. Whenever methods are added, rerun ServiceBuilder to copy their definitions into the {@link com.rcs.dbservice.service.WebformRowLocalService} interface.
  *
  * <p>
  * This is a local service. Methods of this service will not have security checks based on the propagated JAAS credentials because this service can only be accessed from within the same VM.
@@ -31,15 +31,14 @@ import com.rcs.dbservice.service.base.WebformRowLocalServiceBaseImpl;
  *
  * @author rikad.ramadhan@rotterdam-cs.com
  * @see com.rcs.dbservice.service.base.WebformRowLocalServiceBaseImpl
- * @see com.rcs.dbService.service.WebformRowLocalServiceUtil
+ * @see com.rcs.dbservice.service.WebformRowLocalServiceUtil
  */
 public class WebformRowLocalServiceImpl extends WebformRowLocalServiceBaseImpl {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never reference this interface directly. Always use {@link com.rcs.dbService.service.WebformRowLocalServiceUtil} to access the webform row local service.
+	 * Never reference this interface directly. Always use {@link com.rcs.dbservice.service.WebformRowLocalServiceUtil} to access the webform row local service.
 	 */
-	
 	public int getRowsCount(String tableName) throws SystemException, PortalException{
 		int countResult = 0;
 		

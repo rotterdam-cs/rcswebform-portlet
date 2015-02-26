@@ -14,7 +14,7 @@
 
 package com.rcs.dbservice.service.base;
 
-import com.rcs.dbService.service.WebformRowLocalServiceUtil;
+import com.rcs.dbservice.service.WebformRowLocalServiceUtil;
 
 import java.util.Arrays;
 
@@ -27,7 +27,7 @@ public class WebformRowLocalServiceClpInvoker {
 		_methodName0 = "addWebformRow";
 
 		_methodParameterTypes0 = new String[] {
-				"com.rcs.dbService.model.WebformRow"
+				"com.rcs.dbservice.model.WebformRow"
 			};
 
 		_methodName1 = "createWebformRow";
@@ -41,7 +41,7 @@ public class WebformRowLocalServiceClpInvoker {
 		_methodName3 = "deleteWebformRow";
 
 		_methodParameterTypes3 = new String[] {
-				"com.rcs.dbService.model.WebformRow"
+				"com.rcs.dbservice.model.WebformRow"
 			};
 
 		_methodName4 = "dynamicQuery";
@@ -103,7 +103,7 @@ public class WebformRowLocalServiceClpInvoker {
 		_methodName15 = "updateWebformRow";
 
 		_methodParameterTypes15 = new String[] {
-				"com.rcs.dbService.model.WebformRow"
+				"com.rcs.dbservice.model.WebformRow"
 			};
 
 		_methodName50 = "getBeanIdentifier";
@@ -123,7 +123,7 @@ public class WebformRowLocalServiceClpInvoker {
 		Object[] arguments) throws Throwable {
 		if (_methodName0.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes0, parameterTypes)) {
-			return WebformRowLocalServiceUtil.addWebformRow((com.rcs.dbService.model.WebformRow)arguments[0]);
+			return WebformRowLocalServiceUtil.addWebformRow((com.rcs.dbservice.model.WebformRow)arguments[0]);
 		}
 
 		if (_methodName1.equals(name) &&
@@ -138,7 +138,7 @@ public class WebformRowLocalServiceClpInvoker {
 
 		if (_methodName3.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes3, parameterTypes)) {
-			return WebformRowLocalServiceUtil.deleteWebformRow((com.rcs.dbService.model.WebformRow)arguments[0]);
+			return WebformRowLocalServiceUtil.deleteWebformRow((com.rcs.dbservice.model.WebformRow)arguments[0]);
 		}
 
 		if (_methodName4.equals(name) &&
@@ -205,7 +205,7 @@ public class WebformRowLocalServiceClpInvoker {
 
 		if (_methodName15.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes15, parameterTypes)) {
-			return WebformRowLocalServiceUtil.updateWebformRow((com.rcs.dbService.model.WebformRow)arguments[0]);
+			return WebformRowLocalServiceUtil.updateWebformRow((com.rcs.dbservice.model.WebformRow)arguments[0]);
 		}
 
 		if (_methodName50.equals(name) &&

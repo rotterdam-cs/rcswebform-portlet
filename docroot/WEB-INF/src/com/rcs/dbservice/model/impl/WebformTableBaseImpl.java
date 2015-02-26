@@ -16,8 +16,8 @@ package com.rcs.dbservice.model.impl;
 
 import com.liferay.portal.kernel.exception.SystemException;
 
-import com.rcs.dbService.model.WebformTable;
-import com.rcs.dbService.service.WebformTableLocalServiceUtil;
+import com.rcs.dbservice.model.WebformTable;
+import com.rcs.dbservice.service.WebformTableLocalServiceUtil;
 
 /**
  * The extended model base implementation for the WebformTable service. Represents a row in the &quot;RcsWebform_WebformTable&quot; database table, with each column mapped to a property of this class.
@@ -28,7 +28,7 @@ import com.rcs.dbService.service.WebformTableLocalServiceUtil;
  *
  * @author rikad.ramadhan@rotterdam-cs.com
  * @see WebformTableImpl
- * @see com.rcs.dbService.model.WebformTable
+ * @see com.rcs.dbservice.model.WebformTable
  * @generated
  */
 public abstract class WebformTableBaseImpl extends WebformTableModelImpl

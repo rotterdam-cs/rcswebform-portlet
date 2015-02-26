@@ -16,8 +16,8 @@ package com.rcs.dbservice.model.impl;
 
 import com.liferay.portal.kernel.exception.SystemException;
 
-import com.rcs.dbService.model.WebformRow;
-import com.rcs.dbService.service.WebformRowLocalServiceUtil;
+import com.rcs.dbservice.model.WebformRow;
+import com.rcs.dbservice.service.WebformRowLocalServiceUtil;
 
 /**
  * The extended model base implementation for the WebformRow service. Represents a row in the &quot;RcsWebform_WebformRow&quot; database table, with each column mapped to a property of this class.
@@ -28,7 +28,7 @@ import com.rcs.dbService.service.WebformRowLocalServiceUtil;
  *
  * @author rikad.ramadhan@rotterdam-cs.com
  * @see WebformRowImpl
- * @see com.rcs.dbService.model.WebformRow
+ * @see com.rcs.dbservice.model.WebformRow
  * @generated
  */
 public abstract class WebformRowBaseImpl extends WebformRowModelImpl

@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.rcs.dbService.service;
+package com.rcs.dbservice.service;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
@@ -30,8 +30,8 @@ import com.liferay.portal.service.InvokableService;
  *
  * @author rikad.ramadhan@rotterdam-cs.com
  * @see WebformValueServiceUtil
- * @see com.rcs.dbService.service.base.WebformValueServiceBaseImpl
- * @see com.rcs.dbService.service.impl.WebformValueServiceImpl
+ * @see com.rcs.dbservice.service.base.WebformValueServiceBaseImpl
+ * @see com.rcs.dbservice.service.impl.WebformValueServiceImpl
  * @generated
  */
 @AccessControlled
@@ -42,7 +42,7 @@ public interface WebformValueService extends BaseService, InvokableService {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this interface directly. Always use {@link WebformValueServiceUtil} to access the webform value remote service. Add custom service methods to {@link com.rcs.dbService.service.impl.WebformValueServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify or reference this interface directly. Always use {@link WebformValueServiceUtil} to access the webform value remote service. Add custom service methods to {@link com.rcs.dbservice.service.impl.WebformValueServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
 
 	/**

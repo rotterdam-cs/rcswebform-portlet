@@ -22,12 +22,12 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.service.BaseServiceImpl;
 import com.liferay.portal.service.persistence.UserPersistence;
 
-import com.rcs.dbService.model.WebformRow;
-import com.rcs.dbService.service.WebformRowService;
-import com.rcs.dbService.service.persistence.WebformColumnPersistence;
-import com.rcs.dbService.service.persistence.WebformRowPersistence;
-import com.rcs.dbService.service.persistence.WebformTablePersistence;
-import com.rcs.dbService.service.persistence.WebformValuePersistence;
+import com.rcs.dbservice.model.WebformRow;
+import com.rcs.dbservice.service.WebformRowService;
+import com.rcs.dbservice.service.persistence.WebformColumnPersistence;
+import com.rcs.dbservice.service.persistence.WebformRowPersistence;
+import com.rcs.dbservice.service.persistence.WebformTablePersistence;
+import com.rcs.dbservice.service.persistence.WebformValuePersistence;
 
 import javax.sql.DataSource;
 
@@ -40,7 +40,7 @@ import javax.sql.DataSource;
  *
  * @author rikad.ramadhan@rotterdam-cs.com
  * @see com.rcs.dbservice.service.impl.WebformRowServiceImpl
- * @see com.rcs.dbService.service.WebformRowServiceUtil
+ * @see com.rcs.dbservice.service.WebformRowServiceUtil
  * @generated
  */
 public abstract class WebformRowServiceBaseImpl extends BaseServiceImpl
@@ -48,7 +48,7 @@ public abstract class WebformRowServiceBaseImpl extends BaseServiceImpl
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this class directly. Always use {@link com.rcs.dbService.service.WebformRowServiceUtil} to access the webform row remote service.
+	 * Never modify or reference this class directly. Always use {@link com.rcs.dbservice.service.WebformRowServiceUtil} to access the webform row remote service.
 	 */
 
 	/**
@@ -56,7 +56,7 @@ public abstract class WebformRowServiceBaseImpl extends BaseServiceImpl
 	 *
 	 * @return the webform column local service
 	 */
-	public com.rcs.dbService.service.WebformColumnLocalService getWebformColumnLocalService() {
+	public com.rcs.dbservice.service.WebformColumnLocalService getWebformColumnLocalService() {
 		return webformColumnLocalService;
 	}
 
@@ -66,7 +66,7 @@ public abstract class WebformRowServiceBaseImpl extends BaseServiceImpl
 	 * @param webformColumnLocalService the webform column local service
 	 */
 	public void setWebformColumnLocalService(
-		com.rcs.dbService.service.WebformColumnLocalService webformColumnLocalService) {
+		com.rcs.dbservice.service.WebformColumnLocalService webformColumnLocalService) {
 		this.webformColumnLocalService = webformColumnLocalService;
 	}
 
@@ -75,7 +75,7 @@ public abstract class WebformRowServiceBaseImpl extends BaseServiceImpl
 	 *
 	 * @return the webform column remote service
 	 */
-	public com.rcs.dbService.service.WebformColumnService getWebformColumnService() {
+	public com.rcs.dbservice.service.WebformColumnService getWebformColumnService() {
 		return webformColumnService;
 	}
 
@@ -85,7 +85,7 @@ public abstract class WebformRowServiceBaseImpl extends BaseServiceImpl
 	 * @param webformColumnService the webform column remote service
 	 */
 	public void setWebformColumnService(
-		com.rcs.dbService.service.WebformColumnService webformColumnService) {
+		com.rcs.dbservice.service.WebformColumnService webformColumnService) {
 		this.webformColumnService = webformColumnService;
 	}
 
@@ -113,7 +113,7 @@ public abstract class WebformRowServiceBaseImpl extends BaseServiceImpl
 	 *
 	 * @return the webform row local service
 	 */
-	public com.rcs.dbService.service.WebformRowLocalService getWebformRowLocalService() {
+	public com.rcs.dbservice.service.WebformRowLocalService getWebformRowLocalService() {
 		return webformRowLocalService;
 	}
 
@@ -123,7 +123,7 @@ public abstract class WebformRowServiceBaseImpl extends BaseServiceImpl
 	 * @param webformRowLocalService the webform row local service
 	 */
 	public void setWebformRowLocalService(
-		com.rcs.dbService.service.WebformRowLocalService webformRowLocalService) {
+		com.rcs.dbservice.service.WebformRowLocalService webformRowLocalService) {
 		this.webformRowLocalService = webformRowLocalService;
 	}
 
@@ -132,7 +132,7 @@ public abstract class WebformRowServiceBaseImpl extends BaseServiceImpl
 	 *
 	 * @return the webform row remote service
 	 */
-	public com.rcs.dbService.service.WebformRowService getWebformRowService() {
+	public com.rcs.dbservice.service.WebformRowService getWebformRowService() {
 		return webformRowService;
 	}
 
@@ -142,7 +142,7 @@ public abstract class WebformRowServiceBaseImpl extends BaseServiceImpl
 	 * @param webformRowService the webform row remote service
 	 */
 	public void setWebformRowService(
-		com.rcs.dbService.service.WebformRowService webformRowService) {
+		com.rcs.dbservice.service.WebformRowService webformRowService) {
 		this.webformRowService = webformRowService;
 	}
 
@@ -170,7 +170,7 @@ public abstract class WebformRowServiceBaseImpl extends BaseServiceImpl
 	 *
 	 * @return the webform table local service
 	 */
-	public com.rcs.dbService.service.WebformTableLocalService getWebformTableLocalService() {
+	public com.rcs.dbservice.service.WebformTableLocalService getWebformTableLocalService() {
 		return webformTableLocalService;
 	}
 
@@ -180,7 +180,7 @@ public abstract class WebformRowServiceBaseImpl extends BaseServiceImpl
 	 * @param webformTableLocalService the webform table local service
 	 */
 	public void setWebformTableLocalService(
-		com.rcs.dbService.service.WebformTableLocalService webformTableLocalService) {
+		com.rcs.dbservice.service.WebformTableLocalService webformTableLocalService) {
 		this.webformTableLocalService = webformTableLocalService;
 	}
 
@@ -189,7 +189,7 @@ public abstract class WebformRowServiceBaseImpl extends BaseServiceImpl
 	 *
 	 * @return the webform table remote service
 	 */
-	public com.rcs.dbService.service.WebformTableService getWebformTableService() {
+	public com.rcs.dbservice.service.WebformTableService getWebformTableService() {
 		return webformTableService;
 	}
 
@@ -199,7 +199,7 @@ public abstract class WebformRowServiceBaseImpl extends BaseServiceImpl
 	 * @param webformTableService the webform table remote service
 	 */
 	public void setWebformTableService(
-		com.rcs.dbService.service.WebformTableService webformTableService) {
+		com.rcs.dbservice.service.WebformTableService webformTableService) {
 		this.webformTableService = webformTableService;
 	}
 
@@ -227,7 +227,7 @@ public abstract class WebformRowServiceBaseImpl extends BaseServiceImpl
 	 *
 	 * @return the webform value remote service
 	 */
-	public com.rcs.dbService.service.WebformValueService getWebformValueService() {
+	public com.rcs.dbservice.service.WebformValueService getWebformValueService() {
 		return webformValueService;
 	}
 
@@ -237,7 +237,7 @@ public abstract class WebformRowServiceBaseImpl extends BaseServiceImpl
 	 * @param webformValueService the webform value remote service
 	 */
 	public void setWebformValueService(
-		com.rcs.dbService.service.WebformValueService webformValueService) {
+		com.rcs.dbservice.service.WebformValueService webformValueService) {
 		this.webformValueService = webformValueService;
 	}
 
@@ -431,26 +431,26 @@ public abstract class WebformRowServiceBaseImpl extends BaseServiceImpl
 		}
 	}
 
-	@BeanReference(type = com.rcs.dbService.service.WebformColumnLocalService.class)
-	protected com.rcs.dbService.service.WebformColumnLocalService webformColumnLocalService;
-	@BeanReference(type = com.rcs.dbService.service.WebformColumnService.class)
-	protected com.rcs.dbService.service.WebformColumnService webformColumnService;
+	@BeanReference(type = com.rcs.dbservice.service.WebformColumnLocalService.class)
+	protected com.rcs.dbservice.service.WebformColumnLocalService webformColumnLocalService;
+	@BeanReference(type = com.rcs.dbservice.service.WebformColumnService.class)
+	protected com.rcs.dbservice.service.WebformColumnService webformColumnService;
 	@BeanReference(type = WebformColumnPersistence.class)
 	protected WebformColumnPersistence webformColumnPersistence;
-	@BeanReference(type = com.rcs.dbService.service.WebformRowLocalService.class)
-	protected com.rcs.dbService.service.WebformRowLocalService webformRowLocalService;
-	@BeanReference(type = com.rcs.dbService.service.WebformRowService.class)
-	protected com.rcs.dbService.service.WebformRowService webformRowService;
+	@BeanReference(type = com.rcs.dbservice.service.WebformRowLocalService.class)
+	protected com.rcs.dbservice.service.WebformRowLocalService webformRowLocalService;
+	@BeanReference(type = com.rcs.dbservice.service.WebformRowService.class)
+	protected com.rcs.dbservice.service.WebformRowService webformRowService;
 	@BeanReference(type = WebformRowPersistence.class)
 	protected WebformRowPersistence webformRowPersistence;
-	@BeanReference(type = com.rcs.dbService.service.WebformTableLocalService.class)
-	protected com.rcs.dbService.service.WebformTableLocalService webformTableLocalService;
-	@BeanReference(type = com.rcs.dbService.service.WebformTableService.class)
-	protected com.rcs.dbService.service.WebformTableService webformTableService;
+	@BeanReference(type = com.rcs.dbservice.service.WebformTableLocalService.class)
+	protected com.rcs.dbservice.service.WebformTableLocalService webformTableLocalService;
+	@BeanReference(type = com.rcs.dbservice.service.WebformTableService.class)
+	protected com.rcs.dbservice.service.WebformTableService webformTableService;
 	@BeanReference(type = WebformTablePersistence.class)
 	protected WebformTablePersistence webformTablePersistence;
-	@BeanReference(type = com.rcs.dbService.service.WebformValueService.class)
-	protected com.rcs.dbService.service.WebformValueService webformValueService;
+	@BeanReference(type = com.rcs.dbservice.service.WebformValueService.class)
+	protected com.rcs.dbservice.service.WebformValueService webformValueService;
 	@BeanReference(type = WebformValuePersistence.class)
 	protected WebformValuePersistence webformValuePersistence;
 	@BeanReference(type = com.liferay.counter.service.CounterLocalService.class)

@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.rcs.dbService.service;
+package com.rcs.dbservice.service;
 
 import com.liferay.portal.service.InvokableLocalService;
 
@@ -28,7 +28,7 @@ public class WebformColumnLocalServiceClp implements WebformColumnLocalService {
 		_methodName0 = "addWebformColumn";
 
 		_methodParameterTypes0 = new String[] {
-				"com.rcs.dbService.model.WebformColumn"
+				"com.rcs.dbservice.model.WebformColumn"
 			};
 
 		_methodName1 = "createWebformColumn";
@@ -42,7 +42,7 @@ public class WebformColumnLocalServiceClp implements WebformColumnLocalService {
 		_methodName3 = "deleteWebformColumn";
 
 		_methodParameterTypes3 = new String[] {
-				"com.rcs.dbService.model.WebformColumn"
+				"com.rcs.dbservice.model.WebformColumn"
 			};
 
 		_methodName4 = "dynamicQuery";
@@ -104,7 +104,7 @@ public class WebformColumnLocalServiceClp implements WebformColumnLocalService {
 		_methodName15 = "updateWebformColumn";
 
 		_methodParameterTypes15 = new String[] {
-				"com.rcs.dbService.model.WebformColumn"
+				"com.rcs.dbservice.model.WebformColumn"
 			};
 
 		_methodName16 = "getBeanIdentifier";
@@ -117,8 +117,8 @@ public class WebformColumnLocalServiceClp implements WebformColumnLocalService {
 	}
 
 	@Override
-	public com.rcs.dbService.model.WebformColumn addWebformColumn(
-		com.rcs.dbService.model.WebformColumn webformColumn)
+	public com.rcs.dbservice.model.WebformColumn addWebformColumn(
+		com.rcs.dbservice.model.WebformColumn webformColumn)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
 
@@ -143,11 +143,11 @@ public class WebformColumnLocalServiceClp implements WebformColumnLocalService {
 			}
 		}
 
-		return (com.rcs.dbService.model.WebformColumn)ClpSerializer.translateOutput(returnObj);
+		return (com.rcs.dbservice.model.WebformColumn)ClpSerializer.translateOutput(returnObj);
 	}
 
 	@Override
-	public com.rcs.dbService.model.WebformColumn createWebformColumn(
+	public com.rcs.dbservice.model.WebformColumn createWebformColumn(
 		long webformColumnId) {
 		Object returnObj = null;
 
@@ -167,11 +167,11 @@ public class WebformColumnLocalServiceClp implements WebformColumnLocalService {
 			}
 		}
 
-		return (com.rcs.dbService.model.WebformColumn)ClpSerializer.translateOutput(returnObj);
+		return (com.rcs.dbservice.model.WebformColumn)ClpSerializer.translateOutput(returnObj);
 	}
 
 	@Override
-	public com.rcs.dbService.model.WebformColumn deleteWebformColumn(
+	public com.rcs.dbservice.model.WebformColumn deleteWebformColumn(
 		long webformColumnId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -201,12 +201,12 @@ public class WebformColumnLocalServiceClp implements WebformColumnLocalService {
 			}
 		}
 
-		return (com.rcs.dbService.model.WebformColumn)ClpSerializer.translateOutput(returnObj);
+		return (com.rcs.dbservice.model.WebformColumn)ClpSerializer.translateOutput(returnObj);
 	}
 
 	@Override
-	public com.rcs.dbService.model.WebformColumn deleteWebformColumn(
-		com.rcs.dbService.model.WebformColumn webformColumn)
+	public com.rcs.dbservice.model.WebformColumn deleteWebformColumn(
+		com.rcs.dbservice.model.WebformColumn webformColumn)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
 
@@ -231,7 +231,7 @@ public class WebformColumnLocalServiceClp implements WebformColumnLocalService {
 			}
 		}
 
-		return (com.rcs.dbService.model.WebformColumn)ClpSerializer.translateOutput(returnObj);
+		return (com.rcs.dbservice.model.WebformColumn)ClpSerializer.translateOutput(returnObj);
 	}
 
 	@Override
@@ -432,7 +432,7 @@ public class WebformColumnLocalServiceClp implements WebformColumnLocalService {
 	}
 
 	@Override
-	public com.rcs.dbService.model.WebformColumn fetchWebformColumn(
+	public com.rcs.dbservice.model.WebformColumn fetchWebformColumn(
 		long webformColumnId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
@@ -457,11 +457,11 @@ public class WebformColumnLocalServiceClp implements WebformColumnLocalService {
 			}
 		}
 
-		return (com.rcs.dbService.model.WebformColumn)ClpSerializer.translateOutput(returnObj);
+		return (com.rcs.dbservice.model.WebformColumn)ClpSerializer.translateOutput(returnObj);
 	}
 
 	@Override
-	public com.rcs.dbService.model.WebformColumn getWebformColumn(
+	public com.rcs.dbservice.model.WebformColumn getWebformColumn(
 		long webformColumnId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -491,7 +491,7 @@ public class WebformColumnLocalServiceClp implements WebformColumnLocalService {
 			}
 		}
 
-		return (com.rcs.dbService.model.WebformColumn)ClpSerializer.translateOutput(returnObj);
+		return (com.rcs.dbservice.model.WebformColumn)ClpSerializer.translateOutput(returnObj);
 	}
 
 	@Override
@@ -530,7 +530,7 @@ public class WebformColumnLocalServiceClp implements WebformColumnLocalService {
 	}
 
 	@Override
-	public java.util.List<com.rcs.dbService.model.WebformColumn> getWebformColumns(
+	public java.util.List<com.rcs.dbservice.model.WebformColumn> getWebformColumns(
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
@@ -555,7 +555,7 @@ public class WebformColumnLocalServiceClp implements WebformColumnLocalService {
 			}
 		}
 
-		return (java.util.List<com.rcs.dbService.model.WebformColumn>)ClpSerializer.translateOutput(returnObj);
+		return (java.util.List<com.rcs.dbservice.model.WebformColumn>)ClpSerializer.translateOutput(returnObj);
 	}
 
 	@Override
@@ -587,8 +587,8 @@ public class WebformColumnLocalServiceClp implements WebformColumnLocalService {
 	}
 
 	@Override
-	public com.rcs.dbService.model.WebformColumn updateWebformColumn(
-		com.rcs.dbService.model.WebformColumn webformColumn)
+	public com.rcs.dbservice.model.WebformColumn updateWebformColumn(
+		com.rcs.dbservice.model.WebformColumn webformColumn)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
 
@@ -613,7 +613,7 @@ public class WebformColumnLocalServiceClp implements WebformColumnLocalService {
 			}
 		}
 
-		return (com.rcs.dbService.model.WebformColumn)ClpSerializer.translateOutput(returnObj);
+		return (com.rcs.dbservice.model.WebformColumn)ClpSerializer.translateOutput(returnObj);
 	}
 
 	@Override

@@ -12,19 +12,19 @@
  * details.
  */
 
-package com.rcs.dbService.service.messaging;
+package com.rcs.dbservice.service.messaging;
 
 import com.liferay.portal.kernel.messaging.BaseMessageListener;
 import com.liferay.portal.kernel.messaging.Message;
 
-import com.rcs.dbService.service.ClpSerializer;
-import com.rcs.dbService.service.WebformColumnLocalServiceUtil;
-import com.rcs.dbService.service.WebformColumnServiceUtil;
-import com.rcs.dbService.service.WebformRowLocalServiceUtil;
-import com.rcs.dbService.service.WebformRowServiceUtil;
-import com.rcs.dbService.service.WebformTableLocalServiceUtil;
-import com.rcs.dbService.service.WebformTableServiceUtil;
-import com.rcs.dbService.service.WebformValueServiceUtil;
+import com.rcs.dbservice.service.ClpSerializer;
+import com.rcs.dbservice.service.WebformColumnLocalServiceUtil;
+import com.rcs.dbservice.service.WebformColumnServiceUtil;
+import com.rcs.dbservice.service.WebformRowLocalServiceUtil;
+import com.rcs.dbservice.service.WebformRowServiceUtil;
+import com.rcs.dbservice.service.WebformTableLocalServiceUtil;
+import com.rcs.dbservice.service.WebformTableServiceUtil;
+import com.rcs.dbservice.service.WebformValueServiceUtil;
 
 /**
  * @author rikad.ramadhan@rotterdam-cs.com

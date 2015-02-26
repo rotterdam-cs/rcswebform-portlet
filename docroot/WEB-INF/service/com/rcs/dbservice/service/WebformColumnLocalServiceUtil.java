@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.rcs.dbService.service;
+package com.rcs.dbservice.service;
 
 import com.liferay.portal.kernel.bean.PortletBeanLocatorUtil;
 import com.liferay.portal.kernel.util.ReferenceRegistry;
@@ -20,7 +20,7 @@ import com.liferay.portal.service.InvokableLocalService;
 
 /**
  * Provides the local service utility for WebformColumn. This utility wraps
- * {@link com.rcs.dbService.service.impl.WebformColumnLocalServiceImpl} and is the
+ * {@link com.rcs.dbservice.service.impl.WebformColumnLocalServiceImpl} and is the
  * primary access point for service operations in application layer code running
  * on the local server. Methods of this service will not have security checks
  * based on the propagated JAAS credentials because this service can only be
@@ -28,15 +28,15 @@ import com.liferay.portal.service.InvokableLocalService;
  *
  * @author rikad.ramadhan@rotterdam-cs.com
  * @see WebformColumnLocalService
- * @see com.rcs.dbService.service.base.WebformColumnLocalServiceBaseImpl
- * @see com.rcs.dbService.service.impl.WebformColumnLocalServiceImpl
+ * @see com.rcs.dbservice.service.base.WebformColumnLocalServiceBaseImpl
+ * @see com.rcs.dbservice.service.impl.WebformColumnLocalServiceImpl
  * @generated
  */
 public class WebformColumnLocalServiceUtil {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify this class directly. Add custom service methods to {@link com.rcs.dbService.service.impl.WebformColumnLocalServiceImpl} and rerun ServiceBuilder to regenerate this class.
+	 * Never modify this class directly. Add custom service methods to {@link com.rcs.dbservice.service.impl.WebformColumnLocalServiceImpl} and rerun ServiceBuilder to regenerate this class.
 	 */
 
 	/**
@@ -46,8 +46,8 @@ public class WebformColumnLocalServiceUtil {
 	* @return the webform column that was added
 	* @throws SystemException if a system exception occurred
 	*/
-	public static com.rcs.dbService.model.WebformColumn addWebformColumn(
-		com.rcs.dbService.model.WebformColumn webformColumn)
+	public static com.rcs.dbservice.model.WebformColumn addWebformColumn(
+		com.rcs.dbservice.model.WebformColumn webformColumn)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().addWebformColumn(webformColumn);
 	}
@@ -58,7 +58,7 @@ public class WebformColumnLocalServiceUtil {
 	* @param webformColumnId the primary key for the new webform column
 	* @return the new webform column
 	*/
-	public static com.rcs.dbService.model.WebformColumn createWebformColumn(
+	public static com.rcs.dbservice.model.WebformColumn createWebformColumn(
 		long webformColumnId) {
 		return getService().createWebformColumn(webformColumnId);
 	}
@@ -71,7 +71,7 @@ public class WebformColumnLocalServiceUtil {
 	* @throws PortalException if a webform column with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public static com.rcs.dbService.model.WebformColumn deleteWebformColumn(
+	public static com.rcs.dbservice.model.WebformColumn deleteWebformColumn(
 		long webformColumnId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -85,8 +85,8 @@ public class WebformColumnLocalServiceUtil {
 	* @return the webform column that was removed
 	* @throws SystemException if a system exception occurred
 	*/
-	public static com.rcs.dbService.model.WebformColumn deleteWebformColumn(
-		com.rcs.dbService.model.WebformColumn webformColumn)
+	public static com.rcs.dbservice.model.WebformColumn deleteWebformColumn(
+		com.rcs.dbservice.model.WebformColumn webformColumn)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().deleteWebformColumn(webformColumn);
 	}
@@ -113,7 +113,7 @@ public class WebformColumnLocalServiceUtil {
 	* Performs a dynamic query on the database and returns a range of the matching rows.
 	*
 	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.rcs.dbService.model.impl.WebformColumnModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.rcs.dbservice.model.impl.WebformColumnModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
 	* @param dynamicQuery the dynamic query
@@ -133,7 +133,7 @@ public class WebformColumnLocalServiceUtil {
 	* Performs a dynamic query on the database and returns an ordered range of the matching rows.
 	*
 	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.rcs.dbService.model.impl.WebformColumnModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.rcs.dbservice.model.impl.WebformColumnModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
 	* @param dynamicQuery the dynamic query
@@ -181,7 +181,7 @@ public class WebformColumnLocalServiceUtil {
 		return getService().dynamicQueryCount(dynamicQuery, projection);
 	}
 
-	public static com.rcs.dbService.model.WebformColumn fetchWebformColumn(
+	public static com.rcs.dbservice.model.WebformColumn fetchWebformColumn(
 		long webformColumnId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().fetchWebformColumn(webformColumnId);
@@ -195,7 +195,7 @@ public class WebformColumnLocalServiceUtil {
 	* @throws PortalException if a webform column with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public static com.rcs.dbService.model.WebformColumn getWebformColumn(
+	public static com.rcs.dbservice.model.WebformColumn getWebformColumn(
 		long webformColumnId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -213,7 +213,7 @@ public class WebformColumnLocalServiceUtil {
 	* Returns a range of all the webform columns.
 	*
 	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.rcs.dbService.model.impl.WebformColumnModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.rcs.dbservice.model.impl.WebformColumnModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
 	* @param start the lower bound of the range of webform columns
@@ -221,7 +221,7 @@ public class WebformColumnLocalServiceUtil {
 	* @return the range of webform columns
 	* @throws SystemException if a system exception occurred
 	*/
-	public static java.util.List<com.rcs.dbService.model.WebformColumn> getWebformColumns(
+	public static java.util.List<com.rcs.dbservice.model.WebformColumn> getWebformColumns(
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getWebformColumns(start, end);
@@ -245,8 +245,8 @@ public class WebformColumnLocalServiceUtil {
 	* @return the webform column that was updated
 	* @throws SystemException if a system exception occurred
 	*/
-	public static com.rcs.dbService.model.WebformColumn updateWebformColumn(
-		com.rcs.dbService.model.WebformColumn webformColumn)
+	public static com.rcs.dbservice.model.WebformColumn updateWebformColumn(
+		com.rcs.dbservice.model.WebformColumn webformColumn)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().updateWebformColumn(webformColumn);
 	}

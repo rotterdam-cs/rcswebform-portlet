@@ -18,7 +18,7 @@ import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.CacheModel;
 
-import com.rcs.dbService.model.WebformValue;
+import com.rcs.dbservice.model.WebformValue;
 
 import java.io.Externalizable;
 import java.io.IOException;

@@ -20,7 +20,7 @@ import com.rcs.dbservice.service.base.WebformColumnLocalServiceBaseImpl;
  * The implementation of the webform column local service.
  *
  * <p>
- * All custom service methods should be put in this class. Whenever methods are added, rerun ServiceBuilder to copy their definitions into the {@link com.rcs.dbService.service.WebformColumnLocalService} interface.
+ * All custom service methods should be put in this class. Whenever methods are added, rerun ServiceBuilder to copy their definitions into the {@link com.rcs.dbservice.service.WebformColumnLocalService} interface.
  *
  * <p>
  * This is a local service. Methods of this service will not have security checks based on the propagated JAAS credentials because this service can only be accessed from within the same VM.
@@ -28,13 +28,13 @@ import com.rcs.dbservice.service.base.WebformColumnLocalServiceBaseImpl;
  *
  * @author rikad.ramadhan@rotterdam-cs.com
  * @see com.rcs.dbservice.service.base.WebformColumnLocalServiceBaseImpl
- * @see com.rcs.dbService.service.WebformColumnLocalServiceUtil
+ * @see com.rcs.dbservice.service.WebformColumnLocalServiceUtil
  */
 public class WebformColumnLocalServiceImpl
 	extends WebformColumnLocalServiceBaseImpl {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never reference this interface directly. Always use {@link com.rcs.dbService.service.WebformColumnLocalServiceUtil} to access the webform column local service.
+	 * Never reference this interface directly. Always use {@link com.rcs.dbservice.service.WebformColumnLocalServiceUtil} to access the webform column local service.
 	 */
 }

@@ -2,7 +2,7 @@ package com.rcs.webform.util;
 
 import java.util.List;
 
-import com.rcs.dbService.model.WebformColumn;
+import com.rcs.dbservice.model.WebformColumn;
 
 public class ConfigurationModel {
 	

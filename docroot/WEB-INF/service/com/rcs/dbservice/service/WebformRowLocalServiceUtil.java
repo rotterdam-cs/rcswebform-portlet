@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.rcs.dbService.service;
+package com.rcs.dbservice.service;
 
 import com.liferay.portal.kernel.bean.PortletBeanLocatorUtil;
 import com.liferay.portal.kernel.util.ReferenceRegistry;
@@ -20,7 +20,7 @@ import com.liferay.portal.service.InvokableLocalService;
 
 /**
  * Provides the local service utility for WebformRow. This utility wraps
- * {@link com.rcs.dbService.service.impl.WebformRowLocalServiceImpl} and is the
+ * {@link com.rcs.dbservice.service.impl.WebformRowLocalServiceImpl} and is the
  * primary access point for service operations in application layer code running
  * on the local server. Methods of this service will not have security checks
  * based on the propagated JAAS credentials because this service can only be
@@ -28,15 +28,15 @@ import com.liferay.portal.service.InvokableLocalService;
  *
  * @author rikad.ramadhan@rotterdam-cs.com
  * @see WebformRowLocalService
- * @see com.rcs.dbService.service.base.WebformRowLocalServiceBaseImpl
- * @see com.rcs.dbService.service.impl.WebformRowLocalServiceImpl
+ * @see com.rcs.dbservice.service.base.WebformRowLocalServiceBaseImpl
+ * @see com.rcs.dbservice.service.impl.WebformRowLocalServiceImpl
  * @generated
  */
 public class WebformRowLocalServiceUtil {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify this class directly. Add custom service methods to {@link com.rcs.dbService.service.impl.WebformRowLocalServiceImpl} and rerun ServiceBuilder to regenerate this class.
+	 * Never modify this class directly. Add custom service methods to {@link com.rcs.dbservice.service.impl.WebformRowLocalServiceImpl} and rerun ServiceBuilder to regenerate this class.
 	 */
 
 	/**
@@ -46,8 +46,8 @@ public class WebformRowLocalServiceUtil {
 	* @return the webform row that was added
 	* @throws SystemException if a system exception occurred
 	*/
-	public static com.rcs.dbService.model.WebformRow addWebformRow(
-		com.rcs.dbService.model.WebformRow webformRow)
+	public static com.rcs.dbservice.model.WebformRow addWebformRow(
+		com.rcs.dbservice.model.WebformRow webformRow)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().addWebformRow(webformRow);
 	}
@@ -58,7 +58,7 @@ public class WebformRowLocalServiceUtil {
 	* @param webformRowId the primary key for the new webform row
 	* @return the new webform row
 	*/
-	public static com.rcs.dbService.model.WebformRow createWebformRow(
+	public static com.rcs.dbservice.model.WebformRow createWebformRow(
 		long webformRowId) {
 		return getService().createWebformRow(webformRowId);
 	}
@@ -71,7 +71,7 @@ public class WebformRowLocalServiceUtil {
 	* @throws PortalException if a webform row with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public static com.rcs.dbService.model.WebformRow deleteWebformRow(
+	public static com.rcs.dbservice.model.WebformRow deleteWebformRow(
 		long webformRowId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -85,8 +85,8 @@ public class WebformRowLocalServiceUtil {
 	* @return the webform row that was removed
 	* @throws SystemException if a system exception occurred
 	*/
-	public static com.rcs.dbService.model.WebformRow deleteWebformRow(
-		com.rcs.dbService.model.WebformRow webformRow)
+	public static com.rcs.dbservice.model.WebformRow deleteWebformRow(
+		com.rcs.dbservice.model.WebformRow webformRow)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().deleteWebformRow(webformRow);
 	}
@@ -113,7 +113,7 @@ public class WebformRowLocalServiceUtil {
 	* Performs a dynamic query on the database and returns a range of the matching rows.
 	*
 	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.rcs.dbService.model.impl.WebformRowModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.rcs.dbservice.model.impl.WebformRowModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
 	* @param dynamicQuery the dynamic query
@@ -133,7 +133,7 @@ public class WebformRowLocalServiceUtil {
 	* Performs a dynamic query on the database and returns an ordered range of the matching rows.
 	*
 	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.rcs.dbService.model.impl.WebformRowModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.rcs.dbservice.model.impl.WebformRowModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
 	* @param dynamicQuery the dynamic query
@@ -181,7 +181,7 @@ public class WebformRowLocalServiceUtil {
 		return getService().dynamicQueryCount(dynamicQuery, projection);
 	}
 
-	public static com.rcs.dbService.model.WebformRow fetchWebformRow(
+	public static com.rcs.dbservice.model.WebformRow fetchWebformRow(
 		long webformRowId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().fetchWebformRow(webformRowId);
@@ -195,7 +195,7 @@ public class WebformRowLocalServiceUtil {
 	* @throws PortalException if a webform row with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public static com.rcs.dbService.model.WebformRow getWebformRow(
+	public static com.rcs.dbservice.model.WebformRow getWebformRow(
 		long webformRowId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -213,7 +213,7 @@ public class WebformRowLocalServiceUtil {
 	* Returns a range of all the webform rows.
 	*
 	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.rcs.dbService.model.impl.WebformRowModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.rcs.dbservice.model.impl.WebformRowModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
 	* @param start the lower bound of the range of webform rows
@@ -221,7 +221,7 @@ public class WebformRowLocalServiceUtil {
 	* @return the range of webform rows
 	* @throws SystemException if a system exception occurred
 	*/
-	public static java.util.List<com.rcs.dbService.model.WebformRow> getWebformRows(
+	public static java.util.List<com.rcs.dbservice.model.WebformRow> getWebformRows(
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getWebformRows(start, end);
@@ -245,8 +245,8 @@ public class WebformRowLocalServiceUtil {
 	* @return the webform row that was updated
 	* @throws SystemException if a system exception occurred
 	*/
-	public static com.rcs.dbService.model.WebformRow updateWebformRow(
-		com.rcs.dbService.model.WebformRow webformRow)
+	public static com.rcs.dbservice.model.WebformRow updateWebformRow(
+		com.rcs.dbservice.model.WebformRow webformRow)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().updateWebformRow(webformRow);
 	}

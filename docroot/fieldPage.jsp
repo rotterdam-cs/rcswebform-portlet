@@ -12,7 +12,7 @@
 				<span class="field-label" >${fieldLabel}</span> 
 			</c:when>
 			<c:otherwise>
-				<liferay-ui:message key="new-item" />
+				<liferay-ui:message key="new-item" /> _field${index}
 			</c:otherwise>
 		</c:choose>
 	</div>
@@ -21,7 +21,7 @@
 		<c:when test="${isEditable}">
 			<aui:input name="_field${fieldModel.index}" type="hidden" />
 			<aui:field-wrapper cssClass="label-name" label="name">
-				<liferay-ui:input-localized name="fieldLabel${fieldModel.index}" xml="${fieldModel.fieldLabelXml" />
+				<liferay-ui:input-localized name="fieldLabel${fieldModel.index}" xml="${fieldModel.fieldLabelXml}" />
 			</aui:field-wrapper>
 		</c:when>
 	</c:choose>

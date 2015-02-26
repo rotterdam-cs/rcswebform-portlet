@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.rcs.dbService.service;
+package com.rcs.dbservice.service;
 
 import com.liferay.portal.kernel.bean.PortletBeanLocatorUtil;
 import com.liferay.portal.kernel.util.ReferenceRegistry;
@@ -20,7 +20,7 @@ import com.liferay.portal.service.InvokableService;
 
 /**
  * Provides the remote service utility for WebformColumn. This utility wraps
- * {@link com.rcs.dbService.service.impl.WebformColumnServiceImpl} and is the
+ * {@link com.rcs.dbservice.service.impl.WebformColumnServiceImpl} and is the
  * primary access point for service operations in application layer code running
  * on a remote server. Methods of this service are expected to have security
  * checks based on the propagated JAAS credentials because this service can be
@@ -28,15 +28,15 @@ import com.liferay.portal.service.InvokableService;
  *
  * @author rikad.ramadhan@rotterdam-cs.com
  * @see WebformColumnService
- * @see com.rcs.dbService.service.base.WebformColumnServiceBaseImpl
- * @see com.rcs.dbService.service.impl.WebformColumnServiceImpl
+ * @see com.rcs.dbservice.service.base.WebformColumnServiceBaseImpl
+ * @see com.rcs.dbservice.service.impl.WebformColumnServiceImpl
  * @generated
  */
 public class WebformColumnServiceUtil {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify this class directly. Add custom service methods to {@link com.rcs.dbService.service.impl.WebformColumnServiceImpl} and rerun ServiceBuilder to regenerate this class.
+	 * Never modify this class directly. Add custom service methods to {@link com.rcs.dbservice.service.impl.WebformColumnServiceImpl} and rerun ServiceBuilder to regenerate this class.
 	 */
 
 	/**

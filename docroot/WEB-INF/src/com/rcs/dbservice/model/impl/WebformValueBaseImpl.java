@@ -14,7 +14,7 @@
 
 package com.rcs.dbservice.model.impl;
 
-import com.rcs.dbService.model.WebformValue;
+import com.rcs.dbservice.model.WebformValue;
 
 /**
  * The extended model base implementation for the WebformValue service. Represents a row in the &quot;RcsWebform_WebformValue&quot; database table, with each column mapped to a property of this class.
@@ -25,7 +25,7 @@ import com.rcs.dbService.model.WebformValue;
  *
  * @author rikad.ramadhan@rotterdam-cs.com
  * @see WebformValueImpl
- * @see com.rcs.dbService.model.WebformValue
+ * @see com.rcs.dbservice.model.WebformValue
  * @generated
  */
 public abstract class WebformValueBaseImpl extends WebformValueModelImpl

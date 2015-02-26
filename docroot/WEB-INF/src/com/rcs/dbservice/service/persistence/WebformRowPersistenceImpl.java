@@ -37,14 +37,14 @@ import com.liferay.portal.kernel.util.UnmodifiableList;
 import com.liferay.portal.model.CacheModel;
 import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
-import com.rcs.dbService.NoSuchWebformRowException;
-import com.rcs.dbService.model.WebformRow;
-import com.rcs.dbService.service.persistence.WebformRowPersistence;
-import com.rcs.dbService.service.persistence.WebformRowUtil;
+
+import com.rcs.dbservice.NoSuchWebformRowException;
+import com.rcs.dbservice.model.WebformRow;
 import com.rcs.dbservice.model.impl.WebformRowImpl;
 import com.rcs.dbservice.model.impl.WebformRowModelImpl;
 
 import java.io.Serializable;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -259,7 +259,7 @@ public class WebformRowPersistenceImpl extends BasePersistenceImpl<WebformRow>
 	 * @param webformTableId the webform table ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching webform row
-	 * @throws com.rcs.dbService.NoSuchWebformRowException if a matching webform row could not be found
+	 * @throws com.rcs.dbservice.NoSuchWebformRowException if a matching webform row could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
@@ -312,7 +312,7 @@ public class WebformRowPersistenceImpl extends BasePersistenceImpl<WebformRow>
 	 * @param webformTableId the webform table ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching webform row
-	 * @throws com.rcs.dbService.NoSuchWebformRowException if a matching webform row could not be found
+	 * @throws com.rcs.dbservice.NoSuchWebformRowException if a matching webform row could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
@@ -372,7 +372,7 @@ public class WebformRowPersistenceImpl extends BasePersistenceImpl<WebformRow>
 	 * @param webformTableId the webform table ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next webform row
-	 * @throws com.rcs.dbService.NoSuchWebformRowException if a webform row with the primary key could not be found
+	 * @throws com.rcs.dbservice.NoSuchWebformRowException if a webform row with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
@@ -686,7 +686,7 @@ public class WebformRowPersistenceImpl extends BasePersistenceImpl<WebformRow>
 	 *
 	 * @param webformRowId the primary key of the webform row
 	 * @return the webform row that was removed
-	 * @throws com.rcs.dbService.NoSuchWebformRowException if a webform row with the primary key could not be found
+	 * @throws com.rcs.dbservice.NoSuchWebformRowException if a webform row with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
@@ -700,7 +700,7 @@ public class WebformRowPersistenceImpl extends BasePersistenceImpl<WebformRow>
 	 *
 	 * @param primaryKey the primary key of the webform row
 	 * @return the webform row that was removed
-	 * @throws com.rcs.dbService.NoSuchWebformRowException if a webform row with the primary key could not be found
+	 * @throws com.rcs.dbservice.NoSuchWebformRowException if a webform row with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
@@ -770,7 +770,7 @@ public class WebformRowPersistenceImpl extends BasePersistenceImpl<WebformRow>
 	}
 
 	@Override
-	public WebformRow updateImpl(com.rcs.dbService.model.WebformRow webformRow)
+	public WebformRow updateImpl(com.rcs.dbservice.model.WebformRow webformRow)
 		throws SystemException {
 		webformRow = toUnwrappedModel(webformRow);
 
@@ -854,7 +854,7 @@ public class WebformRowPersistenceImpl extends BasePersistenceImpl<WebformRow>
 	 *
 	 * @param primaryKey the primary key of the webform row
 	 * @return the webform row
-	 * @throws com.rcs.dbService.NoSuchWebformRowException if a webform row with the primary key could not be found
+	 * @throws com.rcs.dbservice.NoSuchWebformRowException if a webform row with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
@@ -875,11 +875,11 @@ public class WebformRowPersistenceImpl extends BasePersistenceImpl<WebformRow>
 	}
 
 	/**
-	 * Returns the webform row with the primary key or throws a {@link com.rcs.dbService.NoSuchWebformRowException} if it could not be found.
+	 * Returns the webform row with the primary key or throws a {@link com.rcs.dbservice.NoSuchWebformRowException} if it could not be found.
 	 *
 	 * @param webformRowId the primary key of the webform row
 	 * @return the webform row
-	 * @throws com.rcs.dbService.NoSuchWebformRowException if a webform row with the primary key could not be found
+	 * @throws com.rcs.dbservice.NoSuchWebformRowException if a webform row with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
@@ -1128,7 +1128,7 @@ public class WebformRowPersistenceImpl extends BasePersistenceImpl<WebformRow>
 	public void afterPropertiesSet() {
 		String[] listenerClassNames = StringUtil.split(GetterUtil.getString(
 					com.liferay.util.service.ServiceProps.get(
-						"value.object.listener.com.rcs.dbService.model.WebformRow")));
+						"value.object.listener.com.rcs.dbservice.model.WebformRow")));
 
 		if (listenerClassNames.length > 0) {
 			try {

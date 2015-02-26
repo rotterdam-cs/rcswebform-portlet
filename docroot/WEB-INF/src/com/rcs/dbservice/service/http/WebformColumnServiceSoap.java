@@ -16,7 +16,7 @@ package com.rcs.dbservice.service.http;
 
 /**
  * Provides the SOAP utility for the
- * {@link com.rcs.dbService.service.WebformColumnServiceUtil} service utility. The
+ * {@link com.rcs.dbservice.service.WebformColumnServiceUtil} service utility. The
  * static methods of this class calls the same methods of the service utility.
  * However, the signatures are different because it is difficult for SOAP to
  * support certain types.
@@ -24,10 +24,10 @@ package com.rcs.dbservice.service.http;
  * <p>
  * ServiceBuilder follows certain rules in translating the methods. For example,
  * if the method in the service utility returns a {@link java.util.List}, that
- * is translated to an array of {@link com.rcs.dbService.model.WebformColumnSoap}.
+ * is translated to an array of {@link com.rcs.dbservice.model.WebformColumnSoap}.
  * If the method in the service utility returns a
- * {@link com.rcs.dbService.model.WebformColumn}, that is translated to a
- * {@link com.rcs.dbService.model.WebformColumnSoap}. Methods that SOAP cannot
+ * {@link com.rcs.dbservice.model.WebformColumn}, that is translated to a
+ * {@link com.rcs.dbservice.model.WebformColumnSoap}. Methods that SOAP cannot
  * safely wire are skipped.
  * </p>
  *
@@ -50,8 +50,8 @@ package com.rcs.dbservice.service.http;
  *
  * @author rikad.ramadhan@rotterdam-cs.com
  * @see WebformColumnServiceHttp
- * @see com.rcs.dbService.model.WebformColumnSoap
- * @see com.rcs.dbService.service.WebformColumnServiceUtil
+ * @see com.rcs.dbservice.model.WebformColumnSoap
+ * @see com.rcs.dbservice.service.WebformColumnServiceUtil
  * @generated
  */
 public class WebformColumnServiceSoap {

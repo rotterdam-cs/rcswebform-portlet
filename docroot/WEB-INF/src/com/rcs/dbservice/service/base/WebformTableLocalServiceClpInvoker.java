@@ -14,7 +14,7 @@
 
 package com.rcs.dbservice.service.base;
 
-import com.rcs.dbService.service.WebformTableLocalServiceUtil;
+import com.rcs.dbservice.service.WebformTableLocalServiceUtil;
 
 import java.util.Arrays;
 
@@ -27,7 +27,7 @@ public class WebformTableLocalServiceClpInvoker {
 		_methodName0 = "addWebformTable";
 
 		_methodParameterTypes0 = new String[] {
-				"com.rcs.dbService.model.WebformTable"
+				"com.rcs.dbservice.model.WebformTable"
 			};
 
 		_methodName1 = "createWebformTable";
@@ -41,7 +41,7 @@ public class WebformTableLocalServiceClpInvoker {
 		_methodName3 = "deleteWebformTable";
 
 		_methodParameterTypes3 = new String[] {
-				"com.rcs.dbService.model.WebformTable"
+				"com.rcs.dbservice.model.WebformTable"
 			};
 
 		_methodName4 = "dynamicQuery";
@@ -103,7 +103,7 @@ public class WebformTableLocalServiceClpInvoker {
 		_methodName15 = "updateWebformTable";
 
 		_methodParameterTypes15 = new String[] {
-				"com.rcs.dbService.model.WebformTable"
+				"com.rcs.dbservice.model.WebformTable"
 			};
 
 		_methodName50 = "getBeanIdentifier";
@@ -119,7 +119,7 @@ public class WebformTableLocalServiceClpInvoker {
 		Object[] arguments) throws Throwable {
 		if (_methodName0.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes0, parameterTypes)) {
-			return WebformTableLocalServiceUtil.addWebformTable((com.rcs.dbService.model.WebformTable)arguments[0]);
+			return WebformTableLocalServiceUtil.addWebformTable((com.rcs.dbservice.model.WebformTable)arguments[0]);
 		}
 
 		if (_methodName1.equals(name) &&
@@ -134,7 +134,7 @@ public class WebformTableLocalServiceClpInvoker {
 
 		if (_methodName3.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes3, parameterTypes)) {
-			return WebformTableLocalServiceUtil.deleteWebformTable((com.rcs.dbService.model.WebformTable)arguments[0]);
+			return WebformTableLocalServiceUtil.deleteWebformTable((com.rcs.dbservice.model.WebformTable)arguments[0]);
 		}
 
 		if (_methodName4.equals(name) &&
@@ -201,7 +201,7 @@ public class WebformTableLocalServiceClpInvoker {
 
 		if (_methodName15.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes15, parameterTypes)) {
-			return WebformTableLocalServiceUtil.updateWebformTable((com.rcs.dbService.model.WebformTable)arguments[0]);
+			return WebformTableLocalServiceUtil.updateWebformTable((com.rcs.dbservice.model.WebformTable)arguments[0]);
 		}
 
 		if (_methodName50.equals(name) &&

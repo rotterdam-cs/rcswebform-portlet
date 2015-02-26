@@ -14,7 +14,7 @@
 
 package com.rcs.dbservice.service.base;
 
-import com.rcs.dbService.service.WebformColumnLocalServiceUtil;
+import com.rcs.dbservice.service.WebformColumnLocalServiceUtil;
 
 import java.util.Arrays;
 
@@ -27,7 +27,7 @@ public class WebformColumnLocalServiceClpInvoker {
 		_methodName0 = "addWebformColumn";
 
 		_methodParameterTypes0 = new String[] {
-				"com.rcs.dbService.model.WebformColumn"
+				"com.rcs.dbservice.model.WebformColumn"
 			};
 
 		_methodName1 = "createWebformColumn";
@@ -41,7 +41,7 @@ public class WebformColumnLocalServiceClpInvoker {
 		_methodName3 = "deleteWebformColumn";
 
 		_methodParameterTypes3 = new String[] {
-				"com.rcs.dbService.model.WebformColumn"
+				"com.rcs.dbservice.model.WebformColumn"
 			};
 
 		_methodName4 = "dynamicQuery";
@@ -103,7 +103,7 @@ public class WebformColumnLocalServiceClpInvoker {
 		_methodName15 = "updateWebformColumn";
 
 		_methodParameterTypes15 = new String[] {
-				"com.rcs.dbService.model.WebformColumn"
+				"com.rcs.dbservice.model.WebformColumn"
 			};
 
 		_methodName50 = "getBeanIdentifier";
@@ -119,7 +119,7 @@ public class WebformColumnLocalServiceClpInvoker {
 		Object[] arguments) throws Throwable {
 		if (_methodName0.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes0, parameterTypes)) {
-			return WebformColumnLocalServiceUtil.addWebformColumn((com.rcs.dbService.model.WebformColumn)arguments[0]);
+			return WebformColumnLocalServiceUtil.addWebformColumn((com.rcs.dbservice.model.WebformColumn)arguments[0]);
 		}
 
 		if (_methodName1.equals(name) &&
@@ -134,7 +134,7 @@ public class WebformColumnLocalServiceClpInvoker {
 
 		if (_methodName3.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes3, parameterTypes)) {
-			return WebformColumnLocalServiceUtil.deleteWebformColumn((com.rcs.dbService.model.WebformColumn)arguments[0]);
+			return WebformColumnLocalServiceUtil.deleteWebformColumn((com.rcs.dbservice.model.WebformColumn)arguments[0]);
 		}
 
 		if (_methodName4.equals(name) &&
@@ -201,7 +201,7 @@ public class WebformColumnLocalServiceClpInvoker {
 
 		if (_methodName15.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes15, parameterTypes)) {
-			return WebformColumnLocalServiceUtil.updateWebformColumn((com.rcs.dbService.model.WebformColumn)arguments[0]);
+			return WebformColumnLocalServiceUtil.updateWebformColumn((com.rcs.dbservice.model.WebformColumn)arguments[0]);
 		}
 
 		if (_methodName50.equals(name) &&

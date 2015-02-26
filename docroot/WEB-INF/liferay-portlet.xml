@@ -6,7 +6,8 @@
 		<portlet-name>rcswebform</portlet-name>
 		<icon>/icon.png</icon>
 		<configuration-action-class>com.rcs.webform.action.ConfigurationActionImpl</configuration-action-class>
-		<instanceable>true</instanceable>
+		<instanceable>false</instanceable>
+		<requires-namespaced-parameters>true</requires-namespaced-parameters>
 		<header-portlet-css>/css/main.css</header-portlet-css>
 		<footer-portlet-javascript>/js/main.js</footer-portlet-javascript>
 		<css-class-wrapper>rcswebform-portlet</css-class-wrapper>

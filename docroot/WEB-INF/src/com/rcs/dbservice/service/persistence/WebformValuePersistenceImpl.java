@@ -38,14 +38,14 @@ import com.liferay.portal.kernel.util.UnmodifiableList;
 import com.liferay.portal.model.CacheModel;
 import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
-import com.rcs.dbService.NoSuchWebformValueException;
-import com.rcs.dbService.model.WebformValue;
-import com.rcs.dbService.service.persistence.WebformValuePersistence;
-import com.rcs.dbService.service.persistence.WebformValueUtil;
+
+import com.rcs.dbservice.NoSuchWebformValueException;
+import com.rcs.dbservice.model.WebformValue;
 import com.rcs.dbservice.model.impl.WebformValueImpl;
 import com.rcs.dbservice.model.impl.WebformValueModelImpl;
 
 import java.io.Serializable;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -263,7 +263,7 @@ public class WebformValuePersistenceImpl extends BasePersistenceImpl<WebformValu
 	 * @param webformTableId the webform table ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching webform value
-	 * @throws com.rcs.dbService.NoSuchWebformValueException if a matching webform value could not be found
+	 * @throws com.rcs.dbservice.NoSuchWebformValueException if a matching webform value could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
@@ -316,7 +316,7 @@ public class WebformValuePersistenceImpl extends BasePersistenceImpl<WebformValu
 	 * @param webformTableId the webform table ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching webform value
-	 * @throws com.rcs.dbService.NoSuchWebformValueException if a matching webform value could not be found
+	 * @throws com.rcs.dbservice.NoSuchWebformValueException if a matching webform value could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
@@ -376,7 +376,7 @@ public class WebformValuePersistenceImpl extends BasePersistenceImpl<WebformValu
 	 * @param webformTableId the webform table ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next webform value
-	 * @throws com.rcs.dbService.NoSuchWebformValueException if a webform value with the primary key could not be found
+	 * @throws com.rcs.dbservice.NoSuchWebformValueException if a webform value with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
@@ -691,7 +691,7 @@ public class WebformValuePersistenceImpl extends BasePersistenceImpl<WebformValu
 	 *
 	 * @param webformValueId the primary key of the webform value
 	 * @return the webform value that was removed
-	 * @throws com.rcs.dbService.NoSuchWebformValueException if a webform value with the primary key could not be found
+	 * @throws com.rcs.dbservice.NoSuchWebformValueException if a webform value with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
@@ -705,7 +705,7 @@ public class WebformValuePersistenceImpl extends BasePersistenceImpl<WebformValu
 	 *
 	 * @param primaryKey the primary key of the webform value
 	 * @return the webform value that was removed
-	 * @throws com.rcs.dbService.NoSuchWebformValueException if a webform value with the primary key could not be found
+	 * @throws com.rcs.dbservice.NoSuchWebformValueException if a webform value with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
@@ -776,7 +776,7 @@ public class WebformValuePersistenceImpl extends BasePersistenceImpl<WebformValu
 
 	@Override
 	public WebformValue updateImpl(
-		com.rcs.dbService.model.WebformValue webformValue)
+		com.rcs.dbservice.model.WebformValue webformValue)
 		throws SystemException {
 		webformValue = toUnwrappedModel(webformValue);
 
@@ -862,7 +862,7 @@ public class WebformValuePersistenceImpl extends BasePersistenceImpl<WebformValu
 	 *
 	 * @param primaryKey the primary key of the webform value
 	 * @return the webform value
-	 * @throws com.rcs.dbService.NoSuchWebformValueException if a webform value with the primary key could not be found
+	 * @throws com.rcs.dbservice.NoSuchWebformValueException if a webform value with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
@@ -883,11 +883,11 @@ public class WebformValuePersistenceImpl extends BasePersistenceImpl<WebformValu
 	}
 
 	/**
-	 * Returns the webform value with the primary key or throws a {@link com.rcs.dbService.NoSuchWebformValueException} if it could not be found.
+	 * Returns the webform value with the primary key or throws a {@link com.rcs.dbservice.NoSuchWebformValueException} if it could not be found.
 	 *
 	 * @param webformValueId the primary key of the webform value
 	 * @return the webform value
-	 * @throws com.rcs.dbService.NoSuchWebformValueException if a webform value with the primary key could not be found
+	 * @throws com.rcs.dbservice.NoSuchWebformValueException if a webform value with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
@@ -1141,7 +1141,7 @@ public class WebformValuePersistenceImpl extends BasePersistenceImpl<WebformValu
 	public void afterPropertiesSet() {
 		String[] listenerClassNames = StringUtil.split(GetterUtil.getString(
 					com.liferay.util.service.ServiceProps.get(
-						"value.object.listener.com.rcs.dbService.model.WebformValue")));
+						"value.object.listener.com.rcs.dbservice.model.WebformValue")));
 
 		if (listenerClassNames.length > 0) {
 			try {

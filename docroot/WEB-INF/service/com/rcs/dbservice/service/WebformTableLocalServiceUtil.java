@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.rcs.dbService.service;
+package com.rcs.dbservice.service;
 
 import com.liferay.portal.kernel.bean.PortletBeanLocatorUtil;
 import com.liferay.portal.kernel.util.ReferenceRegistry;
@@ -20,7 +20,7 @@ import com.liferay.portal.service.InvokableLocalService;
 
 /**
  * Provides the local service utility for WebformTable. This utility wraps
- * {@link com.rcs.dbService.service.impl.WebformTableLocalServiceImpl} and is the
+ * {@link com.rcs.dbservice.service.impl.WebformTableLocalServiceImpl} and is the
  * primary access point for service operations in application layer code running
  * on the local server. Methods of this service will not have security checks
  * based on the propagated JAAS credentials because this service can only be
@@ -28,15 +28,15 @@ import com.liferay.portal.service.InvokableLocalService;
  *
  * @author rikad.ramadhan@rotterdam-cs.com
  * @see WebformTableLocalService
- * @see com.rcs.dbService.service.base.WebformTableLocalServiceBaseImpl
- * @see com.rcs.dbService.service.impl.WebformTableLocalServiceImpl
+ * @see com.rcs.dbservice.service.base.WebformTableLocalServiceBaseImpl
+ * @see com.rcs.dbservice.service.impl.WebformTableLocalServiceImpl
  * @generated
  */
 public class WebformTableLocalServiceUtil {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify this class directly. Add custom service methods to {@link com.rcs.dbService.service.impl.WebformTableLocalServiceImpl} and rerun ServiceBuilder to regenerate this class.
+	 * Never modify this class directly. Add custom service methods to {@link com.rcs.dbservice.service.impl.WebformTableLocalServiceImpl} and rerun ServiceBuilder to regenerate this class.
 	 */
 
 	/**
@@ -46,8 +46,8 @@ public class WebformTableLocalServiceUtil {
 	* @return the webform table that was added
 	* @throws SystemException if a system exception occurred
 	*/
-	public static com.rcs.dbService.model.WebformTable addWebformTable(
-		com.rcs.dbService.model.WebformTable webformTable)
+	public static com.rcs.dbservice.model.WebformTable addWebformTable(
+		com.rcs.dbservice.model.WebformTable webformTable)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().addWebformTable(webformTable);
 	}
@@ -58,7 +58,7 @@ public class WebformTableLocalServiceUtil {
 	* @param webformTableId the primary key for the new webform table
 	* @return the new webform table
 	*/
-	public static com.rcs.dbService.model.WebformTable createWebformTable(
+	public static com.rcs.dbservice.model.WebformTable createWebformTable(
 		long webformTableId) {
 		return getService().createWebformTable(webformTableId);
 	}
@@ -71,7 +71,7 @@ public class WebformTableLocalServiceUtil {
 	* @throws PortalException if a webform table with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public static com.rcs.dbService.model.WebformTable deleteWebformTable(
+	public static com.rcs.dbservice.model.WebformTable deleteWebformTable(
 		long webformTableId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -85,8 +85,8 @@ public class WebformTableLocalServiceUtil {
 	* @return the webform table that was removed
 	* @throws SystemException if a system exception occurred
 	*/
-	public static com.rcs.dbService.model.WebformTable deleteWebformTable(
-		com.rcs.dbService.model.WebformTable webformTable)
+	public static com.rcs.dbservice.model.WebformTable deleteWebformTable(
+		com.rcs.dbservice.model.WebformTable webformTable)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().deleteWebformTable(webformTable);
 	}
@@ -113,7 +113,7 @@ public class WebformTableLocalServiceUtil {
 	* Performs a dynamic query on the database and returns a range of the matching rows.
 	*
 	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.rcs.dbService.model.impl.WebformTableModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.rcs.dbservice.model.impl.WebformTableModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
 	* @param dynamicQuery the dynamic query
@@ -133,7 +133,7 @@ public class WebformTableLocalServiceUtil {
 	* Performs a dynamic query on the database and returns an ordered range of the matching rows.
 	*
 	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.rcs.dbService.model.impl.WebformTableModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.rcs.dbservice.model.impl.WebformTableModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
 	* @param dynamicQuery the dynamic query
@@ -181,7 +181,7 @@ public class WebformTableLocalServiceUtil {
 		return getService().dynamicQueryCount(dynamicQuery, projection);
 	}
 
-	public static com.rcs.dbService.model.WebformTable fetchWebformTable(
+	public static com.rcs.dbservice.model.WebformTable fetchWebformTable(
 		long webformTableId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().fetchWebformTable(webformTableId);
@@ -195,7 +195,7 @@ public class WebformTableLocalServiceUtil {
 	* @throws PortalException if a webform table with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public static com.rcs.dbService.model.WebformTable getWebformTable(
+	public static com.rcs.dbservice.model.WebformTable getWebformTable(
 		long webformTableId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -213,7 +213,7 @@ public class WebformTableLocalServiceUtil {
 	* Returns a range of all the webform tables.
 	*
 	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.rcs.dbService.model.impl.WebformTableModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.rcs.dbservice.model.impl.WebformTableModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
 	* @param start the lower bound of the range of webform tables
@@ -221,7 +221,7 @@ public class WebformTableLocalServiceUtil {
 	* @return the range of webform tables
 	* @throws SystemException if a system exception occurred
 	*/
-	public static java.util.List<com.rcs.dbService.model.WebformTable> getWebformTables(
+	public static java.util.List<com.rcs.dbservice.model.WebformTable> getWebformTables(
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getWebformTables(start, end);
@@ -245,8 +245,8 @@ public class WebformTableLocalServiceUtil {
 	* @return the webform table that was updated
 	* @throws SystemException if a system exception occurred
 	*/
-	public static com.rcs.dbService.model.WebformTable updateWebformTable(
-		com.rcs.dbService.model.WebformTable webformTable)
+	public static com.rcs.dbservice.model.WebformTable updateWebformTable(
+		com.rcs.dbservice.model.WebformTable webformTable)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().updateWebformTable(webformTable);
 	}

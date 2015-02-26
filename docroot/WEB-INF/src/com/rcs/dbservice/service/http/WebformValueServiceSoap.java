@@ -16,7 +16,7 @@ package com.rcs.dbservice.service.http;
 
 /**
  * Provides the SOAP utility for the
- * {@link com.rcs.dbService.service.WebformValueServiceUtil} service utility. The
+ * {@link com.rcs.dbservice.service.WebformValueServiceUtil} service utility. The
  * static methods of this class calls the same methods of the service utility.
  * However, the signatures are different because it is difficult for SOAP to
  * support certain types.
@@ -24,10 +24,10 @@ package com.rcs.dbservice.service.http;
  * <p>
  * ServiceBuilder follows certain rules in translating the methods. For example,
  * if the method in the service utility returns a {@link java.util.List}, that
- * is translated to an array of {@link com.rcs.dbService.model.WebformValueSoap}.
+ * is translated to an array of {@link com.rcs.dbservice.model.WebformValueSoap}.
  * If the method in the service utility returns a
- * {@link com.rcs.dbService.model.WebformValue}, that is translated to a
- * {@link com.rcs.dbService.model.WebformValueSoap}. Methods that SOAP cannot
+ * {@link com.rcs.dbservice.model.WebformValue}, that is translated to a
+ * {@link com.rcs.dbservice.model.WebformValueSoap}. Methods that SOAP cannot
  * safely wire are skipped.
  * </p>
  *
@@ -50,8 +50,8 @@ package com.rcs.dbservice.service.http;
  *
  * @author rikad.ramadhan@rotterdam-cs.com
  * @see WebformValueServiceHttp
- * @see com.rcs.dbService.model.WebformValueSoap
- * @see com.rcs.dbService.service.WebformValueServiceUtil
+ * @see com.rcs.dbservice.model.WebformValueSoap
+ * @see com.rcs.dbservice.service.WebformValueServiceUtil
  * @generated
  */
 public class WebformValueServiceSoap {

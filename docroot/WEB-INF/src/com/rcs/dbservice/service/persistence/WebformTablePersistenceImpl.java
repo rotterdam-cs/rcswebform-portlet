@@ -38,14 +38,14 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.CacheModel;
 import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
-import com.rcs.dbService.NoSuchWebformTableException;
-import com.rcs.dbService.model.WebformTable;
-import com.rcs.dbService.service.persistence.WebformTablePersistence;
-import com.rcs.dbService.service.persistence.WebformTableUtil;
+
+import com.rcs.dbservice.NoSuchWebformTableException;
+import com.rcs.dbservice.model.WebformTable;
 import com.rcs.dbservice.model.impl.WebformTableImpl;
 import com.rcs.dbservice.model.impl.WebformTableModelImpl;
 
 import java.io.Serializable;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -94,11 +94,11 @@ public class WebformTablePersistenceImpl extends BasePersistenceImpl<WebformTabl
 			new String[] { String.class.getName() });
 
 	/**
-	 * Returns the webform table where portletId = &#63; or throws a {@link com.rcs.dbService.NoSuchWebformTableException} if it could not be found.
+	 * Returns the webform table where portletId = &#63; or throws a {@link com.rcs.dbservice.NoSuchWebformTableException} if it could not be found.
 	 *
 	 * @param portletId the portlet ID
 	 * @return the matching webform table
-	 * @throws com.rcs.dbService.NoSuchWebformTableException if a matching webform table could not be found
+	 * @throws com.rcs.dbservice.NoSuchWebformTableException if a matching webform table could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
@@ -345,12 +345,12 @@ public class WebformTablePersistenceImpl extends BasePersistenceImpl<WebformTabl
 			new String[] { String.class.getName(), String.class.getName() });
 
 	/**
-	 * Returns the webform table where portletId = &#63; and webformCounter = &#63; or throws a {@link com.rcs.dbService.NoSuchWebformTableException} if it could not be found.
+	 * Returns the webform table where portletId = &#63; and webformCounter = &#63; or throws a {@link com.rcs.dbservice.NoSuchWebformTableException} if it could not be found.
 	 *
 	 * @param portletId the portlet ID
 	 * @param webformCounter the webform counter
 	 * @return the matching webform table
-	 * @throws com.rcs.dbService.NoSuchWebformTableException if a matching webform table could not be found
+	 * @throws com.rcs.dbservice.NoSuchWebformTableException if a matching webform table could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
@@ -655,11 +655,11 @@ public class WebformTablePersistenceImpl extends BasePersistenceImpl<WebformTabl
 			new String[] { String.class.getName() });
 
 	/**
-	 * Returns the webform table where webformName = &#63; or throws a {@link com.rcs.dbService.NoSuchWebformTableException} if it could not be found.
+	 * Returns the webform table where webformName = &#63; or throws a {@link com.rcs.dbservice.NoSuchWebformTableException} if it could not be found.
 	 *
 	 * @param webformName the webform name
 	 * @return the matching webform table
-	 * @throws com.rcs.dbService.NoSuchWebformTableException if a matching webform table could not be found
+	 * @throws com.rcs.dbservice.NoSuchWebformTableException if a matching webform table could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
@@ -1129,7 +1129,7 @@ public class WebformTablePersistenceImpl extends BasePersistenceImpl<WebformTabl
 	 *
 	 * @param webformTableId the primary key of the webform table
 	 * @return the webform table that was removed
-	 * @throws com.rcs.dbService.NoSuchWebformTableException if a webform table with the primary key could not be found
+	 * @throws com.rcs.dbservice.NoSuchWebformTableException if a webform table with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
@@ -1143,7 +1143,7 @@ public class WebformTablePersistenceImpl extends BasePersistenceImpl<WebformTabl
 	 *
 	 * @param primaryKey the primary key of the webform table
 	 * @return the webform table that was removed
-	 * @throws com.rcs.dbService.NoSuchWebformTableException if a webform table with the primary key could not be found
+	 * @throws com.rcs.dbservice.NoSuchWebformTableException if a webform table with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
@@ -1214,7 +1214,7 @@ public class WebformTablePersistenceImpl extends BasePersistenceImpl<WebformTabl
 
 	@Override
 	public WebformTable updateImpl(
-		com.rcs.dbService.model.WebformTable webformTable)
+		com.rcs.dbservice.model.WebformTable webformTable)
 		throws SystemException {
 		webformTable = toUnwrappedModel(webformTable);
 
@@ -1279,7 +1279,7 @@ public class WebformTablePersistenceImpl extends BasePersistenceImpl<WebformTabl
 	 *
 	 * @param primaryKey the primary key of the webform table
 	 * @return the webform table
-	 * @throws com.rcs.dbService.NoSuchWebformTableException if a webform table with the primary key could not be found
+	 * @throws com.rcs.dbservice.NoSuchWebformTableException if a webform table with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
@@ -1300,11 +1300,11 @@ public class WebformTablePersistenceImpl extends BasePersistenceImpl<WebformTabl
 	}
 
 	/**
-	 * Returns the webform table with the primary key or throws a {@link com.rcs.dbService.NoSuchWebformTableException} if it could not be found.
+	 * Returns the webform table with the primary key or throws a {@link com.rcs.dbservice.NoSuchWebformTableException} if it could not be found.
 	 *
 	 * @param webformTableId the primary key of the webform table
 	 * @return the webform table
-	 * @throws com.rcs.dbService.NoSuchWebformTableException if a webform table with the primary key could not be found
+	 * @throws com.rcs.dbservice.NoSuchWebformTableException if a webform table with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
@@ -1553,7 +1553,7 @@ public class WebformTablePersistenceImpl extends BasePersistenceImpl<WebformTabl
 	public void afterPropertiesSet() {
 		String[] listenerClassNames = StringUtil.split(GetterUtil.getString(
 					com.liferay.util.service.ServiceProps.get(
-						"value.object.listener.com.rcs.dbService.model.WebformTable")));
+						"value.object.listener.com.rcs.dbservice.model.WebformTable")));
 
 		if (listenerClassNames.length > 0) {
 			try {

@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.rcs.dbService.service;
+package com.rcs.dbservice.service;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
@@ -30,8 +30,8 @@ import com.liferay.portal.service.InvokableService;
  *
  * @author rikad.ramadhan@rotterdam-cs.com
  * @see WebformTableServiceUtil
- * @see com.rcs.dbService.service.base.WebformTableServiceBaseImpl
- * @see com.rcs.dbService.service.impl.WebformTableServiceImpl
+ * @see com.rcs.dbservice.service.base.WebformTableServiceBaseImpl
+ * @see com.rcs.dbservice.service.impl.WebformTableServiceImpl
  * @generated
  */
 @AccessControlled
@@ -42,7 +42,7 @@ public interface WebformTableService extends BaseService, InvokableService {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this interface directly. Always use {@link WebformTableServiceUtil} to access the webform table remote service. Add custom service methods to {@link com.rcs.dbService.service.impl.WebformTableServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify or reference this interface directly. Always use {@link WebformTableServiceUtil} to access the webform table remote service. Add custom service methods to {@link com.rcs.dbservice.service.impl.WebformTableServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
 
 	/**

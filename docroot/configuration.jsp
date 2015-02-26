@@ -77,9 +77,12 @@
 				<c:forEach items="${webformFieldModelList}" var="fieldModel" varStatus="countStatus">
 					<div class="lfr-form-row" id="<portlet:namespace />fieldset${countStatus.count}">
 						<div class="row-fields">
-							<liferay-util:include page="/fieldPage.jsp" servletContext="<%= application %>" />
+							<liferay-util:include page="/fieldPage.jsp" servletContext="<%= this.getServletContext()  %>" >
+								<liferay-util:param name="fieldModel" value="${fieldModel}" />
+							</liferay-util:include>
 						</div>
 					</div>
+					<c:set var="index" value="${countStatus.count}" />
 				</c:forEach>
 					
 			</aui:fieldset>
@@ -172,7 +175,7 @@
 		new Liferay.AutoFields(
 			{
 				contentBox: webFields,
-				fieldIndexes: '<portlet:namespace />${formFieldsIndexes}',
+				fieldIndexes: '<portlet:namespace />formFieldsIndexes',
 				namespace: '<portlet:namespace />',
 				sortable: true,
 				sortableHandle: '.field-label',

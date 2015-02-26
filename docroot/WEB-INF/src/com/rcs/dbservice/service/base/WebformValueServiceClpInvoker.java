@@ -14,7 +14,7 @@
 
 package com.rcs.dbservice.service.base;
 
-import com.rcs.dbService.service.WebformValueServiceUtil;
+import com.rcs.dbservice.service.WebformValueServiceUtil;
 
 import java.util.Arrays;
 

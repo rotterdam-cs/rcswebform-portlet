@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.rcs.dbService.model;
+package com.rcs.dbservice.model;
 
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ModelWrapper;
@@ -474,7 +474,7 @@ public class WebformColumnWrapper implements WebformColumn,
 	}
 
 	@Override
-	public int compareTo(com.rcs.dbService.model.WebformColumn webformColumn) {
+	public int compareTo(com.rcs.dbservice.model.WebformColumn webformColumn) {
 		return _webformColumn.compareTo(webformColumn);
 	}
 
@@ -484,17 +484,17 @@ public class WebformColumnWrapper implements WebformColumn,
 	}
 
 	@Override
-	public com.liferay.portal.model.CacheModel<com.rcs.dbService.model.WebformColumn> toCacheModel() {
+	public com.liferay.portal.model.CacheModel<com.rcs.dbservice.model.WebformColumn> toCacheModel() {
 		return _webformColumn.toCacheModel();
 	}
 
 	@Override
-	public com.rcs.dbService.model.WebformColumn toEscapedModel() {
+	public com.rcs.dbservice.model.WebformColumn toEscapedModel() {
 		return new WebformColumnWrapper(_webformColumn.toEscapedModel());
 	}
 
 	@Override
-	public com.rcs.dbService.model.WebformColumn toUnescapedModel() {
+	public com.rcs.dbservice.model.WebformColumn toUnescapedModel() {
 		return new WebformColumnWrapper(_webformColumn.toUnescapedModel());
 	}
 

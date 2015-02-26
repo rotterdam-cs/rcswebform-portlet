@@ -20,7 +20,7 @@ import com.rcs.dbservice.service.base.WebformTableServiceBaseImpl;
  * The implementation of the webform table remote service.
  *
  * <p>
- * All custom service methods should be put in this class. Whenever methods are added, rerun ServiceBuilder to copy their definitions into the {@link com.rcs.dbService.service.WebformTableService} interface.
+ * All custom service methods should be put in this class. Whenever methods are added, rerun ServiceBuilder to copy their definitions into the {@link com.rcs.dbservice.service.WebformTableService} interface.
  *
  * <p>
  * This is a remote service. Methods of this service are expected to have security checks based on the propagated JAAS credentials because this service can be accessed remotely.
@@ -28,12 +28,12 @@ import com.rcs.dbservice.service.base.WebformTableServiceBaseImpl;
  *
  * @author rikad.ramadhan@rotterdam-cs.com
  * @see com.rcs.dbservice.service.base.WebformTableServiceBaseImpl
- * @see com.rcs.dbService.service.WebformTableServiceUtil
+ * @see com.rcs.dbservice.service.WebformTableServiceUtil
  */
 public class WebformTableServiceImpl extends WebformTableServiceBaseImpl {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never reference this interface directly. Always use {@link com.rcs.dbService.service.WebformTableServiceUtil} to access the webform table remote service.
+	 * Never reference this interface directly. Always use {@link com.rcs.dbservice.service.WebformTableServiceUtil} to access the webform table remote service.
 	 */
 }

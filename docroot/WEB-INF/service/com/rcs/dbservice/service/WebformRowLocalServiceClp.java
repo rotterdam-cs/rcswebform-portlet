@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.rcs.dbService.service;
+package com.rcs.dbservice.service;
 
 import com.liferay.portal.service.InvokableLocalService;
 
@@ -28,7 +28,7 @@ public class WebformRowLocalServiceClp implements WebformRowLocalService {
 		_methodName0 = "addWebformRow";
 
 		_methodParameterTypes0 = new String[] {
-				"com.rcs.dbService.model.WebformRow"
+				"com.rcs.dbservice.model.WebformRow"
 			};
 
 		_methodName1 = "createWebformRow";
@@ -42,7 +42,7 @@ public class WebformRowLocalServiceClp implements WebformRowLocalService {
 		_methodName3 = "deleteWebformRow";
 
 		_methodParameterTypes3 = new String[] {
-				"com.rcs.dbService.model.WebformRow"
+				"com.rcs.dbservice.model.WebformRow"
 			};
 
 		_methodName4 = "dynamicQuery";
@@ -104,7 +104,7 @@ public class WebformRowLocalServiceClp implements WebformRowLocalService {
 		_methodName15 = "updateWebformRow";
 
 		_methodParameterTypes15 = new String[] {
-				"com.rcs.dbService.model.WebformRow"
+				"com.rcs.dbservice.model.WebformRow"
 			};
 
 		_methodName16 = "getBeanIdentifier";
@@ -121,8 +121,8 @@ public class WebformRowLocalServiceClp implements WebformRowLocalService {
 	}
 
 	@Override
-	public com.rcs.dbService.model.WebformRow addWebformRow(
-		com.rcs.dbService.model.WebformRow webformRow)
+	public com.rcs.dbservice.model.WebformRow addWebformRow(
+		com.rcs.dbservice.model.WebformRow webformRow)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
 
@@ -147,11 +147,11 @@ public class WebformRowLocalServiceClp implements WebformRowLocalService {
 			}
 		}
 
-		return (com.rcs.dbService.model.WebformRow)ClpSerializer.translateOutput(returnObj);
+		return (com.rcs.dbservice.model.WebformRow)ClpSerializer.translateOutput(returnObj);
 	}
 
 	@Override
-	public com.rcs.dbService.model.WebformRow createWebformRow(
+	public com.rcs.dbservice.model.WebformRow createWebformRow(
 		long webformRowId) {
 		Object returnObj = null;
 
@@ -171,11 +171,11 @@ public class WebformRowLocalServiceClp implements WebformRowLocalService {
 			}
 		}
 
-		return (com.rcs.dbService.model.WebformRow)ClpSerializer.translateOutput(returnObj);
+		return (com.rcs.dbservice.model.WebformRow)ClpSerializer.translateOutput(returnObj);
 	}
 
 	@Override
-	public com.rcs.dbService.model.WebformRow deleteWebformRow(
+	public com.rcs.dbservice.model.WebformRow deleteWebformRow(
 		long webformRowId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -205,12 +205,12 @@ public class WebformRowLocalServiceClp implements WebformRowLocalService {
 			}
 		}
 
-		return (com.rcs.dbService.model.WebformRow)ClpSerializer.translateOutput(returnObj);
+		return (com.rcs.dbservice.model.WebformRow)ClpSerializer.translateOutput(returnObj);
 	}
 
 	@Override
-	public com.rcs.dbService.model.WebformRow deleteWebformRow(
-		com.rcs.dbService.model.WebformRow webformRow)
+	public com.rcs.dbservice.model.WebformRow deleteWebformRow(
+		com.rcs.dbservice.model.WebformRow webformRow)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
 
@@ -235,7 +235,7 @@ public class WebformRowLocalServiceClp implements WebformRowLocalService {
 			}
 		}
 
-		return (com.rcs.dbService.model.WebformRow)ClpSerializer.translateOutput(returnObj);
+		return (com.rcs.dbservice.model.WebformRow)ClpSerializer.translateOutput(returnObj);
 	}
 
 	@Override
@@ -436,7 +436,7 @@ public class WebformRowLocalServiceClp implements WebformRowLocalService {
 	}
 
 	@Override
-	public com.rcs.dbService.model.WebformRow fetchWebformRow(long webformRowId)
+	public com.rcs.dbservice.model.WebformRow fetchWebformRow(long webformRowId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
 
@@ -460,11 +460,11 @@ public class WebformRowLocalServiceClp implements WebformRowLocalService {
 			}
 		}
 
-		return (com.rcs.dbService.model.WebformRow)ClpSerializer.translateOutput(returnObj);
+		return (com.rcs.dbservice.model.WebformRow)ClpSerializer.translateOutput(returnObj);
 	}
 
 	@Override
-	public com.rcs.dbService.model.WebformRow getWebformRow(long webformRowId)
+	public com.rcs.dbservice.model.WebformRow getWebformRow(long webformRowId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
@@ -493,7 +493,7 @@ public class WebformRowLocalServiceClp implements WebformRowLocalService {
 			}
 		}
 
-		return (com.rcs.dbService.model.WebformRow)ClpSerializer.translateOutput(returnObj);
+		return (com.rcs.dbservice.model.WebformRow)ClpSerializer.translateOutput(returnObj);
 	}
 
 	@Override
@@ -532,7 +532,7 @@ public class WebformRowLocalServiceClp implements WebformRowLocalService {
 	}
 
 	@Override
-	public java.util.List<com.rcs.dbService.model.WebformRow> getWebformRows(
+	public java.util.List<com.rcs.dbservice.model.WebformRow> getWebformRows(
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
@@ -557,7 +557,7 @@ public class WebformRowLocalServiceClp implements WebformRowLocalService {
 			}
 		}
 
-		return (java.util.List<com.rcs.dbService.model.WebformRow>)ClpSerializer.translateOutput(returnObj);
+		return (java.util.List<com.rcs.dbservice.model.WebformRow>)ClpSerializer.translateOutput(returnObj);
 	}
 
 	@Override
@@ -589,8 +589,8 @@ public class WebformRowLocalServiceClp implements WebformRowLocalService {
 	}
 
 	@Override
-	public com.rcs.dbService.model.WebformRow updateWebformRow(
-		com.rcs.dbService.model.WebformRow webformRow)
+	public com.rcs.dbservice.model.WebformRow updateWebformRow(
+		com.rcs.dbservice.model.WebformRow webformRow)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
 
@@ -615,7 +615,7 @@ public class WebformRowLocalServiceClp implements WebformRowLocalService {
 			}
 		}
 
-		return (com.rcs.dbService.model.WebformRow)ClpSerializer.translateOutput(returnObj);
+		return (com.rcs.dbservice.model.WebformRow)ClpSerializer.translateOutput(returnObj);
 	}
 
 	@Override

@@ -38,14 +38,14 @@ import com.liferay.portal.kernel.util.UnmodifiableList;
 import com.liferay.portal.model.CacheModel;
 import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
-import com.rcs.dbService.NoSuchWebformColumnException;
-import com.rcs.dbService.model.WebformColumn;
-import com.rcs.dbService.service.persistence.WebformColumnPersistence;
-import com.rcs.dbService.service.persistence.WebformColumnUtil;
+
+import com.rcs.dbservice.NoSuchWebformColumnException;
+import com.rcs.dbservice.model.WebformColumn;
 import com.rcs.dbservice.model.impl.WebformColumnImpl;
 import com.rcs.dbservice.model.impl.WebformColumnModelImpl;
 
 import java.io.Serializable;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -264,7 +264,7 @@ public class WebformColumnPersistenceImpl extends BasePersistenceImpl<WebformCol
 	 * @param webformTableId the webform table ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching webform column
-	 * @throws com.rcs.dbService.NoSuchWebformColumnException if a matching webform column could not be found
+	 * @throws com.rcs.dbservice.NoSuchWebformColumnException if a matching webform column could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
@@ -317,7 +317,7 @@ public class WebformColumnPersistenceImpl extends BasePersistenceImpl<WebformCol
 	 * @param webformTableId the webform table ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching webform column
-	 * @throws com.rcs.dbService.NoSuchWebformColumnException if a matching webform column could not be found
+	 * @throws com.rcs.dbservice.NoSuchWebformColumnException if a matching webform column could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
@@ -377,7 +377,7 @@ public class WebformColumnPersistenceImpl extends BasePersistenceImpl<WebformCol
 	 * @param webformTableId the webform table ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next webform column
-	 * @throws com.rcs.dbService.NoSuchWebformColumnException if a webform column with the primary key could not be found
+	 * @throws com.rcs.dbservice.NoSuchWebformColumnException if a webform column with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
@@ -693,7 +693,7 @@ public class WebformColumnPersistenceImpl extends BasePersistenceImpl<WebformCol
 	 *
 	 * @param webformColumnId the primary key of the webform column
 	 * @return the webform column that was removed
-	 * @throws com.rcs.dbService.NoSuchWebformColumnException if a webform column with the primary key could not be found
+	 * @throws com.rcs.dbservice.NoSuchWebformColumnException if a webform column with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
@@ -707,7 +707,7 @@ public class WebformColumnPersistenceImpl extends BasePersistenceImpl<WebformCol
 	 *
 	 * @param primaryKey the primary key of the webform column
 	 * @return the webform column that was removed
-	 * @throws com.rcs.dbService.NoSuchWebformColumnException if a webform column with the primary key could not be found
+	 * @throws com.rcs.dbservice.NoSuchWebformColumnException if a webform column with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
@@ -778,7 +778,7 @@ public class WebformColumnPersistenceImpl extends BasePersistenceImpl<WebformCol
 
 	@Override
 	public WebformColumn updateImpl(
-		com.rcs.dbService.model.WebformColumn webformColumn)
+		com.rcs.dbservice.model.WebformColumn webformColumn)
 		throws SystemException {
 		webformColumn = toUnwrappedModel(webformColumn);
 
@@ -872,7 +872,7 @@ public class WebformColumnPersistenceImpl extends BasePersistenceImpl<WebformCol
 	 *
 	 * @param primaryKey the primary key of the webform column
 	 * @return the webform column
-	 * @throws com.rcs.dbService.NoSuchWebformColumnException if a webform column with the primary key could not be found
+	 * @throws com.rcs.dbservice.NoSuchWebformColumnException if a webform column with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
@@ -893,11 +893,11 @@ public class WebformColumnPersistenceImpl extends BasePersistenceImpl<WebformCol
 	}
 
 	/**
-	 * Returns the webform column with the primary key or throws a {@link com.rcs.dbService.NoSuchWebformColumnException} if it could not be found.
+	 * Returns the webform column with the primary key or throws a {@link com.rcs.dbservice.NoSuchWebformColumnException} if it could not be found.
 	 *
 	 * @param webformColumnId the primary key of the webform column
 	 * @return the webform column
-	 * @throws com.rcs.dbService.NoSuchWebformColumnException if a webform column with the primary key could not be found
+	 * @throws com.rcs.dbservice.NoSuchWebformColumnException if a webform column with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
@@ -1151,7 +1151,7 @@ public class WebformColumnPersistenceImpl extends BasePersistenceImpl<WebformCol
 	public void afterPropertiesSet() {
 		String[] listenerClassNames = StringUtil.split(GetterUtil.getString(
 					com.liferay.util.service.ServiceProps.get(
-						"value.object.listener.com.rcs.dbService.model.WebformColumn")));
+						"value.object.listener.com.rcs.dbservice.model.WebformColumn")));
 
 		if (listenerClassNames.length > 0) {
 			try {

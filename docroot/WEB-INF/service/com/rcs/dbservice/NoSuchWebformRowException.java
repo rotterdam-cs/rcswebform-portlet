@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.rcs.dbService;
+package com.rcs.dbservice;
 
 import com.liferay.portal.NoSuchModelException;
 

@@ -31,12 +31,11 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
-import com.liferay.portal.model.Company;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.util.portlet.PortletProps;
-import com.rcs.dbService.service.WebformRowLocalServiceUtil;
+import com.rcs.dbservice.service.WebformRowLocalServiceUtil;
 import com.rcs.webform.util.ConfigurationModel;
 import com.rcs.webform.util.GeneralUtil;
 import com.rcs.webform.util.WebformFieldModel;
@@ -69,6 +68,11 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 			boolean isEditable = ParamUtil.getBoolean(request, "isEditable");
 			request.setAttribute("isEditable", isEditable);
 			request.setAttribute("fieldModel", new WebformFieldModel());
+			
+			String formFieldIndexes = request.getParameter("formFieldsIndexes");
+			formFieldsIndexes = StringUtil.split(formFieldIndexes, 0);
+			log.info("formFieldsIndexes : "+formFieldsIndexes.length);
+			
 		}else{
 			/* Generating Configuration Model */
 			ConfigurationModel configModel = generateConfigurationModelData(preferences, request);
@@ -101,7 +105,9 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 			List<WebformFieldModel> webformFieldModelList = new ArrayList<WebformFieldModel>();
 			
 			for(int formFieldIndex : formFieldsIndexes){
+				log.info("formFieldIndex : "+formFieldIndex);
 				WebformFieldModel fieldModel = generatingWebformFieldModelData(preferences, request, formFieldIndex,index);
+				log.info("Index Value : "+fieldModel.getIndex());
 				webformFieldModelList.add(fieldModel);
 				index++;
 			}
@@ -233,6 +239,9 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 	}
 	
 	public WebformFieldModel generatingWebformFieldModelData(PortletPreferences preferences,PortletRequest request,int formFieldsIndex, int index ){
+		
+		log.info("###--- Generating WebformFieldModel Data ---###");
+		
 		WebformFieldModel fieldModel = new WebformFieldModel();
 		ThemeDisplay themeDisplay = (ThemeDisplay) request.getAttribute(WebKeys.THEME_DISPLAY);
 		
@@ -243,10 +252,11 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 		String fieldOptions 				= LocalizationUtil.getLocalization(fieldOptionsXml, themeDisplay.getLanguageId());
 		String fieldValidationScript 		= PrefsParamUtil.getString(preferences, request, "fieldValidationScript" + index);
 		String fieldValidationErrorMessage 	= PrefsParamUtil.getString(preferences, request, "fieldValidationErrorMessage" + index);
-		Integer indexParam 					= Integer.valueOf(index);
-		Integer formFieldsIndexParam 		= Integer.valueOf(formFieldsIndex);
+		int formFieldsIndexParam 			= formFieldsIndex;
 		boolean fieldOptional 				= PrefsParamUtil.getBoolean(preferences, request, "fieldOptional" + index);
 		boolean ignoreRequestValue 			= (index != formFieldsIndex);
+		
+		log.info("fieldLabelXml : "+fieldLabelXml);
 		
 		fieldModel.setFieldLabelXml(fieldLabelXml);
 		fieldModel.setFieldLabel(fieldLabel);
@@ -255,8 +265,8 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 		fieldModel.setFieldOptions(fieldOptions);
 		fieldModel.setFieldValidationErrorMessage(fieldValidationErrorMessage);
 		fieldModel.setFieldValidationScript(fieldValidationScript);
-		fieldModel.setIndex(indexParam);
-		fieldModel.setFormFieldsIndex(formFieldsIndex);
+		fieldModel.setIndex(index);
+		fieldModel.setFormFieldsIndex(formFieldsIndexParam);
 		fieldModel.setFieldOptional(fieldOptional);
 		fieldModel.setIqnoreRequestValue(ignoreRequestValue);
 		

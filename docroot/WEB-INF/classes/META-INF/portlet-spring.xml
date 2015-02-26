@@ -1,15 +1,15 @@
 <?xml version="1.0"?>
 
 <beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" default-destroy-method="destroy" default-init-method="afterPropertiesSet" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
-	<bean id="com.rcs.dbService.service.WebformColumnLocalService" class="com.rcs.dbService.service.impl.WebformColumnLocalServiceImpl" />
-	<bean id="com.rcs.dbService.service.WebformColumnService" class="com.rcs.dbService.service.impl.WebformColumnServiceImpl" />
-	<bean id="com.rcs.dbService.service.persistence.WebformColumnPersistence" class="com.rcs.dbService.service.persistence.WebformColumnPersistenceImpl" parent="basePersistence" />
-	<bean id="com.rcs.dbService.service.WebformRowLocalService" class="com.rcs.dbService.service.impl.WebformRowLocalServiceImpl" />
-	<bean id="com.rcs.dbService.service.WebformRowService" class="com.rcs.dbService.service.impl.WebformRowServiceImpl" />
-	<bean id="com.rcs.dbService.service.persistence.WebformRowPersistence" class="com.rcs.dbService.service.persistence.WebformRowPersistenceImpl" parent="basePersistence" />
-	<bean id="com.rcs.dbService.service.WebformTableLocalService" class="com.rcs.dbService.service.impl.WebformTableLocalServiceImpl" />
-	<bean id="com.rcs.dbService.service.WebformTableService" class="com.rcs.dbService.service.impl.WebformTableServiceImpl" />
-	<bean id="com.rcs.dbService.service.persistence.WebformTablePersistence" class="com.rcs.dbService.service.persistence.WebformTablePersistenceImpl" parent="basePersistence" />
-	<bean id="com.rcs.dbService.service.WebformValueService" class="com.rcs.dbService.service.impl.WebformValueServiceImpl" />
-	<bean id="com.rcs.dbService.service.persistence.WebformValuePersistence" class="com.rcs.dbService.service.persistence.WebformValuePersistenceImpl" parent="basePersistence" />
+	<bean id="com.rcs.dbservice.service.WebformColumnLocalService" class="com.rcs.dbservice.service.impl.WebformColumnLocalServiceImpl" />
+	<bean id="com.rcs.dbservice.service.WebformColumnService" class="com.rcs.dbservice.service.impl.WebformColumnServiceImpl" />
+	<bean id="com.rcs.dbservice.service.persistence.WebformColumnPersistence" class="com.rcs.dbservice.service.persistence.WebformColumnPersistenceImpl" parent="basePersistence" />
+	<bean id="com.rcs.dbservice.service.WebformRowLocalService" class="com.rcs.dbservice.service.impl.WebformRowLocalServiceImpl" />
+	<bean id="com.rcs.dbservice.service.WebformRowService" class="com.rcs.dbservice.service.impl.WebformRowServiceImpl" />
+	<bean id="com.rcs.dbservice.service.persistence.WebformRowPersistence" class="com.rcs.dbservice.service.persistence.WebformRowPersistenceImpl" parent="basePersistence" />
+	<bean id="com.rcs.dbservice.service.WebformTableLocalService" class="com.rcs.dbservice.service.impl.WebformTableLocalServiceImpl" />
+	<bean id="com.rcs.dbservice.service.WebformTableService" class="com.rcs.dbservice.service.impl.WebformTableServiceImpl" />
+	<bean id="com.rcs.dbservice.service.persistence.WebformTablePersistence" class="com.rcs.dbservice.service.persistence.WebformTablePersistenceImpl" parent="basePersistence" />
+	<bean id="com.rcs.dbservice.service.WebformValueService" class="com.rcs.dbservice.service.impl.WebformValueServiceImpl" />
+	<bean id="com.rcs.dbservice.service.persistence.WebformValuePersistence" class="com.rcs.dbservice.service.persistence.WebformValuePersistenceImpl" parent="basePersistence" />
 </beans>

@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.rcs.dbService.model;
+package com.rcs.dbservice.model;
 
 import java.io.Serializable;
 
@@ -21,10 +21,10 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * This class is used by SOAP remote services, specifically {@link com.rcs.dbService.service.http.WebformRowServiceSoap}.
+ * This class is used by SOAP remote services, specifically {@link com.rcs.dbservice.service.http.WebformRowServiceSoap}.
  *
  * @author rikad.ramadhan@rotterdam-cs.com
- * @see com.rcs.dbService.service.http.WebformRowServiceSoap
+ * @see com.rcs.dbservice.service.http.WebformRowServiceSoap
  * @generated
  */
 public class WebformRowSoap implements Serializable {

@@ -17,13 +17,13 @@ package com.rcs.dbservice.service.http;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 
-import com.rcs.dbService.service.WebformRowServiceUtil;
+import com.rcs.dbservice.service.WebformRowServiceUtil;
 
 import java.rmi.RemoteException;
 
 /**
  * Provides the SOAP utility for the
- * {@link com.rcs.dbService.service.WebformRowServiceUtil} service utility. The
+ * {@link com.rcs.dbservice.service.WebformRowServiceUtil} service utility. The
  * static methods of this class calls the same methods of the service utility.
  * However, the signatures are different because it is difficult for SOAP to
  * support certain types.
@@ -31,10 +31,10 @@ import java.rmi.RemoteException;
  * <p>
  * ServiceBuilder follows certain rules in translating the methods. For example,
  * if the method in the service utility returns a {@link java.util.List}, that
- * is translated to an array of {@link com.rcs.dbService.model.WebformRowSoap}.
+ * is translated to an array of {@link com.rcs.dbservice.model.WebformRowSoap}.
  * If the method in the service utility returns a
- * {@link com.rcs.dbService.model.WebformRow}, that is translated to a
- * {@link com.rcs.dbService.model.WebformRowSoap}. Methods that SOAP cannot
+ * {@link com.rcs.dbservice.model.WebformRow}, that is translated to a
+ * {@link com.rcs.dbservice.model.WebformRowSoap}. Methods that SOAP cannot
  * safely wire are skipped.
  * </p>
  *
@@ -57,8 +57,8 @@ import java.rmi.RemoteException;
  *
  * @author rikad.ramadhan@rotterdam-cs.com
  * @see WebformRowServiceHttp
- * @see com.rcs.dbService.model.WebformRowSoap
- * @see com.rcs.dbService.service.WebformRowServiceUtil
+ * @see com.rcs.dbservice.model.WebformRowSoap
+ * @see com.rcs.dbservice.service.WebformRowServiceUtil
  * @generated
  */
 public class WebformRowServiceSoap {

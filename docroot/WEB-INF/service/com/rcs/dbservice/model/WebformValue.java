@@ -12,21 +12,21 @@
  * details.
  */
 
-package com.rcs.dbService.model;
+package com.rcs.dbservice.model;
 
 /**
  * The extended model interface for the WebformValue service. Represents a row in the &quot;RcsWebform_WebformValue&quot; database table, with each column mapped to a property of this class.
  *
  * @author rikad.ramadhan@rotterdam-cs.com
  * @see WebformValueModel
- * @see com.rcs.dbService.model.impl.WebformValueImpl
- * @see com.rcs.dbService.model.impl.WebformValueModelImpl
+ * @see com.rcs.dbservice.model.impl.WebformValueImpl
+ * @see com.rcs.dbservice.model.impl.WebformValueModelImpl
  * @generated
  */
 public interface WebformValue extends WebformValueModel {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify this interface directly. Add methods to {@link com.rcs.dbService.model.impl.WebformValueImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify this interface directly. Add methods to {@link com.rcs.dbservice.model.impl.WebformValueImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
 }

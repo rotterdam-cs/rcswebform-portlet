@@ -17,7 +17,7 @@ package com.rcs.dbservice.model.impl;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.model.CacheModel;
 
-import com.rcs.dbService.model.WebformRow;
+import com.rcs.dbservice.model.WebformRow;
 
 import java.io.Externalizable;
 import java.io.IOException;

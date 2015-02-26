@@ -20,7 +20,7 @@ import com.rcs.dbservice.service.base.WebformTableLocalServiceBaseImpl;
  * The implementation of the webform table local service.
  *
  * <p>
- * All custom service methods should be put in this class. Whenever methods are added, rerun ServiceBuilder to copy their definitions into the {@link com.rcs.dbService.service.WebformTableLocalService} interface.
+ * All custom service methods should be put in this class. Whenever methods are added, rerun ServiceBuilder to copy their definitions into the {@link com.rcs.dbservice.service.WebformTableLocalService} interface.
  *
  * <p>
  * This is a local service. Methods of this service will not have security checks based on the propagated JAAS credentials because this service can only be accessed from within the same VM.
@@ -28,13 +28,13 @@ import com.rcs.dbservice.service.base.WebformTableLocalServiceBaseImpl;
  *
  * @author rikad.ramadhan@rotterdam-cs.com
  * @see com.rcs.dbservice.service.base.WebformTableLocalServiceBaseImpl
- * @see com.rcs.dbService.service.WebformTableLocalServiceUtil
+ * @see com.rcs.dbservice.service.WebformTableLocalServiceUtil
  */
 public class WebformTableLocalServiceImpl
 	extends WebformTableLocalServiceBaseImpl {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never reference this interface directly. Always use {@link com.rcs.dbService.service.WebformTableLocalServiceUtil} to access the webform table local service.
+	 * Never reference this interface directly. Always use {@link com.rcs.dbservice.service.WebformTableLocalServiceUtil} to access the webform table local service.
 	 */
 }

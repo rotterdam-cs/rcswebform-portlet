@@ -12,13 +12,13 @@
  * details.
  */
 
-package com.rcs.dbService.service.persistence;
+package com.rcs.dbservice.service.persistence;
 
 import com.liferay.portal.kernel.dao.orm.BaseActionableDynamicQuery;
 import com.liferay.portal.kernel.exception.SystemException;
 
-import com.rcs.dbService.model.WebformColumn;
-import com.rcs.dbService.service.WebformColumnLocalServiceUtil;
+import com.rcs.dbservice.model.WebformColumn;
+import com.rcs.dbservice.service.WebformColumnLocalServiceUtil;
 
 /**
  * @author rikad.ramadhan@rotterdam-cs.com
@@ -30,7 +30,7 @@ public abstract class WebformColumnActionableDynamicQuery
 		setBaseLocalService(WebformColumnLocalServiceUtil.getService());
 		setClass(WebformColumn.class);
 
-		setClassLoader(com.rcs.dbService.service.ClpSerializer.class.getClassLoader());
+		setClassLoader(com.rcs.dbservice.service.ClpSerializer.class.getClassLoader());
 
 		setPrimaryKeyPropertyName("webformColumnId");
 	}

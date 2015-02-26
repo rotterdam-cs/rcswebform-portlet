@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.rcs.dbService.service;
+package com.rcs.dbservice.service;
 
 import com.liferay.portal.service.InvokableLocalService;
 
@@ -28,7 +28,7 @@ public class WebformTableLocalServiceClp implements WebformTableLocalService {
 		_methodName0 = "addWebformTable";
 
 		_methodParameterTypes0 = new String[] {
-				"com.rcs.dbService.model.WebformTable"
+				"com.rcs.dbservice.model.WebformTable"
 			};
 
 		_methodName1 = "createWebformTable";
@@ -42,7 +42,7 @@ public class WebformTableLocalServiceClp implements WebformTableLocalService {
 		_methodName3 = "deleteWebformTable";
 
 		_methodParameterTypes3 = new String[] {
-				"com.rcs.dbService.model.WebformTable"
+				"com.rcs.dbservice.model.WebformTable"
 			};
 
 		_methodName4 = "dynamicQuery";
@@ -104,7 +104,7 @@ public class WebformTableLocalServiceClp implements WebformTableLocalService {
 		_methodName15 = "updateWebformTable";
 
 		_methodParameterTypes15 = new String[] {
-				"com.rcs.dbService.model.WebformTable"
+				"com.rcs.dbservice.model.WebformTable"
 			};
 
 		_methodName16 = "getBeanIdentifier";
@@ -117,8 +117,8 @@ public class WebformTableLocalServiceClp implements WebformTableLocalService {
 	}
 
 	@Override
-	public com.rcs.dbService.model.WebformTable addWebformTable(
-		com.rcs.dbService.model.WebformTable webformTable)
+	public com.rcs.dbservice.model.WebformTable addWebformTable(
+		com.rcs.dbservice.model.WebformTable webformTable)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
 
@@ -143,11 +143,11 @@ public class WebformTableLocalServiceClp implements WebformTableLocalService {
 			}
 		}
 
-		return (com.rcs.dbService.model.WebformTable)ClpSerializer.translateOutput(returnObj);
+		return (com.rcs.dbservice.model.WebformTable)ClpSerializer.translateOutput(returnObj);
 	}
 
 	@Override
-	public com.rcs.dbService.model.WebformTable createWebformTable(
+	public com.rcs.dbservice.model.WebformTable createWebformTable(
 		long webformTableId) {
 		Object returnObj = null;
 
@@ -167,11 +167,11 @@ public class WebformTableLocalServiceClp implements WebformTableLocalService {
 			}
 		}
 
-		return (com.rcs.dbService.model.WebformTable)ClpSerializer.translateOutput(returnObj);
+		return (com.rcs.dbservice.model.WebformTable)ClpSerializer.translateOutput(returnObj);
 	}
 
 	@Override
-	public com.rcs.dbService.model.WebformTable deleteWebformTable(
+	public com.rcs.dbservice.model.WebformTable deleteWebformTable(
 		long webformTableId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -201,12 +201,12 @@ public class WebformTableLocalServiceClp implements WebformTableLocalService {
 			}
 		}
 
-		return (com.rcs.dbService.model.WebformTable)ClpSerializer.translateOutput(returnObj);
+		return (com.rcs.dbservice.model.WebformTable)ClpSerializer.translateOutput(returnObj);
 	}
 
 	@Override
-	public com.rcs.dbService.model.WebformTable deleteWebformTable(
-		com.rcs.dbService.model.WebformTable webformTable)
+	public com.rcs.dbservice.model.WebformTable deleteWebformTable(
+		com.rcs.dbservice.model.WebformTable webformTable)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
 
@@ -231,7 +231,7 @@ public class WebformTableLocalServiceClp implements WebformTableLocalService {
 			}
 		}
 
-		return (com.rcs.dbService.model.WebformTable)ClpSerializer.translateOutput(returnObj);
+		return (com.rcs.dbservice.model.WebformTable)ClpSerializer.translateOutput(returnObj);
 	}
 
 	@Override
@@ -432,7 +432,7 @@ public class WebformTableLocalServiceClp implements WebformTableLocalService {
 	}
 
 	@Override
-	public com.rcs.dbService.model.WebformTable fetchWebformTable(
+	public com.rcs.dbservice.model.WebformTable fetchWebformTable(
 		long webformTableId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
@@ -457,11 +457,11 @@ public class WebformTableLocalServiceClp implements WebformTableLocalService {
 			}
 		}
 
-		return (com.rcs.dbService.model.WebformTable)ClpSerializer.translateOutput(returnObj);
+		return (com.rcs.dbservice.model.WebformTable)ClpSerializer.translateOutput(returnObj);
 	}
 
 	@Override
-	public com.rcs.dbService.model.WebformTable getWebformTable(
+	public com.rcs.dbservice.model.WebformTable getWebformTable(
 		long webformTableId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -491,7 +491,7 @@ public class WebformTableLocalServiceClp implements WebformTableLocalService {
 			}
 		}
 
-		return (com.rcs.dbService.model.WebformTable)ClpSerializer.translateOutput(returnObj);
+		return (com.rcs.dbservice.model.WebformTable)ClpSerializer.translateOutput(returnObj);
 	}
 
 	@Override
@@ -530,7 +530,7 @@ public class WebformTableLocalServiceClp implements WebformTableLocalService {
 	}
 
 	@Override
-	public java.util.List<com.rcs.dbService.model.WebformTable> getWebformTables(
+	public java.util.List<com.rcs.dbservice.model.WebformTable> getWebformTables(
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
@@ -555,7 +555,7 @@ public class WebformTableLocalServiceClp implements WebformTableLocalService {
 			}
 		}
 
-		return (java.util.List<com.rcs.dbService.model.WebformTable>)ClpSerializer.translateOutput(returnObj);
+		return (java.util.List<com.rcs.dbservice.model.WebformTable>)ClpSerializer.translateOutput(returnObj);
 	}
 
 	@Override
@@ -587,8 +587,8 @@ public class WebformTableLocalServiceClp implements WebformTableLocalService {
 	}
 
 	@Override
-	public com.rcs.dbService.model.WebformTable updateWebformTable(
-		com.rcs.dbService.model.WebformTable webformTable)
+	public com.rcs.dbservice.model.WebformTable updateWebformTable(
+		com.rcs.dbservice.model.WebformTable webformTable)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
 
@@ -613,7 +613,7 @@ public class WebformTableLocalServiceClp implements WebformTableLocalService {
 			}
 		}
 
-		return (com.rcs.dbService.model.WebformTable)ClpSerializer.translateOutput(returnObj);
+		return (com.rcs.dbservice.model.WebformTable)ClpSerializer.translateOutput(returnObj);
 	}
 
 	@Override

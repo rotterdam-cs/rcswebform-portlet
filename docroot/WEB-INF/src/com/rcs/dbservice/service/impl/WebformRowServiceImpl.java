@@ -16,14 +16,14 @@ package com.rcs.dbservice.service.impl;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
-import com.rcs.dbService.model.WebformTable;
+import com.rcs.dbservice.model.WebformTable;
 import com.rcs.dbservice.service.base.WebformRowServiceBaseImpl;
 
 /**
  * The implementation of the webform row remote service.
  *
  * <p>
- * All custom service methods should be put in this class. Whenever methods are added, rerun ServiceBuilder to copy their definitions into the {@link com.rcs.dbService.service.WebformRowService} interface.
+ * All custom service methods should be put in this class. Whenever methods are added, rerun ServiceBuilder to copy their definitions into the {@link com.rcs.dbservice.service.WebformRowService} interface.
  *
  * <p>
  * This is a remote service. Methods of this service are expected to have security checks based on the propagated JAAS credentials because this service can be accessed remotely.
@@ -31,14 +31,15 @@ import com.rcs.dbservice.service.base.WebformRowServiceBaseImpl;
  *
  * @author rikad.ramadhan@rotterdam-cs.com
  * @see com.rcs.dbservice.service.base.WebformRowServiceBaseImpl
- * @see com.rcs.dbService.service.WebformRowServiceUtil
+ * @see com.rcs.dbservice.service.WebformRowServiceUtil
  */
 public class WebformRowServiceImpl extends WebformRowServiceBaseImpl {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never reference this interface directly. Always use {@link com.rcs.dbService.service.WebformRowServiceUtil} to access the webform row remote service.
+	 * Never reference this interface directly. Always use {@link com.rcs.dbservice.service.WebformRowServiceUtil} to access the webform row remote service.
 	 */
+	
 	public int getRowsCount(String tableName) throws SystemException, PortalException{
 		int countResult = 0;
 		

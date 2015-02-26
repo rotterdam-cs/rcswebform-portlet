@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.rcs.dbService.model;
+package com.rcs.dbservice.model;
 
 import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.exception.SystemException;
@@ -21,8 +21,8 @@ import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.model.impl.BaseModelImpl;
 
-import com.rcs.dbService.service.ClpSerializer;
-import com.rcs.dbService.service.WebformTableLocalServiceUtil;
+import com.rcs.dbservice.service.ClpSerializer;
+import com.rcs.dbservice.service.WebformTableLocalServiceUtil;
 
 import java.io.Serializable;
 
@@ -346,7 +346,7 @@ public class WebformTableClp extends BaseModelImpl<WebformTable>
 		StringBundler sb = new StringBundler(16);
 
 		sb.append("<model><model-name>");
-		sb.append("com.rcs.dbService.model.WebformTable");
+		sb.append("com.rcs.dbservice.model.WebformTable");
 		sb.append("</model-name>");
 
 		sb.append(
@@ -376,5 +376,5 @@ public class WebformTableClp extends BaseModelImpl<WebformTable>
 	private String _webformCounter;
 	private String _webformName;
 	private BaseModel<?> _webformTableRemoteModel;
-	private Class<?> _clpSerializerClass = com.rcs.dbService.service.ClpSerializer.class;
+	private Class<?> _clpSerializerClass = com.rcs.dbservice.service.ClpSerializer.class;
 }

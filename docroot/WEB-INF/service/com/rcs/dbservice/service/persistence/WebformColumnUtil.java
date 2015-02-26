@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.rcs.dbService.service.persistence;
+package com.rcs.dbservice.service.persistence;
 
 import com.liferay.portal.kernel.bean.PortletBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
@@ -21,7 +21,7 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.ReferenceRegistry;
 import com.liferay.portal.service.ServiceContext;
 
-import com.rcs.dbService.model.WebformColumn;
+import com.rcs.dbservice.model.WebformColumn;
 
 import java.util.List;
 
@@ -117,7 +117,7 @@ public class WebformColumnUtil {
 	* @return the matching webform columns
 	* @throws SystemException if a system exception occurred
 	*/
-	public static java.util.List<com.rcs.dbService.model.WebformColumn> findByWebformTableId(
+	public static java.util.List<com.rcs.dbservice.model.WebformColumn> findByWebformTableId(
 		long webformTableId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByWebformTableId(webformTableId);
@@ -127,7 +127,7 @@ public class WebformColumnUtil {
 	* Returns a range of all the webform columns where webformTableId = &#63;.
 	*
 	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.rcs.dbService.model.impl.WebformColumnModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.rcs.dbservice.model.impl.WebformColumnModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
 	* @param webformTableId the webform table ID
@@ -136,7 +136,7 @@ public class WebformColumnUtil {
 	* @return the range of matching webform columns
 	* @throws SystemException if a system exception occurred
 	*/
-	public static java.util.List<com.rcs.dbService.model.WebformColumn> findByWebformTableId(
+	public static java.util.List<com.rcs.dbservice.model.WebformColumn> findByWebformTableId(
 		long webformTableId, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByWebformTableId(webformTableId, start, end);
@@ -146,7 +146,7 @@ public class WebformColumnUtil {
 	* Returns an ordered range of all the webform columns where webformTableId = &#63;.
 	*
 	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.rcs.dbService.model.impl.WebformColumnModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.rcs.dbservice.model.impl.WebformColumnModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
 	* @param webformTableId the webform table ID
@@ -156,7 +156,7 @@ public class WebformColumnUtil {
 	* @return the ordered range of matching webform columns
 	* @throws SystemException if a system exception occurred
 	*/
-	public static java.util.List<com.rcs.dbService.model.WebformColumn> findByWebformTableId(
+	public static java.util.List<com.rcs.dbservice.model.WebformColumn> findByWebformTableId(
 		long webformTableId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -171,14 +171,14 @@ public class WebformColumnUtil {
 	* @param webformTableId the webform table ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching webform column
-	* @throws com.rcs.dbService.NoSuchWebformColumnException if a matching webform column could not be found
+	* @throws com.rcs.dbservice.NoSuchWebformColumnException if a matching webform column could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public static com.rcs.dbService.model.WebformColumn findByWebformTableId_First(
+	public static com.rcs.dbservice.model.WebformColumn findByWebformTableId_First(
 		long webformTableId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
-			com.rcs.dbService.NoSuchWebformColumnException {
+			com.rcs.dbservice.NoSuchWebformColumnException {
 		return getPersistence()
 				   .findByWebformTableId_First(webformTableId, orderByComparator);
 	}
@@ -191,7 +191,7 @@ public class WebformColumnUtil {
 	* @return the first matching webform column, or <code>null</code> if a matching webform column could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public static com.rcs.dbService.model.WebformColumn fetchByWebformTableId_First(
+	public static com.rcs.dbservice.model.WebformColumn fetchByWebformTableId_First(
 		long webformTableId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -206,14 +206,14 @@ public class WebformColumnUtil {
 	* @param webformTableId the webform table ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching webform column
-	* @throws com.rcs.dbService.NoSuchWebformColumnException if a matching webform column could not be found
+	* @throws com.rcs.dbservice.NoSuchWebformColumnException if a matching webform column could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public static com.rcs.dbService.model.WebformColumn findByWebformTableId_Last(
+	public static com.rcs.dbservice.model.WebformColumn findByWebformTableId_Last(
 		long webformTableId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
-			com.rcs.dbService.NoSuchWebformColumnException {
+			com.rcs.dbservice.NoSuchWebformColumnException {
 		return getPersistence()
 				   .findByWebformTableId_Last(webformTableId, orderByComparator);
 	}
@@ -226,7 +226,7 @@ public class WebformColumnUtil {
 	* @return the last matching webform column, or <code>null</code> if a matching webform column could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public static com.rcs.dbService.model.WebformColumn fetchByWebformTableId_Last(
+	public static com.rcs.dbservice.model.WebformColumn fetchByWebformTableId_Last(
 		long webformTableId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -241,14 +241,14 @@ public class WebformColumnUtil {
 	* @param webformTableId the webform table ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next webform column
-	* @throws com.rcs.dbService.NoSuchWebformColumnException if a webform column with the primary key could not be found
+	* @throws com.rcs.dbservice.NoSuchWebformColumnException if a webform column with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public static com.rcs.dbService.model.WebformColumn[] findByWebformTableId_PrevAndNext(
+	public static com.rcs.dbservice.model.WebformColumn[] findByWebformTableId_PrevAndNext(
 		long webformColumnId, long webformTableId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
-			com.rcs.dbService.NoSuchWebformColumnException {
+			com.rcs.dbservice.NoSuchWebformColumnException {
 		return getPersistence()
 				   .findByWebformTableId_PrevAndNext(webformColumnId,
 			webformTableId, orderByComparator);
@@ -283,7 +283,7 @@ public class WebformColumnUtil {
 	* @param webformColumn the webform column
 	*/
 	public static void cacheResult(
-		com.rcs.dbService.model.WebformColumn webformColumn) {
+		com.rcs.dbservice.model.WebformColumn webformColumn) {
 		getPersistence().cacheResult(webformColumn);
 	}
 
@@ -293,7 +293,7 @@ public class WebformColumnUtil {
 	* @param webformColumns the webform columns
 	*/
 	public static void cacheResult(
-		java.util.List<com.rcs.dbService.model.WebformColumn> webformColumns) {
+		java.util.List<com.rcs.dbservice.model.WebformColumn> webformColumns) {
 		getPersistence().cacheResult(webformColumns);
 	}
 
@@ -303,7 +303,7 @@ public class WebformColumnUtil {
 	* @param webformColumnId the primary key for the new webform column
 	* @return the new webform column
 	*/
-	public static com.rcs.dbService.model.WebformColumn create(
+	public static com.rcs.dbservice.model.WebformColumn create(
 		long webformColumnId) {
 		return getPersistence().create(webformColumnId);
 	}
@@ -313,34 +313,34 @@ public class WebformColumnUtil {
 	*
 	* @param webformColumnId the primary key of the webform column
 	* @return the webform column that was removed
-	* @throws com.rcs.dbService.NoSuchWebformColumnException if a webform column with the primary key could not be found
+	* @throws com.rcs.dbservice.NoSuchWebformColumnException if a webform column with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public static com.rcs.dbService.model.WebformColumn remove(
+	public static com.rcs.dbservice.model.WebformColumn remove(
 		long webformColumnId)
 		throws com.liferay.portal.kernel.exception.SystemException,
-			com.rcs.dbService.NoSuchWebformColumnException {
+			com.rcs.dbservice.NoSuchWebformColumnException {
 		return getPersistence().remove(webformColumnId);
 	}
 
-	public static com.rcs.dbService.model.WebformColumn updateImpl(
-		com.rcs.dbService.model.WebformColumn webformColumn)
+	public static com.rcs.dbservice.model.WebformColumn updateImpl(
+		com.rcs.dbservice.model.WebformColumn webformColumn)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().updateImpl(webformColumn);
 	}
 
 	/**
-	* Returns the webform column with the primary key or throws a {@link com.rcs.dbService.NoSuchWebformColumnException} if it could not be found.
+	* Returns the webform column with the primary key or throws a {@link com.rcs.dbservice.NoSuchWebformColumnException} if it could not be found.
 	*
 	* @param webformColumnId the primary key of the webform column
 	* @return the webform column
-	* @throws com.rcs.dbService.NoSuchWebformColumnException if a webform column with the primary key could not be found
+	* @throws com.rcs.dbservice.NoSuchWebformColumnException if a webform column with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public static com.rcs.dbService.model.WebformColumn findByPrimaryKey(
+	public static com.rcs.dbservice.model.WebformColumn findByPrimaryKey(
 		long webformColumnId)
 		throws com.liferay.portal.kernel.exception.SystemException,
-			com.rcs.dbService.NoSuchWebformColumnException {
+			com.rcs.dbservice.NoSuchWebformColumnException {
 		return getPersistence().findByPrimaryKey(webformColumnId);
 	}
 
@@ -351,7 +351,7 @@ public class WebformColumnUtil {
 	* @return the webform column, or <code>null</code> if a webform column with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public static com.rcs.dbService.model.WebformColumn fetchByPrimaryKey(
+	public static com.rcs.dbservice.model.WebformColumn fetchByPrimaryKey(
 		long webformColumnId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().fetchByPrimaryKey(webformColumnId);
@@ -363,7 +363,7 @@ public class WebformColumnUtil {
 	* @return the webform columns
 	* @throws SystemException if a system exception occurred
 	*/
-	public static java.util.List<com.rcs.dbService.model.WebformColumn> findAll()
+	public static java.util.List<com.rcs.dbservice.model.WebformColumn> findAll()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findAll();
 	}
@@ -372,7 +372,7 @@ public class WebformColumnUtil {
 	* Returns a range of all the webform columns.
 	*
 	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.rcs.dbService.model.impl.WebformColumnModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.rcs.dbservice.model.impl.WebformColumnModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
 	* @param start the lower bound of the range of webform columns
@@ -380,7 +380,7 @@ public class WebformColumnUtil {
 	* @return the range of webform columns
 	* @throws SystemException if a system exception occurred
 	*/
-	public static java.util.List<com.rcs.dbService.model.WebformColumn> findAll(
+	public static java.util.List<com.rcs.dbservice.model.WebformColumn> findAll(
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findAll(start, end);
@@ -390,7 +390,7 @@ public class WebformColumnUtil {
 	* Returns an ordered range of all the webform columns.
 	*
 	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.rcs.dbService.model.impl.WebformColumnModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.rcs.dbservice.model.impl.WebformColumnModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
 	* @param start the lower bound of the range of webform columns
@@ -399,7 +399,7 @@ public class WebformColumnUtil {
 	* @return the ordered range of webform columns
 	* @throws SystemException if a system exception occurred
 	*/
-	public static java.util.List<com.rcs.dbService.model.WebformColumn> findAll(
+	public static java.util.List<com.rcs.dbservice.model.WebformColumn> findAll(
 		int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -429,7 +429,7 @@ public class WebformColumnUtil {
 
 	public static WebformColumnPersistence getPersistence() {
 		if (_persistence == null) {
-			_persistence = (WebformColumnPersistence)PortletBeanLocatorUtil.locate(com.rcs.dbService.service.ClpSerializer.getServletContextName(),
+			_persistence = (WebformColumnPersistence)PortletBeanLocatorUtil.locate(com.rcs.dbservice.service.ClpSerializer.getServletContextName(),
 					WebformColumnPersistence.class.getName());
 
 			ReferenceRegistry.registerReference(WebformColumnUtil.class,

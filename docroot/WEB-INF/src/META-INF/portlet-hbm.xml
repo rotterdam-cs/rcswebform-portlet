@@ -2,11 +2,11 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping default-lazy="false" auto-import="false">
-	<import class="com.rcs.dbService.model.WebformColumn" />
-	<import class="com.rcs.dbService.model.WebformRow" />
-	<import class="com.rcs.dbService.model.WebformTable" />
-	<import class="com.rcs.dbService.model.WebformValue" />
-	<class name="com.rcs.dbService.model.impl.WebformColumnImpl" table="RcsWebform_WebformColumn">
+	<import class="com.rcs.dbservice.model.WebformColumn" />
+	<import class="com.rcs.dbservice.model.WebformRow" />
+	<import class="com.rcs.dbservice.model.WebformTable" />
+	<import class="com.rcs.dbservice.model.WebformValue" />
+	<class name="com.rcs.dbservice.model.impl.WebformColumnImpl" table="RcsWebform_WebformColumn">
 		<cache usage="read-write" />
 		<id name="webformColumnId" type="long">
 			<generator class="assigned" />
@@ -23,7 +23,7 @@
 		<property name="inputClass" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="maxLength" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 	</class>
-	<class name="com.rcs.dbService.model.impl.WebformRowImpl" table="RcsWebform_WebformRow">
+	<class name="com.rcs.dbservice.model.impl.WebformRowImpl" table="RcsWebform_WebformRow">
 		<cache usage="read-write" />
 		<id name="webformRowId" type="long">
 			<generator class="assigned" />
@@ -31,7 +31,7 @@
 		<property name="webformTableId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="updateDate" type="org.hibernate.type.TimestampType" />
 	</class>
-	<class name="com.rcs.dbService.model.impl.WebformTableImpl" table="RcsWebform_WebformTable">
+	<class name="com.rcs.dbservice.model.impl.WebformTableImpl" table="RcsWebform_WebformTable">
 		<cache usage="read-write" />
 		<id name="webformTableId" type="long">
 			<generator class="assigned" />
@@ -40,7 +40,7 @@
 		<property name="webformCounter" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="webformName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 	</class>
-	<class name="com.rcs.dbService.model.impl.WebformValueImpl" table="RcsWebform_WebformValue">
+	<class name="com.rcs.dbservice.model.impl.WebformValueImpl" table="RcsWebform_WebformValue">
 		<cache usage="read-write" />
 		<id name="webformValueId" type="long">
 			<generator class="assigned" />

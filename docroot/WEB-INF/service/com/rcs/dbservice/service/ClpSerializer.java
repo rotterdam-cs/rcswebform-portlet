@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.rcs.dbService.service;
+package com.rcs.dbservice.service;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
@@ -25,10 +25,10 @@ import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.BaseModel;
 
-import com.rcs.dbService.model.WebformColumnClp;
-import com.rcs.dbService.model.WebformRowClp;
-import com.rcs.dbService.model.WebformTableClp;
-import com.rcs.dbService.model.WebformValueClp;
+import com.rcs.dbservice.model.WebformColumnClp;
+import com.rcs.dbservice.model.WebformRowClp;
+import com.rcs.dbservice.model.WebformTableClp;
+import com.rcs.dbservice.model.WebformValueClp;
 
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -194,7 +194,7 @@ public class ClpSerializer {
 		String oldModelClassName = oldModelClass.getName();
 
 		if (oldModelClassName.equals(
-					"com.rcs.dbService.model.impl.WebformColumnImpl")) {
+					"com.rcs.dbservice.model.impl.WebformColumnImpl")) {
 			return translateOutputWebformColumn(oldModel);
 		}
 		else if (oldModelClassName.endsWith("Clp")) {
@@ -231,7 +231,7 @@ public class ClpSerializer {
 		}
 
 		if (oldModelClassName.equals(
-					"com.rcs.dbService.model.impl.WebformRowImpl")) {
+					"com.rcs.dbservice.model.impl.WebformRowImpl")) {
 			return translateOutputWebformRow(oldModel);
 		}
 		else if (oldModelClassName.endsWith("Clp")) {
@@ -268,7 +268,7 @@ public class ClpSerializer {
 		}
 
 		if (oldModelClassName.equals(
-					"com.rcs.dbService.model.impl.WebformTableImpl")) {
+					"com.rcs.dbservice.model.impl.WebformTableImpl")) {
 			return translateOutputWebformTable(oldModel);
 		}
 		else if (oldModelClassName.endsWith("Clp")) {
@@ -305,7 +305,7 @@ public class ClpSerializer {
 		}
 
 		if (oldModelClassName.equals(
-					"com.rcs.dbService.model.impl.WebformValueImpl")) {
+					"com.rcs.dbservice.model.impl.WebformValueImpl")) {
 			return translateOutputWebformValue(oldModel);
 		}
 		else if (oldModelClassName.endsWith("Clp")) {
@@ -421,20 +421,20 @@ public class ClpSerializer {
 			return new SystemException();
 		}
 
-		if (className.equals("com.rcs.dbService.NoSuchWebformColumnException")) {
-			return new com.rcs.dbService.NoSuchWebformColumnException();
+		if (className.equals("com.rcs.dbservice.NoSuchWebformColumnException")) {
+			return new com.rcs.dbservice.NoSuchWebformColumnException();
 		}
 
-		if (className.equals("com.rcs.dbService.NoSuchWebformRowException")) {
-			return new com.rcs.dbService.NoSuchWebformRowException();
+		if (className.equals("com.rcs.dbservice.NoSuchWebformRowException")) {
+			return new com.rcs.dbservice.NoSuchWebformRowException();
 		}
 
-		if (className.equals("com.rcs.dbService.NoSuchWebformTableException")) {
-			return new com.rcs.dbService.NoSuchWebformTableException();
+		if (className.equals("com.rcs.dbservice.NoSuchWebformTableException")) {
+			return new com.rcs.dbservice.NoSuchWebformTableException();
 		}
 
-		if (className.equals("com.rcs.dbService.NoSuchWebformValueException")) {
-			return new com.rcs.dbService.NoSuchWebformValueException();
+		if (className.equals("com.rcs.dbservice.NoSuchWebformValueException")) {
+			return new com.rcs.dbservice.NoSuchWebformValueException();
 		}
 
 		return throwable;

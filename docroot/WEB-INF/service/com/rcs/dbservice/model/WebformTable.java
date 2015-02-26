@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.rcs.dbService.model;
+package com.rcs.dbservice.model;
 
 import com.liferay.portal.model.PersistedModel;
 
@@ -21,14 +21,14 @@ import com.liferay.portal.model.PersistedModel;
  *
  * @author rikad.ramadhan@rotterdam-cs.com
  * @see WebformTableModel
- * @see com.rcs.dbService.model.impl.WebformTableImpl
- * @see com.rcs.dbService.model.impl.WebformTableModelImpl
+ * @see com.rcs.dbservice.model.impl.WebformTableImpl
+ * @see com.rcs.dbservice.model.impl.WebformTableModelImpl
  * @generated
  */
 public interface WebformTable extends WebformTableModel, PersistedModel {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify this interface directly. Add methods to {@link com.rcs.dbService.model.impl.WebformTableImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify this interface directly. Add methods to {@link com.rcs.dbservice.model.impl.WebformTableImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
 }
