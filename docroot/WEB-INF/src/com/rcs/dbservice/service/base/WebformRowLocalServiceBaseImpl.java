@@ -455,6 +455,25 @@ public abstract class WebformRowLocalServiceBaseImpl
 	}
 
 	/**
+	 * Returns the webform value local service.
+	 *
+	 * @return the webform value local service
+	 */
+	public com.rcs.dbservice.service.WebformValueLocalService getWebformValueLocalService() {
+		return webformValueLocalService;
+	}
+
+	/**
+	 * Sets the webform value local service.
+	 *
+	 * @param webformValueLocalService the webform value local service
+	 */
+	public void setWebformValueLocalService(
+		com.rcs.dbservice.service.WebformValueLocalService webformValueLocalService) {
+		this.webformValueLocalService = webformValueLocalService;
+	}
+
+	/**
 	 * Returns the webform value remote service.
 	 *
 	 * @return the webform value remote service
@@ -686,6 +705,8 @@ public abstract class WebformRowLocalServiceBaseImpl
 	protected com.rcs.dbservice.service.WebformTableService webformTableService;
 	@BeanReference(type = WebformTablePersistence.class)
 	protected WebformTablePersistence webformTablePersistence;
+	@BeanReference(type = com.rcs.dbservice.service.WebformValueLocalService.class)
+	protected com.rcs.dbservice.service.WebformValueLocalService webformValueLocalService;
 	@BeanReference(type = com.rcs.dbservice.service.WebformValueService.class)
 	protected com.rcs.dbservice.service.WebformValueService webformValueService;
 	@BeanReference(type = WebformValuePersistence.class)

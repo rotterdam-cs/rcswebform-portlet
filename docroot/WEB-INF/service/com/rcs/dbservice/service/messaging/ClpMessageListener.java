@@ -24,6 +24,7 @@ import com.rcs.dbservice.service.WebformRowLocalServiceUtil;
 import com.rcs.dbservice.service.WebformRowServiceUtil;
 import com.rcs.dbservice.service.WebformTableLocalServiceUtil;
 import com.rcs.dbservice.service.WebformTableServiceUtil;
+import com.rcs.dbservice.service.WebformValueLocalServiceUtil;
 import com.rcs.dbservice.service.WebformValueServiceUtil;
 
 /**
@@ -50,6 +51,7 @@ public class ClpMessageListener extends BaseMessageListener {
 			WebformTableLocalServiceUtil.clearService();
 
 			WebformTableServiceUtil.clearService();
+			WebformValueLocalServiceUtil.clearService();
 
 			WebformValueServiceUtil.clearService();
 		}

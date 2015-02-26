@@ -10,6 +10,7 @@
 	<bean id="com.rcs.dbservice.service.WebformTableLocalService" class="com.rcs.dbservice.service.impl.WebformTableLocalServiceImpl" />
 	<bean id="com.rcs.dbservice.service.WebformTableService" class="com.rcs.dbservice.service.impl.WebformTableServiceImpl" />
 	<bean id="com.rcs.dbservice.service.persistence.WebformTablePersistence" class="com.rcs.dbservice.service.persistence.WebformTablePersistenceImpl" parent="basePersistence" />
+	<bean id="com.rcs.dbservice.service.WebformValueLocalService" class="com.rcs.dbservice.service.impl.WebformValueLocalServiceImpl" />
 	<bean id="com.rcs.dbservice.service.WebformValueService" class="com.rcs.dbservice.service.impl.WebformValueServiceImpl" />
 	<bean id="com.rcs.dbservice.service.persistence.WebformValuePersistence" class="com.rcs.dbservice.service.persistence.WebformValuePersistenceImpl" parent="basePersistence" />
 </beans>

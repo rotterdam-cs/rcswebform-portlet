@@ -14,7 +14,7 @@
 
 package com.rcs.dbservice.service.base;
 
-import com.rcs.dbservice.service.WebformTableLocalServiceUtil;
+import com.rcs.dbservice.service.WebformValueLocalServiceUtil;
 
 import java.util.Arrays;
 
@@ -22,26 +22,26 @@ import java.util.Arrays;
  * @author rikad.ramadhan@rotterdam-cs.com
  * @generated
  */
-public class WebformTableLocalServiceClpInvoker {
-	public WebformTableLocalServiceClpInvoker() {
-		_methodName0 = "addWebformTable";
+public class WebformValueLocalServiceClpInvoker {
+	public WebformValueLocalServiceClpInvoker() {
+		_methodName0 = "addWebformValue";
 
 		_methodParameterTypes0 = new String[] {
-				"com.rcs.dbservice.model.WebformTable"
+				"com.rcs.dbservice.model.WebformValue"
 			};
 
-		_methodName1 = "createWebformTable";
+		_methodName1 = "createWebformValue";
 
 		_methodParameterTypes1 = new String[] { "long" };
 
-		_methodName2 = "deleteWebformTable";
+		_methodName2 = "deleteWebformValue";
 
 		_methodParameterTypes2 = new String[] { "long" };
 
-		_methodName3 = "deleteWebformTable";
+		_methodName3 = "deleteWebformValue";
 
 		_methodParameterTypes3 = new String[] {
-				"com.rcs.dbservice.model.WebformTable"
+				"com.rcs.dbservice.model.WebformValue"
 			};
 
 		_methodName4 = "dynamicQuery";
@@ -80,11 +80,11 @@ public class WebformTableLocalServiceClpInvoker {
 				"com.liferay.portal.kernel.dao.orm.Projection"
 			};
 
-		_methodName10 = "fetchWebformTable";
+		_methodName10 = "fetchWebformValue";
 
 		_methodParameterTypes10 = new String[] { "long" };
 
-		_methodName11 = "getWebformTable";
+		_methodName11 = "getWebformValue";
 
 		_methodParameterTypes11 = new String[] { "long" };
 
@@ -92,18 +92,18 @@ public class WebformTableLocalServiceClpInvoker {
 
 		_methodParameterTypes12 = new String[] { "java.io.Serializable" };
 
-		_methodName13 = "getWebformTables";
+		_methodName13 = "getWebformValues";
 
 		_methodParameterTypes13 = new String[] { "int", "int" };
 
-		_methodName14 = "getWebformTablesCount";
+		_methodName14 = "getWebformValuesCount";
 
 		_methodParameterTypes14 = new String[] {  };
 
-		_methodName15 = "updateWebformTable";
+		_methodName15 = "updateWebformValue";
 
 		_methodParameterTypes15 = new String[] {
-				"com.rcs.dbservice.model.WebformTable"
+				"com.rcs.dbservice.model.WebformValue"
 			};
 
 		_methodName52 = "getBeanIdentifier";
@@ -119,44 +119,44 @@ public class WebformTableLocalServiceClpInvoker {
 		Object[] arguments) throws Throwable {
 		if (_methodName0.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes0, parameterTypes)) {
-			return WebformTableLocalServiceUtil.addWebformTable((com.rcs.dbservice.model.WebformTable)arguments[0]);
+			return WebformValueLocalServiceUtil.addWebformValue((com.rcs.dbservice.model.WebformValue)arguments[0]);
 		}
 
 		if (_methodName1.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes1, parameterTypes)) {
-			return WebformTableLocalServiceUtil.createWebformTable(((Long)arguments[0]).longValue());
+			return WebformValueLocalServiceUtil.createWebformValue(((Long)arguments[0]).longValue());
 		}
 
 		if (_methodName2.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes2, parameterTypes)) {
-			return WebformTableLocalServiceUtil.deleteWebformTable(((Long)arguments[0]).longValue());
+			return WebformValueLocalServiceUtil.deleteWebformValue(((Long)arguments[0]).longValue());
 		}
 
 		if (_methodName3.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes3, parameterTypes)) {
-			return WebformTableLocalServiceUtil.deleteWebformTable((com.rcs.dbservice.model.WebformTable)arguments[0]);
+			return WebformValueLocalServiceUtil.deleteWebformValue((com.rcs.dbservice.model.WebformValue)arguments[0]);
 		}
 
 		if (_methodName4.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes4, parameterTypes)) {
-			return WebformTableLocalServiceUtil.dynamicQuery();
+			return WebformValueLocalServiceUtil.dynamicQuery();
 		}
 
 		if (_methodName5.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes5, parameterTypes)) {
-			return WebformTableLocalServiceUtil.dynamicQuery((com.liferay.portal.kernel.dao.orm.DynamicQuery)arguments[0]);
+			return WebformValueLocalServiceUtil.dynamicQuery((com.liferay.portal.kernel.dao.orm.DynamicQuery)arguments[0]);
 		}
 
 		if (_methodName6.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes6, parameterTypes)) {
-			return WebformTableLocalServiceUtil.dynamicQuery((com.liferay.portal.kernel.dao.orm.DynamicQuery)arguments[0],
+			return WebformValueLocalServiceUtil.dynamicQuery((com.liferay.portal.kernel.dao.orm.DynamicQuery)arguments[0],
 				((Integer)arguments[1]).intValue(),
 				((Integer)arguments[2]).intValue());
 		}
 
 		if (_methodName7.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes7, parameterTypes)) {
-			return WebformTableLocalServiceUtil.dynamicQuery((com.liferay.portal.kernel.dao.orm.DynamicQuery)arguments[0],
+			return WebformValueLocalServiceUtil.dynamicQuery((com.liferay.portal.kernel.dao.orm.DynamicQuery)arguments[0],
 				((Integer)arguments[1]).intValue(),
 				((Integer)arguments[2]).intValue(),
 				(com.liferay.portal.kernel.util.OrderByComparator)arguments[3]);
@@ -164,54 +164,54 @@ public class WebformTableLocalServiceClpInvoker {
 
 		if (_methodName8.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes8, parameterTypes)) {
-			return WebformTableLocalServiceUtil.dynamicQueryCount((com.liferay.portal.kernel.dao.orm.DynamicQuery)arguments[0]);
+			return WebformValueLocalServiceUtil.dynamicQueryCount((com.liferay.portal.kernel.dao.orm.DynamicQuery)arguments[0]);
 		}
 
 		if (_methodName9.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes9, parameterTypes)) {
-			return WebformTableLocalServiceUtil.dynamicQueryCount((com.liferay.portal.kernel.dao.orm.DynamicQuery)arguments[0],
+			return WebformValueLocalServiceUtil.dynamicQueryCount((com.liferay.portal.kernel.dao.orm.DynamicQuery)arguments[0],
 				(com.liferay.portal.kernel.dao.orm.Projection)arguments[1]);
 		}
 
 		if (_methodName10.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes10, parameterTypes)) {
-			return WebformTableLocalServiceUtil.fetchWebformTable(((Long)arguments[0]).longValue());
+			return WebformValueLocalServiceUtil.fetchWebformValue(((Long)arguments[0]).longValue());
 		}
 
 		if (_methodName11.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes11, parameterTypes)) {
-			return WebformTableLocalServiceUtil.getWebformTable(((Long)arguments[0]).longValue());
+			return WebformValueLocalServiceUtil.getWebformValue(((Long)arguments[0]).longValue());
 		}
 
 		if (_methodName12.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes12, parameterTypes)) {
-			return WebformTableLocalServiceUtil.getPersistedModel((java.io.Serializable)arguments[0]);
+			return WebformValueLocalServiceUtil.getPersistedModel((java.io.Serializable)arguments[0]);
 		}
 
 		if (_methodName13.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes13, parameterTypes)) {
-			return WebformTableLocalServiceUtil.getWebformTables(((Integer)arguments[0]).intValue(),
+			return WebformValueLocalServiceUtil.getWebformValues(((Integer)arguments[0]).intValue(),
 				((Integer)arguments[1]).intValue());
 		}
 
 		if (_methodName14.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes14, parameterTypes)) {
-			return WebformTableLocalServiceUtil.getWebformTablesCount();
+			return WebformValueLocalServiceUtil.getWebformValuesCount();
 		}
 
 		if (_methodName15.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes15, parameterTypes)) {
-			return WebformTableLocalServiceUtil.updateWebformTable((com.rcs.dbservice.model.WebformTable)arguments[0]);
+			return WebformValueLocalServiceUtil.updateWebformValue((com.rcs.dbservice.model.WebformValue)arguments[0]);
 		}
 
 		if (_methodName52.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes52, parameterTypes)) {
-			return WebformTableLocalServiceUtil.getBeanIdentifier();
+			return WebformValueLocalServiceUtil.getBeanIdentifier();
 		}
 
 		if (_methodName53.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes53, parameterTypes)) {
-			WebformTableLocalServiceUtil.setBeanIdentifier((java.lang.String)arguments[0]);
+			WebformValueLocalServiceUtil.setBeanIdentifier((java.lang.String)arguments[0]);
 
 			return null;
 		}

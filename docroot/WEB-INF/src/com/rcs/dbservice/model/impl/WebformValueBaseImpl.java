@@ -14,7 +14,10 @@
 
 package com.rcs.dbservice.model.impl;
 
+import com.liferay.portal.kernel.exception.SystemException;
+
 import com.rcs.dbservice.model.WebformValue;
+import com.rcs.dbservice.service.WebformValueLocalServiceUtil;
 
 /**
  * The extended model base implementation for the WebformValue service. Represents a row in the &quot;RcsWebform_WebformValue&quot; database table, with each column mapped to a property of this class.
@@ -35,4 +38,13 @@ public abstract class WebformValueBaseImpl extends WebformValueModelImpl
 	 *
 	 * Never modify or reference this class directly. All methods that expect a webform value model instance should use the {@link WebformValue} interface instead.
 	 */
+	@Override
+	public void persist() throws SystemException {
+		if (this.isNew()) {
+			WebformValueLocalServiceUtil.addWebformValue(this);
+		}
+		else {
+			WebformValueLocalServiceUtil.updateWebformValue(this);
+		}
+	}
 }

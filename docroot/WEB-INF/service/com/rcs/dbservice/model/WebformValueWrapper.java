@@ -310,6 +310,12 @@ public class WebformValueWrapper implements WebformValue,
 	}
 
 	@Override
+	public void persist()
+		throws com.liferay.portal.kernel.exception.SystemException {
+		_webformValue.persist();
+	}
+
+	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
 			return true;

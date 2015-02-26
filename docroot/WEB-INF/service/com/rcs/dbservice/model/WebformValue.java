@@ -14,6 +14,8 @@
 
 package com.rcs.dbservice.model;
 
+import com.liferay.portal.model.PersistedModel;
+
 /**
  * The extended model interface for the WebformValue service. Represents a row in the &quot;RcsWebform_WebformValue&quot; database table, with each column mapped to a property of this class.
  *
@@ -23,7 +25,7 @@ package com.rcs.dbservice.model;
  * @see com.rcs.dbservice.model.impl.WebformValueModelImpl
  * @generated
  */
-public interface WebformValue extends WebformValueModel {
+public interface WebformValue extends WebformValueModel, PersistedModel {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *

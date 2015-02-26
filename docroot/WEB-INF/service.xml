@@ -65,7 +65,7 @@
 		
 	</entity>
 	
-	<entity name="WebformValue">
+	<entity name="WebformValue" local-service="true" remote-service="true">
 		<!-- Primary Key -->
 		<column name="webformValueId" type="long" primary="true"/>
 		

@@ -15,12 +15,14 @@
 package com.rcs.dbservice.model;
 
 import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.ProxyUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.model.impl.BaseModelImpl;
 
 import com.rcs.dbservice.service.ClpSerializer;
+import com.rcs.dbservice.service.WebformValueLocalServiceUtil;
 
 import java.io.Serializable;
 
@@ -275,6 +277,16 @@ public class WebformValueClp extends BaseModelImpl<WebformValue>
 		}
 
 		return returnValue;
+	}
+
+	@Override
+	public void persist() throws SystemException {
+		if (this.isNew()) {
+			WebformValueLocalServiceUtil.addWebformValue(this);
+		}
+		else {
+			WebformValueLocalServiceUtil.updateWebformValue(this);
+		}
 	}
 
 	@Override
