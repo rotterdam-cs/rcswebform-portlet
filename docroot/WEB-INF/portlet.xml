@@ -4,7 +4,7 @@
 	<portlet>
 		<portlet-name>rcswebform</portlet-name>
 		<display-name>rcswebform</display-name>
-		 <portlet-class>com.rcs.webform.portlet.WebformPortlet</portlet-class>
+		 <portlet-class>com.rcs.webform.portlet.WebFormPortlet</portlet-class>
 		<init-param>
 			<name>view-template</name>
 			<value>/view.jsp</value>
