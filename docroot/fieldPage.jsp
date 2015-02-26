@@ -1,6 +1,7 @@
 <%@ include file="/init.jsp" %>
 
 <liferay-ui:error key='fieldSizeInvalid${formFieldsIndex}' message="please-enter-no-more-than-75-characters" />
+<c:set var="fieldModel" value="${configClass.generatingWebformFieldModelData(renderRequest,configurationFormFieldsIndex,configurationIndex)}" />
 
 <div class="field-row field-row">
 	<div class="field-title">
@@ -12,13 +13,13 @@
 				<span class="field-label" >${fieldLabel}</span> 
 			</c:when>
 			<c:otherwise>
-				<liferay-ui:message key="new-item" /> _field${index}
+				<liferay-ui:message key="new-item" />
 			</c:otherwise>
 		</c:choose>
 	</div>
 	
 	<c:choose>
-		<c:when test="${isEditable}">
+		<c:when test="${configurationIsEditable}">
 			<aui:input name="_field${fieldModel.index}" type="hidden" />
 			<aui:field-wrapper cssClass="label-name" label="name">
 				<liferay-ui:input-localized name="fieldLabel${fieldModel.index}" xml="${fieldModel.fieldLabelXml}" />

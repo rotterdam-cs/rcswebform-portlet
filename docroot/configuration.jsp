@@ -72,17 +72,20 @@
 				</c:if>
 				
 				<aui:input name="updateFields" type="hidden" value="${configModel.isEditable}" />
-				<c:set var="index" value="1" />
+				<c:set var="index" value="1" scope="request" />
+				<c:set var="formFieldsIndexes" value="${configClass.generateFormFieldsIndexes(formFieldsIndexesParam,renderRequest)}" />
 				
-				<c:forEach items="${webformFieldModelList}" var="fieldModel" varStatus="countStatus">
-					<div class="lfr-form-row" id="<portlet:namespace />fieldset${countStatus.count}">
+				<c:forEach items="${formFieldsIndexes}" var="formFieldsIndex" varStatus="counter">
+					<c:set var="configurationIndex" value="${index}" scope="application"/>
+					<c:set var="configurationFormFieldsIndex" value="${formFieldsIndex}" scope="application" />
+					<c:set var="configurationIsEditable" value="${isEditable}" scope="application" />
+					
+					<div class="lfr-form-row" id="<portlet:namespace />fieldset${formFieldsIndex}">
 						<div class="row-fields">
-							<liferay-util:include page="/fieldPage.jsp" servletContext="<%= this.getServletContext()  %>" >
-								<liferay-util:param name="fieldModel" value="${fieldModel}" />
-							</liferay-util:include>
+							<liferay-util:include page="/fieldPage.jsp" servletContext="<%= application %>" />
 						</div>
 					</div>
-					<c:set var="index" value="${countStatus.count}" />
+					<c:set var="index" value="${index+1}" scope="request" />
 				</c:forEach>
 					
 			</aui:fieldset>
@@ -182,7 +185,8 @@
 
 				<liferay-portlet:renderURL portletConfiguration="true" var="editFieldURL" windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>">
 					<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.ADD %>" />
-					<portlet:param name="isEditable" value="${isEditable }"/>
+					<portlet:param name="configurationIsEditable" value="${isEditable}" />
+					<portlet:param name="configurationIndex" value="${index}" />
 				</liferay-portlet:renderURL>
 
 				url: '<%= editFieldURL %>'
