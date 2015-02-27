@@ -5,6 +5,7 @@
 
 <aui:form action="<%= configurationActionURL %>" method="post" name="fm">
 	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
+	<aui:input name="redirect" type="hidden" value="<%= configurationRenderURL %>" />
 	
 	<liferay-ui:error exception="<%= DuplicateColumnNameException.class %>" message="please-enter-unique-field-names" />
 	
@@ -69,6 +70,31 @@
 					<div class="alert">
 						<liferay-ui:message key="there-is-existing-form-data-please-export-and-delete-it-before-making-changes-to-the-fields" />
 					</div>
+					
+					<c:if test="<%= layoutTypePortlet.hasPortletId(portletResource) %>">
+						<liferay-portlet:resourceURL portletName="<%= portletResource %>" var="exportURL">
+							<portlet:param name="<%= Constants.CMD %>" value="export" />
+						</liferay-portlet:resourceURL>
+
+						<%
+						String taglibExport = "submitForm(document.hrefFm, '" + exportURL + "', false);";
+						%>
+
+						<aui:button onClick="<%= taglibExport %>" value="export-data" />
+
+						<liferay-portlet:actionURL portletName="<%= portletResource %>" var="deleteURL">
+							<portlet:param name="<%= ActionRequest.ACTION_NAME %>" value="deleteData" />
+							<portlet:param name="redirect" value="<%= currentURL %>" />
+						</liferay-portlet:actionURL>
+
+						<%
+						String taglibDelete = "submitForm(document." + renderResponse.getNamespace() + "fm, '" + deleteURL + "');";
+						%>
+
+						<aui:button onClick="<%= taglibDelete %>" value="delete-data" />
+					</c:if>
+
+					<br /><br />
 				</c:if>
 				
 				<aui:input name="updateFields" type="hidden" value="${configModel.isEditable}" />
@@ -77,7 +103,7 @@
 				
 				<c:forEach items="${formFieldsIndexes}" var="formFieldsIndex" varStatus="counter">
 					<c:set var="configurationIndex" value="${index}" scope="application"/>
-					<c:set var="configurationFormFieldsIndex" value="${formFieldsIndex}" scope="application" />
+					<c:set var="configurationFormFieldsIndex" value="${formFieldsIndex}" scope="request" />
 					<c:set var="configurationIsEditable" value="${isEditable}" scope="application" />
 					
 					<div class="lfr-form-row" id="<portlet:namespace />fieldset${formFieldsIndex}">

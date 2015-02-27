@@ -58,7 +58,6 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 		String formFieldsIndexesParam 	= ParamUtil.getString(request, "formFieldsIndexes");
 		String cmd 						= ParamUtil.getString(request, Constants.CMD);
 		String returnPage 				= null;
-		int[] formFieldsIndexes			= null;
 		
 		if(cmd.equals(Constants.ADD)) {
 			log.info("###--- Add Field Action ---###");
@@ -69,6 +68,7 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 			
 			request.setAttribute("configClass", this);
 			request.setAttribute("configurationIndex", configurationIndex);
+			request.setAttribute("configurationFormFieldsIndex", null);
 			
 		}else{
 			log.info("###--- Entering Render Action ---###");
@@ -265,40 +265,7 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 		
 	}
 	
-	public WebformFieldModel generatingWebformFieldModelData(PortletPreferences preferences,PortletRequest request,int formFieldsIndex, int index ){
-		
-		log.info("###--- Generating WebformFieldModel Data ---###");
-		
-		WebformFieldModel fieldModel = new WebformFieldModel();
-		ThemeDisplay themeDisplay = (ThemeDisplay) request.getAttribute(WebKeys.THEME_DISPLAY);
-		
-		String fieldLabelXml 				= GetterUtil.getString(LocalizationUtil.getLocalizationXmlFromPreferences(preferences, request, "fieldLabel"+index));
-		String fieldLabel 					= LocalizationUtil.getLocalization(fieldLabelXml, themeDisplay.getLanguageId());
-		String fieldType 					= PrefsParamUtil.getString(preferences, request, "fieldType"+index);
-		String fieldOptionsXml 				= GetterUtil.getString(LocalizationUtil.getLocalizationXmlFromPreferences(preferences, request, "fieldOptions"+index));
-		String fieldOptions 				= LocalizationUtil.getLocalization(fieldOptionsXml, themeDisplay.getLanguageId());
-		String fieldValidationScript 		= PrefsParamUtil.getString(preferences, request, "fieldValidationScript" + index);
-		String fieldValidationErrorMessage 	= PrefsParamUtil.getString(preferences, request, "fieldValidationErrorMessage" + index);
-		int formFieldsIndexParam 			= formFieldsIndex;
-		boolean fieldOptional 				= PrefsParamUtil.getBoolean(preferences, request, "fieldOptional" + index);
-		boolean ignoreRequestValue 			= (index != formFieldsIndex);
-		
-		log.info("fieldLabelXml : "+fieldLabelXml);
-		
-		fieldModel.setFieldLabelXml(fieldLabelXml);
-		fieldModel.setFieldLabel(fieldLabel);
-		fieldModel.setFieldType(fieldType);
-		fieldModel.setFieldOptionslXml(fieldOptionsXml);
-		fieldModel.setFieldOptions(fieldOptions);
-		fieldModel.setFieldValidationErrorMessage(fieldValidationErrorMessage);
-		fieldModel.setFieldValidationScript(fieldValidationScript);
-		fieldModel.setIndex(index);
-		fieldModel.setFormFieldsIndex(formFieldsIndexParam);
-		fieldModel.setFieldOptional(fieldOptional);
-		fieldModel.setIqnoreRequestValue(ignoreRequestValue);
-		
-		return fieldModel;
-	}
+	
 	
 	public int[] generateFormFieldsIndexes(String formFieldsIndexesParam,PortletRequest request) throws PortalException, SystemException{
 		log.info("###--- Generating FormFieldsIndexes ---###");
@@ -329,7 +296,7 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 		return formFieldsIndexes;
 	}
 	
-public WebformFieldModel generatingWebformFieldModelData(PortletRequest request,int formFieldsIndex, int index ) throws PortalException, SystemException{
+	public WebformFieldModel generatingWebformFieldModelData(PortletRequest request,int formFieldsIndex, int index ) throws PortalException, SystemException{
 		
 		log.info("###--- Generating WebformFieldModel Data ---###");
 		log.info("FormFieldIndex : "+formFieldsIndex+"|| Index Value : "+index);
@@ -339,10 +306,10 @@ public WebformFieldModel generatingWebformFieldModelData(PortletRequest request,
 		WebformFieldModel fieldModel = new WebformFieldModel();
 		ThemeDisplay themeDisplay = (ThemeDisplay) request.getAttribute(WebKeys.THEME_DISPLAY);
 		
-		String fieldLabelXml 				= GetterUtil.getString(LocalizationUtil.getLocalizationXmlFromPreferences(preferences, request, "fieldLabel"+formFieldsIndex));
+		String fieldLabelXml 				= GetterUtil.getString(LocalizationUtil.getLocalizationXmlFromPreferences(preferences, request, "fieldLabel"+formFieldsIndex),StringPool.BLANK);
 		String fieldLabel 					= LocalizationUtil.getLocalization(fieldLabelXml, themeDisplay.getLanguageId());
 		String fieldType 					= PrefsParamUtil.getString(preferences, request, "fieldType"+formFieldsIndex);
-		String fieldOptionsXml 				= GetterUtil.getString(LocalizationUtil.getLocalizationXmlFromPreferences(preferences, request, "fieldOptions"+formFieldsIndex));
+		String fieldOptionsXml 				= GetterUtil.getString(LocalizationUtil.getLocalizationXmlFromPreferences(preferences, request, "fieldOptions"+formFieldsIndex),StringPool.BLANK);
 		String fieldOptions 				= LocalizationUtil.getLocalization(fieldOptionsXml, themeDisplay.getLanguageId());
 		String fieldValidationScript 		= PrefsParamUtil.getString(preferences, request, "fieldValidationScript" + formFieldsIndex);
 		String fieldValidationErrorMessage 	= PrefsParamUtil.getString(preferences, request, "fieldValidationErrorMessage" + formFieldsIndex);
@@ -355,7 +322,7 @@ public WebformFieldModel generatingWebformFieldModelData(PortletRequest request,
 		fieldModel.setFieldLabelXml(fieldLabelXml);
 		fieldModel.setFieldLabel(fieldLabel);
 		fieldModel.setFieldType(fieldType);
-		fieldModel.setFieldOptionslXml(fieldOptionsXml);
+		fieldModel.setFieldOptionsXml(fieldOptionsXml);
 		fieldModel.setFieldOptions(fieldOptions);
 		fieldModel.setFieldValidationErrorMessage(fieldValidationErrorMessage);
 		fieldModel.setFieldValidationScript(fieldValidationScript);
@@ -363,8 +330,15 @@ public WebformFieldModel generatingWebformFieldModelData(PortletRequest request,
 		fieldModel.setFormFieldsIndex(formFieldsIndexParam);
 		fieldModel.setFieldOptional(fieldOptional);
 		fieldModel.setIqnoreRequestValue(ignoreRequestValue);
+		fieldModel.setFieldValidationScriptHide(Validator.isNull(fieldValidationScript) ? "hide" : "");
 		
 		return fieldModel;
+	}
+	
+	public String generatingOptionalCss(String fieldType){
+		String optionsCss = "options";
+		optionsCss = optionsCss+((Validator.isNull(fieldType) || (!fieldType.equals("options") && !fieldType.equals("radio"))) ? " hide" : StringPool.BLANK);
+		return optionsCss;
 	}
 	
 }

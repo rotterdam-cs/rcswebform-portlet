@@ -6,9 +6,10 @@ public class WebformFieldModel {
 	private String fieldLabelXml;
 	private String fieldLabel;
 	private String fieldType;
-	private String fieldOptionslXml;
+	private String fieldOptionsXml;
 	private String fieldOptions;
 	private String fieldValidationScript;
+	private String fieldValidationScriptHide;
 	private String fieldValidationErrorMessage;
 	
 	/* Integer Type */
@@ -38,11 +39,11 @@ public class WebformFieldModel {
 	public void setFieldType(String fieldType) {
 		this.fieldType = fieldType;
 	}
-	public String getFieldOptionslXml() {
-		return fieldOptionslXml;
+	public String getFieldOptionsXml() {
+		return fieldOptionsXml;
 	}
-	public void setFieldOptionslXml(String fieldOptionslXml) {
-		this.fieldOptionslXml = fieldOptionslXml;
+	public void setFieldOptionsXml(String fieldOptionslXml) {
+		this.fieldOptionsXml = fieldOptionslXml;
 	}
 	public String getFieldOptions() {
 		return fieldOptions;
@@ -91,6 +92,12 @@ public class WebformFieldModel {
 	}
 	public void setIqnoreRequestValue(Boolean iqnoreRequestValue) {
 		this.iqnoreRequestValue = iqnoreRequestValue;
+	}
+	public String getFieldValidationScriptHide() {
+		return fieldValidationScriptHide;
+	}
+	public void setFieldValidationScriptHide(String fieldValidationScriptHide) {
+		this.fieldValidationScriptHide = fieldValidationScriptHide;
 	}
 	
 	
