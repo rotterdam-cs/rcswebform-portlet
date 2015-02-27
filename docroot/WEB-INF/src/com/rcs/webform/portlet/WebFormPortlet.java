@@ -134,11 +134,14 @@ public class WebFormPortlet extends MVCPortlet {
 			formComponent.setPosition("horizontal");
 			/*formComponent.setPlaceholder(portletPreferences.getValue("placeholder" + i, StringPool.BLANK));*/
 			formComponent.setPlaceholder("Input Text Here");
-			//formComponent.setFieldOptional(fieldOptional);
-			formComponent.setFieldOptional(false);
+			formComponent.setFieldOptional(fieldOptional);
+			/*formComponent.setFieldOptional(false);*/
 			formComponent.setFieldValue(fieldValue);
 			formComponent.setFieldLabel(fieldLabel);
 			formComponent.setFieldName(fieldName);
+			if(Validator.isNotNull(fieldValue)){
+				formComponent.setFieldValueBoolean(GetterUtil.getBoolean(fieldValue));
+			}
 			if(formComponent.getFileType().equalsIgnoreCase("options") || formComponent.getFileType().equalsIgnoreCase("radio")){
 				List<FieldOptions> fieldOptionsSet = new ArrayList<FieldOptions>();
 				for (String fieldOptionValue : WebFormUtil.split(formComponent.getFieldOptions())) {
