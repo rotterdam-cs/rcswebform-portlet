@@ -132,10 +132,8 @@ public class WebFormPortlet extends MVCPortlet {
 			formComponent.setFieldValidationErrorMessage(portletPreferences.getValue("fieldValidationErrorMessage" + i, StringPool.BLANK));
 			//formComponent.setPosition(portletPreferences.getValue("position" + i, StringPool.BLANK));
 			formComponent.setPosition("horizontal");
-			/*formComponent.setPlaceholder(portletPreferences.getValue("placeholder" + i, StringPool.BLANK));*/
-			formComponent.setPlaceholder("Input Text Here");
+			formComponent.setPlaceholder(portletPreferences.getValue("fieldPlaceHolder" + i, StringPool.BLANK));
 			formComponent.setFieldOptional(fieldOptional);
-			/*formComponent.setFieldOptional(false);*/
 			formComponent.setFieldValue(fieldValue);
 			formComponent.setFieldLabel(fieldLabel);
 			formComponent.setFieldName(fieldName);
