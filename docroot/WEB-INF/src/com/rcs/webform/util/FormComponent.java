@@ -15,6 +15,7 @@ public class FormComponent {
 	private String fieldValidationErrorMessage; 
 	private String position; 
 	private String placeholder; 
+	private boolean fieldValueBoolean; 
 	
 	
 	/*Boolean*/
@@ -101,6 +102,12 @@ public class FormComponent {
 	}
 	public void setFieldOptionsSet(List<FieldOptions> fieldOptionsSet) {
 		this.fieldOptionsSet = fieldOptionsSet;
+	}
+	public boolean isFieldValueBoolean() {
+		return fieldValueBoolean;
+	}
+	public void setFieldValueBoolean(boolean fieldValueBoolean) {
+		this.fieldValueBoolean = fieldValueBoolean;
 	}
 
 	

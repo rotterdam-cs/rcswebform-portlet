@@ -221,6 +221,44 @@
 							</c:when>
 						</c:choose>		
 					</c:when>
+					<c:when test="${item.fileType == 'checkbox'}">
+					<c:choose>
+							<c:when test="${item.position == 'horizontal'}">
+								<tr>
+									<td valign="top">${item.fieldLabel}</td>
+									<td>
+										<aui:input  label="" name="${item.fieldName}" type="checkbox" value="${item.fieldValueBoolean}" />
+									</td> 
+									<td valign="top">
+										<c:if test="${! item.fieldOptional}">
+											<div class="hide" id="<portlet:namespace />fieldOptionalError${item.fieldName}">
+												<span class="alert alert-error"><liferay-ui:message key="this-field-is-mandatory" /></span>
+											</div>
+										</c:if>
+									</td>
+								</tr>
+							</c:when>
+							<c:when test="${item.position == 'vertical'}">
+								<tr>
+									<td colspan="3">${item.fieldLabel}</td>
+								</tr>
+								<tr>
+									<td colspan="2">
+										
+										<aui:input  label="" name="${item.fieldName}" type="checkbox" value="${item.fieldValueBoolean}" />
+										
+									</td>
+									<td valign="top">
+										<c:if test="${! item.fieldOptional}">
+											<div class="hide" id="<portlet:namespace />fieldOptionalError${item.fieldName}">
+												<span class="alert alert-error"><liferay-ui:message key="this-field-is-mandatory" /></span>
+											</div>
+										</c:if>
+									</td>
+								</tr>
+							</c:when>
+						</c:choose>
+					</c:when>
 				
 			</c:choose>
 		</c:forEach> 
