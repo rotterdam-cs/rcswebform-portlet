@@ -46,6 +46,11 @@
 				<liferay-ui:input-localized name="fieldPlaceHolder${fieldModel.index}" xml="${fieldModel.fieldPlaceHolderXml}" />
 			</aui:field-wrapper>
 			
+			<aui:select name="fieldPosition${fieldModel.index}" label="type" ignoreRequestValue="${fieldModel.iqnoreRequestValue}">
+				<aui:option selected='${fieldModel.fieldPosition=="horizontal"}' value="horizontal"><liferay-ui:message key="horizontal" /></aui:option>
+				<aui:option selected='${fieldModel.fieldPosition=="vertical"}' value="vertical"><liferay-ui:message key="vertical" /></aui:option>
+			</aui:select>
+			
 		</c:when>
 	</c:choose>
 	

@@ -133,10 +133,13 @@
 			var value = select.val();
 
 			var optionsDiv = formRow.one('.options');
+			
+			var placeHolderDiv = formRow.one('.label-placeHolder');
 
 			if ((value == 'options') || (value == 'radio')) {
 				optionsDiv.all('label').show();
 				optionsDiv.show();
+				placeHolderDiv.hide();
 			}
 			else if (value == 'paragraph') {
 
@@ -148,6 +151,7 @@
 			}
 			else {
 				optionsDiv.hide();
+				placeHolderDiv.show();
 			}
 
 			var optionalControl = formRow.one('.optional-control').ancestor();
