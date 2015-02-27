@@ -41,6 +41,11 @@
 			<aui:field-wrapper cssClass='${fieldModel.fieldOptionsCss}' helpMessage="add-options-separated-by-commas" label="options">
 				<liferay-ui:input-localized name="fieldOptions${fieldModel.index}" xml="${fieldModel.fieldOptionsXml}" />
 			</aui:field-wrapper>
+			
+			<aui:field-wrapper cssClass="label-placeHolder" label="placeholder">
+				<liferay-ui:input-localized name="fieldPlaceHolder${fieldModel.index}" xml="${fieldModel.fieldPlaceHolderXml}" />
+			</aui:field-wrapper>
+			
 		</c:when>
 	</c:choose>
 	

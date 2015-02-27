@@ -12,6 +12,8 @@ public class WebformFieldModel {
 	private String fieldValidationScript;
 	private String fieldValidationScriptHide;
 	private String fieldValidationErrorMessage;
+	private String fieldPlaceHolder;
+	private String fieldPlaceHolderXml;
 	
 	/* Integer Type */
 	private Integer index;
@@ -105,6 +107,18 @@ public class WebformFieldModel {
 	}
 	public void setFieldOptionsCss(String fieldOptionsCss) {
 		this.fieldOptionsCss = fieldOptionsCss;
+	}
+	public String getFieldPlaceHolder() {
+		return fieldPlaceHolder;
+	}
+	public void setFieldPlaceHolder(String fieldPlaceHolder) {
+		this.fieldPlaceHolder = fieldPlaceHolder;
+	}
+	public String getFieldPlaceHolderXml() {
+		return fieldPlaceHolderXml;
+	}
+	public void setFieldPlaceHolderXml(String fieldPlaceHolderXml) {
+		this.fieldPlaceHolderXml = fieldPlaceHolderXml;
 	}
 	
 	

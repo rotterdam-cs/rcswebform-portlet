@@ -134,8 +134,9 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 			log.info("FormFieldsIndexes Length : "+formFieldsIndexes.length);
 			
 			for(int formFieldIndex : formFieldsIndexes){
-				Map<Locale, String> fieldLabelMap 	= LocalizationUtil.getLocalizationMap(actionRequest, "fieldLabel"+formFieldIndex);
-				Map<Locale, String> fieldOptionsMap = LocalizationUtil.getLocalizationMap(actionRequest, "fieldOptions"+formFieldIndex);
+				Map<Locale, String> fieldLabelMap 		= LocalizationUtil.getLocalizationMap(actionRequest, "fieldLabel"+formFieldIndex);
+				Map<Locale, String> fieldOptionsMap 	= LocalizationUtil.getLocalizationMap(actionRequest, "fieldOptions"+formFieldIndex);
+				Map<Locale, String> fieldPlaceHolderMap = LocalizationUtil.getLocalizationMap(actionRequest, "fieldPlaceHolder"+formFieldIndex);
 				
 				if (Validator.isNull(fieldLabelMap.get(defaultLocale))) {
 					continue;
@@ -152,6 +153,7 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 				
 				updateModifiedLocales("fieldLabel" + i, fieldLabelMap, preferences);
 				updateModifiedLocales("fieldOptions" + i, fieldOptionsMap, preferences);
+				updateModifiedLocales("fieldPlaceHolder" + i, fieldPlaceHolderMap, preferences);
 				
 				preferences.setValue("fieldType" + i, fieldType);
 				preferences.setValue("fieldOptional" + i, String.valueOf(fieldOptional));
@@ -173,6 +175,7 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 					LocalizationUtil.setPreferencesValue(preferences, "fieldLabel" + i, languageId,StringPool.BLANK);
 
 					LocalizationUtil.setPreferencesValue(preferences, "fieldOptions" + i, languageId,StringPool.BLANK);
+					LocalizationUtil.setPreferencesValue(preferences, "fieldPlaceHolder" + i, languageId,StringPool.BLANK);
 				}
 
 				preferences.setValue("fieldType" + i, StringPool.BLANK);
@@ -313,6 +316,8 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 		String fieldOptions 				= LocalizationUtil.getLocalization(fieldOptionsXml, themeDisplay.getLanguageId());
 		String fieldValidationScript 		= PrefsParamUtil.getString(preferences, request, "fieldValidationScript" + formFieldsIndex);
 		String fieldValidationErrorMessage 	= PrefsParamUtil.getString(preferences, request, "fieldValidationErrorMessage" + formFieldsIndex);
+		String fieldPlaceHolderXml			= GetterUtil.getString(LocalizationUtil.getLocalizationXmlFromPreferences(preferences, request, "fieldPlaceHolder"+formFieldsIndex),StringPool.BLANK);
+		String fieldPlaceHolder				= LocalizationUtil.getLocalization(fieldPlaceHolderXml, themeDisplay.getLanguageId());;
 		int formFieldsIndexParam 			= formFieldsIndex;
 		boolean fieldOptional 				= PrefsParamUtil.getBoolean(preferences, request, "fieldOptional" + formFieldsIndex);
 		boolean ignoreRequestValue 			= (index != formFieldsIndex);
@@ -333,6 +338,8 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 		fieldModel.setIqnoreRequestValue(ignoreRequestValue);
 		fieldModel.setFieldValidationScriptHide(Validator.isNull(fieldValidationScript) ? "hide" : "");
 		fieldModel.setFieldOptionsCss("options"+ ((Validator.isNull(fieldType) || (!fieldType.equals("options") && !fieldType.equals("radio"))) ? " hide" : StringPool.BLANK));
+		fieldModel.setFieldPlaceHolder(fieldPlaceHolder);
+		fieldModel.setFieldPlaceHolderXml(fieldPlaceHolderXml);
 		
 		log.info("FieldOptionsCss : "+fieldModel.getFieldOptionsCss());
 		
