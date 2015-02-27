@@ -318,6 +318,7 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 		boolean ignoreRequestValue 			= (index != formFieldsIndex);
 		
 		log.info("fieldLabelXml : "+fieldLabelXml);
+		log.info("fieldValidationScript : "+fieldValidationScript);
 		
 		fieldModel.setFieldLabelXml(fieldLabelXml);
 		fieldModel.setFieldLabel(fieldLabel);
@@ -332,6 +333,8 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 		fieldModel.setIqnoreRequestValue(ignoreRequestValue);
 		fieldModel.setFieldValidationScriptHide(Validator.isNull(fieldValidationScript) ? "hide" : "");
 		fieldModel.setFieldOptionsCss("options"+ ((Validator.isNull(fieldType) || (!fieldType.equals("options") && !fieldType.equals("radio"))) ? " hide" : StringPool.BLANK));
+		
+		log.info("FieldOptionsCss : "+fieldModel.getFieldOptionsCss());
 		
 		return fieldModel;
 	}
