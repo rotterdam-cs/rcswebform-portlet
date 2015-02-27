@@ -39,9 +39,9 @@
 			<aui:input cssClass="optional-control" ignoreRequestValue="${fieldModel.iqnoreRequestValue}" label="optional" name='fieldOptional${fieldModel.index}' type="checkbox" value="${fieldModel.fieldOptional}" />
 			
 			<!-- Field Type - Option Section -->
-			<%-- <aui:field-wrapper cssClass="${configClass.generatingOptionalCss(fieldModel.fieldType)}" helpMessage="add-options-separated-by-commas" label="options">
-				<liferay-ui:input-localized name="fieldOptions${fieldModel.index}" xml="${fieldModel.fieldOptionsXml}"></liferay-ui:input-localized>
-			</aui:field-wrapper> --%>
+			<aui:field-wrapper cssClass="${ieldModel.fieldOptionsCss}" helpMessage="add-options-separated-by-commas" label="options">
+				<liferay-ui:input-localized name="fieldOptions${fieldModel.index}" xml="${fieldModel.fieldOptionsXml}" />
+			</aui:field-wrapper>
 		</c:when>
 	</c:choose>
 	

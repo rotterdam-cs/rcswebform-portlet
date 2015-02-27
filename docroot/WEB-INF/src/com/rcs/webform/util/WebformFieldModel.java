@@ -8,6 +8,7 @@ public class WebformFieldModel {
 	private String fieldType;
 	private String fieldOptionsXml;
 	private String fieldOptions;
+	private String fieldOptionsCss;
 	private String fieldValidationScript;
 	private String fieldValidationScriptHide;
 	private String fieldValidationErrorMessage;
@@ -98,6 +99,12 @@ public class WebformFieldModel {
 	}
 	public void setFieldValidationScriptHide(String fieldValidationScriptHide) {
 		this.fieldValidationScriptHide = fieldValidationScriptHide;
+	}
+	public String getFieldOptionsCss() {
+		return fieldOptionsCss;
+	}
+	public void setFieldOptionsCss(String fieldOptionsCss) {
+		this.fieldOptionsCss = fieldOptionsCss;
 	}
 	
 	

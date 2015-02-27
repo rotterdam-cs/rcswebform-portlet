@@ -1,6 +1,5 @@
 package com.rcs.webform.action;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -36,7 +35,6 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.portlet.expando.service.ExpandoRowLocalServiceUtil;
 import com.liferay.util.portlet.PortletProps;
-import com.rcs.dbservice.service.WebformRowLocalServiceUtil;
 import com.rcs.webform.util.ConfigurationModel;
 import com.rcs.webform.util.GeneralUtil;
 import com.rcs.webform.util.WebFormUtil;
@@ -333,14 +331,9 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 		fieldModel.setFieldOptional(fieldOptional);
 		fieldModel.setIqnoreRequestValue(ignoreRequestValue);
 		fieldModel.setFieldValidationScriptHide(Validator.isNull(fieldValidationScript) ? "hide" : "");
+		fieldModel.setFieldOptionsCss("options"+ ((Validator.isNull(fieldType) || (!fieldType.equals("options") && !fieldType.equals("radio"))) ? " hide" : StringPool.BLANK));
 		
 		return fieldModel;
-	}
-	
-	public String generatingOptionalCss(String fieldType){
-		String optionsCss = "options";
-		optionsCss = optionsCss+((Validator.isNull(fieldType) || (!fieldType.equals("options") && !fieldType.equals("radio"))) ? " hide" : StringPool.BLANK);
-		return optionsCss;
 	}
 	
 }

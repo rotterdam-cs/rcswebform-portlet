@@ -2,8 +2,6 @@ package com.rcs.webform.util;
 
 import java.util.List;
 
-import com.rcs.dbservice.model.WebformColumn;
-
 public class ConfigurationModel {
 	
 	/* String Value */
@@ -27,8 +25,6 @@ public class ConfigurationModel {
 	/* Integer Value */
 	private Integer totalField;
 	
-	/* List Value */
-	private List<WebformColumn> webformColumList;
 
 	public String getTitleXml() {
 		return titleXml;
@@ -150,13 +146,6 @@ public class ConfigurationModel {
 		this.emailAddress = emailAddress;
 	}
 
-	public List<WebformColumn> getWebformColumList() {
-		return webformColumList;
-	}
-
-	public void setWebformColumList(List<WebformColumn> webformColumList) {
-		this.webformColumList = webformColumList;
-	}
 	
 	
 
