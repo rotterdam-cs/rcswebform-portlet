@@ -34,10 +34,12 @@ import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
+import com.liferay.portlet.expando.service.ExpandoRowLocalServiceUtil;
 import com.liferay.util.portlet.PortletProps;
 import com.rcs.dbservice.service.WebformRowLocalServiceUtil;
 import com.rcs.webform.util.ConfigurationModel;
 import com.rcs.webform.util.GeneralUtil;
+import com.rcs.webform.util.WebFormUtil;
 import com.rcs.webform.util.WebformFieldModel;
 
 /**
@@ -225,8 +227,8 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 		boolean saveToFile 		= GetterUtil.getBoolean(preferences.getValue("saveToFile", StringPool.BLANK));
 		boolean isEditable 		= true;
 		
-		Integer databaseRowsCount = WebformRowLocalServiceUtil.getRowsCount(databaseTableName);
-		log.info(databaseTableName+" Rows Count : "+databaseRowsCount.toString());
+		Integer databaseRowsCount = ExpandoRowLocalServiceUtil.getRowsCount(themeDisplay.getCompanyId(), WebFormUtil.class.getName(),databaseTableName);
+		log.info(databaseTableName+" || Rows Count : "+databaseRowsCount.toString());
 		if(databaseRowsCount > 0 ) {
 			isEditable = false;
 		}
