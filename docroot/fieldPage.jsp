@@ -9,8 +9,8 @@
 			<c:when test='${fieldModel.fieldType=="paragraph"}'>
 				<span class="field-label"><liferay-ui:message key="paragraph" /></span>
 			</c:when>
-			<c:when test="${fieldModel.fieldLabel!=null}">
-				<span class="field-label" >${fieldLabel}</span> 
+			<c:when test="${fieldModel.fieldLabel != null && !fieldModel.fieldLabel.equals('') }">
+				<span class="field-label" >${fieldModel.fieldLabel}</span> 
 			</c:when>
 			<c:otherwise>
 				<liferay-ui:message key="new-item" />
@@ -25,21 +25,20 @@
 				<liferay-ui:input-localized name="fieldLabel${fieldModel.index}" xml="${fieldModel.fieldLabelXml}" />
 			</aui:field-wrapper>
 			
-			<%-- <!-- Field Type Section -->
+			<!-- Field Type Section -->
 			<aui:select name="fieldType${fieldModel.index}" label="type" ignoreRequestValue="${fieldModel.iqnoreRequestValue}">
-			<aui:option selected='${fieldModel.fieldType.equals("text")}' value="text"><liferay-ui:message key="text" /></aui:option>
 				<aui:option selected='${fieldModel.fieldType=="text"}' value="text"><liferay-ui:message key="text" /></aui:option>
 				<aui:option selected='${fieldModel.fieldType=="texarea"}' value="textarea"><liferay-ui:message key="textarea" /></aui:option>
-				<aui:option selected='${fieldModel.fieldType=="option"}' value="option"><liferay-ui:message key="options" /></aui:option>
+				<aui:option selected='${fieldModel.fieldType=="options"}' value="options"><liferay-ui:message key="options" /></aui:option>
 				<aui:option selected='${fieldModel.fieldType=="radio"}' value="radio"><liferay-ui:message key="radio-buttons" /></aui:option>
 				<aui:option selected='${fieldModel.fieldType=="paragraph"}' value="paragraph"><liferay-ui:message key="paragraph" /></aui:option>
 				<aui:option selected='${fieldModel.fieldType=="checkbox"}' value="checkbox"><liferay-ui:message key="check-box" /></aui:option>
-			</aui:select> --%>
+			</aui:select>
 			
 			<aui:input cssClass="optional-control" ignoreRequestValue="${fieldModel.iqnoreRequestValue}" label="optional" name='fieldOptional${fieldModel.index}' type="checkbox" value="${fieldModel.fieldOptional}" />
 			
 			<!-- Field Type - Option Section -->
-			<aui:field-wrapper cssClass="${ieldModel.fieldOptionsCss}" helpMessage="add-options-separated-by-commas" label="options">
+			<aui:field-wrapper cssClass='${fieldModel.fieldOptionsCss}' helpMessage="add-options-separated-by-commas" label="options">
 				<liferay-ui:input-localized name="fieldOptions${fieldModel.index}" xml="${fieldModel.fieldOptionsXml}" />
 			</aui:field-wrapper>
 		</c:when>
