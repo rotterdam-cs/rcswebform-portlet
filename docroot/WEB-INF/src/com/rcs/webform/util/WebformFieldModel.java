@@ -14,6 +14,7 @@ public class WebformFieldModel {
 	private String fieldValidationErrorMessage;
 	private String fieldPlaceHolder;
 	private String fieldPlaceHolderXml;
+	private String fieldPosition;
 	
 	/* Integer Type */
 	private Integer index;
@@ -119,6 +120,12 @@ public class WebformFieldModel {
 	}
 	public void setFieldPlaceHolderXml(String fieldPlaceHolderXml) {
 		this.fieldPlaceHolderXml = fieldPlaceHolderXml;
+	}
+	public String getFieldPosition() {
+		return fieldPosition;
+	}
+	public void setFieldPosition(String fieldPosition) {
+		this.fieldPosition = fieldPosition;
 	}
 	
 	

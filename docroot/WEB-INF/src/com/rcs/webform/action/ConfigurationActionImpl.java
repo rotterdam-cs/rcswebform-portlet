@@ -145,6 +145,7 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 				String fieldType 					= ParamUtil.getString(actionRequest, "fieldType" + formFieldIndex);
 				String fieldValidationScript 		= ParamUtil.getString(actionRequest, "fieldValidationScript" + formFieldIndex);
 				String fieldValidationErrorMessage 	= ParamUtil.getString(actionRequest,"fieldValidationErrorMessage" + formFieldIndex);
+				String fieldPosition				= ParamUtil.getString(actionRequest,"fieldPosition" + formFieldIndex);
 				boolean fieldOptional 				= ParamUtil.getBoolean(actionRequest, "fieldOptional" + formFieldIndex);
 				
 				if (Validator.isNotNull(fieldValidationScript) ^ Validator.isNotNull(fieldValidationErrorMessage)) {
@@ -159,6 +160,7 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 				preferences.setValue("fieldOptional" + i, String.valueOf(fieldOptional));
 				preferences.setValue("fieldValidationScript" + i, fieldValidationScript);
 				preferences.setValue("fieldValidationErrorMessage" + i,fieldValidationErrorMessage);
+				preferences.setValue("fieldPosition", fieldPosition);
 				
 				i++;
 			}
@@ -182,6 +184,7 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 				preferences.setValue("fieldOptional" + i, StringPool.BLANK);
 				preferences.setValue("fieldValidationScript" + i, StringPool.BLANK);
 				preferences.setValue("fieldValidationErrorMessage" + i, StringPool.BLANK);
+				preferences.setValue("fieldPosition" + i, StringPool.BLANK);
 
 				i++;
 
@@ -318,6 +321,7 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 		String fieldValidationErrorMessage 	= PrefsParamUtil.getString(preferences, request, "fieldValidationErrorMessage" + formFieldsIndex);
 		String fieldPlaceHolderXml			= GetterUtil.getString(LocalizationUtil.getLocalizationXmlFromPreferences(preferences, request, "fieldPlaceHolder"+formFieldsIndex),StringPool.BLANK);
 		String fieldPlaceHolder				= LocalizationUtil.getLocalization(fieldPlaceHolderXml, themeDisplay.getLanguageId());;
+		String fieldPosition				= PrefsParamUtil.getString(preferences, request, "fieldPosition"+formFieldsIndex);
 		int formFieldsIndexParam 			= formFieldsIndex;
 		boolean fieldOptional 				= PrefsParamUtil.getBoolean(preferences, request, "fieldOptional" + formFieldsIndex);
 		boolean ignoreRequestValue 			= (index != formFieldsIndex);
@@ -340,6 +344,7 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 		fieldModel.setFieldOptionsCss("options"+ ((Validator.isNull(fieldType) || (!fieldType.equals("options") && !fieldType.equals("radio"))) ? " hide" : StringPool.BLANK));
 		fieldModel.setFieldPlaceHolder(fieldPlaceHolder);
 		fieldModel.setFieldPlaceHolderXml(fieldPlaceHolderXml);
+		fieldModel.setFieldPosition(fieldPosition);
 		
 		log.info("FieldOptionsCss : "+fieldModel.getFieldOptionsCss());
 		
