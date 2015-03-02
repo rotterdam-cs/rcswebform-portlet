@@ -117,6 +117,7 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 		PortletPreferences preferences = actionRequest.getPreferences();
 		LocalizationUtil.setLocalizedPreferencesValues(actionRequest, preferences, "title");
 		LocalizationUtil.setLocalizedPreferencesValues(actionRequest, preferences, "description");
+		LocalizationUtil.setLocalizedPreferencesValues(actionRequest, preferences, "submitButton");
 		
 		preferences.setValue("requireCaptcha", ParamUtil.getString(actionRequest, "requireCaptcha"));
 		
@@ -217,6 +218,7 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 		ThemeDisplay themeDisplay = (ThemeDisplay) request.getAttribute(WebKeys.THEME_DISPLAY);
 		String titleXml 		= GetterUtil.getString(LocalizationUtil.getLocalizationXmlFromPreferences(preferences, request, "title"));
 		String descriptionXml 	= GetterUtil.getString(LocalizationUtil.getLocalizationXmlFromPreferences(preferences, request, "description"));
+		String submitLabelXml 	= GetterUtil.getString(LocalizationUtil.getLocalizationXmlFromPreferences(preferences, request, "submitLabelXml"));
 		String emailFromName	= PortalUtil.getEmailFromName(preferences, themeDisplay.getCompanyId(), "");
 		String emailFromAddr	= PortalUtil.getEmailFromAddress(preferences, themeDisplay.getCompanyId(), "");
 		String emailAddress 	= preferences.getValue("emailAddress", StringPool.BLANK);
@@ -252,6 +254,7 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 		configModel.setSendAsEmail(sendAsEmail);
 		configModel.setSaveToDatabase(saveToDatabase);
 		configModel.setSaveToFile(saveToFile);
+		configModel.setSubmitLabelXml(submitLabelXml);
 		
 		return configModel;
 	}

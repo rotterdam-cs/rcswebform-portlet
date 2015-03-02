@@ -33,6 +33,7 @@
 				<aui:option selected='${fieldModel.fieldType=="radio"}' value="radio"><liferay-ui:message key="radio-buttons" /></aui:option>
 				<aui:option selected='${fieldModel.fieldType=="paragraph"}' value="paragraph"><liferay-ui:message key="paragraph" /></aui:option>
 				<aui:option selected='${fieldModel.fieldType=="checkbox"}' value="checkbox"><liferay-ui:message key="check-box" /></aui:option>
+				<aui:option selected='${fieldModel.fieldType=="date"}' value="date"><liferay-ui:message key="date" /></aui:option>
 			</aui:select>
 			
 			<aui:input cssClass="optional-control" ignoreRequestValue="${fieldModel.iqnoreRequestValue}" label="optional" name='fieldOptional${fieldModel.index}' type="checkbox" value="${fieldModel.fieldOptional}" />

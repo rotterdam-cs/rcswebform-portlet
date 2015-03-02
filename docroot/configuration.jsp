@@ -23,6 +23,10 @@
 				
 				<aui:input name="requireCaptcha" type="checkbox" value="${configModel.requireCaptcha}" />
 				<aui:input label="redirect-url-on-success" name="preferences--successURL--" value="${configModel.successURL}" wrapperCssClass="lfr-input-text-container" />
+				
+				<aui:field-wrapper cssClass="lfr-input-text-container" label="submit-label">
+					<liferay-ui:input-localized name="submitLabel" xml="${configModel.submitLabelXml }" />
+				</aui:field-wrapper>
 			</aui:fieldset>
 		</liferay-ui:panel>
 		

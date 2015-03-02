@@ -14,6 +14,7 @@ public class ConfigurationModel {
 	private String subject;
 	private String databaseTableName;
 	private String fileName;
+	private String submitLabelXml;
 	
 	/* Boolean Value */
 	private Boolean requireCaptcha;
@@ -144,6 +145,14 @@ public class ConfigurationModel {
 
 	public void setEmailAddress(String emailAddress) {
 		this.emailAddress = emailAddress;
+	}
+
+	public String getSubmitLabelXml() {
+		return submitLabelXml;
+	}
+
+	public void setSubmitLabelXml(String submitLabelXml) {
+		this.submitLabelXml = submitLabelXml;
 	}
 
 	
