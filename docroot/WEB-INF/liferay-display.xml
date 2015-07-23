@@ -3,4 +3,7 @@
 
 <display>
 	
+	<category name="category.tools">
+		<portlet id="rcs-web-form"></portlet>
+	</category>
 </display>
