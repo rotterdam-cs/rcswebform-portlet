@@ -22,6 +22,12 @@
 			<short-title>Rcs Web Form</short-title>
 			<keywords></keywords>
 		</portlet-info>
+		<portlet-preferences>
+			<preference>
+				<name>description</name>
+				<value>Here will be the description of RCS Web Form</value>
+			</preference>
+		</portlet-preferences>
 		<security-role-ref>
 			<role-name>administrator</role-name>
 		</security-role-ref>
