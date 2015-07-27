@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping default-lazy="false" auto-import="false">
+	<import class="com.rcs.webform.model.Form" />
+	<import class="com.rcs.webform.model.FormItem" />
+	<import class="com.rcs.webform.model.FormToPorletMap" />
+	<class name="com.rcs.webform.model.impl.FormImpl" table="rcswebform_Form">
+		<cache usage="read-write" />
+		<id name="formId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="createDate" type="org.hibernate.type.TimestampType" />
+		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
+		<property name="formAttrId" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="formAttrClass" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="title" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="desc" type="com.liferay.portal.dao.orm.hibernate.StringType" column="desc_" />
+		<property name="useCaptcha" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="successMessage" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="successURL" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="submitLabel" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="submitAttrId" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="submitAttrClass" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+	<class name="com.rcs.webform.model.impl.FormItemImpl" table="rcswebform_FormItem">
+		<cache usage="read-write" />
+		<id name="formItemId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="formId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="formItemAttrId" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="formItemAttrClass" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="label" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="labelAttrId" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="labelAttrClass" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="inputAttrId" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="inputAttrClass" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="type" type="com.liferay.portal.dao.orm.hibernate.StringType" column="type_" />
+		<property name="options" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="mandatory" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="defaultValue" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="order" type="com.liferay.portal.dao.orm.hibernate.IntegerType" column="order_" />
+		<property name="validationType" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="validationRegexValue" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="errorValidationMessage" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="errorMandatoryMessage" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+	<class name="com.rcs.webform.model.impl.FormToPorletMapImpl" table="rcswebform_FormToPorletMap">
+		<cache usage="read-write" />
+		<id name="formToPorletMapId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="createDate" type="org.hibernate.type.TimestampType" />
+		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
+		<property name="formId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="portletId" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+</hibernate-mapping>

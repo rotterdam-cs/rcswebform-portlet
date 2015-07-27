@@ -1,0 +1,1 @@
+create index IX_6046C555 on rcswebform_FormToPorletMap (groupId, companyId, portletId);

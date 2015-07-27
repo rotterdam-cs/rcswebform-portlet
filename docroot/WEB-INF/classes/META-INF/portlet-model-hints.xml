@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<model name="com.rcs.webform.model.Form">
+		<field name="formId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="userId" type="long" />
+		<field name="userName" type="String" />
+		<field name="createDate" type="Date" />
+		<field name="modifiedDate" type="Date" />
+		<field name="formAttrId" type="String" />
+		<field name="formAttrClass" type="String" />
+		<field name="title" type="String" />
+		<field name="desc" type="String" />
+		<field name="useCaptcha" type="boolean" />
+		<field name="successMessage" type="String" />
+		<field name="successURL" type="String" />
+		<field name="submitLabel" type="String" />
+		<field name="submitAttrId" type="String" />
+		<field name="submitAttrClass" type="String" />
+	</model>
+	<model name="com.rcs.webform.model.FormItem">
+		<field name="formItemId" type="long" />
+		<field name="formId" type="long" />
+		<field name="formItemAttrId" type="String" />
+		<field name="formItemAttrClass" type="String" />
+		<field name="label" type="String" />
+		<field name="labelAttrId" type="String" />
+		<field name="labelAttrClass" type="String" />
+		<field name="inputAttrId" type="String" />
+		<field name="inputAttrClass" type="String" />
+		<field name="type" type="String" />
+		<field name="options" type="String" />
+		<field name="mandatory" type="boolean" />
+		<field name="defaultValue" type="String" />
+		<field name="order" type="int" />
+		<field name="validationType" type="String" />
+		<field name="validationRegexValue" type="String" />
+		<field name="errorValidationMessage" type="String" />
+		<field name="errorMandatoryMessage" type="String" />
+	</model>
+	<model name="com.rcs.webform.model.FormToPorletMap">
+		<field name="formToPorletMapId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="userId" type="long" />
+		<field name="userName" type="String" />
+		<field name="createDate" type="Date" />
+		<field name="modifiedDate" type="Date" />
+		<field name="formId" type="long" />
+		<field name="portletId" type="String" />
+	</model>
+</model-hints>

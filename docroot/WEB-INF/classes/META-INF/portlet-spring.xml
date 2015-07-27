@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" default-destroy-method="destroy" default-init-method="afterPropertiesSet" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+	<bean id="com.rcs.webform.service.FormLocalService" class="com.rcs.webform.service.impl.FormLocalServiceImpl" />
+	<bean id="com.rcs.webform.service.persistence.FormPersistence" class="com.rcs.webform.service.persistence.FormPersistenceImpl" parent="basePersistence" />
+	<bean id="com.rcs.webform.service.FormItemLocalService" class="com.rcs.webform.service.impl.FormItemLocalServiceImpl" />
+	<bean id="com.rcs.webform.service.persistence.FormItemPersistence" class="com.rcs.webform.service.persistence.FormItemPersistenceImpl" parent="basePersistence" />
+	<bean id="com.rcs.webform.service.FormToPorletMapLocalService" class="com.rcs.webform.service.impl.FormToPorletMapLocalServiceImpl" />
+	<bean id="com.rcs.webform.service.persistence.FormToPorletMapPersistence" class="com.rcs.webform.service.persistence.FormToPorletMapPersistenceImpl" parent="basePersistence" />
+</beans>

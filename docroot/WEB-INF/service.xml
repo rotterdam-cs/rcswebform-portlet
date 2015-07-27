@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 6.2.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_6_2_0.dtd">
+<service-builder package-path="com.rcs.webform">
+	<author>ryusuf</author>
+	<namespace>rcswebform</namespace>
+	<entity name="Form" local-service="true" remote-service="false">
+
+		<!-- PK fields -->
+
+		<column name="formId" type="long" primary="true"></column>
+
+		<!-- Group instance -->
+
+		<column name="groupId" type="long"></column>
+
+		<!-- Audit fields -->
+
+		<column name="companyId" type="long"></column>
+		<column name="userId" type="long"></column>
+		<column name="userName" type="String"></column>
+		<column name="createDate" type="Date"></column>
+		<column name="modifiedDate" type="Date"></column>
+        <column name="formAttrId" type="String"></column>
+        <column name="formAttrClass" type="String"></column>
+        <column name="title" type="String"></column>
+        <column name="desc" type="String"></column>
+        <column name="useCaptcha" type="boolean"></column>
+        <column name="successMessage" type="String"></column>
+        <column name="successURL" type="String"></column>
+        <column name="submitLabel" type="String"></column>
+        <column name="submitAttrId" type="String"></column>
+        <column name="submitAttrClass" type="String"></column>
+        <order by="asc">
+            <order-column name="formId"></order-column>
+        </order>
+	</entity>
+	<entity local-service="true" name="FormItem" remote-service="false">
+
+		<!-- PK fields -->
+
+		<column name="formItemId" type="long" primary="true"></column>
+
+		<!-- Group instance -->
+
+		<!-- Audit fields -->
+        <column name="formId" type="long"></column>
+        <column name="formItemAttrId" type="String"></column>
+        <column name="formItemAttrClass" type="String"></column>
+        <column name="label" type="String"></column>
+        <column name="labelAttrId" type="String"></column>
+        <column name="labelAttrClass" type="String"></column>
+        <column name="inputAttrId" type="String"></column>
+        <column name="inputAttrClass" type="String"></column>
+        <column name="type" type="String"></column>
+        <column name="options" type="String"></column>
+        <column name="mandatory" type="boolean"></column>
+        <column name="defaultValue" type="String"></column>
+        <column name="order" type="int"></column>
+        <column name="validationType" type="String"></column>
+        <column name="validationRegexValue" type="String"></column>
+        <column name="errorValidationMessage" type="String"></column>
+        <column name="errorMandatoryMessage" type="String"></column>
+	</entity>
+	<entity name="FormToPorletMap" local-service="true" remote-service="false">
+
+		<!-- PK fields -->
+
+		<!-- Group instance -->
+
+		<!-- Audit fields -->
+
+
+		<!-- PK fields -->
+
+		<column name="formToPorletMapId" type="long" primary="true"></column>
+
+		<!-- Group instance -->
+
+		<column name="groupId" type="long"></column>
+
+		<!-- Audit fields -->
+
+		<column name="companyId" type="long"></column>
+		<column name="userId" type="long"></column>
+		<column name="userName" type="String"></column>
+		<column name="createDate" type="Date"></column>
+		<column name="modifiedDate" type="Date"></column>
+
+
+		<!-- PK fields -->
+
+		<!-- Group instance -->
+
+		<!-- Audit fields -->
+
+
+		<!-- PK fields -->
+
+		<!-- Group instance -->
+
+		<!-- Audit fields -->
+        <column name="formId" type="long"></column>
+        <column name="portletId" type="String"></column>
+        <finder name="GroupColumnPortletId" return-type="Form">
+            <finder-column name="groupId"></finder-column>
+            <finder-column name="companyId"></finder-column>
+            <finder-column name="portletId"></finder-column>
+        </finder>
+	</entity>
+
+
+</service-builder>

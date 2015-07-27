@@ -1,0 +1,103 @@
+<?xml version="1.0"?>
+
+<entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.0" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm_1_0.xsd">
+	<persistence-unit-metadata>
+		<xml-mapping-metadata-complete/>
+		<persistence-unit-defaults>
+			<access>PROPERTY</access>
+		</persistence-unit-defaults>
+	</persistence-unit-metadata>
+	<mapped-superclass class="com.rcs.webform.model.impl.FormModelImpl">
+		<attributes>
+			<id name="formId" />
+			<basic name="groupId" />
+			<basic name="companyId" />
+			<basic name="userId" />
+			<basic name="userName" />
+			<basic name="createDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="modifiedDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="formAttrId" />
+			<basic name="formAttrClass" />
+			<basic name="title" />
+			<basic name="desc">
+				<column name="DESC_" />
+			</basic>
+			<basic name="useCaptcha" />
+			<basic name="successMessage" />
+			<basic name="successURL" />
+			<basic name="submitLabel" />
+			<basic name="submitAttrId" />
+			<basic name="submitAttrClass" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.rcs.webform.model.impl.FormItemModelImpl">
+		<attributes>
+			<id name="formItemId" />
+			<basic name="formId" />
+			<basic name="formItemAttrId" />
+			<basic name="formItemAttrClass" />
+			<basic name="label" />
+			<basic name="labelAttrId" />
+			<basic name="labelAttrClass" />
+			<basic name="inputAttrId" />
+			<basic name="inputAttrClass" />
+			<basic name="type">
+				<column name="TYPE_" />
+			</basic>
+			<basic name="options" />
+			<basic name="mandatory" />
+			<basic name="defaultValue" />
+			<basic name="order">
+				<column name="ORDER_" />
+			</basic>
+			<basic name="validationType" />
+			<basic name="validationRegexValue" />
+			<basic name="errorValidationMessage" />
+			<basic name="errorMandatoryMessage" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.rcs.webform.model.impl.FormToPorletMapModelImpl">
+		<attributes>
+			<id name="formToPorletMapId" />
+			<basic name="groupId" />
+			<basic name="companyId" />
+			<basic name="userId" />
+			<basic name="userName" />
+			<basic name="createDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="modifiedDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="formId" />
+			<basic name="portletId" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
+	<entity class="com.rcs.webform.model.impl.FormImpl" name="Form">
+		<table name="rcswebform_Form" />
+		<attributes />
+	</entity>
+	<entity class="com.rcs.webform.model.impl.FormItemImpl" name="FormItem">
+		<table name="rcswebform_FormItem" />
+		<attributes />
+	</entity>
+	<entity class="com.rcs.webform.model.impl.FormToPorletMapImpl" name="FormToPorletMap">
+		<table name="rcswebform_FormToPorletMap" />
+		<attributes />
+	</entity>
+</entity-mappings>
