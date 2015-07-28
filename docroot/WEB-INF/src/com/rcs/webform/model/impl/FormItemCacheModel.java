@@ -37,7 +37,7 @@ import java.util.Date;
 public class FormItemCacheModel implements CacheModel<FormItem>, Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(45);
+		StringBundler sb = new StringBundler(47);
 
 		sb.append("{formItemId=");
 		sb.append(formItemId);
@@ -83,6 +83,8 @@ public class FormItemCacheModel implements CacheModel<FormItem>, Externalizable 
 		sb.append(errorValidationMessage);
 		sb.append(", errorMandatoryMessage=");
 		sb.append(errorMandatoryMessage);
+		sb.append(", hintMessage=");
+		sb.append(hintMessage);
 		sb.append("}");
 
 		return sb.toString();
@@ -220,6 +222,13 @@ public class FormItemCacheModel implements CacheModel<FormItem>, Externalizable 
 			formItemImpl.setErrorMandatoryMessage(errorMandatoryMessage);
 		}
 
+		if (hintMessage == null) {
+			formItemImpl.setHintMessage(StringPool.BLANK);
+		}
+		else {
+			formItemImpl.setHintMessage(hintMessage);
+		}
+
 		formItemImpl.resetOriginalValues();
 
 		return formItemImpl;
@@ -249,6 +258,7 @@ public class FormItemCacheModel implements CacheModel<FormItem>, Externalizable 
 		validationRegexValue = objectInput.readUTF();
 		errorValidationMessage = objectInput.readUTF();
 		errorMandatoryMessage = objectInput.readUTF();
+		hintMessage = objectInput.readUTF();
 	}
 
 	@Override
@@ -369,6 +379,13 @@ public class FormItemCacheModel implements CacheModel<FormItem>, Externalizable 
 		else {
 			objectOutput.writeUTF(errorMandatoryMessage);
 		}
+
+		if (hintMessage == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(hintMessage);
+		}
 	}
 
 	public long formItemId;
@@ -393,4 +410,5 @@ public class FormItemCacheModel implements CacheModel<FormItem>, Externalizable 
 	public String validationRegexValue;
 	public String errorValidationMessage;
 	public String errorMandatoryMessage;
+	public String hintMessage;
 }

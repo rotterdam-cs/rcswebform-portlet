@@ -52,6 +52,7 @@ public class FormItemSoap implements Serializable {
 		soapModel.setValidationRegexValue(model.getValidationRegexValue());
 		soapModel.setErrorValidationMessage(model.getErrorValidationMessage());
 		soapModel.setErrorMandatoryMessage(model.getErrorMandatoryMessage());
+		soapModel.setHintMessage(model.getHintMessage());
 
 		return soapModel;
 	}
@@ -288,6 +289,14 @@ public class FormItemSoap implements Serializable {
 		_errorMandatoryMessage = errorMandatoryMessage;
 	}
 
+	public String getHintMessage() {
+		return _hintMessage;
+	}
+
+	public void setHintMessage(String hintMessage) {
+		_hintMessage = hintMessage;
+	}
+
 	private long _formItemId;
 	private boolean _active;
 	private Date _creationDate;
@@ -310,4 +319,5 @@ public class FormItemSoap implements Serializable {
 	private String _validationRegexValue;
 	private String _errorValidationMessage;
 	private String _errorMandatoryMessage;
+	private String _hintMessage;
 }

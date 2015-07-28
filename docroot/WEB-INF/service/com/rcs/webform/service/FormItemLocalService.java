@@ -261,15 +261,11 @@ public interface FormItemLocalService extends BaseLocalService,
 	* @param errorValidationMessage
 	* @param serviceContext
 	* @return
-	* @throws SystemException
-	* @throws PortalException
 	*/
 	public com.rcs.webform.model.FormItem add(java.lang.Long formItemId,
 		java.lang.String label, java.lang.String type,
 		java.lang.String options, boolean mandatory,
 		java.lang.String validationRegexValue,
 		java.lang.String errorValidationMessage,
-		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException;
+		com.liferay.portal.service.ServiceContext serviceContext);
 }

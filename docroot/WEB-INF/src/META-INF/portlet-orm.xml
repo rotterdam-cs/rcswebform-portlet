@@ -76,6 +76,7 @@
 			<basic name="validationRegexValue" />
 			<basic name="errorValidationMessage" />
 			<basic name="errorMandatoryMessage" />
+			<basic name="hintMessage" />
 			<transient name="modelAttributes" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />

@@ -396,6 +396,21 @@ public interface FormItemModel extends BaseModel<FormItem> {
 	 */
 	public void setErrorMandatoryMessage(String errorMandatoryMessage);
 
+	/**
+	 * Returns the hint message of this form item.
+	 *
+	 * @return the hint message of this form item
+	 */
+	@AutoEscape
+	public String getHintMessage();
+
+	/**
+	 * Sets the hint message of this form item.
+	 *
+	 * @param hintMessage the hint message of this form item
+	 */
+	public void setHintMessage(String hintMessage);
+
 	@Override
 	public boolean isNew();
 

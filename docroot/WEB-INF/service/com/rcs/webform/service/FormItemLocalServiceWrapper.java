@@ -293,8 +293,6 @@ public class FormItemLocalServiceWrapper implements FormItemLocalService,
 	* @param errorValidationMessage
 	* @param serviceContext
 	* @return
-	* @throws SystemException
-	* @throws PortalException
 	*/
 	@Override
 	public com.rcs.webform.model.FormItem add(java.lang.Long formItemId,
@@ -302,9 +300,7 @@ public class FormItemLocalServiceWrapper implements FormItemLocalService,
 		java.lang.String options, boolean mandatory,
 		java.lang.String validationRegexValue,
 		java.lang.String errorValidationMessage,
-		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
+		com.liferay.portal.service.ServiceContext serviceContext) {
 		return _formItemLocalService.add(formItemId, label, type, options,
 			mandatory, validationRegexValue, errorValidationMessage,
 			serviceContext);

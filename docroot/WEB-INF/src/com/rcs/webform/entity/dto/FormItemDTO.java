@@ -1,6 +1,7 @@
 package com.rcs.webform.entity.dto;
 
 import com.rcs.webform.common.dto.GenericEntityDTO;
+import com.rcs.webform.common.enums.FormItemType;
 import com.rcs.webform.common.enums.ValidationType;
 
 public class FormItemDTO extends GenericEntityDTO {
@@ -14,7 +15,7 @@ public class FormItemDTO extends GenericEntityDTO {
 	private String labelAttrClass;
 	private String inputAttrId;
 	private String inputAttrClass;
-	private String type;
+	private FormItemType type;
 	private String options;
 	private boolean mandatory;
 	private String defaultValue;
@@ -23,6 +24,7 @@ public class FormItemDTO extends GenericEntityDTO {
 	private String validationRegexValueString;
 	private String errorValidationMessage;
 	private String errorMandatoryMessage;
+	private String hintMessage;
 	
 	public long getFormItemId() {
 		return formItemId;
@@ -96,11 +98,11 @@ public class FormItemDTO extends GenericEntityDTO {
 		this.inputAttrClass = inputAttrClass;
 	}
 	
-	public String getType() {
+	public FormItemType getType() {
 		return type;
 	}
 	
-	public void setType(String type) {
+	public void setType(FormItemType type) {
 		this.type = type;
 	}
 	
@@ -166,6 +168,14 @@ public class FormItemDTO extends GenericEntityDTO {
 	
 	public void setErrorMandatoryMessage(String errorMandatoryMessage) {
 		this.errorMandatoryMessage = errorMandatoryMessage;
+	}
+
+	public String getHintMessage() {
+		return hintMessage;
+	}
+
+	public void setHintMessage(String hintMessage) {
+		this.hintMessage = hintMessage;
 	}
 	
 }

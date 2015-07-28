@@ -80,9 +80,10 @@ public class FormItemModelImpl extends BaseModelImpl<FormItem>
 			{ "validationType", Types.VARCHAR },
 			{ "validationRegexValue", Types.VARCHAR },
 			{ "errorValidationMessage", Types.VARCHAR },
-			{ "errorMandatoryMessage", Types.VARCHAR }
+			{ "errorMandatoryMessage", Types.VARCHAR },
+			{ "hintMessage", Types.VARCHAR }
 		};
-	public static final String TABLE_SQL_CREATE = "create table rcswebform_FormItem (formItemId LONG not null primary key,active_ BOOLEAN,creationDate DATE null,modificationDate DATE null,modificationUser VARCHAR(75) null,formId LONG,formItemAttrId VARCHAR(75) null,formItemAttrClass VARCHAR(75) null,label VARCHAR(75) null,labelAttrId VARCHAR(75) null,labelAttrClass VARCHAR(75) null,inputAttrId VARCHAR(75) null,inputAttrClass VARCHAR(75) null,type_ VARCHAR(75) null,options VARCHAR(75) null,mandatory BOOLEAN,defaultValue VARCHAR(75) null,order_ INTEGER,validationType VARCHAR(75) null,validationRegexValue VARCHAR(75) null,errorValidationMessage VARCHAR(75) null,errorMandatoryMessage VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table rcswebform_FormItem (formItemId LONG not null primary key,active_ BOOLEAN,creationDate DATE null,modificationDate DATE null,modificationUser VARCHAR(75) null,formId LONG,formItemAttrId VARCHAR(75) null,formItemAttrClass VARCHAR(75) null,label VARCHAR(75) null,labelAttrId VARCHAR(75) null,labelAttrClass VARCHAR(75) null,inputAttrId VARCHAR(75) null,inputAttrClass VARCHAR(75) null,type_ VARCHAR(75) null,options VARCHAR(75) null,mandatory BOOLEAN,defaultValue VARCHAR(75) null,order_ INTEGER,validationType VARCHAR(75) null,validationRegexValue VARCHAR(75) null,errorValidationMessage VARCHAR(75) null,errorMandatoryMessage VARCHAR(75) null,hintMessage VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table rcswebform_FormItem";
 	public static final String ORDER_BY_JPQL = " ORDER BY formItem.formItemId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY rcswebform_FormItem.formItemId ASC";
@@ -158,6 +159,7 @@ public class FormItemModelImpl extends BaseModelImpl<FormItem>
 		attributes.put("validationRegexValue", getValidationRegexValue());
 		attributes.put("errorValidationMessage", getErrorValidationMessage());
 		attributes.put("errorMandatoryMessage", getErrorMandatoryMessage());
+		attributes.put("hintMessage", getHintMessage());
 
 		return attributes;
 	}
@@ -297,6 +299,12 @@ public class FormItemModelImpl extends BaseModelImpl<FormItem>
 
 		if (errorMandatoryMessage != null) {
 			setErrorMandatoryMessage(errorMandatoryMessage);
+		}
+
+		String hintMessage = (String)attributes.get("hintMessage");
+
+		if (hintMessage != null) {
+			setHintMessage(hintMessage);
 		}
 	}
 
@@ -606,6 +614,21 @@ public class FormItemModelImpl extends BaseModelImpl<FormItem>
 	}
 
 	@Override
+	public String getHintMessage() {
+		if (_hintMessage == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _hintMessage;
+		}
+	}
+
+	@Override
+	public void setHintMessage(String hintMessage) {
+		_hintMessage = hintMessage;
+	}
+
+	@Override
 	public ExpandoBridge getExpandoBridge() {
 		return ExpandoBridgeFactoryUtil.getExpandoBridge(0,
 			FormItem.class.getName(), getPrimaryKey());
@@ -654,6 +677,7 @@ public class FormItemModelImpl extends BaseModelImpl<FormItem>
 		formItemImpl.setValidationRegexValue(getValidationRegexValue());
 		formItemImpl.setErrorValidationMessage(getErrorValidationMessage());
 		formItemImpl.setErrorMandatoryMessage(getErrorMandatoryMessage());
+		formItemImpl.setHintMessage(getHintMessage());
 
 		formItemImpl.resetOriginalValues();
 
@@ -861,12 +885,20 @@ public class FormItemModelImpl extends BaseModelImpl<FormItem>
 			formItemCacheModel.errorMandatoryMessage = null;
 		}
 
+		formItemCacheModel.hintMessage = getHintMessage();
+
+		String hintMessage = formItemCacheModel.hintMessage;
+
+		if ((hintMessage != null) && (hintMessage.length() == 0)) {
+			formItemCacheModel.hintMessage = null;
+		}
+
 		return formItemCacheModel;
 	}
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(45);
+		StringBundler sb = new StringBundler(47);
 
 		sb.append("{formItemId=");
 		sb.append(getFormItemId());
@@ -912,6 +944,8 @@ public class FormItemModelImpl extends BaseModelImpl<FormItem>
 		sb.append(getErrorValidationMessage());
 		sb.append(", errorMandatoryMessage=");
 		sb.append(getErrorMandatoryMessage());
+		sb.append(", hintMessage=");
+		sb.append(getHintMessage());
 		sb.append("}");
 
 		return sb.toString();
@@ -919,7 +953,7 @@ public class FormItemModelImpl extends BaseModelImpl<FormItem>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(70);
+		StringBundler sb = new StringBundler(73);
 
 		sb.append("<model><model-name>");
 		sb.append("com.rcs.webform.model.FormItem");
@@ -1013,6 +1047,10 @@ public class FormItemModelImpl extends BaseModelImpl<FormItem>
 			"<column><column-name>errorMandatoryMessage</column-name><column-value><![CDATA[");
 		sb.append(getErrorMandatoryMessage());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>hintMessage</column-name><column-value><![CDATA[");
+		sb.append(getHintMessage());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -1045,5 +1083,6 @@ public class FormItemModelImpl extends BaseModelImpl<FormItem>
 	private String _validationRegexValue;
 	private String _errorValidationMessage;
 	private String _errorMandatoryMessage;
+	private String _hintMessage;
 	private FormItem _escapedModel;
 }

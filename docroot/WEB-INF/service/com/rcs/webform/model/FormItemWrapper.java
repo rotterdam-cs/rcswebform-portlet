@@ -71,6 +71,7 @@ public class FormItemWrapper implements FormItem, ModelWrapper<FormItem> {
 		attributes.put("validationRegexValue", getValidationRegexValue());
 		attributes.put("errorValidationMessage", getErrorValidationMessage());
 		attributes.put("errorMandatoryMessage", getErrorMandatoryMessage());
+		attributes.put("hintMessage", getHintMessage());
 
 		return attributes;
 	}
@@ -210,6 +211,12 @@ public class FormItemWrapper implements FormItem, ModelWrapper<FormItem> {
 
 		if (errorMandatoryMessage != null) {
 			setErrorMandatoryMessage(errorMandatoryMessage);
+		}
+
+		String hintMessage = (String)attributes.get("hintMessage");
+
+		if (hintMessage != null) {
+			setHintMessage(hintMessage);
 		}
 	}
 
@@ -692,6 +699,26 @@ public class FormItemWrapper implements FormItem, ModelWrapper<FormItem> {
 	@Override
 	public void setErrorMandatoryMessage(java.lang.String errorMandatoryMessage) {
 		_formItem.setErrorMandatoryMessage(errorMandatoryMessage);
+	}
+
+	/**
+	* Returns the hint message of this form item.
+	*
+	* @return the hint message of this form item
+	*/
+	@Override
+	public java.lang.String getHintMessage() {
+		return _formItem.getHintMessage();
+	}
+
+	/**
+	* Sets the hint message of this form item.
+	*
+	* @param hintMessage the hint message of this form item
+	*/
+	@Override
+	public void setHintMessage(java.lang.String hintMessage) {
+		_formItem.setHintMessage(hintMessage);
 	}
 
 	@Override
