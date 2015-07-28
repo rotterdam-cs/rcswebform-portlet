@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -33,6 +33,7 @@ import java.io.Serializable;
 
 import java.sql.Types;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -59,6 +60,10 @@ public class FormItemModelImpl extends BaseModelImpl<FormItem>
 	public static final String TABLE_NAME = "rcswebform_FormItem";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "formItemId", Types.BIGINT },
+			{ "active_", Types.BOOLEAN },
+			{ "creationDate", Types.TIMESTAMP },
+			{ "modificationDate", Types.TIMESTAMP },
+			{ "modificationUser", Types.VARCHAR },
 			{ "formId", Types.BIGINT },
 			{ "formItemAttrId", Types.VARCHAR },
 			{ "formItemAttrClass", Types.VARCHAR },
@@ -77,7 +82,7 @@ public class FormItemModelImpl extends BaseModelImpl<FormItem>
 			{ "errorValidationMessage", Types.VARCHAR },
 			{ "errorMandatoryMessage", Types.VARCHAR }
 		};
-	public static final String TABLE_SQL_CREATE = "create table rcswebform_FormItem (formItemId LONG not null primary key,formId LONG,formItemAttrId VARCHAR(75) null,formItemAttrClass VARCHAR(75) null,label VARCHAR(75) null,labelAttrId VARCHAR(75) null,labelAttrClass VARCHAR(75) null,inputAttrId VARCHAR(75) null,inputAttrClass VARCHAR(75) null,type_ VARCHAR(75) null,options VARCHAR(75) null,mandatory BOOLEAN,defaultValue VARCHAR(75) null,order_ INTEGER,validationType VARCHAR(75) null,validationRegexValue VARCHAR(75) null,errorValidationMessage VARCHAR(75) null,errorMandatoryMessage VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table rcswebform_FormItem (formItemId LONG not null primary key,active_ BOOLEAN,creationDate DATE null,modificationDate DATE null,modificationUser VARCHAR(75) null,formId LONG,formItemAttrId VARCHAR(75) null,formItemAttrClass VARCHAR(75) null,label VARCHAR(75) null,labelAttrId VARCHAR(75) null,labelAttrClass VARCHAR(75) null,inputAttrId VARCHAR(75) null,inputAttrClass VARCHAR(75) null,type_ VARCHAR(75) null,options VARCHAR(75) null,mandatory BOOLEAN,defaultValue VARCHAR(75) null,order_ INTEGER,validationType VARCHAR(75) null,validationRegexValue VARCHAR(75) null,errorValidationMessage VARCHAR(75) null,errorMandatoryMessage VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table rcswebform_FormItem";
 	public static final String ORDER_BY_JPQL = " ORDER BY formItem.formItemId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY rcswebform_FormItem.formItemId ASC";
@@ -132,6 +137,10 @@ public class FormItemModelImpl extends BaseModelImpl<FormItem>
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
 		attributes.put("formItemId", getFormItemId());
+		attributes.put("active", getActive());
+		attributes.put("creationDate", getCreationDate());
+		attributes.put("modificationDate", getModificationDate());
+		attributes.put("modificationUser", getModificationUser());
 		attributes.put("formId", getFormId());
 		attributes.put("formItemAttrId", getFormItemAttrId());
 		attributes.put("formItemAttrClass", getFormItemAttrClass());
@@ -159,6 +168,30 @@ public class FormItemModelImpl extends BaseModelImpl<FormItem>
 
 		if (formItemId != null) {
 			setFormItemId(formItemId);
+		}
+
+		Boolean active = (Boolean)attributes.get("active");
+
+		if (active != null) {
+			setActive(active);
+		}
+
+		Date creationDate = (Date)attributes.get("creationDate");
+
+		if (creationDate != null) {
+			setCreationDate(creationDate);
+		}
+
+		Date modificationDate = (Date)attributes.get("modificationDate");
+
+		if (modificationDate != null) {
+			setModificationDate(modificationDate);
+		}
+
+		String modificationUser = (String)attributes.get("modificationUser");
+
+		if (modificationUser != null) {
+			setModificationUser(modificationUser);
 		}
 
 		Long formId = (Long)attributes.get("formId");
@@ -275,6 +308,56 @@ public class FormItemModelImpl extends BaseModelImpl<FormItem>
 	@Override
 	public void setFormItemId(long formItemId) {
 		_formItemId = formItemId;
+	}
+
+	@Override
+	public boolean getActive() {
+		return _active;
+	}
+
+	@Override
+	public boolean isActive() {
+		return _active;
+	}
+
+	@Override
+	public void setActive(boolean active) {
+		_active = active;
+	}
+
+	@Override
+	public Date getCreationDate() {
+		return _creationDate;
+	}
+
+	@Override
+	public void setCreationDate(Date creationDate) {
+		_creationDate = creationDate;
+	}
+
+	@Override
+	public Date getModificationDate() {
+		return _modificationDate;
+	}
+
+	@Override
+	public void setModificationDate(Date modificationDate) {
+		_modificationDate = modificationDate;
+	}
+
+	@Override
+	public String getModificationUser() {
+		if (_modificationUser == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _modificationUser;
+		}
+	}
+
+	@Override
+	public void setModificationUser(String modificationUser) {
+		_modificationUser = modificationUser;
 	}
 
 	@Override
@@ -550,6 +633,10 @@ public class FormItemModelImpl extends BaseModelImpl<FormItem>
 		FormItemImpl formItemImpl = new FormItemImpl();
 
 		formItemImpl.setFormItemId(getFormItemId());
+		formItemImpl.setActive(getActive());
+		formItemImpl.setCreationDate(getCreationDate());
+		formItemImpl.setModificationDate(getModificationDate());
+		formItemImpl.setModificationUser(getModificationUser());
 		formItemImpl.setFormId(getFormId());
 		formItemImpl.setFormItemAttrId(getFormItemAttrId());
 		formItemImpl.setFormItemAttrClass(getFormItemAttrClass());
@@ -624,6 +711,34 @@ public class FormItemModelImpl extends BaseModelImpl<FormItem>
 		FormItemCacheModel formItemCacheModel = new FormItemCacheModel();
 
 		formItemCacheModel.formItemId = getFormItemId();
+
+		formItemCacheModel.active = getActive();
+
+		Date creationDate = getCreationDate();
+
+		if (creationDate != null) {
+			formItemCacheModel.creationDate = creationDate.getTime();
+		}
+		else {
+			formItemCacheModel.creationDate = Long.MIN_VALUE;
+		}
+
+		Date modificationDate = getModificationDate();
+
+		if (modificationDate != null) {
+			formItemCacheModel.modificationDate = modificationDate.getTime();
+		}
+		else {
+			formItemCacheModel.modificationDate = Long.MIN_VALUE;
+		}
+
+		formItemCacheModel.modificationUser = getModificationUser();
+
+		String modificationUser = formItemCacheModel.modificationUser;
+
+		if ((modificationUser != null) && (modificationUser.length() == 0)) {
+			formItemCacheModel.modificationUser = null;
+		}
 
 		formItemCacheModel.formId = getFormId();
 
@@ -751,10 +866,18 @@ public class FormItemModelImpl extends BaseModelImpl<FormItem>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(37);
+		StringBundler sb = new StringBundler(45);
 
 		sb.append("{formItemId=");
 		sb.append(getFormItemId());
+		sb.append(", active=");
+		sb.append(getActive());
+		sb.append(", creationDate=");
+		sb.append(getCreationDate());
+		sb.append(", modificationDate=");
+		sb.append(getModificationDate());
+		sb.append(", modificationUser=");
+		sb.append(getModificationUser());
 		sb.append(", formId=");
 		sb.append(getFormId());
 		sb.append(", formItemAttrId=");
@@ -796,7 +919,7 @@ public class FormItemModelImpl extends BaseModelImpl<FormItem>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(58);
+		StringBundler sb = new StringBundler(70);
 
 		sb.append("<model><model-name>");
 		sb.append("com.rcs.webform.model.FormItem");
@@ -805,6 +928,22 @@ public class FormItemModelImpl extends BaseModelImpl<FormItem>
 		sb.append(
 			"<column><column-name>formItemId</column-name><column-value><![CDATA[");
 		sb.append(getFormItemId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>active</column-name><column-value><![CDATA[");
+		sb.append(getActive());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>creationDate</column-name><column-value><![CDATA[");
+		sb.append(getCreationDate());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>modificationDate</column-name><column-value><![CDATA[");
+		sb.append(getModificationDate());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>modificationUser</column-name><column-value><![CDATA[");
+		sb.append(getModificationUser());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>formId</column-name><column-value><![CDATA[");
@@ -885,6 +1024,10 @@ public class FormItemModelImpl extends BaseModelImpl<FormItem>
 			FormItem.class
 		};
 	private long _formItemId;
+	private boolean _active;
+	private Date _creationDate;
+	private Date _modificationDate;
+	private String _modificationUser;
 	private long _formId;
 	private String _formItemAttrId;
 	private String _formItemAttrClass;

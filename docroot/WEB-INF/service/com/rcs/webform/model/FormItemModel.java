@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -22,6 +22,8 @@ import com.liferay.portal.service.ServiceContext;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 
 import java.io.Serializable;
+
+import java.util.Date;
 
 /**
  * The base model interface for the FormItem service. Represents a row in the &quot;rcswebform_FormItem&quot; database table, with each column mapped to a property of this class.
@@ -70,6 +72,70 @@ public interface FormItemModel extends BaseModel<FormItem> {
 	 * @param formItemId the form item ID of this form item
 	 */
 	public void setFormItemId(long formItemId);
+
+	/**
+	 * Returns the active of this form item.
+	 *
+	 * @return the active of this form item
+	 */
+	public boolean getActive();
+
+	/**
+	 * Returns <code>true</code> if this form item is active.
+	 *
+	 * @return <code>true</code> if this form item is active; <code>false</code> otherwise
+	 */
+	public boolean isActive();
+
+	/**
+	 * Sets whether this form item is active.
+	 *
+	 * @param active the active of this form item
+	 */
+	public void setActive(boolean active);
+
+	/**
+	 * Returns the creation date of this form item.
+	 *
+	 * @return the creation date of this form item
+	 */
+	public Date getCreationDate();
+
+	/**
+	 * Sets the creation date of this form item.
+	 *
+	 * @param creationDate the creation date of this form item
+	 */
+	public void setCreationDate(Date creationDate);
+
+	/**
+	 * Returns the modification date of this form item.
+	 *
+	 * @return the modification date of this form item
+	 */
+	public Date getModificationDate();
+
+	/**
+	 * Sets the modification date of this form item.
+	 *
+	 * @param modificationDate the modification date of this form item
+	 */
+	public void setModificationDate(Date modificationDate);
+
+	/**
+	 * Returns the modification user of this form item.
+	 *
+	 * @return the modification user of this form item
+	 */
+	@AutoEscape
+	public String getModificationUser();
+
+	/**
+	 * Sets the modification user of this form item.
+	 *
+	 * @param modificationUser the modification user of this form item
+	 */
+	public void setModificationUser(String modificationUser);
 
 	/**
 	 * Returns the form ID of this form item.

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -61,12 +61,14 @@ public class FormModelImpl extends BaseModelImpl<Form> implements FormModel {
 	public static final String TABLE_NAME = "rcswebform_Form";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "formId", Types.BIGINT },
+			{ "active_", Types.BOOLEAN },
+			{ "creationDate", Types.TIMESTAMP },
+			{ "modificationDate", Types.TIMESTAMP },
+			{ "modificationUser", Types.VARCHAR },
 			{ "groupId", Types.BIGINT },
 			{ "companyId", Types.BIGINT },
 			{ "userId", Types.BIGINT },
 			{ "userName", Types.VARCHAR },
-			{ "createDate", Types.TIMESTAMP },
-			{ "modifiedDate", Types.TIMESTAMP },
 			{ "formAttrId", Types.VARCHAR },
 			{ "formAttrClass", Types.VARCHAR },
 			{ "title", Types.VARCHAR },
@@ -78,7 +80,7 @@ public class FormModelImpl extends BaseModelImpl<Form> implements FormModel {
 			{ "submitAttrId", Types.VARCHAR },
 			{ "submitAttrClass", Types.VARCHAR }
 		};
-	public static final String TABLE_SQL_CREATE = "create table rcswebform_Form (formId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,formAttrId VARCHAR(75) null,formAttrClass VARCHAR(75) null,title VARCHAR(75) null,desc_ VARCHAR(75) null,useCaptcha BOOLEAN,successMessage VARCHAR(75) null,successURL VARCHAR(75) null,submitLabel VARCHAR(75) null,submitAttrId VARCHAR(75) null,submitAttrClass VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table rcswebform_Form (formId LONG not null primary key,active_ BOOLEAN,creationDate DATE null,modificationDate DATE null,modificationUser VARCHAR(75) null,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,formAttrId VARCHAR(75) null,formAttrClass VARCHAR(75) null,title VARCHAR(75) null,desc_ VARCHAR(75) null,useCaptcha BOOLEAN,successMessage VARCHAR(75) null,successURL VARCHAR(75) null,submitLabel VARCHAR(75) null,submitAttrId VARCHAR(75) null,submitAttrClass VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table rcswebform_Form";
 	public static final String ORDER_BY_JPQL = " ORDER BY form.formId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY rcswebform_Form.formId ASC";
@@ -133,12 +135,14 @@ public class FormModelImpl extends BaseModelImpl<Form> implements FormModel {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
 		attributes.put("formId", getFormId());
+		attributes.put("active", getActive());
+		attributes.put("creationDate", getCreationDate());
+		attributes.put("modificationDate", getModificationDate());
+		attributes.put("modificationUser", getModificationUser());
 		attributes.put("groupId", getGroupId());
 		attributes.put("companyId", getCompanyId());
 		attributes.put("userId", getUserId());
 		attributes.put("userName", getUserName());
-		attributes.put("createDate", getCreateDate());
-		attributes.put("modifiedDate", getModifiedDate());
 		attributes.put("formAttrId", getFormAttrId());
 		attributes.put("formAttrClass", getFormAttrClass());
 		attributes.put("title", getTitle());
@@ -159,6 +163,30 @@ public class FormModelImpl extends BaseModelImpl<Form> implements FormModel {
 
 		if (formId != null) {
 			setFormId(formId);
+		}
+
+		Boolean active = (Boolean)attributes.get("active");
+
+		if (active != null) {
+			setActive(active);
+		}
+
+		Date creationDate = (Date)attributes.get("creationDate");
+
+		if (creationDate != null) {
+			setCreationDate(creationDate);
+		}
+
+		Date modificationDate = (Date)attributes.get("modificationDate");
+
+		if (modificationDate != null) {
+			setModificationDate(modificationDate);
+		}
+
+		String modificationUser = (String)attributes.get("modificationUser");
+
+		if (modificationUser != null) {
+			setModificationUser(modificationUser);
 		}
 
 		Long groupId = (Long)attributes.get("groupId");
@@ -183,18 +211,6 @@ public class FormModelImpl extends BaseModelImpl<Form> implements FormModel {
 
 		if (userName != null) {
 			setUserName(userName);
-		}
-
-		Date createDate = (Date)attributes.get("createDate");
-
-		if (createDate != null) {
-			setCreateDate(createDate);
-		}
-
-		Date modifiedDate = (Date)attributes.get("modifiedDate");
-
-		if (modifiedDate != null) {
-			setModifiedDate(modifiedDate);
 		}
 
 		String formAttrId = (String)attributes.get("formAttrId");
@@ -269,6 +285,56 @@ public class FormModelImpl extends BaseModelImpl<Form> implements FormModel {
 	}
 
 	@Override
+	public boolean getActive() {
+		return _active;
+	}
+
+	@Override
+	public boolean isActive() {
+		return _active;
+	}
+
+	@Override
+	public void setActive(boolean active) {
+		_active = active;
+	}
+
+	@Override
+	public Date getCreationDate() {
+		return _creationDate;
+	}
+
+	@Override
+	public void setCreationDate(Date creationDate) {
+		_creationDate = creationDate;
+	}
+
+	@Override
+	public Date getModificationDate() {
+		return _modificationDate;
+	}
+
+	@Override
+	public void setModificationDate(Date modificationDate) {
+		_modificationDate = modificationDate;
+	}
+
+	@Override
+	public String getModificationUser() {
+		if (_modificationUser == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _modificationUser;
+		}
+	}
+
+	@Override
+	public void setModificationUser(String modificationUser) {
+		_modificationUser = modificationUser;
+	}
+
+	@Override
 	public long getGroupId() {
 		return _groupId;
 	}
@@ -321,26 +387,6 @@ public class FormModelImpl extends BaseModelImpl<Form> implements FormModel {
 	@Override
 	public void setUserName(String userName) {
 		_userName = userName;
-	}
-
-	@Override
-	public Date getCreateDate() {
-		return _createDate;
-	}
-
-	@Override
-	public void setCreateDate(Date createDate) {
-		_createDate = createDate;
-	}
-
-	@Override
-	public Date getModifiedDate() {
-		return _modifiedDate;
-	}
-
-	@Override
-	public void setModifiedDate(Date modifiedDate) {
-		_modifiedDate = modifiedDate;
 	}
 
 	@Override
@@ -521,12 +567,14 @@ public class FormModelImpl extends BaseModelImpl<Form> implements FormModel {
 		FormImpl formImpl = new FormImpl();
 
 		formImpl.setFormId(getFormId());
+		formImpl.setActive(getActive());
+		formImpl.setCreationDate(getCreationDate());
+		formImpl.setModificationDate(getModificationDate());
+		formImpl.setModificationUser(getModificationUser());
 		formImpl.setGroupId(getGroupId());
 		formImpl.setCompanyId(getCompanyId());
 		formImpl.setUserId(getUserId());
 		formImpl.setUserName(getUserName());
-		formImpl.setCreateDate(getCreateDate());
-		formImpl.setModifiedDate(getModifiedDate());
 		formImpl.setFormAttrId(getFormAttrId());
 		formImpl.setFormAttrClass(getFormAttrClass());
 		formImpl.setTitle(getTitle());
@@ -601,6 +649,34 @@ public class FormModelImpl extends BaseModelImpl<Form> implements FormModel {
 
 		formCacheModel.formId = getFormId();
 
+		formCacheModel.active = getActive();
+
+		Date creationDate = getCreationDate();
+
+		if (creationDate != null) {
+			formCacheModel.creationDate = creationDate.getTime();
+		}
+		else {
+			formCacheModel.creationDate = Long.MIN_VALUE;
+		}
+
+		Date modificationDate = getModificationDate();
+
+		if (modificationDate != null) {
+			formCacheModel.modificationDate = modificationDate.getTime();
+		}
+		else {
+			formCacheModel.modificationDate = Long.MIN_VALUE;
+		}
+
+		formCacheModel.modificationUser = getModificationUser();
+
+		String modificationUser = formCacheModel.modificationUser;
+
+		if ((modificationUser != null) && (modificationUser.length() == 0)) {
+			formCacheModel.modificationUser = null;
+		}
+
 		formCacheModel.groupId = getGroupId();
 
 		formCacheModel.companyId = getCompanyId();
@@ -613,24 +689,6 @@ public class FormModelImpl extends BaseModelImpl<Form> implements FormModel {
 
 		if ((userName != null) && (userName.length() == 0)) {
 			formCacheModel.userName = null;
-		}
-
-		Date createDate = getCreateDate();
-
-		if (createDate != null) {
-			formCacheModel.createDate = createDate.getTime();
-		}
-		else {
-			formCacheModel.createDate = Long.MIN_VALUE;
-		}
-
-		Date modifiedDate = getModifiedDate();
-
-		if (modifiedDate != null) {
-			formCacheModel.modifiedDate = modifiedDate.getTime();
-		}
-		else {
-			formCacheModel.modifiedDate = Long.MIN_VALUE;
 		}
 
 		formCacheModel.formAttrId = getFormAttrId();
@@ -712,10 +770,18 @@ public class FormModelImpl extends BaseModelImpl<Form> implements FormModel {
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(35);
+		StringBundler sb = new StringBundler(39);
 
 		sb.append("{formId=");
 		sb.append(getFormId());
+		sb.append(", active=");
+		sb.append(getActive());
+		sb.append(", creationDate=");
+		sb.append(getCreationDate());
+		sb.append(", modificationDate=");
+		sb.append(getModificationDate());
+		sb.append(", modificationUser=");
+		sb.append(getModificationUser());
 		sb.append(", groupId=");
 		sb.append(getGroupId());
 		sb.append(", companyId=");
@@ -724,10 +790,6 @@ public class FormModelImpl extends BaseModelImpl<Form> implements FormModel {
 		sb.append(getUserId());
 		sb.append(", userName=");
 		sb.append(getUserName());
-		sb.append(", createDate=");
-		sb.append(getCreateDate());
-		sb.append(", modifiedDate=");
-		sb.append(getModifiedDate());
 		sb.append(", formAttrId=");
 		sb.append(getFormAttrId());
 		sb.append(", formAttrClass=");
@@ -755,7 +817,7 @@ public class FormModelImpl extends BaseModelImpl<Form> implements FormModel {
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(55);
+		StringBundler sb = new StringBundler(61);
 
 		sb.append("<model><model-name>");
 		sb.append("com.rcs.webform.model.Form");
@@ -764,6 +826,22 @@ public class FormModelImpl extends BaseModelImpl<Form> implements FormModel {
 		sb.append(
 			"<column><column-name>formId</column-name><column-value><![CDATA[");
 		sb.append(getFormId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>active</column-name><column-value><![CDATA[");
+		sb.append(getActive());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>creationDate</column-name><column-value><![CDATA[");
+		sb.append(getCreationDate());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>modificationDate</column-name><column-value><![CDATA[");
+		sb.append(getModificationDate());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>modificationUser</column-name><column-value><![CDATA[");
+		sb.append(getModificationUser());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>groupId</column-name><column-value><![CDATA[");
@@ -780,14 +858,6 @@ public class FormModelImpl extends BaseModelImpl<Form> implements FormModel {
 		sb.append(
 			"<column><column-name>userName</column-name><column-value><![CDATA[");
 		sb.append(getUserName());
-		sb.append("]]></column-value></column>");
-		sb.append(
-			"<column><column-name>createDate</column-name><column-value><![CDATA[");
-		sb.append(getCreateDate());
-		sb.append("]]></column-value></column>");
-		sb.append(
-			"<column><column-name>modifiedDate</column-name><column-value><![CDATA[");
-		sb.append(getModifiedDate());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>formAttrId</column-name><column-value><![CDATA[");
@@ -838,13 +908,15 @@ public class FormModelImpl extends BaseModelImpl<Form> implements FormModel {
 	private static ClassLoader _classLoader = Form.class.getClassLoader();
 	private static Class<?>[] _escapedModelInterfaces = new Class[] { Form.class };
 	private long _formId;
+	private boolean _active;
+	private Date _creationDate;
+	private Date _modificationDate;
+	private String _modificationUser;
 	private long _groupId;
 	private long _companyId;
 	private long _userId;
 	private String _userUuid;
 	private String _userName;
-	private Date _createDate;
-	private Date _modifiedDate;
 	private String _formAttrId;
 	private String _formAttrClass;
 	private String _title;

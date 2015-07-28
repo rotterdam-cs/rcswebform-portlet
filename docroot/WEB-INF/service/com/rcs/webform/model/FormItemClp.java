@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -28,6 +28,7 @@ import java.io.Serializable;
 
 import java.lang.reflect.Method;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -73,6 +74,10 @@ public class FormItemClp extends BaseModelImpl<FormItem> implements FormItem {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
 		attributes.put("formItemId", getFormItemId());
+		attributes.put("active", getActive());
+		attributes.put("creationDate", getCreationDate());
+		attributes.put("modificationDate", getModificationDate());
+		attributes.put("modificationUser", getModificationUser());
 		attributes.put("formId", getFormId());
 		attributes.put("formItemAttrId", getFormItemAttrId());
 		attributes.put("formItemAttrClass", getFormItemAttrClass());
@@ -100,6 +105,30 @@ public class FormItemClp extends BaseModelImpl<FormItem> implements FormItem {
 
 		if (formItemId != null) {
 			setFormItemId(formItemId);
+		}
+
+		Boolean active = (Boolean)attributes.get("active");
+
+		if (active != null) {
+			setActive(active);
+		}
+
+		Date creationDate = (Date)attributes.get("creationDate");
+
+		if (creationDate != null) {
+			setCreationDate(creationDate);
+		}
+
+		Date modificationDate = (Date)attributes.get("modificationDate");
+
+		if (modificationDate != null) {
+			setModificationDate(modificationDate);
+		}
+
+		String modificationUser = (String)attributes.get("modificationUser");
+
+		if (modificationUser != null) {
+			setModificationUser(modificationUser);
 		}
 
 		Long formId = (Long)attributes.get("formId");
@@ -224,6 +253,105 @@ public class FormItemClp extends BaseModelImpl<FormItem> implements FormItem {
 				Method method = clazz.getMethod("setFormItemId", long.class);
 
 				method.invoke(_formItemRemoteModel, formItemId);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public boolean getActive() {
+		return _active;
+	}
+
+	@Override
+	public boolean isActive() {
+		return _active;
+	}
+
+	@Override
+	public void setActive(boolean active) {
+		_active = active;
+
+		if (_formItemRemoteModel != null) {
+			try {
+				Class<?> clazz = _formItemRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setActive", boolean.class);
+
+				method.invoke(_formItemRemoteModel, active);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public Date getCreationDate() {
+		return _creationDate;
+	}
+
+	@Override
+	public void setCreationDate(Date creationDate) {
+		_creationDate = creationDate;
+
+		if (_formItemRemoteModel != null) {
+			try {
+				Class<?> clazz = _formItemRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setCreationDate", Date.class);
+
+				method.invoke(_formItemRemoteModel, creationDate);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public Date getModificationDate() {
+		return _modificationDate;
+	}
+
+	@Override
+	public void setModificationDate(Date modificationDate) {
+		_modificationDate = modificationDate;
+
+		if (_formItemRemoteModel != null) {
+			try {
+				Class<?> clazz = _formItemRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setModificationDate",
+						Date.class);
+
+				method.invoke(_formItemRemoteModel, modificationDate);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public String getModificationUser() {
+		return _modificationUser;
+	}
+
+	@Override
+	public void setModificationUser(String modificationUser) {
+		_modificationUser = modificationUser;
+
+		if (_formItemRemoteModel != null) {
+			try {
+				Class<?> clazz = _formItemRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setModificationUser",
+						String.class);
+
+				method.invoke(_formItemRemoteModel, modificationUser);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -705,6 +833,10 @@ public class FormItemClp extends BaseModelImpl<FormItem> implements FormItem {
 		FormItemClp clone = new FormItemClp();
 
 		clone.setFormItemId(getFormItemId());
+		clone.setActive(getActive());
+		clone.setCreationDate(getCreationDate());
+		clone.setModificationDate(getModificationDate());
+		clone.setModificationUser(getModificationUser());
 		clone.setFormId(getFormId());
 		clone.setFormItemAttrId(getFormItemAttrId());
 		clone.setFormItemAttrClass(getFormItemAttrClass());
@@ -774,10 +906,18 @@ public class FormItemClp extends BaseModelImpl<FormItem> implements FormItem {
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(37);
+		StringBundler sb = new StringBundler(45);
 
 		sb.append("{formItemId=");
 		sb.append(getFormItemId());
+		sb.append(", active=");
+		sb.append(getActive());
+		sb.append(", creationDate=");
+		sb.append(getCreationDate());
+		sb.append(", modificationDate=");
+		sb.append(getModificationDate());
+		sb.append(", modificationUser=");
+		sb.append(getModificationUser());
 		sb.append(", formId=");
 		sb.append(getFormId());
 		sb.append(", formItemAttrId=");
@@ -819,7 +959,7 @@ public class FormItemClp extends BaseModelImpl<FormItem> implements FormItem {
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(58);
+		StringBundler sb = new StringBundler(70);
 
 		sb.append("<model><model-name>");
 		sb.append("com.rcs.webform.model.FormItem");
@@ -828,6 +968,22 @@ public class FormItemClp extends BaseModelImpl<FormItem> implements FormItem {
 		sb.append(
 			"<column><column-name>formItemId</column-name><column-value><![CDATA[");
 		sb.append(getFormItemId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>active</column-name><column-value><![CDATA[");
+		sb.append(getActive());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>creationDate</column-name><column-value><![CDATA[");
+		sb.append(getCreationDate());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>modificationDate</column-name><column-value><![CDATA[");
+		sb.append(getModificationDate());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>modificationUser</column-name><column-value><![CDATA[");
+		sb.append(getModificationUser());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>formId</column-name><column-value><![CDATA[");
@@ -904,6 +1060,10 @@ public class FormItemClp extends BaseModelImpl<FormItem> implements FormItem {
 	}
 
 	private long _formItemId;
+	private boolean _active;
+	private Date _creationDate;
+	private Date _modificationDate;
+	private String _modificationUser;
 	private long _formId;
 	private String _formItemAttrId;
 	private String _formItemAttrClass;

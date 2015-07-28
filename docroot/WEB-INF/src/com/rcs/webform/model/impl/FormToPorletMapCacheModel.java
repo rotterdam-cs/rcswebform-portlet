@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -38,10 +38,18 @@ public class FormToPorletMapCacheModel implements CacheModel<FormToPorletMap>,
 	Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(19);
+		StringBundler sb = new StringBundler(23);
 
 		sb.append("{formToPorletMapId=");
 		sb.append(formToPorletMapId);
+		sb.append(", active=");
+		sb.append(active);
+		sb.append(", creationDate=");
+		sb.append(creationDate);
+		sb.append(", modificationDate=");
+		sb.append(modificationDate);
+		sb.append(", modificationUser=");
+		sb.append(modificationUser);
 		sb.append(", groupId=");
 		sb.append(groupId);
 		sb.append(", companyId=");
@@ -50,10 +58,6 @@ public class FormToPorletMapCacheModel implements CacheModel<FormToPorletMap>,
 		sb.append(userId);
 		sb.append(", userName=");
 		sb.append(userName);
-		sb.append(", createDate=");
-		sb.append(createDate);
-		sb.append(", modifiedDate=");
-		sb.append(modifiedDate);
 		sb.append(", formId=");
 		sb.append(formId);
 		sb.append(", portletId=");
@@ -68,6 +72,29 @@ public class FormToPorletMapCacheModel implements CacheModel<FormToPorletMap>,
 		FormToPorletMapImpl formToPorletMapImpl = new FormToPorletMapImpl();
 
 		formToPorletMapImpl.setFormToPorletMapId(formToPorletMapId);
+		formToPorletMapImpl.setActive(active);
+
+		if (creationDate == Long.MIN_VALUE) {
+			formToPorletMapImpl.setCreationDate(null);
+		}
+		else {
+			formToPorletMapImpl.setCreationDate(new Date(creationDate));
+		}
+
+		if (modificationDate == Long.MIN_VALUE) {
+			formToPorletMapImpl.setModificationDate(null);
+		}
+		else {
+			formToPorletMapImpl.setModificationDate(new Date(modificationDate));
+		}
+
+		if (modificationUser == null) {
+			formToPorletMapImpl.setModificationUser(StringPool.BLANK);
+		}
+		else {
+			formToPorletMapImpl.setModificationUser(modificationUser);
+		}
+
 		formToPorletMapImpl.setGroupId(groupId);
 		formToPorletMapImpl.setCompanyId(companyId);
 		formToPorletMapImpl.setUserId(userId);
@@ -77,20 +104,6 @@ public class FormToPorletMapCacheModel implements CacheModel<FormToPorletMap>,
 		}
 		else {
 			formToPorletMapImpl.setUserName(userName);
-		}
-
-		if (createDate == Long.MIN_VALUE) {
-			formToPorletMapImpl.setCreateDate(null);
-		}
-		else {
-			formToPorletMapImpl.setCreateDate(new Date(createDate));
-		}
-
-		if (modifiedDate == Long.MIN_VALUE) {
-			formToPorletMapImpl.setModifiedDate(null);
-		}
-		else {
-			formToPorletMapImpl.setModifiedDate(new Date(modifiedDate));
 		}
 
 		formToPorletMapImpl.setFormId(formId);
@@ -110,12 +123,14 @@ public class FormToPorletMapCacheModel implements CacheModel<FormToPorletMap>,
 	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		formToPorletMapId = objectInput.readLong();
+		active = objectInput.readBoolean();
+		creationDate = objectInput.readLong();
+		modificationDate = objectInput.readLong();
+		modificationUser = objectInput.readUTF();
 		groupId = objectInput.readLong();
 		companyId = objectInput.readLong();
 		userId = objectInput.readLong();
 		userName = objectInput.readUTF();
-		createDate = objectInput.readLong();
-		modifiedDate = objectInput.readLong();
 		formId = objectInput.readLong();
 		portletId = objectInput.readUTF();
 	}
@@ -124,6 +139,17 @@ public class FormToPorletMapCacheModel implements CacheModel<FormToPorletMap>,
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
 		objectOutput.writeLong(formToPorletMapId);
+		objectOutput.writeBoolean(active);
+		objectOutput.writeLong(creationDate);
+		objectOutput.writeLong(modificationDate);
+
+		if (modificationUser == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(modificationUser);
+		}
+
 		objectOutput.writeLong(groupId);
 		objectOutput.writeLong(companyId);
 		objectOutput.writeLong(userId);
@@ -135,8 +161,6 @@ public class FormToPorletMapCacheModel implements CacheModel<FormToPorletMap>,
 			objectOutput.writeUTF(userName);
 		}
 
-		objectOutput.writeLong(createDate);
-		objectOutput.writeLong(modifiedDate);
 		objectOutput.writeLong(formId);
 
 		if (portletId == null) {
@@ -148,12 +172,14 @@ public class FormToPorletMapCacheModel implements CacheModel<FormToPorletMap>,
 	}
 
 	public long formToPorletMapId;
+	public boolean active;
+	public long creationDate;
+	public long modificationDate;
+	public String modificationUser;
 	public long groupId;
 	public long companyId;
 	public long userId;
 	public String userName;
-	public long createDate;
-	public long modifiedDate;
 	public long formId;
 	public String portletId;
 }

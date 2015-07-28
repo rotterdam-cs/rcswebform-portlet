@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -17,6 +17,7 @@ package com.rcs.webform.model;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ModelWrapper;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -49,6 +50,10 @@ public class FormItemWrapper implements FormItem, ModelWrapper<FormItem> {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
 		attributes.put("formItemId", getFormItemId());
+		attributes.put("active", getActive());
+		attributes.put("creationDate", getCreationDate());
+		attributes.put("modificationDate", getModificationDate());
+		attributes.put("modificationUser", getModificationUser());
 		attributes.put("formId", getFormId());
 		attributes.put("formItemAttrId", getFormItemAttrId());
 		attributes.put("formItemAttrClass", getFormItemAttrClass());
@@ -76,6 +81,30 @@ public class FormItemWrapper implements FormItem, ModelWrapper<FormItem> {
 
 		if (formItemId != null) {
 			setFormItemId(formItemId);
+		}
+
+		Boolean active = (Boolean)attributes.get("active");
+
+		if (active != null) {
+			setActive(active);
+		}
+
+		Date creationDate = (Date)attributes.get("creationDate");
+
+		if (creationDate != null) {
+			setCreationDate(creationDate);
+		}
+
+		Date modificationDate = (Date)attributes.get("modificationDate");
+
+		if (modificationDate != null) {
+			setModificationDate(modificationDate);
+		}
+
+		String modificationUser = (String)attributes.get("modificationUser");
+
+		if (modificationUser != null) {
+			setModificationUser(modificationUser);
 		}
 
 		Long formId = (Long)attributes.get("formId");
@@ -222,6 +251,96 @@ public class FormItemWrapper implements FormItem, ModelWrapper<FormItem> {
 	@Override
 	public void setFormItemId(long formItemId) {
 		_formItem.setFormItemId(formItemId);
+	}
+
+	/**
+	* Returns the active of this form item.
+	*
+	* @return the active of this form item
+	*/
+	@Override
+	public boolean getActive() {
+		return _formItem.getActive();
+	}
+
+	/**
+	* Returns <code>true</code> if this form item is active.
+	*
+	* @return <code>true</code> if this form item is active; <code>false</code> otherwise
+	*/
+	@Override
+	public boolean isActive() {
+		return _formItem.isActive();
+	}
+
+	/**
+	* Sets whether this form item is active.
+	*
+	* @param active the active of this form item
+	*/
+	@Override
+	public void setActive(boolean active) {
+		_formItem.setActive(active);
+	}
+
+	/**
+	* Returns the creation date of this form item.
+	*
+	* @return the creation date of this form item
+	*/
+	@Override
+	public java.util.Date getCreationDate() {
+		return _formItem.getCreationDate();
+	}
+
+	/**
+	* Sets the creation date of this form item.
+	*
+	* @param creationDate the creation date of this form item
+	*/
+	@Override
+	public void setCreationDate(java.util.Date creationDate) {
+		_formItem.setCreationDate(creationDate);
+	}
+
+	/**
+	* Returns the modification date of this form item.
+	*
+	* @return the modification date of this form item
+	*/
+	@Override
+	public java.util.Date getModificationDate() {
+		return _formItem.getModificationDate();
+	}
+
+	/**
+	* Sets the modification date of this form item.
+	*
+	* @param modificationDate the modification date of this form item
+	*/
+	@Override
+	public void setModificationDate(java.util.Date modificationDate) {
+		_formItem.setModificationDate(modificationDate);
+	}
+
+	/**
+	* Returns the modification user of this form item.
+	*
+	* @return the modification user of this form item
+	*/
+	@Override
+	public java.lang.String getModificationUser() {
+		return _formItem.getModificationUser();
+	}
+
+	/**
+	* Sets the modification user of this form item.
+	*
+	* @param modificationUser the modification user of this form item
+	*/
+	@Override
+	public void setModificationUser(java.lang.String modificationUser) {
+		_formItem.setModificationUser(modificationUser);
 	}
 
 	/**
@@ -639,7 +758,7 @@ public class FormItemWrapper implements FormItem, ModelWrapper<FormItem> {
 	}
 
 	@Override
-	public int compareTo(FormItem formItem) {
+	public int compareTo(com.rcs.webform.model.FormItem formItem) {
 		return _formItem.compareTo(formItem);
 	}
 
@@ -649,17 +768,17 @@ public class FormItemWrapper implements FormItem, ModelWrapper<FormItem> {
 	}
 
 	@Override
-	public com.liferay.portal.model.CacheModel<FormItem> toCacheModel() {
+	public com.liferay.portal.model.CacheModel<com.rcs.webform.model.FormItem> toCacheModel() {
 		return _formItem.toCacheModel();
 	}
 
 	@Override
-	public FormItem toEscapedModel() {
+	public com.rcs.webform.model.FormItem toEscapedModel() {
 		return new FormItemWrapper(_formItem.toEscapedModel());
 	}
 
 	@Override
-	public FormItem toUnescapedModel() {
+	public com.rcs.webform.model.FormItem toUnescapedModel() {
 		return new FormItemWrapper(_formItem.toUnescapedModel());
 	}
 

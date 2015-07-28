@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -50,12 +50,14 @@ public class FormWrapper implements Form, ModelWrapper<Form> {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
 		attributes.put("formId", getFormId());
+		attributes.put("active", getActive());
+		attributes.put("creationDate", getCreationDate());
+		attributes.put("modificationDate", getModificationDate());
+		attributes.put("modificationUser", getModificationUser());
 		attributes.put("groupId", getGroupId());
 		attributes.put("companyId", getCompanyId());
 		attributes.put("userId", getUserId());
 		attributes.put("userName", getUserName());
-		attributes.put("createDate", getCreateDate());
-		attributes.put("modifiedDate", getModifiedDate());
 		attributes.put("formAttrId", getFormAttrId());
 		attributes.put("formAttrClass", getFormAttrClass());
 		attributes.put("title", getTitle());
@@ -76,6 +78,30 @@ public class FormWrapper implements Form, ModelWrapper<Form> {
 
 		if (formId != null) {
 			setFormId(formId);
+		}
+
+		Boolean active = (Boolean)attributes.get("active");
+
+		if (active != null) {
+			setActive(active);
+		}
+
+		Date creationDate = (Date)attributes.get("creationDate");
+
+		if (creationDate != null) {
+			setCreationDate(creationDate);
+		}
+
+		Date modificationDate = (Date)attributes.get("modificationDate");
+
+		if (modificationDate != null) {
+			setModificationDate(modificationDate);
+		}
+
+		String modificationUser = (String)attributes.get("modificationUser");
+
+		if (modificationUser != null) {
+			setModificationUser(modificationUser);
 		}
 
 		Long groupId = (Long)attributes.get("groupId");
@@ -100,18 +126,6 @@ public class FormWrapper implements Form, ModelWrapper<Form> {
 
 		if (userName != null) {
 			setUserName(userName);
-		}
-
-		Date createDate = (Date)attributes.get("createDate");
-
-		if (createDate != null) {
-			setCreateDate(createDate);
-		}
-
-		Date modifiedDate = (Date)attributes.get("modifiedDate");
-
-		if (modifiedDate != null) {
-			setModifiedDate(modifiedDate);
 		}
 
 		String formAttrId = (String)attributes.get("formAttrId");
@@ -216,6 +230,96 @@ public class FormWrapper implements Form, ModelWrapper<Form> {
 	}
 
 	/**
+	* Returns the active of this form.
+	*
+	* @return the active of this form
+	*/
+	@Override
+	public boolean getActive() {
+		return _form.getActive();
+	}
+
+	/**
+	* Returns <code>true</code> if this form is active.
+	*
+	* @return <code>true</code> if this form is active; <code>false</code> otherwise
+	*/
+	@Override
+	public boolean isActive() {
+		return _form.isActive();
+	}
+
+	/**
+	* Sets whether this form is active.
+	*
+	* @param active the active of this form
+	*/
+	@Override
+	public void setActive(boolean active) {
+		_form.setActive(active);
+	}
+
+	/**
+	* Returns the creation date of this form.
+	*
+	* @return the creation date of this form
+	*/
+	@Override
+	public java.util.Date getCreationDate() {
+		return _form.getCreationDate();
+	}
+
+	/**
+	* Sets the creation date of this form.
+	*
+	* @param creationDate the creation date of this form
+	*/
+	@Override
+	public void setCreationDate(java.util.Date creationDate) {
+		_form.setCreationDate(creationDate);
+	}
+
+	/**
+	* Returns the modification date of this form.
+	*
+	* @return the modification date of this form
+	*/
+	@Override
+	public java.util.Date getModificationDate() {
+		return _form.getModificationDate();
+	}
+
+	/**
+	* Sets the modification date of this form.
+	*
+	* @param modificationDate the modification date of this form
+	*/
+	@Override
+	public void setModificationDate(java.util.Date modificationDate) {
+		_form.setModificationDate(modificationDate);
+	}
+
+	/**
+	* Returns the modification user of this form.
+	*
+	* @return the modification user of this form
+	*/
+	@Override
+	public java.lang.String getModificationUser() {
+		return _form.getModificationUser();
+	}
+
+	/**
+	* Sets the modification user of this form.
+	*
+	* @param modificationUser the modification user of this form
+	*/
+	@Override
+	public void setModificationUser(java.lang.String modificationUser) {
+		_form.setModificationUser(modificationUser);
+	}
+
+	/**
 	* Returns the group ID of this form.
 	*
 	* @return the group ID of this form
@@ -315,46 +419,6 @@ public class FormWrapper implements Form, ModelWrapper<Form> {
 	@Override
 	public void setUserName(java.lang.String userName) {
 		_form.setUserName(userName);
-	}
-
-	/**
-	* Returns the create date of this form.
-	*
-	* @return the create date of this form
-	*/
-	@Override
-	public java.util.Date getCreateDate() {
-		return _form.getCreateDate();
-	}
-
-	/**
-	* Sets the create date of this form.
-	*
-	* @param createDate the create date of this form
-	*/
-	@Override
-	public void setCreateDate(java.util.Date createDate) {
-		_form.setCreateDate(createDate);
-	}
-
-	/**
-	* Returns the modified date of this form.
-	*
-	* @return the modified date of this form
-	*/
-	@Override
-	public java.util.Date getModifiedDate() {
-		return _form.getModifiedDate();
-	}
-
-	/**
-	* Sets the modified date of this form.
-	*
-	* @param modifiedDate the modified date of this form
-	*/
-	@Override
-	public void setModifiedDate(java.util.Date modifiedDate) {
-		_form.setModifiedDate(modifiedDate);
 	}
 
 	/**
@@ -631,7 +695,7 @@ public class FormWrapper implements Form, ModelWrapper<Form> {
 	}
 
 	@Override
-	public int compareTo(Form form) {
+	public int compareTo(com.rcs.webform.model.Form form) {
 		return _form.compareTo(form);
 	}
 
@@ -641,17 +705,17 @@ public class FormWrapper implements Form, ModelWrapper<Form> {
 	}
 
 	@Override
-	public com.liferay.portal.model.CacheModel<Form> toCacheModel() {
+	public com.liferay.portal.model.CacheModel<com.rcs.webform.model.Form> toCacheModel() {
 		return _form.toCacheModel();
 	}
 
 	@Override
-	public Form toEscapedModel() {
+	public com.rcs.webform.model.Form toEscapedModel() {
 		return new FormWrapper(_form.toEscapedModel());
 	}
 
 	@Override
-	public Form toUnescapedModel() {
+	public com.rcs.webform.model.Form toUnescapedModel() {
 		return new FormWrapper(_form.toUnescapedModel());
 	}
 

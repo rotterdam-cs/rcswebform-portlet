@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -18,7 +18,6 @@ import com.liferay.portal.kernel.bean.AutoEscape;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.model.CacheModel;
-import com.liferay.portal.model.GroupedModel;
 import com.liferay.portal.service.ServiceContext;
 
 import com.liferay.portlet.expando.model.ExpandoBridge;
@@ -40,8 +39,7 @@ import java.util.Date;
  * @see com.rcs.webform.model.impl.FormToPorletMapModelImpl
  * @generated
  */
-public interface FormToPorletMapModel extends BaseModel<FormToPorletMap>,
-	GroupedModel {
+public interface FormToPorletMapModel extends BaseModel<FormToPorletMap> {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
@@ -77,11 +75,74 @@ public interface FormToPorletMapModel extends BaseModel<FormToPorletMap>,
 	public void setFormToPorletMapId(long formToPorletMapId);
 
 	/**
+	 * Returns the active of this form to porlet map.
+	 *
+	 * @return the active of this form to porlet map
+	 */
+	public boolean getActive();
+
+	/**
+	 * Returns <code>true</code> if this form to porlet map is active.
+	 *
+	 * @return <code>true</code> if this form to porlet map is active; <code>false</code> otherwise
+	 */
+	public boolean isActive();
+
+	/**
+	 * Sets whether this form to porlet map is active.
+	 *
+	 * @param active the active of this form to porlet map
+	 */
+	public void setActive(boolean active);
+
+	/**
+	 * Returns the creation date of this form to porlet map.
+	 *
+	 * @return the creation date of this form to porlet map
+	 */
+	public Date getCreationDate();
+
+	/**
+	 * Sets the creation date of this form to porlet map.
+	 *
+	 * @param creationDate the creation date of this form to porlet map
+	 */
+	public void setCreationDate(Date creationDate);
+
+	/**
+	 * Returns the modification date of this form to porlet map.
+	 *
+	 * @return the modification date of this form to porlet map
+	 */
+	public Date getModificationDate();
+
+	/**
+	 * Sets the modification date of this form to porlet map.
+	 *
+	 * @param modificationDate the modification date of this form to porlet map
+	 */
+	public void setModificationDate(Date modificationDate);
+
+	/**
+	 * Returns the modification user of this form to porlet map.
+	 *
+	 * @return the modification user of this form to porlet map
+	 */
+	@AutoEscape
+	public String getModificationUser();
+
+	/**
+	 * Sets the modification user of this form to porlet map.
+	 *
+	 * @param modificationUser the modification user of this form to porlet map
+	 */
+	public void setModificationUser(String modificationUser);
+
+	/**
 	 * Returns the group ID of this form to porlet map.
 	 *
 	 * @return the group ID of this form to porlet map
 	 */
-	@Override
 	public long getGroupId();
 
 	/**
@@ -89,7 +150,6 @@ public interface FormToPorletMapModel extends BaseModel<FormToPorletMap>,
 	 *
 	 * @param groupId the group ID of this form to porlet map
 	 */
-	@Override
 	public void setGroupId(long groupId);
 
 	/**
@@ -97,7 +157,6 @@ public interface FormToPorletMapModel extends BaseModel<FormToPorletMap>,
 	 *
 	 * @return the company ID of this form to porlet map
 	 */
-	@Override
 	public long getCompanyId();
 
 	/**
@@ -105,7 +164,6 @@ public interface FormToPorletMapModel extends BaseModel<FormToPorletMap>,
 	 *
 	 * @param companyId the company ID of this form to porlet map
 	 */
-	@Override
 	public void setCompanyId(long companyId);
 
 	/**
@@ -113,7 +171,6 @@ public interface FormToPorletMapModel extends BaseModel<FormToPorletMap>,
 	 *
 	 * @return the user ID of this form to porlet map
 	 */
-	@Override
 	public long getUserId();
 
 	/**
@@ -121,7 +178,6 @@ public interface FormToPorletMapModel extends BaseModel<FormToPorletMap>,
 	 *
 	 * @param userId the user ID of this form to porlet map
 	 */
-	@Override
 	public void setUserId(long userId);
 
 	/**
@@ -130,7 +186,6 @@ public interface FormToPorletMapModel extends BaseModel<FormToPorletMap>,
 	 * @return the user uuid of this form to porlet map
 	 * @throws SystemException if a system exception occurred
 	 */
-	@Override
 	public String getUserUuid() throws SystemException;
 
 	/**
@@ -138,7 +193,6 @@ public interface FormToPorletMapModel extends BaseModel<FormToPorletMap>,
 	 *
 	 * @param userUuid the user uuid of this form to porlet map
 	 */
-	@Override
 	public void setUserUuid(String userUuid);
 
 	/**
@@ -147,7 +201,6 @@ public interface FormToPorletMapModel extends BaseModel<FormToPorletMap>,
 	 * @return the user name of this form to porlet map
 	 */
 	@AutoEscape
-	@Override
 	public String getUserName();
 
 	/**
@@ -155,40 +208,7 @@ public interface FormToPorletMapModel extends BaseModel<FormToPorletMap>,
 	 *
 	 * @param userName the user name of this form to porlet map
 	 */
-	@Override
 	public void setUserName(String userName);
-
-	/**
-	 * Returns the create date of this form to porlet map.
-	 *
-	 * @return the create date of this form to porlet map
-	 */
-	@Override
-	public Date getCreateDate();
-
-	/**
-	 * Sets the create date of this form to porlet map.
-	 *
-	 * @param createDate the create date of this form to porlet map
-	 */
-	@Override
-	public void setCreateDate(Date createDate);
-
-	/**
-	 * Returns the modified date of this form to porlet map.
-	 *
-	 * @return the modified date of this form to porlet map
-	 */
-	@Override
-	public Date getModifiedDate();
-
-	/**
-	 * Sets the modified date of this form to porlet map.
-	 *
-	 * @param modifiedDate the modified date of this form to porlet map
-	 */
-	@Override
-	public void setModifiedDate(Date modifiedDate);
 
 	/**
 	 * Returns the form ID of this form to porlet map.

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -316,12 +316,14 @@ public class FormPersistenceImpl extends BasePersistenceImpl<Form>
 		formImpl.setPrimaryKey(form.getPrimaryKey());
 
 		formImpl.setFormId(form.getFormId());
+		formImpl.setActive(form.isActive());
+		formImpl.setCreationDate(form.getCreationDate());
+		formImpl.setModificationDate(form.getModificationDate());
+		formImpl.setModificationUser(form.getModificationUser());
 		formImpl.setGroupId(form.getGroupId());
 		formImpl.setCompanyId(form.getCompanyId());
 		formImpl.setUserId(form.getUserId());
 		formImpl.setUserName(form.getUserName());
-		formImpl.setCreateDate(form.getCreateDate());
-		formImpl.setModifiedDate(form.getModifiedDate());
 		formImpl.setFormAttrId(form.getFormAttrId());
 		formImpl.setFormAttrClass(form.getFormAttrClass());
 		formImpl.setTitle(form.getTitle());
@@ -651,7 +653,7 @@ public class FormPersistenceImpl extends BasePersistenceImpl<Form>
 				PropsKeys.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE));
 	private static Log _log = LogFactoryUtil.getLog(FormPersistenceImpl.class);
 	private static Set<String> _badColumnNames = SetUtil.fromArray(new String[] {
-				"desc"
+				"active", "desc"
 			});
 	private static Form _nullForm = new FormImpl() {
 			@Override

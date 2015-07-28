@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -75,12 +75,14 @@ public class FormClp extends BaseModelImpl<Form> implements Form {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
 		attributes.put("formId", getFormId());
+		attributes.put("active", getActive());
+		attributes.put("creationDate", getCreationDate());
+		attributes.put("modificationDate", getModificationDate());
+		attributes.put("modificationUser", getModificationUser());
 		attributes.put("groupId", getGroupId());
 		attributes.put("companyId", getCompanyId());
 		attributes.put("userId", getUserId());
 		attributes.put("userName", getUserName());
-		attributes.put("createDate", getCreateDate());
-		attributes.put("modifiedDate", getModifiedDate());
 		attributes.put("formAttrId", getFormAttrId());
 		attributes.put("formAttrClass", getFormAttrClass());
 		attributes.put("title", getTitle());
@@ -101,6 +103,30 @@ public class FormClp extends BaseModelImpl<Form> implements Form {
 
 		if (formId != null) {
 			setFormId(formId);
+		}
+
+		Boolean active = (Boolean)attributes.get("active");
+
+		if (active != null) {
+			setActive(active);
+		}
+
+		Date creationDate = (Date)attributes.get("creationDate");
+
+		if (creationDate != null) {
+			setCreationDate(creationDate);
+		}
+
+		Date modificationDate = (Date)attributes.get("modificationDate");
+
+		if (modificationDate != null) {
+			setModificationDate(modificationDate);
+		}
+
+		String modificationUser = (String)attributes.get("modificationUser");
+
+		if (modificationUser != null) {
+			setModificationUser(modificationUser);
 		}
 
 		Long groupId = (Long)attributes.get("groupId");
@@ -125,18 +151,6 @@ public class FormClp extends BaseModelImpl<Form> implements Form {
 
 		if (userName != null) {
 			setUserName(userName);
-		}
-
-		Date createDate = (Date)attributes.get("createDate");
-
-		if (createDate != null) {
-			setCreateDate(createDate);
-		}
-
-		Date modifiedDate = (Date)attributes.get("modifiedDate");
-
-		if (modifiedDate != null) {
-			setModifiedDate(modifiedDate);
 		}
 
 		String formAttrId = (String)attributes.get("formAttrId");
@@ -216,6 +230,105 @@ public class FormClp extends BaseModelImpl<Form> implements Form {
 				Method method = clazz.getMethod("setFormId", long.class);
 
 				method.invoke(_formRemoteModel, formId);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public boolean getActive() {
+		return _active;
+	}
+
+	@Override
+	public boolean isActive() {
+		return _active;
+	}
+
+	@Override
+	public void setActive(boolean active) {
+		_active = active;
+
+		if (_formRemoteModel != null) {
+			try {
+				Class<?> clazz = _formRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setActive", boolean.class);
+
+				method.invoke(_formRemoteModel, active);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public Date getCreationDate() {
+		return _creationDate;
+	}
+
+	@Override
+	public void setCreationDate(Date creationDate) {
+		_creationDate = creationDate;
+
+		if (_formRemoteModel != null) {
+			try {
+				Class<?> clazz = _formRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setCreationDate", Date.class);
+
+				method.invoke(_formRemoteModel, creationDate);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public Date getModificationDate() {
+		return _modificationDate;
+	}
+
+	@Override
+	public void setModificationDate(Date modificationDate) {
+		_modificationDate = modificationDate;
+
+		if (_formRemoteModel != null) {
+			try {
+				Class<?> clazz = _formRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setModificationDate",
+						Date.class);
+
+				method.invoke(_formRemoteModel, modificationDate);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public String getModificationUser() {
+		return _modificationUser;
+	}
+
+	@Override
+	public void setModificationUser(String modificationUser) {
+		_modificationUser = modificationUser;
+
+		if (_formRemoteModel != null) {
+			try {
+				Class<?> clazz = _formRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setModificationUser",
+						String.class);
+
+				method.invoke(_formRemoteModel, modificationUser);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -318,52 +431,6 @@ public class FormClp extends BaseModelImpl<Form> implements Form {
 				Method method = clazz.getMethod("setUserName", String.class);
 
 				method.invoke(_formRemoteModel, userName);
-			}
-			catch (Exception e) {
-				throw new UnsupportedOperationException(e);
-			}
-		}
-	}
-
-	@Override
-	public Date getCreateDate() {
-		return _createDate;
-	}
-
-	@Override
-	public void setCreateDate(Date createDate) {
-		_createDate = createDate;
-
-		if (_formRemoteModel != null) {
-			try {
-				Class<?> clazz = _formRemoteModel.getClass();
-
-				Method method = clazz.getMethod("setCreateDate", Date.class);
-
-				method.invoke(_formRemoteModel, createDate);
-			}
-			catch (Exception e) {
-				throw new UnsupportedOperationException(e);
-			}
-		}
-	}
-
-	@Override
-	public Date getModifiedDate() {
-		return _modifiedDate;
-	}
-
-	@Override
-	public void setModifiedDate(Date modifiedDate) {
-		_modifiedDate = modifiedDate;
-
-		if (_formRemoteModel != null) {
-			try {
-				Class<?> clazz = _formRemoteModel.getClass();
-
-				Method method = clazz.getMethod("setModifiedDate", Date.class);
-
-				method.invoke(_formRemoteModel, modifiedDate);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -678,12 +745,14 @@ public class FormClp extends BaseModelImpl<Form> implements Form {
 		FormClp clone = new FormClp();
 
 		clone.setFormId(getFormId());
+		clone.setActive(getActive());
+		clone.setCreationDate(getCreationDate());
+		clone.setModificationDate(getModificationDate());
+		clone.setModificationUser(getModificationUser());
 		clone.setGroupId(getGroupId());
 		clone.setCompanyId(getCompanyId());
 		clone.setUserId(getUserId());
 		clone.setUserName(getUserName());
-		clone.setCreateDate(getCreateDate());
-		clone.setModifiedDate(getModifiedDate());
 		clone.setFormAttrId(getFormAttrId());
 		clone.setFormAttrClass(getFormAttrClass());
 		clone.setTitle(getTitle());
@@ -752,10 +821,18 @@ public class FormClp extends BaseModelImpl<Form> implements Form {
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(35);
+		StringBundler sb = new StringBundler(39);
 
 		sb.append("{formId=");
 		sb.append(getFormId());
+		sb.append(", active=");
+		sb.append(getActive());
+		sb.append(", creationDate=");
+		sb.append(getCreationDate());
+		sb.append(", modificationDate=");
+		sb.append(getModificationDate());
+		sb.append(", modificationUser=");
+		sb.append(getModificationUser());
 		sb.append(", groupId=");
 		sb.append(getGroupId());
 		sb.append(", companyId=");
@@ -764,10 +841,6 @@ public class FormClp extends BaseModelImpl<Form> implements Form {
 		sb.append(getUserId());
 		sb.append(", userName=");
 		sb.append(getUserName());
-		sb.append(", createDate=");
-		sb.append(getCreateDate());
-		sb.append(", modifiedDate=");
-		sb.append(getModifiedDate());
 		sb.append(", formAttrId=");
 		sb.append(getFormAttrId());
 		sb.append(", formAttrClass=");
@@ -795,7 +868,7 @@ public class FormClp extends BaseModelImpl<Form> implements Form {
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(55);
+		StringBundler sb = new StringBundler(61);
 
 		sb.append("<model><model-name>");
 		sb.append("com.rcs.webform.model.Form");
@@ -804,6 +877,22 @@ public class FormClp extends BaseModelImpl<Form> implements Form {
 		sb.append(
 			"<column><column-name>formId</column-name><column-value><![CDATA[");
 		sb.append(getFormId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>active</column-name><column-value><![CDATA[");
+		sb.append(getActive());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>creationDate</column-name><column-value><![CDATA[");
+		sb.append(getCreationDate());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>modificationDate</column-name><column-value><![CDATA[");
+		sb.append(getModificationDate());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>modificationUser</column-name><column-value><![CDATA[");
+		sb.append(getModificationUser());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>groupId</column-name><column-value><![CDATA[");
@@ -820,14 +909,6 @@ public class FormClp extends BaseModelImpl<Form> implements Form {
 		sb.append(
 			"<column><column-name>userName</column-name><column-value><![CDATA[");
 		sb.append(getUserName());
-		sb.append("]]></column-value></column>");
-		sb.append(
-			"<column><column-name>createDate</column-name><column-value><![CDATA[");
-		sb.append(getCreateDate());
-		sb.append("]]></column-value></column>");
-		sb.append(
-			"<column><column-name>modifiedDate</column-name><column-value><![CDATA[");
-		sb.append(getModifiedDate());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>formAttrId</column-name><column-value><![CDATA[");
@@ -876,13 +957,15 @@ public class FormClp extends BaseModelImpl<Form> implements Form {
 	}
 
 	private long _formId;
+	private boolean _active;
+	private Date _creationDate;
+	private Date _modificationDate;
+	private String _modificationUser;
 	private long _groupId;
 	private long _companyId;
 	private long _userId;
 	private String _userUuid;
 	private String _userName;
-	private Date _createDate;
-	private Date _modifiedDate;
 	private String _formAttrId;
 	private String _formAttrClass;
 	private String _title;

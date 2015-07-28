@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -76,12 +76,14 @@ public class FormToPorletMapClp extends BaseModelImpl<FormToPorletMap>
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
 		attributes.put("formToPorletMapId", getFormToPorletMapId());
+		attributes.put("active", getActive());
+		attributes.put("creationDate", getCreationDate());
+		attributes.put("modificationDate", getModificationDate());
+		attributes.put("modificationUser", getModificationUser());
 		attributes.put("groupId", getGroupId());
 		attributes.put("companyId", getCompanyId());
 		attributes.put("userId", getUserId());
 		attributes.put("userName", getUserName());
-		attributes.put("createDate", getCreateDate());
-		attributes.put("modifiedDate", getModifiedDate());
 		attributes.put("formId", getFormId());
 		attributes.put("portletId", getPortletId());
 
@@ -94,6 +96,30 @@ public class FormToPorletMapClp extends BaseModelImpl<FormToPorletMap>
 
 		if (formToPorletMapId != null) {
 			setFormToPorletMapId(formToPorletMapId);
+		}
+
+		Boolean active = (Boolean)attributes.get("active");
+
+		if (active != null) {
+			setActive(active);
+		}
+
+		Date creationDate = (Date)attributes.get("creationDate");
+
+		if (creationDate != null) {
+			setCreationDate(creationDate);
+		}
+
+		Date modificationDate = (Date)attributes.get("modificationDate");
+
+		if (modificationDate != null) {
+			setModificationDate(modificationDate);
+		}
+
+		String modificationUser = (String)attributes.get("modificationUser");
+
+		if (modificationUser != null) {
+			setModificationUser(modificationUser);
 		}
 
 		Long groupId = (Long)attributes.get("groupId");
@@ -118,18 +144,6 @@ public class FormToPorletMapClp extends BaseModelImpl<FormToPorletMap>
 
 		if (userName != null) {
 			setUserName(userName);
-		}
-
-		Date createDate = (Date)attributes.get("createDate");
-
-		if (createDate != null) {
-			setCreateDate(createDate);
-		}
-
-		Date modifiedDate = (Date)attributes.get("modifiedDate");
-
-		if (modifiedDate != null) {
-			setModifiedDate(modifiedDate);
 		}
 
 		Long formId = (Long)attributes.get("formId");
@@ -162,6 +176,105 @@ public class FormToPorletMapClp extends BaseModelImpl<FormToPorletMap>
 						long.class);
 
 				method.invoke(_formToPorletMapRemoteModel, formToPorletMapId);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public boolean getActive() {
+		return _active;
+	}
+
+	@Override
+	public boolean isActive() {
+		return _active;
+	}
+
+	@Override
+	public void setActive(boolean active) {
+		_active = active;
+
+		if (_formToPorletMapRemoteModel != null) {
+			try {
+				Class<?> clazz = _formToPorletMapRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setActive", boolean.class);
+
+				method.invoke(_formToPorletMapRemoteModel, active);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public Date getCreationDate() {
+		return _creationDate;
+	}
+
+	@Override
+	public void setCreationDate(Date creationDate) {
+		_creationDate = creationDate;
+
+		if (_formToPorletMapRemoteModel != null) {
+			try {
+				Class<?> clazz = _formToPorletMapRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setCreationDate", Date.class);
+
+				method.invoke(_formToPorletMapRemoteModel, creationDate);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public Date getModificationDate() {
+		return _modificationDate;
+	}
+
+	@Override
+	public void setModificationDate(Date modificationDate) {
+		_modificationDate = modificationDate;
+
+		if (_formToPorletMapRemoteModel != null) {
+			try {
+				Class<?> clazz = _formToPorletMapRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setModificationDate",
+						Date.class);
+
+				method.invoke(_formToPorletMapRemoteModel, modificationDate);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public String getModificationUser() {
+		return _modificationUser;
+	}
+
+	@Override
+	public void setModificationUser(String modificationUser) {
+		_modificationUser = modificationUser;
+
+		if (_formToPorletMapRemoteModel != null) {
+			try {
+				Class<?> clazz = _formToPorletMapRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setModificationUser",
+						String.class);
+
+				method.invoke(_formToPorletMapRemoteModel, modificationUser);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -264,52 +377,6 @@ public class FormToPorletMapClp extends BaseModelImpl<FormToPorletMap>
 				Method method = clazz.getMethod("setUserName", String.class);
 
 				method.invoke(_formToPorletMapRemoteModel, userName);
-			}
-			catch (Exception e) {
-				throw new UnsupportedOperationException(e);
-			}
-		}
-	}
-
-	@Override
-	public Date getCreateDate() {
-		return _createDate;
-	}
-
-	@Override
-	public void setCreateDate(Date createDate) {
-		_createDate = createDate;
-
-		if (_formToPorletMapRemoteModel != null) {
-			try {
-				Class<?> clazz = _formToPorletMapRemoteModel.getClass();
-
-				Method method = clazz.getMethod("setCreateDate", Date.class);
-
-				method.invoke(_formToPorletMapRemoteModel, createDate);
-			}
-			catch (Exception e) {
-				throw new UnsupportedOperationException(e);
-			}
-		}
-	}
-
-	@Override
-	public Date getModifiedDate() {
-		return _modifiedDate;
-	}
-
-	@Override
-	public void setModifiedDate(Date modifiedDate) {
-		_modifiedDate = modifiedDate;
-
-		if (_formToPorletMapRemoteModel != null) {
-			try {
-				Class<?> clazz = _formToPorletMapRemoteModel.getClass();
-
-				Method method = clazz.getMethod("setModifiedDate", Date.class);
-
-				method.invoke(_formToPorletMapRemoteModel, modifiedDate);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -435,12 +502,14 @@ public class FormToPorletMapClp extends BaseModelImpl<FormToPorletMap>
 		FormToPorletMapClp clone = new FormToPorletMapClp();
 
 		clone.setFormToPorletMapId(getFormToPorletMapId());
+		clone.setActive(getActive());
+		clone.setCreationDate(getCreationDate());
+		clone.setModificationDate(getModificationDate());
+		clone.setModificationUser(getModificationUser());
 		clone.setGroupId(getGroupId());
 		clone.setCompanyId(getCompanyId());
 		clone.setUserId(getUserId());
 		clone.setUserName(getUserName());
-		clone.setCreateDate(getCreateDate());
-		clone.setModifiedDate(getModifiedDate());
 		clone.setFormId(getFormId());
 		clone.setPortletId(getPortletId());
 
@@ -495,10 +564,18 @@ public class FormToPorletMapClp extends BaseModelImpl<FormToPorletMap>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(19);
+		StringBundler sb = new StringBundler(23);
 
 		sb.append("{formToPorletMapId=");
 		sb.append(getFormToPorletMapId());
+		sb.append(", active=");
+		sb.append(getActive());
+		sb.append(", creationDate=");
+		sb.append(getCreationDate());
+		sb.append(", modificationDate=");
+		sb.append(getModificationDate());
+		sb.append(", modificationUser=");
+		sb.append(getModificationUser());
 		sb.append(", groupId=");
 		sb.append(getGroupId());
 		sb.append(", companyId=");
@@ -507,10 +584,6 @@ public class FormToPorletMapClp extends BaseModelImpl<FormToPorletMap>
 		sb.append(getUserId());
 		sb.append(", userName=");
 		sb.append(getUserName());
-		sb.append(", createDate=");
-		sb.append(getCreateDate());
-		sb.append(", modifiedDate=");
-		sb.append(getModifiedDate());
 		sb.append(", formId=");
 		sb.append(getFormId());
 		sb.append(", portletId=");
@@ -522,7 +595,7 @@ public class FormToPorletMapClp extends BaseModelImpl<FormToPorletMap>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(31);
+		StringBundler sb = new StringBundler(37);
 
 		sb.append("<model><model-name>");
 		sb.append("com.rcs.webform.model.FormToPorletMap");
@@ -531,6 +604,22 @@ public class FormToPorletMapClp extends BaseModelImpl<FormToPorletMap>
 		sb.append(
 			"<column><column-name>formToPorletMapId</column-name><column-value><![CDATA[");
 		sb.append(getFormToPorletMapId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>active</column-name><column-value><![CDATA[");
+		sb.append(getActive());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>creationDate</column-name><column-value><![CDATA[");
+		sb.append(getCreationDate());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>modificationDate</column-name><column-value><![CDATA[");
+		sb.append(getModificationDate());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>modificationUser</column-name><column-value><![CDATA[");
+		sb.append(getModificationUser());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>groupId</column-name><column-value><![CDATA[");
@@ -549,14 +638,6 @@ public class FormToPorletMapClp extends BaseModelImpl<FormToPorletMap>
 		sb.append(getUserName());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>createDate</column-name><column-value><![CDATA[");
-		sb.append(getCreateDate());
-		sb.append("]]></column-value></column>");
-		sb.append(
-			"<column><column-name>modifiedDate</column-name><column-value><![CDATA[");
-		sb.append(getModifiedDate());
-		sb.append("]]></column-value></column>");
-		sb.append(
 			"<column><column-name>formId</column-name><column-value><![CDATA[");
 		sb.append(getFormId());
 		sb.append("]]></column-value></column>");
@@ -571,13 +652,15 @@ public class FormToPorletMapClp extends BaseModelImpl<FormToPorletMap>
 	}
 
 	private long _formToPorletMapId;
+	private boolean _active;
+	private Date _creationDate;
+	private Date _modificationDate;
+	private String _modificationUser;
 	private long _groupId;
 	private long _companyId;
 	private long _userId;
 	private String _userUuid;
 	private String _userName;
-	private Date _createDate;
-	private Date _modifiedDate;
 	private long _formId;
 	private String _portletId;
 	private BaseModel<?> _formToPorletMapRemoteModel;

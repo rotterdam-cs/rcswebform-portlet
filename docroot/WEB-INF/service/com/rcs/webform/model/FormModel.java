@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -18,7 +18,6 @@ import com.liferay.portal.kernel.bean.AutoEscape;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.model.CacheModel;
-import com.liferay.portal.model.GroupedModel;
 import com.liferay.portal.service.ServiceContext;
 
 import com.liferay.portlet.expando.model.ExpandoBridge;
@@ -40,7 +39,7 @@ import java.util.Date;
  * @see com.rcs.webform.model.impl.FormModelImpl
  * @generated
  */
-public interface FormModel extends BaseModel<Form>, GroupedModel {
+public interface FormModel extends BaseModel<Form> {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
@@ -76,11 +75,74 @@ public interface FormModel extends BaseModel<Form>, GroupedModel {
 	public void setFormId(long formId);
 
 	/**
+	 * Returns the active of this form.
+	 *
+	 * @return the active of this form
+	 */
+	public boolean getActive();
+
+	/**
+	 * Returns <code>true</code> if this form is active.
+	 *
+	 * @return <code>true</code> if this form is active; <code>false</code> otherwise
+	 */
+	public boolean isActive();
+
+	/**
+	 * Sets whether this form is active.
+	 *
+	 * @param active the active of this form
+	 */
+	public void setActive(boolean active);
+
+	/**
+	 * Returns the creation date of this form.
+	 *
+	 * @return the creation date of this form
+	 */
+	public Date getCreationDate();
+
+	/**
+	 * Sets the creation date of this form.
+	 *
+	 * @param creationDate the creation date of this form
+	 */
+	public void setCreationDate(Date creationDate);
+
+	/**
+	 * Returns the modification date of this form.
+	 *
+	 * @return the modification date of this form
+	 */
+	public Date getModificationDate();
+
+	/**
+	 * Sets the modification date of this form.
+	 *
+	 * @param modificationDate the modification date of this form
+	 */
+	public void setModificationDate(Date modificationDate);
+
+	/**
+	 * Returns the modification user of this form.
+	 *
+	 * @return the modification user of this form
+	 */
+	@AutoEscape
+	public String getModificationUser();
+
+	/**
+	 * Sets the modification user of this form.
+	 *
+	 * @param modificationUser the modification user of this form
+	 */
+	public void setModificationUser(String modificationUser);
+
+	/**
 	 * Returns the group ID of this form.
 	 *
 	 * @return the group ID of this form
 	 */
-	@Override
 	public long getGroupId();
 
 	/**
@@ -88,7 +150,6 @@ public interface FormModel extends BaseModel<Form>, GroupedModel {
 	 *
 	 * @param groupId the group ID of this form
 	 */
-	@Override
 	public void setGroupId(long groupId);
 
 	/**
@@ -96,7 +157,6 @@ public interface FormModel extends BaseModel<Form>, GroupedModel {
 	 *
 	 * @return the company ID of this form
 	 */
-	@Override
 	public long getCompanyId();
 
 	/**
@@ -104,7 +164,6 @@ public interface FormModel extends BaseModel<Form>, GroupedModel {
 	 *
 	 * @param companyId the company ID of this form
 	 */
-	@Override
 	public void setCompanyId(long companyId);
 
 	/**
@@ -112,7 +171,6 @@ public interface FormModel extends BaseModel<Form>, GroupedModel {
 	 *
 	 * @return the user ID of this form
 	 */
-	@Override
 	public long getUserId();
 
 	/**
@@ -120,7 +178,6 @@ public interface FormModel extends BaseModel<Form>, GroupedModel {
 	 *
 	 * @param userId the user ID of this form
 	 */
-	@Override
 	public void setUserId(long userId);
 
 	/**
@@ -129,7 +186,6 @@ public interface FormModel extends BaseModel<Form>, GroupedModel {
 	 * @return the user uuid of this form
 	 * @throws SystemException if a system exception occurred
 	 */
-	@Override
 	public String getUserUuid() throws SystemException;
 
 	/**
@@ -137,7 +193,6 @@ public interface FormModel extends BaseModel<Form>, GroupedModel {
 	 *
 	 * @param userUuid the user uuid of this form
 	 */
-	@Override
 	public void setUserUuid(String userUuid);
 
 	/**
@@ -146,7 +201,6 @@ public interface FormModel extends BaseModel<Form>, GroupedModel {
 	 * @return the user name of this form
 	 */
 	@AutoEscape
-	@Override
 	public String getUserName();
 
 	/**
@@ -154,40 +208,7 @@ public interface FormModel extends BaseModel<Form>, GroupedModel {
 	 *
 	 * @param userName the user name of this form
 	 */
-	@Override
 	public void setUserName(String userName);
-
-	/**
-	 * Returns the create date of this form.
-	 *
-	 * @return the create date of this form
-	 */
-	@Override
-	public Date getCreateDate();
-
-	/**
-	 * Sets the create date of this form.
-	 *
-	 * @param createDate the create date of this form
-	 */
-	@Override
-	public void setCreateDate(Date createDate);
-
-	/**
-	 * Returns the modified date of this form.
-	 *
-	 * @return the modified date of this form
-	 */
-	@Override
-	public Date getModifiedDate();
-
-	/**
-	 * Sets the modified date of this form.
-	 *
-	 * @param modifiedDate the modified date of this form
-	 */
-	@Override
-	public void setModifiedDate(Date modifiedDate);
 
 	/**
 	 * Returns the form attr ID of this form.

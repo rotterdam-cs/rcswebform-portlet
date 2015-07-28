@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -30,6 +30,7 @@ import com.liferay.portal.kernel.util.InstanceFactory;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.PropsUtil;
+import com.liferay.portal.kernel.util.SetUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -49,6 +50,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 /**
  * The persistence implementation for the form to porlet map service.
@@ -703,12 +705,14 @@ public class FormToPorletMapPersistenceImpl extends BasePersistenceImpl<FormToPo
 		formToPorletMapImpl.setPrimaryKey(formToPorletMap.getPrimaryKey());
 
 		formToPorletMapImpl.setFormToPorletMapId(formToPorletMap.getFormToPorletMapId());
+		formToPorletMapImpl.setActive(formToPorletMap.isActive());
+		formToPorletMapImpl.setCreationDate(formToPorletMap.getCreationDate());
+		formToPorletMapImpl.setModificationDate(formToPorletMap.getModificationDate());
+		formToPorletMapImpl.setModificationUser(formToPorletMap.getModificationUser());
 		formToPorletMapImpl.setGroupId(formToPorletMap.getGroupId());
 		formToPorletMapImpl.setCompanyId(formToPorletMap.getCompanyId());
 		formToPorletMapImpl.setUserId(formToPorletMap.getUserId());
 		formToPorletMapImpl.setUserName(formToPorletMap.getUserName());
-		formToPorletMapImpl.setCreateDate(formToPorletMap.getCreateDate());
-		formToPorletMapImpl.setModifiedDate(formToPorletMap.getModifiedDate());
 		formToPorletMapImpl.setFormId(formToPorletMap.getFormId());
 		formToPorletMapImpl.setPortletId(formToPorletMap.getPortletId());
 
@@ -989,6 +993,11 @@ public class FormToPorletMapPersistenceImpl extends BasePersistenceImpl<FormToPo
 		return count.intValue();
 	}
 
+	@Override
+	protected Set<String> getBadColumnNames() {
+		return _badColumnNames;
+	}
+
 	/**
 	 * Initializes the form to porlet map persistence.
 	 */
@@ -1031,6 +1040,9 @@ public class FormToPorletMapPersistenceImpl extends BasePersistenceImpl<FormToPo
 	private static final boolean _HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE = GetterUtil.getBoolean(PropsUtil.get(
 				PropsKeys.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE));
 	private static Log _log = LogFactoryUtil.getLog(FormToPorletMapPersistenceImpl.class);
+	private static Set<String> _badColumnNames = SetUtil.fromArray(new String[] {
+				"active"
+			});
 	private static FormToPorletMap _nullFormToPorletMap = new FormToPorletMapImpl() {
 			@Override
 			public Object clone() {

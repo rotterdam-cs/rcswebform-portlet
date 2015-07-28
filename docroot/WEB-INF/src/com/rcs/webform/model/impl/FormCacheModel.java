@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -37,10 +37,18 @@ import java.util.Date;
 public class FormCacheModel implements CacheModel<Form>, Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(35);
+		StringBundler sb = new StringBundler(39);
 
 		sb.append("{formId=");
 		sb.append(formId);
+		sb.append(", active=");
+		sb.append(active);
+		sb.append(", creationDate=");
+		sb.append(creationDate);
+		sb.append(", modificationDate=");
+		sb.append(modificationDate);
+		sb.append(", modificationUser=");
+		sb.append(modificationUser);
 		sb.append(", groupId=");
 		sb.append(groupId);
 		sb.append(", companyId=");
@@ -49,10 +57,6 @@ public class FormCacheModel implements CacheModel<Form>, Externalizable {
 		sb.append(userId);
 		sb.append(", userName=");
 		sb.append(userName);
-		sb.append(", createDate=");
-		sb.append(createDate);
-		sb.append(", modifiedDate=");
-		sb.append(modifiedDate);
 		sb.append(", formAttrId=");
 		sb.append(formAttrId);
 		sb.append(", formAttrClass=");
@@ -83,6 +87,29 @@ public class FormCacheModel implements CacheModel<Form>, Externalizable {
 		FormImpl formImpl = new FormImpl();
 
 		formImpl.setFormId(formId);
+		formImpl.setActive(active);
+
+		if (creationDate == Long.MIN_VALUE) {
+			formImpl.setCreationDate(null);
+		}
+		else {
+			formImpl.setCreationDate(new Date(creationDate));
+		}
+
+		if (modificationDate == Long.MIN_VALUE) {
+			formImpl.setModificationDate(null);
+		}
+		else {
+			formImpl.setModificationDate(new Date(modificationDate));
+		}
+
+		if (modificationUser == null) {
+			formImpl.setModificationUser(StringPool.BLANK);
+		}
+		else {
+			formImpl.setModificationUser(modificationUser);
+		}
+
 		formImpl.setGroupId(groupId);
 		formImpl.setCompanyId(companyId);
 		formImpl.setUserId(userId);
@@ -92,20 +119,6 @@ public class FormCacheModel implements CacheModel<Form>, Externalizable {
 		}
 		else {
 			formImpl.setUserName(userName);
-		}
-
-		if (createDate == Long.MIN_VALUE) {
-			formImpl.setCreateDate(null);
-		}
-		else {
-			formImpl.setCreateDate(new Date(createDate));
-		}
-
-		if (modifiedDate == Long.MIN_VALUE) {
-			formImpl.setModifiedDate(null);
-		}
-		else {
-			formImpl.setModifiedDate(new Date(modifiedDate));
 		}
 
 		if (formAttrId == null) {
@@ -181,12 +194,14 @@ public class FormCacheModel implements CacheModel<Form>, Externalizable {
 	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		formId = objectInput.readLong();
+		active = objectInput.readBoolean();
+		creationDate = objectInput.readLong();
+		modificationDate = objectInput.readLong();
+		modificationUser = objectInput.readUTF();
 		groupId = objectInput.readLong();
 		companyId = objectInput.readLong();
 		userId = objectInput.readLong();
 		userName = objectInput.readUTF();
-		createDate = objectInput.readLong();
-		modifiedDate = objectInput.readLong();
 		formAttrId = objectInput.readUTF();
 		formAttrClass = objectInput.readUTF();
 		title = objectInput.readUTF();
@@ -203,6 +218,17 @@ public class FormCacheModel implements CacheModel<Form>, Externalizable {
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
 		objectOutput.writeLong(formId);
+		objectOutput.writeBoolean(active);
+		objectOutput.writeLong(creationDate);
+		objectOutput.writeLong(modificationDate);
+
+		if (modificationUser == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(modificationUser);
+		}
+
 		objectOutput.writeLong(groupId);
 		objectOutput.writeLong(companyId);
 		objectOutput.writeLong(userId);
@@ -213,9 +239,6 @@ public class FormCacheModel implements CacheModel<Form>, Externalizable {
 		else {
 			objectOutput.writeUTF(userName);
 		}
-
-		objectOutput.writeLong(createDate);
-		objectOutput.writeLong(modifiedDate);
 
 		if (formAttrId == null) {
 			objectOutput.writeUTF(StringPool.BLANK);
@@ -284,12 +307,14 @@ public class FormCacheModel implements CacheModel<Form>, Externalizable {
 	}
 
 	public long formId;
+	public boolean active;
+	public long creationDate;
+	public long modificationDate;
+	public String modificationUser;
 	public long groupId;
 	public long companyId;
 	public long userId;
 	public String userName;
-	public long createDate;
-	public long modifiedDate;
 	public String formAttrId;
 	public String formAttrClass;
 	public String title;

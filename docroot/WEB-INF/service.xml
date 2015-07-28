@@ -8,8 +8,12 @@
 		<!-- PK fields -->
 
 		<column name="formId" type="long" primary="true"></column>
+        <column name="active" type="boolean"></column>
 
 		<!-- Group instance -->
+		<column name="creationDate" type="Date"></column>
+		<column name="modificationDate" type="Date"></column>
+        <column name="modificationUser" type="String"></column>
 
 		<column name="groupId" type="long"></column>
 
@@ -18,8 +22,6 @@
 		<column name="companyId" type="long"></column>
 		<column name="userId" type="long"></column>
 		<column name="userName" type="String"></column>
-		<column name="createDate" type="Date"></column>
-		<column name="modifiedDate" type="Date"></column>
         <column name="formAttrId" type="String"></column>
         <column name="formAttrClass" type="String"></column>
         <column name="title" type="String"></column>
@@ -43,6 +45,10 @@
 		<!-- Group instance -->
 
 		<!-- Audit fields -->
+        <column name="active" type="boolean"></column>
+        <column name="creationDate" type="Date"></column>
+        <column name="modificationDate" type="Date"></column>
+        <column name="modificationUser" type="String"></column>
         <column name="formId" type="long"></column>
         <column name="formItemAttrId" type="String"></column>
         <column name="formItemAttrClass" type="String"></column>
@@ -73,8 +79,12 @@
 		<!-- PK fields -->
 
 		<column name="formToPorletMapId" type="long" primary="true"></column>
+        <column name="active" type="boolean"></column>
 
 		<!-- Group instance -->
+		<column name="creationDate" type="Date"></column>
+		<column name="modificationDate" type="Date"></column>
+        <column name="modificationUser" type="String"></column>
 
 		<column name="groupId" type="long"></column>
 
@@ -83,8 +93,6 @@
 		<column name="companyId" type="long"></column>
 		<column name="userId" type="long"></column>
 		<column name="userName" type="String"></column>
-		<column name="createDate" type="Date"></column>
-		<column name="modifiedDate" type="Date"></column>
 
 
 		<!-- PK fields -->

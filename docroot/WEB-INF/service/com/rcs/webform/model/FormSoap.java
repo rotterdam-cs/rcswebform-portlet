@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -31,12 +31,14 @@ public class FormSoap implements Serializable {
 		FormSoap soapModel = new FormSoap();
 
 		soapModel.setFormId(model.getFormId());
+		soapModel.setActive(model.getActive());
+		soapModel.setCreationDate(model.getCreationDate());
+		soapModel.setModificationDate(model.getModificationDate());
+		soapModel.setModificationUser(model.getModificationUser());
 		soapModel.setGroupId(model.getGroupId());
 		soapModel.setCompanyId(model.getCompanyId());
 		soapModel.setUserId(model.getUserId());
 		soapModel.setUserName(model.getUserName());
-		soapModel.setCreateDate(model.getCreateDate());
-		soapModel.setModifiedDate(model.getModifiedDate());
 		soapModel.setFormAttrId(model.getFormAttrId());
 		soapModel.setFormAttrClass(model.getFormAttrClass());
 		soapModel.setTitle(model.getTitle());
@@ -107,6 +109,42 @@ public class FormSoap implements Serializable {
 		_formId = formId;
 	}
 
+	public boolean getActive() {
+		return _active;
+	}
+
+	public boolean isActive() {
+		return _active;
+	}
+
+	public void setActive(boolean active) {
+		_active = active;
+	}
+
+	public Date getCreationDate() {
+		return _creationDate;
+	}
+
+	public void setCreationDate(Date creationDate) {
+		_creationDate = creationDate;
+	}
+
+	public Date getModificationDate() {
+		return _modificationDate;
+	}
+
+	public void setModificationDate(Date modificationDate) {
+		_modificationDate = modificationDate;
+	}
+
+	public String getModificationUser() {
+		return _modificationUser;
+	}
+
+	public void setModificationUser(String modificationUser) {
+		_modificationUser = modificationUser;
+	}
+
 	public long getGroupId() {
 		return _groupId;
 	}
@@ -137,22 +175,6 @@ public class FormSoap implements Serializable {
 
 	public void setUserName(String userName) {
 		_userName = userName;
-	}
-
-	public Date getCreateDate() {
-		return _createDate;
-	}
-
-	public void setCreateDate(Date createDate) {
-		_createDate = createDate;
-	}
-
-	public Date getModifiedDate() {
-		return _modifiedDate;
-	}
-
-	public void setModifiedDate(Date modifiedDate) {
-		_modifiedDate = modifiedDate;
 	}
 
 	public String getFormAttrId() {
@@ -240,12 +262,14 @@ public class FormSoap implements Serializable {
 	}
 
 	private long _formId;
+	private boolean _active;
+	private Date _creationDate;
+	private Date _modificationDate;
+	private String _modificationUser;
 	private long _groupId;
 	private long _companyId;
 	private long _userId;
 	private String _userName;
-	private Date _createDate;
-	private Date _modifiedDate;
 	private String _formAttrId;
 	private String _formAttrClass;
 	private String _title;

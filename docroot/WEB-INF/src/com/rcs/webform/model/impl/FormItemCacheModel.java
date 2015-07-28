@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -25,6 +25,8 @@ import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectOutput;
 
+import java.util.Date;
+
 /**
  * The cache model class for representing FormItem in entity cache.
  *
@@ -35,10 +37,18 @@ import java.io.ObjectOutput;
 public class FormItemCacheModel implements CacheModel<FormItem>, Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(37);
+		StringBundler sb = new StringBundler(45);
 
 		sb.append("{formItemId=");
 		sb.append(formItemId);
+		sb.append(", active=");
+		sb.append(active);
+		sb.append(", creationDate=");
+		sb.append(creationDate);
+		sb.append(", modificationDate=");
+		sb.append(modificationDate);
+		sb.append(", modificationUser=");
+		sb.append(modificationUser);
 		sb.append(", formId=");
 		sb.append(formId);
 		sb.append(", formItemAttrId=");
@@ -83,6 +93,29 @@ public class FormItemCacheModel implements CacheModel<FormItem>, Externalizable 
 		FormItemImpl formItemImpl = new FormItemImpl();
 
 		formItemImpl.setFormItemId(formItemId);
+		formItemImpl.setActive(active);
+
+		if (creationDate == Long.MIN_VALUE) {
+			formItemImpl.setCreationDate(null);
+		}
+		else {
+			formItemImpl.setCreationDate(new Date(creationDate));
+		}
+
+		if (modificationDate == Long.MIN_VALUE) {
+			formItemImpl.setModificationDate(null);
+		}
+		else {
+			formItemImpl.setModificationDate(new Date(modificationDate));
+		}
+
+		if (modificationUser == null) {
+			formItemImpl.setModificationUser(StringPool.BLANK);
+		}
+		else {
+			formItemImpl.setModificationUser(modificationUser);
+		}
+
 		formItemImpl.setFormId(formId);
 
 		if (formItemAttrId == null) {
@@ -195,6 +228,10 @@ public class FormItemCacheModel implements CacheModel<FormItem>, Externalizable 
 	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		formItemId = objectInput.readLong();
+		active = objectInput.readBoolean();
+		creationDate = objectInput.readLong();
+		modificationDate = objectInput.readLong();
+		modificationUser = objectInput.readUTF();
 		formId = objectInput.readLong();
 		formItemAttrId = objectInput.readUTF();
 		formItemAttrClass = objectInput.readUTF();
@@ -218,6 +255,17 @@ public class FormItemCacheModel implements CacheModel<FormItem>, Externalizable 
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
 		objectOutput.writeLong(formItemId);
+		objectOutput.writeBoolean(active);
+		objectOutput.writeLong(creationDate);
+		objectOutput.writeLong(modificationDate);
+
+		if (modificationUser == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(modificationUser);
+		}
+
 		objectOutput.writeLong(formId);
 
 		if (formItemAttrId == null) {
@@ -324,6 +372,10 @@ public class FormItemCacheModel implements CacheModel<FormItem>, Externalizable 
 	}
 
 	public long formItemId;
+	public boolean active;
+	public long creationDate;
+	public long modificationDate;
+	public String modificationUser;
 	public long formId;
 	public String formItemAttrId;
 	public String formItemAttrClass;

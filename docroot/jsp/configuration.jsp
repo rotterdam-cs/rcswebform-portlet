@@ -5,6 +5,8 @@ String titleXml = GetterUtil.getString(LocalizationUtil.getLocalizationXmlFromPr
 String descriptionXml = GetterUtil.getString(LocalizationUtil.getLocalizationXmlFromPreferences(portletPreferences, renderRequest, "description"), StringPool.BLANK);
 boolean requireCaptcha = GetterUtil.getBoolean(portletPreferences.getValue("requireCaptcha", StringPool.BLANK));
 String successURL = portletPreferences.getValue("successURL", StringPool.BLANK);
+
+boolean fieldsEditingDisabled = false;
 %>
 
 <liferay-portlet:actionURL portletConfiguration="true" var="configurationActionURL" />
@@ -14,8 +16,11 @@ String successURL = portletPreferences.getValue("successURL", StringPool.BLANK);
 <aui:form action="<%= configurationActionURL %>" method="POST" name="fmConfig">
 	<aui:input name="formId" type="hidden" value="0"/>
 	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
+	<aui:input name="redirect" type="hidden" value="<%= configurationRenderURL %>" />
+
+	<liferay-ui:error exception="<%= DuplicateColumnNameException.class %>" message="please-enter-unique-field-names" />
 	
-	<liferay-ui:panel-container extended="true" id="webFormConfiguration">
+	<liferay-ui:panel-container extended="true" id="webFormConfiguration" >
 		<liferay-ui:panel collapsible="true" extended="true" id="webFormGeneral" persistState="true" title="Form Information">
 			<aui:fieldset>
 				<aui:field-wrapper label="Title">
@@ -59,8 +64,88 @@ String successURL = portletPreferences.getValue("successURL", StringPool.BLANK);
 		</liferay-ui:panel>
 		
 		<liferay-ui:panel collapsible="true" extended="true" id="webFormFields" persistState="true" title="Form Fields">
-			<aui:fieldset>
+		<%-- 	<aui:fieldset>
 				Form fields to be put here
+			</aui:fieldset> --%>
+			<aui:fieldset cssClass="rows-container webFields">
+				<c:if test="<%= fieldsEditingDisabled %>">
+					<div class="alert">
+						<liferay-ui:message key="there-is-existing-form-data-please-export-and-delete-it-before-making-changes-to-the-fields" />
+					</div>
+
+					<c:if test="<%= layoutTypePortlet.hasPortletId(portletResource) %>">
+						<liferay-portlet:resourceURL portletName="<%= portletResource %>" var="exportURL">
+							<portlet:param name="<%= Constants.CMD %>" value="export" />
+						</liferay-portlet:resourceURL>
+
+						<%
+						String taglibExport = "submitForm(document.hrefFm, '" + exportURL + "', false);";
+						%>
+
+						<aui:button onClick="<%= taglibExport %>" value="export-data" />
+
+						<liferay-portlet:actionURL portletName="<%= portletResource %>" var="deleteURL">
+							<portlet:param name="<%= ActionRequest.ACTION_NAME %>" value="deleteData" />
+							<portlet:param name="redirect" value="<%= currentURL %>" />
+						</liferay-portlet:actionURL>
+
+						<%
+						String taglibDelete = "submitForm(document." + renderResponse.getNamespace() + "fm, '" + deleteURL + "');";
+						%>
+
+						<aui:button onClick="<%= taglibDelete %>" value="delete-data" />
+					</c:if>
+
+					<br /><br />
+				</c:if>
+
+				<aui:input name="updateFields" type="hidden" value="<%= !fieldsEditingDisabled %>" />
+
+				<%
+				String formFieldsIndexesParam = ParamUtil.getString(renderRequest, "formFieldsIndexes") ;
+
+				int[] formFieldsIndexes = null;
+
+				if (Validator.isNotNull(formFieldsIndexesParam)) {
+					formFieldsIndexes = StringUtil.split(formFieldsIndexesParam, 0);
+				}
+				else {
+					formFieldsIndexes = new int[0];
+
+					for (int i = 1; true; i++) {
+						String fieldLabel = PrefsParamUtil.getString(portletPreferences, request, "fieldLabel" + i);
+
+						if (Validator.isNull(fieldLabel)) {
+							break;
+						}
+
+						formFieldsIndexes = ArrayUtil.append(formFieldsIndexes, i);
+					}
+
+					if (formFieldsIndexes.length == 0) {
+						formFieldsIndexes = ArrayUtil.append(formFieldsIndexes, -1);
+					}
+				}
+
+				int index = 1;
+
+				for (int formFieldsIndex : formFieldsIndexes) {
+					request.setAttribute("configuration.jsp-index", String.valueOf(index));
+					request.setAttribute("configuration.jsp-formFieldsIndex", String.valueOf(formFieldsIndex));
+					request.setAttribute("configuration.jsp-fieldsEditingDisabled", String.valueOf(fieldsEditingDisabled));
+				%>
+
+					<div class="lfr-form-row" id="<portlet:namespace />fieldset<%= formFieldsIndex %>">
+						<div class="row-fields">
+							<liferay-util:include page="/jsp/edit_field.jsp" servletContext="<%= application %>" />
+						</div>
+					</div>
+
+				<%
+					index++;
+				}
+				%>
+
 			</aui:fieldset>
 		</liferay-ui:panel>
 		
@@ -71,3 +156,98 @@ String successURL = portletPreferences.getValue("successURL", StringPool.BLANK);
 	</aui:button-row>
 	
 </aui:form>
+
+<c:if test="<%= !fieldsEditingDisabled %>">
+	<aui:script use="aui-base,liferay-auto-fields">
+		var toggleOptions = function(event) {
+			var select = this;
+
+			var formRow = select.ancestor('.lfr-form-row');
+			var value = select.val();
+
+			var optionsDiv = formRow.one('.options');
+
+			if ((value == 'options') || (value == 'radio')) {
+				optionsDiv.all('label').show();
+				optionsDiv.show();
+			}
+			else if (value == 'paragraph') {
+
+				// Show just the text field and not the labels since there
+				// are multiple choice inputs
+
+				optionsDiv.all('label').hide();
+				optionsDiv.show();
+			}
+			else {
+				optionsDiv.hide();
+			}
+
+			var optionalControl = formRow.one('.optional-control').ancestor();
+			var labelName = formRow.one('.label-name');
+
+			if (value == 'paragraph') {
+				var inputName = labelName.one('input.field');
+
+				var formFieldsIndex = select.attr('id').match(/\d+$/);
+
+				inputName.val('<liferay-ui:message key="paragraph" />' + formFieldsIndex);
+				inputName.fire('change');
+
+				labelName.hide();
+				optionalControl.hide();
+
+				optionalControl.all('input[type="checkbox"]').attr('checked', 'true');
+				optionalControl.all('input[type="hidden"]').attr('value', 'true');
+			}
+			else {
+				optionalControl.show();
+				labelName.show();
+			}
+		};
+
+		var webFields = A.one('.webFields');
+
+		webFields.all('select').each(toggleOptions);
+
+		webFields.delegate(['change', 'click', 'keydown'], toggleOptions, 'select');
+
+		<c:if test="false">
+			var toggleValidationOptions = function(event) {
+				this.next().toggle();
+			};
+
+			webFields.delegate('click', toggleValidationOptions, '.validation-link');
+		</c:if>
+
+		webFields.delegate(
+			'change',
+			function(event) {
+				var input = event.currentTarget;
+				var row = input.ancestor('.field-row');
+				var label = row.one('.field-title');
+
+				if (label) {
+					label.html(input.get('value'));
+				}
+			},
+			'.label-name input'
+		);
+
+		new Liferay.AutoFields(
+			{
+				contentBox: webFields,
+				fieldIndexes: '<portlet:namespace />formFieldsIndexes',
+				namespace: '<portlet:namespace />',
+				sortable: true,
+				sortableHandle: '.field-label',
+
+				<liferay-portlet:renderURL portletConfiguration="true" var="editFieldURL" windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>">
+					<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.ADD %>" />
+				</liferay-portlet:renderURL>
+
+				url: '<%= editFieldURL %>'
+			}
+		).render();
+	</aui:script>
+</c:if>

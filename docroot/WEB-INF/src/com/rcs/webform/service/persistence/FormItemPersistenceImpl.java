@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -320,6 +320,10 @@ public class FormItemPersistenceImpl extends BasePersistenceImpl<FormItem>
 		formItemImpl.setPrimaryKey(formItem.getPrimaryKey());
 
 		formItemImpl.setFormItemId(formItem.getFormItemId());
+		formItemImpl.setActive(formItem.isActive());
+		formItemImpl.setCreationDate(formItem.getCreationDate());
+		formItemImpl.setModificationDate(formItem.getModificationDate());
+		formItemImpl.setModificationUser(formItem.getModificationUser());
 		formItemImpl.setFormId(formItem.getFormId());
 		formItemImpl.setFormItemAttrId(formItem.getFormItemAttrId());
 		formItemImpl.setFormItemAttrClass(formItem.getFormItemAttrClass());
@@ -657,7 +661,7 @@ public class FormItemPersistenceImpl extends BasePersistenceImpl<FormItem>
 				PropsKeys.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE));
 	private static Log _log = LogFactoryUtil.getLog(FormItemPersistenceImpl.class);
 	private static Set<String> _badColumnNames = SetUtil.fromArray(new String[] {
-				"type", "order"
+				"active", "type", "order"
 			});
 	private static FormItem _nullFormItem = new FormItemImpl() {
 			@Override

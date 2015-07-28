@@ -10,12 +10,14 @@
 		<id name="formId" type="long">
 			<generator class="assigned" />
 		</id>
+		<property name="active" type="com.liferay.portal.dao.orm.hibernate.BooleanType" column="active_" />
+		<property name="creationDate" type="org.hibernate.type.TimestampType" />
+		<property name="modificationDate" type="org.hibernate.type.TimestampType" />
+		<property name="modificationUser" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="userName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="createDate" type="org.hibernate.type.TimestampType" />
-		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
 		<property name="formAttrId" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="formAttrClass" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="title" type="com.liferay.portal.dao.orm.hibernate.StringType" />
@@ -32,6 +34,10 @@
 		<id name="formItemId" type="long">
 			<generator class="assigned" />
 		</id>
+		<property name="active" type="com.liferay.portal.dao.orm.hibernate.BooleanType" column="active_" />
+		<property name="creationDate" type="org.hibernate.type.TimestampType" />
+		<property name="modificationDate" type="org.hibernate.type.TimestampType" />
+		<property name="modificationUser" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="formId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="formItemAttrId" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="formItemAttrClass" type="com.liferay.portal.dao.orm.hibernate.StringType" />
@@ -55,12 +61,14 @@
 		<id name="formToPorletMapId" type="long">
 			<generator class="assigned" />
 		</id>
+		<property name="active" type="com.liferay.portal.dao.orm.hibernate.BooleanType" column="active_" />
+		<property name="creationDate" type="org.hibernate.type.TimestampType" />
+		<property name="modificationDate" type="org.hibernate.type.TimestampType" />
+		<property name="modificationUser" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="userName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="createDate" type="org.hibernate.type.TimestampType" />
-		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
 		<property name="formId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="portletId" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 	</class>

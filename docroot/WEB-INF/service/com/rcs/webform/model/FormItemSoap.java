@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -17,6 +17,7 @@ package com.rcs.webform.model;
 import java.io.Serializable;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -30,6 +31,10 @@ public class FormItemSoap implements Serializable {
 		FormItemSoap soapModel = new FormItemSoap();
 
 		soapModel.setFormItemId(model.getFormItemId());
+		soapModel.setActive(model.getActive());
+		soapModel.setCreationDate(model.getCreationDate());
+		soapModel.setModificationDate(model.getModificationDate());
+		soapModel.setModificationUser(model.getModificationUser());
 		soapModel.setFormId(model.getFormId());
 		soapModel.setFormItemAttrId(model.getFormItemAttrId());
 		soapModel.setFormItemAttrClass(model.getFormItemAttrClass());
@@ -105,6 +110,42 @@ public class FormItemSoap implements Serializable {
 
 	public void setFormItemId(long formItemId) {
 		_formItemId = formItemId;
+	}
+
+	public boolean getActive() {
+		return _active;
+	}
+
+	public boolean isActive() {
+		return _active;
+	}
+
+	public void setActive(boolean active) {
+		_active = active;
+	}
+
+	public Date getCreationDate() {
+		return _creationDate;
+	}
+
+	public void setCreationDate(Date creationDate) {
+		_creationDate = creationDate;
+	}
+
+	public Date getModificationDate() {
+		return _modificationDate;
+	}
+
+	public void setModificationDate(Date modificationDate) {
+		_modificationDate = modificationDate;
+	}
+
+	public String getModificationUser() {
+		return _modificationUser;
+	}
+
+	public void setModificationUser(String modificationUser) {
+		_modificationUser = modificationUser;
 	}
 
 	public long getFormId() {
@@ -248,6 +289,10 @@ public class FormItemSoap implements Serializable {
 	}
 
 	private long _formItemId;
+	private boolean _active;
+	private Date _creationDate;
+	private Date _modificationDate;
+	private String _modificationUser;
 	private long _formId;
 	private String _formItemAttrId;
 	private String _formItemAttrClass;

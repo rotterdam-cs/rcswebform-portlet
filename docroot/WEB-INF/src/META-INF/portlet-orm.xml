@@ -10,16 +10,20 @@
 	<mapped-superclass class="com.rcs.webform.model.impl.FormModelImpl">
 		<attributes>
 			<id name="formId" />
+			<basic name="active">
+				<column name="ACTIVE_" />
+			</basic>
+			<basic name="creationDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="modificationDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="modificationUser" />
 			<basic name="groupId" />
 			<basic name="companyId" />
 			<basic name="userId" />
 			<basic name="userName" />
-			<basic name="createDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-			<basic name="modifiedDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
 			<basic name="formAttrId" />
 			<basic name="formAttrClass" />
 			<basic name="title" />
@@ -41,6 +45,16 @@
 	<mapped-superclass class="com.rcs.webform.model.impl.FormItemModelImpl">
 		<attributes>
 			<id name="formItemId" />
+			<basic name="active">
+				<column name="ACTIVE_" />
+			</basic>
+			<basic name="creationDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="modificationDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="modificationUser" />
 			<basic name="formId" />
 			<basic name="formItemAttrId" />
 			<basic name="formItemAttrClass" />
@@ -70,16 +84,20 @@
 	<mapped-superclass class="com.rcs.webform.model.impl.FormToPorletMapModelImpl">
 		<attributes>
 			<id name="formToPorletMapId" />
+			<basic name="active">
+				<column name="ACTIVE_" />
+			</basic>
+			<basic name="creationDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="modificationDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="modificationUser" />
 			<basic name="groupId" />
 			<basic name="companyId" />
 			<basic name="userId" />
 			<basic name="userName" />
-			<basic name="createDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-			<basic name="modifiedDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
 			<basic name="formId" />
 			<basic name="portletId" />
 			<transient name="modelAttributes" />

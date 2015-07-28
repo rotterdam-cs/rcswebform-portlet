@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -51,12 +51,14 @@ public class FormToPorletMapWrapper implements FormToPorletMap,
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
 		attributes.put("formToPorletMapId", getFormToPorletMapId());
+		attributes.put("active", getActive());
+		attributes.put("creationDate", getCreationDate());
+		attributes.put("modificationDate", getModificationDate());
+		attributes.put("modificationUser", getModificationUser());
 		attributes.put("groupId", getGroupId());
 		attributes.put("companyId", getCompanyId());
 		attributes.put("userId", getUserId());
 		attributes.put("userName", getUserName());
-		attributes.put("createDate", getCreateDate());
-		attributes.put("modifiedDate", getModifiedDate());
 		attributes.put("formId", getFormId());
 		attributes.put("portletId", getPortletId());
 
@@ -69,6 +71,30 @@ public class FormToPorletMapWrapper implements FormToPorletMap,
 
 		if (formToPorletMapId != null) {
 			setFormToPorletMapId(formToPorletMapId);
+		}
+
+		Boolean active = (Boolean)attributes.get("active");
+
+		if (active != null) {
+			setActive(active);
+		}
+
+		Date creationDate = (Date)attributes.get("creationDate");
+
+		if (creationDate != null) {
+			setCreationDate(creationDate);
+		}
+
+		Date modificationDate = (Date)attributes.get("modificationDate");
+
+		if (modificationDate != null) {
+			setModificationDate(modificationDate);
+		}
+
+		String modificationUser = (String)attributes.get("modificationUser");
+
+		if (modificationUser != null) {
+			setModificationUser(modificationUser);
 		}
 
 		Long groupId = (Long)attributes.get("groupId");
@@ -93,18 +119,6 @@ public class FormToPorletMapWrapper implements FormToPorletMap,
 
 		if (userName != null) {
 			setUserName(userName);
-		}
-
-		Date createDate = (Date)attributes.get("createDate");
-
-		if (createDate != null) {
-			setCreateDate(createDate);
-		}
-
-		Date modifiedDate = (Date)attributes.get("modifiedDate");
-
-		if (modifiedDate != null) {
-			setModifiedDate(modifiedDate);
 		}
 
 		Long formId = (Long)attributes.get("formId");
@@ -158,6 +172,96 @@ public class FormToPorletMapWrapper implements FormToPorletMap,
 	@Override
 	public void setFormToPorletMapId(long formToPorletMapId) {
 		_formToPorletMap.setFormToPorletMapId(formToPorletMapId);
+	}
+
+	/**
+	* Returns the active of this form to porlet map.
+	*
+	* @return the active of this form to porlet map
+	*/
+	@Override
+	public boolean getActive() {
+		return _formToPorletMap.getActive();
+	}
+
+	/**
+	* Returns <code>true</code> if this form to porlet map is active.
+	*
+	* @return <code>true</code> if this form to porlet map is active; <code>false</code> otherwise
+	*/
+	@Override
+	public boolean isActive() {
+		return _formToPorletMap.isActive();
+	}
+
+	/**
+	* Sets whether this form to porlet map is active.
+	*
+	* @param active the active of this form to porlet map
+	*/
+	@Override
+	public void setActive(boolean active) {
+		_formToPorletMap.setActive(active);
+	}
+
+	/**
+	* Returns the creation date of this form to porlet map.
+	*
+	* @return the creation date of this form to porlet map
+	*/
+	@Override
+	public java.util.Date getCreationDate() {
+		return _formToPorletMap.getCreationDate();
+	}
+
+	/**
+	* Sets the creation date of this form to porlet map.
+	*
+	* @param creationDate the creation date of this form to porlet map
+	*/
+	@Override
+	public void setCreationDate(java.util.Date creationDate) {
+		_formToPorletMap.setCreationDate(creationDate);
+	}
+
+	/**
+	* Returns the modification date of this form to porlet map.
+	*
+	* @return the modification date of this form to porlet map
+	*/
+	@Override
+	public java.util.Date getModificationDate() {
+		return _formToPorletMap.getModificationDate();
+	}
+
+	/**
+	* Sets the modification date of this form to porlet map.
+	*
+	* @param modificationDate the modification date of this form to porlet map
+	*/
+	@Override
+	public void setModificationDate(java.util.Date modificationDate) {
+		_formToPorletMap.setModificationDate(modificationDate);
+	}
+
+	/**
+	* Returns the modification user of this form to porlet map.
+	*
+	* @return the modification user of this form to porlet map
+	*/
+	@Override
+	public java.lang.String getModificationUser() {
+		return _formToPorletMap.getModificationUser();
+	}
+
+	/**
+	* Sets the modification user of this form to porlet map.
+	*
+	* @param modificationUser the modification user of this form to porlet map
+	*/
+	@Override
+	public void setModificationUser(java.lang.String modificationUser) {
+		_formToPorletMap.setModificationUser(modificationUser);
 	}
 
 	/**
@@ -260,46 +364,6 @@ public class FormToPorletMapWrapper implements FormToPorletMap,
 	@Override
 	public void setUserName(java.lang.String userName) {
 		_formToPorletMap.setUserName(userName);
-	}
-
-	/**
-	* Returns the create date of this form to porlet map.
-	*
-	* @return the create date of this form to porlet map
-	*/
-	@Override
-	public java.util.Date getCreateDate() {
-		return _formToPorletMap.getCreateDate();
-	}
-
-	/**
-	* Sets the create date of this form to porlet map.
-	*
-	* @param createDate the create date of this form to porlet map
-	*/
-	@Override
-	public void setCreateDate(java.util.Date createDate) {
-		_formToPorletMap.setCreateDate(createDate);
-	}
-
-	/**
-	* Returns the modified date of this form to porlet map.
-	*
-	* @return the modified date of this form to porlet map
-	*/
-	@Override
-	public java.util.Date getModifiedDate() {
-		return _formToPorletMap.getModifiedDate();
-	}
-
-	/**
-	* Sets the modified date of this form to porlet map.
-	*
-	* @param modifiedDate the modified date of this form to porlet map
-	*/
-	@Override
-	public void setModifiedDate(java.util.Date modifiedDate) {
-		_formToPorletMap.setModifiedDate(modifiedDate);
 	}
 
 	/**
@@ -406,7 +470,7 @@ public class FormToPorletMapWrapper implements FormToPorletMap,
 	}
 
 	@Override
-	public int compareTo(FormToPorletMap formToPorletMap) {
+	public int compareTo(com.rcs.webform.model.FormToPorletMap formToPorletMap) {
 		return _formToPorletMap.compareTo(formToPorletMap);
 	}
 
@@ -416,17 +480,17 @@ public class FormToPorletMapWrapper implements FormToPorletMap,
 	}
 
 	@Override
-	public com.liferay.portal.model.CacheModel<FormToPorletMap> toCacheModel() {
+	public com.liferay.portal.model.CacheModel<com.rcs.webform.model.FormToPorletMap> toCacheModel() {
 		return _formToPorletMap.toCacheModel();
 	}
 
 	@Override
-	public FormToPorletMap toEscapedModel() {
+	public com.rcs.webform.model.FormToPorletMap toEscapedModel() {
 		return new FormToPorletMapWrapper(_formToPorletMap.toEscapedModel());
 	}
 
 	@Override
-	public FormToPorletMap toUnescapedModel() {
+	public com.rcs.webform.model.FormToPorletMap toUnescapedModel() {
 		return new FormToPorletMapWrapper(_formToPorletMap.toUnescapedModel());
 	}
 
