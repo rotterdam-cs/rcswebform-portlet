@@ -3,8 +3,6 @@
 <%
 String titleXml = GetterUtil.getString(LocalizationUtil.getLocalizationXmlFromPreferences(portletPreferences, renderRequest, "title"), StringPool.BLANK);
 String descriptionXml = GetterUtil.getString(LocalizationUtil.getLocalizationXmlFromPreferences(portletPreferences, renderRequest, "description"), StringPool.BLANK);
-boolean requireCaptcha = GetterUtil.getBoolean(portletPreferences.getValue("requireCaptcha", StringPool.BLANK));
-String successURL = portletPreferences.getValue("successURL", StringPool.BLANK);
 boolean sendAsEmail = GetterUtil.getBoolean(portletPreferences.getValue("sendAsEmail", StringPool.BLANK));
 String emailFromName = portletPreferences.getValue("emailFromName", StringPool.BLANK);
 String emailFromAddress = portletPreferences.getValue("emailFromAddress", StringPool.BLANK);
@@ -54,7 +52,7 @@ boolean saveToDatabase = GetterUtil.getBoolean(portletPreferences.getValue("save
 				<liferay-ui:error key="handlingRequired" message="Please select an action for the handling of form data" />
 				<liferay-ui:error key="subjectRequired" message="Please enter a subject" />
 				
-				<aui:input name="preferences--sendAsEmail--" label="Send data as email" type="checkbox" value="<%= sendAsEmail %>"></aui:input>
+				<aui:input name="preferences--sendAsEmail--" cssClass="sendAsEmailChkBox" label="Send data as email" type="checkbox" value="<%= sendAsEmail %>"></aui:input>
 				
 				<aui:fieldset>
 					<aui:input name="preferences--emailFromName--" label="Name From" value="<%= emailFromName %>"></aui:input>
