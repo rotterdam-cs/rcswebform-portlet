@@ -337,6 +337,7 @@ public class FormItemPersistenceImpl extends BasePersistenceImpl<FormItem>
 		formItemImpl.setValidationRegexValue(formItem.getValidationRegexValue());
 		formItemImpl.setErrorValidationMessage(formItem.getErrorValidationMessage());
 		formItemImpl.setErrorMandatoryMessage(formItem.getErrorMandatoryMessage());
+		formItemImpl.setHintMessage(formItem.getHintMessage());
 
 		return formItemImpl;
 	}

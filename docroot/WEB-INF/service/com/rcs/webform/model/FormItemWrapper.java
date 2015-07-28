@@ -66,6 +66,7 @@ public class FormItemWrapper implements FormItem, ModelWrapper<FormItem> {
 		attributes.put("validationRegexValue", getValidationRegexValue());
 		attributes.put("errorValidationMessage", getErrorValidationMessage());
 		attributes.put("errorMandatoryMessage", getErrorMandatoryMessage());
+		attributes.put("hintMessage", getHintMessage());
 
 		return attributes;
 	}
@@ -181,6 +182,12 @@ public class FormItemWrapper implements FormItem, ModelWrapper<FormItem> {
 
 		if (errorMandatoryMessage != null) {
 			setErrorMandatoryMessage(errorMandatoryMessage);
+		}
+
+		String hintMessage = (String)attributes.get("hintMessage");
+
+		if (hintMessage != null) {
+			setHintMessage(hintMessage);
 		}
 	}
 
@@ -575,6 +582,26 @@ public class FormItemWrapper implements FormItem, ModelWrapper<FormItem> {
 		_formItem.setErrorMandatoryMessage(errorMandatoryMessage);
 	}
 
+	/**
+	* Returns the hint message of this form item.
+	*
+	* @return the hint message of this form item
+	*/
+	@Override
+	public java.lang.String getHintMessage() {
+		return _formItem.getHintMessage();
+	}
+
+	/**
+	* Sets the hint message of this form item.
+	*
+	* @param hintMessage the hint message of this form item
+	*/
+	@Override
+	public void setHintMessage(java.lang.String hintMessage) {
+		_formItem.setHintMessage(hintMessage);
+	}
+
 	@Override
 	public boolean isNew() {
 		return _formItem.isNew();
@@ -639,7 +666,7 @@ public class FormItemWrapper implements FormItem, ModelWrapper<FormItem> {
 	}
 
 	@Override
-	public int compareTo(FormItem formItem) {
+	public int compareTo(com.rcs.webform.model.FormItem formItem) {
 		return _formItem.compareTo(formItem);
 	}
 
@@ -649,17 +676,17 @@ public class FormItemWrapper implements FormItem, ModelWrapper<FormItem> {
 	}
 
 	@Override
-	public com.liferay.portal.model.CacheModel<FormItem> toCacheModel() {
+	public com.liferay.portal.model.CacheModel<com.rcs.webform.model.FormItem> toCacheModel() {
 		return _formItem.toCacheModel();
 	}
 
 	@Override
-	public FormItem toEscapedModel() {
+	public com.rcs.webform.model.FormItem toEscapedModel() {
 		return new FormItemWrapper(_formItem.toEscapedModel());
 	}
 
 	@Override
-	public FormItem toUnescapedModel() {
+	public com.rcs.webform.model.FormItem toUnescapedModel() {
 		return new FormItemWrapper(_formItem.toUnescapedModel());
 	}
 
