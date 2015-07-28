@@ -1,6 +1,6 @@
 package com.rcs.webform.entity.dto;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 
 public class FormDTO{
