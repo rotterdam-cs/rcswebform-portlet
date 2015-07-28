@@ -39,6 +39,7 @@
 		<field name="validationRegexValue" type="String" />
 		<field name="errorValidationMessage" type="String" />
 		<field name="errorMandatoryMessage" type="String" />
+		<field name="hintMessage" type="String" />
 	</model>
 	<model name="com.rcs.webform.model.FormToPorletMap">
 		<field name="formToPorletMapId" type="long" />

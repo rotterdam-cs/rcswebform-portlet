@@ -36,7 +36,8 @@ create table rcswebform_FormItem (
 	validationType VARCHAR(75) null,
 	validationRegexValue VARCHAR(75) null,
 	errorValidationMessage VARCHAR(75) null,
-	errorMandatoryMessage VARCHAR(75) null
+	errorMandatoryMessage VARCHAR(75) null,
+	hintMessage VARCHAR(75) null
 );
 
 create table rcswebform_FormToPorletMap (
