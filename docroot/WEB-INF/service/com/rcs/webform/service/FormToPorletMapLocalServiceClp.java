@@ -121,6 +121,13 @@ public class FormToPorletMapLocalServiceClp
 		_methodParameterTypes19 = new String[] {
 				"long", "long", "java.lang.String"
 			};
+
+		_methodName20 = "save";
+
+		_methodParameterTypes20 = new String[] {
+				"java.lang.Long", "java.lang.String", "java.lang.Long",
+				"com.liferay.portal.service.ServiceContext"
+			};
 	}
 
 	@Override
@@ -704,6 +711,41 @@ public class FormToPorletMapLocalServiceClp
 		return (com.rcs.webform.model.FormToPorletMap)ClpSerializer.translateOutput(returnObj);
 	}
 
+	@Override
+	public com.rcs.webform.model.FormToPorletMap save(
+		java.lang.Long formToPortletId, java.lang.String namespace,
+		java.lang.Long formId,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableLocalService.invokeMethod(_methodName20,
+					_methodParameterTypes20,
+					new Object[] {
+						ClpSerializer.translateInput(formToPortletId),
+						
+					ClpSerializer.translateInput(namespace),
+						
+					ClpSerializer.translateInput(formId),
+						
+					ClpSerializer.translateInput(serviceContext)
+					});
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (com.rcs.webform.model.FormToPorletMap)ClpSerializer.translateOutput(returnObj);
+	}
+
 	private InvokableLocalService _invokableLocalService;
 	private String _methodName0;
 	private String[] _methodParameterTypes0;
@@ -743,4 +785,6 @@ public class FormToPorletMapLocalServiceClp
 	private String[] _methodParameterTypes17;
 	private String _methodName19;
 	private String[] _methodParameterTypes19;
+	private String _methodName20;
+	private String[] _methodParameterTypes20;
 }

@@ -296,6 +296,15 @@ public class FormToPorletMapLocalServiceWrapper
 			companyId, portletId);
 	}
 
+	@Override
+	public com.rcs.webform.model.FormToPorletMap save(
+		java.lang.Long formToPortletId, java.lang.String namespace,
+		java.lang.Long formId,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return _formToPorletMapLocalService.save(formToPortletId, namespace,
+			formId, serviceContext);
+	}
+
 	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */

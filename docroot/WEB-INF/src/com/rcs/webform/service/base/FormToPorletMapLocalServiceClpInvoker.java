@@ -119,6 +119,13 @@ public class FormToPorletMapLocalServiceClpInvoker {
 		_methodParameterTypes46 = new String[] {
 				"long", "long", "java.lang.String"
 			};
+
+		_methodName47 = "save";
+
+		_methodParameterTypes47 = new String[] {
+				"java.lang.Long", "java.lang.String", "java.lang.Long",
+				"com.liferay.portal.service.ServiceContext"
+			};
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -228,6 +235,13 @@ public class FormToPorletMapLocalServiceClpInvoker {
 				((Long)arguments[1]).longValue(), (java.lang.String)arguments[2]);
 		}
 
+		if (_methodName47.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes47, parameterTypes)) {
+			return FormToPorletMapLocalServiceUtil.save((java.lang.Long)arguments[0],
+				(java.lang.String)arguments[1], (java.lang.Long)arguments[2],
+				(com.liferay.portal.service.ServiceContext)arguments[3]);
+		}
+
 		throw new UnsupportedOperationException();
 	}
 
@@ -269,4 +283,6 @@ public class FormToPorletMapLocalServiceClpInvoker {
 	private String[] _methodParameterTypes41;
 	private String _methodName46;
 	private String[] _methodParameterTypes46;
+	private String _methodName47;
+	private String[] _methodParameterTypes47;
 }

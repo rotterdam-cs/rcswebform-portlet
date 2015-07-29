@@ -22,10 +22,13 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
+import com.liferay.portal.util.PortalUtil;
 import com.rcs.webform.model.Form;
 import com.rcs.webform.model.FormItem;
+import com.rcs.webform.model.FormToPorletMap;
 import com.rcs.webform.service.FormItemLocalServiceUtil;
 import com.rcs.webform.service.FormLocalServiceUtil;
+import com.rcs.webform.service.FormToPorletMapLocalServiceUtil;
 
 public class ConfigurationActionImpl extends DefaultConfigurationAction {
 
@@ -69,9 +72,18 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 		log.info("On submit data value: " + ParamUtil.getString(actionRequest, "onSubmitData"));
 		log.info("Success message: " + successMessage);
 		log.info("Success URL: " + successUrl);
+		log.info("Portlet id: " + PortalUtil.getPortletId(actionRequest));
 		
-		FormLocalServiceUtil.add(formId, formServiceContext, title, description, useCaptcha, 
+		Form form = FormLocalServiceUtil.add(formId, formServiceContext, title, description, useCaptcha, 
 				successMessage, successUrl, submitLabel);
+		
+		//Save form-portlet mapping to database
+		ServiceContext formPortletMappingServiceContext = ServiceContextFactory.getInstance(FormToPorletMap.class.getName(), actionRequest);
+		Long formToPortletId = null;
+		if (ParamUtil.getLong(actionRequest, "formToPortletMapId")!=0){
+			formToPortletId = ParamUtil.getLong(actionRequest, "formToPortletMapId");
+		}
+		FormToPorletMapLocalServiceUtil.save(formToPortletId, PortalUtil.getPortletId(actionRequest), form.getFormId(), formPortletMappingServiceContext);
 		
 		boolean updateFields = ParamUtil.getBoolean(actionRequest, "updateFields");
 

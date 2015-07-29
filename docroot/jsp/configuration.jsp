@@ -21,8 +21,8 @@ boolean fieldsEditingDisabled = false;
 
 <aui:form action="<%= configurationActionURL %>" method="POST" name="fmConfig">
 	<aui:input name="formId" type="hidden" value="0"/>
+	<aui:input name="formToPortletMapId" type="hidden" value="0"/>
 	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
-	<input type="hidden" name="<portlet:namespace/>portletNamespace" value="<portlet:namespace/>"/>
 	<aui:input name="redirect" type="hidden" value="<%= configurationRenderURL %>" />
 
 	<liferay-ui:error exception="<%= DuplicateColumnNameException.class %>" message="please-enter-unique-field-names" />
