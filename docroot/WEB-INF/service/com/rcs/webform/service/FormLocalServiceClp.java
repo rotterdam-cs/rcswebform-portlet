@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -107,6 +107,14 @@ public class FormLocalServiceClp implements FormLocalService {
 		_methodName17 = "setBeanIdentifier";
 
 		_methodParameterTypes17 = new String[] { "java.lang.String" };
+
+		_methodName19 = "add";
+
+		_methodParameterTypes19 = new String[] {
+				"java.lang.Long", "com.liferay.portal.service.ServiceContext",
+				"java.lang.String", "java.lang.String", "boolean",
+				"java.lang.String", "java.lang.String", "java.lang.String"
+			};
 	}
 
 	@Override
@@ -653,6 +661,50 @@ public class FormLocalServiceClp implements FormLocalService {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
+	public com.rcs.webform.model.Form add(java.lang.Long formId,
+		com.liferay.portal.service.ServiceContext serviceContext,
+		java.lang.String title, java.lang.String description,
+		boolean useCaptcha, java.lang.String successMessage,
+		java.lang.String successUrl, java.lang.String submitLabel) {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableLocalService.invokeMethod(_methodName19,
+					_methodParameterTypes19,
+					new Object[] {
+						ClpSerializer.translateInput(formId),
+						
+					ClpSerializer.translateInput(serviceContext),
+						
+					ClpSerializer.translateInput(title),
+						
+					ClpSerializer.translateInput(description),
+						
+					useCaptcha,
+						
+					ClpSerializer.translateInput(successMessage),
+						
+					ClpSerializer.translateInput(successUrl),
+						
+					ClpSerializer.translateInput(submitLabel)
+					});
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (com.rcs.webform.model.Form)ClpSerializer.translateOutput(returnObj);
+	}
+
 	private InvokableLocalService _invokableLocalService;
 	private String _methodName0;
 	private String[] _methodParameterTypes0;
@@ -690,4 +742,6 @@ public class FormLocalServiceClp implements FormLocalService {
 	private String[] _methodParameterTypes16;
 	private String _methodName17;
 	private String[] _methodParameterTypes17;
+	private String _methodName19;
+	private String[] _methodParameterTypes19;
 }

@@ -14,6 +14,13 @@
 
 package com.rcs.webform.service.impl;
 
+import java.util.Date;
+
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.model.User;
+import com.liferay.portal.service.ServiceContext;
+import com.rcs.webform.model.Form;
 import com.rcs.webform.service.base.FormLocalServiceBaseImpl;
 
 /**
@@ -31,9 +38,46 @@ import com.rcs.webform.service.base.FormLocalServiceBaseImpl;
  * @see com.rcs.webform.service.FormLocalServiceUtil
  */
 public class FormLocalServiceImpl extends FormLocalServiceBaseImpl {
-	/*
-	 * NOTE FOR DEVELOPERS:
-	 *
-	 * Never reference this interface directly. Always use {@link com.rcs.webform.service.FormLocalServiceUtil} to access the form local service.
-	 */
+	
+	private static Log log = LogFactoryUtil.getLog(FormLocalServiceImpl.class);
+	
+	public Form add(Long formId, ServiceContext serviceContext, String title, String description, boolean useCaptcha,
+			String successMessage, String successUrl, String submitLabel){
+		User user = null;
+		Form form = null;
+		Date now = new Date();
+		
+		try {
+			user = userLocalService.getUserById(serviceContext.getUserId());
+			if(formId == null){
+				formId = counterLocalService.increment(Form.class.getName());
+			}
+			form = formPersistence.create(formId);
+			form.setActive(true);
+			form.setCreationDate(serviceContext.getCreateDate(now));
+			form.setModificationDate(serviceContext.getCreateDate(now));
+			form.setModificationUser(user.getFullName());
+			form.setGroupId(serviceContext.getScopeGroupId());
+			form.setCompanyId(serviceContext.getCompanyId());
+			form.setUserId(user.getUserId());
+			form.setUserName(user.getEmailAddress());
+			form.setFormAttrId("");
+			form.setFormAttrClass("");
+			form.setTitle(title);
+			form.setDesc(description);
+			form.setUseCaptcha(useCaptcha);
+			form.setSuccessMessage(successMessage);
+			form.setSuccessURL(successUrl);
+			form.setSubmitLabel(submitLabel);
+			form.setSubmitAttrClass("");
+			form.setSubmitAttrId("");
+			
+			formPersistence.update(form);
+		} catch (Exception e) {
+			log.error("Exception while adding form: " + e.getMessage(), e);
+		}
+		
+		return form;
+	}
+	
 }
