@@ -72,7 +72,6 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 		log.info("On submit data value: " + ParamUtil.getString(actionRequest, "onSubmitData"));
 		log.info("Success message: " + successMessage);
 		log.info("Success URL: " + successUrl);
-		log.info("Portlet id: " + PortalUtil.getPortletId(actionRequest));
 		
 		Form form = FormLocalServiceUtil.add(formId, formServiceContext, title, description, useCaptcha, 
 				successMessage, successUrl, submitLabel);
@@ -83,7 +82,7 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 		if (ParamUtil.getLong(actionRequest, "formToPortletMapId")!=0){
 			formToPortletId = ParamUtil.getLong(actionRequest, "formToPortletMapId");
 		}
-		FormToPorletMapLocalServiceUtil.save(formToPortletId, PortalUtil.getPortletId(actionRequest), form.getFormId(), formPortletMappingServiceContext);
+		FormToPorletMapLocalServiceUtil.save(formToPortletId, portletResource, form.getFormId(), formPortletMappingServiceContext);
 		
 		boolean updateFields = ParamUtil.getBoolean(actionRequest, "updateFields");
 
