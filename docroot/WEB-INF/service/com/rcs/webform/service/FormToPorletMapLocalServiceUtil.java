@@ -282,6 +282,14 @@ public class FormToPorletMapLocalServiceUtil {
 			companyId, portletId);
 	}
 
+	public static com.rcs.webform.model.FormToPorletMap save(
+		java.lang.Long formToPortletId, java.lang.String namespace,
+		java.lang.Long formId,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return getService()
+				   .save(formToPortletId, namespace, formId, serviceContext);
+	}
+
 	public static void clearService() {
 		_service = null;
 	}

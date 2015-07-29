@@ -257,4 +257,9 @@ public interface FormToPorletMapLocalService extends BaseLocalService,
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.rcs.webform.model.FormToPorletMap getFormToPortletMapByGroupColumnPortletId(
 		long groupId, long companyId, java.lang.String portletId);
+
+	public com.rcs.webform.model.FormToPorletMap save(
+		java.lang.Long formToPortletId, java.lang.String namespace,
+		java.lang.Long formId,
+		com.liferay.portal.service.ServiceContext serviceContext);
 }

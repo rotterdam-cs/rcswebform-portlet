@@ -13,8 +13,13 @@
 ##
 
     build.namespace=rcswebform
-    build.number=20
-    build.date=1438170343164
+<<<<<<< HEAD
+    build.number=19
+    build.date=1438157313578
+=======
+    build.number=13
+    build.date=1438154574499
+>>>>>>> 36be01feb5bc9e0da1629e020a54a1572446016c
     build.auto.upgrade=true
 
 ##

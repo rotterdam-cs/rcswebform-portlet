@@ -14,10 +14,12 @@
 
 package com.rcs.webform.service.impl;
 
-import com.liferay.portal.kernel.exception.SystemException;
+import java.util.Date;
+
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.rcs.webform.NoSuchFormToPorletMapException;
+import com.liferay.portal.model.User;
+import com.liferay.portal.service.ServiceContext;
 import com.rcs.webform.model.FormToPorletMap;
 import com.rcs.webform.service.base.FormToPorletMapLocalServiceBaseImpl;
 import com.rcs.webform.service.persistence.FormToPorletMapUtil;
@@ -57,6 +59,36 @@ public class FormToPorletMapLocalServiceImpl extends FormToPorletMapLocalService
                     + "] : " + e.getMessage(), e);
             return null;
         }
+    }
+    
+    public FormToPorletMap save(Long formToPortletId, String namespace, Long formId, ServiceContext serviceContext){
+    	User user = null;
+    	FormToPorletMap formToPortletMap = null;
+    	Date now = new Date();
+    	
+    	try {
+			user = userLocalService.getUserById(serviceContext.getUserId());
+			if (formToPortletId == null){
+				formToPortletId = counterLocalService.increment(FormToPorletMap.class.getName());
+			}
+			formToPortletMap = formToPorletMapPersistence.create(formToPortletId);
+			formToPortletMap.setActive(true);
+			formToPortletMap.setCreationDate(serviceContext.getCreateDate(now));
+			formToPortletMap.setModificationDate(serviceContext.getCreateDate(now));
+			formToPortletMap.setModificationUser(user.getFullName());
+			formToPortletMap.setGroupId(serviceContext.getScopeGroupId());
+			formToPortletMap.setCompanyId(serviceContext.getCompanyId());
+			formToPortletMap.setUserId(user.getUserId());
+			formToPortletMap.setUserName(user.getEmailAddress());
+			formToPortletMap.setFormId(formId);
+			formToPortletMap.setPortletId(namespace);
+			
+			formToPorletMapPersistence.update(formToPortletMap);
+		} catch (Exception e) {
+			log.error("Exception while adding form to portlet map: ", e);
+		}
+    	
+    	return formToPortletMap;
     }
 
 }
