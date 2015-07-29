@@ -36,9 +36,17 @@
 			<basic name="submitLabel" />
 			<basic name="submitAttrId" />
 			<basic name="submitAttrClass" />
+			<transient name="descCurrentLanguageId" />
+			<transient name="descMap" />
 			<transient name="modelAttributes" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />
+			<transient name="submitLabelCurrentLanguageId" />
+			<transient name="submitLabelMap" />
+			<transient name="successMessageCurrentLanguageId" />
+			<transient name="successMessageMap" />
+			<transient name="titleCurrentLanguageId" />
+			<transient name="titleMap" />
 			<transient name="userUuid" />
 		</attributes>
 	</mapped-superclass>
@@ -77,7 +85,19 @@
 			<basic name="errorValidationMessage" />
 			<basic name="errorMandatoryMessage" />
 			<basic name="hintMessage" />
+			<transient name="defaultValueCurrentLanguageId" />
+			<transient name="defaultValueMap" />
+			<transient name="errorMandatoryMessageCurrentLanguageId" />
+			<transient name="errorMandatoryMessageMap" />
+			<transient name="errorValidationMessageCurrentLanguageId" />
+			<transient name="errorValidationMessageMap" />
+			<transient name="hintMessageCurrentLanguageId" />
+			<transient name="hintMessageMap" />
+			<transient name="labelCurrentLanguageId" />
+			<transient name="labelMap" />
 			<transient name="modelAttributes" />
+			<transient name="optionsCurrentLanguageId" />
+			<transient name="optionsMap" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />
 		</attributes>

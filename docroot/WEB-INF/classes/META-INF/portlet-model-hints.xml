@@ -13,12 +13,12 @@
 		<field name="userName" type="String" />
 		<field name="formAttrId" type="String" />
 		<field name="formAttrClass" type="String" />
-		<field name="title" type="String" />
-		<field name="desc" type="String" />
+		<field name="title" type="String" localized="true" />
+		<field name="desc" type="String" localized="true" />
 		<field name="useCaptcha" type="boolean" />
-		<field name="successMessage" type="String" />
+		<field name="successMessage" type="String" localized="true" />
 		<field name="successURL" type="String" />
-		<field name="submitLabel" type="String" />
+		<field name="submitLabel" type="String" localized="true" />
 		<field name="submitAttrId" type="String" />
 		<field name="submitAttrClass" type="String" />
 	</model>
@@ -31,21 +31,21 @@
 		<field name="formId" type="long" />
 		<field name="formItemAttrId" type="String" />
 		<field name="formItemAttrClass" type="String" />
-		<field name="label" type="String" />
+		<field name="label" type="String" localized="true" />
 		<field name="labelAttrId" type="String" />
 		<field name="labelAttrClass" type="String" />
 		<field name="inputAttrId" type="String" />
 		<field name="inputAttrClass" type="String" />
 		<field name="type" type="String" />
-		<field name="options" type="String" />
+		<field name="options" type="String" localized="true" />
 		<field name="mandatory" type="boolean" />
-		<field name="defaultValue" type="String" />
+		<field name="defaultValue" type="String" localized="true" />
 		<field name="order" type="int" />
 		<field name="validationType" type="String" />
 		<field name="validationRegexValue" type="String" />
-		<field name="errorValidationMessage" type="String" />
-		<field name="errorMandatoryMessage" type="String" />
-		<field name="hintMessage" type="String" />
+		<field name="errorValidationMessage" type="String" localized="true" />
+		<field name="errorMandatoryMessage" type="String" localized="true" />
+		<field name="hintMessage" type="String" localized="true" />
 	</model>
 	<model name="com.rcs.webform.model.FormToPorletMap">
 		<field name="formToPorletMapId" type="long" />

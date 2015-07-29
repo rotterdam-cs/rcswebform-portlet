@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -304,6 +304,12 @@ public class FormItemLocalServiceWrapper implements FormItemLocalService,
 		return _formItemLocalService.add(formItemId, label, type, options,
 			mandatory, validationRegexValue, errorValidationMessage,
 			serviceContext);
+	}
+
+	@Override
+	public java.util.List<com.rcs.webform.model.FormItem> getFormItemByFormId(
+		long formId) {
+		return _formItemLocalService.getFormItemByFormId(formId);
 	}
 
 	/**

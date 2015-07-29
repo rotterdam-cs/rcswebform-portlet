@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -472,6 +472,73 @@ public class FormWrapper implements Form, ModelWrapper<Form> {
 	}
 
 	/**
+	* Returns the localized title of this form in the language. Uses the default language if no localization exists for the requested language.
+	*
+	* @param locale the locale of the language
+	* @return the localized title of this form
+	*/
+	@Override
+	public java.lang.String getTitle(java.util.Locale locale) {
+		return _form.getTitle(locale);
+	}
+
+	/**
+	* Returns the localized title of this form in the language, optionally using the default language if no localization exists for the requested language.
+	*
+	* @param locale the local of the language
+	* @param useDefault whether to use the default language if no localization exists for the requested language
+	* @return the localized title of this form. If <code>useDefault</code> is <code>false</code> and no localization exists for the requested language, an empty string will be returned.
+	*/
+	@Override
+	public java.lang.String getTitle(java.util.Locale locale, boolean useDefault) {
+		return _form.getTitle(locale, useDefault);
+	}
+
+	/**
+	* Returns the localized title of this form in the language. Uses the default language if no localization exists for the requested language.
+	*
+	* @param languageId the ID of the language
+	* @return the localized title of this form
+	*/
+	@Override
+	public java.lang.String getTitle(java.lang.String languageId) {
+		return _form.getTitle(languageId);
+	}
+
+	/**
+	* Returns the localized title of this form in the language, optionally using the default language if no localization exists for the requested language.
+	*
+	* @param languageId the ID of the language
+	* @param useDefault whether to use the default language if no localization exists for the requested language
+	* @return the localized title of this form
+	*/
+	@Override
+	public java.lang.String getTitle(java.lang.String languageId,
+		boolean useDefault) {
+		return _form.getTitle(languageId, useDefault);
+	}
+
+	@Override
+	public java.lang.String getTitleCurrentLanguageId() {
+		return _form.getTitleCurrentLanguageId();
+	}
+
+	@Override
+	public java.lang.String getTitleCurrentValue() {
+		return _form.getTitleCurrentValue();
+	}
+
+	/**
+	* Returns a map of the locales and localized titles of this form.
+	*
+	* @return the locales and localized titles of this form
+	*/
+	@Override
+	public java.util.Map<java.util.Locale, java.lang.String> getTitleMap() {
+		return _form.getTitleMap();
+	}
+
+	/**
 	* Sets the title of this form.
 	*
 	* @param title the title of this form
@@ -479,6 +546,59 @@ public class FormWrapper implements Form, ModelWrapper<Form> {
 	@Override
 	public void setTitle(java.lang.String title) {
 		_form.setTitle(title);
+	}
+
+	/**
+	* Sets the localized title of this form in the language.
+	*
+	* @param title the localized title of this form
+	* @param locale the locale of the language
+	*/
+	@Override
+	public void setTitle(java.lang.String title, java.util.Locale locale) {
+		_form.setTitle(title, locale);
+	}
+
+	/**
+	* Sets the localized title of this form in the language, and sets the default locale.
+	*
+	* @param title the localized title of this form
+	* @param locale the locale of the language
+	* @param defaultLocale the default locale
+	*/
+	@Override
+	public void setTitle(java.lang.String title, java.util.Locale locale,
+		java.util.Locale defaultLocale) {
+		_form.setTitle(title, locale, defaultLocale);
+	}
+
+	@Override
+	public void setTitleCurrentLanguageId(java.lang.String languageId) {
+		_form.setTitleCurrentLanguageId(languageId);
+	}
+
+	/**
+	* Sets the localized titles of this form from the map of locales and localized titles.
+	*
+	* @param titleMap the locales and localized titles of this form
+	*/
+	@Override
+	public void setTitleMap(
+		java.util.Map<java.util.Locale, java.lang.String> titleMap) {
+		_form.setTitleMap(titleMap);
+	}
+
+	/**
+	* Sets the localized titles of this form from the map of locales and localized titles, and sets the default locale.
+	*
+	* @param titleMap the locales and localized titles of this form
+	* @param defaultLocale the default locale
+	*/
+	@Override
+	public void setTitleMap(
+		java.util.Map<java.util.Locale, java.lang.String> titleMap,
+		java.util.Locale defaultLocale) {
+		_form.setTitleMap(titleMap, defaultLocale);
 	}
 
 	/**
@@ -492,6 +612,73 @@ public class FormWrapper implements Form, ModelWrapper<Form> {
 	}
 
 	/**
+	* Returns the localized desc of this form in the language. Uses the default language if no localization exists for the requested language.
+	*
+	* @param locale the locale of the language
+	* @return the localized desc of this form
+	*/
+	@Override
+	public java.lang.String getDesc(java.util.Locale locale) {
+		return _form.getDesc(locale);
+	}
+
+	/**
+	* Returns the localized desc of this form in the language, optionally using the default language if no localization exists for the requested language.
+	*
+	* @param locale the local of the language
+	* @param useDefault whether to use the default language if no localization exists for the requested language
+	* @return the localized desc of this form. If <code>useDefault</code> is <code>false</code> and no localization exists for the requested language, an empty string will be returned.
+	*/
+	@Override
+	public java.lang.String getDesc(java.util.Locale locale, boolean useDefault) {
+		return _form.getDesc(locale, useDefault);
+	}
+
+	/**
+	* Returns the localized desc of this form in the language. Uses the default language if no localization exists for the requested language.
+	*
+	* @param languageId the ID of the language
+	* @return the localized desc of this form
+	*/
+	@Override
+	public java.lang.String getDesc(java.lang.String languageId) {
+		return _form.getDesc(languageId);
+	}
+
+	/**
+	* Returns the localized desc of this form in the language, optionally using the default language if no localization exists for the requested language.
+	*
+	* @param languageId the ID of the language
+	* @param useDefault whether to use the default language if no localization exists for the requested language
+	* @return the localized desc of this form
+	*/
+	@Override
+	public java.lang.String getDesc(java.lang.String languageId,
+		boolean useDefault) {
+		return _form.getDesc(languageId, useDefault);
+	}
+
+	@Override
+	public java.lang.String getDescCurrentLanguageId() {
+		return _form.getDescCurrentLanguageId();
+	}
+
+	@Override
+	public java.lang.String getDescCurrentValue() {
+		return _form.getDescCurrentValue();
+	}
+
+	/**
+	* Returns a map of the locales and localized descs of this form.
+	*
+	* @return the locales and localized descs of this form
+	*/
+	@Override
+	public java.util.Map<java.util.Locale, java.lang.String> getDescMap() {
+		return _form.getDescMap();
+	}
+
+	/**
 	* Sets the desc of this form.
 	*
 	* @param desc the desc of this form
@@ -499,6 +686,59 @@ public class FormWrapper implements Form, ModelWrapper<Form> {
 	@Override
 	public void setDesc(java.lang.String desc) {
 		_form.setDesc(desc);
+	}
+
+	/**
+	* Sets the localized desc of this form in the language.
+	*
+	* @param desc the localized desc of this form
+	* @param locale the locale of the language
+	*/
+	@Override
+	public void setDesc(java.lang.String desc, java.util.Locale locale) {
+		_form.setDesc(desc, locale);
+	}
+
+	/**
+	* Sets the localized desc of this form in the language, and sets the default locale.
+	*
+	* @param desc the localized desc of this form
+	* @param locale the locale of the language
+	* @param defaultLocale the default locale
+	*/
+	@Override
+	public void setDesc(java.lang.String desc, java.util.Locale locale,
+		java.util.Locale defaultLocale) {
+		_form.setDesc(desc, locale, defaultLocale);
+	}
+
+	@Override
+	public void setDescCurrentLanguageId(java.lang.String languageId) {
+		_form.setDescCurrentLanguageId(languageId);
+	}
+
+	/**
+	* Sets the localized descs of this form from the map of locales and localized descs.
+	*
+	* @param descMap the locales and localized descs of this form
+	*/
+	@Override
+	public void setDescMap(
+		java.util.Map<java.util.Locale, java.lang.String> descMap) {
+		_form.setDescMap(descMap);
+	}
+
+	/**
+	* Sets the localized descs of this form from the map of locales and localized descs, and sets the default locale.
+	*
+	* @param descMap the locales and localized descs of this form
+	* @param defaultLocale the default locale
+	*/
+	@Override
+	public void setDescMap(
+		java.util.Map<java.util.Locale, java.lang.String> descMap,
+		java.util.Locale defaultLocale) {
+		_form.setDescMap(descMap, defaultLocale);
 	}
 
 	/**
@@ -542,6 +782,74 @@ public class FormWrapper implements Form, ModelWrapper<Form> {
 	}
 
 	/**
+	* Returns the localized success message of this form in the language. Uses the default language if no localization exists for the requested language.
+	*
+	* @param locale the locale of the language
+	* @return the localized success message of this form
+	*/
+	@Override
+	public java.lang.String getSuccessMessage(java.util.Locale locale) {
+		return _form.getSuccessMessage(locale);
+	}
+
+	/**
+	* Returns the localized success message of this form in the language, optionally using the default language if no localization exists for the requested language.
+	*
+	* @param locale the local of the language
+	* @param useDefault whether to use the default language if no localization exists for the requested language
+	* @return the localized success message of this form. If <code>useDefault</code> is <code>false</code> and no localization exists for the requested language, an empty string will be returned.
+	*/
+	@Override
+	public java.lang.String getSuccessMessage(java.util.Locale locale,
+		boolean useDefault) {
+		return _form.getSuccessMessage(locale, useDefault);
+	}
+
+	/**
+	* Returns the localized success message of this form in the language. Uses the default language if no localization exists for the requested language.
+	*
+	* @param languageId the ID of the language
+	* @return the localized success message of this form
+	*/
+	@Override
+	public java.lang.String getSuccessMessage(java.lang.String languageId) {
+		return _form.getSuccessMessage(languageId);
+	}
+
+	/**
+	* Returns the localized success message of this form in the language, optionally using the default language if no localization exists for the requested language.
+	*
+	* @param languageId the ID of the language
+	* @param useDefault whether to use the default language if no localization exists for the requested language
+	* @return the localized success message of this form
+	*/
+	@Override
+	public java.lang.String getSuccessMessage(java.lang.String languageId,
+		boolean useDefault) {
+		return _form.getSuccessMessage(languageId, useDefault);
+	}
+
+	@Override
+	public java.lang.String getSuccessMessageCurrentLanguageId() {
+		return _form.getSuccessMessageCurrentLanguageId();
+	}
+
+	@Override
+	public java.lang.String getSuccessMessageCurrentValue() {
+		return _form.getSuccessMessageCurrentValue();
+	}
+
+	/**
+	* Returns a map of the locales and localized success messages of this form.
+	*
+	* @return the locales and localized success messages of this form
+	*/
+	@Override
+	public java.util.Map<java.util.Locale, java.lang.String> getSuccessMessageMap() {
+		return _form.getSuccessMessageMap();
+	}
+
+	/**
 	* Sets the success message of this form.
 	*
 	* @param successMessage the success message of this form
@@ -549,6 +857,60 @@ public class FormWrapper implements Form, ModelWrapper<Form> {
 	@Override
 	public void setSuccessMessage(java.lang.String successMessage) {
 		_form.setSuccessMessage(successMessage);
+	}
+
+	/**
+	* Sets the localized success message of this form in the language.
+	*
+	* @param successMessage the localized success message of this form
+	* @param locale the locale of the language
+	*/
+	@Override
+	public void setSuccessMessage(java.lang.String successMessage,
+		java.util.Locale locale) {
+		_form.setSuccessMessage(successMessage, locale);
+	}
+
+	/**
+	* Sets the localized success message of this form in the language, and sets the default locale.
+	*
+	* @param successMessage the localized success message of this form
+	* @param locale the locale of the language
+	* @param defaultLocale the default locale
+	*/
+	@Override
+	public void setSuccessMessage(java.lang.String successMessage,
+		java.util.Locale locale, java.util.Locale defaultLocale) {
+		_form.setSuccessMessage(successMessage, locale, defaultLocale);
+	}
+
+	@Override
+	public void setSuccessMessageCurrentLanguageId(java.lang.String languageId) {
+		_form.setSuccessMessageCurrentLanguageId(languageId);
+	}
+
+	/**
+	* Sets the localized success messages of this form from the map of locales and localized success messages.
+	*
+	* @param successMessageMap the locales and localized success messages of this form
+	*/
+	@Override
+	public void setSuccessMessageMap(
+		java.util.Map<java.util.Locale, java.lang.String> successMessageMap) {
+		_form.setSuccessMessageMap(successMessageMap);
+	}
+
+	/**
+	* Sets the localized success messages of this form from the map of locales and localized success messages, and sets the default locale.
+	*
+	* @param successMessageMap the locales and localized success messages of this form
+	* @param defaultLocale the default locale
+	*/
+	@Override
+	public void setSuccessMessageMap(
+		java.util.Map<java.util.Locale, java.lang.String> successMessageMap,
+		java.util.Locale defaultLocale) {
+		_form.setSuccessMessageMap(successMessageMap, defaultLocale);
 	}
 
 	/**
@@ -582,6 +944,74 @@ public class FormWrapper implements Form, ModelWrapper<Form> {
 	}
 
 	/**
+	* Returns the localized submit label of this form in the language. Uses the default language if no localization exists for the requested language.
+	*
+	* @param locale the locale of the language
+	* @return the localized submit label of this form
+	*/
+	@Override
+	public java.lang.String getSubmitLabel(java.util.Locale locale) {
+		return _form.getSubmitLabel(locale);
+	}
+
+	/**
+	* Returns the localized submit label of this form in the language, optionally using the default language if no localization exists for the requested language.
+	*
+	* @param locale the local of the language
+	* @param useDefault whether to use the default language if no localization exists for the requested language
+	* @return the localized submit label of this form. If <code>useDefault</code> is <code>false</code> and no localization exists for the requested language, an empty string will be returned.
+	*/
+	@Override
+	public java.lang.String getSubmitLabel(java.util.Locale locale,
+		boolean useDefault) {
+		return _form.getSubmitLabel(locale, useDefault);
+	}
+
+	/**
+	* Returns the localized submit label of this form in the language. Uses the default language if no localization exists for the requested language.
+	*
+	* @param languageId the ID of the language
+	* @return the localized submit label of this form
+	*/
+	@Override
+	public java.lang.String getSubmitLabel(java.lang.String languageId) {
+		return _form.getSubmitLabel(languageId);
+	}
+
+	/**
+	* Returns the localized submit label of this form in the language, optionally using the default language if no localization exists for the requested language.
+	*
+	* @param languageId the ID of the language
+	* @param useDefault whether to use the default language if no localization exists for the requested language
+	* @return the localized submit label of this form
+	*/
+	@Override
+	public java.lang.String getSubmitLabel(java.lang.String languageId,
+		boolean useDefault) {
+		return _form.getSubmitLabel(languageId, useDefault);
+	}
+
+	@Override
+	public java.lang.String getSubmitLabelCurrentLanguageId() {
+		return _form.getSubmitLabelCurrentLanguageId();
+	}
+
+	@Override
+	public java.lang.String getSubmitLabelCurrentValue() {
+		return _form.getSubmitLabelCurrentValue();
+	}
+
+	/**
+	* Returns a map of the locales and localized submit labels of this form.
+	*
+	* @return the locales and localized submit labels of this form
+	*/
+	@Override
+	public java.util.Map<java.util.Locale, java.lang.String> getSubmitLabelMap() {
+		return _form.getSubmitLabelMap();
+	}
+
+	/**
 	* Sets the submit label of this form.
 	*
 	* @param submitLabel the submit label of this form
@@ -589,6 +1019,60 @@ public class FormWrapper implements Form, ModelWrapper<Form> {
 	@Override
 	public void setSubmitLabel(java.lang.String submitLabel) {
 		_form.setSubmitLabel(submitLabel);
+	}
+
+	/**
+	* Sets the localized submit label of this form in the language.
+	*
+	* @param submitLabel the localized submit label of this form
+	* @param locale the locale of the language
+	*/
+	@Override
+	public void setSubmitLabel(java.lang.String submitLabel,
+		java.util.Locale locale) {
+		_form.setSubmitLabel(submitLabel, locale);
+	}
+
+	/**
+	* Sets the localized submit label of this form in the language, and sets the default locale.
+	*
+	* @param submitLabel the localized submit label of this form
+	* @param locale the locale of the language
+	* @param defaultLocale the default locale
+	*/
+	@Override
+	public void setSubmitLabel(java.lang.String submitLabel,
+		java.util.Locale locale, java.util.Locale defaultLocale) {
+		_form.setSubmitLabel(submitLabel, locale, defaultLocale);
+	}
+
+	@Override
+	public void setSubmitLabelCurrentLanguageId(java.lang.String languageId) {
+		_form.setSubmitLabelCurrentLanguageId(languageId);
+	}
+
+	/**
+	* Sets the localized submit labels of this form from the map of locales and localized submit labels.
+	*
+	* @param submitLabelMap the locales and localized submit labels of this form
+	*/
+	@Override
+	public void setSubmitLabelMap(
+		java.util.Map<java.util.Locale, java.lang.String> submitLabelMap) {
+		_form.setSubmitLabelMap(submitLabelMap);
+	}
+
+	/**
+	* Sets the localized submit labels of this form from the map of locales and localized submit labels, and sets the default locale.
+	*
+	* @param submitLabelMap the locales and localized submit labels of this form
+	* @param defaultLocale the default locale
+	*/
+	@Override
+	public void setSubmitLabelMap(
+		java.util.Map<java.util.Locale, java.lang.String> submitLabelMap,
+		java.util.Locale defaultLocale) {
+		_form.setSubmitLabelMap(submitLabelMap, defaultLocale);
 	}
 
 	/**
@@ -687,6 +1171,29 @@ public class FormWrapper implements Form, ModelWrapper<Form> {
 	public void setExpandoBridgeAttributes(
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		_form.setExpandoBridgeAttributes(serviceContext);
+	}
+
+	@Override
+	public java.lang.String[] getAvailableLanguageIds() {
+		return _form.getAvailableLanguageIds();
+	}
+
+	@Override
+	public java.lang.String getDefaultLanguageId() {
+		return _form.getDefaultLanguageId();
+	}
+
+	@Override
+	public void prepareLocalizedFieldsForImport()
+		throws com.liferay.portal.LocaleException {
+		_form.prepareLocalizedFieldsForImport();
+	}
+
+	@Override
+	public void prepareLocalizedFieldsForImport(
+		java.util.Locale defaultImportLocale)
+		throws com.liferay.portal.LocaleException {
+		_form.prepareLocalizedFieldsForImport(defaultImportLocale);
 	}
 
 	@Override

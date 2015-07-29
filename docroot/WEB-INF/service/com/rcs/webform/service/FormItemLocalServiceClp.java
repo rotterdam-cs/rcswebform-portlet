@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -115,6 +115,10 @@ public class FormItemLocalServiceClp implements FormItemLocalService {
 				"java.lang.String", "boolean", "java.lang.String",
 				"java.lang.String", "com.liferay.portal.service.ServiceContext"
 			};
+
+		_methodName20 = "getFormItemByFormId";
+
+		_methodParameterTypes20 = new String[] { "long" };
 	}
 
 	@Override
@@ -708,6 +712,30 @@ public class FormItemLocalServiceClp implements FormItemLocalService {
 		return (com.rcs.webform.model.FormItem)ClpSerializer.translateOutput(returnObj);
 	}
 
+	@Override
+	public java.util.List<com.rcs.webform.model.FormItem> getFormItemByFormId(
+		long formId) {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableLocalService.invokeMethod(_methodName20,
+					_methodParameterTypes20, new Object[] { formId });
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (java.util.List<com.rcs.webform.model.FormItem>)ClpSerializer.translateOutput(returnObj);
+	}
+
 	private InvokableLocalService _invokableLocalService;
 	private String _methodName0;
 	private String[] _methodParameterTypes0;
@@ -747,4 +775,6 @@ public class FormItemLocalServiceClp implements FormItemLocalService {
 	private String[] _methodParameterTypes17;
 	private String _methodName19;
 	private String[] _methodParameterTypes19;
+	private String _methodName20;
+	private String[] _methodParameterTypes20;
 }

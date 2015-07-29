@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -273,6 +273,13 @@ public class FormToPorletMapLocalServiceUtil {
 		java.lang.String[] parameterTypes, java.lang.Object[] arguments)
 		throws java.lang.Throwable {
 		return getService().invokeMethod(name, parameterTypes, arguments);
+	}
+
+	public static com.rcs.webform.model.FormToPorletMap getFormToPortletMapByGroupColumnPortletId(
+		long groupId, long companyId, java.lang.String portletId) {
+		return getService()
+				   .getFormToPortletMapByGroupColumnPortletId(groupId,
+			companyId, portletId);
 	}
 
 	public static void clearService() {

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -115,6 +115,12 @@ public class FormToPorletMapLocalServiceClp
 		_methodName17 = "setBeanIdentifier";
 
 		_methodParameterTypes17 = new String[] { "java.lang.String" };
+
+		_methodName19 = "getFormToPortletMapByGroupColumnPortletId";
+
+		_methodParameterTypes19 = new String[] {
+				"long", "long", "java.lang.String"
+			};
 	}
 
 	@Override
@@ -667,6 +673,37 @@ public class FormToPorletMapLocalServiceClp
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
+	public com.rcs.webform.model.FormToPorletMap getFormToPortletMapByGroupColumnPortletId(
+		long groupId, long companyId, java.lang.String portletId) {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableLocalService.invokeMethod(_methodName19,
+					_methodParameterTypes19,
+					new Object[] {
+						groupId,
+						
+					companyId,
+						
+					ClpSerializer.translateInput(portletId)
+					});
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (com.rcs.webform.model.FormToPorletMap)ClpSerializer.translateOutput(returnObj);
+	}
+
 	private InvokableLocalService _invokableLocalService;
 	private String _methodName0;
 	private String[] _methodParameterTypes0;
@@ -704,4 +741,6 @@ public class FormToPorletMapLocalServiceClp
 	private String[] _methodParameterTypes16;
 	private String _methodName17;
 	private String[] _methodParameterTypes17;
+	private String _methodName19;
+	private String[] _methodParameterTypes19;
 }

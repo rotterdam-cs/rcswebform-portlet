@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -14,10 +14,16 @@
 
 package com.rcs.webform.model;
 
+import com.liferay.portal.LocaleException;
 import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.util.LocaleUtil;
+import com.liferay.portal.kernel.util.LocalizationUtil;
+import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 import com.liferay.portal.kernel.util.ProxyUtil;
 import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.model.impl.BaseModelImpl;
 
@@ -30,7 +36,10 @@ import java.lang.reflect.Method;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
+import java.util.Set;
+import java.util.TreeSet;
 
 /**
  * @author ryusuf
@@ -443,6 +452,48 @@ public class FormItemClp extends BaseModelImpl<FormItem> implements FormItem {
 	}
 
 	@Override
+	public String getLabel(Locale locale) {
+		String languageId = LocaleUtil.toLanguageId(locale);
+
+		return getLabel(languageId);
+	}
+
+	@Override
+	public String getLabel(Locale locale, boolean useDefault) {
+		String languageId = LocaleUtil.toLanguageId(locale);
+
+		return getLabel(languageId, useDefault);
+	}
+
+	@Override
+	public String getLabel(String languageId) {
+		return LocalizationUtil.getLocalization(getLabel(), languageId);
+	}
+
+	@Override
+	public String getLabel(String languageId, boolean useDefault) {
+		return LocalizationUtil.getLocalization(getLabel(), languageId,
+			useDefault);
+	}
+
+	@Override
+	public String getLabelCurrentLanguageId() {
+		return _labelCurrentLanguageId;
+	}
+
+	@Override
+	public String getLabelCurrentValue() {
+		Locale locale = getLocale(_labelCurrentLanguageId);
+
+		return getLabel(locale);
+	}
+
+	@Override
+	public Map<Locale, String> getLabelMap() {
+		return LocalizationUtil.getLocalizationMap(getLabel());
+	}
+
+	@Override
 	public void setLabel(String label) {
 		_label = label;
 
@@ -456,6 +507,63 @@ public class FormItemClp extends BaseModelImpl<FormItem> implements FormItem {
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public void setLabel(String label, Locale locale) {
+		setLabel(label, locale, LocaleUtil.getDefault());
+	}
+
+	@Override
+	public void setLabel(String label, Locale locale, Locale defaultLocale) {
+		String languageId = LocaleUtil.toLanguageId(locale);
+		String defaultLanguageId = LocaleUtil.toLanguageId(defaultLocale);
+
+		if (Validator.isNotNull(label)) {
+			setLabel(LocalizationUtil.updateLocalization(getLabel(), "Label",
+					label, languageId, defaultLanguageId));
+		}
+		else {
+			setLabel(LocalizationUtil.removeLocalization(getLabel(), "Label",
+					languageId));
+		}
+	}
+
+	@Override
+	public void setLabelCurrentLanguageId(String languageId) {
+		_labelCurrentLanguageId = languageId;
+	}
+
+	@Override
+	public void setLabelMap(Map<Locale, String> labelMap) {
+		setLabelMap(labelMap, LocaleUtil.getDefault());
+	}
+
+	@Override
+	public void setLabelMap(Map<Locale, String> labelMap, Locale defaultLocale) {
+		if (labelMap == null) {
+			return;
+		}
+
+		ClassLoader portalClassLoader = PortalClassLoaderUtil.getClassLoader();
+
+		Thread currentThread = Thread.currentThread();
+
+		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
+
+		try {
+			if (contextClassLoader != portalClassLoader) {
+				currentThread.setContextClassLoader(portalClassLoader);
+			}
+
+			setLabel(LocalizationUtil.updateLocalization(labelMap, getLabel(),
+					"Label", LocaleUtil.toLanguageId(defaultLocale)));
+		}
+		finally {
+			if (contextClassLoader != portalClassLoader) {
+				currentThread.setContextClassLoader(contextClassLoader);
 			}
 		}
 	}
@@ -583,6 +691,48 @@ public class FormItemClp extends BaseModelImpl<FormItem> implements FormItem {
 	}
 
 	@Override
+	public String getOptions(Locale locale) {
+		String languageId = LocaleUtil.toLanguageId(locale);
+
+		return getOptions(languageId);
+	}
+
+	@Override
+	public String getOptions(Locale locale, boolean useDefault) {
+		String languageId = LocaleUtil.toLanguageId(locale);
+
+		return getOptions(languageId, useDefault);
+	}
+
+	@Override
+	public String getOptions(String languageId) {
+		return LocalizationUtil.getLocalization(getOptions(), languageId);
+	}
+
+	@Override
+	public String getOptions(String languageId, boolean useDefault) {
+		return LocalizationUtil.getLocalization(getOptions(), languageId,
+			useDefault);
+	}
+
+	@Override
+	public String getOptionsCurrentLanguageId() {
+		return _optionsCurrentLanguageId;
+	}
+
+	@Override
+	public String getOptionsCurrentValue() {
+		Locale locale = getLocale(_optionsCurrentLanguageId);
+
+		return getOptions(locale);
+	}
+
+	@Override
+	public Map<Locale, String> getOptionsMap() {
+		return LocalizationUtil.getLocalizationMap(getOptions());
+	}
+
+	@Override
 	public void setOptions(String options) {
 		_options = options;
 
@@ -596,6 +746,65 @@ public class FormItemClp extends BaseModelImpl<FormItem> implements FormItem {
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public void setOptions(String options, Locale locale) {
+		setOptions(options, locale, LocaleUtil.getDefault());
+	}
+
+	@Override
+	public void setOptions(String options, Locale locale, Locale defaultLocale) {
+		String languageId = LocaleUtil.toLanguageId(locale);
+		String defaultLanguageId = LocaleUtil.toLanguageId(defaultLocale);
+
+		if (Validator.isNotNull(options)) {
+			setOptions(LocalizationUtil.updateLocalization(getOptions(),
+					"Options", options, languageId, defaultLanguageId));
+		}
+		else {
+			setOptions(LocalizationUtil.removeLocalization(getOptions(),
+					"Options", languageId));
+		}
+	}
+
+	@Override
+	public void setOptionsCurrentLanguageId(String languageId) {
+		_optionsCurrentLanguageId = languageId;
+	}
+
+	@Override
+	public void setOptionsMap(Map<Locale, String> optionsMap) {
+		setOptionsMap(optionsMap, LocaleUtil.getDefault());
+	}
+
+	@Override
+	public void setOptionsMap(Map<Locale, String> optionsMap,
+		Locale defaultLocale) {
+		if (optionsMap == null) {
+			return;
+		}
+
+		ClassLoader portalClassLoader = PortalClassLoaderUtil.getClassLoader();
+
+		Thread currentThread = Thread.currentThread();
+
+		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
+
+		try {
+			if (contextClassLoader != portalClassLoader) {
+				currentThread.setContextClassLoader(portalClassLoader);
+			}
+
+			setOptions(LocalizationUtil.updateLocalization(optionsMap,
+					getOptions(), "Options",
+					LocaleUtil.toLanguageId(defaultLocale)));
+		}
+		finally {
+			if (contextClassLoader != portalClassLoader) {
+				currentThread.setContextClassLoader(contextClassLoader);
 			}
 		}
 	}
@@ -634,6 +843,48 @@ public class FormItemClp extends BaseModelImpl<FormItem> implements FormItem {
 	}
 
 	@Override
+	public String getDefaultValue(Locale locale) {
+		String languageId = LocaleUtil.toLanguageId(locale);
+
+		return getDefaultValue(languageId);
+	}
+
+	@Override
+	public String getDefaultValue(Locale locale, boolean useDefault) {
+		String languageId = LocaleUtil.toLanguageId(locale);
+
+		return getDefaultValue(languageId, useDefault);
+	}
+
+	@Override
+	public String getDefaultValue(String languageId) {
+		return LocalizationUtil.getLocalization(getDefaultValue(), languageId);
+	}
+
+	@Override
+	public String getDefaultValue(String languageId, boolean useDefault) {
+		return LocalizationUtil.getLocalization(getDefaultValue(), languageId,
+			useDefault);
+	}
+
+	@Override
+	public String getDefaultValueCurrentLanguageId() {
+		return _defaultValueCurrentLanguageId;
+	}
+
+	@Override
+	public String getDefaultValueCurrentValue() {
+		Locale locale = getLocale(_defaultValueCurrentLanguageId);
+
+		return getDefaultValue(locale);
+	}
+
+	@Override
+	public Map<Locale, String> getDefaultValueMap() {
+		return LocalizationUtil.getLocalizationMap(getDefaultValue());
+	}
+
+	@Override
 	public void setDefaultValue(String defaultValue) {
 		_defaultValue = defaultValue;
 
@@ -647,6 +898,67 @@ public class FormItemClp extends BaseModelImpl<FormItem> implements FormItem {
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public void setDefaultValue(String defaultValue, Locale locale) {
+		setDefaultValue(defaultValue, locale, LocaleUtil.getDefault());
+	}
+
+	@Override
+	public void setDefaultValue(String defaultValue, Locale locale,
+		Locale defaultLocale) {
+		String languageId = LocaleUtil.toLanguageId(locale);
+		String defaultLanguageId = LocaleUtil.toLanguageId(defaultLocale);
+
+		if (Validator.isNotNull(defaultValue)) {
+			setDefaultValue(LocalizationUtil.updateLocalization(
+					getDefaultValue(), "DefaultValue", defaultValue,
+					languageId, defaultLanguageId));
+		}
+		else {
+			setDefaultValue(LocalizationUtil.removeLocalization(
+					getDefaultValue(), "DefaultValue", languageId));
+		}
+	}
+
+	@Override
+	public void setDefaultValueCurrentLanguageId(String languageId) {
+		_defaultValueCurrentLanguageId = languageId;
+	}
+
+	@Override
+	public void setDefaultValueMap(Map<Locale, String> defaultValueMap) {
+		setDefaultValueMap(defaultValueMap, LocaleUtil.getDefault());
+	}
+
+	@Override
+	public void setDefaultValueMap(Map<Locale, String> defaultValueMap,
+		Locale defaultLocale) {
+		if (defaultValueMap == null) {
+			return;
+		}
+
+		ClassLoader portalClassLoader = PortalClassLoaderUtil.getClassLoader();
+
+		Thread currentThread = Thread.currentThread();
+
+		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
+
+		try {
+			if (contextClassLoader != portalClassLoader) {
+				currentThread.setContextClassLoader(portalClassLoader);
+			}
+
+			setDefaultValue(LocalizationUtil.updateLocalization(
+					defaultValueMap, getDefaultValue(), "DefaultValue",
+					LocaleUtil.toLanguageId(defaultLocale)));
+		}
+		finally {
+			if (contextClassLoader != portalClassLoader) {
+				currentThread.setContextClassLoader(contextClassLoader);
 			}
 		}
 	}
@@ -728,6 +1040,50 @@ public class FormItemClp extends BaseModelImpl<FormItem> implements FormItem {
 	}
 
 	@Override
+	public String getErrorValidationMessage(Locale locale) {
+		String languageId = LocaleUtil.toLanguageId(locale);
+
+		return getErrorValidationMessage(languageId);
+	}
+
+	@Override
+	public String getErrorValidationMessage(Locale locale, boolean useDefault) {
+		String languageId = LocaleUtil.toLanguageId(locale);
+
+		return getErrorValidationMessage(languageId, useDefault);
+	}
+
+	@Override
+	public String getErrorValidationMessage(String languageId) {
+		return LocalizationUtil.getLocalization(getErrorValidationMessage(),
+			languageId);
+	}
+
+	@Override
+	public String getErrorValidationMessage(String languageId,
+		boolean useDefault) {
+		return LocalizationUtil.getLocalization(getErrorValidationMessage(),
+			languageId, useDefault);
+	}
+
+	@Override
+	public String getErrorValidationMessageCurrentLanguageId() {
+		return _errorValidationMessageCurrentLanguageId;
+	}
+
+	@Override
+	public String getErrorValidationMessageCurrentValue() {
+		Locale locale = getLocale(_errorValidationMessageCurrentLanguageId);
+
+		return getErrorValidationMessage(locale);
+	}
+
+	@Override
+	public Map<Locale, String> getErrorValidationMessageMap() {
+		return LocalizationUtil.getLocalizationMap(getErrorValidationMessage());
+	}
+
+	@Override
 	public void setErrorValidationMessage(String errorValidationMessage) {
 		_errorValidationMessage = errorValidationMessage;
 
@@ -747,8 +1103,118 @@ public class FormItemClp extends BaseModelImpl<FormItem> implements FormItem {
 	}
 
 	@Override
+	public void setErrorValidationMessage(String errorValidationMessage,
+		Locale locale) {
+		setErrorValidationMessage(errorValidationMessage, locale,
+			LocaleUtil.getDefault());
+	}
+
+	@Override
+	public void setErrorValidationMessage(String errorValidationMessage,
+		Locale locale, Locale defaultLocale) {
+		String languageId = LocaleUtil.toLanguageId(locale);
+		String defaultLanguageId = LocaleUtil.toLanguageId(defaultLocale);
+
+		if (Validator.isNotNull(errorValidationMessage)) {
+			setErrorValidationMessage(LocalizationUtil.updateLocalization(
+					getErrorValidationMessage(), "ErrorValidationMessage",
+					errorValidationMessage, languageId, defaultLanguageId));
+		}
+		else {
+			setErrorValidationMessage(LocalizationUtil.removeLocalization(
+					getErrorValidationMessage(), "ErrorValidationMessage",
+					languageId));
+		}
+	}
+
+	@Override
+	public void setErrorValidationMessageCurrentLanguageId(String languageId) {
+		_errorValidationMessageCurrentLanguageId = languageId;
+	}
+
+	@Override
+	public void setErrorValidationMessageMap(
+		Map<Locale, String> errorValidationMessageMap) {
+		setErrorValidationMessageMap(errorValidationMessageMap,
+			LocaleUtil.getDefault());
+	}
+
+	@Override
+	public void setErrorValidationMessageMap(
+		Map<Locale, String> errorValidationMessageMap, Locale defaultLocale) {
+		if (errorValidationMessageMap == null) {
+			return;
+		}
+
+		ClassLoader portalClassLoader = PortalClassLoaderUtil.getClassLoader();
+
+		Thread currentThread = Thread.currentThread();
+
+		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
+
+		try {
+			if (contextClassLoader != portalClassLoader) {
+				currentThread.setContextClassLoader(portalClassLoader);
+			}
+
+			setErrorValidationMessage(LocalizationUtil.updateLocalization(
+					errorValidationMessageMap, getErrorValidationMessage(),
+					"ErrorValidationMessage",
+					LocaleUtil.toLanguageId(defaultLocale)));
+		}
+		finally {
+			if (contextClassLoader != portalClassLoader) {
+				currentThread.setContextClassLoader(contextClassLoader);
+			}
+		}
+	}
+
+	@Override
 	public String getErrorMandatoryMessage() {
 		return _errorMandatoryMessage;
+	}
+
+	@Override
+	public String getErrorMandatoryMessage(Locale locale) {
+		String languageId = LocaleUtil.toLanguageId(locale);
+
+		return getErrorMandatoryMessage(languageId);
+	}
+
+	@Override
+	public String getErrorMandatoryMessage(Locale locale, boolean useDefault) {
+		String languageId = LocaleUtil.toLanguageId(locale);
+
+		return getErrorMandatoryMessage(languageId, useDefault);
+	}
+
+	@Override
+	public String getErrorMandatoryMessage(String languageId) {
+		return LocalizationUtil.getLocalization(getErrorMandatoryMessage(),
+			languageId);
+	}
+
+	@Override
+	public String getErrorMandatoryMessage(String languageId, boolean useDefault) {
+		return LocalizationUtil.getLocalization(getErrorMandatoryMessage(),
+			languageId, useDefault);
+	}
+
+	@Override
+	public String getErrorMandatoryMessageCurrentLanguageId() {
+		return _errorMandatoryMessageCurrentLanguageId;
+	}
+
+	@Override
+	public String getErrorMandatoryMessageCurrentValue() {
+		Locale locale = getLocale(_errorMandatoryMessageCurrentLanguageId);
+
+		return getErrorMandatoryMessage(locale);
+	}
+
+	@Override
+	public Map<Locale, String> getErrorMandatoryMessageMap() {
+		return LocalizationUtil.getLocalizationMap(getErrorMandatoryMessage());
 	}
 
 	@Override
@@ -771,8 +1237,117 @@ public class FormItemClp extends BaseModelImpl<FormItem> implements FormItem {
 	}
 
 	@Override
+	public void setErrorMandatoryMessage(String errorMandatoryMessage,
+		Locale locale) {
+		setErrorMandatoryMessage(errorMandatoryMessage, locale,
+			LocaleUtil.getDefault());
+	}
+
+	@Override
+	public void setErrorMandatoryMessage(String errorMandatoryMessage,
+		Locale locale, Locale defaultLocale) {
+		String languageId = LocaleUtil.toLanguageId(locale);
+		String defaultLanguageId = LocaleUtil.toLanguageId(defaultLocale);
+
+		if (Validator.isNotNull(errorMandatoryMessage)) {
+			setErrorMandatoryMessage(LocalizationUtil.updateLocalization(
+					getErrorMandatoryMessage(), "ErrorMandatoryMessage",
+					errorMandatoryMessage, languageId, defaultLanguageId));
+		}
+		else {
+			setErrorMandatoryMessage(LocalizationUtil.removeLocalization(
+					getErrorMandatoryMessage(), "ErrorMandatoryMessage",
+					languageId));
+		}
+	}
+
+	@Override
+	public void setErrorMandatoryMessageCurrentLanguageId(String languageId) {
+		_errorMandatoryMessageCurrentLanguageId = languageId;
+	}
+
+	@Override
+	public void setErrorMandatoryMessageMap(
+		Map<Locale, String> errorMandatoryMessageMap) {
+		setErrorMandatoryMessageMap(errorMandatoryMessageMap,
+			LocaleUtil.getDefault());
+	}
+
+	@Override
+	public void setErrorMandatoryMessageMap(
+		Map<Locale, String> errorMandatoryMessageMap, Locale defaultLocale) {
+		if (errorMandatoryMessageMap == null) {
+			return;
+		}
+
+		ClassLoader portalClassLoader = PortalClassLoaderUtil.getClassLoader();
+
+		Thread currentThread = Thread.currentThread();
+
+		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
+
+		try {
+			if (contextClassLoader != portalClassLoader) {
+				currentThread.setContextClassLoader(portalClassLoader);
+			}
+
+			setErrorMandatoryMessage(LocalizationUtil.updateLocalization(
+					errorMandatoryMessageMap, getErrorMandatoryMessage(),
+					"ErrorMandatoryMessage",
+					LocaleUtil.toLanguageId(defaultLocale)));
+		}
+		finally {
+			if (contextClassLoader != portalClassLoader) {
+				currentThread.setContextClassLoader(contextClassLoader);
+			}
+		}
+	}
+
+	@Override
 	public String getHintMessage() {
 		return _hintMessage;
+	}
+
+	@Override
+	public String getHintMessage(Locale locale) {
+		String languageId = LocaleUtil.toLanguageId(locale);
+
+		return getHintMessage(languageId);
+	}
+
+	@Override
+	public String getHintMessage(Locale locale, boolean useDefault) {
+		String languageId = LocaleUtil.toLanguageId(locale);
+
+		return getHintMessage(languageId, useDefault);
+	}
+
+	@Override
+	public String getHintMessage(String languageId) {
+		return LocalizationUtil.getLocalization(getHintMessage(), languageId);
+	}
+
+	@Override
+	public String getHintMessage(String languageId, boolean useDefault) {
+		return LocalizationUtil.getLocalization(getHintMessage(), languageId,
+			useDefault);
+	}
+
+	@Override
+	public String getHintMessageCurrentLanguageId() {
+		return _hintMessageCurrentLanguageId;
+	}
+
+	@Override
+	public String getHintMessageCurrentValue() {
+		Locale locale = getLocale(_hintMessageCurrentLanguageId);
+
+		return getHintMessage(locale);
+	}
+
+	@Override
+	public Map<Locale, String> getHintMessageMap() {
+		return LocalizationUtil.getLocalizationMap(getHintMessage());
 	}
 
 	@Override
@@ -789,6 +1364,67 @@ public class FormItemClp extends BaseModelImpl<FormItem> implements FormItem {
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public void setHintMessage(String hintMessage, Locale locale) {
+		setHintMessage(hintMessage, locale, LocaleUtil.getDefault());
+	}
+
+	@Override
+	public void setHintMessage(String hintMessage, Locale locale,
+		Locale defaultLocale) {
+		String languageId = LocaleUtil.toLanguageId(locale);
+		String defaultLanguageId = LocaleUtil.toLanguageId(defaultLocale);
+
+		if (Validator.isNotNull(hintMessage)) {
+			setHintMessage(LocalizationUtil.updateLocalization(
+					getHintMessage(), "HintMessage", hintMessage, languageId,
+					defaultLanguageId));
+		}
+		else {
+			setHintMessage(LocalizationUtil.removeLocalization(
+					getHintMessage(), "HintMessage", languageId));
+		}
+	}
+
+	@Override
+	public void setHintMessageCurrentLanguageId(String languageId) {
+		_hintMessageCurrentLanguageId = languageId;
+	}
+
+	@Override
+	public void setHintMessageMap(Map<Locale, String> hintMessageMap) {
+		setHintMessageMap(hintMessageMap, LocaleUtil.getDefault());
+	}
+
+	@Override
+	public void setHintMessageMap(Map<Locale, String> hintMessageMap,
+		Locale defaultLocale) {
+		if (hintMessageMap == null) {
+			return;
+		}
+
+		ClassLoader portalClassLoader = PortalClassLoaderUtil.getClassLoader();
+
+		Thread currentThread = Thread.currentThread();
+
+		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
+
+		try {
+			if (contextClassLoader != portalClassLoader) {
+				currentThread.setContextClassLoader(portalClassLoader);
+			}
+
+			setHintMessage(LocalizationUtil.updateLocalization(hintMessageMap,
+					getHintMessage(), "HintMessage",
+					LocaleUtil.toLanguageId(defaultLocale)));
+		}
+		finally {
+			if (contextClassLoader != portalClassLoader) {
+				currentThread.setContextClassLoader(contextClassLoader);
 			}
 		}
 	}
@@ -849,6 +1485,167 @@ public class FormItemClp extends BaseModelImpl<FormItem> implements FormItem {
 		}
 		else {
 			FormItemLocalServiceUtil.updateFormItem(this);
+		}
+	}
+
+	@Override
+	public String[] getAvailableLanguageIds() {
+		Set<String> availableLanguageIds = new TreeSet<String>();
+
+		Map<Locale, String> labelMap = getLabelMap();
+
+		for (Map.Entry<Locale, String> entry : labelMap.entrySet()) {
+			Locale locale = entry.getKey();
+			String value = entry.getValue();
+
+			if (Validator.isNotNull(value)) {
+				availableLanguageIds.add(LocaleUtil.toLanguageId(locale));
+			}
+		}
+
+		Map<Locale, String> optionsMap = getOptionsMap();
+
+		for (Map.Entry<Locale, String> entry : optionsMap.entrySet()) {
+			Locale locale = entry.getKey();
+			String value = entry.getValue();
+
+			if (Validator.isNotNull(value)) {
+				availableLanguageIds.add(LocaleUtil.toLanguageId(locale));
+			}
+		}
+
+		Map<Locale, String> defaultValueMap = getDefaultValueMap();
+
+		for (Map.Entry<Locale, String> entry : defaultValueMap.entrySet()) {
+			Locale locale = entry.getKey();
+			String value = entry.getValue();
+
+			if (Validator.isNotNull(value)) {
+				availableLanguageIds.add(LocaleUtil.toLanguageId(locale));
+			}
+		}
+
+		Map<Locale, String> errorValidationMessageMap = getErrorValidationMessageMap();
+
+		for (Map.Entry<Locale, String> entry : errorValidationMessageMap.entrySet()) {
+			Locale locale = entry.getKey();
+			String value = entry.getValue();
+
+			if (Validator.isNotNull(value)) {
+				availableLanguageIds.add(LocaleUtil.toLanguageId(locale));
+			}
+		}
+
+		Map<Locale, String> errorMandatoryMessageMap = getErrorMandatoryMessageMap();
+
+		for (Map.Entry<Locale, String> entry : errorMandatoryMessageMap.entrySet()) {
+			Locale locale = entry.getKey();
+			String value = entry.getValue();
+
+			if (Validator.isNotNull(value)) {
+				availableLanguageIds.add(LocaleUtil.toLanguageId(locale));
+			}
+		}
+
+		Map<Locale, String> hintMessageMap = getHintMessageMap();
+
+		for (Map.Entry<Locale, String> entry : hintMessageMap.entrySet()) {
+			Locale locale = entry.getKey();
+			String value = entry.getValue();
+
+			if (Validator.isNotNull(value)) {
+				availableLanguageIds.add(LocaleUtil.toLanguageId(locale));
+			}
+		}
+
+		return availableLanguageIds.toArray(new String[availableLanguageIds.size()]);
+	}
+
+	@Override
+	public String getDefaultLanguageId() {
+		String xml = getLabel();
+
+		if (xml == null) {
+			return StringPool.BLANK;
+		}
+
+		Locale defaultLocale = LocaleUtil.getDefault();
+
+		return LocalizationUtil.getDefaultLanguageId(xml, defaultLocale);
+	}
+
+	@Override
+	public void prepareLocalizedFieldsForImport() throws LocaleException {
+		prepareLocalizedFieldsForImport(null);
+	}
+
+	@Override
+	@SuppressWarnings("unused")
+	public void prepareLocalizedFieldsForImport(Locale defaultImportLocale)
+		throws LocaleException {
+		Locale defaultLocale = LocaleUtil.getDefault();
+
+		String modelDefaultLanguageId = getDefaultLanguageId();
+
+		String label = getLabel(defaultLocale);
+
+		if (Validator.isNull(label)) {
+			setLabel(getLabel(modelDefaultLanguageId), defaultLocale);
+		}
+		else {
+			setLabel(getLabel(defaultLocale), defaultLocale, defaultLocale);
+		}
+
+		String options = getOptions(defaultLocale);
+
+		if (Validator.isNull(options)) {
+			setOptions(getOptions(modelDefaultLanguageId), defaultLocale);
+		}
+		else {
+			setOptions(getOptions(defaultLocale), defaultLocale, defaultLocale);
+		}
+
+		String defaultValue = getDefaultValue(defaultLocale);
+
+		if (Validator.isNull(defaultValue)) {
+			setDefaultValue(getDefaultValue(modelDefaultLanguageId),
+				defaultLocale);
+		}
+		else {
+			setDefaultValue(getDefaultValue(defaultLocale), defaultLocale,
+				defaultLocale);
+		}
+
+		String errorValidationMessage = getErrorValidationMessage(defaultLocale);
+
+		if (Validator.isNull(errorValidationMessage)) {
+			setErrorValidationMessage(getErrorValidationMessage(
+					modelDefaultLanguageId), defaultLocale);
+		}
+		else {
+			setErrorValidationMessage(getErrorValidationMessage(defaultLocale),
+				defaultLocale, defaultLocale);
+		}
+
+		String errorMandatoryMessage = getErrorMandatoryMessage(defaultLocale);
+
+		if (Validator.isNull(errorMandatoryMessage)) {
+			setErrorMandatoryMessage(getErrorMandatoryMessage(
+					modelDefaultLanguageId), defaultLocale);
+		}
+		else {
+			setErrorMandatoryMessage(getErrorMandatoryMessage(defaultLocale),
+				defaultLocale, defaultLocale);
+		}
+
+		String hintMessage = getHintMessage(defaultLocale);
+
+		if (Validator.isNull(hintMessage)) {
+			setHintMessage(getHintMessage(modelDefaultLanguageId), defaultLocale);
+		}
+		else {
+			setHintMessage(getHintMessage(defaultLocale), defaultLocale,
+				defaultLocale);
 		}
 	}
 
@@ -1105,20 +1902,26 @@ public class FormItemClp extends BaseModelImpl<FormItem> implements FormItem {
 	private String _formItemAttrId;
 	private String _formItemAttrClass;
 	private String _label;
+	private String _labelCurrentLanguageId;
 	private String _labelAttrId;
 	private String _labelAttrClass;
 	private String _inputAttrId;
 	private String _inputAttrClass;
 	private String _type;
 	private String _options;
+	private String _optionsCurrentLanguageId;
 	private boolean _mandatory;
 	private String _defaultValue;
+	private String _defaultValueCurrentLanguageId;
 	private int _order;
 	private String _validationType;
 	private String _validationRegexValue;
 	private String _errorValidationMessage;
+	private String _errorValidationMessageCurrentLanguageId;
 	private String _errorMandatoryMessage;
+	private String _errorMandatoryMessageCurrentLanguageId;
 	private String _hintMessage;
+	private String _hintMessageCurrentLanguageId;
 	private BaseModel<?> _formItemRemoteModel;
 	private Class<?> _clpSerializerClass = com.rcs.webform.service.ClpSerializer.class;
 }

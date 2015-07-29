@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -421,6 +421,73 @@ public class FormItemWrapper implements FormItem, ModelWrapper<FormItem> {
 	}
 
 	/**
+	* Returns the localized label of this form item in the language. Uses the default language if no localization exists for the requested language.
+	*
+	* @param locale the locale of the language
+	* @return the localized label of this form item
+	*/
+	@Override
+	public java.lang.String getLabel(java.util.Locale locale) {
+		return _formItem.getLabel(locale);
+	}
+
+	/**
+	* Returns the localized label of this form item in the language, optionally using the default language if no localization exists for the requested language.
+	*
+	* @param locale the local of the language
+	* @param useDefault whether to use the default language if no localization exists for the requested language
+	* @return the localized label of this form item. If <code>useDefault</code> is <code>false</code> and no localization exists for the requested language, an empty string will be returned.
+	*/
+	@Override
+	public java.lang.String getLabel(java.util.Locale locale, boolean useDefault) {
+		return _formItem.getLabel(locale, useDefault);
+	}
+
+	/**
+	* Returns the localized label of this form item in the language. Uses the default language if no localization exists for the requested language.
+	*
+	* @param languageId the ID of the language
+	* @return the localized label of this form item
+	*/
+	@Override
+	public java.lang.String getLabel(java.lang.String languageId) {
+		return _formItem.getLabel(languageId);
+	}
+
+	/**
+	* Returns the localized label of this form item in the language, optionally using the default language if no localization exists for the requested language.
+	*
+	* @param languageId the ID of the language
+	* @param useDefault whether to use the default language if no localization exists for the requested language
+	* @return the localized label of this form item
+	*/
+	@Override
+	public java.lang.String getLabel(java.lang.String languageId,
+		boolean useDefault) {
+		return _formItem.getLabel(languageId, useDefault);
+	}
+
+	@Override
+	public java.lang.String getLabelCurrentLanguageId() {
+		return _formItem.getLabelCurrentLanguageId();
+	}
+
+	@Override
+	public java.lang.String getLabelCurrentValue() {
+		return _formItem.getLabelCurrentValue();
+	}
+
+	/**
+	* Returns a map of the locales and localized labels of this form item.
+	*
+	* @return the locales and localized labels of this form item
+	*/
+	@Override
+	public java.util.Map<java.util.Locale, java.lang.String> getLabelMap() {
+		return _formItem.getLabelMap();
+	}
+
+	/**
 	* Sets the label of this form item.
 	*
 	* @param label the label of this form item
@@ -428,6 +495,59 @@ public class FormItemWrapper implements FormItem, ModelWrapper<FormItem> {
 	@Override
 	public void setLabel(java.lang.String label) {
 		_formItem.setLabel(label);
+	}
+
+	/**
+	* Sets the localized label of this form item in the language.
+	*
+	* @param label the localized label of this form item
+	* @param locale the locale of the language
+	*/
+	@Override
+	public void setLabel(java.lang.String label, java.util.Locale locale) {
+		_formItem.setLabel(label, locale);
+	}
+
+	/**
+	* Sets the localized label of this form item in the language, and sets the default locale.
+	*
+	* @param label the localized label of this form item
+	* @param locale the locale of the language
+	* @param defaultLocale the default locale
+	*/
+	@Override
+	public void setLabel(java.lang.String label, java.util.Locale locale,
+		java.util.Locale defaultLocale) {
+		_formItem.setLabel(label, locale, defaultLocale);
+	}
+
+	@Override
+	public void setLabelCurrentLanguageId(java.lang.String languageId) {
+		_formItem.setLabelCurrentLanguageId(languageId);
+	}
+
+	/**
+	* Sets the localized labels of this form item from the map of locales and localized labels.
+	*
+	* @param labelMap the locales and localized labels of this form item
+	*/
+	@Override
+	public void setLabelMap(
+		java.util.Map<java.util.Locale, java.lang.String> labelMap) {
+		_formItem.setLabelMap(labelMap);
+	}
+
+	/**
+	* Sets the localized labels of this form item from the map of locales and localized labels, and sets the default locale.
+	*
+	* @param labelMap the locales and localized labels of this form item
+	* @param defaultLocale the default locale
+	*/
+	@Override
+	public void setLabelMap(
+		java.util.Map<java.util.Locale, java.lang.String> labelMap,
+		java.util.Locale defaultLocale) {
+		_formItem.setLabelMap(labelMap, defaultLocale);
 	}
 
 	/**
@@ -541,6 +661,74 @@ public class FormItemWrapper implements FormItem, ModelWrapper<FormItem> {
 	}
 
 	/**
+	* Returns the localized options of this form item in the language. Uses the default language if no localization exists for the requested language.
+	*
+	* @param locale the locale of the language
+	* @return the localized options of this form item
+	*/
+	@Override
+	public java.lang.String getOptions(java.util.Locale locale) {
+		return _formItem.getOptions(locale);
+	}
+
+	/**
+	* Returns the localized options of this form item in the language, optionally using the default language if no localization exists for the requested language.
+	*
+	* @param locale the local of the language
+	* @param useDefault whether to use the default language if no localization exists for the requested language
+	* @return the localized options of this form item. If <code>useDefault</code> is <code>false</code> and no localization exists for the requested language, an empty string will be returned.
+	*/
+	@Override
+	public java.lang.String getOptions(java.util.Locale locale,
+		boolean useDefault) {
+		return _formItem.getOptions(locale, useDefault);
+	}
+
+	/**
+	* Returns the localized options of this form item in the language. Uses the default language if no localization exists for the requested language.
+	*
+	* @param languageId the ID of the language
+	* @return the localized options of this form item
+	*/
+	@Override
+	public java.lang.String getOptions(java.lang.String languageId) {
+		return _formItem.getOptions(languageId);
+	}
+
+	/**
+	* Returns the localized options of this form item in the language, optionally using the default language if no localization exists for the requested language.
+	*
+	* @param languageId the ID of the language
+	* @param useDefault whether to use the default language if no localization exists for the requested language
+	* @return the localized options of this form item
+	*/
+	@Override
+	public java.lang.String getOptions(java.lang.String languageId,
+		boolean useDefault) {
+		return _formItem.getOptions(languageId, useDefault);
+	}
+
+	@Override
+	public java.lang.String getOptionsCurrentLanguageId() {
+		return _formItem.getOptionsCurrentLanguageId();
+	}
+
+	@Override
+	public java.lang.String getOptionsCurrentValue() {
+		return _formItem.getOptionsCurrentValue();
+	}
+
+	/**
+	* Returns a map of the locales and localized optionses of this form item.
+	*
+	* @return the locales and localized optionses of this form item
+	*/
+	@Override
+	public java.util.Map<java.util.Locale, java.lang.String> getOptionsMap() {
+		return _formItem.getOptionsMap();
+	}
+
+	/**
 	* Sets the options of this form item.
 	*
 	* @param options the options of this form item
@@ -548,6 +736,59 @@ public class FormItemWrapper implements FormItem, ModelWrapper<FormItem> {
 	@Override
 	public void setOptions(java.lang.String options) {
 		_formItem.setOptions(options);
+	}
+
+	/**
+	* Sets the localized options of this form item in the language.
+	*
+	* @param options the localized options of this form item
+	* @param locale the locale of the language
+	*/
+	@Override
+	public void setOptions(java.lang.String options, java.util.Locale locale) {
+		_formItem.setOptions(options, locale);
+	}
+
+	/**
+	* Sets the localized options of this form item in the language, and sets the default locale.
+	*
+	* @param options the localized options of this form item
+	* @param locale the locale of the language
+	* @param defaultLocale the default locale
+	*/
+	@Override
+	public void setOptions(java.lang.String options, java.util.Locale locale,
+		java.util.Locale defaultLocale) {
+		_formItem.setOptions(options, locale, defaultLocale);
+	}
+
+	@Override
+	public void setOptionsCurrentLanguageId(java.lang.String languageId) {
+		_formItem.setOptionsCurrentLanguageId(languageId);
+	}
+
+	/**
+	* Sets the localized optionses of this form item from the map of locales and localized optionses.
+	*
+	* @param optionsMap the locales and localized optionses of this form item
+	*/
+	@Override
+	public void setOptionsMap(
+		java.util.Map<java.util.Locale, java.lang.String> optionsMap) {
+		_formItem.setOptionsMap(optionsMap);
+	}
+
+	/**
+	* Sets the localized optionses of this form item from the map of locales and localized optionses, and sets the default locale.
+	*
+	* @param optionsMap the locales and localized optionses of this form item
+	* @param defaultLocale the default locale
+	*/
+	@Override
+	public void setOptionsMap(
+		java.util.Map<java.util.Locale, java.lang.String> optionsMap,
+		java.util.Locale defaultLocale) {
+		_formItem.setOptionsMap(optionsMap, defaultLocale);
 	}
 
 	/**
@@ -591,6 +832,74 @@ public class FormItemWrapper implements FormItem, ModelWrapper<FormItem> {
 	}
 
 	/**
+	* Returns the localized default value of this form item in the language. Uses the default language if no localization exists for the requested language.
+	*
+	* @param locale the locale of the language
+	* @return the localized default value of this form item
+	*/
+	@Override
+	public java.lang.String getDefaultValue(java.util.Locale locale) {
+		return _formItem.getDefaultValue(locale);
+	}
+
+	/**
+	* Returns the localized default value of this form item in the language, optionally using the default language if no localization exists for the requested language.
+	*
+	* @param locale the local of the language
+	* @param useDefault whether to use the default language if no localization exists for the requested language
+	* @return the localized default value of this form item. If <code>useDefault</code> is <code>false</code> and no localization exists for the requested language, an empty string will be returned.
+	*/
+	@Override
+	public java.lang.String getDefaultValue(java.util.Locale locale,
+		boolean useDefault) {
+		return _formItem.getDefaultValue(locale, useDefault);
+	}
+
+	/**
+	* Returns the localized default value of this form item in the language. Uses the default language if no localization exists for the requested language.
+	*
+	* @param languageId the ID of the language
+	* @return the localized default value of this form item
+	*/
+	@Override
+	public java.lang.String getDefaultValue(java.lang.String languageId) {
+		return _formItem.getDefaultValue(languageId);
+	}
+
+	/**
+	* Returns the localized default value of this form item in the language, optionally using the default language if no localization exists for the requested language.
+	*
+	* @param languageId the ID of the language
+	* @param useDefault whether to use the default language if no localization exists for the requested language
+	* @return the localized default value of this form item
+	*/
+	@Override
+	public java.lang.String getDefaultValue(java.lang.String languageId,
+		boolean useDefault) {
+		return _formItem.getDefaultValue(languageId, useDefault);
+	}
+
+	@Override
+	public java.lang.String getDefaultValueCurrentLanguageId() {
+		return _formItem.getDefaultValueCurrentLanguageId();
+	}
+
+	@Override
+	public java.lang.String getDefaultValueCurrentValue() {
+		return _formItem.getDefaultValueCurrentValue();
+	}
+
+	/**
+	* Returns a map of the locales and localized default values of this form item.
+	*
+	* @return the locales and localized default values of this form item
+	*/
+	@Override
+	public java.util.Map<java.util.Locale, java.lang.String> getDefaultValueMap() {
+		return _formItem.getDefaultValueMap();
+	}
+
+	/**
 	* Sets the default value of this form item.
 	*
 	* @param defaultValue the default value of this form item
@@ -598,6 +907,60 @@ public class FormItemWrapper implements FormItem, ModelWrapper<FormItem> {
 	@Override
 	public void setDefaultValue(java.lang.String defaultValue) {
 		_formItem.setDefaultValue(defaultValue);
+	}
+
+	/**
+	* Sets the localized default value of this form item in the language.
+	*
+	* @param defaultValue the localized default value of this form item
+	* @param locale the locale of the language
+	*/
+	@Override
+	public void setDefaultValue(java.lang.String defaultValue,
+		java.util.Locale locale) {
+		_formItem.setDefaultValue(defaultValue, locale);
+	}
+
+	/**
+	* Sets the localized default value of this form item in the language, and sets the default locale.
+	*
+	* @param defaultValue the localized default value of this form item
+	* @param locale the locale of the language
+	* @param defaultLocale the default locale
+	*/
+	@Override
+	public void setDefaultValue(java.lang.String defaultValue,
+		java.util.Locale locale, java.util.Locale defaultLocale) {
+		_formItem.setDefaultValue(defaultValue, locale, defaultLocale);
+	}
+
+	@Override
+	public void setDefaultValueCurrentLanguageId(java.lang.String languageId) {
+		_formItem.setDefaultValueCurrentLanguageId(languageId);
+	}
+
+	/**
+	* Sets the localized default values of this form item from the map of locales and localized default values.
+	*
+	* @param defaultValueMap the locales and localized default values of this form item
+	*/
+	@Override
+	public void setDefaultValueMap(
+		java.util.Map<java.util.Locale, java.lang.String> defaultValueMap) {
+		_formItem.setDefaultValueMap(defaultValueMap);
+	}
+
+	/**
+	* Sets the localized default values of this form item from the map of locales and localized default values, and sets the default locale.
+	*
+	* @param defaultValueMap the locales and localized default values of this form item
+	* @param defaultLocale the default locale
+	*/
+	@Override
+	public void setDefaultValueMap(
+		java.util.Map<java.util.Locale, java.lang.String> defaultValueMap,
+		java.util.Locale defaultLocale) {
+		_formItem.setDefaultValueMap(defaultValueMap, defaultLocale);
 	}
 
 	/**
@@ -671,6 +1034,75 @@ public class FormItemWrapper implements FormItem, ModelWrapper<FormItem> {
 	}
 
 	/**
+	* Returns the localized error validation message of this form item in the language. Uses the default language if no localization exists for the requested language.
+	*
+	* @param locale the locale of the language
+	* @return the localized error validation message of this form item
+	*/
+	@Override
+	public java.lang.String getErrorValidationMessage(java.util.Locale locale) {
+		return _formItem.getErrorValidationMessage(locale);
+	}
+
+	/**
+	* Returns the localized error validation message of this form item in the language, optionally using the default language if no localization exists for the requested language.
+	*
+	* @param locale the local of the language
+	* @param useDefault whether to use the default language if no localization exists for the requested language
+	* @return the localized error validation message of this form item. If <code>useDefault</code> is <code>false</code> and no localization exists for the requested language, an empty string will be returned.
+	*/
+	@Override
+	public java.lang.String getErrorValidationMessage(java.util.Locale locale,
+		boolean useDefault) {
+		return _formItem.getErrorValidationMessage(locale, useDefault);
+	}
+
+	/**
+	* Returns the localized error validation message of this form item in the language. Uses the default language if no localization exists for the requested language.
+	*
+	* @param languageId the ID of the language
+	* @return the localized error validation message of this form item
+	*/
+	@Override
+	public java.lang.String getErrorValidationMessage(
+		java.lang.String languageId) {
+		return _formItem.getErrorValidationMessage(languageId);
+	}
+
+	/**
+	* Returns the localized error validation message of this form item in the language, optionally using the default language if no localization exists for the requested language.
+	*
+	* @param languageId the ID of the language
+	* @param useDefault whether to use the default language if no localization exists for the requested language
+	* @return the localized error validation message of this form item
+	*/
+	@Override
+	public java.lang.String getErrorValidationMessage(
+		java.lang.String languageId, boolean useDefault) {
+		return _formItem.getErrorValidationMessage(languageId, useDefault);
+	}
+
+	@Override
+	public java.lang.String getErrorValidationMessageCurrentLanguageId() {
+		return _formItem.getErrorValidationMessageCurrentLanguageId();
+	}
+
+	@Override
+	public java.lang.String getErrorValidationMessageCurrentValue() {
+		return _formItem.getErrorValidationMessageCurrentValue();
+	}
+
+	/**
+	* Returns a map of the locales and localized error validation messages of this form item.
+	*
+	* @return the locales and localized error validation messages of this form item
+	*/
+	@Override
+	public java.util.Map<java.util.Locale, java.lang.String> getErrorValidationMessageMap() {
+		return _formItem.getErrorValidationMessageMap();
+	}
+
+	/**
 	* Sets the error validation message of this form item.
 	*
 	* @param errorValidationMessage the error validation message of this form item
@@ -679,6 +1111,64 @@ public class FormItemWrapper implements FormItem, ModelWrapper<FormItem> {
 	public void setErrorValidationMessage(
 		java.lang.String errorValidationMessage) {
 		_formItem.setErrorValidationMessage(errorValidationMessage);
+	}
+
+	/**
+	* Sets the localized error validation message of this form item in the language.
+	*
+	* @param errorValidationMessage the localized error validation message of this form item
+	* @param locale the locale of the language
+	*/
+	@Override
+	public void setErrorValidationMessage(
+		java.lang.String errorValidationMessage, java.util.Locale locale) {
+		_formItem.setErrorValidationMessage(errorValidationMessage, locale);
+	}
+
+	/**
+	* Sets the localized error validation message of this form item in the language, and sets the default locale.
+	*
+	* @param errorValidationMessage the localized error validation message of this form item
+	* @param locale the locale of the language
+	* @param defaultLocale the default locale
+	*/
+	@Override
+	public void setErrorValidationMessage(
+		java.lang.String errorValidationMessage, java.util.Locale locale,
+		java.util.Locale defaultLocale) {
+		_formItem.setErrorValidationMessage(errorValidationMessage, locale,
+			defaultLocale);
+	}
+
+	@Override
+	public void setErrorValidationMessageCurrentLanguageId(
+		java.lang.String languageId) {
+		_formItem.setErrorValidationMessageCurrentLanguageId(languageId);
+	}
+
+	/**
+	* Sets the localized error validation messages of this form item from the map of locales and localized error validation messages.
+	*
+	* @param errorValidationMessageMap the locales and localized error validation messages of this form item
+	*/
+	@Override
+	public void setErrorValidationMessageMap(
+		java.util.Map<java.util.Locale, java.lang.String> errorValidationMessageMap) {
+		_formItem.setErrorValidationMessageMap(errorValidationMessageMap);
+	}
+
+	/**
+	* Sets the localized error validation messages of this form item from the map of locales and localized error validation messages, and sets the default locale.
+	*
+	* @param errorValidationMessageMap the locales and localized error validation messages of this form item
+	* @param defaultLocale the default locale
+	*/
+	@Override
+	public void setErrorValidationMessageMap(
+		java.util.Map<java.util.Locale, java.lang.String> errorValidationMessageMap,
+		java.util.Locale defaultLocale) {
+		_formItem.setErrorValidationMessageMap(errorValidationMessageMap,
+			defaultLocale);
 	}
 
 	/**
@@ -692,6 +1182,75 @@ public class FormItemWrapper implements FormItem, ModelWrapper<FormItem> {
 	}
 
 	/**
+	* Returns the localized error mandatory message of this form item in the language. Uses the default language if no localization exists for the requested language.
+	*
+	* @param locale the locale of the language
+	* @return the localized error mandatory message of this form item
+	*/
+	@Override
+	public java.lang.String getErrorMandatoryMessage(java.util.Locale locale) {
+		return _formItem.getErrorMandatoryMessage(locale);
+	}
+
+	/**
+	* Returns the localized error mandatory message of this form item in the language, optionally using the default language if no localization exists for the requested language.
+	*
+	* @param locale the local of the language
+	* @param useDefault whether to use the default language if no localization exists for the requested language
+	* @return the localized error mandatory message of this form item. If <code>useDefault</code> is <code>false</code> and no localization exists for the requested language, an empty string will be returned.
+	*/
+	@Override
+	public java.lang.String getErrorMandatoryMessage(java.util.Locale locale,
+		boolean useDefault) {
+		return _formItem.getErrorMandatoryMessage(locale, useDefault);
+	}
+
+	/**
+	* Returns the localized error mandatory message of this form item in the language. Uses the default language if no localization exists for the requested language.
+	*
+	* @param languageId the ID of the language
+	* @return the localized error mandatory message of this form item
+	*/
+	@Override
+	public java.lang.String getErrorMandatoryMessage(
+		java.lang.String languageId) {
+		return _formItem.getErrorMandatoryMessage(languageId);
+	}
+
+	/**
+	* Returns the localized error mandatory message of this form item in the language, optionally using the default language if no localization exists for the requested language.
+	*
+	* @param languageId the ID of the language
+	* @param useDefault whether to use the default language if no localization exists for the requested language
+	* @return the localized error mandatory message of this form item
+	*/
+	@Override
+	public java.lang.String getErrorMandatoryMessage(
+		java.lang.String languageId, boolean useDefault) {
+		return _formItem.getErrorMandatoryMessage(languageId, useDefault);
+	}
+
+	@Override
+	public java.lang.String getErrorMandatoryMessageCurrentLanguageId() {
+		return _formItem.getErrorMandatoryMessageCurrentLanguageId();
+	}
+
+	@Override
+	public java.lang.String getErrorMandatoryMessageCurrentValue() {
+		return _formItem.getErrorMandatoryMessageCurrentValue();
+	}
+
+	/**
+	* Returns a map of the locales and localized error mandatory messages of this form item.
+	*
+	* @return the locales and localized error mandatory messages of this form item
+	*/
+	@Override
+	public java.util.Map<java.util.Locale, java.lang.String> getErrorMandatoryMessageMap() {
+		return _formItem.getErrorMandatoryMessageMap();
+	}
+
+	/**
 	* Sets the error mandatory message of this form item.
 	*
 	* @param errorMandatoryMessage the error mandatory message of this form item
@@ -699,6 +1258,64 @@ public class FormItemWrapper implements FormItem, ModelWrapper<FormItem> {
 	@Override
 	public void setErrorMandatoryMessage(java.lang.String errorMandatoryMessage) {
 		_formItem.setErrorMandatoryMessage(errorMandatoryMessage);
+	}
+
+	/**
+	* Sets the localized error mandatory message of this form item in the language.
+	*
+	* @param errorMandatoryMessage the localized error mandatory message of this form item
+	* @param locale the locale of the language
+	*/
+	@Override
+	public void setErrorMandatoryMessage(
+		java.lang.String errorMandatoryMessage, java.util.Locale locale) {
+		_formItem.setErrorMandatoryMessage(errorMandatoryMessage, locale);
+	}
+
+	/**
+	* Sets the localized error mandatory message of this form item in the language, and sets the default locale.
+	*
+	* @param errorMandatoryMessage the localized error mandatory message of this form item
+	* @param locale the locale of the language
+	* @param defaultLocale the default locale
+	*/
+	@Override
+	public void setErrorMandatoryMessage(
+		java.lang.String errorMandatoryMessage, java.util.Locale locale,
+		java.util.Locale defaultLocale) {
+		_formItem.setErrorMandatoryMessage(errorMandatoryMessage, locale,
+			defaultLocale);
+	}
+
+	@Override
+	public void setErrorMandatoryMessageCurrentLanguageId(
+		java.lang.String languageId) {
+		_formItem.setErrorMandatoryMessageCurrentLanguageId(languageId);
+	}
+
+	/**
+	* Sets the localized error mandatory messages of this form item from the map of locales and localized error mandatory messages.
+	*
+	* @param errorMandatoryMessageMap the locales and localized error mandatory messages of this form item
+	*/
+	@Override
+	public void setErrorMandatoryMessageMap(
+		java.util.Map<java.util.Locale, java.lang.String> errorMandatoryMessageMap) {
+		_formItem.setErrorMandatoryMessageMap(errorMandatoryMessageMap);
+	}
+
+	/**
+	* Sets the localized error mandatory messages of this form item from the map of locales and localized error mandatory messages, and sets the default locale.
+	*
+	* @param errorMandatoryMessageMap the locales and localized error mandatory messages of this form item
+	* @param defaultLocale the default locale
+	*/
+	@Override
+	public void setErrorMandatoryMessageMap(
+		java.util.Map<java.util.Locale, java.lang.String> errorMandatoryMessageMap,
+		java.util.Locale defaultLocale) {
+		_formItem.setErrorMandatoryMessageMap(errorMandatoryMessageMap,
+			defaultLocale);
 	}
 
 	/**
@@ -712,6 +1329,74 @@ public class FormItemWrapper implements FormItem, ModelWrapper<FormItem> {
 	}
 
 	/**
+	* Returns the localized hint message of this form item in the language. Uses the default language if no localization exists for the requested language.
+	*
+	* @param locale the locale of the language
+	* @return the localized hint message of this form item
+	*/
+	@Override
+	public java.lang.String getHintMessage(java.util.Locale locale) {
+		return _formItem.getHintMessage(locale);
+	}
+
+	/**
+	* Returns the localized hint message of this form item in the language, optionally using the default language if no localization exists for the requested language.
+	*
+	* @param locale the local of the language
+	* @param useDefault whether to use the default language if no localization exists for the requested language
+	* @return the localized hint message of this form item. If <code>useDefault</code> is <code>false</code> and no localization exists for the requested language, an empty string will be returned.
+	*/
+	@Override
+	public java.lang.String getHintMessage(java.util.Locale locale,
+		boolean useDefault) {
+		return _formItem.getHintMessage(locale, useDefault);
+	}
+
+	/**
+	* Returns the localized hint message of this form item in the language. Uses the default language if no localization exists for the requested language.
+	*
+	* @param languageId the ID of the language
+	* @return the localized hint message of this form item
+	*/
+	@Override
+	public java.lang.String getHintMessage(java.lang.String languageId) {
+		return _formItem.getHintMessage(languageId);
+	}
+
+	/**
+	* Returns the localized hint message of this form item in the language, optionally using the default language if no localization exists for the requested language.
+	*
+	* @param languageId the ID of the language
+	* @param useDefault whether to use the default language if no localization exists for the requested language
+	* @return the localized hint message of this form item
+	*/
+	@Override
+	public java.lang.String getHintMessage(java.lang.String languageId,
+		boolean useDefault) {
+		return _formItem.getHintMessage(languageId, useDefault);
+	}
+
+	@Override
+	public java.lang.String getHintMessageCurrentLanguageId() {
+		return _formItem.getHintMessageCurrentLanguageId();
+	}
+
+	@Override
+	public java.lang.String getHintMessageCurrentValue() {
+		return _formItem.getHintMessageCurrentValue();
+	}
+
+	/**
+	* Returns a map of the locales and localized hint messages of this form item.
+	*
+	* @return the locales and localized hint messages of this form item
+	*/
+	@Override
+	public java.util.Map<java.util.Locale, java.lang.String> getHintMessageMap() {
+		return _formItem.getHintMessageMap();
+	}
+
+	/**
 	* Sets the hint message of this form item.
 	*
 	* @param hintMessage the hint message of this form item
@@ -719,6 +1404,60 @@ public class FormItemWrapper implements FormItem, ModelWrapper<FormItem> {
 	@Override
 	public void setHintMessage(java.lang.String hintMessage) {
 		_formItem.setHintMessage(hintMessage);
+	}
+
+	/**
+	* Sets the localized hint message of this form item in the language.
+	*
+	* @param hintMessage the localized hint message of this form item
+	* @param locale the locale of the language
+	*/
+	@Override
+	public void setHintMessage(java.lang.String hintMessage,
+		java.util.Locale locale) {
+		_formItem.setHintMessage(hintMessage, locale);
+	}
+
+	/**
+	* Sets the localized hint message of this form item in the language, and sets the default locale.
+	*
+	* @param hintMessage the localized hint message of this form item
+	* @param locale the locale of the language
+	* @param defaultLocale the default locale
+	*/
+	@Override
+	public void setHintMessage(java.lang.String hintMessage,
+		java.util.Locale locale, java.util.Locale defaultLocale) {
+		_formItem.setHintMessage(hintMessage, locale, defaultLocale);
+	}
+
+	@Override
+	public void setHintMessageCurrentLanguageId(java.lang.String languageId) {
+		_formItem.setHintMessageCurrentLanguageId(languageId);
+	}
+
+	/**
+	* Sets the localized hint messages of this form item from the map of locales and localized hint messages.
+	*
+	* @param hintMessageMap the locales and localized hint messages of this form item
+	*/
+	@Override
+	public void setHintMessageMap(
+		java.util.Map<java.util.Locale, java.lang.String> hintMessageMap) {
+		_formItem.setHintMessageMap(hintMessageMap);
+	}
+
+	/**
+	* Sets the localized hint messages of this form item from the map of locales and localized hint messages, and sets the default locale.
+	*
+	* @param hintMessageMap the locales and localized hint messages of this form item
+	* @param defaultLocale the default locale
+	*/
+	@Override
+	public void setHintMessageMap(
+		java.util.Map<java.util.Locale, java.lang.String> hintMessageMap,
+		java.util.Locale defaultLocale) {
+		_formItem.setHintMessageMap(hintMessageMap, defaultLocale);
 	}
 
 	@Override
@@ -777,6 +1516,29 @@ public class FormItemWrapper implements FormItem, ModelWrapper<FormItem> {
 	public void setExpandoBridgeAttributes(
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		_formItem.setExpandoBridgeAttributes(serviceContext);
+	}
+
+	@Override
+	public java.lang.String[] getAvailableLanguageIds() {
+		return _formItem.getAvailableLanguageIds();
+	}
+
+	@Override
+	public java.lang.String getDefaultLanguageId() {
+		return _formItem.getDefaultLanguageId();
+	}
+
+	@Override
+	public void prepareLocalizedFieldsForImport()
+		throws com.liferay.portal.LocaleException {
+		_formItem.prepareLocalizedFieldsForImport();
+	}
+
+	@Override
+	public void prepareLocalizedFieldsForImport(
+		java.util.Locale defaultImportLocale)
+		throws com.liferay.portal.LocaleException {
+		_formItem.prepareLocalizedFieldsForImport(defaultImportLocale);
 	}
 
 	@Override

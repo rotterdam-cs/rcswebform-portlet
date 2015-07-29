@@ -10,12 +10,12 @@ create table rcswebform_Form (
 	userName VARCHAR(75) null,
 	formAttrId VARCHAR(75) null,
 	formAttrClass VARCHAR(75) null,
-	title VARCHAR(75) null,
-	desc_ VARCHAR(75) null,
+	title STRING null,
+	desc_ STRING null,
 	useCaptcha BOOLEAN,
-	successMessage VARCHAR(75) null,
+	successMessage STRING null,
 	successURL VARCHAR(75) null,
-	submitLabel VARCHAR(75) null,
+	submitLabel STRING null,
 	submitAttrId VARCHAR(75) null,
 	submitAttrClass VARCHAR(75) null
 );
@@ -29,21 +29,21 @@ create table rcswebform_FormItem (
 	formId LONG,
 	formItemAttrId VARCHAR(75) null,
 	formItemAttrClass VARCHAR(75) null,
-	label VARCHAR(75) null,
+	label STRING null,
 	labelAttrId VARCHAR(75) null,
 	labelAttrClass VARCHAR(75) null,
 	inputAttrId VARCHAR(75) null,
 	inputAttrClass VARCHAR(75) null,
 	type_ VARCHAR(75) null,
-	options VARCHAR(75) null,
+	options STRING null,
 	mandatory BOOLEAN,
-	defaultValue VARCHAR(75) null,
+	defaultValue STRING null,
 	order_ INTEGER,
 	validationType VARCHAR(75) null,
 	validationRegexValue VARCHAR(75) null,
-	errorValidationMessage VARCHAR(75) null,
-	errorMandatoryMessage VARCHAR(75) null,
-	hintMessage VARCHAR(75) null
+	errorValidationMessage STRING null,
+	errorMandatoryMessage STRING null,
+	hintMessage STRING null
 );
 
 create table rcswebform_FormToPorletMap (

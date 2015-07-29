@@ -11,5 +11,6 @@ public enum FormItemType {
 	RADIO_BUTTON,
 	RATING,
 	DATE,
+	SECTION,
 	
 }

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -14,6 +14,7 @@
 
 package com.rcs.webform.model;
 
+import com.liferay.portal.LocaleException;
 import com.liferay.portal.kernel.bean.AutoEscape;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.BaseModel;
@@ -25,6 +26,8 @@ import com.liferay.portlet.expando.model.ExpandoBridge;
 import java.io.Serializable;
 
 import java.util.Date;
+import java.util.Locale;
+import java.util.Map;
 
 /**
  * The base model interface for the Form service. Represents a row in the &quot;rcswebform_Form&quot; database table, with each column mapped to a property of this class.
@@ -245,8 +248,58 @@ public interface FormModel extends BaseModel<Form> {
 	 *
 	 * @return the title of this form
 	 */
-	@AutoEscape
 	public String getTitle();
+
+	/**
+	 * Returns the localized title of this form in the language. Uses the default language if no localization exists for the requested language.
+	 *
+	 * @param locale the locale of the language
+	 * @return the localized title of this form
+	 */
+	@AutoEscape
+	public String getTitle(Locale locale);
+
+	/**
+	 * Returns the localized title of this form in the language, optionally using the default language if no localization exists for the requested language.
+	 *
+	 * @param locale the local of the language
+	 * @param useDefault whether to use the default language if no localization exists for the requested language
+	 * @return the localized title of this form. If <code>useDefault</code> is <code>false</code> and no localization exists for the requested language, an empty string will be returned.
+	 */
+	@AutoEscape
+	public String getTitle(Locale locale, boolean useDefault);
+
+	/**
+	 * Returns the localized title of this form in the language. Uses the default language if no localization exists for the requested language.
+	 *
+	 * @param languageId the ID of the language
+	 * @return the localized title of this form
+	 */
+	@AutoEscape
+	public String getTitle(String languageId);
+
+	/**
+	 * Returns the localized title of this form in the language, optionally using the default language if no localization exists for the requested language.
+	 *
+	 * @param languageId the ID of the language
+	 * @param useDefault whether to use the default language if no localization exists for the requested language
+	 * @return the localized title of this form
+	 */
+	@AutoEscape
+	public String getTitle(String languageId, boolean useDefault);
+
+	@AutoEscape
+	public String getTitleCurrentLanguageId();
+
+	@AutoEscape
+	public String getTitleCurrentValue();
+
+	/**
+	 * Returns a map of the locales and localized titles of this form.
+	 *
+	 * @return the locales and localized titles of this form
+	 */
+	public Map<Locale, String> getTitleMap();
 
 	/**
 	 * Sets the title of this form.
@@ -256,12 +309,96 @@ public interface FormModel extends BaseModel<Form> {
 	public void setTitle(String title);
 
 	/**
+	 * Sets the localized title of this form in the language.
+	 *
+	 * @param title the localized title of this form
+	 * @param locale the locale of the language
+	 */
+	public void setTitle(String title, Locale locale);
+
+	/**
+	 * Sets the localized title of this form in the language, and sets the default locale.
+	 *
+	 * @param title the localized title of this form
+	 * @param locale the locale of the language
+	 * @param defaultLocale the default locale
+	 */
+	public void setTitle(String title, Locale locale, Locale defaultLocale);
+
+	public void setTitleCurrentLanguageId(String languageId);
+
+	/**
+	 * Sets the localized titles of this form from the map of locales and localized titles.
+	 *
+	 * @param titleMap the locales and localized titles of this form
+	 */
+	public void setTitleMap(Map<Locale, String> titleMap);
+
+	/**
+	 * Sets the localized titles of this form from the map of locales and localized titles, and sets the default locale.
+	 *
+	 * @param titleMap the locales and localized titles of this form
+	 * @param defaultLocale the default locale
+	 */
+	public void setTitleMap(Map<Locale, String> titleMap, Locale defaultLocale);
+
+	/**
 	 * Returns the desc of this form.
 	 *
 	 * @return the desc of this form
 	 */
-	@AutoEscape
 	public String getDesc();
+
+	/**
+	 * Returns the localized desc of this form in the language. Uses the default language if no localization exists for the requested language.
+	 *
+	 * @param locale the locale of the language
+	 * @return the localized desc of this form
+	 */
+	@AutoEscape
+	public String getDesc(Locale locale);
+
+	/**
+	 * Returns the localized desc of this form in the language, optionally using the default language if no localization exists for the requested language.
+	 *
+	 * @param locale the local of the language
+	 * @param useDefault whether to use the default language if no localization exists for the requested language
+	 * @return the localized desc of this form. If <code>useDefault</code> is <code>false</code> and no localization exists for the requested language, an empty string will be returned.
+	 */
+	@AutoEscape
+	public String getDesc(Locale locale, boolean useDefault);
+
+	/**
+	 * Returns the localized desc of this form in the language. Uses the default language if no localization exists for the requested language.
+	 *
+	 * @param languageId the ID of the language
+	 * @return the localized desc of this form
+	 */
+	@AutoEscape
+	public String getDesc(String languageId);
+
+	/**
+	 * Returns the localized desc of this form in the language, optionally using the default language if no localization exists for the requested language.
+	 *
+	 * @param languageId the ID of the language
+	 * @param useDefault whether to use the default language if no localization exists for the requested language
+	 * @return the localized desc of this form
+	 */
+	@AutoEscape
+	public String getDesc(String languageId, boolean useDefault);
+
+	@AutoEscape
+	public String getDescCurrentLanguageId();
+
+	@AutoEscape
+	public String getDescCurrentValue();
+
+	/**
+	 * Returns a map of the locales and localized descs of this form.
+	 *
+	 * @return the locales and localized descs of this form
+	 */
+	public Map<Locale, String> getDescMap();
 
 	/**
 	 * Sets the desc of this form.
@@ -269,6 +406,40 @@ public interface FormModel extends BaseModel<Form> {
 	 * @param desc the desc of this form
 	 */
 	public void setDesc(String desc);
+
+	/**
+	 * Sets the localized desc of this form in the language.
+	 *
+	 * @param desc the localized desc of this form
+	 * @param locale the locale of the language
+	 */
+	public void setDesc(String desc, Locale locale);
+
+	/**
+	 * Sets the localized desc of this form in the language, and sets the default locale.
+	 *
+	 * @param desc the localized desc of this form
+	 * @param locale the locale of the language
+	 * @param defaultLocale the default locale
+	 */
+	public void setDesc(String desc, Locale locale, Locale defaultLocale);
+
+	public void setDescCurrentLanguageId(String languageId);
+
+	/**
+	 * Sets the localized descs of this form from the map of locales and localized descs.
+	 *
+	 * @param descMap the locales and localized descs of this form
+	 */
+	public void setDescMap(Map<Locale, String> descMap);
+
+	/**
+	 * Sets the localized descs of this form from the map of locales and localized descs, and sets the default locale.
+	 *
+	 * @param descMap the locales and localized descs of this form
+	 * @param defaultLocale the default locale
+	 */
+	public void setDescMap(Map<Locale, String> descMap, Locale defaultLocale);
 
 	/**
 	 * Returns the use captcha of this form.
@@ -296,8 +467,58 @@ public interface FormModel extends BaseModel<Form> {
 	 *
 	 * @return the success message of this form
 	 */
-	@AutoEscape
 	public String getSuccessMessage();
+
+	/**
+	 * Returns the localized success message of this form in the language. Uses the default language if no localization exists for the requested language.
+	 *
+	 * @param locale the locale of the language
+	 * @return the localized success message of this form
+	 */
+	@AutoEscape
+	public String getSuccessMessage(Locale locale);
+
+	/**
+	 * Returns the localized success message of this form in the language, optionally using the default language if no localization exists for the requested language.
+	 *
+	 * @param locale the local of the language
+	 * @param useDefault whether to use the default language if no localization exists for the requested language
+	 * @return the localized success message of this form. If <code>useDefault</code> is <code>false</code> and no localization exists for the requested language, an empty string will be returned.
+	 */
+	@AutoEscape
+	public String getSuccessMessage(Locale locale, boolean useDefault);
+
+	/**
+	 * Returns the localized success message of this form in the language. Uses the default language if no localization exists for the requested language.
+	 *
+	 * @param languageId the ID of the language
+	 * @return the localized success message of this form
+	 */
+	@AutoEscape
+	public String getSuccessMessage(String languageId);
+
+	/**
+	 * Returns the localized success message of this form in the language, optionally using the default language if no localization exists for the requested language.
+	 *
+	 * @param languageId the ID of the language
+	 * @param useDefault whether to use the default language if no localization exists for the requested language
+	 * @return the localized success message of this form
+	 */
+	@AutoEscape
+	public String getSuccessMessage(String languageId, boolean useDefault);
+
+	@AutoEscape
+	public String getSuccessMessageCurrentLanguageId();
+
+	@AutoEscape
+	public String getSuccessMessageCurrentValue();
+
+	/**
+	 * Returns a map of the locales and localized success messages of this form.
+	 *
+	 * @return the locales and localized success messages of this form
+	 */
+	public Map<Locale, String> getSuccessMessageMap();
 
 	/**
 	 * Sets the success message of this form.
@@ -305,6 +526,42 @@ public interface FormModel extends BaseModel<Form> {
 	 * @param successMessage the success message of this form
 	 */
 	public void setSuccessMessage(String successMessage);
+
+	/**
+	 * Sets the localized success message of this form in the language.
+	 *
+	 * @param successMessage the localized success message of this form
+	 * @param locale the locale of the language
+	 */
+	public void setSuccessMessage(String successMessage, Locale locale);
+
+	/**
+	 * Sets the localized success message of this form in the language, and sets the default locale.
+	 *
+	 * @param successMessage the localized success message of this form
+	 * @param locale the locale of the language
+	 * @param defaultLocale the default locale
+	 */
+	public void setSuccessMessage(String successMessage, Locale locale,
+		Locale defaultLocale);
+
+	public void setSuccessMessageCurrentLanguageId(String languageId);
+
+	/**
+	 * Sets the localized success messages of this form from the map of locales and localized success messages.
+	 *
+	 * @param successMessageMap the locales and localized success messages of this form
+	 */
+	public void setSuccessMessageMap(Map<Locale, String> successMessageMap);
+
+	/**
+	 * Sets the localized success messages of this form from the map of locales and localized success messages, and sets the default locale.
+	 *
+	 * @param successMessageMap the locales and localized success messages of this form
+	 * @param defaultLocale the default locale
+	 */
+	public void setSuccessMessageMap(Map<Locale, String> successMessageMap,
+		Locale defaultLocale);
 
 	/**
 	 * Returns the success u r l of this form.
@@ -326,8 +583,58 @@ public interface FormModel extends BaseModel<Form> {
 	 *
 	 * @return the submit label of this form
 	 */
-	@AutoEscape
 	public String getSubmitLabel();
+
+	/**
+	 * Returns the localized submit label of this form in the language. Uses the default language if no localization exists for the requested language.
+	 *
+	 * @param locale the locale of the language
+	 * @return the localized submit label of this form
+	 */
+	@AutoEscape
+	public String getSubmitLabel(Locale locale);
+
+	/**
+	 * Returns the localized submit label of this form in the language, optionally using the default language if no localization exists for the requested language.
+	 *
+	 * @param locale the local of the language
+	 * @param useDefault whether to use the default language if no localization exists for the requested language
+	 * @return the localized submit label of this form. If <code>useDefault</code> is <code>false</code> and no localization exists for the requested language, an empty string will be returned.
+	 */
+	@AutoEscape
+	public String getSubmitLabel(Locale locale, boolean useDefault);
+
+	/**
+	 * Returns the localized submit label of this form in the language. Uses the default language if no localization exists for the requested language.
+	 *
+	 * @param languageId the ID of the language
+	 * @return the localized submit label of this form
+	 */
+	@AutoEscape
+	public String getSubmitLabel(String languageId);
+
+	/**
+	 * Returns the localized submit label of this form in the language, optionally using the default language if no localization exists for the requested language.
+	 *
+	 * @param languageId the ID of the language
+	 * @param useDefault whether to use the default language if no localization exists for the requested language
+	 * @return the localized submit label of this form
+	 */
+	@AutoEscape
+	public String getSubmitLabel(String languageId, boolean useDefault);
+
+	@AutoEscape
+	public String getSubmitLabelCurrentLanguageId();
+
+	@AutoEscape
+	public String getSubmitLabelCurrentValue();
+
+	/**
+	 * Returns a map of the locales and localized submit labels of this form.
+	 *
+	 * @return the locales and localized submit labels of this form
+	 */
+	public Map<Locale, String> getSubmitLabelMap();
 
 	/**
 	 * Sets the submit label of this form.
@@ -335,6 +642,42 @@ public interface FormModel extends BaseModel<Form> {
 	 * @param submitLabel the submit label of this form
 	 */
 	public void setSubmitLabel(String submitLabel);
+
+	/**
+	 * Sets the localized submit label of this form in the language.
+	 *
+	 * @param submitLabel the localized submit label of this form
+	 * @param locale the locale of the language
+	 */
+	public void setSubmitLabel(String submitLabel, Locale locale);
+
+	/**
+	 * Sets the localized submit label of this form in the language, and sets the default locale.
+	 *
+	 * @param submitLabel the localized submit label of this form
+	 * @param locale the locale of the language
+	 * @param defaultLocale the default locale
+	 */
+	public void setSubmitLabel(String submitLabel, Locale locale,
+		Locale defaultLocale);
+
+	public void setSubmitLabelCurrentLanguageId(String languageId);
+
+	/**
+	 * Sets the localized submit labels of this form from the map of locales and localized submit labels.
+	 *
+	 * @param submitLabelMap the locales and localized submit labels of this form
+	 */
+	public void setSubmitLabelMap(Map<Locale, String> submitLabelMap);
+
+	/**
+	 * Sets the localized submit labels of this form from the map of locales and localized submit labels, and sets the default locale.
+	 *
+	 * @param submitLabelMap the locales and localized submit labels of this form
+	 * @param defaultLocale the default locale
+	 */
+	public void setSubmitLabelMap(Map<Locale, String> submitLabelMap,
+		Locale defaultLocale);
 
 	/**
 	 * Returns the submit attr ID of this form.
@@ -398,6 +741,15 @@ public interface FormModel extends BaseModel<Form> {
 
 	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext);
+
+	public String[] getAvailableLanguageIds();
+
+	public String getDefaultLanguageId();
+
+	public void prepareLocalizedFieldsForImport() throws LocaleException;
+
+	public void prepareLocalizedFieldsForImport(Locale defaultImportLocale)
+		throws LocaleException;
 
 	@Override
 	public Object clone();

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -14,12 +14,17 @@
 
 package com.rcs.webform.model.impl;
 
+import com.liferay.portal.LocaleException;
 import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.json.JSON;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.LocaleUtil;
+import com.liferay.portal.kernel.util.LocalizationUtil;
 import com.liferay.portal.kernel.util.ProxyUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.CacheModel;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.service.ServiceContext;
@@ -37,7 +42,10 @@ import java.sql.Types;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
+import java.util.Set;
+import java.util.TreeSet;
 
 /**
  * The base model implementation for the Form service. Represents a row in the &quot;rcswebform_Form&quot; database table, with each column mapped to a property of this class.
@@ -80,7 +88,7 @@ public class FormModelImpl extends BaseModelImpl<Form> implements FormModel {
 			{ "submitAttrId", Types.VARCHAR },
 			{ "submitAttrClass", Types.VARCHAR }
 		};
-	public static final String TABLE_SQL_CREATE = "create table rcswebform_Form (formId LONG not null primary key,active_ BOOLEAN,creationDate DATE null,modificationDate DATE null,modificationUser VARCHAR(75) null,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,formAttrId VARCHAR(75) null,formAttrClass VARCHAR(75) null,title VARCHAR(75) null,desc_ VARCHAR(75) null,useCaptcha BOOLEAN,successMessage VARCHAR(75) null,successURL VARCHAR(75) null,submitLabel VARCHAR(75) null,submitAttrId VARCHAR(75) null,submitAttrClass VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table rcswebform_Form (formId LONG not null primary key,active_ BOOLEAN,creationDate DATE null,modificationDate DATE null,modificationUser VARCHAR(75) null,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,formAttrId VARCHAR(75) null,formAttrClass VARCHAR(75) null,title STRING null,desc_ STRING null,useCaptcha BOOLEAN,successMessage STRING null,successURL VARCHAR(75) null,submitLabel STRING null,submitAttrId VARCHAR(75) null,submitAttrClass VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table rcswebform_Form";
 	public static final String ORDER_BY_JPQL = " ORDER BY form.formId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY rcswebform_Form.formId ASC";
@@ -430,8 +438,91 @@ public class FormModelImpl extends BaseModelImpl<Form> implements FormModel {
 	}
 
 	@Override
+	public String getTitle(Locale locale) {
+		String languageId = LocaleUtil.toLanguageId(locale);
+
+		return getTitle(languageId);
+	}
+
+	@Override
+	public String getTitle(Locale locale, boolean useDefault) {
+		String languageId = LocaleUtil.toLanguageId(locale);
+
+		return getTitle(languageId, useDefault);
+	}
+
+	@Override
+	public String getTitle(String languageId) {
+		return LocalizationUtil.getLocalization(getTitle(), languageId);
+	}
+
+	@Override
+	public String getTitle(String languageId, boolean useDefault) {
+		return LocalizationUtil.getLocalization(getTitle(), languageId,
+			useDefault);
+	}
+
+	@Override
+	public String getTitleCurrentLanguageId() {
+		return _titleCurrentLanguageId;
+	}
+
+	@JSON
+	@Override
+	public String getTitleCurrentValue() {
+		Locale locale = getLocale(_titleCurrentLanguageId);
+
+		return getTitle(locale);
+	}
+
+	@Override
+	public Map<Locale, String> getTitleMap() {
+		return LocalizationUtil.getLocalizationMap(getTitle());
+	}
+
+	@Override
 	public void setTitle(String title) {
 		_title = title;
+	}
+
+	@Override
+	public void setTitle(String title, Locale locale) {
+		setTitle(title, locale, LocaleUtil.getDefault());
+	}
+
+	@Override
+	public void setTitle(String title, Locale locale, Locale defaultLocale) {
+		String languageId = LocaleUtil.toLanguageId(locale);
+		String defaultLanguageId = LocaleUtil.toLanguageId(defaultLocale);
+
+		if (Validator.isNotNull(title)) {
+			setTitle(LocalizationUtil.updateLocalization(getTitle(), "Title",
+					title, languageId, defaultLanguageId));
+		}
+		else {
+			setTitle(LocalizationUtil.removeLocalization(getTitle(), "Title",
+					languageId));
+		}
+	}
+
+	@Override
+	public void setTitleCurrentLanguageId(String languageId) {
+		_titleCurrentLanguageId = languageId;
+	}
+
+	@Override
+	public void setTitleMap(Map<Locale, String> titleMap) {
+		setTitleMap(titleMap, LocaleUtil.getDefault());
+	}
+
+	@Override
+	public void setTitleMap(Map<Locale, String> titleMap, Locale defaultLocale) {
+		if (titleMap == null) {
+			return;
+		}
+
+		setTitle(LocalizationUtil.updateLocalization(titleMap, getTitle(),
+				"Title", LocaleUtil.toLanguageId(defaultLocale)));
 	}
 
 	@Override
@@ -445,8 +536,91 @@ public class FormModelImpl extends BaseModelImpl<Form> implements FormModel {
 	}
 
 	@Override
+	public String getDesc(Locale locale) {
+		String languageId = LocaleUtil.toLanguageId(locale);
+
+		return getDesc(languageId);
+	}
+
+	@Override
+	public String getDesc(Locale locale, boolean useDefault) {
+		String languageId = LocaleUtil.toLanguageId(locale);
+
+		return getDesc(languageId, useDefault);
+	}
+
+	@Override
+	public String getDesc(String languageId) {
+		return LocalizationUtil.getLocalization(getDesc(), languageId);
+	}
+
+	@Override
+	public String getDesc(String languageId, boolean useDefault) {
+		return LocalizationUtil.getLocalization(getDesc(), languageId,
+			useDefault);
+	}
+
+	@Override
+	public String getDescCurrentLanguageId() {
+		return _descCurrentLanguageId;
+	}
+
+	@JSON
+	@Override
+	public String getDescCurrentValue() {
+		Locale locale = getLocale(_descCurrentLanguageId);
+
+		return getDesc(locale);
+	}
+
+	@Override
+	public Map<Locale, String> getDescMap() {
+		return LocalizationUtil.getLocalizationMap(getDesc());
+	}
+
+	@Override
 	public void setDesc(String desc) {
 		_desc = desc;
+	}
+
+	@Override
+	public void setDesc(String desc, Locale locale) {
+		setDesc(desc, locale, LocaleUtil.getDefault());
+	}
+
+	@Override
+	public void setDesc(String desc, Locale locale, Locale defaultLocale) {
+		String languageId = LocaleUtil.toLanguageId(locale);
+		String defaultLanguageId = LocaleUtil.toLanguageId(defaultLocale);
+
+		if (Validator.isNotNull(desc)) {
+			setDesc(LocalizationUtil.updateLocalization(getDesc(), "Desc",
+					desc, languageId, defaultLanguageId));
+		}
+		else {
+			setDesc(LocalizationUtil.removeLocalization(getDesc(), "Desc",
+					languageId));
+		}
+	}
+
+	@Override
+	public void setDescCurrentLanguageId(String languageId) {
+		_descCurrentLanguageId = languageId;
+	}
+
+	@Override
+	public void setDescMap(Map<Locale, String> descMap) {
+		setDescMap(descMap, LocaleUtil.getDefault());
+	}
+
+	@Override
+	public void setDescMap(Map<Locale, String> descMap, Locale defaultLocale) {
+		if (descMap == null) {
+			return;
+		}
+
+		setDesc(LocalizationUtil.updateLocalization(descMap, getDesc(), "Desc",
+				LocaleUtil.toLanguageId(defaultLocale)));
 	}
 
 	@Override
@@ -475,8 +649,95 @@ public class FormModelImpl extends BaseModelImpl<Form> implements FormModel {
 	}
 
 	@Override
+	public String getSuccessMessage(Locale locale) {
+		String languageId = LocaleUtil.toLanguageId(locale);
+
+		return getSuccessMessage(languageId);
+	}
+
+	@Override
+	public String getSuccessMessage(Locale locale, boolean useDefault) {
+		String languageId = LocaleUtil.toLanguageId(locale);
+
+		return getSuccessMessage(languageId, useDefault);
+	}
+
+	@Override
+	public String getSuccessMessage(String languageId) {
+		return LocalizationUtil.getLocalization(getSuccessMessage(), languageId);
+	}
+
+	@Override
+	public String getSuccessMessage(String languageId, boolean useDefault) {
+		return LocalizationUtil.getLocalization(getSuccessMessage(),
+			languageId, useDefault);
+	}
+
+	@Override
+	public String getSuccessMessageCurrentLanguageId() {
+		return _successMessageCurrentLanguageId;
+	}
+
+	@JSON
+	@Override
+	public String getSuccessMessageCurrentValue() {
+		Locale locale = getLocale(_successMessageCurrentLanguageId);
+
+		return getSuccessMessage(locale);
+	}
+
+	@Override
+	public Map<Locale, String> getSuccessMessageMap() {
+		return LocalizationUtil.getLocalizationMap(getSuccessMessage());
+	}
+
+	@Override
 	public void setSuccessMessage(String successMessage) {
 		_successMessage = successMessage;
+	}
+
+	@Override
+	public void setSuccessMessage(String successMessage, Locale locale) {
+		setSuccessMessage(successMessage, locale, LocaleUtil.getDefault());
+	}
+
+	@Override
+	public void setSuccessMessage(String successMessage, Locale locale,
+		Locale defaultLocale) {
+		String languageId = LocaleUtil.toLanguageId(locale);
+		String defaultLanguageId = LocaleUtil.toLanguageId(defaultLocale);
+
+		if (Validator.isNotNull(successMessage)) {
+			setSuccessMessage(LocalizationUtil.updateLocalization(
+					getSuccessMessage(), "SuccessMessage", successMessage,
+					languageId, defaultLanguageId));
+		}
+		else {
+			setSuccessMessage(LocalizationUtil.removeLocalization(
+					getSuccessMessage(), "SuccessMessage", languageId));
+		}
+	}
+
+	@Override
+	public void setSuccessMessageCurrentLanguageId(String languageId) {
+		_successMessageCurrentLanguageId = languageId;
+	}
+
+	@Override
+	public void setSuccessMessageMap(Map<Locale, String> successMessageMap) {
+		setSuccessMessageMap(successMessageMap, LocaleUtil.getDefault());
+	}
+
+	@Override
+	public void setSuccessMessageMap(Map<Locale, String> successMessageMap,
+		Locale defaultLocale) {
+		if (successMessageMap == null) {
+			return;
+		}
+
+		setSuccessMessage(LocalizationUtil.updateLocalization(
+				successMessageMap, getSuccessMessage(), "SuccessMessage",
+				LocaleUtil.toLanguageId(defaultLocale)));
 	}
 
 	@Override
@@ -505,8 +766,95 @@ public class FormModelImpl extends BaseModelImpl<Form> implements FormModel {
 	}
 
 	@Override
+	public String getSubmitLabel(Locale locale) {
+		String languageId = LocaleUtil.toLanguageId(locale);
+
+		return getSubmitLabel(languageId);
+	}
+
+	@Override
+	public String getSubmitLabel(Locale locale, boolean useDefault) {
+		String languageId = LocaleUtil.toLanguageId(locale);
+
+		return getSubmitLabel(languageId, useDefault);
+	}
+
+	@Override
+	public String getSubmitLabel(String languageId) {
+		return LocalizationUtil.getLocalization(getSubmitLabel(), languageId);
+	}
+
+	@Override
+	public String getSubmitLabel(String languageId, boolean useDefault) {
+		return LocalizationUtil.getLocalization(getSubmitLabel(), languageId,
+			useDefault);
+	}
+
+	@Override
+	public String getSubmitLabelCurrentLanguageId() {
+		return _submitLabelCurrentLanguageId;
+	}
+
+	@JSON
+	@Override
+	public String getSubmitLabelCurrentValue() {
+		Locale locale = getLocale(_submitLabelCurrentLanguageId);
+
+		return getSubmitLabel(locale);
+	}
+
+	@Override
+	public Map<Locale, String> getSubmitLabelMap() {
+		return LocalizationUtil.getLocalizationMap(getSubmitLabel());
+	}
+
+	@Override
 	public void setSubmitLabel(String submitLabel) {
 		_submitLabel = submitLabel;
+	}
+
+	@Override
+	public void setSubmitLabel(String submitLabel, Locale locale) {
+		setSubmitLabel(submitLabel, locale, LocaleUtil.getDefault());
+	}
+
+	@Override
+	public void setSubmitLabel(String submitLabel, Locale locale,
+		Locale defaultLocale) {
+		String languageId = LocaleUtil.toLanguageId(locale);
+		String defaultLanguageId = LocaleUtil.toLanguageId(defaultLocale);
+
+		if (Validator.isNotNull(submitLabel)) {
+			setSubmitLabel(LocalizationUtil.updateLocalization(
+					getSubmitLabel(), "SubmitLabel", submitLabel, languageId,
+					defaultLanguageId));
+		}
+		else {
+			setSubmitLabel(LocalizationUtil.removeLocalization(
+					getSubmitLabel(), "SubmitLabel", languageId));
+		}
+	}
+
+	@Override
+	public void setSubmitLabelCurrentLanguageId(String languageId) {
+		_submitLabelCurrentLanguageId = languageId;
+	}
+
+	@Override
+	public void setSubmitLabelMap(Map<Locale, String> submitLabelMap) {
+		setSubmitLabelMap(submitLabelMap, LocaleUtil.getDefault());
+	}
+
+	@Override
+	public void setSubmitLabelMap(Map<Locale, String> submitLabelMap,
+		Locale defaultLocale) {
+		if (submitLabelMap == null) {
+			return;
+		}
+
+		setSubmitLabel(LocalizationUtil.updateLocalization(submitLabelMap,
+				getSubmitLabel(), "SubmitLabel",
+				LocaleUtil.toLanguageId(defaultLocale)));
 	}
 
 	@Override
@@ -550,6 +898,123 @@ public class FormModelImpl extends BaseModelImpl<Form> implements FormModel {
 		ExpandoBridge expandoBridge = getExpandoBridge();
 
 		expandoBridge.setAttributes(serviceContext);
+	}
+
+	@Override
+	public String[] getAvailableLanguageIds() {
+		Set<String> availableLanguageIds = new TreeSet<String>();
+
+		Map<Locale, String> titleMap = getTitleMap();
+
+		for (Map.Entry<Locale, String> entry : titleMap.entrySet()) {
+			Locale locale = entry.getKey();
+			String value = entry.getValue();
+
+			if (Validator.isNotNull(value)) {
+				availableLanguageIds.add(LocaleUtil.toLanguageId(locale));
+			}
+		}
+
+		Map<Locale, String> descMap = getDescMap();
+
+		for (Map.Entry<Locale, String> entry : descMap.entrySet()) {
+			Locale locale = entry.getKey();
+			String value = entry.getValue();
+
+			if (Validator.isNotNull(value)) {
+				availableLanguageIds.add(LocaleUtil.toLanguageId(locale));
+			}
+		}
+
+		Map<Locale, String> successMessageMap = getSuccessMessageMap();
+
+		for (Map.Entry<Locale, String> entry : successMessageMap.entrySet()) {
+			Locale locale = entry.getKey();
+			String value = entry.getValue();
+
+			if (Validator.isNotNull(value)) {
+				availableLanguageIds.add(LocaleUtil.toLanguageId(locale));
+			}
+		}
+
+		Map<Locale, String> submitLabelMap = getSubmitLabelMap();
+
+		for (Map.Entry<Locale, String> entry : submitLabelMap.entrySet()) {
+			Locale locale = entry.getKey();
+			String value = entry.getValue();
+
+			if (Validator.isNotNull(value)) {
+				availableLanguageIds.add(LocaleUtil.toLanguageId(locale));
+			}
+		}
+
+		return availableLanguageIds.toArray(new String[availableLanguageIds.size()]);
+	}
+
+	@Override
+	public String getDefaultLanguageId() {
+		String xml = getTitle();
+
+		if (xml == null) {
+			return StringPool.BLANK;
+		}
+
+		Locale defaultLocale = LocaleUtil.getDefault();
+
+		return LocalizationUtil.getDefaultLanguageId(xml, defaultLocale);
+	}
+
+	@Override
+	public void prepareLocalizedFieldsForImport() throws LocaleException {
+		prepareLocalizedFieldsForImport(null);
+	}
+
+	@Override
+	@SuppressWarnings("unused")
+	public void prepareLocalizedFieldsForImport(Locale defaultImportLocale)
+		throws LocaleException {
+		Locale defaultLocale = LocaleUtil.getDefault();
+
+		String modelDefaultLanguageId = getDefaultLanguageId();
+
+		String title = getTitle(defaultLocale);
+
+		if (Validator.isNull(title)) {
+			setTitle(getTitle(modelDefaultLanguageId), defaultLocale);
+		}
+		else {
+			setTitle(getTitle(defaultLocale), defaultLocale, defaultLocale);
+		}
+
+		String desc = getDesc(defaultLocale);
+
+		if (Validator.isNull(desc)) {
+			setDesc(getDesc(modelDefaultLanguageId), defaultLocale);
+		}
+		else {
+			setDesc(getDesc(defaultLocale), defaultLocale, defaultLocale);
+		}
+
+		String successMessage = getSuccessMessage(defaultLocale);
+
+		if (Validator.isNull(successMessage)) {
+			setSuccessMessage(getSuccessMessage(modelDefaultLanguageId),
+				defaultLocale);
+		}
+		else {
+			setSuccessMessage(getSuccessMessage(defaultLocale), defaultLocale,
+				defaultLocale);
+		}
+
+		String submitLabel = getSubmitLabel(defaultLocale);
+
+		if (Validator.isNull(submitLabel)) {
+			setSubmitLabel(getSubmitLabel(modelDefaultLanguageId), defaultLocale);
+		}
+		else {
+			setSubmitLabel(getSubmitLabel(defaultLocale), defaultLocale,
+				defaultLocale);
+		}
 	}
 
 	@Override
@@ -920,11 +1385,15 @@ public class FormModelImpl extends BaseModelImpl<Form> implements FormModel {
 	private String _formAttrId;
 	private String _formAttrClass;
 	private String _title;
+	private String _titleCurrentLanguageId;
 	private String _desc;
+	private String _descCurrentLanguageId;
 	private boolean _useCaptcha;
 	private String _successMessage;
+	private String _successMessageCurrentLanguageId;
 	private String _successURL;
 	private String _submitLabel;
+	private String _submitLabelCurrentLanguageId;
 	private String _submitAttrId;
 	private String _submitAttrClass;
 	private Form _escapedModel;

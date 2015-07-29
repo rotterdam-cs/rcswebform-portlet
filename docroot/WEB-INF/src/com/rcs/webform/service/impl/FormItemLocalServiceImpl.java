@@ -14,7 +14,9 @@
 
 package com.rcs.webform.service.impl;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -22,6 +24,7 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.service.ServiceContext;
 import com.rcs.webform.model.FormItem;
 import com.rcs.webform.service.base.FormItemLocalServiceBaseImpl;
+import com.rcs.webform.service.persistence.FormItemUtil;
 
 /**
  * The implementation of the form item local service.
@@ -41,62 +44,70 @@ import com.rcs.webform.service.base.FormItemLocalServiceBaseImpl;
  * @see com.rcs.webform.service.FormItemLocalServiceUtil
  */
 public class FormItemLocalServiceImpl extends FormItemLocalServiceBaseImpl {
-	
-	private static Log log = LogFactoryUtil.getLog(FormItemLocalServiceImpl.class);
 
-	/**
-	 * Add Form Item
-	 * 
-	 * @param label
-	 * @param type
-	 * @param options
-	 * @param mandatory
-	 * @param validationRegexValue
-	 * @param errorValidationMessage
-	 * @param serviceContext
-	 * @return
-	 */
-	public FormItem add(Long formItemId, String label, String type, String options, boolean mandatory, String validationRegexValue,
-			String errorValidationMessage, ServiceContext serviceContext) {
-		
-		User user = null;
-		FormItem formItem = null;
-		Date now = new Date();
-		try {
-			user = userLocalService.getUserById(serviceContext.getUserId());
-			if (formItemId == null) {
-				formItemId = counterLocalService.increment(FormItem.class.getName());
-			}
-			formItem = formItemPersistence.create(formItemId);
-			formItem.setFormId(0);
-			formItem.setActive(true);
-			formItem.setCreationDate(serviceContext.getCreateDate(now));
-			formItem.setModificationDate(serviceContext.getModifiedDate(now));
-			formItem.setModificationUser(user.getFullName());
-			formItem.setFormId(0);
-			formItem.setFormItemAttrId("");
-			formItem.setFormItemAttrClass("");
-			formItem.setLabel(label);
-			formItem.setLabelAttrId("");
-			formItem.setLabelAttrClass("");
-			formItem.setInputAttrId("");
-			formItem.setInputAttrClass("");
-			formItem.setType(type);
-			formItem.setOptions(options);
-			formItem.setMandatory(mandatory);
-			formItem.setDefaultValue("");
-			formItem.setOrder(0);
-			formItem.setValidationType("");
-			formItem.setValidationRegexValue(validationRegexValue);
-			formItem.setErrorMandatoryMessage("");
-			formItem.setErrorValidationMessage(errorValidationMessage);
+    private static Log log = LogFactoryUtil.getLog(FormItemLocalServiceImpl.class);
 
-			formItemPersistence.update(formItem);
-		} catch (Exception e) {
-			log.error("Exception while adding form item: " + e.getMessage(), e);
-		} 
+    /**
+     * Add Form Item
+     * 
+     * @param label
+     * @param type
+     * @param options
+     * @param mandatory
+     * @param validationRegexValue
+     * @param errorValidationMessage
+     * @param serviceContext
+     * @return
+     */
+    public FormItem add(Long formItemId, String label, String type, String options, boolean mandatory, String validationRegexValue,
+            String errorValidationMessage, ServiceContext serviceContext) {
 
-		return formItem;
-	}
+        User user = null;
+        FormItem formItem = null;
+        Date now = new Date();
+        try {
+            user = userLocalService.getUserById(serviceContext.getUserId());
+            if (formItemId == null) {
+                formItemId = counterLocalService.increment(FormItem.class.getName());
+            }
+            formItem = formItemPersistence.create(formItemId);
+            formItem.setFormId(0);
+            formItem.setActive(true);
+            formItem.setCreationDate(serviceContext.getCreateDate(now));
+            formItem.setModificationDate(serviceContext.getModifiedDate(now));
+            formItem.setModificationUser(user.getFullName());
+            formItem.setFormId(0);
+            formItem.setFormItemAttrId("");
+            formItem.setFormItemAttrClass("");
+            formItem.setLabel(label);
+            formItem.setLabelAttrId("");
+            formItem.setLabelAttrClass("");
+            formItem.setInputAttrId("");
+            formItem.setInputAttrClass("");
+            formItem.setType(type);
+            formItem.setOptions(options);
+            formItem.setMandatory(mandatory);
+            formItem.setDefaultValue("");
+            formItem.setOrder(0);
+            formItem.setValidationType("");
+            formItem.setValidationRegexValue(validationRegexValue);
+            formItem.setErrorMandatoryMessage("");
+            formItem.setErrorValidationMessage(errorValidationMessage);
 
+            formItemPersistence.update(formItem);
+        } catch (Exception e) {
+            log.error("Exception while adding form item: " + e.getMessage(), e);
+        }
+
+        return formItem;
+    }
+
+    public List<FormItem> getFormItemByFormId(long formId) {
+        try {
+            return FormItemUtil.findByFormId(formId);
+        } catch (Exception e) {
+            log.error("Exception while getting form item by id [" + formId + "] : " + e.getMessage(), e);
+            return new ArrayList<FormItem>();
+        }
+    }
 }
