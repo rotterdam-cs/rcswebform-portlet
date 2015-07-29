@@ -247,4 +247,10 @@ public interface FormLocalService extends BaseLocalService, InvokableLocalServic
 	public java.lang.Object invokeMethod(java.lang.String name,
 		java.lang.String[] parameterTypes, java.lang.Object[] arguments)
 		throws java.lang.Throwable;
+
+	public com.rcs.webform.model.Form add(java.lang.Long formId,
+		com.liferay.portal.service.ServiceContext serviceContext,
+		java.lang.String title, java.lang.String description,
+		boolean useCaptcha, java.lang.String successMessage,
+		java.lang.String successUrl, java.lang.String submitLabel);
 }

@@ -278,6 +278,16 @@ public class FormLocalServiceWrapper implements FormLocalService,
 		return _formLocalService.invokeMethod(name, parameterTypes, arguments);
 	}
 
+	@Override
+	public com.rcs.webform.model.Form add(java.lang.Long formId,
+		com.liferay.portal.service.ServiceContext serviceContext,
+		java.lang.String title, java.lang.String description,
+		boolean useCaptcha, java.lang.String successMessage,
+		java.lang.String successUrl, java.lang.String submitLabel) {
+		return _formLocalService.add(formId, serviceContext, title,
+			description, useCaptcha, successMessage, successUrl, submitLabel);
+	}
+
 	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */

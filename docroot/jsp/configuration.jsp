@@ -38,10 +38,14 @@ boolean fieldsEditingDisabled = false;
 					<liferay-ui:input-localized name="description" xml="<%= descriptionXml %>" type="editor"></liferay-ui:input-localized>
 				</aui:field-wrapper>
 				
+				<aui:field-wrapper>
+					<aui:input name="requireCaptcha" type="checkbox" label="Require Captcha" value="true"></aui:input>
+				</aui:field-wrapper>
+				
 				<aui:field-wrapper label="On Valid Submitted Data">
-					<aui:input name="onSubmitData" type="radio" id="submitSuccessRadio" label="Show Success Message"></aui:input>
+					<aui:input name="onSubmitData" type="radio" id="submitSuccessRadio" label="Show Success Message" value="1"></aui:input>
 					Success message: <liferay-ui:input-localized name="submitSuccessMsg" xml=""></liferay-ui:input-localized>
-					<aui:input name="onSubmitData" type="radio" id="submitURLRadio" label="Redirect URL on success"></aui:input>
+					<aui:input name="onSubmitData" type="radio" id="submitURLRadio" label="Redirect URL on success" value="2"></aui:input>
 					URL redirect: <aui:input name="submitSuccessURL" type="text" label=""></aui:input>
 				</aui:field-wrapper>
 				

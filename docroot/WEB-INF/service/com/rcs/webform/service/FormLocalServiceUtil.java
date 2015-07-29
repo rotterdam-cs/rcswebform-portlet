@@ -271,6 +271,16 @@ public class FormLocalServiceUtil {
 		return getService().invokeMethod(name, parameterTypes, arguments);
 	}
 
+	public static com.rcs.webform.model.Form add(java.lang.Long formId,
+		com.liferay.portal.service.ServiceContext serviceContext,
+		java.lang.String title, java.lang.String description,
+		boolean useCaptcha, java.lang.String successMessage,
+		java.lang.String successUrl, java.lang.String submitLabel) {
+		return getService()
+				   .add(formId, serviceContext, title, description, useCaptcha,
+			successMessage, successUrl, submitLabel);
+	}
+
 	public static void clearService() {
 		_service = null;
 	}
