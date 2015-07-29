@@ -106,17 +106,17 @@ public class FormToPorletMapLocalServiceClpInvoker {
 				"com.rcs.webform.model.FormToPorletMap"
 			};
 
-		_methodName40 = "getBeanIdentifier";
+		_methodName44 = "getBeanIdentifier";
 
-		_methodParameterTypes40 = new String[] {  };
+		_methodParameterTypes44 = new String[] {  };
 
-		_methodName41 = "setBeanIdentifier";
+		_methodName45 = "setBeanIdentifier";
 
-		_methodParameterTypes41 = new String[] { "java.lang.String" };
+		_methodParameterTypes45 = new String[] { "java.lang.String" };
 
-		_methodName46 = "getFormToPortletMapByGroupColumnPortletId";
+		_methodName50 = "getFormToPortletMapByGroupColumnPortletId";
 
-		_methodParameterTypes46 = new String[] {
+		_methodParameterTypes50 = new String[] {
 				"long", "long", "java.lang.String"
 			};
 	}
@@ -210,20 +210,20 @@ public class FormToPorletMapLocalServiceClpInvoker {
 			return FormToPorletMapLocalServiceUtil.updateFormToPorletMap((com.rcs.webform.model.FormToPorletMap)arguments[0]);
 		}
 
-		if (_methodName40.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes40, parameterTypes)) {
+		if (_methodName44.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes44, parameterTypes)) {
 			return FormToPorletMapLocalServiceUtil.getBeanIdentifier();
 		}
 
-		if (_methodName41.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes41, parameterTypes)) {
+		if (_methodName45.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes45, parameterTypes)) {
 			FormToPorletMapLocalServiceUtil.setBeanIdentifier((java.lang.String)arguments[0]);
 
 			return null;
 		}
 
-		if (_methodName46.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes46, parameterTypes)) {
+		if (_methodName50.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes50, parameterTypes)) {
 			return FormToPorletMapLocalServiceUtil.getFormToPortletMapByGroupColumnPortletId(((Long)arguments[0]).longValue(),
 				((Long)arguments[1]).longValue(), (java.lang.String)arguments[2]);
 		}
@@ -263,10 +263,10 @@ public class FormToPorletMapLocalServiceClpInvoker {
 	private String[] _methodParameterTypes14;
 	private String _methodName15;
 	private String[] _methodParameterTypes15;
-	private String _methodName40;
-	private String[] _methodParameterTypes40;
-	private String _methodName41;
-	private String[] _methodParameterTypes41;
-	private String _methodName46;
-	private String[] _methodParameterTypes46;
+	private String _methodName44;
+	private String[] _methodParameterTypes44;
+	private String _methodName45;
+	private String[] _methodParameterTypes45;
+	private String _methodName50;
+	private String[] _methodParameterTypes50;
 }

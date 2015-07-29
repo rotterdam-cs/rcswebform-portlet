@@ -97,10 +97,10 @@ public class FormModelImpl extends BaseModelImpl<Form> implements FormModel {
 	public static final String TX_MANAGER = "liferayTransactionManager";
 	public static final boolean ENTITY_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.util.service.ServiceProps.get(
 				"value.object.entity.cache.enabled.com.rcs.webform.model.Form"),
-			true);
+			false);
 	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.util.service.ServiceProps.get(
 				"value.object.finder.cache.enabled.com.rcs.webform.model.Form"),
-			true);
+			false);
 	public static final boolean COLUMN_BITMASK_ENABLED = false;
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.util.service.ServiceProps.get(
 				"lock.expiration.time.com.rcs.webform.model.Form"));

@@ -21,6 +21,7 @@ import com.rcs.webform.service.ClpSerializer;
 import com.rcs.webform.service.FormItemLocalServiceUtil;
 import com.rcs.webform.service.FormLocalServiceUtil;
 import com.rcs.webform.service.FormToPorletMapLocalServiceUtil;
+import com.rcs.webform.service.SubmittedDataLocalServiceUtil;
 
 /**
  * @author ryusuf
@@ -42,6 +43,8 @@ public class ClpMessageListener extends BaseMessageListener {
 			FormItemLocalServiceUtil.clearService();
 
 			FormToPorletMapLocalServiceUtil.clearService();
+
+			SubmittedDataLocalServiceUtil.clearService();
 		}
 	}
 }

@@ -59,3 +59,17 @@ create table rcswebform_FormToPorletMap (
 	formId LONG,
 	portletId VARCHAR(75) null
 );
+
+create table rcswebform_SubmittedData (
+	submittedDataId LONG not null primary key,
+	groupId LONG,
+	companyId LONG,
+	active_ BOOLEAN,
+	creationDate DATE null,
+	modificationDate DATE null,
+	modificationUser VARCHAR(75) null,
+	formId LONG,
+	portletId VARCHAR(75) null,
+	formItemId LONG,
+	userInput STRING null
+);

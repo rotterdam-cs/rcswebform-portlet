@@ -60,4 +60,19 @@
 		<field name="formId" type="long" />
 		<field name="portletId" type="String" />
 	</model>
+	<model name="com.rcs.webform.model.SubmittedData">
+		<field name="submittedDataId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="active" type="boolean" />
+		<field name="creationDate" type="Date" />
+		<field name="modificationDate" type="Date" />
+		<field name="modificationUser" type="String" />
+		<field name="formId" type="long" />
+		<field name="portletId" type="String" />
+		<field name="formItemId" type="long" />
+		<field name="userInput" type="String">
+			<hint name="max-length">4000</hint>
+		</field>
+	</model>
 </model-hints>

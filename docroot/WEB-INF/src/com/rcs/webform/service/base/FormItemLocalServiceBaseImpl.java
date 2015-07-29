@@ -36,6 +36,7 @@ import com.rcs.webform.service.FormItemLocalService;
 import com.rcs.webform.service.persistence.FormItemPersistence;
 import com.rcs.webform.service.persistence.FormPersistence;
 import com.rcs.webform.service.persistence.FormToPorletMapPersistence;
+import com.rcs.webform.service.persistence.SubmittedDataPersistence;
 
 import java.io.Serializable;
 
@@ -389,6 +390,44 @@ public abstract class FormItemLocalServiceBaseImpl extends BaseLocalServiceImpl
 	}
 
 	/**
+	 * Returns the submitted data local service.
+	 *
+	 * @return the submitted data local service
+	 */
+	public com.rcs.webform.service.SubmittedDataLocalService getSubmittedDataLocalService() {
+		return submittedDataLocalService;
+	}
+
+	/**
+	 * Sets the submitted data local service.
+	 *
+	 * @param submittedDataLocalService the submitted data local service
+	 */
+	public void setSubmittedDataLocalService(
+		com.rcs.webform.service.SubmittedDataLocalService submittedDataLocalService) {
+		this.submittedDataLocalService = submittedDataLocalService;
+	}
+
+	/**
+	 * Returns the submitted data persistence.
+	 *
+	 * @return the submitted data persistence
+	 */
+	public SubmittedDataPersistence getSubmittedDataPersistence() {
+		return submittedDataPersistence;
+	}
+
+	/**
+	 * Sets the submitted data persistence.
+	 *
+	 * @param submittedDataPersistence the submitted data persistence
+	 */
+	public void setSubmittedDataPersistence(
+		SubmittedDataPersistence submittedDataPersistence) {
+		this.submittedDataPersistence = submittedDataPersistence;
+	}
+
+	/**
 	 * Returns the counter local service.
 	 *
 	 * @return the counter local service
@@ -576,6 +615,10 @@ public abstract class FormItemLocalServiceBaseImpl extends BaseLocalServiceImpl
 	protected com.rcs.webform.service.FormToPorletMapLocalService formToPorletMapLocalService;
 	@BeanReference(type = FormToPorletMapPersistence.class)
 	protected FormToPorletMapPersistence formToPorletMapPersistence;
+	@BeanReference(type = com.rcs.webform.service.SubmittedDataLocalService.class)
+	protected com.rcs.webform.service.SubmittedDataLocalService submittedDataLocalService;
+	@BeanReference(type = SubmittedDataPersistence.class)
+	protected SubmittedDataPersistence submittedDataPersistence;
 	@BeanReference(type = com.liferay.counter.service.CounterLocalService.class)
 	protected com.liferay.counter.service.CounterLocalService counterLocalService;
 	@BeanReference(type = com.liferay.portal.service.ResourceLocalService.class)

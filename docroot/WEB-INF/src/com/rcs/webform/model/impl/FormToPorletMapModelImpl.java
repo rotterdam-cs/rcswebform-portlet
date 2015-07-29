@@ -82,10 +82,10 @@ public class FormToPorletMapModelImpl extends BaseModelImpl<FormToPorletMap>
 	public static final String TX_MANAGER = "liferayTransactionManager";
 	public static final boolean ENTITY_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.util.service.ServiceProps.get(
 				"value.object.entity.cache.enabled.com.rcs.webform.model.FormToPorletMap"),
-			true);
+			false);
 	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.util.service.ServiceProps.get(
 				"value.object.finder.cache.enabled.com.rcs.webform.model.FormToPorletMap"),
-			true);
+			false);
 	public static final boolean COLUMN_BITMASK_ENABLED = GetterUtil.getBoolean(com.liferay.util.service.ServiceProps.get(
 				"value.object.column.bitmask.enabled.com.rcs.webform.model.FormToPorletMap"),
 			true);

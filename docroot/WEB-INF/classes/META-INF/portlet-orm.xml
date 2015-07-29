@@ -127,6 +127,30 @@
 			<transient name="userUuid" />
 		</attributes>
 	</mapped-superclass>
+	<mapped-superclass class="com.rcs.webform.model.impl.SubmittedDataModelImpl">
+		<attributes>
+			<id name="submittedDataId" />
+			<basic name="groupId" />
+			<basic name="companyId" />
+			<basic name="active">
+				<column name="ACTIVE_" />
+			</basic>
+			<basic name="creationDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="modificationDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="modificationUser" />
+			<basic name="formId" />
+			<basic name="portletId" />
+			<basic name="formItemId" />
+			<basic name="userInput" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
 	<entity class="com.rcs.webform.model.impl.FormImpl" name="Form">
 		<table name="rcswebform_Form" />
 		<attributes />
@@ -137,6 +161,10 @@
 	</entity>
 	<entity class="com.rcs.webform.model.impl.FormToPorletMapImpl" name="FormToPorletMap">
 		<table name="rcswebform_FormToPorletMap" />
+		<attributes />
+	</entity>
+	<entity class="com.rcs.webform.model.impl.SubmittedDataImpl" name="SubmittedData">
+		<table name="rcswebform_SubmittedData" />
 		<attributes />
 	</entity>
 </entity-mappings>

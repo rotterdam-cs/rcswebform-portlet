@@ -3,7 +3,7 @@
 <service-builder package-path="com.rcs.webform">
 	<author>ryusuf</author>
 	<namespace>rcswebform</namespace>
-	<entity name="Form" local-service="true" remote-service="false">
+	<entity name="Form" local-service="true" remote-service="false" cache-enabled="false">
 
 		<!-- PK fields -->
 
@@ -36,7 +36,7 @@
             <order-column name="formId"></order-column>
         </order>
 	</entity>
-	<entity local-service="true" name="FormItem" remote-service="false">
+	<entity local-service="true" name="FormItem" remote-service="false" cache-enabled="false">
 
 		<!-- PK fields -->
 
@@ -71,7 +71,7 @@
             <finder-column name="formId" comparator="="></finder-column>
         </finder>
 	</entity>
-	<entity name="FormToPorletMap" local-service="true" remote-service="false">
+	<entity name="FormToPorletMap" local-service="true" remote-service="false" cache-enabled="false">
 
 		<!-- PK fields -->
 
@@ -118,6 +118,28 @@
             <finder-column name="companyId"></finder-column>
             <finder-column name="portletId"></finder-column>
         </finder>
+	</entity>
+	<entity name="SubmittedData" local-service="true"
+		remote-service="false">
+
+		<!-- PK fields -->
+
+		<column name="submittedDataId" type="long" primary="true"></column>
+
+		<!-- Group instance -->
+
+		<column name="groupId" type="long"></column>
+		<column name="companyId" type="long"></column>
+
+		<!-- Audit fields -->
+        <column name="active" type="boolean"></column>
+		<column name="creationDate" type="Date"></column>
+		<column name="modificationDate" type="Date"></column>
+        <column name="modificationUser" type="String"></column>
+        <column name="formId" type="long"></column>
+        <column name="portletId" type="String"></column>
+        <column name="formItemId" type="long"></column>
+        <column name="userInput" type="String"></column>
 	</entity>
 
 

@@ -14,7 +14,7 @@
 
 package com.rcs.webform.service.base;
 
-import com.rcs.webform.service.FormLocalServiceUtil;
+import com.rcs.webform.service.SubmittedDataLocalServiceUtil;
 
 import java.util.Arrays;
 
@@ -22,23 +22,27 @@ import java.util.Arrays;
  * @author ryusuf
  * @generated
  */
-public class FormLocalServiceClpInvoker {
-	public FormLocalServiceClpInvoker() {
-		_methodName0 = "addForm";
+public class SubmittedDataLocalServiceClpInvoker {
+	public SubmittedDataLocalServiceClpInvoker() {
+		_methodName0 = "addSubmittedData";
 
-		_methodParameterTypes0 = new String[] { "com.rcs.webform.model.Form" };
+		_methodParameterTypes0 = new String[] {
+				"com.rcs.webform.model.SubmittedData"
+			};
 
-		_methodName1 = "createForm";
+		_methodName1 = "createSubmittedData";
 
 		_methodParameterTypes1 = new String[] { "long" };
 
-		_methodName2 = "deleteForm";
+		_methodName2 = "deleteSubmittedData";
 
 		_methodParameterTypes2 = new String[] { "long" };
 
-		_methodName3 = "deleteForm";
+		_methodName3 = "deleteSubmittedData";
 
-		_methodParameterTypes3 = new String[] { "com.rcs.webform.model.Form" };
+		_methodParameterTypes3 = new String[] {
+				"com.rcs.webform.model.SubmittedData"
+			};
 
 		_methodName4 = "dynamicQuery";
 
@@ -76,11 +80,11 @@ public class FormLocalServiceClpInvoker {
 				"com.liferay.portal.kernel.dao.orm.Projection"
 			};
 
-		_methodName10 = "fetchForm";
+		_methodName10 = "fetchSubmittedData";
 
 		_methodParameterTypes10 = new String[] { "long" };
 
-		_methodName11 = "getForm";
+		_methodName11 = "getSubmittedData";
 
 		_methodParameterTypes11 = new String[] { "long" };
 
@@ -88,17 +92,19 @@ public class FormLocalServiceClpInvoker {
 
 		_methodParameterTypes12 = new String[] { "java.io.Serializable" };
 
-		_methodName13 = "getForms";
+		_methodName13 = "getSubmittedDatas";
 
 		_methodParameterTypes13 = new String[] { "int", "int" };
 
-		_methodName14 = "getFormsCount";
+		_methodName14 = "getSubmittedDatasCount";
 
 		_methodParameterTypes14 = new String[] {  };
 
-		_methodName15 = "updateForm";
+		_methodName15 = "updateSubmittedData";
 
-		_methodParameterTypes15 = new String[] { "com.rcs.webform.model.Form" };
+		_methodParameterTypes15 = new String[] {
+				"com.rcs.webform.model.SubmittedData"
+			};
 
 		_methodName44 = "getBeanIdentifier";
 
@@ -107,58 +113,50 @@ public class FormLocalServiceClpInvoker {
 		_methodName45 = "setBeanIdentifier";
 
 		_methodParameterTypes45 = new String[] { "java.lang.String" };
-
-		_methodName50 = "add";
-
-		_methodParameterTypes50 = new String[] {
-				"java.lang.Long", "com.liferay.portal.service.ServiceContext",
-				"java.lang.String", "java.lang.String", "boolean",
-				"java.lang.String", "java.lang.String", "java.lang.String"
-			};
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
 		Object[] arguments) throws Throwable {
 		if (_methodName0.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes0, parameterTypes)) {
-			return FormLocalServiceUtil.addForm((com.rcs.webform.model.Form)arguments[0]);
+			return SubmittedDataLocalServiceUtil.addSubmittedData((com.rcs.webform.model.SubmittedData)arguments[0]);
 		}
 
 		if (_methodName1.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes1, parameterTypes)) {
-			return FormLocalServiceUtil.createForm(((Long)arguments[0]).longValue());
+			return SubmittedDataLocalServiceUtil.createSubmittedData(((Long)arguments[0]).longValue());
 		}
 
 		if (_methodName2.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes2, parameterTypes)) {
-			return FormLocalServiceUtil.deleteForm(((Long)arguments[0]).longValue());
+			return SubmittedDataLocalServiceUtil.deleteSubmittedData(((Long)arguments[0]).longValue());
 		}
 
 		if (_methodName3.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes3, parameterTypes)) {
-			return FormLocalServiceUtil.deleteForm((com.rcs.webform.model.Form)arguments[0]);
+			return SubmittedDataLocalServiceUtil.deleteSubmittedData((com.rcs.webform.model.SubmittedData)arguments[0]);
 		}
 
 		if (_methodName4.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes4, parameterTypes)) {
-			return FormLocalServiceUtil.dynamicQuery();
+			return SubmittedDataLocalServiceUtil.dynamicQuery();
 		}
 
 		if (_methodName5.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes5, parameterTypes)) {
-			return FormLocalServiceUtil.dynamicQuery((com.liferay.portal.kernel.dao.orm.DynamicQuery)arguments[0]);
+			return SubmittedDataLocalServiceUtil.dynamicQuery((com.liferay.portal.kernel.dao.orm.DynamicQuery)arguments[0]);
 		}
 
 		if (_methodName6.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes6, parameterTypes)) {
-			return FormLocalServiceUtil.dynamicQuery((com.liferay.portal.kernel.dao.orm.DynamicQuery)arguments[0],
+			return SubmittedDataLocalServiceUtil.dynamicQuery((com.liferay.portal.kernel.dao.orm.DynamicQuery)arguments[0],
 				((Integer)arguments[1]).intValue(),
 				((Integer)arguments[2]).intValue());
 		}
 
 		if (_methodName7.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes7, parameterTypes)) {
-			return FormLocalServiceUtil.dynamicQuery((com.liferay.portal.kernel.dao.orm.DynamicQuery)arguments[0],
+			return SubmittedDataLocalServiceUtil.dynamicQuery((com.liferay.portal.kernel.dao.orm.DynamicQuery)arguments[0],
 				((Integer)arguments[1]).intValue(),
 				((Integer)arguments[2]).intValue(),
 				(com.liferay.portal.kernel.util.OrderByComparator)arguments[3]);
@@ -166,66 +164,56 @@ public class FormLocalServiceClpInvoker {
 
 		if (_methodName8.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes8, parameterTypes)) {
-			return FormLocalServiceUtil.dynamicQueryCount((com.liferay.portal.kernel.dao.orm.DynamicQuery)arguments[0]);
+			return SubmittedDataLocalServiceUtil.dynamicQueryCount((com.liferay.portal.kernel.dao.orm.DynamicQuery)arguments[0]);
 		}
 
 		if (_methodName9.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes9, parameterTypes)) {
-			return FormLocalServiceUtil.dynamicQueryCount((com.liferay.portal.kernel.dao.orm.DynamicQuery)arguments[0],
+			return SubmittedDataLocalServiceUtil.dynamicQueryCount((com.liferay.portal.kernel.dao.orm.DynamicQuery)arguments[0],
 				(com.liferay.portal.kernel.dao.orm.Projection)arguments[1]);
 		}
 
 		if (_methodName10.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes10, parameterTypes)) {
-			return FormLocalServiceUtil.fetchForm(((Long)arguments[0]).longValue());
+			return SubmittedDataLocalServiceUtil.fetchSubmittedData(((Long)arguments[0]).longValue());
 		}
 
 		if (_methodName11.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes11, parameterTypes)) {
-			return FormLocalServiceUtil.getForm(((Long)arguments[0]).longValue());
+			return SubmittedDataLocalServiceUtil.getSubmittedData(((Long)arguments[0]).longValue());
 		}
 
 		if (_methodName12.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes12, parameterTypes)) {
-			return FormLocalServiceUtil.getPersistedModel((java.io.Serializable)arguments[0]);
+			return SubmittedDataLocalServiceUtil.getPersistedModel((java.io.Serializable)arguments[0]);
 		}
 
 		if (_methodName13.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes13, parameterTypes)) {
-			return FormLocalServiceUtil.getForms(((Integer)arguments[0]).intValue(),
+			return SubmittedDataLocalServiceUtil.getSubmittedDatas(((Integer)arguments[0]).intValue(),
 				((Integer)arguments[1]).intValue());
 		}
 
 		if (_methodName14.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes14, parameterTypes)) {
-			return FormLocalServiceUtil.getFormsCount();
+			return SubmittedDataLocalServiceUtil.getSubmittedDatasCount();
 		}
 
 		if (_methodName15.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes15, parameterTypes)) {
-			return FormLocalServiceUtil.updateForm((com.rcs.webform.model.Form)arguments[0]);
+			return SubmittedDataLocalServiceUtil.updateSubmittedData((com.rcs.webform.model.SubmittedData)arguments[0]);
 		}
 
 		if (_methodName44.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes44, parameterTypes)) {
-			return FormLocalServiceUtil.getBeanIdentifier();
+			return SubmittedDataLocalServiceUtil.getBeanIdentifier();
 		}
 
 		if (_methodName45.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes45, parameterTypes)) {
-			FormLocalServiceUtil.setBeanIdentifier((java.lang.String)arguments[0]);
+			SubmittedDataLocalServiceUtil.setBeanIdentifier((java.lang.String)arguments[0]);
 
 			return null;
-		}
-
-		if (_methodName50.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes50, parameterTypes)) {
-			return FormLocalServiceUtil.add((java.lang.Long)arguments[0],
-				(com.liferay.portal.service.ServiceContext)arguments[1],
-				(java.lang.String)arguments[2], (java.lang.String)arguments[3],
-				((Boolean)arguments[4]).booleanValue(),
-				(java.lang.String)arguments[5], (java.lang.String)arguments[6],
-				(java.lang.String)arguments[7]);
 		}
 
 		throw new UnsupportedOperationException();
@@ -267,6 +255,4 @@ public class FormLocalServiceClpInvoker {
 	private String[] _methodParameterTypes44;
 	private String _methodName45;
 	private String[] _methodParameterTypes45;
-	private String _methodName50;
-	private String[] _methodParameterTypes50;
 }
