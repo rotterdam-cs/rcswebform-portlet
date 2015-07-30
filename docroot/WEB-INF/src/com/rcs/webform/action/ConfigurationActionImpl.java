@@ -1,5 +1,6 @@
 package com.rcs.webform.action;
 
+import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
@@ -22,7 +23,6 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
-import com.liferay.portal.util.PortalUtil;
 import com.rcs.webform.model.Form;
 import com.rcs.webform.model.FormItem;
 import com.rcs.webform.model.FormToPorletMap;
@@ -57,24 +57,15 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 		if(ParamUtil.getLong(actionRequest, "formId")!=0){
 			formId = ParamUtil.getLong(actionRequest, "formId");
 		}
-		String title = ParamUtil.getString(actionRequest, "title");
-		String description = ParamUtil.getString(actionRequest, "description");
 		boolean useCaptcha = ParamUtil.getBoolean(actionRequest, "requireCaptcha");
-		
-		String submitLabel = ParamUtil.getString(actionRequest, "submitBtnLabel");
-		String successMessage = ParamUtil.getInteger(actionRequest, "onSubmitData")==1 ? ParamUtil.getString(actionRequest, "submitSuccessMsg") : "";
 		String successUrl = ParamUtil.getInteger(actionRequest, "onSubmitData")==2 ? ParamUtil.getString(actionRequest, "submitSuccessURL") : "";
 		
-		log.info("Title: " + title);
-		log.info("Desc: " + description);
-		log.info("Use captcha: " + useCaptcha);
-		log.info("Submit label: " + submitLabel);
-		log.info("On submit data value: " + ParamUtil.getString(actionRequest, "onSubmitData"));
-		log.info("Success message: " + successMessage);
-		log.info("Success URL: " + successUrl);
+		Map<Locale, String> titleMap = LocalizationUtil.getLocalizationMap(actionRequest, "title");
+		Map<Locale, String> descMap = LocalizationUtil.getLocalizationMap(actionRequest, "description");
+		Map<Locale, String> successMsgMap = ParamUtil.getInteger(actionRequest, "onSubmitData")==1 ? LocalizationUtil.getLocalizationMap(actionRequest, "submitSuccessMsg") : new HashMap<Locale, String>();
+		Map<Locale, String> submitLabelMap = LocalizationUtil.getLocalizationMap(actionRequest, "submitBtnLabel");
 		
-		Form form = FormLocalServiceUtil.add(formId, formServiceContext, title, description, useCaptcha, 
-				successMessage, successUrl, submitLabel);
+		Form savedForm = FormLocalServiceUtil.save(formId, formServiceContext, titleMap, descMap, useCaptcha, successMsgMap, successUrl, submitLabelMap);
 		
 		//Save form-portlet mapping to database
 		ServiceContext formPortletMappingServiceContext = ServiceContextFactory.getInstance(FormToPorletMap.class.getName(), actionRequest);
@@ -82,7 +73,7 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 		if (ParamUtil.getLong(actionRequest, "formToPortletMapId")!=0){
 			formToPortletId = ParamUtil.getLong(actionRequest, "formToPortletMapId");
 		}
-		FormToPorletMapLocalServiceUtil.save(formToPortletId, portletResource, form.getFormId(), formPortletMappingServiceContext);
+		FormToPorletMapLocalServiceUtil.save(formToPortletId, portletResource, savedForm.getFormId(), formPortletMappingServiceContext);
 		
 		boolean updateFields = ParamUtil.getBoolean(actionRequest, "updateFields");
 
