@@ -42,6 +42,7 @@ public class WebFormPortlet extends MVCPortlet {
             log.info("Portlet id : "+portletId);
                        
             FormToPorletMap formToPorletMap = FormToPorletMapLocalServiceUtil.getFormToPortletMapByPortletId(portletId);
+            
             Form form = FormLocalServiceUtil.getForm(formToPorletMap.getFormId());
             List<FormItem> formItems = FormItemLocalServiceUtil.getFormItemByFormId(form.getFormId());
             

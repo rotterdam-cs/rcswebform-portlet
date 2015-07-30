@@ -12,10 +12,10 @@ import com.rcs.webform.entity.dto.FormItemDTO;
 import com.rcs.webform.model.Form;
 import com.rcs.webform.model.FormItem;
 
-
 public class EntityDtoConverter {
+
     public static final FormDTO formEntityToDto(final Form form, final List<FormItem> formItems, final Locale locale) {
-        
+
         FormDTO formDto = new FormDTO();
         formDto.setFormId(form.getFormId());
         formDto.setActive(form.getActive());
@@ -39,15 +39,15 @@ public class EntityDtoConverter {
         formDto.setFormItems(formItemListEntityToDto(formItems, locale));
         return formDto;
     }
-    
+
     public static final List<FormItemDTO> formItemListEntityToDto(final List<FormItem> formItems, final Locale locale) {
         List<FormItemDTO> formItemDTOs = new ArrayList<FormItemDTO>();
-        for(FormItem formItem : formItems) {
+        for (FormItem formItem : formItems) {
             formItemDTOs.add(formItemEntityToDto(formItem, locale));
         }
         return formItemDTOs;
     }
-    
+
     public static final FormItemDTO formItemEntityToDto(final FormItem formItem, final Locale locale) {
         FormItemDTO formItemDto = new FormItemDTO();
         formItemDto.setFormItemId(formItem.getFormItemId());
@@ -63,16 +63,17 @@ public class EntityDtoConverter {
         formItemDto.setLabelAttrClass(formItem.getLabelAttrClass());
         formItemDto.setInputAttrId(formItem.getInputAttrId());
         formItemDto.setInputAttrClass(formItem.getInputAttrClass());
-        formItemDto.setType(FormItemType.valueOf(formItem.getType()));
+        formItemDto.setType(formItem.getType().isEmpty() ? FormItemType.valueOf("NONE") : FormItemType.valueOf(formItem.getType()));
         formItemDto.setOptions(formItem.getOptions(locale));
         formItemDto.setMandatory(formItem.getMandatory());
         formItemDto.setDefaultValue(formItem.getDefaultValue(locale));
         formItemDto.setOrder(formItem.getOrder());
-        formItemDto.setValidationType(ValidationType.valueOf(formItem.getValidationType()));
+        formItemDto.setValidationType(formItem.getValidationType().isEmpty() ? ValidationType.valueOf("NONE") : ValidationType
+                .valueOf(formItem.getValidationType()));
         formItemDto.setValidationRegexValueString(formItem.getValidationRegexValue());
         formItemDto.setErrorValidationMessage(formItem.getErrorValidationMessage(locale));
         formItemDto.setErrorMandatoryMessage(formItem.getErrorMandatoryMessage(locale));
-        return formItemDto;        
+        return formItemDto;
     }
 
 }
