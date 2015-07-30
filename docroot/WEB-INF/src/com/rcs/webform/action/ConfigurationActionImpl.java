@@ -81,8 +81,8 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 		}
 		FormToPorletMapLocalServiceUtil.save(formToPortletId, portletResource, savedForm.getFormId(), formPortletMappingServiceContext);
 
-		if(form.getFormId() != 0){
-			updateFormItems(actionRequest, defaultLocale, form.getFormId());
+		if(savedForm.getFormId() != 0){
+			updateFormItems(actionRequest, defaultLocale, savedForm.getFormId());
 		}
 		
 		if (SessionErrors.isEmpty(actionRequest)) {
