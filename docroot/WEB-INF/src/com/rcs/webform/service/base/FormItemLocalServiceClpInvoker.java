@@ -108,11 +108,11 @@ public class FormItemLocalServiceClpInvoker {
 
 		_methodParameterTypes45 = new String[] { "java.lang.String" };
 
-		_methodName50 = "add";
+		_methodName50 = "save";
 
 		_methodParameterTypes50 = new String[] {
-				"java.lang.Long", "java.lang.Long", "java.lang.String",
-				"java.lang.String", "java.lang.String", "boolean",
+				"java.lang.Long", "java.lang.Long", "java.util.Map",
+				"java.lang.String", "java.util.Map", "boolean",
 				"java.lang.String", "java.lang.String", "java.lang.String",
 				"com.liferay.portal.service.ServiceContext"
 			};
@@ -225,9 +225,11 @@ public class FormItemLocalServiceClpInvoker {
 
 		if (_methodName50.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes50, parameterTypes)) {
-			return FormItemLocalServiceUtil.add((java.lang.Long)arguments[0],
-				(java.lang.Long)arguments[1], (java.lang.String)arguments[2],
-				(java.lang.String)arguments[3], (java.lang.String)arguments[4],
+			return FormItemLocalServiceUtil.save((java.lang.Long)arguments[0],
+				(java.lang.Long)arguments[1],
+				(java.util.Map<java.util.Locale, java.lang.String>)arguments[2],
+				(java.lang.String)arguments[3],
+				(java.util.Map<java.util.Locale, java.lang.String>)arguments[4],
 				((Boolean)arguments[5]).booleanValue(),
 				(java.lang.String)arguments[6], (java.lang.String)arguments[7],
 				(java.lang.String)arguments[8],

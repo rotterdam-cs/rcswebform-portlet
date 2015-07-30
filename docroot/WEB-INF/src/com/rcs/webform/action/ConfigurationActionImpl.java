@@ -82,7 +82,7 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 		FormToPorletMapLocalServiceUtil.save(formToPortletId, portletResource, savedForm.getFormId(), formPortletMappingServiceContext);
 
 		if(savedForm.getFormId() != 0){
-			updateFormItems(actionRequest, defaultLocale, savedForm.getFormId());
+			saveFormItems(actionRequest, defaultLocale, savedForm.getFormId());
 		}
 		
 		if (SessionErrors.isEmpty(actionRequest)) {
@@ -103,7 +103,14 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 	}
 	
 	
-	private void updateFormItems(ActionRequest actionRequest, Locale defaultLocale, Long formId){
+	/**
+	 * Save Form Items
+	 * 
+	 * @param actionRequest
+	 * @param defaultLocale
+	 * @param formId
+	 */
+	private void saveFormItems(ActionRequest actionRequest, Locale defaultLocale, Long formId){
 		try {
 			boolean updateFields = ParamUtil.getBoolean(actionRequest, "updateFields");
 	
@@ -132,7 +139,7 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 					}
 	
 					ServiceContext serviceContext = ServiceContextFactory.getInstance(FormItem.class.getName(), actionRequest);
-					FormItemLocalServiceUtil.add(null, formId, fieldLabelMap.values().toString(), fieldType, fieldOptionsMap.values().toString(), fieldOptional,
+					FormItemLocalServiceUtil.save(null, formId, fieldLabelMap, fieldType, fieldOptionsMap, fieldOptional,
 							fieldValidationScript, validationType, fieldValidationErrorMessage, serviceContext);
 	
 					i++;

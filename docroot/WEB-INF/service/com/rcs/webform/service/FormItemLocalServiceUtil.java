@@ -272,7 +272,7 @@ public class FormItemLocalServiceUtil {
 	}
 
 	/**
-	* Add Form Item
+	* Save Form Item
 	*
 	* @param formItemId
 	* @param formId
@@ -286,15 +286,17 @@ public class FormItemLocalServiceUtil {
 	* @param serviceContext
 	* @return
 	*/
-	public static com.rcs.webform.model.FormItem add(
+	public static com.rcs.webform.model.FormItem save(
 		java.lang.Long formItemId, java.lang.Long formId,
-		java.lang.String label, java.lang.String type,
-		java.lang.String options, boolean mandatory,
-		java.lang.String validationRegexValue, java.lang.String validationType,
+		java.util.Map<java.util.Locale, java.lang.String> label,
+		java.lang.String type,
+		java.util.Map<java.util.Locale, java.lang.String> options,
+		boolean mandatory, java.lang.String validationRegexValue,
+		java.lang.String validationType,
 		java.lang.String errorValidationMessage,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		return getService()
-				   .add(formItemId, formId, label, type, options, mandatory,
+				   .save(formItemId, formId, label, type, options, mandatory,
 			validationRegexValue, validationType, errorValidationMessage,
 			serviceContext);
 	}

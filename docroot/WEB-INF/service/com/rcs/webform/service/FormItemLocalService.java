@@ -251,7 +251,7 @@ public interface FormItemLocalService extends BaseLocalService,
 		throws java.lang.Throwable;
 
 	/**
-	* Add Form Item
+	* Save Form Item
 	*
 	* @param formItemId
 	* @param formId
@@ -265,10 +265,13 @@ public interface FormItemLocalService extends BaseLocalService,
 	* @param serviceContext
 	* @return
 	*/
-	public com.rcs.webform.model.FormItem add(java.lang.Long formItemId,
-		java.lang.Long formId, java.lang.String label, java.lang.String type,
-		java.lang.String options, boolean mandatory,
-		java.lang.String validationRegexValue, java.lang.String validationType,
+	public com.rcs.webform.model.FormItem save(java.lang.Long formItemId,
+		java.lang.Long formId,
+		java.util.Map<java.util.Locale, java.lang.String> label,
+		java.lang.String type,
+		java.util.Map<java.util.Locale, java.lang.String> options,
+		boolean mandatory, java.lang.String validationRegexValue,
+		java.lang.String validationType,
 		java.lang.String errorValidationMessage,
 		com.liferay.portal.service.ServiceContext serviceContext);
 

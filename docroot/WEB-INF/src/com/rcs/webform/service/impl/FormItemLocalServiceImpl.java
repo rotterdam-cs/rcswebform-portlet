@@ -17,6 +17,8 @@ package com.rcs.webform.service.impl;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -48,7 +50,7 @@ public class FormItemLocalServiceImpl extends FormItemLocalServiceBaseImpl {
     private static Log log = LogFactoryUtil.getLog(FormItemLocalServiceImpl.class);
 
     /**
-     * Add Form Item
+     * Save Form Item
      * 
      * @param formItemId
      * @param formId
@@ -62,7 +64,7 @@ public class FormItemLocalServiceImpl extends FormItemLocalServiceBaseImpl {
      * @param serviceContext
      * @return
      */
-    public FormItem add(Long formItemId, Long formId, String label, String type, String options, boolean mandatory, String validationRegexValue,
+    public FormItem save(Long formItemId, Long formId, Map<Locale, String> label, String type, Map<Locale, String> options, boolean mandatory, String validationRegexValue,
             String validationType, String errorValidationMessage, ServiceContext serviceContext) {
 
         User user = null;
@@ -82,13 +84,13 @@ public class FormItemLocalServiceImpl extends FormItemLocalServiceBaseImpl {
             formItem.setFormId(formId);
             formItem.setFormItemAttrId("");
             formItem.setFormItemAttrClass("");
-            formItem.setLabel(label);
+            formItem.setLabelMap(label);
             formItem.setLabelAttrId("");
             formItem.setLabelAttrClass("");
             formItem.setInputAttrId("");
             formItem.setInputAttrClass("");
             formItem.setType(type);
-            formItem.setOptions(options);
+            formItem.setOptionsMap(options);
             formItem.setMandatory(mandatory);
             formItem.setDefaultValue("");
             formItem.setOrder(0);
