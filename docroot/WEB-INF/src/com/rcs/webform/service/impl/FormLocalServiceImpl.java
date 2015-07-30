@@ -92,8 +92,11 @@ public class FormLocalServiceImpl extends FormLocalServiceBaseImpl {
 			user = userLocalService.getUserById(serviceContext.getUserId());
 			if(formId == null){
 				formId = counterLocalService.increment(Form.class.getName());
+				form = formPersistence.create(formId);
+			} else {
+				form = formPersistence.findByPrimaryKey(formId);
 			}
-			form = formPersistence.create(formId);
+			
 			form.setActive(true);
 			form.setCreationDate(serviceContext.getCreateDate(now));
 			form.setModificationDate(serviceContext.getCreateDate(now));
@@ -107,7 +110,11 @@ public class FormLocalServiceImpl extends FormLocalServiceBaseImpl {
 			form.setTitleMap(titleMap);
 			form.setDescMap(descriptionMap);
 			form.setUseCaptcha(useCaptcha);
-			form.setSuccessMessageMap(successMessageMap);
+			if(successMessageMap==null){
+				form.setSuccessMessage("");
+			} else {
+				form.setSuccessMessageMap(successMessageMap);
+			}
 			form.setSuccessURL(successUrl);
 			form.setSubmitLabelMap(submitLabelMap);
 			form.setSubmitAttrClass("");
