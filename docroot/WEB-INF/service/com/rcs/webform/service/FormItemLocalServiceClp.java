@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -111,9 +111,10 @@ public class FormItemLocalServiceClp implements FormItemLocalService {
 		_methodName19 = "add";
 
 		_methodParameterTypes19 = new String[] {
-				"java.lang.Long", "java.lang.String", "java.lang.String",
-				"java.lang.String", "boolean", "java.lang.String",
-				"java.lang.String", "com.liferay.portal.service.ServiceContext"
+				"java.lang.Long", "java.lang.Long", "java.lang.String",
+				"java.lang.String", "java.lang.String", "boolean",
+				"java.lang.String", "java.lang.String", "java.lang.String",
+				"com.liferay.portal.service.ServiceContext"
 			};
 
 		_methodName20 = "getFormItemByFormId";
@@ -669,9 +670,9 @@ public class FormItemLocalServiceClp implements FormItemLocalService {
 
 	@Override
 	public com.rcs.webform.model.FormItem add(java.lang.Long formItemId,
-		java.lang.String label, java.lang.String type,
+		java.lang.Long formId, java.lang.String label, java.lang.String type,
 		java.lang.String options, boolean mandatory,
-		java.lang.String validationRegexValue,
+		java.lang.String validationRegexValue, java.lang.String validationType,
 		java.lang.String errorValidationMessage,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		Object returnObj = null;
@@ -682,6 +683,8 @@ public class FormItemLocalServiceClp implements FormItemLocalService {
 					new Object[] {
 						ClpSerializer.translateInput(formItemId),
 						
+					ClpSerializer.translateInput(formId),
+						
 					ClpSerializer.translateInput(label),
 						
 					ClpSerializer.translateInput(type),
@@ -691,6 +694,8 @@ public class FormItemLocalServiceClp implements FormItemLocalService {
 					mandatory,
 						
 					ClpSerializer.translateInput(validationRegexValue),
+						
+					ClpSerializer.translateInput(validationType),
 						
 					ClpSerializer.translateInput(errorValidationMessage),
 						

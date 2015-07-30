@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -111,9 +111,10 @@ public class FormItemLocalServiceClpInvoker {
 		_methodName50 = "add";
 
 		_methodParameterTypes50 = new String[] {
-				"java.lang.Long", "java.lang.String", "java.lang.String",
-				"java.lang.String", "boolean", "java.lang.String",
-				"java.lang.String", "com.liferay.portal.service.ServiceContext"
+				"java.lang.Long", "java.lang.Long", "java.lang.String",
+				"java.lang.String", "java.lang.String", "boolean",
+				"java.lang.String", "java.lang.String", "java.lang.String",
+				"com.liferay.portal.service.ServiceContext"
 			};
 
 		_methodName51 = "getFormItemByFormId";
@@ -225,11 +226,12 @@ public class FormItemLocalServiceClpInvoker {
 		if (_methodName50.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes50, parameterTypes)) {
 			return FormItemLocalServiceUtil.add((java.lang.Long)arguments[0],
-				(java.lang.String)arguments[1], (java.lang.String)arguments[2],
-				(java.lang.String)arguments[3],
-				((Boolean)arguments[4]).booleanValue(),
-				(java.lang.String)arguments[5], (java.lang.String)arguments[6],
-				(com.liferay.portal.service.ServiceContext)arguments[7]);
+				(java.lang.Long)arguments[1], (java.lang.String)arguments[2],
+				(java.lang.String)arguments[3], (java.lang.String)arguments[4],
+				((Boolean)arguments[5]).booleanValue(),
+				(java.lang.String)arguments[6], (java.lang.String)arguments[7],
+				(java.lang.String)arguments[8],
+				(com.liferay.portal.service.ServiceContext)arguments[9]);
 		}
 
 		if (_methodName51.equals(name) &&

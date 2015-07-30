@@ -50,17 +50,20 @@ public class FormItemLocalServiceImpl extends FormItemLocalServiceBaseImpl {
     /**
      * Add Form Item
      * 
+     * @param formItemId
+     * @param formId
      * @param label
      * @param type
      * @param options
      * @param mandatory
      * @param validationRegexValue
+     * @param validationType
      * @param errorValidationMessage
      * @param serviceContext
      * @return
      */
-    public FormItem add(Long formItemId, String label, String type, String options, boolean mandatory, String validationRegexValue,
-            String errorValidationMessage, ServiceContext serviceContext) {
+    public FormItem add(Long formItemId, Long formId, String label, String type, String options, boolean mandatory, String validationRegexValue,
+            String validationType, String errorValidationMessage, ServiceContext serviceContext) {
 
         User user = null;
         FormItem formItem = null;
@@ -71,12 +74,12 @@ public class FormItemLocalServiceImpl extends FormItemLocalServiceBaseImpl {
                 formItemId = counterLocalService.increment(FormItem.class.getName());
             }
             formItem = formItemPersistence.create(formItemId);
-            formItem.setFormId(0);
+            formItem.setFormItemId(formItemId);
             formItem.setActive(true);
             formItem.setCreationDate(serviceContext.getCreateDate(now));
             formItem.setModificationDate(serviceContext.getModifiedDate(now));
             formItem.setModificationUser(user.getFullName());
-            formItem.setFormId(0);
+            formItem.setFormId(formId);
             formItem.setFormItemAttrId("");
             formItem.setFormItemAttrClass("");
             formItem.setLabel(label);
@@ -89,7 +92,7 @@ public class FormItemLocalServiceImpl extends FormItemLocalServiceBaseImpl {
             formItem.setMandatory(mandatory);
             formItem.setDefaultValue("");
             formItem.setOrder(0);
-            formItem.setValidationType("");
+            formItem.setValidationType(validationType);
             formItem.setValidationRegexValue(validationRegexValue);
             formItem.setErrorMandatoryMessage("");
             formItem.setErrorValidationMessage(errorValidationMessage);

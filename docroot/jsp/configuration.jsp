@@ -82,36 +82,6 @@ boolean fieldsEditingDisabled = false;
 		
 		<liferay-ui:panel collapsible="true" extended="true" id="webFormFields" persistState="true" title="Form Fields">
 			<aui:fieldset cssClass="rows-container webFields">
-				<c:if test="<%= fieldsEditingDisabled %>">
-					<div class="alert">
-						<liferay-ui:message key="there-is-existing-form-data-please-export-and-delete-it-before-making-changes-to-the-fields" />
-					</div>
-
-					<c:if test="<%= layoutTypePortlet.hasPortletId(portletResource) %>">
-						<liferay-portlet:resourceURL portletName="<%= portletResource %>" var="exportURL">
-							<portlet:param name="<%= Constants.CMD %>" value="export" />
-						</liferay-portlet:resourceURL>
-
-						<%
-						String taglibExport = "submitForm(document.hrefFm, '" + exportURL + "', false);";
-						%>
-
-						<aui:button onClick="<%= taglibExport %>" value="export-data" />
-
-						<liferay-portlet:actionURL portletName="<%= portletResource %>" var="deleteURL">
-							<portlet:param name="<%= ActionRequest.ACTION_NAME %>" value="deleteData" />
-							<portlet:param name="redirect" value="<%= currentURL %>" />
-						</liferay-portlet:actionURL>
-
-						<%
-						String taglibDelete = "submitForm(document." + renderResponse.getNamespace() + "fm, '" + deleteURL + "');";
-						%>
-
-						<aui:button onClick="<%= taglibDelete %>" value="delete-data" />
-					</c:if>
-
-					<br /><br />
-				</c:if>
 
 				<aui:input name="updateFields" type="hidden" value="<%= !fieldsEditingDisabled %>" />
 

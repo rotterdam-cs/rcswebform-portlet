@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -16,6 +16,7 @@ package com.rcs.webform.service;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.search.IndexableType;
 import com.liferay.portal.kernel.transaction.Isolation;
 import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.transaction.Transactional;
@@ -52,6 +53,7 @@ public interface FormItemLocalService extends BaseLocalService,
 	* @return the form item that was added
 	* @throws SystemException if a system exception occurred
 	*/
+	@com.liferay.portal.kernel.search.Indexable(type = IndexableType.REINDEX)
 	public com.rcs.webform.model.FormItem addFormItem(
 		com.rcs.webform.model.FormItem formItem)
 		throws com.liferay.portal.kernel.exception.SystemException;
@@ -72,6 +74,7 @@ public interface FormItemLocalService extends BaseLocalService,
 	* @throws PortalException if a form item with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
+	@com.liferay.portal.kernel.search.Indexable(type = IndexableType.DELETE)
 	public com.rcs.webform.model.FormItem deleteFormItem(long formItemId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
@@ -83,6 +86,7 @@ public interface FormItemLocalService extends BaseLocalService,
 	* @return the form item that was removed
 	* @throws SystemException if a system exception occurred
 	*/
+	@com.liferay.portal.kernel.search.Indexable(type = IndexableType.DELETE)
 	public com.rcs.webform.model.FormItem deleteFormItem(
 		com.rcs.webform.model.FormItem formItem)
 		throws com.liferay.portal.kernel.exception.SystemException;
@@ -222,6 +226,7 @@ public interface FormItemLocalService extends BaseLocalService,
 	* @return the form item that was updated
 	* @throws SystemException if a system exception occurred
 	*/
+	@com.liferay.portal.kernel.search.Indexable(type = IndexableType.REINDEX)
 	public com.rcs.webform.model.FormItem updateFormItem(
 		com.rcs.webform.model.FormItem formItem)
 		throws com.liferay.portal.kernel.exception.SystemException;
@@ -248,19 +253,22 @@ public interface FormItemLocalService extends BaseLocalService,
 	/**
 	* Add Form Item
 	*
+	* @param formItemId
+	* @param formId
 	* @param label
 	* @param type
 	* @param options
 	* @param mandatory
 	* @param validationRegexValue
+	* @param validationType
 	* @param errorValidationMessage
 	* @param serviceContext
 	* @return
 	*/
 	public com.rcs.webform.model.FormItem add(java.lang.Long formItemId,
-		java.lang.String label, java.lang.String type,
+		java.lang.Long formId, java.lang.String label, java.lang.String type,
 		java.lang.String options, boolean mandatory,
-		java.lang.String validationRegexValue,
+		java.lang.String validationRegexValue, java.lang.String validationType,
 		java.lang.String errorValidationMessage,
 		com.liferay.portal.service.ServiceContext serviceContext);
 
