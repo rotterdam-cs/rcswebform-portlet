@@ -115,6 +115,14 @@ public class FormLocalServiceClp implements FormLocalService {
 				"java.lang.String", "java.lang.String", "boolean",
 				"java.lang.String", "java.lang.String", "java.lang.String"
 			};
+
+		_methodName20 = "save";
+
+		_methodParameterTypes20 = new String[] {
+				"java.lang.Long", "com.liferay.portal.service.ServiceContext",
+				"java.util.Map", "java.util.Map", "boolean", "java.util.Map",
+				"java.lang.String", "java.util.Map"
+			};
 	}
 
 	@Override
@@ -705,6 +713,53 @@ public class FormLocalServiceClp implements FormLocalService {
 		return (com.rcs.webform.model.Form)ClpSerializer.translateOutput(returnObj);
 	}
 
+	@Override
+	public com.rcs.webform.model.Form save(java.lang.Long formId,
+		com.liferay.portal.service.ServiceContext serviceContext,
+		java.util.Map<java.util.Locale, java.lang.String> titleMap,
+		java.util.Map<java.util.Locale, java.lang.String> descriptionMap,
+		boolean useCaptcha,
+		java.util.Map<java.util.Locale, java.lang.String> successMessageMap,
+		java.lang.String successUrl,
+		java.util.Map<java.util.Locale, java.lang.String> submitLabelMap) {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableLocalService.invokeMethod(_methodName20,
+					_methodParameterTypes20,
+					new Object[] {
+						ClpSerializer.translateInput(formId),
+						
+					ClpSerializer.translateInput(serviceContext),
+						
+					ClpSerializer.translateInput(titleMap),
+						
+					ClpSerializer.translateInput(descriptionMap),
+						
+					useCaptcha,
+						
+					ClpSerializer.translateInput(successMessageMap),
+						
+					ClpSerializer.translateInput(successUrl),
+						
+					ClpSerializer.translateInput(submitLabelMap)
+					});
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (com.rcs.webform.model.Form)ClpSerializer.translateOutput(returnObj);
+	}
+
 	private InvokableLocalService _invokableLocalService;
 	private String _methodName0;
 	private String[] _methodParameterTypes0;
@@ -744,4 +799,6 @@ public class FormLocalServiceClp implements FormLocalService {
 	private String[] _methodParameterTypes17;
 	private String _methodName19;
 	private String[] _methodParameterTypes19;
+	private String _methodName20;
+	private String[] _methodParameterTypes20;
 }

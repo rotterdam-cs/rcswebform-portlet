@@ -281,6 +281,19 @@ public class FormLocalServiceUtil {
 			successMessage, successUrl, submitLabel);
 	}
 
+	public static com.rcs.webform.model.Form save(java.lang.Long formId,
+		com.liferay.portal.service.ServiceContext serviceContext,
+		java.util.Map<java.util.Locale, java.lang.String> titleMap,
+		java.util.Map<java.util.Locale, java.lang.String> descriptionMap,
+		boolean useCaptcha,
+		java.util.Map<java.util.Locale, java.lang.String> successMessageMap,
+		java.lang.String successUrl,
+		java.util.Map<java.util.Locale, java.lang.String> submitLabelMap) {
+		return getService()
+				   .save(formId, serviceContext, titleMap, descriptionMap,
+			useCaptcha, successMessageMap, successUrl, submitLabelMap);
+	}
+
 	public static void clearService() {
 		_service = null;
 	}

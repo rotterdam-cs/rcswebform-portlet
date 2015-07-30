@@ -1,5 +1,6 @@
 package com.rcs.webform.action;
 
+import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
@@ -65,16 +66,12 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 		String successMessage = ParamUtil.getInteger(actionRequest, "onSubmitData")==1 ? ParamUtil.getString(actionRequest, "submitSuccessMsg") : "";
 		String successUrl = ParamUtil.getInteger(actionRequest, "onSubmitData")==2 ? ParamUtil.getString(actionRequest, "submitSuccessURL") : "";
 		
-		log.info("Title: " + title);
-		log.info("Desc: " + description);
-		log.info("Use captcha: " + useCaptcha);
-		log.info("Submit label: " + submitLabel);
-		log.info("On submit data value: " + ParamUtil.getString(actionRequest, "onSubmitData"));
-		log.info("Success message: " + successMessage);
-		log.info("Success URL: " + successUrl);
+		Map<Locale, String> titleMap = LocalizationUtil.getLocalizationMap(actionRequest, "title");
+		Map<Locale, String> descMap = LocalizationUtil.getLocalizationMap(actionRequest, "description");
+		Map<Locale, String> successMsgMap = ParamUtil.getInteger(actionRequest, "onSubmitData")==1 ? LocalizationUtil.getLocalizationMap(actionRequest, "submitSuccessMsg") : new HashMap<Locale, String>();
+		Map<Locale, String> submitLabelMap = LocalizationUtil.getLocalizationMap(actionRequest, "submitBtnLabel");
 		
-		Form form = FormLocalServiceUtil.add(formId, formServiceContext, title, description, useCaptcha, 
-				successMessage, successUrl, submitLabel);
+		Form savedForm = FormLocalServiceUtil.save(formId, formServiceContext, titleMap, descMap, useCaptcha, successMsgMap, successUrl, submitLabelMap);
 		
 		//Save form-portlet mapping to database
 		ServiceContext formPortletMappingServiceContext = ServiceContextFactory.getInstance(FormToPorletMap.class.getName(), actionRequest);
@@ -82,7 +79,7 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 		if (ParamUtil.getLong(actionRequest, "formToPortletMapId")!=0){
 			formToPortletId = ParamUtil.getLong(actionRequest, "formToPortletMapId");
 		}
-		FormToPorletMapLocalServiceUtil.save(formToPortletId, portletResource, form.getFormId(), formPortletMappingServiceContext);
+		FormToPorletMapLocalServiceUtil.save(formToPortletId, portletResource, savedForm.getFormId(), formPortletMappingServiceContext);
 
 		if(form.getFormId() != 0){
 			updateFormItems(actionRequest, defaultLocale, form.getFormId());

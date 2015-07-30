@@ -288,6 +288,20 @@ public class FormLocalServiceWrapper implements FormLocalService,
 			description, useCaptcha, successMessage, successUrl, submitLabel);
 	}
 
+	@Override
+	public com.rcs.webform.model.Form save(java.lang.Long formId,
+		com.liferay.portal.service.ServiceContext serviceContext,
+		java.util.Map<java.util.Locale, java.lang.String> titleMap,
+		java.util.Map<java.util.Locale, java.lang.String> descriptionMap,
+		boolean useCaptcha,
+		java.util.Map<java.util.Locale, java.lang.String> successMessageMap,
+		java.lang.String successUrl,
+		java.util.Map<java.util.Locale, java.lang.String> submitLabelMap) {
+		return _formLocalService.save(formId, serviceContext, titleMap,
+			descriptionMap, useCaptcha, successMessageMap, successUrl,
+			submitLabelMap);
+	}
+
 	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */
