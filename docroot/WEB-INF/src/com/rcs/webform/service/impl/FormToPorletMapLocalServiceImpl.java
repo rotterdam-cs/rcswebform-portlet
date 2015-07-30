@@ -69,8 +69,11 @@ public class FormToPorletMapLocalServiceImpl extends FormToPorletMapLocalService
             user = userLocalService.getUserById(serviceContext.getUserId());
             if (formToPortletId == null) {
                 formToPortletId = counterLocalService.increment(FormToPorletMap.class.getName());
+                formToPortletMap = formToPorletMapPersistence.create(formToPortletId);
+            } else {
+            	formToPortletMap = formToPorletMapPersistence.findByPrimaryKey(formToPortletId);
             }
-            formToPortletMap = formToPorletMapPersistence.create(formToPortletId);
+            
             formToPortletMap.setActive(true);
             formToPortletMap.setCreationDate(serviceContext.getCreateDate(now));
             formToPortletMap.setModificationDate(serviceContext.getCreateDate(now));

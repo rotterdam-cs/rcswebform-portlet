@@ -16,7 +16,6 @@ package com.rcs.webform.service;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.kernel.search.IndexableType;
 import com.liferay.portal.kernel.transaction.Isolation;
 import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.transaction.Transactional;
@@ -53,7 +52,6 @@ public interface SubmittedDataLocalService extends BaseLocalService,
 	* @return the submitted data that was added
 	* @throws SystemException if a system exception occurred
 	*/
-	@com.liferay.portal.kernel.search.Indexable(type = IndexableType.REINDEX)
 	public com.rcs.webform.model.SubmittedData addSubmittedData(
 		com.rcs.webform.model.SubmittedData submittedData)
 		throws com.liferay.portal.kernel.exception.SystemException;
@@ -75,7 +73,6 @@ public interface SubmittedDataLocalService extends BaseLocalService,
 	* @throws PortalException if a submitted data with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	@com.liferay.portal.kernel.search.Indexable(type = IndexableType.DELETE)
 	public com.rcs.webform.model.SubmittedData deleteSubmittedData(
 		long submittedDataId)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -88,7 +85,6 @@ public interface SubmittedDataLocalService extends BaseLocalService,
 	* @return the submitted data that was removed
 	* @throws SystemException if a system exception occurred
 	*/
-	@com.liferay.portal.kernel.search.Indexable(type = IndexableType.DELETE)
 	public com.rcs.webform.model.SubmittedData deleteSubmittedData(
 		com.rcs.webform.model.SubmittedData submittedData)
 		throws com.liferay.portal.kernel.exception.SystemException;
@@ -230,7 +226,6 @@ public interface SubmittedDataLocalService extends BaseLocalService,
 	* @return the submitted data that was updated
 	* @throws SystemException if a system exception occurred
 	*/
-	@com.liferay.portal.kernel.search.Indexable(type = IndexableType.REINDEX)
 	public com.rcs.webform.model.SubmittedData updateSubmittedData(
 		com.rcs.webform.model.SubmittedData submittedData)
 		throws com.liferay.portal.kernel.exception.SystemException;

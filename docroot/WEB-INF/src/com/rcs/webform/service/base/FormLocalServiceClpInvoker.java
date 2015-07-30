@@ -115,6 +115,14 @@ public class FormLocalServiceClpInvoker {
 				"java.lang.String", "java.lang.String", "boolean",
 				"java.lang.String", "java.lang.String", "java.lang.String"
 			};
+
+		_methodName51 = "save";
+
+		_methodParameterTypes51 = new String[] {
+				"java.lang.Long", "com.liferay.portal.service.ServiceContext",
+				"java.util.Map", "java.util.Map", "boolean", "java.util.Map",
+				"java.lang.String", "java.util.Map"
+			};
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -228,6 +236,18 @@ public class FormLocalServiceClpInvoker {
 				(java.lang.String)arguments[7]);
 		}
 
+		if (_methodName51.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes51, parameterTypes)) {
+			return FormLocalServiceUtil.save((java.lang.Long)arguments[0],
+				(com.liferay.portal.service.ServiceContext)arguments[1],
+				(java.util.Map<java.util.Locale, java.lang.String>)arguments[2],
+				(java.util.Map<java.util.Locale, java.lang.String>)arguments[3],
+				((Boolean)arguments[4]).booleanValue(),
+				(java.util.Map<java.util.Locale, java.lang.String>)arguments[5],
+				(java.lang.String)arguments[6],
+				(java.util.Map<java.util.Locale, java.lang.String>)arguments[7]);
+		}
+
 		throw new UnsupportedOperationException();
 	}
 
@@ -269,4 +289,6 @@ public class FormLocalServiceClpInvoker {
 	private String[] _methodParameterTypes45;
 	private String _methodName50;
 	private String[] _methodParameterTypes50;
+	private String _methodName51;
+	private String[] _methodParameterTypes51;
 }

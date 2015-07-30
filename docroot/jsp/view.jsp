@@ -36,7 +36,6 @@
 		var fieldStrings = new Object();
 		if(divTemplateFormItem) {
 			console.log('s1');
-			console.log('formItem.0.type = '+Data.data.formItems[0].type);
 			for(formItemIdx in Data.data.formItems) { 
 				console.log('formItem = '+formItemIdx);
 				var divFormItem =  divTemplateFormItem.cloneNode(true);

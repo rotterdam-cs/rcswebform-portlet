@@ -1569,9 +1569,7 @@ public class FormItemClp extends BaseModelImpl<FormItem> implements FormItem {
 			return StringPool.BLANK;
 		}
 
-		Locale defaultLocale = LocaleUtil.getDefault();
-
-		return LocalizationUtil.getDefaultLanguageId(xml, defaultLocale);
+		return LocalizationUtil.getDefaultLanguageId(xml);
 	}
 
 	@Override
@@ -1721,10 +1719,6 @@ public class FormItemClp extends BaseModelImpl<FormItem> implements FormItem {
 		else {
 			return false;
 		}
-	}
-
-	public Class<?> getClpSerializerClass() {
-		return _clpSerializerClass;
 	}
 
 	@Override
@@ -1923,5 +1917,4 @@ public class FormItemClp extends BaseModelImpl<FormItem> implements FormItem {
 	private String _hintMessage;
 	private String _hintMessageCurrentLanguageId;
 	private BaseModel<?> _formItemRemoteModel;
-	private Class<?> _clpSerializerClass = com.rcs.webform.service.ClpSerializer.class;
 }

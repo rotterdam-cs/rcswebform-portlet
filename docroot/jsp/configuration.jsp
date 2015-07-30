@@ -1,10 +1,35 @@
 <%@ include file="/jsp/init.jsp" %>
 
 <%
-String titleXml = GetterUtil.getString(LocalizationUtil.getLocalizationXmlFromPreferences(portletPreferences, renderRequest, "title"), StringPool.BLANK);
-String descriptionXml = GetterUtil.getString(LocalizationUtil.getLocalizationXmlFromPreferences(portletPreferences, renderRequest, "description"), StringPool.BLANK);
-boolean requireCaptcha = GetterUtil.getBoolean(portletPreferences.getValue("requireCaptcha", StringPool.BLANK));
-String successURL = portletPreferences.getValue("successURL", StringPool.BLANK);
+//Get values from the database
+FormToPorletMap formToPortletMap = WebFormUtil.getFormToPortletMap(portletResource);
+Form thisForm = WebFormUtil.getPortletForm(portletResource);
+Long formToPortletId = 0L;
+Long formId = 0L;
+String titleXml = "";
+String descriptionXml = "";
+boolean requireCaptcha = false;
+String submitSuccessMessage = "";
+boolean submitSuccessMessageRadio = false;
+String successURL = "";
+boolean successURLRadio = false;
+String submitButtonLabel = "";
+
+try{
+	formToPortletId = GetterUtil.getLong(formToPortletMap.getFormToPorletMapId(), 0);
+	formId = GetterUtil.getLong(thisForm.getFormId(), 0);
+	titleXml = GetterUtil.getString(thisForm.getTitle(), StringPool.BLANK);
+	descriptionXml = GetterUtil.getString(thisForm.getDesc(), StringPool.BLANK);
+	requireCaptcha = GetterUtil.getBoolean(""+ thisForm.getUseCaptcha() +"",false);
+	submitSuccessMessage = GetterUtil.getString(thisForm.getSuccessMessage(), StringPool.BLANK);
+	submitSuccessMessageRadio = !submitSuccessMessage.equals(StringPool.BLANK);
+	successURL = GetterUtil.getString(thisForm.getSuccessURL(), StringPool.BLANK);
+	successURLRadio = !successURL.equals(StringPool.BLANK);
+	submitButtonLabel = GetterUtil.getString(thisForm.getSubmitLabel(), StringPool.BLANK);
+} catch(Exception ignored){
+}
+
+//Get values from portlet preferences
 boolean sendAsEmail = GetterUtil.getBoolean(portletPreferences.getValue("sendAsEmail", StringPool.BLANK));
 String emailFromName = portletPreferences.getValue("emailFromName", StringPool.BLANK);
 String emailFromAddress = portletPreferences.getValue("emailFromAddress", StringPool.BLANK);
@@ -20,8 +45,8 @@ boolean fieldsEditingDisabled = false;
 <liferay-portlet:renderURL portletConfiguration="true" var="configurationRenderURL" />
 
 <aui:form action="<%= configurationActionURL %>" method="POST" name="fmConfig">
-	<aui:input name="formId" type="hidden" value="0"/>
-	<aui:input name="formToPortletMapId" type="hidden" value="0"/>
+	<aui:input name="formId" type="hidden" value="<%= formId %>"/>
+	<aui:input name="formToPortletMapId" type="hidden" value="<%= formToPortletId %>"/>
 	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
 	<aui:input name="redirect" type="hidden" value="<%= configurationRenderURL %>" />
 
@@ -39,18 +64,18 @@ boolean fieldsEditingDisabled = false;
 				</aui:field-wrapper>
 				
 				<aui:field-wrapper>
-					<aui:input name="requireCaptcha" type="checkbox" label="Require Captcha" value="true"></aui:input>
+					<aui:input name="requireCaptcha" type="checkbox" label="Require Captcha" value="<%= requireCaptcha %>"></aui:input>
 				</aui:field-wrapper>
 				
 				<aui:field-wrapper label="On Valid Submitted Data">
-					<aui:input name="onSubmitData" type="radio" id="submitSuccessRadio" label="Show Success Message" value="1"></aui:input>
-					Success message: <liferay-ui:input-localized name="submitSuccessMsg" xml=""></liferay-ui:input-localized>
-					<aui:input name="onSubmitData" type="radio" id="submitURLRadio" label="Redirect URL on success" value="2"></aui:input>
-					URL redirect: <aui:input name="submitSuccessURL" type="text" label=""></aui:input>
+					<aui:input name="onSubmitData" type="radio" id="submitSuccessRadio" label="Show Success Message" value="1" checked="<%= submitSuccessMessageRadio %>" ></aui:input>
+					Success message: <liferay-ui:input-localized name="submitSuccessMsg" xml="<%= submitSuccessMessage %>"></liferay-ui:input-localized>
+					<aui:input name="onSubmitData" type="radio" id="submitURLRadio" label="Redirect URL on success" value="2" checked="<%= successURLRadio %>"></aui:input>
+					URL redirect: <aui:input name="submitSuccessURL" type="text" label="" value="<%= successURL %>"></aui:input>
 				</aui:field-wrapper>
 				
 				<aui:field-wrapper label="Submit Button Label">
-					<liferay-ui:input-localized name="submitBtnLabel" xml=""></liferay-ui:input-localized>
+					<liferay-ui:input-localized name="submitBtnLabel" xml="<%= submitButtonLabel %>"></liferay-ui:input-localized>
 				</aui:field-wrapper>
 			</aui:fieldset>
 		</liferay-ui:panel>
@@ -82,36 +107,6 @@ boolean fieldsEditingDisabled = false;
 		
 		<liferay-ui:panel collapsible="true" extended="true" id="webFormFields" persistState="true" title="Form Fields">
 			<aui:fieldset cssClass="rows-container webFields">
-				<c:if test="<%= fieldsEditingDisabled %>">
-					<div class="alert">
-						<liferay-ui:message key="there-is-existing-form-data-please-export-and-delete-it-before-making-changes-to-the-fields" />
-					</div>
-
-					<c:if test="<%= layoutTypePortlet.hasPortletId(portletResource) %>">
-						<liferay-portlet:resourceURL portletName="<%= portletResource %>" var="exportURL">
-							<portlet:param name="<%= Constants.CMD %>" value="export" />
-						</liferay-portlet:resourceURL>
-
-						<%
-						String taglibExport = "submitForm(document.hrefFm, '" + exportURL + "', false);";
-						%>
-
-						<aui:button onClick="<%= taglibExport %>" value="export-data" />
-
-						<liferay-portlet:actionURL portletName="<%= portletResource %>" var="deleteURL">
-							<portlet:param name="<%= ActionRequest.ACTION_NAME %>" value="deleteData" />
-							<portlet:param name="redirect" value="<%= currentURL %>" />
-						</liferay-portlet:actionURL>
-
-						<%
-						String taglibDelete = "submitForm(document." + renderResponse.getNamespace() + "fm, '" + deleteURL + "');";
-						%>
-
-						<aui:button onClick="<%= taglibDelete %>" value="delete-data" />
-					</c:if>
-
-					<br /><br />
-				</c:if>
 
 				<aui:input name="updateFields" type="hidden" value="<%= !fieldsEditingDisabled %>" />
 
@@ -265,3 +260,30 @@ boolean fieldsEditingDisabled = false;
 		).render();
 	</aui:script>
 </c:if>
+
+<aui:script>
+AUI().use('aui-base',function(A){
+	
+	<c:if test="<%= !sendAsEmail %>">
+		A.one('#<portlet:namespace />emailFromName').set('disabled',true);
+		A.one('#<portlet:namespace />emailFromAddress').set('disabled',true);
+		A.one('#<portlet:namespace />emailAddress').set('disabled',true);
+		A.one('#<portlet:namespace />subject').set('disabled',true);
+	</c:if>
+	
+	A.one('.sendAsEmailChkBox').on('click', function(event){
+		if(this.attr('checked')){
+			A.one('#<portlet:namespace />emailFromName').set('disabled',false);
+			A.one('#<portlet:namespace />emailFromAddress').set('disabled',false);
+			A.one('#<portlet:namespace />emailAddress').set('disabled',false);
+			A.one('#<portlet:namespace />subject').set('disabled',false);
+		} else {
+			A.one('#<portlet:namespace />emailFromName').set('disabled',true);
+			A.one('#<portlet:namespace />emailFromAddress').set('disabled',true);
+			A.one('#<portlet:namespace />emailAddress').set('disabled',true);
+			A.one('#<portlet:namespace />subject').set('disabled',true);
+		}
+	});
+	
+});
+</aui:script>

@@ -1,5 +1,6 @@
 package com.rcs.webform.action;
 
+import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
@@ -65,16 +66,12 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 		String successMessage = ParamUtil.getInteger(actionRequest, "onSubmitData")==1 ? ParamUtil.getString(actionRequest, "submitSuccessMsg") : "";
 		String successUrl = ParamUtil.getInteger(actionRequest, "onSubmitData")==2 ? ParamUtil.getString(actionRequest, "submitSuccessURL") : "";
 		
-		log.info("Title: " + title);
-		log.info("Desc: " + description);
-		log.info("Use captcha: " + useCaptcha);
-		log.info("Submit label: " + submitLabel);
-		log.info("On submit data value: " + ParamUtil.getString(actionRequest, "onSubmitData"));
-		log.info("Success message: " + successMessage);
-		log.info("Success URL: " + successUrl);
+		Map<Locale, String> titleMap = LocalizationUtil.getLocalizationMap(actionRequest, "title");
+		Map<Locale, String> descMap = LocalizationUtil.getLocalizationMap(actionRequest, "description");
+		Map<Locale, String> successMsgMap = ParamUtil.getInteger(actionRequest, "onSubmitData")==1 ? LocalizationUtil.getLocalizationMap(actionRequest, "submitSuccessMsg") : null;
+		Map<Locale, String> submitLabelMap = LocalizationUtil.getLocalizationMap(actionRequest, "submitBtnLabel");
 		
-		Form form = FormLocalServiceUtil.add(formId, formServiceContext, title, description, useCaptcha, 
-				successMessage, successUrl, submitLabel);
+		Form savedForm = FormLocalServiceUtil.save(formId, formServiceContext, titleMap, descMap, useCaptcha, successMsgMap, successUrl, submitLabelMap);
 		
 		//Save form-portlet mapping to database
 		ServiceContext formPortletMappingServiceContext = ServiceContextFactory.getInstance(FormToPorletMap.class.getName(), actionRequest);
@@ -82,46 +79,12 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 		if (ParamUtil.getLong(actionRequest, "formToPortletMapId")!=0){
 			formToPortletId = ParamUtil.getLong(actionRequest, "formToPortletMapId");
 		}
-		FormToPorletMapLocalServiceUtil.save(formToPortletId, portletResource, form.getFormId(), formPortletMappingServiceContext);
-		
-		boolean updateFields = ParamUtil.getBoolean(actionRequest, "updateFields");
+		FormToPorletMapLocalServiceUtil.save(formToPortletId, portletResource, savedForm.getFormId(), formPortletMappingServiceContext);
 
-		if (updateFields) {
-			int i = 1;
-
-			int[] formFieldsIndexes = StringUtil.split(ParamUtil.getString(actionRequest, "formFieldsIndexes"), 0);
-
-			for (int formFieldsIndex : formFieldsIndexes) {
-				Map<Locale, String> fieldLabelMap = LocalizationUtil.getLocalizationMap(actionRequest, "fieldLabel" + formFieldsIndex);
-
-				if (Validator.isNull(fieldLabelMap.get(defaultLocale))) {
-					continue;
-				}
-
-				String fieldType = ParamUtil.getString(actionRequest, "fieldType" + formFieldsIndex);
-				boolean fieldOptional = ParamUtil.getBoolean(actionRequest, "fieldOptional" + formFieldsIndex);
-				Map<Locale, String> fieldOptionsMap = LocalizationUtil.getLocalizationMap(actionRequest, "fieldOptions" + formFieldsIndex);
-				String fieldValidationScript = ParamUtil.getString(actionRequest, "fieldValidationScript" + formFieldsIndex);
-				String fieldValidationErrorMessage = ParamUtil.getString(actionRequest, "fieldValidationErrorMessage" + formFieldsIndex);
-
-				if (Validator.isNotNull(fieldValidationScript) ^ Validator.isNotNull(fieldValidationErrorMessage)) {
-
-					SessionErrors.add(actionRequest, "validationDefinitionInvalid" + i);
-				}
-
-				ServiceContext serviceContext = ServiceContextFactory.getInstance(FormItem.class.getName(), actionRequest);
-				FormItemLocalServiceUtil.add(null, fieldLabelMap.values().toString(), fieldType, fieldOptionsMap.values().toString(), fieldOptional,
-						fieldValidationScript, fieldValidationErrorMessage, serviceContext);
-
-				i++;
-			}
-
-			if (!SessionErrors.isEmpty(actionRequest)) {
-				return;
-			}
-
+		if(savedForm.getFormId() != 0){
+			saveFormItems(actionRequest, defaultLocale, savedForm.getFormId());
 		}
-
+		
 		if (SessionErrors.isEmpty(actionRequest)) {
 			preferences.store();
 		}
@@ -138,4 +101,59 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 			return "/jsp/configuration.jsp";
 		}
 	}
+	
+	
+	/**
+	 * Save Form Items
+	 * 
+	 * @param actionRequest
+	 * @param defaultLocale
+	 * @param formId
+	 */
+	private void saveFormItems(ActionRequest actionRequest, Locale defaultLocale, Long formId){
+		try {
+			boolean updateFields = ParamUtil.getBoolean(actionRequest, "updateFields");
+	
+			if (updateFields) {
+				int i = 1;
+	
+				int[] formFieldsIndexes = StringUtil.split(ParamUtil.getString(actionRequest, "formFieldsIndexes"), 0);
+	
+				for (int formFieldsIndex : formFieldsIndexes) {
+					Map<Locale, String> fieldLabelMap = LocalizationUtil.getLocalizationMap(actionRequest, "fieldLabel" + formFieldsIndex);
+	
+					if (Validator.isNull(fieldLabelMap.get(defaultLocale))) {
+						continue;
+					}
+	
+					String fieldType = ParamUtil.getString(actionRequest, "fieldType" + formFieldsIndex).split(":")[0];
+					String validationType = ParamUtil.getString(actionRequest, "fieldType" + formFieldsIndex).split(":")[1];
+					boolean fieldOptional = ParamUtil.getBoolean(actionRequest, "fieldOptional" + formFieldsIndex);
+					Map<Locale, String> fieldOptionsMap = LocalizationUtil.getLocalizationMap(actionRequest, "fieldOptions" + formFieldsIndex);
+					String fieldValidationScript = ParamUtil.getString(actionRequest, "fieldValidationScript" + formFieldsIndex);
+					String fieldValidationErrorMessage = ParamUtil.getString(actionRequest, "fieldValidationErrorMessage" + formFieldsIndex);
+	
+					if (Validator.isNotNull(fieldValidationScript) ^ Validator.isNotNull(fieldValidationErrorMessage)) {
+	
+						SessionErrors.add(actionRequest, "validationDefinitionInvalid" + i);
+					}
+	
+					ServiceContext serviceContext = ServiceContextFactory.getInstance(FormItem.class.getName(), actionRequest);
+					FormItemLocalServiceUtil.save(null, formId, fieldLabelMap, fieldType, fieldOptionsMap, fieldOptional,
+							fieldValidationScript, validationType, fieldValidationErrorMessage, serviceContext);
+	
+					i++;
+				}
+	
+				if (!SessionErrors.isEmpty(actionRequest)) {
+					return;
+				}
+	
+			}
+		} catch (Exception e) {
+	        log.error("Exception while update form items: " + e.getMessage(), e);
+	    }
+		
+	}
+	
 }

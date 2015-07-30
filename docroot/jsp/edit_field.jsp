@@ -70,13 +70,14 @@ boolean ignoreRequestValue = (index != formFieldsIndex);
 
 	<c:choose>
 		<c:when test="<%= !fieldsEditingDisabled %>">
-			<aui:select ignoreRequestValue="<%= ignoreRequestValue %>" label="type" name='<%= "fieldType" + index %>'>
-				<aui:option selected='<%= fieldType.equals("text") %>' value="text"><liferay-ui:message key="text" /></aui:option>
-				<aui:option selected='<%= fieldType.equals("textarea") %>' value="textarea"><liferay-ui:message key="text-box" /></aui:option>
-				<aui:option selected='<%= fieldType.equals("options") %>' value="options"><liferay-ui:message key="options" /></aui:option>
-				<aui:option selected='<%= fieldType.equals("radio") %>' value="radio"><liferay-ui:message key="radio-buttons" /></aui:option>
-				<aui:option selected='<%= fieldType.equals("paragraph") %>' value="paragraph"><liferay-ui:message key="paragraph" /></aui:option>
-				<aui:option selected='<%= fieldType.equals("checkbox") %>' value="checkbox"><liferay-ui:message key="check-box" /></aui:option>
+			<aui:select ignoreRequestValue="<%= ignoreRequestValue %>" label="type" name='<%= "fieldType" + index %>' >
+				<aui:option selected='<%= fieldType.equals("TEXT_FIELD") %>' value="TEXT_FIELD:ALPHANUM"><liferay-ui:message key="text" /></aui:option>
+				<aui:option selected='<%= fieldType.equals("TEXT_BOX") %>' value="TEXT_BOX:ALPHANUM"><liferay-ui:message key="text-box" /></aui:option>
+				<aui:option selected='<%= fieldType.equals("PASSWORD") %>' value="PASSWORD:ALPHANUM"><liferay-ui:message key="password" /></aui:option>
+				<aui:option selected='<%= fieldType.equals("OPTIONS") %>' value="OPTIONS:ALPHANUM"><liferay-ui:message key="options" /></aui:option>
+				<aui:option selected='<%= fieldType.equals("RADIO_BUTTON") %>' value="RADIO_BUTTON:ALPHANUM"><liferay-ui:message key="radio-buttons" /></aui:option>
+				<aui:option selected='<%= fieldType.equals("paragraph") %>' value="paragraph:ALPHANUM"><liferay-ui:message key="paragraph" /></aui:option>
+				<aui:option selected='<%= fieldType.equals("CHECKBOX") %>' value="CHECKBOX:ALPHANUM"><liferay-ui:message key="check-box" /></aui:option>
 			</aui:select>
 		</c:when>
 		<c:otherwise>
@@ -166,7 +167,7 @@ boolean ignoreRequestValue = (index != formFieldsIndex);
 		</c:choose>
 	</c:if>
 
-	<c:if test="<%= fieldsEditingDisabled %>">
+	<c:if test="<%=fieldsEditingDisabled %>">
 		</dl>
 	</c:if>
 </div>

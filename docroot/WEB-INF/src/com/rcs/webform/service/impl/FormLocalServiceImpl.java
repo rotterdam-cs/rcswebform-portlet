@@ -15,6 +15,8 @@
 package com.rcs.webform.service.impl;
 
 import java.util.Date;
+import java.util.Locale;
+import java.util.Map;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -75,6 +77,52 @@ public class FormLocalServiceImpl extends FormLocalServiceBaseImpl {
 			formPersistence.update(form);
 		} catch (Exception e) {
 			log.error("Exception while adding form: " + e.getMessage(), e);
+		}
+		
+		return form;
+	}
+	
+	public Form save(Long formId, ServiceContext serviceContext, Map<Locale, String> titleMap, Map<Locale, String> descriptionMap, 
+			boolean useCaptcha, Map<Locale, String> successMessageMap, String successUrl, Map<Locale, String> submitLabelMap){
+		User user = null;
+		Form form = null;
+		Date now = new Date();
+		
+		try {
+			user = userLocalService.getUserById(serviceContext.getUserId());
+			if(formId == null){
+				formId = counterLocalService.increment(Form.class.getName());
+				form = formPersistence.create(formId);
+			} else {
+				form = formPersistence.findByPrimaryKey(formId);
+			}
+			
+			form.setActive(true);
+			form.setCreationDate(serviceContext.getCreateDate(now));
+			form.setModificationDate(serviceContext.getCreateDate(now));
+			form.setModificationUser(user.getFullName());
+			form.setGroupId(serviceContext.getScopeGroupId());
+			form.setCompanyId(serviceContext.getCompanyId());
+			form.setUserId(user.getUserId());
+			form.setUserName(user.getEmailAddress());
+			form.setFormAttrId("");
+			form.setFormAttrClass("");
+			form.setTitleMap(titleMap);
+			form.setDescMap(descriptionMap);
+			form.setUseCaptcha(useCaptcha);
+			if(successMessageMap==null){
+				form.setSuccessMessage("");
+			} else {
+				form.setSuccessMessageMap(successMessageMap);
+			}
+			form.setSuccessURL(successUrl);
+			form.setSubmitLabelMap(submitLabelMap);
+			form.setSubmitAttrClass("");
+			form.setSubmitAttrId("");
+			
+			formPersistence.update(form);
+		} catch (Exception e) {
+			log.error("Exception while saving form: " + e.getMessage(), e);
 		}
 		
 		return form;
