@@ -111,89 +111,71 @@ public class FormToPorletMapUtil {
 	}
 
 	/**
-	* Returns the form to porlet map where groupId = &#63; and companyId = &#63; and portletId = &#63; or throws a {@link com.rcs.webform.NoSuchFormToPorletMapException} if it could not be found.
+	* Returns the form to porlet map where portletId = &#63; or throws a {@link com.rcs.webform.NoSuchFormToPorletMapException} if it could not be found.
 	*
-	* @param groupId the group ID
-	* @param companyId the company ID
 	* @param portletId the portlet ID
 	* @return the matching form to porlet map
 	* @throws com.rcs.webform.NoSuchFormToPorletMapException if a matching form to porlet map could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public static com.rcs.webform.model.FormToPorletMap findByGroupColumnPortletId(
-		long groupId, long companyId, java.lang.String portletId)
+	public static com.rcs.webform.model.FormToPorletMap findByPortletId(
+		java.lang.String portletId)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.rcs.webform.NoSuchFormToPorletMapException {
-		return getPersistence()
-				   .findByGroupColumnPortletId(groupId, companyId, portletId);
+		return getPersistence().findByPortletId(portletId);
 	}
 
 	/**
-	* Returns the form to porlet map where groupId = &#63; and companyId = &#63; and portletId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	* Returns the form to porlet map where portletId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	*
-	* @param groupId the group ID
-	* @param companyId the company ID
 	* @param portletId the portlet ID
 	* @return the matching form to porlet map, or <code>null</code> if a matching form to porlet map could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public static com.rcs.webform.model.FormToPorletMap fetchByGroupColumnPortletId(
-		long groupId, long companyId, java.lang.String portletId)
+	public static com.rcs.webform.model.FormToPorletMap fetchByPortletId(
+		java.lang.String portletId)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence()
-				   .fetchByGroupColumnPortletId(groupId, companyId, portletId);
+		return getPersistence().fetchByPortletId(portletId);
 	}
 
 	/**
-	* Returns the form to porlet map where groupId = &#63; and companyId = &#63; and portletId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	* Returns the form to porlet map where portletId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
-	* @param groupId the group ID
-	* @param companyId the company ID
 	* @param portletId the portlet ID
 	* @param retrieveFromCache whether to use the finder cache
 	* @return the matching form to porlet map, or <code>null</code> if a matching form to porlet map could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public static com.rcs.webform.model.FormToPorletMap fetchByGroupColumnPortletId(
-		long groupId, long companyId, java.lang.String portletId,
-		boolean retrieveFromCache)
+	public static com.rcs.webform.model.FormToPorletMap fetchByPortletId(
+		java.lang.String portletId, boolean retrieveFromCache)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence()
-				   .fetchByGroupColumnPortletId(groupId, companyId, portletId,
-			retrieveFromCache);
+		return getPersistence().fetchByPortletId(portletId, retrieveFromCache);
 	}
 
 	/**
-	* Removes the form to porlet map where groupId = &#63; and companyId = &#63; and portletId = &#63; from the database.
+	* Removes the form to porlet map where portletId = &#63; from the database.
 	*
-	* @param groupId the group ID
-	* @param companyId the company ID
 	* @param portletId the portlet ID
 	* @return the form to porlet map that was removed
 	* @throws SystemException if a system exception occurred
 	*/
-	public static com.rcs.webform.model.FormToPorletMap removeByGroupColumnPortletId(
-		long groupId, long companyId, java.lang.String portletId)
+	public static com.rcs.webform.model.FormToPorletMap removeByPortletId(
+		java.lang.String portletId)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.rcs.webform.NoSuchFormToPorletMapException {
-		return getPersistence()
-				   .removeByGroupColumnPortletId(groupId, companyId, portletId);
+		return getPersistence().removeByPortletId(portletId);
 	}
 
 	/**
-	* Returns the number of form to porlet maps where groupId = &#63; and companyId = &#63; and portletId = &#63;.
+	* Returns the number of form to porlet maps where portletId = &#63;.
 	*
-	* @param groupId the group ID
-	* @param companyId the company ID
 	* @param portletId the portlet ID
 	* @return the number of matching form to porlet maps
 	* @throws SystemException if a system exception occurred
 	*/
-	public static int countByGroupColumnPortletId(long groupId, long companyId,
-		java.lang.String portletId)
+	public static int countByPortletId(java.lang.String portletId)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence()
-				   .countByGroupColumnPortletId(groupId, companyId, portletId);
+		return getPersistence().countByPortletId(portletId);
 	}
 
 	/**

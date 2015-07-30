@@ -113,9 +113,7 @@
 		<!-- Audit fields -->
         <column name="formId" type="long"></column>
         <column name="portletId" type="String"></column>
-        <finder name="GroupColumnPortletId" return-type="Form">
-            <finder-column name="groupId"></finder-column>
-            <finder-column name="companyId"></finder-column>
+        <finder name="PortletId" return-type="Form">
             <finder-column name="portletId"></finder-column>
         </finder>
 	</entity>

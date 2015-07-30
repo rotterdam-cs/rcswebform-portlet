@@ -89,10 +89,8 @@ public class FormToPorletMapModelImpl extends BaseModelImpl<FormToPorletMap>
 	public static final boolean COLUMN_BITMASK_ENABLED = GetterUtil.getBoolean(com.liferay.util.service.ServiceProps.get(
 				"value.object.column.bitmask.enabled.com.rcs.webform.model.FormToPorletMap"),
 			true);
-	public static long COMPANYID_COLUMN_BITMASK = 1L;
-	public static long GROUPID_COLUMN_BITMASK = 2L;
-	public static long PORTLETID_COLUMN_BITMASK = 4L;
-	public static long FORMTOPORLETMAPID_COLUMN_BITMASK = 8L;
+	public static long PORTLETID_COLUMN_BITMASK = 1L;
+	public static long FORMTOPORLETMAPID_COLUMN_BITMASK = 2L;
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.util.service.ServiceProps.get(
 				"lock.expiration.time.com.rcs.webform.model.FormToPorletMap"));
 
@@ -284,19 +282,7 @@ public class FormToPorletMapModelImpl extends BaseModelImpl<FormToPorletMap>
 
 	@Override
 	public void setGroupId(long groupId) {
-		_columnBitmask |= GROUPID_COLUMN_BITMASK;
-
-		if (!_setOriginalGroupId) {
-			_setOriginalGroupId = true;
-
-			_originalGroupId = _groupId;
-		}
-
 		_groupId = groupId;
-	}
-
-	public long getOriginalGroupId() {
-		return _originalGroupId;
 	}
 
 	@Override
@@ -306,19 +292,7 @@ public class FormToPorletMapModelImpl extends BaseModelImpl<FormToPorletMap>
 
 	@Override
 	public void setCompanyId(long companyId) {
-		_columnBitmask |= COMPANYID_COLUMN_BITMASK;
-
-		if (!_setOriginalCompanyId) {
-			_setOriginalCompanyId = true;
-
-			_originalCompanyId = _companyId;
-		}
-
 		_companyId = companyId;
-	}
-
-	public long getOriginalCompanyId() {
-		return _originalCompanyId;
 	}
 
 	@Override
@@ -485,14 +459,6 @@ public class FormToPorletMapModelImpl extends BaseModelImpl<FormToPorletMap>
 	public void resetOriginalValues() {
 		FormToPorletMapModelImpl formToPorletMapModelImpl = this;
 
-		formToPorletMapModelImpl._originalGroupId = formToPorletMapModelImpl._groupId;
-
-		formToPorletMapModelImpl._setOriginalGroupId = false;
-
-		formToPorletMapModelImpl._originalCompanyId = formToPorletMapModelImpl._companyId;
-
-		formToPorletMapModelImpl._setOriginalCompanyId = false;
-
 		formToPorletMapModelImpl._originalPortletId = formToPorletMapModelImpl._portletId;
 
 		formToPorletMapModelImpl._columnBitmask = 0;
@@ -658,11 +624,7 @@ public class FormToPorletMapModelImpl extends BaseModelImpl<FormToPorletMap>
 	private Date _modificationDate;
 	private String _modificationUser;
 	private long _groupId;
-	private long _originalGroupId;
-	private boolean _setOriginalGroupId;
 	private long _companyId;
-	private long _originalCompanyId;
-	private boolean _setOriginalCompanyId;
 	private long _userId;
 	private String _userUuid;
 	private String _userName;

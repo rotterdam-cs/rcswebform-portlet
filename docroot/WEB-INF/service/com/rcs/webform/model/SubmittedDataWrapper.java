@@ -448,7 +448,7 @@ public class SubmittedDataWrapper implements SubmittedData,
 	}
 
 	@Override
-	public int compareTo(SubmittedData submittedData) {
+	public int compareTo(com.rcs.webform.model.SubmittedData submittedData) {
 		return _submittedData.compareTo(submittedData);
 	}
 
@@ -458,17 +458,17 @@ public class SubmittedDataWrapper implements SubmittedData,
 	}
 
 	@Override
-	public com.liferay.portal.model.CacheModel<SubmittedData> toCacheModel() {
+	public com.liferay.portal.model.CacheModel<com.rcs.webform.model.SubmittedData> toCacheModel() {
 		return _submittedData.toCacheModel();
 	}
 
 	@Override
-	public SubmittedData toEscapedModel() {
+	public com.rcs.webform.model.SubmittedData toEscapedModel() {
 		return new SubmittedDataWrapper(_submittedData.toEscapedModel());
 	}
 
 	@Override
-	public SubmittedData toUnescapedModel() {
+	public com.rcs.webform.model.SubmittedData toUnescapedModel() {
 		return new SubmittedDataWrapper(_submittedData.toUnescapedModel());
 	}
 

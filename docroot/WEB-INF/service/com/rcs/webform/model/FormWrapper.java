@@ -1202,7 +1202,7 @@ public class FormWrapper implements Form, ModelWrapper<Form> {
 	}
 
 	@Override
-	public int compareTo(Form form) {
+	public int compareTo(com.rcs.webform.model.Form form) {
 		return _form.compareTo(form);
 	}
 
@@ -1212,17 +1212,17 @@ public class FormWrapper implements Form, ModelWrapper<Form> {
 	}
 
 	@Override
-	public com.liferay.portal.model.CacheModel<Form> toCacheModel() {
+	public com.liferay.portal.model.CacheModel<com.rcs.webform.model.Form> toCacheModel() {
 		return _form.toCacheModel();
 	}
 
 	@Override
-	public Form toEscapedModel() {
+	public com.rcs.webform.model.Form toEscapedModel() {
 		return new FormWrapper(_form.toEscapedModel());
 	}
 
 	@Override
-	public Form toUnescapedModel() {
+	public com.rcs.webform.model.Form toUnescapedModel() {
 		return new FormWrapper(_form.toUnescapedModel());
 	}
 

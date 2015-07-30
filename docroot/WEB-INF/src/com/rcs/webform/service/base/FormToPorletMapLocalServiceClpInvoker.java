@@ -114,11 +114,9 @@ public class FormToPorletMapLocalServiceClpInvoker {
 
 		_methodParameterTypes45 = new String[] { "java.lang.String" };
 
-		_methodName50 = "getFormToPortletMapByGroupColumnPortletId";
+		_methodName50 = "getFormToPortletMapByPortletId";
 
-		_methodParameterTypes50 = new String[] {
-				"long", "long", "java.lang.String"
-			};
+		_methodParameterTypes50 = new String[] { "java.lang.String" };
 
 		_methodName51 = "save";
 
@@ -231,8 +229,7 @@ public class FormToPorletMapLocalServiceClpInvoker {
 
 		if (_methodName50.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes50, parameterTypes)) {
-			return FormToPorletMapLocalServiceUtil.getFormToPortletMapByGroupColumnPortletId(((Long)arguments[0]).longValue(),
-				((Long)arguments[1]).longValue(), (java.lang.String)arguments[2]);
+			return FormToPorletMapLocalServiceUtil.getFormToPortletMapByPortletId((java.lang.String)arguments[0]);
 		}
 
 		if (_methodName51.equals(name) &&

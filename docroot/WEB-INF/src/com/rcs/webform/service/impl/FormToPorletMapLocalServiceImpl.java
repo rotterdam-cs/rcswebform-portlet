@@ -51,44 +51,43 @@ public class FormToPorletMapLocalServiceImpl extends FormToPorletMapLocalService
      * local service.
      */
 
-    public FormToPorletMap getFormToPortletMapByGroupColumnPortletId(final long groupId, final long companyId, final String portletId) {
+    public FormToPorletMap getFormToPortletMapByPortletId(final String portletId) {
         try {
-            return FormToPorletMapUtil.findByGroupColumnPortletId(groupId, companyId, portletId);
+            return FormToPorletMapUtil.findByPortletId(portletId);
         } catch (Exception e) {
-            log.error("Exception while getting form to portlet map by Group id [" + groupId + "], Company id [" + companyId + "], Portlet id [" + portletId
-                    + "] : " + e.getMessage(), e);
+            log.error("Exception while getting form to portlet map by Portlet id [" + portletId + "] : " + e.getMessage(), e);
             return null;
         }
     }
-    
-    public FormToPorletMap save(Long formToPortletId, String namespace, Long formId, ServiceContext serviceContext){
-    	User user = null;
-    	FormToPorletMap formToPortletMap = null;
-    	Date now = new Date();
-    	
-    	try {
-			user = userLocalService.getUserById(serviceContext.getUserId());
-			if (formToPortletId == null){
-				formToPortletId = counterLocalService.increment(FormToPorletMap.class.getName());
-			}
-			formToPortletMap = formToPorletMapPersistence.create(formToPortletId);
-			formToPortletMap.setActive(true);
-			formToPortletMap.setCreationDate(serviceContext.getCreateDate(now));
-			formToPortletMap.setModificationDate(serviceContext.getCreateDate(now));
-			formToPortletMap.setModificationUser(user.getFullName());
-			formToPortletMap.setGroupId(serviceContext.getScopeGroupId());
-			formToPortletMap.setCompanyId(serviceContext.getCompanyId());
-			formToPortletMap.setUserId(user.getUserId());
-			formToPortletMap.setUserName(user.getEmailAddress());
-			formToPortletMap.setFormId(formId);
-			formToPortletMap.setPortletId(namespace);
-			
-			formToPorletMapPersistence.update(formToPortletMap);
-		} catch (Exception e) {
-			log.error("Exception while adding form to portlet map: ", e);
-		}
-    	
-    	return formToPortletMap;
+
+    public FormToPorletMap save(Long formToPortletId, String namespace, Long formId, ServiceContext serviceContext) {
+        User user = null;
+        FormToPorletMap formToPortletMap = null;
+        Date now = new Date();
+
+        try {
+            user = userLocalService.getUserById(serviceContext.getUserId());
+            if (formToPortletId == null) {
+                formToPortletId = counterLocalService.increment(FormToPorletMap.class.getName());
+            }
+            formToPortletMap = formToPorletMapPersistence.create(formToPortletId);
+            formToPortletMap.setActive(true);
+            formToPortletMap.setCreationDate(serviceContext.getCreateDate(now));
+            formToPortletMap.setModificationDate(serviceContext.getCreateDate(now));
+            formToPortletMap.setModificationUser(user.getFullName());
+            formToPortletMap.setGroupId(serviceContext.getScopeGroupId());
+            formToPortletMap.setCompanyId(serviceContext.getCompanyId());
+            formToPortletMap.setUserId(user.getUserId());
+            formToPortletMap.setUserName(user.getEmailAddress());
+            formToPortletMap.setFormId(formId);
+            formToPortletMap.setPortletId(namespace);
+
+            formToPorletMapPersistence.update(formToPortletMap);
+        } catch (Exception e) {
+            log.error("Exception while adding form to portlet map: ", e);
+        }
+
+        return formToPortletMap;
     }
 
 }

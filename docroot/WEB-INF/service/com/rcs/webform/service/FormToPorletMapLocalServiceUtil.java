@@ -275,11 +275,9 @@ public class FormToPorletMapLocalServiceUtil {
 		return getService().invokeMethod(name, parameterTypes, arguments);
 	}
 
-	public static com.rcs.webform.model.FormToPorletMap getFormToPortletMapByGroupColumnPortletId(
-		long groupId, long companyId, java.lang.String portletId) {
-		return getService()
-				   .getFormToPortletMapByGroupColumnPortletId(groupId,
-			companyId, portletId);
+	public static com.rcs.webform.model.FormToPorletMap getFormToPortletMapByPortletId(
+		java.lang.String portletId) {
+		return getService().getFormToPortletMapByPortletId(portletId);
 	}
 
 	public static com.rcs.webform.model.FormToPorletMap save(

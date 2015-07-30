@@ -38,14 +38,10 @@ public class WebFormPortlet extends MVCPortlet {
     public void doView(RenderRequest renderRequest, RenderResponse renderResponse) throws IOException, PortletException {
         try {
             JsonResponse jsonResponse = new JsonResponse();
-            User user = PortalUtil.getUser(renderRequest);
             String portletId = PortalUtil.getPortletId(renderRequest);
             log.info("Portlet id : "+portletId);
-            log.info("User id : "+user.getUserId());
-            log.info("Company id : "+user.getCompanyId());
-            log.info("Group id : "+user.getGroupId());
                        
-            FormToPorletMap formToPorletMap = FormToPorletMapLocalServiceUtil.getFormToPortletMapByGroupColumnPortletId(user.getGroupId(), user.getCompanyId(), portletId);
+            FormToPorletMap formToPorletMap = FormToPorletMapLocalServiceUtil.getFormToPortletMapByPortletId(portletId);
             Form form = FormLocalServiceUtil.getForm(formToPorletMap.getFormId());
             List<FormItem> formItems = FormItemLocalServiceUtil.getFormItemByFormId(form.getFormId());
             

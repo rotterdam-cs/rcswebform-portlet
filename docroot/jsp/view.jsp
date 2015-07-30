@@ -18,7 +18,7 @@
 			
 			<span id="<portlet:namespace />rcsWebFormItemLabel" >Form Item 1 label</span>
 			<span id="<portlet:namespace />rcsWebFormItemInputWrapper" >
-				<aui:input name="" type="text" id="rcsWebFormItemInput" />
+				<aui:input name="" id="rcsWebFormItemInput" />
 			</span>
 			</div>
 
@@ -27,7 +27,7 @@
 	</aui:fieldset>
 </aui:form>
 
-<aui:script use="aui-base,node">
+<aui:script use="aui-base,node,aui-form-validator">
 	var Data = <%= renderRequest.getAttribute("Data")%>;
 	if(Data) {
 		console.log('t0');

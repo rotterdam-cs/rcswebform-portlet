@@ -290,10 +290,9 @@ public class FormToPorletMapLocalServiceWrapper
 	}
 
 	@Override
-	public com.rcs.webform.model.FormToPorletMap getFormToPortletMapByGroupColumnPortletId(
-		long groupId, long companyId, java.lang.String portletId) {
-		return _formToPorletMapLocalService.getFormToPortletMapByGroupColumnPortletId(groupId,
-			companyId, portletId);
+	public com.rcs.webform.model.FormToPorletMap getFormToPortletMapByPortletId(
+		java.lang.String portletId) {
+		return _formToPorletMapLocalService.getFormToPortletMapByPortletId(portletId);
 	}
 
 	@Override

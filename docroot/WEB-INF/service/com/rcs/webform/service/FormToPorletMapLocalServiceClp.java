@@ -116,11 +116,9 @@ public class FormToPorletMapLocalServiceClp
 
 		_methodParameterTypes17 = new String[] { "java.lang.String" };
 
-		_methodName19 = "getFormToPortletMapByGroupColumnPortletId";
+		_methodName19 = "getFormToPortletMapByPortletId";
 
-		_methodParameterTypes19 = new String[] {
-				"long", "long", "java.lang.String"
-			};
+		_methodParameterTypes19 = new String[] { "java.lang.String" };
 
 		_methodName20 = "save";
 
@@ -681,20 +679,14 @@ public class FormToPorletMapLocalServiceClp
 	}
 
 	@Override
-	public com.rcs.webform.model.FormToPorletMap getFormToPortletMapByGroupColumnPortletId(
-		long groupId, long companyId, java.lang.String portletId) {
+	public com.rcs.webform.model.FormToPorletMap getFormToPortletMapByPortletId(
+		java.lang.String portletId) {
 		Object returnObj = null;
 
 		try {
 			returnObj = _invokableLocalService.invokeMethod(_methodName19,
 					_methodParameterTypes19,
-					new Object[] {
-						groupId,
-						
-					companyId,
-						
-					ClpSerializer.translateInput(portletId)
-					});
+					new Object[] { ClpSerializer.translateInput(portletId) });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
