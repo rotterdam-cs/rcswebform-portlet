@@ -125,21 +125,22 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 					if (Validator.isNull(fieldLabelMap.get(defaultLocale))) {
 						continue;
 					}
-	
+					
+					Long formItemId = ParamUtil.getLong(actionRequest, "formItemId" + formFieldsIndex);
 					String fieldType = ParamUtil.getString(actionRequest, "fieldType" + formFieldsIndex).split(":")[0];
 					String validationType = ParamUtil.getString(actionRequest, "fieldType" + formFieldsIndex).split(":")[1];
 					boolean fieldOptional = ParamUtil.getBoolean(actionRequest, "fieldOptional" + formFieldsIndex);
 					Map<Locale, String> fieldOptionsMap = LocalizationUtil.getLocalizationMap(actionRequest, "fieldOptions" + formFieldsIndex);
 					String fieldValidationScript = ParamUtil.getString(actionRequest, "fieldValidationScript" + formFieldsIndex);
 					String fieldValidationErrorMessage = ParamUtil.getString(actionRequest, "fieldValidationErrorMessage" + formFieldsIndex);
-	
+					
 					if (Validator.isNotNull(fieldValidationScript) ^ Validator.isNotNull(fieldValidationErrorMessage)) {
 	
 						SessionErrors.add(actionRequest, "validationDefinitionInvalid" + i);
 					}
 	
 					ServiceContext serviceContext = ServiceContextFactory.getInstance(FormItem.class.getName(), actionRequest);
-					FormItemLocalServiceUtil.save(null, formId, fieldLabelMap, fieldType, fieldOptionsMap, fieldOptional,
+					FormItemLocalServiceUtil.save(formItemId, formId, fieldLabelMap, fieldType, fieldOptionsMap, fieldOptional,
 							fieldValidationScript, validationType, fieldValidationErrorMessage, serviceContext);
 	
 					i++;

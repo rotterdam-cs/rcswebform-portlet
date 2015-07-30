@@ -1,7 +1,11 @@
 package com.rcs.webform.common.util;
 
+import java.util.List;
+
 import com.rcs.webform.model.Form;
+import com.rcs.webform.model.FormItem;
 import com.rcs.webform.model.FormToPorletMap;
+import com.rcs.webform.service.FormItemLocalServiceUtil;
 import com.rcs.webform.service.FormLocalServiceUtil;
 import com.rcs.webform.service.FormToPorletMapLocalServiceUtil;
 
@@ -10,6 +14,7 @@ import com.rcs.webform.service.FormToPorletMapLocalServiceUtil;
  * Web form utilities class
  * 
  * @author tito
+ * @author mfauzan_abdi
  *
  */
 public class WebFormUtil {
@@ -30,5 +35,21 @@ public class WebFormUtil {
 		}
 		return null;
 	}
+	
+	/**
+	 * get FormItems Form
+	 * 
+	 * @param portletId
+	 * @return
+	 */
+	public static List<FormItem> getPortletFormItems(String portletId){
+		try {
+			FormToPorletMap formToPorletMap = getFormToPortletMap(portletId);
+			return FormItemLocalServiceUtil.getFormItemByFormId(formToPorletMap.getFormId());
+		} catch (Exception ignored) {
+		}
+		return null;
+	}
+
 	
 }

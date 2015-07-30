@@ -1,7 +1,10 @@
+<%@page import="com.rcs.webform.model.FormItem"%>
+<%@page import="java.util.List"%>
 <%@ include file="/jsp/init.jsp" %>
 
 <%
 //Get values from the database
+List<FormItem> formItems = WebFormUtil.getPortletFormItems(portletResource);
 FormToPorletMap formToPortletMap = WebFormUtil.getFormToPortletMap(portletResource);
 Form thisForm = WebFormUtil.getPortletForm(portletResource);
 Long formToPortletId = GetterUtil.getLong(formToPortletMap.getFormToPorletMapId(), 0);
@@ -123,8 +126,10 @@ boolean fieldsEditingDisabled = false;
 				}
 
 				int index = 1;
+				
+				request.setAttribute("formItems", formItems);
 
-				for (int formFieldsIndex : formFieldsIndexes) {
+				for (int formFieldsIndex = 0; formFieldsIndex < formItems.size(); formFieldsIndex++) {
 					request.setAttribute("configuration.jsp-index", String.valueOf(index));
 					request.setAttribute("configuration.jsp-formFieldsIndex", String.valueOf(formFieldsIndex));
 					request.setAttribute("configuration.jsp-fieldsEditingDisabled", String.valueOf(fieldsEditingDisabled));
@@ -158,11 +163,11 @@ boolean fieldsEditingDisabled = false;
 			var select = this;
 
 			var formRow = select.ancestor('.lfr-form-row');
-			var value = select.val();
+			var value = select.val().split(":")[0];
 
 			var optionsDiv = formRow.one('.options');
 
-			if ((value == 'options') || (value == 'radio')) {
+			if ((value == 'OPTIONS') || (value == 'RADIO_BUTTON')) {
 				optionsDiv.all('label').show();
 				optionsDiv.show();
 			}

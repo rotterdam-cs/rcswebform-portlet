@@ -72,11 +72,12 @@ public class FormItemLocalServiceImpl extends FormItemLocalServiceBaseImpl {
         Date now = new Date();
         try {
             user = userLocalService.getUserById(serviceContext.getUserId());
-            if (formItemId == null) {
+            if (formItemId == 0) {
                 formItemId = counterLocalService.increment(FormItem.class.getName());
+                formItem = formItemPersistence.create(formItemId);
+            } else {
+            	formItem = formItemPersistence.fetchByPrimaryKey(formItemId);
             }
-            formItem = formItemPersistence.create(formItemId);
-            formItem.setFormItemId(formItemId);
             formItem.setActive(true);
             formItem.setCreationDate(serviceContext.getCreateDate(now));
             formItem.setModificationDate(serviceContext.getModifiedDate(now));
