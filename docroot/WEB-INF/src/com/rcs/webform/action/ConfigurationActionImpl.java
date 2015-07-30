@@ -63,7 +63,7 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 		
 		String submitLabel = ParamUtil.getString(actionRequest, "submitBtnLabel");
 		String successMessage = ParamUtil.getInteger(actionRequest, "onSubmitData")==1 ? ParamUtil.getString(actionRequest, "submitSuccessMsg") : "";
-		String successUrl = ParamUtil.getInteger(actionRequest, "onSubmitData")==2 ? ParamUtil.getString(actionRequest, "submitSuccessMsg") : "";
+		String successUrl = ParamUtil.getInteger(actionRequest, "onSubmitData")==2 ? ParamUtil.getString(actionRequest, "submitSuccessURL") : "";
 		
 		log.info("Title: " + title);
 		log.info("Desc: " + description);
