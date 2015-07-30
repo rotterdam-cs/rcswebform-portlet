@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -272,26 +272,33 @@ public class FormItemLocalServiceUtil {
 	}
 
 	/**
-	* Add Form Item
+	* Save Form Item
 	*
+	* @param formItemId
+	* @param formId
 	* @param label
 	* @param type
 	* @param options
 	* @param mandatory
 	* @param validationRegexValue
+	* @param validationType
 	* @param errorValidationMessage
 	* @param serviceContext
 	* @return
 	*/
-	public static com.rcs.webform.model.FormItem add(
-		java.lang.Long formItemId, java.lang.String label,
-		java.lang.String type, java.lang.String options, boolean mandatory,
-		java.lang.String validationRegexValue,
+	public static com.rcs.webform.model.FormItem save(
+		java.lang.Long formItemId, java.lang.Long formId,
+		java.util.Map<java.util.Locale, java.lang.String> label,
+		java.lang.String type,
+		java.util.Map<java.util.Locale, java.lang.String> options,
+		boolean mandatory, java.lang.String validationRegexValue,
+		java.lang.String validationType,
 		java.lang.String errorValidationMessage,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		return getService()
-				   .add(formItemId, label, type, options, mandatory,
-			validationRegexValue, errorValidationMessage, serviceContext);
+				   .save(formItemId, formId, label, type, options, mandatory,
+			validationRegexValue, validationType, errorValidationMessage,
+			serviceContext);
 	}
 
 	public static java.util.List<com.rcs.webform.model.FormItem> getFormItemByFormId(

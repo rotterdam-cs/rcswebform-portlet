@@ -17,6 +17,8 @@ package com.rcs.webform.service.impl;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -48,19 +50,22 @@ public class FormItemLocalServiceImpl extends FormItemLocalServiceBaseImpl {
     private static Log log = LogFactoryUtil.getLog(FormItemLocalServiceImpl.class);
 
     /**
-     * Add Form Item
+     * Save Form Item
      * 
+     * @param formItemId
+     * @param formId
      * @param label
      * @param type
      * @param options
      * @param mandatory
      * @param validationRegexValue
+     * @param validationType
      * @param errorValidationMessage
      * @param serviceContext
      * @return
      */
-    public FormItem add(Long formItemId, String label, String type, String options, boolean mandatory, String validationRegexValue,
-            String errorValidationMessage, ServiceContext serviceContext) {
+    public FormItem save(Long formItemId, Long formId, Map<Locale, String> label, String type, Map<Locale, String> options, boolean mandatory, String validationRegexValue,
+            String validationType, String errorValidationMessage, ServiceContext serviceContext) {
 
         User user = null;
         FormItem formItem = null;
@@ -71,25 +76,25 @@ public class FormItemLocalServiceImpl extends FormItemLocalServiceBaseImpl {
                 formItemId = counterLocalService.increment(FormItem.class.getName());
             }
             formItem = formItemPersistence.create(formItemId);
-            formItem.setFormId(0);
+            formItem.setFormItemId(formItemId);
             formItem.setActive(true);
             formItem.setCreationDate(serviceContext.getCreateDate(now));
             formItem.setModificationDate(serviceContext.getModifiedDate(now));
             formItem.setModificationUser(user.getFullName());
-            formItem.setFormId(0);
+            formItem.setFormId(formId);
             formItem.setFormItemAttrId("");
             formItem.setFormItemAttrClass("");
-            formItem.setLabel(label);
+            formItem.setLabelMap(label);
             formItem.setLabelAttrId("");
             formItem.setLabelAttrClass("");
             formItem.setInputAttrId("");
             formItem.setInputAttrClass("");
             formItem.setType(type);
-            formItem.setOptions(options);
+            formItem.setOptionsMap(options);
             formItem.setMandatory(mandatory);
             formItem.setDefaultValue("");
             formItem.setOrder(0);
-            formItem.setValidationType("");
+            formItem.setValidationType(validationType);
             formItem.setValidationRegexValue(validationRegexValue);
             formItem.setErrorMandatoryMessage("");
             formItem.setErrorValidationMessage(errorValidationMessage);
