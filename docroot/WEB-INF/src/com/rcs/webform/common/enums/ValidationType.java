@@ -24,5 +24,6 @@ public enum ValidationType {
 	
 	//list custom validation type
 	REGEX,
+	NONE,
 	;
 }

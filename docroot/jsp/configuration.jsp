@@ -7,16 +7,30 @@
 List<FormItem> formItems = WebFormUtil.getPortletFormItems(portletResource);
 FormToPorletMap formToPortletMap = WebFormUtil.getFormToPortletMap(portletResource);
 Form thisForm = WebFormUtil.getPortletForm(portletResource);
-Long formToPortletId = GetterUtil.getLong(formToPortletMap.getFormToPorletMapId(), 0);
-Long formId = GetterUtil.getLong(thisForm.getFormId(), 0);
-String titleXml = GetterUtil.getString(thisForm.getTitle(), StringPool.BLANK);
-String descriptionXml = GetterUtil.getString(thisForm.getDesc(), StringPool.BLANK);
-boolean requireCaptcha = GetterUtil.getBoolean(""+ thisForm.getUseCaptcha() +"",false);
-String submitSuccessMessage = GetterUtil.getString(thisForm.getSuccessMessage(), StringPool.BLANK);
-boolean submitSuccessMessageRadio = !submitSuccessMessage.equals(StringPool.BLANK);
-String successURL = GetterUtil.getString(thisForm.getSuccessURL(), StringPool.BLANK);
-boolean successURLRadio = !successURL.equals(StringPool.BLANK);
-String submitButtonLabel = GetterUtil.getString(thisForm.getSubmitLabel(), StringPool.BLANK);
+Long formToPortletId = 0L;
+Long formId = 0L;
+String titleXml = "";
+String descriptionXml = "";
+boolean requireCaptcha = false;
+String submitSuccessMessage = "";
+boolean submitSuccessMessageRadio = false;
+String successURL = "";
+boolean successURLRadio = false;
+String submitButtonLabel = "";
+
+try{
+	formToPortletId = GetterUtil.getLong(formToPortletMap.getFormToPorletMapId(), 0);
+	formId = GetterUtil.getLong(thisForm.getFormId(), 0);
+	titleXml = GetterUtil.getString(thisForm.getTitle(), StringPool.BLANK);
+	descriptionXml = GetterUtil.getString(thisForm.getDesc(), StringPool.BLANK);
+	requireCaptcha = GetterUtil.getBoolean(""+ thisForm.getUseCaptcha() +"",false);
+	submitSuccessMessage = GetterUtil.getString(thisForm.getSuccessMessage(), StringPool.BLANK);
+	submitSuccessMessageRadio = !submitSuccessMessage.equals(StringPool.BLANK);
+	successURL = GetterUtil.getString(thisForm.getSuccessURL(), StringPool.BLANK);
+	successURLRadio = !successURL.equals(StringPool.BLANK);
+	submitButtonLabel = GetterUtil.getString(thisForm.getSubmitLabel(), StringPool.BLANK);
+} catch(Exception ignored){
+}
 
 //Get values from portlet preferences
 boolean sendAsEmail = GetterUtil.getBoolean(portletPreferences.getValue("sendAsEmail", StringPool.BLANK));
