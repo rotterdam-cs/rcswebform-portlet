@@ -8,10 +8,13 @@ import javax.portlet.ActionResponse;
 import javax.portlet.PortletException;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
+import javax.portlet.ResourceRequest;
+import javax.portlet.ResourceResponse;
 import javax.portlet.filter.ActionFilter;
 
 import sun.util.logging.resources.logging;
 
+import com.liferay.portal.kernel.captcha.CaptchaUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.model.User;
@@ -60,5 +63,13 @@ public class WebFormPortlet extends MVCPortlet {
     
     public void submitForm(ActionRequest actionRequest, ActionResponse actionResponse) throws IOException, PortletException {
         
+    }
+    
+    public void serveResource(ResourceRequest resourceRequest,
+            ResourceResponse resourceResponse){
+    	try {
+			CaptchaUtil.serveImage(resourceRequest, resourceResponse);
+		} catch (Exception ignored) {
+		}
     }
 }
