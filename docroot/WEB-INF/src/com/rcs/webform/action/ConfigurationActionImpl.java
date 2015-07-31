@@ -140,7 +140,7 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 	
 					ServiceContext serviceContext = ServiceContextFactory.getInstance(FormItem.class.getName(), actionRequest);
 					FormItemLocalServiceUtil.save(formItemId, formId, fieldLabelMap, fieldType, fieldOptionsMap, fieldOptional,
-							fieldValidationScript, validationType, fieldValidationErrorMessage, serviceContext);
+							fieldValidationScript, validationType, fieldValidationErrorMessage, formFieldsIndex, serviceContext);
 	
 					i++;
 				}

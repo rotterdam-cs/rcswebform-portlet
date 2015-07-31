@@ -89,12 +89,12 @@ boolean ignoreRequestValue = (index != formFieldsIndex);
 	<c:choose>
 		<c:when test="<%= !fieldsEditingDisabled %>">
 			<aui:select ignoreRequestValue="<%= ignoreRequestValue %>" label="type" name='<%= "fieldType" + index %>' >
-				<aui:option selected='<%= fieldType.equals("TEXT_FIELD") %>' value="TEXT_FIELD:ALPHANUM"><liferay-ui:message key="text" /></aui:option>
-				<aui:option selected='<%= fieldType.equals("TEXT_BOX") %>' value="TEXT_BOX:ALPHANUM"><liferay-ui:message key="text-box" /></aui:option>
-				<aui:option selected='<%= fieldType.equals("PASSWORD") %>' value="PASSWORD:ALPHANUM"><liferay-ui:message key="password" /></aui:option>
-				<aui:option selected='<%= fieldType.equals("OPTIONS") %>' value="OPTIONS:ALPHANUM"><liferay-ui:message key="options" /></aui:option>
-				<aui:option selected='<%= fieldType.equals("RADIO_BUTTON") %>' value="RADIO_BUTTON:ALPHANUM"><liferay-ui:message key="radio-buttons" /></aui:option>
-				<aui:option selected='<%= fieldType.equals("CHECKBOX") %>' value="CHECKBOX:ALPHANUM"><liferay-ui:message key="check-box" /></aui:option>
+				<aui:option selected='<%= fieldType.equals("TEXT_FIELD") %>' value="TEXT_FIELD:NONE"><liferay-ui:message key="text" /></aui:option>
+				<aui:option selected='<%= fieldType.equals("TEXT_BOX") %>' value="TEXT_BOX:NONE"><liferay-ui:message key="text-box" /></aui:option>
+				<aui:option selected='<%= fieldType.equals("PASSWORD") %>' value="PASSWORD:NONE"><liferay-ui:message key="password" /></aui:option>
+				<aui:option selected='<%= fieldType.equals("OPTIONS") %>' value="OPTIONS:NONE"><liferay-ui:message key="options" /></aui:option>
+				<aui:option selected='<%= fieldType.equals("RADIO_BUTTON") %>' value="RADIO_BUTTON:NONE"><liferay-ui:message key="radio-buttons" /></aui:option>
+				<aui:option selected='<%= fieldType.equals("CHECKBOX") %>' value="CHECKBOX:NONE"><liferay-ui:message key="check-box" /></aui:option>
 			</aui:select>
 		</c:when>
 		<c:otherwise>

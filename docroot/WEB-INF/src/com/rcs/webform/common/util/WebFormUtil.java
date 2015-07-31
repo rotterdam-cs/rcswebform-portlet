@@ -45,7 +45,7 @@ public class WebFormUtil {
 	public static List<FormItem> getPortletFormItems(String portletId){
 		try {
 			FormToPorletMap formToPorletMap = getFormToPortletMap(portletId);
-			return FormItemLocalServiceUtil.getFormItemByFormId(formToPorletMap.getFormId());
+			return FormItemLocalServiceUtil.getFormItemsByFormId(formToPorletMap.getFormId());
 		} catch (Exception ignored) {
 		}
 		return null;

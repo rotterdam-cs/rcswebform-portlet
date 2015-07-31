@@ -114,36 +114,17 @@ boolean fieldsEditingDisabled = false;
 				<aui:input name="updateFields" type="hidden" value="<%= !fieldsEditingDisabled %>" />
 
 				<%
-				String formFieldsIndexesParam = ParamUtil.getString(renderRequest, "formFieldsIndexes") ;
-
-				int[] formFieldsIndexes = null;
-
-				if (Validator.isNotNull(formFieldsIndexesParam)) {
-					formFieldsIndexes = StringUtil.split(formFieldsIndexesParam, 0);
-				}
-				else {
-					formFieldsIndexes = new int[0];
-
-					for (int i = 1; true; i++) {
-						String fieldLabel = PrefsParamUtil.getString(portletPreferences, request, "fieldLabel" + i);
-
-						if (Validator.isNull(fieldLabel)) {
-							break;
-						}
-
-						formFieldsIndexes = ArrayUtil.append(formFieldsIndexes, i);
-					}
-
-					if (formFieldsIndexes.length == 0) {
-						formFieldsIndexes = ArrayUtil.append(formFieldsIndexes, -1);
-					}
+				
+				int formItemsSize = 1;
+				if(formItems != null && !formItems.isEmpty()){
+					formItemsSize = formItems.size();
 				}
 
 				int index = 1;
 				
 				request.setAttribute("formItems", formItems);
 
-				for (int formFieldsIndex = 0; formFieldsIndex < formItems.size(); formFieldsIndex++) {
+				for (int formFieldsIndex = 0; formFieldsIndex < formItemsSize; formFieldsIndex++) {
 					request.setAttribute("configuration.jsp-index", String.valueOf(index));
 					request.setAttribute("configuration.jsp-formFieldsIndex", String.valueOf(formFieldsIndex));
 					request.setAttribute("configuration.jsp-fieldsEditingDisabled", String.valueOf(fieldsEditingDisabled));

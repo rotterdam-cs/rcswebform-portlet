@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -114,12 +114,16 @@ public class FormItemLocalServiceClp implements FormItemLocalService {
 				"java.lang.Long", "java.lang.Long", "java.util.Map",
 				"java.lang.String", "java.util.Map", "boolean",
 				"java.lang.String", "java.lang.String", "java.lang.String",
-				"com.liferay.portal.service.ServiceContext"
+				"int", "com.liferay.portal.service.ServiceContext"
 			};
 
 		_methodName20 = "getFormItemByFormId";
 
 		_methodParameterTypes20 = new String[] { "long" };
+
+		_methodName21 = "getFormItemsByFormId";
+
+		_methodParameterTypes21 = new String[] { "java.lang.Long" };
 	}
 
 	@Override
@@ -676,7 +680,7 @@ public class FormItemLocalServiceClp implements FormItemLocalService {
 		java.util.Map<java.util.Locale, java.lang.String> options,
 		boolean mandatory, java.lang.String validationRegexValue,
 		java.lang.String validationType,
-		java.lang.String errorValidationMessage,
+		java.lang.String errorValidationMessage, int order,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		Object returnObj = null;
 
@@ -701,6 +705,8 @@ public class FormItemLocalServiceClp implements FormItemLocalService {
 					ClpSerializer.translateInput(validationType),
 						
 					ClpSerializer.translateInput(errorValidationMessage),
+						
+					order,
 						
 					ClpSerializer.translateInput(serviceContext)
 					});
@@ -728,6 +734,31 @@ public class FormItemLocalServiceClp implements FormItemLocalService {
 		try {
 			returnObj = _invokableLocalService.invokeMethod(_methodName20,
 					_methodParameterTypes20, new Object[] { formId });
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (java.util.List<com.rcs.webform.model.FormItem>)ClpSerializer.translateOutput(returnObj);
+	}
+
+	@Override
+	public java.util.List<com.rcs.webform.model.FormItem> getFormItemsByFormId(
+		java.lang.Long formId) {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableLocalService.invokeMethod(_methodName21,
+					_methodParameterTypes21,
+					new Object[] { ClpSerializer.translateInput(formId) });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -785,4 +816,6 @@ public class FormItemLocalServiceClp implements FormItemLocalService {
 	private String[] _methodParameterTypes19;
 	private String _methodName20;
 	private String[] _methodParameterTypes20;
+	private String _methodName21;
+	private String[] _methodParameterTypes21;
 }

@@ -44,7 +44,7 @@ public class WebFormPortlet extends MVCPortlet {
             FormToPorletMap formToPorletMap = FormToPorletMapLocalServiceUtil.getFormToPortletMapByPortletId(portletId);
             
             Form form = FormLocalServiceUtil.getForm(formToPorletMap.getFormId());
-            List<FormItem> formItems = FormItemLocalServiceUtil.getFormItemByFormId(form.getFormId());
+            List<FormItem> formItems = FormItemLocalServiceUtil.getFormItemsByFormId(form.getFormId());
             
             jsonResponse.setMessage(renderRequest.getLocale().getDisplayCountry());
             jsonResponse.setData(EntityDtoConverter.formEntityToDto(form, formItems, renderRequest.getLocale()));
