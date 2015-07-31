@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -122,6 +122,15 @@ public class FormLocalServiceClpInvoker {
 				"java.lang.Long", "com.liferay.portal.service.ServiceContext",
 				"java.util.Map", "java.util.Map", "boolean", "java.util.Map",
 				"java.lang.String", "java.util.Map"
+			};
+
+		_methodName52 = "save";
+
+		_methodParameterTypes52 = new String[] {
+				"java.lang.Long", "com.liferay.portal.service.ServiceContext",
+				"java.lang.String", "java.lang.String", "java.util.Map",
+				"java.util.Map", "boolean", "java.util.Map", "java.lang.String",
+				"java.util.Map", "java.lang.String", "java.lang.String"
 			};
 	}
 
@@ -248,6 +257,20 @@ public class FormLocalServiceClpInvoker {
 				(java.util.Map<java.util.Locale, java.lang.String>)arguments[7]);
 		}
 
+		if (_methodName52.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes52, parameterTypes)) {
+			return FormLocalServiceUtil.save((java.lang.Long)arguments[0],
+				(com.liferay.portal.service.ServiceContext)arguments[1],
+				(java.lang.String)arguments[2], (java.lang.String)arguments[3],
+				(java.util.Map<java.util.Locale, java.lang.String>)arguments[4],
+				(java.util.Map<java.util.Locale, java.lang.String>)arguments[5],
+				((Boolean)arguments[6]).booleanValue(),
+				(java.util.Map<java.util.Locale, java.lang.String>)arguments[7],
+				(java.lang.String)arguments[8],
+				(java.util.Map<java.util.Locale, java.lang.String>)arguments[9],
+				(java.lang.String)arguments[10], (java.lang.String)arguments[11]);
+		}
+
 		throw new UnsupportedOperationException();
 	}
 
@@ -291,4 +314,6 @@ public class FormLocalServiceClpInvoker {
 	private String[] _methodParameterTypes50;
 	private String _methodName51;
 	private String[] _methodParameterTypes51;
+	private String _methodName52;
+	private String[] _methodParameterTypes52;
 }

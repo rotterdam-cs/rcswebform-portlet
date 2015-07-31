@@ -45,45 +45,17 @@ public class FormLocalServiceImpl extends FormLocalServiceBaseImpl {
 	
 	public Form add(Long formId, ServiceContext serviceContext, String title, String description, boolean useCaptcha,
 			String successMessage, String successUrl, String submitLabel){
-		User user = null;
-		Form form = null;
-		Date now = new Date();
-		
-		try {
-			user = userLocalService.getUserById(serviceContext.getUserId());
-			if(formId == null){
-				formId = counterLocalService.increment(Form.class.getName());
-			}
-			form = formPersistence.create(formId);
-			form.setActive(true);
-			form.setCreationDate(serviceContext.getCreateDate(now));
-			form.setModificationDate(serviceContext.getCreateDate(now));
-			form.setModificationUser(user.getFullName());
-			form.setGroupId(serviceContext.getScopeGroupId());
-			form.setCompanyId(serviceContext.getCompanyId());
-			form.setUserId(user.getUserId());
-			form.setUserName(user.getEmailAddress());
-			form.setFormAttrId("");
-			form.setFormAttrClass("");
-			form.setTitle(title);
-			form.setDesc(description);
-			form.setUseCaptcha(useCaptcha);
-			form.setSuccessMessage(successMessage);
-			form.setSuccessURL(successUrl);
-			form.setSubmitLabel(submitLabel);
-			form.setSubmitAttrClass("");
-			form.setSubmitAttrId("");
-			
-			formPersistence.update(form);
-		} catch (Exception e) {
-			log.error("Exception while adding form: " + e.getMessage(), e);
-		}
-		
-		return form;
+		return null;
 	}
 	
 	public Form save(Long formId, ServiceContext serviceContext, Map<Locale, String> titleMap, Map<Locale, String> descriptionMap, 
 			boolean useCaptcha, Map<Locale, String> successMessageMap, String successUrl, Map<Locale, String> submitLabelMap){
+		return null;
+	}
+	
+	public Form save(Long formId, ServiceContext serviceContext, String formAttrId, String formAttrClass, Map<Locale, String> titleMap, 
+			Map<Locale, String> descriptionMap, boolean useCaptcha, Map<Locale, String> successMessageMap, String successUrl, 
+			Map<Locale, String> submitLabelMap, String submitAttrId, String submitAttrclass){
 		User user = null;
 		Form form = null;
 		Date now = new Date();
@@ -105,8 +77,8 @@ public class FormLocalServiceImpl extends FormLocalServiceBaseImpl {
 			form.setCompanyId(serviceContext.getCompanyId());
 			form.setUserId(user.getUserId());
 			form.setUserName(user.getEmailAddress());
-			form.setFormAttrId("");
-			form.setFormAttrClass("");
+			form.setFormAttrId(formAttrId);
+			form.setFormAttrClass(formAttrClass);
 			form.setTitleMap(titleMap);
 			form.setDescMap(descriptionMap);
 			form.setUseCaptcha(useCaptcha);
@@ -117,8 +89,8 @@ public class FormLocalServiceImpl extends FormLocalServiceBaseImpl {
 			}
 			form.setSuccessURL(successUrl);
 			form.setSubmitLabelMap(submitLabelMap);
-			form.setSubmitAttrClass("");
-			form.setSubmitAttrId("");
+			form.setSubmitAttrClass(submitAttrclass);
+			form.setSubmitAttrId(submitAttrId);
 			
 			formPersistence.update(form);
 		} catch (Exception e) {

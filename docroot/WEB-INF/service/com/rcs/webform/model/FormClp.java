@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -1206,9 +1206,7 @@ public class FormClp extends BaseModelImpl<Form> implements Form {
 			return StringPool.BLANK;
 		}
 
-		Locale defaultLocale = LocaleUtil.getDefault();
-
-		return LocalizationUtil.getDefaultLanguageId(xml, defaultLocale);
+		return LocalizationUtil.getDefaultLanguageId(xml);
 	}
 
 	@Override
@@ -1338,10 +1336,6 @@ public class FormClp extends BaseModelImpl<Form> implements Form {
 		else {
 			return false;
 		}
-	}
-
-	public Class<?> getClpSerializerClass() {
-		return _clpSerializerClass;
 	}
 
 	@Override
@@ -1511,5 +1505,4 @@ public class FormClp extends BaseModelImpl<Form> implements Form {
 	private String _submitAttrId;
 	private String _submitAttrClass;
 	private BaseModel<?> _formRemoteModel;
-	private Class<?> _clpSerializerClass = com.rcs.webform.service.ClpSerializer.class;
 }

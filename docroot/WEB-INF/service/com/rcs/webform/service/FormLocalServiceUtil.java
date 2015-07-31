@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -292,6 +292,22 @@ public class FormLocalServiceUtil {
 		return getService()
 				   .save(formId, serviceContext, titleMap, descriptionMap,
 			useCaptcha, successMessageMap, successUrl, submitLabelMap);
+	}
+
+	public static com.rcs.webform.model.Form save(java.lang.Long formId,
+		com.liferay.portal.service.ServiceContext serviceContext,
+		java.lang.String formAttrId, java.lang.String formAttrClass,
+		java.util.Map<java.util.Locale, java.lang.String> titleMap,
+		java.util.Map<java.util.Locale, java.lang.String> descriptionMap,
+		boolean useCaptcha,
+		java.util.Map<java.util.Locale, java.lang.String> successMessageMap,
+		java.lang.String successUrl,
+		java.util.Map<java.util.Locale, java.lang.String> submitLabelMap,
+		java.lang.String submitAttrId, java.lang.String submitAttrclass) {
+		return getService()
+				   .save(formId, serviceContext, formAttrId, formAttrClass,
+			titleMap, descriptionMap, useCaptcha, successMessageMap,
+			successUrl, submitLabelMap, submitAttrId, submitAttrclass);
 	}
 
 	public static void clearService() {

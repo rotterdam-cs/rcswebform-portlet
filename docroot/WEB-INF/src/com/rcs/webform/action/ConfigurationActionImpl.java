@@ -58,20 +58,19 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 		if(ParamUtil.getLong(actionRequest, "formId")!=0){
 			formId = ParamUtil.getLong(actionRequest, "formId");
 		}
-		String title = ParamUtil.getString(actionRequest, "title");
-		String description = ParamUtil.getString(actionRequest, "description");
 		boolean useCaptcha = ParamUtil.getBoolean(actionRequest, "requireCaptcha");
-		
-		String submitLabel = ParamUtil.getString(actionRequest, "submitBtnLabel");
-		String successMessage = ParamUtil.getInteger(actionRequest, "onSubmitData")==1 ? ParamUtil.getString(actionRequest, "submitSuccessMsg") : "";
 		String successUrl = ParamUtil.getInteger(actionRequest, "onSubmitData")==2 ? ParamUtil.getString(actionRequest, "submitSuccessURL") : "";
+		String formAttrId = "";
+		String formAttrClass = "";
+		String submitAttrId = "";
+		String submitAttrClass = "";
 		
 		Map<Locale, String> titleMap = LocalizationUtil.getLocalizationMap(actionRequest, "title");
 		Map<Locale, String> descMap = LocalizationUtil.getLocalizationMap(actionRequest, "description");
 		Map<Locale, String> successMsgMap = ParamUtil.getInteger(actionRequest, "onSubmitData")==1 ? LocalizationUtil.getLocalizationMap(actionRequest, "submitSuccessMsg") : null;
 		Map<Locale, String> submitLabelMap = LocalizationUtil.getLocalizationMap(actionRequest, "submitBtnLabel");
 		
-		Form savedForm = FormLocalServiceUtil.save(formId, formServiceContext, titleMap, descMap, useCaptcha, successMsgMap, successUrl, submitLabelMap);
+		Form savedForm = FormLocalServiceUtil.save(formId, formServiceContext, formAttrId, formAttrClass, titleMap, descMap, useCaptcha, successMsgMap, successUrl, submitLabelMap, submitAttrId, submitAttrClass);
 		
 		//Save form-portlet mapping to database
 		ServiceContext formPortletMappingServiceContext = ServiceContextFactory.getInstance(FormToPorletMap.class.getName(), actionRequest);

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -540,10 +540,6 @@ public class SubmittedDataClp extends BaseModelImpl<SubmittedData>
 		}
 	}
 
-	public Class<?> getClpSerializerClass() {
-		return _clpSerializerClass;
-	}
-
 	@Override
 	public int hashCode() {
 		return (int)getPrimaryKey();
@@ -650,5 +646,4 @@ public class SubmittedDataClp extends BaseModelImpl<SubmittedData>
 	private long _formItemId;
 	private String _userInput;
 	private BaseModel<?> _submittedDataRemoteModel;
-	private Class<?> _clpSerializerClass = com.rcs.webform.service.ClpSerializer.class;
 }
