@@ -94,6 +94,7 @@ boolean ignoreRequestValue = (index != formFieldsIndex);
 				<aui:option selected='<%= fieldType.equals("PASSWORD") %>' value="PASSWORD:NONE"><liferay-ui:message key="password" /></aui:option>
 				<aui:option selected='<%= fieldType.equals("OPTIONS") %>' value="OPTIONS:NONE"><liferay-ui:message key="options" /></aui:option>
 				<aui:option selected='<%= fieldType.equals("RADIO_BUTTON") %>' value="RADIO_BUTTON:NONE"><liferay-ui:message key="radio-buttons" /></aui:option>
+				<aui:option selected='<%= fieldType.equals("CHECKBOX") %>' value="CHECKBOX:NONE"><liferay-ui:message key="check-box" /></aui:option>
 				<aui:option selected='<%= fieldType.equals("DATE") %>' value="DATE:NONE"><liferay-ui:message key="date" /></aui:option>
 				<aui:option selected='<%= fieldType.equals("SECTION") %>' value="SECTION:NONE"><liferay-ui:message key="Section" /></aui:option>
 			</aui:select>
