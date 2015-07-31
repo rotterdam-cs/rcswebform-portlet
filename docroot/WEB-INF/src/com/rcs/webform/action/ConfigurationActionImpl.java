@@ -60,10 +60,10 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 		}
 		boolean useCaptcha = ParamUtil.getBoolean(actionRequest, "requireCaptcha");
 		String successUrl = ParamUtil.getInteger(actionRequest, "onSubmitData")==2 ? ParamUtil.getString(actionRequest, "submitSuccessURL") : "";
-		String formAttrId = "";
-		String formAttrClass = "";
-		String submitAttrId = "";
-		String submitAttrClass = "";
+		String formAttrId = ParamUtil.getString(actionRequest, "formCssId");
+		String formAttrClass = ParamUtil.getString(actionRequest, "formCssClass");
+		String submitAttrId = ParamUtil.getString(actionRequest, "submitCssId");
+		String submitAttrClass = ParamUtil.getString(actionRequest, "submitCssClass");
 		
 		Map<Locale, String> titleMap = LocalizationUtil.getLocalizationMap(actionRequest, "title");
 		Map<Locale, String> descMap = LocalizationUtil.getLocalizationMap(actionRequest, "description");

@@ -17,6 +17,10 @@ boolean submitSuccessMessageRadio = true;
 String successURL = "";
 boolean successURLRadio = false;
 String submitButtonLabel = "";
+String formCssId = "";
+String formCssClass = "";
+String submitBtnCssId = "";
+String submitBtnCssClass = "";
 
 try{
 	formToPortletId = GetterUtil.getLong(formToPortletMap.getFormToPorletMapId(), 0);
@@ -29,6 +33,10 @@ try{
 	successURL = GetterUtil.getString(thisForm.getSuccessURL(), StringPool.BLANK);
 	successURLRadio = !successURL.equals(StringPool.BLANK);
 	submitButtonLabel = GetterUtil.getString(thisForm.getSubmitLabel(), StringPool.BLANK);
+	formCssId = GetterUtil.getString(thisForm.getFormAttrId(), StringPool.BLANK);
+	formCssClass = GetterUtil.getString(thisForm.getFormAttrClass(), StringPool.BLANK);
+	submitBtnCssId = GetterUtil.getString(thisForm.getSubmitAttrId(), StringPool.BLANK);
+	submitBtnCssClass = GetterUtil.getString(thisForm.getSubmitAttrClass(), StringPool.BLANK);
 } catch(Exception ignored){
 }
 
@@ -80,6 +88,14 @@ boolean fieldsEditingDisabled = false;
 				<aui:field-wrapper label="Submit Button Label">
 					<liferay-ui:input-localized name="submitBtnLabel" xml="<%= submitButtonLabel %>"></liferay-ui:input-localized>
 				</aui:field-wrapper>
+				
+				<aui:field-wrapper label="Form CSS Styling">
+					<aui:input name="formCssId" type="text" label="Form Id" value="<%= formCssId %>"></aui:input>
+					<aui:input name="formCssClass" type="text" label="Form Class" value="<%= formCssClass %>"></aui:input>
+					<aui:input name="submitCssId" type="text" label="Submit Button Id" value="<%= submitBtnCssId %>"></aui:input>
+					<aui:input name="submitCssClass" type="text" label="Submit Button Class" value="<%= submitBtnCssClass %>"></aui:input>
+				</aui:field-wrapper>
+				
 			</aui:fieldset>
 		</liferay-ui:panel>
 		
