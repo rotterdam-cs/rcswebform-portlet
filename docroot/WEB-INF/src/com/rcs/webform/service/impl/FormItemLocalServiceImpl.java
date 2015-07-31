@@ -20,6 +20,10 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.OrderFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.PropertyFactoryUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.model.User;
@@ -65,18 +69,19 @@ public class FormItemLocalServiceImpl extends FormItemLocalServiceBaseImpl {
      * @return
      */
     public FormItem save(Long formItemId, Long formId, Map<Locale, String> label, String type, Map<Locale, String> options, boolean mandatory, String validationRegexValue,
-            String validationType, String errorValidationMessage, ServiceContext serviceContext) {
+            String validationType, String errorValidationMessage, int order, ServiceContext serviceContext) {
 
         User user = null;
         FormItem formItem = null;
         Date now = new Date();
         try {
             user = userLocalService.getUserById(serviceContext.getUserId());
-            if (formItemId == null) {
+            if (formItemId == 0) {
                 formItemId = counterLocalService.increment(FormItem.class.getName());
+                formItem = formItemPersistence.create(formItemId);
+            } else {
+            	formItem = formItemPersistence.fetchByPrimaryKey(formItemId);
             }
-            formItem = formItemPersistence.create(formItemId);
-            formItem.setFormItemId(formItemId);
             formItem.setActive(true);
             formItem.setCreationDate(serviceContext.getCreateDate(now));
             formItem.setModificationDate(serviceContext.getModifiedDate(now));
@@ -93,7 +98,7 @@ public class FormItemLocalServiceImpl extends FormItemLocalServiceBaseImpl {
             formItem.setOptionsMap(options);
             formItem.setMandatory(mandatory);
             formItem.setDefaultValue("");
-            formItem.setOrder(0);
+            formItem.setOrder(order);
             formItem.setValidationType(validationType);
             formItem.setValidationRegexValue(validationRegexValue);
             formItem.setErrorMandatoryMessage("");
@@ -112,6 +117,27 @@ public class FormItemLocalServiceImpl extends FormItemLocalServiceBaseImpl {
             return FormItemUtil.findByFormIdAndActive(formId);
         } catch (Exception e) {
             log.error("Exception while getting form item by id [" + formId + "] : " + e.getMessage(), e);
+            return new ArrayList<FormItem>();
+        }
+    }
+    
+    /**
+     * get Form Items
+     * 
+     * @param formId
+     * @return
+     */
+    public List<FormItem> getFormItemsByFormId(Long formId) {
+        try {
+        	DynamicQuery query = DynamicQueryFactoryUtil.forClass(FormItem.class)
+        			.add(PropertyFactoryUtil.forName("formId").eq(formId))
+        			.add(PropertyFactoryUtil.forName("active").eq(true))
+        			.addOrder(OrderFactoryUtil.asc("order"));
+        	
+        	List<FormItem> results = (List<FormItem>) formItemPersistence.findWithDynamicQuery(query);
+            return results;
+        } catch (Exception e) {
+            log.error("Exception while getting form items by id [" + formId + "] : " + e.getMessage(), e);
             return new ArrayList<FormItem>();
         }
     }

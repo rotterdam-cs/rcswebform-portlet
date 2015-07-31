@@ -114,12 +114,16 @@ public class FormItemLocalServiceClpInvoker {
 				"java.lang.Long", "java.lang.Long", "java.util.Map",
 				"java.lang.String", "java.util.Map", "boolean",
 				"java.lang.String", "java.lang.String", "java.lang.String",
-				"com.liferay.portal.service.ServiceContext"
+				"int", "com.liferay.portal.service.ServiceContext"
 			};
 
 		_methodName51 = "getFormItemByFormId";
 
 		_methodParameterTypes51 = new String[] { "long" };
+
+		_methodName52 = "getFormItemsByFormId";
+
+		_methodParameterTypes52 = new String[] { "java.lang.Long" };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -233,12 +237,18 @@ public class FormItemLocalServiceClpInvoker {
 				((Boolean)arguments[5]).booleanValue(),
 				(java.lang.String)arguments[6], (java.lang.String)arguments[7],
 				(java.lang.String)arguments[8],
-				(com.liferay.portal.service.ServiceContext)arguments[9]);
+				((Integer)arguments[9]).intValue(),
+				(com.liferay.portal.service.ServiceContext)arguments[10]);
 		}
 
 		if (_methodName51.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes51, parameterTypes)) {
 			return FormItemLocalServiceUtil.getFormItemByFormId(((Long)arguments[0]).longValue());
+		}
+
+		if (_methodName52.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes52, parameterTypes)) {
+			return FormItemLocalServiceUtil.getFormItemsByFormId((java.lang.Long)arguments[0]);
 		}
 
 		throw new UnsupportedOperationException();
@@ -284,4 +294,6 @@ public class FormItemLocalServiceClpInvoker {
 	private String[] _methodParameterTypes50;
 	private String _methodName51;
 	private String[] _methodParameterTypes51;
+	private String _methodName52;
+	private String[] _methodParameterTypes52;
 }

@@ -263,6 +263,17 @@ public interface FormLocalService extends BaseLocalService, InvokableLocalServic
 		java.lang.String successUrl,
 		java.util.Map<java.util.Locale, java.lang.String> submitLabelMap);
 
+	public com.rcs.webform.model.Form save(java.lang.Long formId,
+		com.liferay.portal.service.ServiceContext serviceContext,
+		java.lang.String formAttrId, java.lang.String formAttrClass,
+		java.util.Map<java.util.Locale, java.lang.String> titleMap,
+		java.util.Map<java.util.Locale, java.lang.String> descriptionMap,
+		boolean useCaptcha,
+		java.util.Map<java.util.Locale, java.lang.String> successMessageMap,
+		java.lang.String successUrl,
+		java.util.Map<java.util.Locale, java.lang.String> submitLabelMap,
+		java.lang.String submitAttrId, java.lang.String submitAttrclass);
+
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.rcs.webform.model.Form getFormByFormId(long formId);
 }

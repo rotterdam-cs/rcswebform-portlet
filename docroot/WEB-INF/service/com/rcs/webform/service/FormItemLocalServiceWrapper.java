@@ -305,17 +305,29 @@ public class FormItemLocalServiceWrapper implements FormItemLocalService,
 		java.util.Map<java.util.Locale, java.lang.String> options,
 		boolean mandatory, java.lang.String validationRegexValue,
 		java.lang.String validationType,
-		java.lang.String errorValidationMessage,
+		java.lang.String errorValidationMessage, int order,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		return _formItemLocalService.save(formItemId, formId, label, type,
 			options, mandatory, validationRegexValue, validationType,
-			errorValidationMessage, serviceContext);
+			errorValidationMessage, order, serviceContext);
 	}
 
 	@Override
 	public java.util.List<com.rcs.webform.model.FormItem> getFormItemByFormId(
 		long formId) {
 		return _formItemLocalService.getFormItemByFormId(formId);
+	}
+
+	/**
+	* get Form Items
+	*
+	* @param formId
+	* @return
+	*/
+	@Override
+	public java.util.List<com.rcs.webform.model.FormItem> getFormItemsByFormId(
+		java.lang.Long formId) {
+		return _formItemLocalService.getFormItemsByFormId(formId);
 	}
 
 	/**

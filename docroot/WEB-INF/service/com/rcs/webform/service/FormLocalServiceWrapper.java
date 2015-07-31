@@ -303,6 +303,23 @@ public class FormLocalServiceWrapper implements FormLocalService,
 	}
 
 	@Override
+	public com.rcs.webform.model.Form save(java.lang.Long formId,
+		com.liferay.portal.service.ServiceContext serviceContext,
+		java.lang.String formAttrId, java.lang.String formAttrClass,
+		java.util.Map<java.util.Locale, java.lang.String> titleMap,
+		java.util.Map<java.util.Locale, java.lang.String> descriptionMap,
+		boolean useCaptcha,
+		java.util.Map<java.util.Locale, java.lang.String> successMessageMap,
+		java.lang.String successUrl,
+		java.util.Map<java.util.Locale, java.lang.String> submitLabelMap,
+		java.lang.String submitAttrId, java.lang.String submitAttrclass) {
+		return _formLocalService.save(formId, serviceContext, formAttrId,
+			formAttrClass, titleMap, descriptionMap, useCaptcha,
+			successMessageMap, successUrl, submitLabelMap, submitAttrId,
+			submitAttrclass);
+	}
+
+	@Override
 	public com.rcs.webform.model.Form getFormByFormId(long formId) {
 		return _formLocalService.getFormByFormId(formId);
 	}

@@ -14,20 +14,37 @@
  */
 --%>
 
+<%@page import="java.util.List"%>
+<%@page import="com.rcs.webform.model.FormItem"%>
+<%@page import="com.rcs.webform.model.FormItemSoap"%>
 <%@ include file="/jsp/init.jsp" %>
 
 <%
 int index = ParamUtil.getInteger(renderRequest, "index", GetterUtil.getInteger((String)request.getAttribute("configuration.jsp-index")));
 int formFieldsIndex = GetterUtil.getInteger((String)request.getAttribute("configuration.jsp-formFieldsIndex"));
 boolean fieldsEditingDisabled = GetterUtil.getBoolean((String)request.getAttribute("configuration.jsp-fieldsEditingDisabled"));
-String fieldLabelXml = LocalizationUtil.getLocalizationXmlFromPreferences(portletPreferences, renderRequest, "fieldLabel" + formFieldsIndex);
-String fieldLabel = LocalizationUtil.getLocalization(fieldLabelXml, themeDisplay.getLanguageId());
-String fieldType = PrefsParamUtil.getString(portletPreferences, renderRequest, "fieldType" + formFieldsIndex);
-boolean fieldOptional = PrefsParamUtil.getBoolean(portletPreferences, renderRequest, "fieldOptional" + formFieldsIndex);
-String fieldOptionsXml = LocalizationUtil.getLocalizationXmlFromPreferences(portletPreferences, renderRequest, "fieldOptions" + formFieldsIndex);
-String fieldOptions = LocalizationUtil.getLocalization(fieldOptionsXml, themeDisplay.getLanguageId());
-String fieldValidationScript = PrefsParamUtil.getString(portletPreferences, request, "fieldValidationScript" + formFieldsIndex);
-String fieldValidationErrorMessage = PrefsParamUtil.getString(portletPreferences, request, "fieldValidationErrorMessage" + formFieldsIndex);
+List<FormItem> formItems = (List<FormItem>) GetterUtil.getObject(request.getAttribute("formItems"));
+Long formItemId = null;
+String fieldLabelXml = "";
+String fieldLabel = "";
+String fieldType = "";
+boolean fieldOptional = false;
+String fieldOptionsXml = "";
+String fieldOptions = "";
+String fieldValidationScript = "";
+String fieldValidationErrorMessage = "";
+
+if(formItems != null && !formItems.isEmpty()){
+	formItemId = formItems.get(formFieldsIndex).getFormItemId();
+	fieldLabelXml = formItems.get(formFieldsIndex).getLabel();
+	fieldLabel = LocalizationUtil.getLocalization(fieldLabelXml, themeDisplay.getLanguageId());
+	fieldType = formItems.get(formFieldsIndex).getType();
+	fieldOptional = formItems.get(formFieldsIndex).getMandatory();
+	fieldOptionsXml = formItems.get(formFieldsIndex).getOptions();
+	fieldOptions = LocalizationUtil.getLocalization(fieldOptionsXml, themeDisplay.getLanguageId());
+	fieldValidationScript = PrefsParamUtil.getString(portletPreferences, request, "fieldValidationScript" + formFieldsIndex);
+	fieldValidationErrorMessage = PrefsParamUtil.getString(portletPreferences, request, "fieldValidationErrorMessage" + formFieldsIndex);	
+}
 
 boolean ignoreRequestValue = (index != formFieldsIndex);
 %>
@@ -52,6 +69,7 @@ boolean ignoreRequestValue = (index != formFieldsIndex);
 	<c:choose>
 		<c:when test="<%= !fieldsEditingDisabled %>">
 			<aui:input name='<%= "_field" + index %>' type="hidden" />
+			<aui:input name='<%= "formItemId" + index %>' type="hidden" value='<%=formItemId%>'/>
 
 			<aui:field-wrapper cssClass="label-name" label="name">
 				<liferay-ui:input-localized ignoreRequestValue="<%= ignoreRequestValue %>" name='<%= "fieldLabel" + index %>' xml="<%= fieldLabelXml %>" />
@@ -71,13 +89,12 @@ boolean ignoreRequestValue = (index != formFieldsIndex);
 	<c:choose>
 		<c:when test="<%= !fieldsEditingDisabled %>">
 			<aui:select ignoreRequestValue="<%= ignoreRequestValue %>" label="type" name='<%= "fieldType" + index %>' >
-				<aui:option selected='<%= fieldType.equals("TEXT_FIELD") %>' value="TEXT_FIELD:ALPHANUM"><liferay-ui:message key="text" /></aui:option>
-				<aui:option selected='<%= fieldType.equals("TEXT_BOX") %>' value="TEXT_BOX:ALPHANUM"><liferay-ui:message key="text-box" /></aui:option>
-				<aui:option selected='<%= fieldType.equals("PASSWORD") %>' value="PASSWORD:ALPHANUM"><liferay-ui:message key="password" /></aui:option>
-				<aui:option selected='<%= fieldType.equals("OPTIONS") %>' value="OPTIONS:ALPHANUM"><liferay-ui:message key="options" /></aui:option>
-				<aui:option selected='<%= fieldType.equals("RADIO_BUTTON") %>' value="RADIO_BUTTON:ALPHANUM"><liferay-ui:message key="radio-buttons" /></aui:option>
-				<aui:option selected='<%= fieldType.equals("paragraph") %>' value="paragraph:ALPHANUM"><liferay-ui:message key="paragraph" /></aui:option>
-				<aui:option selected='<%= fieldType.equals("CHECKBOX") %>' value="CHECKBOX:ALPHANUM"><liferay-ui:message key="check-box" /></aui:option>
+				<aui:option selected='<%= fieldType.equals("TEXT_FIELD") %>' value="TEXT_FIELD:NONE"><liferay-ui:message key="text" /></aui:option>
+				<aui:option selected='<%= fieldType.equals("TEXT_BOX") %>' value="TEXT_BOX:NONE"><liferay-ui:message key="text-box" /></aui:option>
+				<aui:option selected='<%= fieldType.equals("PASSWORD") %>' value="PASSWORD:NONE"><liferay-ui:message key="password" /></aui:option>
+				<aui:option selected='<%= fieldType.equals("OPTIONS") %>' value="OPTIONS:NONE"><liferay-ui:message key="options" /></aui:option>
+				<aui:option selected='<%= fieldType.equals("RADIO_BUTTON") %>' value="RADIO_BUTTON:NONE"><liferay-ui:message key="radio-buttons" /></aui:option>
+				<aui:option selected='<%= fieldType.equals("CHECKBOX") %>' value="CHECKBOX:NONE"><liferay-ui:message key="check-box" /></aui:option>
 			</aui:select>
 		</c:when>
 		<c:otherwise>
@@ -142,7 +159,7 @@ boolean ignoreRequestValue = (index != formFieldsIndex);
 					</div>
 				</div>
 			</c:when>
-			<c:when test="<%= Validator.isNotNull(fieldValidationScript) %>">
+			<c:when test="<%=Validator.isNotNull(fieldValidationScript) %>">
 					<dt class="optional">
 						<liferay-ui:message key="validation" />
 					</dt>

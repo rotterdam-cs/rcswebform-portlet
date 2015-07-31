@@ -124,9 +124,18 @@ public class FormLocalServiceClp implements FormLocalService {
 				"java.lang.String", "java.util.Map"
 			};
 
-		_methodName21 = "getFormByFormId";
+		_methodName21 = "save";
 
-		_methodParameterTypes21 = new String[] { "long" };
+		_methodParameterTypes21 = new String[] {
+				"java.lang.Long", "com.liferay.portal.service.ServiceContext",
+				"java.lang.String", "java.lang.String", "java.util.Map",
+				"java.util.Map", "boolean", "java.util.Map", "java.lang.String",
+				"java.util.Map", "java.lang.String", "java.lang.String"
+			};
+
+		_methodName22 = "getFormByFormId";
+
+		_methodParameterTypes22 = new String[] { "long" };
 	}
 
 	@Override
@@ -765,12 +774,69 @@ public class FormLocalServiceClp implements FormLocalService {
 	}
 
 	@Override
-	public com.rcs.webform.model.Form getFormByFormId(long formId) {
+	public com.rcs.webform.model.Form save(java.lang.Long formId,
+		com.liferay.portal.service.ServiceContext serviceContext,
+		java.lang.String formAttrId, java.lang.String formAttrClass,
+		java.util.Map<java.util.Locale, java.lang.String> titleMap,
+		java.util.Map<java.util.Locale, java.lang.String> descriptionMap,
+		boolean useCaptcha,
+		java.util.Map<java.util.Locale, java.lang.String> successMessageMap,
+		java.lang.String successUrl,
+		java.util.Map<java.util.Locale, java.lang.String> submitLabelMap,
+		java.lang.String submitAttrId, java.lang.String submitAttrclass) {
 		Object returnObj = null;
 
 		try {
 			returnObj = _invokableLocalService.invokeMethod(_methodName21,
-					_methodParameterTypes21, new Object[] { formId });
+					_methodParameterTypes21,
+					new Object[] {
+						ClpSerializer.translateInput(formId),
+						
+					ClpSerializer.translateInput(serviceContext),
+						
+					ClpSerializer.translateInput(formAttrId),
+						
+					ClpSerializer.translateInput(formAttrClass),
+						
+					ClpSerializer.translateInput(titleMap),
+						
+					ClpSerializer.translateInput(descriptionMap),
+						
+					useCaptcha,
+						
+					ClpSerializer.translateInput(successMessageMap),
+						
+					ClpSerializer.translateInput(successUrl),
+						
+					ClpSerializer.translateInput(submitLabelMap),
+						
+					ClpSerializer.translateInput(submitAttrId),
+						
+					ClpSerializer.translateInput(submitAttrclass)
+					});
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (com.rcs.webform.model.Form)ClpSerializer.translateOutput(returnObj);
+	}
+
+	@Override
+	public com.rcs.webform.model.Form getFormByFormId(long formId) {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableLocalService.invokeMethod(_methodName22,
+					_methodParameterTypes22, new Object[] { formId });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -830,4 +896,6 @@ public class FormLocalServiceClp implements FormLocalService {
 	private String[] _methodParameterTypes20;
 	private String _methodName21;
 	private String[] _methodParameterTypes21;
+	private String _methodName22;
+	private String[] _methodParameterTypes22;
 }

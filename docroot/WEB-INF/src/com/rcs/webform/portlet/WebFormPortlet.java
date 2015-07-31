@@ -1,18 +1,17 @@
 package com.rcs.webform.portlet;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Locale;
-import java.util.Map;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletException;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
+import javax.portlet.ResourceRequest;
+import javax.portlet.ResourceResponse;
 
+import com.liferay.portal.kernel.captcha.CaptchaUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.util.PortalUtil;
@@ -25,7 +24,6 @@ import com.rcs.webform.model.FormToPorletMap;
 import com.rcs.webform.service.FormItemLocalServiceUtil;
 import com.rcs.webform.service.FormLocalServiceUtil;
 import com.rcs.webform.service.FormToPorletMapLocalServiceUtil;
-import com.sun.corba.se.spi.orb.StringPair;
 
 /**
  * Portlet implementation class WebFormPortlet
@@ -76,8 +74,11 @@ public class WebFormPortlet extends MVCPortlet {
 
     }
     
-    private int getOptionIdxInDefaultLanguage(Map<Locale, String> optionsMap, String userInput, Locale userLocale){
-        ArrayList<String> options = new ArrayList<String>(Arrays.asList(optionsMap.get(userInput).split(",")));
-        return options.indexOf(userInput); 
+    public void serveResource(ResourceRequest resourceRequest,
+            ResourceResponse resourceResponse){
+    	try {
+			CaptchaUtil.serveImage(resourceRequest, resourceResponse);
+		} catch (Exception ignored) {
+		}
     }
 }

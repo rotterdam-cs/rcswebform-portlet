@@ -58,20 +58,19 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 		if(ParamUtil.getLong(actionRequest, "formId")!=0){
 			formId = ParamUtil.getLong(actionRequest, "formId");
 		}
-		String title = ParamUtil.getString(actionRequest, "title");
-		String description = ParamUtil.getString(actionRequest, "description");
 		boolean useCaptcha = ParamUtil.getBoolean(actionRequest, "requireCaptcha");
-		
-		String submitLabel = ParamUtil.getString(actionRequest, "submitBtnLabel");
-		String successMessage = ParamUtil.getInteger(actionRequest, "onSubmitData")==1 ? ParamUtil.getString(actionRequest, "submitSuccessMsg") : "";
 		String successUrl = ParamUtil.getInteger(actionRequest, "onSubmitData")==2 ? ParamUtil.getString(actionRequest, "submitSuccessURL") : "";
+		String formAttrId = ParamUtil.getString(actionRequest, "formCssId");
+		String formAttrClass = ParamUtil.getString(actionRequest, "formCssClass");
+		String submitAttrId = ParamUtil.getString(actionRequest, "submitCssId");
+		String submitAttrClass = ParamUtil.getString(actionRequest, "submitCssClass");
 		
 		Map<Locale, String> titleMap = LocalizationUtil.getLocalizationMap(actionRequest, "title");
 		Map<Locale, String> descMap = LocalizationUtil.getLocalizationMap(actionRequest, "description");
 		Map<Locale, String> successMsgMap = ParamUtil.getInteger(actionRequest, "onSubmitData")==1 ? LocalizationUtil.getLocalizationMap(actionRequest, "submitSuccessMsg") : null;
 		Map<Locale, String> submitLabelMap = LocalizationUtil.getLocalizationMap(actionRequest, "submitBtnLabel");
 		
-		Form savedForm = FormLocalServiceUtil.save(formId, formServiceContext, titleMap, descMap, useCaptcha, successMsgMap, successUrl, submitLabelMap);
+		Form savedForm = FormLocalServiceUtil.save(formId, formServiceContext, formAttrId, formAttrClass, titleMap, descMap, useCaptcha, successMsgMap, successUrl, submitLabelMap, submitAttrId, submitAttrClass);
 		
 		//Save form-portlet mapping to database
 		ServiceContext formPortletMappingServiceContext = ServiceContextFactory.getInstance(FormToPorletMap.class.getName(), actionRequest);
@@ -125,22 +124,23 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 					if (Validator.isNull(fieldLabelMap.get(defaultLocale))) {
 						continue;
 					}
-	
+					
+					Long formItemId = ParamUtil.getLong(actionRequest, "formItemId" + formFieldsIndex);
 					String fieldType = ParamUtil.getString(actionRequest, "fieldType" + formFieldsIndex).split(":")[0];
 					String validationType = ParamUtil.getString(actionRequest, "fieldType" + formFieldsIndex).split(":")[1];
 					boolean fieldOptional = ParamUtil.getBoolean(actionRequest, "fieldOptional" + formFieldsIndex);
 					Map<Locale, String> fieldOptionsMap = LocalizationUtil.getLocalizationMap(actionRequest, "fieldOptions" + formFieldsIndex);
 					String fieldValidationScript = ParamUtil.getString(actionRequest, "fieldValidationScript" + formFieldsIndex);
 					String fieldValidationErrorMessage = ParamUtil.getString(actionRequest, "fieldValidationErrorMessage" + formFieldsIndex);
-	
+					
 					if (Validator.isNotNull(fieldValidationScript) ^ Validator.isNotNull(fieldValidationErrorMessage)) {
 	
 						SessionErrors.add(actionRequest, "validationDefinitionInvalid" + i);
 					}
 	
 					ServiceContext serviceContext = ServiceContextFactory.getInstance(FormItem.class.getName(), actionRequest);
-					FormItemLocalServiceUtil.save(null, formId, fieldLabelMap, fieldType, fieldOptionsMap, fieldOptional,
-							fieldValidationScript, validationType, fieldValidationErrorMessage, serviceContext);
+					FormItemLocalServiceUtil.save(formItemId, formId, fieldLabelMap, fieldType, fieldOptionsMap, fieldOptional,
+							fieldValidationScript, validationType, fieldValidationErrorMessage, formFieldsIndex, serviceContext);
 	
 					i++;
 				}

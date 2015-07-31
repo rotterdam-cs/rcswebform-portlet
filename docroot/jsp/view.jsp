@@ -1,31 +1,46 @@
 <%@ include file="/jsp/init.jsp" %>
 
-<aui:form action="#" method="POST" name="fm">
 <%-- <aui:form action="#" method="POST" name="fm" onSubmit="event.preventDefault();"> --%>
+<aui:form action="#" method="POST" name="fm">
 	<aui:fieldset label="${Data.data.title}">
-			<div id="formDescription">
-				${Data.data.desc}
-			</div>
+		<div id="formDescription">
+			${Data.data.desc}
+		</div>
 		
-		<liferay-ui:success key="success" message="Form information was sent successfully" />
+		<liferay-ui:success key="success" message="${Data.data.successMessage}" />
+		
+		<liferay-ui:error exception="<%= CaptchaMaxChallengesException.class %>" message="maximum-number-of-captcha-attempts-exceeded" />
+		<liferay-ui:error exception="<%= CaptchaTextException.class %>" message="text-verification-failed" />
 		<liferay-ui:error key="error" message="An error occurred while sending the form information" />
 		
-		<div id="<portlet:namespace />rcsWebForm" >
+		<!-- Hidden input -->
+		<aui:input name="redirect" type="hidden" value="${Data.data.successURL}"></aui:input>
+		
+		<div id="<portlet:namespace />rcsWebForm" class="${Data.data.formAttrClass}">
 			<!-- Form will be put here -->
 			<div id="<portlet:namespace />rcsWebFormItem">
 			<span id="<portlet:namespace />rcsWebFormItemLabel" >Form Item 1 label</span>
 			<span id="<portlet:namespace />rcsWebFormItemInputWrapper" >
 				<input type="text" name="<portlet:namespace />rcsWebFormItemInputText" id="<portlet:namespace />rcsWebFormItemInputText" />
 				<select name="<portlet:namespace />rcsWebFormItemInputCombo" id="<portlet:namespace />rcsWebFormItemInputCombo">
-					<option id="<portlet:namespace />rcsWebFormItemOption" value="<portlet:namespace />rcsWebFormItemOption"></option>
+					<option id="<portlet:namespace />rcsWebFormItemOption" value="">Please Select</option>
 				</select>
-				<input type="radio" name="<portlet:namespace />rcsWebFormItemInputRadio" id="<portlet:namespace />rcsWebFormItemInputRadio" />
+				<input type="checkbox" name="<portlet:namespace />rcsWebFormItemInputRadio" id="<portlet:namespace />rcsWebFormItemInputRadio" />
 				<span id="<portlet:namespace />rcsWebFormItemInputRadioLabel" ></span>
 				
 			</span>
 			</div>
 		</div>
-	<input type="submit" value="${Data.data.submitLabel}" />
+		<c:if test="${Data.data.useCaptcha}">
+			<div id="<portlet:namespace />rcsWebFormCaptcha">
+				<portlet:resourceURL var="captchaURL">
+					<portlet:param name="<%= Constants.CMD %>" value="captcha" />
+				</portlet:resourceURL>
+	
+				<liferay-ui:captcha url="<%= captchaURL %>" />
+			</div>
+		</c:if>
+		<input type="submit" value="${Data.data.submitLabel}" id="${Data.data.submitAttrId}" class="${Data.data.submitAttrClass}" />
 	</aui:fieldset>
 </aui:form>
 
@@ -48,12 +63,17 @@
 				if(divFormItem) {
 					console.log('s2');
 					
-					divFormItem.one('#<portlet:namespace />rcsWebFormItemLabel').set('text',Data.data.formItems[formItemIdx].label);
+					divFormItemLabel = divFormItem.one('#<portlet:namespace />rcsWebFormItemLabel');
 					divFormItemInputWrapper = divFormItem.one('#<portlet:namespace />rcsWebFormItemInputWrapper');
 					divFormItemInputCombo = divFormItem.one('#<portlet:namespace />rcsWebFormItemInputCombo');
 					divFormItemInputText = divFormItem.one('#<portlet:namespace />rcsWebFormItemInputText');
 					divFormItemInputRadio = divFormItem.one('#<portlet:namespace />rcsWebFormItemInputRadio');
 					divFormItemInputRadioLabel = divFormItem.one('#<portlet:namespace />rcsWebFormItemInputRadioLabel');
+
+					divFormItemLabel.set('class', Data.data.formItems[formItemIdx].labelAttrClass);
+					divFormItemLabel.set('text',Data.data.formItems[formItemIdx].label);
+
+					
 					console.log('s3');
 					
 					switch(Data.data.formItems[formItemIdx].type) {
@@ -108,15 +128,22 @@
 							divFormItemInputText.remove();
 							break;
 						case 'RADIO_BUTTON' :
-							console.log('r1');
-							initUserInputRadio(divFormItemInputWrapper, divFormItemInputRadio, formItemIdx, divFormItemInputRadioLabel);
-							console.log('r2');
+							divFormItemInputRadio.set('type','radio');
+							initUserInputRadioCheckbox(divFormItemInputWrapper, divFormItemInputRadio, formItemIdx, divFormItemInputRadioLabel);
 							divFormItemInputText.remove();
-							console.log('r3');
 							divFormItemInputCombo.remove();
-							console.log('r4');
 							break;
+						case 'CHECKBOX' :
+							divFormItemInputRadio.set('type','checkbox');
+							initUserInputRadioCheckbox(divFormItemInputWrapper, divFormItemInputRadio, formItemIdx, divFormItemInputRadioLabel);
+							divFormItemInputText.remove();
+							divFormItemInputCombo.remove();
+							break;
+
 					}
+					
+					console.log('s4');
+					
 				} else {
 					console.log('e2');
 				}
@@ -131,7 +158,7 @@
 					boundingBox:'#<portlet:namespace />fm',
 					rules:rules,
 					fieldStrings:fieldStrings,
-					showAllMessages:true,
+					fieldContainer:'span',
 					on: {
 						submitError: function(event) {
 							console.log("submitError");
@@ -155,12 +182,7 @@
 		divFormItemInput.set('id', '<portlet:namespace />'+Data.data.formItems[formItemIdx].label);
 		divFormItemInput.set('name', '<portlet:namespace />'+Data.data.formItems[formItemIdx].label);
 		
-		divFormItemInput.set('id', divFormItemInput.attr('id')+formItemIdx);
-		divFormItemInput.set('name', divFormItemInput.attr('id')+formItemIdx);
-	}
-	
-	function initUserInputText(divFormItemInputWrapper, divFormItemInput, formItemIdx) {
-		initUserInput(divFormItemInputWrapper, divFormItemInput, formItemIdx);
+		divFormItemInputWrapper.set('class', Data.data.formItems[formItemIdx].inputAttrClass);
 		
 		var rule = new Object();
 		rule.required = Data.data.formItems[formItemIdx].mandatory;
@@ -175,6 +197,11 @@
 		fieldString.required = Data.data.formItems[formItemIdx].errorMandatoryMessage;
 		fieldString[Data.data.formItems[formItemIdx].validationType.toLowerCase()] = Data.data.formItems[formItemIdx].errorValidationMessage;
 		fieldStrings[divFormItemInput.attr('id')] = fieldString;
+
+	}
+	
+	function initUserInputText(divFormItemInputWrapper, divFormItemInput, formItemIdx) {
+		initUserInput(divFormItemInputWrapper, divFormItemInput, formItemIdx);
 	}
 	
 	function initUserInputCombo(divFormItemInputWrapper, divFormItemInput, formItemIdx, templateOptionItem) {
@@ -182,25 +209,27 @@
 		var options = Data.data.formItems[formItemIdx].options.split(',');
 		console.log('divFormItemInput.attr("id") '+divFormItemInput.attr('id'));
 		var templateOptionItem =  divFormItemInput.one('#<portlet:namespace />rcsWebFormItemOption');
+		
 		if(templateOptionItem){
 			for(optionIdx in options) { 
 				var optionItem =  templateOptionItem.cloneNode(true);
 				if(optionItem) {
 					optionItem.set('id', '<portlet:namespace />'+Data.data.formItems[formItemIdx].label);
 					optionItem.set('value',options[optionIdx]);
-					optionItem.val(options[optionIdx]);
+					optionItem.set('text',options[optionIdx]);
 					optionItem.appendTo(divFormItemInput);
-						} else {
+				} else {
 					console.log('error cloning option');
 				}
 			}
-			templateOptionItem.remove();
+// 			templateOptionItem.remove();
 		} else {
 			console.log('error getting template option');
 		}
 	}
+	
 
-	function initUserInputRadio(divFormItemInputWrapper, divFormItemInput, formItemIdx, divFormItemInputLabel) {
+	function initUserInputRadioCheckbox(divFormItemInputWrapper, divFormItemInput, formItemIdx, divFormItemInputLabel) {
 		initUserInput(divFormItemInputWrapper, divFormItemInput, formItemIdx);
 		var options = Data.data.formItems[formItemIdx].options.split(',');
 		for(optionIdx in options) { 
