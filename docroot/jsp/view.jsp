@@ -15,7 +15,7 @@
 		<!-- Hidden input -->
 		<aui:input name="redirect" type="hidden" value="${Data.data.successURL}"></aui:input>
 		
-		<div id="<portlet:namespace />rcsWebForm ${Data.data.formAttrId}" class="${Data.data.formAttrClass}">
+		<div id="<portlet:namespace />rcsWebForm" class="${Data.data.formAttrClass}">
 			<!-- Form will be put here -->
 			<div id="<portlet:namespace />rcsWebFormItem">
 				<span id="<portlet:namespace />rcsWebFormItemLabel" >Form Item 1 label</span>

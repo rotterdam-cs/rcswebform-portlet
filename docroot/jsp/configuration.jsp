@@ -128,6 +128,7 @@ boolean fieldsEditingDisabled = false;
 			<aui:fieldset cssClass="rows-container webFields">
 
 				<aui:input name="updateFields" type="hidden" value="<%= !fieldsEditingDisabled %>" />
+				<aui:input id="deletedFormItemIds" name="deletedFormItemIds" type="hidden" value="" />
 
 				<%
 				
@@ -245,7 +246,7 @@ boolean fieldsEditingDisabled = false;
 			'.label-name input'
 		);
 
-		new Liferay.AutoFields(
+		var autoFields = new Liferay.AutoFields(
 			{
 				contentBox: webFields,
 				fieldIndexes: '<portlet:namespace />formFieldsIndexes',
@@ -258,8 +259,25 @@ boolean fieldsEditingDisabled = false;
 				</liferay-portlet:renderURL>
 
 				url: '<%= editFieldURL %>'
-			}
-		).render();
+			});
+			
+		// delete row event
+		autoFields.on("delete", function(event) {
+        	var deletedRow = event.deletedRow;
+        	var rowFormItemId = deletedRow.getDOM().getElementsByClassName('formItemId')[0].value;
+        	
+        	var rowFormItemIds = A.one('#<portlet:namespace />deletedFormItemIds').val();
+        	
+        	if(rowFormItemIds != ""){
+        		rowFormItemIds += "," + rowFormItemId;
+        	}else{
+        		rowFormItemIds += rowFormItemId;
+        	}
+        	
+        	A.one('#<portlet:namespace />deletedFormItemIds').val(rowFormItemIds);
+        });
+
+  		autoFields.render();
 	</aui:script>
 </c:if>
 

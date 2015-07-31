@@ -288,4 +288,14 @@ public interface FormItemLocalService extends BaseLocalService,
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.rcs.webform.model.FormItem> getFormItemsByFormId(
 		java.lang.Long formId);
+
+	/**
+	* Soft Delete Form Item
+	*
+	* @param formItemId
+	* @param serviceContext
+	* @return
+	*/
+	public com.rcs.webform.model.FormItem delete(java.lang.Long formItemId,
+		com.liferay.portal.service.ServiceContext serviceContext);
 }

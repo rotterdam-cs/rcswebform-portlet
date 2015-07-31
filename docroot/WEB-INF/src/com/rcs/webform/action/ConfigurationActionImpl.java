@@ -1,6 +1,5 @@
 package com.rcs.webform.action;
 
-import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
@@ -23,7 +22,6 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
-import com.liferay.portal.util.PortalUtil;
 import com.rcs.webform.model.Form;
 import com.rcs.webform.model.FormItem;
 import com.rcs.webform.model.FormToPorletMap;
@@ -117,7 +115,9 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 				int i = 1;
 	
 				int[] formFieldsIndexes = StringUtil.split(ParamUtil.getString(actionRequest, "formFieldsIndexes"), 0);
-	
+				ServiceContext serviceContext = ServiceContextFactory.getInstance(FormItem.class.getName(), actionRequest);
+				
+				/* save form items */
 				for (int formFieldsIndex : formFieldsIndexes) {
 					Map<Locale, String> fieldLabelMap = LocalizationUtil.getLocalizationMap(actionRequest, "fieldLabel" + formFieldsIndex);
 	
@@ -138,15 +138,18 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 						SessionErrors.add(actionRequest, "validationDefinitionInvalid" + i);
 					}
 	
-					ServiceContext serviceContext = ServiceContextFactory.getInstance(FormItem.class.getName(), actionRequest);
 					FormItemLocalServiceUtil.save(formItemId, formId, fieldLabelMap, fieldType, fieldOptionsMap, fieldOptional,
 							fieldValidationScript, validationType, fieldValidationErrorMessage, formFieldsIndex, serviceContext);
 	
 					i++;
 				}
-	
-				if (!SessionErrors.isEmpty(actionRequest)) {
-					return;
+				
+				/* soft delete form items */
+				String[] deletedFormItemIds = ParamUtil.getString(actionRequest, "deletedFormItemIds").split(",");
+				if(deletedFormItemIds[0] != ""){
+					for(String formItemId : deletedFormItemIds){
+						FormItemLocalServiceUtil.delete(Long.parseLong(formItemId), serviceContext);
+					}
 				}
 	
 			}
