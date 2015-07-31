@@ -84,25 +84,26 @@ public class FormItemPersistenceImpl extends BasePersistenceImpl<FormItem>
 	public static final FinderPath FINDER_PATH_COUNT_ALL = new FinderPath(FormItemModelImpl.ENTITY_CACHE_ENABLED,
 			FormItemModelImpl.FINDER_CACHE_ENABLED, Long.class,
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countAll", new String[0]);
-	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_FORMID = new FinderPath(FormItemModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_FORMIDANDACTIVE =
+		new FinderPath(FormItemModelImpl.ENTITY_CACHE_ENABLED,
 			FormItemModelImpl.FINDER_CACHE_ENABLED, FormItemImpl.class,
-			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByFormId",
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByFormIdAndActive",
 			new String[] {
 				Long.class.getName(),
 				
 			Integer.class.getName(), Integer.class.getName(),
 				OrderByComparator.class.getName()
 			});
-	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_FORMID =
+	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_FORMIDANDACTIVE =
 		new FinderPath(FormItemModelImpl.ENTITY_CACHE_ENABLED,
 			FormItemModelImpl.FINDER_CACHE_ENABLED, FormItemImpl.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByFormId",
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByFormIdAndActive",
 			new String[] { Long.class.getName() },
 			FormItemModelImpl.FORMID_COLUMN_BITMASK);
-	public static final FinderPath FINDER_PATH_COUNT_BY_FORMID = new FinderPath(FormItemModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_COUNT_BY_FORMIDANDACTIVE = new FinderPath(FormItemModelImpl.ENTITY_CACHE_ENABLED,
 			FormItemModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByFormId",
-			new String[] { Long.class.getName() });
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
+			"countByFormIdAndActive", new String[] { Long.class.getName() });
 
 	/**
 	 * Returns all the form items where formId = &#63;.
@@ -112,8 +113,10 @@ public class FormItemPersistenceImpl extends BasePersistenceImpl<FormItem>
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public List<FormItem> findByFormId(long formId) throws SystemException {
-		return findByFormId(formId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+	public List<FormItem> findByFormIdAndActive(long formId)
+		throws SystemException {
+		return findByFormIdAndActive(formId, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
 	}
 
 	/**
@@ -130,9 +133,9 @@ public class FormItemPersistenceImpl extends BasePersistenceImpl<FormItem>
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public List<FormItem> findByFormId(long formId, int start, int end)
+	public List<FormItem> findByFormIdAndActive(long formId, int start, int end)
 		throws SystemException {
-		return findByFormId(formId, start, end, null);
+		return findByFormIdAndActive(formId, start, end, null);
 	}
 
 	/**
@@ -150,8 +153,8 @@ public class FormItemPersistenceImpl extends BasePersistenceImpl<FormItem>
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public List<FormItem> findByFormId(long formId, int start, int end,
-		OrderByComparator orderByComparator) throws SystemException {
+	public List<FormItem> findByFormIdAndActive(long formId, int start,
+		int end, OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
@@ -159,11 +162,11 @@ public class FormItemPersistenceImpl extends BasePersistenceImpl<FormItem>
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
 				(orderByComparator == null)) {
 			pagination = false;
-			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_FORMID;
+			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_FORMIDANDACTIVE;
 			finderArgs = new Object[] { formId };
 		}
 		else {
-			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_FORMID;
+			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_FORMIDANDACTIVE;
 			finderArgs = new Object[] { formId, start, end, orderByComparator };
 		}
 
@@ -193,7 +196,7 @@ public class FormItemPersistenceImpl extends BasePersistenceImpl<FormItem>
 
 			query.append(_SQL_SELECT_FORMITEM_WHERE);
 
-			query.append(_FINDER_COLUMN_FORMID_FORMID_2);
+			query.append(_FINDER_COLUMN_FORMIDANDACTIVE_FORMID_2);
 
 			if (orderByComparator != null) {
 				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
@@ -257,10 +260,11 @@ public class FormItemPersistenceImpl extends BasePersistenceImpl<FormItem>
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public FormItem findByFormId_First(long formId,
+	public FormItem findByFormIdAndActive_First(long formId,
 		OrderByComparator orderByComparator)
 		throws NoSuchFormItemException, SystemException {
-		FormItem formItem = fetchByFormId_First(formId, orderByComparator);
+		FormItem formItem = fetchByFormIdAndActive_First(formId,
+				orderByComparator);
 
 		if (formItem != null) {
 			return formItem;
@@ -287,9 +291,10 @@ public class FormItemPersistenceImpl extends BasePersistenceImpl<FormItem>
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public FormItem fetchByFormId_First(long formId,
+	public FormItem fetchByFormIdAndActive_First(long formId,
 		OrderByComparator orderByComparator) throws SystemException {
-		List<FormItem> list = findByFormId(formId, 0, 1, orderByComparator);
+		List<FormItem> list = findByFormIdAndActive(formId, 0, 1,
+				orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -308,10 +313,11 @@ public class FormItemPersistenceImpl extends BasePersistenceImpl<FormItem>
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public FormItem findByFormId_Last(long formId,
+	public FormItem findByFormIdAndActive_Last(long formId,
 		OrderByComparator orderByComparator)
 		throws NoSuchFormItemException, SystemException {
-		FormItem formItem = fetchByFormId_Last(formId, orderByComparator);
+		FormItem formItem = fetchByFormIdAndActive_Last(formId,
+				orderByComparator);
 
 		if (formItem != null) {
 			return formItem;
@@ -338,15 +344,15 @@ public class FormItemPersistenceImpl extends BasePersistenceImpl<FormItem>
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public FormItem fetchByFormId_Last(long formId,
+	public FormItem fetchByFormIdAndActive_Last(long formId,
 		OrderByComparator orderByComparator) throws SystemException {
-		int count = countByFormId(formId);
+		int count = countByFormIdAndActive(formId);
 
 		if (count == 0) {
 			return null;
 		}
 
-		List<FormItem> list = findByFormId(formId, count - 1, count,
+		List<FormItem> list = findByFormIdAndActive(formId, count - 1, count,
 				orderByComparator);
 
 		if (!list.isEmpty()) {
@@ -367,8 +373,8 @@ public class FormItemPersistenceImpl extends BasePersistenceImpl<FormItem>
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public FormItem[] findByFormId_PrevAndNext(long formItemId, long formId,
-		OrderByComparator orderByComparator)
+	public FormItem[] findByFormIdAndActive_PrevAndNext(long formItemId,
+		long formId, OrderByComparator orderByComparator)
 		throws NoSuchFormItemException, SystemException {
 		FormItem formItem = findByPrimaryKey(formItemId);
 
@@ -379,13 +385,13 @@ public class FormItemPersistenceImpl extends BasePersistenceImpl<FormItem>
 
 			FormItem[] array = new FormItemImpl[3];
 
-			array[0] = getByFormId_PrevAndNext(session, formItem, formId,
-					orderByComparator, true);
+			array[0] = getByFormIdAndActive_PrevAndNext(session, formItem,
+					formId, orderByComparator, true);
 
 			array[1] = formItem;
 
-			array[2] = getByFormId_PrevAndNext(session, formItem, formId,
-					orderByComparator, false);
+			array[2] = getByFormIdAndActive_PrevAndNext(session, formItem,
+					formId, orderByComparator, false);
 
 			return array;
 		}
@@ -397,7 +403,7 @@ public class FormItemPersistenceImpl extends BasePersistenceImpl<FormItem>
 		}
 	}
 
-	protected FormItem getByFormId_PrevAndNext(Session session,
+	protected FormItem getByFormIdAndActive_PrevAndNext(Session session,
 		FormItem formItem, long formId, OrderByComparator orderByComparator,
 		boolean previous) {
 		StringBundler query = null;
@@ -412,7 +418,7 @@ public class FormItemPersistenceImpl extends BasePersistenceImpl<FormItem>
 
 		query.append(_SQL_SELECT_FORMITEM_WHERE);
 
-		query.append(_FINDER_COLUMN_FORMID_FORMID_2);
+		query.append(_FINDER_COLUMN_FORMIDANDACTIVE_FORMID_2);
 
 		if (orderByComparator != null) {
 			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
@@ -509,9 +515,9 @@ public class FormItemPersistenceImpl extends BasePersistenceImpl<FormItem>
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public void removeByFormId(long formId) throws SystemException {
-		for (FormItem formItem : findByFormId(formId, QueryUtil.ALL_POS,
-				QueryUtil.ALL_POS, null)) {
+	public void removeByFormIdAndActive(long formId) throws SystemException {
+		for (FormItem formItem : findByFormIdAndActive(formId,
+				QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
 			remove(formItem);
 		}
 	}
@@ -524,8 +530,8 @@ public class FormItemPersistenceImpl extends BasePersistenceImpl<FormItem>
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public int countByFormId(long formId) throws SystemException {
-		FinderPath finderPath = FINDER_PATH_COUNT_BY_FORMID;
+	public int countByFormIdAndActive(long formId) throws SystemException {
+		FinderPath finderPath = FINDER_PATH_COUNT_BY_FORMIDANDACTIVE;
 
 		Object[] finderArgs = new Object[] { formId };
 
@@ -537,7 +543,7 @@ public class FormItemPersistenceImpl extends BasePersistenceImpl<FormItem>
 
 			query.append(_SQL_COUNT_FORMITEM_WHERE);
 
-			query.append(_FINDER_COLUMN_FORMID_FORMID_2);
+			query.append(_FINDER_COLUMN_FORMIDANDACTIVE_FORMID_2);
 
 			String sql = query.toString();
 
@@ -569,7 +575,7 @@ public class FormItemPersistenceImpl extends BasePersistenceImpl<FormItem>
 		return count.intValue();
 	}
 
-	private static final String _FINDER_COLUMN_FORMID_FORMID_2 = "formItem.formId = ?";
+	private static final String _FINDER_COLUMN_FORMIDANDACTIVE_FORMID_2 = "formItem.formId = ? AND formItem.active=true";
 
 	public FormItemPersistenceImpl() {
 		setModelClass(FormItem.class);
@@ -795,19 +801,21 @@ public class FormItemPersistenceImpl extends BasePersistenceImpl<FormItem>
 
 		else {
 			if ((formItemModelImpl.getColumnBitmask() &
-					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_FORMID.getColumnBitmask()) != 0) {
+					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_FORMIDANDACTIVE.getColumnBitmask()) != 0) {
 				Object[] args = new Object[] {
 						formItemModelImpl.getOriginalFormId()
 					};
 
-				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_FORMID, args);
-				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_FORMID,
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_FORMIDANDACTIVE,
+					args);
+				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_FORMIDANDACTIVE,
 					args);
 
 				args = new Object[] { formItemModelImpl.getFormId() };
 
-				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_FORMID, args);
-				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_FORMID,
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_FORMIDANDACTIVE,
+					args);
+				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_FORMIDANDACTIVE,
 					args);
 			}
 		}

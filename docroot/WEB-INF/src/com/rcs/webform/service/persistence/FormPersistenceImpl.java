@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderPath;
 import com.liferay.portal.kernel.dao.orm.Query;
+import com.liferay.portal.kernel.dao.orm.QueryPos;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.exception.SystemException;
@@ -31,6 +32,7 @@ import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.SetUtil;
 import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.UnmodifiableList;
 import com.liferay.portal.model.CacheModel;
@@ -82,6 +84,223 @@ public class FormPersistenceImpl extends BasePersistenceImpl<Form>
 	public static final FinderPath FINDER_PATH_COUNT_ALL = new FinderPath(FormModelImpl.ENTITY_CACHE_ENABLED,
 			FormModelImpl.FINDER_CACHE_ENABLED, Long.class,
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countAll", new String[0]);
+	public static final FinderPath FINDER_PATH_FETCH_BY_FORMIDANDACTIVE = new FinderPath(FormModelImpl.ENTITY_CACHE_ENABLED,
+			FormModelImpl.FINDER_CACHE_ENABLED, FormImpl.class,
+			FINDER_CLASS_NAME_ENTITY, "fetchByFormIdAndActive",
+			new String[] { Long.class.getName() },
+			FormModelImpl.FORMID_COLUMN_BITMASK);
+	public static final FinderPath FINDER_PATH_COUNT_BY_FORMIDANDACTIVE = new FinderPath(FormModelImpl.ENTITY_CACHE_ENABLED,
+			FormModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
+			"countByFormIdAndActive", new String[] { Long.class.getName() });
+
+	/**
+	 * Returns the form where formId = &#63; or throws a {@link com.rcs.webform.NoSuchFormException} if it could not be found.
+	 *
+	 * @param formId the form ID
+	 * @return the matching form
+	 * @throws com.rcs.webform.NoSuchFormException if a matching form could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public Form findByFormIdAndActive(long formId)
+		throws NoSuchFormException, SystemException {
+		Form form = fetchByFormIdAndActive(formId);
+
+		if (form == null) {
+			StringBundler msg = new StringBundler(4);
+
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+			msg.append("formId=");
+			msg.append(formId);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			if (_log.isWarnEnabled()) {
+				_log.warn(msg.toString());
+			}
+
+			throw new NoSuchFormException(msg.toString());
+		}
+
+		return form;
+	}
+
+	/**
+	 * Returns the form where formId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 *
+	 * @param formId the form ID
+	 * @return the matching form, or <code>null</code> if a matching form could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public Form fetchByFormIdAndActive(long formId) throws SystemException {
+		return fetchByFormIdAndActive(formId, true);
+	}
+
+	/**
+	 * Returns the form where formId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 *
+	 * @param formId the form ID
+	 * @param retrieveFromCache whether to use the finder cache
+	 * @return the matching form, or <code>null</code> if a matching form could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public Form fetchByFormIdAndActive(long formId, boolean retrieveFromCache)
+		throws SystemException {
+		Object[] finderArgs = new Object[] { formId };
+
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_FORMIDANDACTIVE,
+					finderArgs, this);
+		}
+
+		if (result instanceof Form) {
+			Form form = (Form)result;
+
+			if ((formId != form.getFormId())) {
+				result = null;
+			}
+		}
+
+		if (result == null) {
+			StringBundler query = new StringBundler(3);
+
+			query.append(_SQL_SELECT_FORM_WHERE);
+
+			query.append(_FINDER_COLUMN_FORMIDANDACTIVE_FORMID_2);
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(formId);
+
+				List<Form> list = q.list();
+
+				if (list.isEmpty()) {
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_FORMIDANDACTIVE,
+						finderArgs, list);
+				}
+				else {
+					if ((list.size() > 1) && _log.isWarnEnabled()) {
+						_log.warn(
+							"FormPersistenceImpl.fetchByFormIdAndActive(long, boolean) with parameters (" +
+							StringUtil.merge(finderArgs) +
+							") yields a result set with more than 1 result. This violates the logical unique restriction. There is no order guarantee on which result is returned by this finder.");
+					}
+
+					Form form = list.get(0);
+
+					result = form;
+
+					cacheResult(form);
+
+					if ((form.getFormId() != formId)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_FORMIDANDACTIVE,
+							finderArgs, form);
+					}
+				}
+			}
+			catch (Exception e) {
+				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_FORMIDANDACTIVE,
+					finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		if (result instanceof List<?>) {
+			return null;
+		}
+		else {
+			return (Form)result;
+		}
+	}
+
+	/**
+	 * Removes the form where formId = &#63; from the database.
+	 *
+	 * @param formId the form ID
+	 * @return the form that was removed
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public Form removeByFormIdAndActive(long formId)
+		throws NoSuchFormException, SystemException {
+		Form form = findByFormIdAndActive(formId);
+
+		return remove(form);
+	}
+
+	/**
+	 * Returns the number of forms where formId = &#63;.
+	 *
+	 * @param formId the form ID
+	 * @return the number of matching forms
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public int countByFormIdAndActive(long formId) throws SystemException {
+		FinderPath finderPath = FINDER_PATH_COUNT_BY_FORMIDANDACTIVE;
+
+		Object[] finderArgs = new Object[] { formId };
+
+		Long count = (Long)FinderCacheUtil.getResult(finderPath, finderArgs,
+				this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(2);
+
+			query.append(_SQL_COUNT_FORM_WHERE);
+
+			query.append(_FINDER_COLUMN_FORMIDANDACTIVE_FORMID_2);
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(formId);
+
+				count = (Long)q.uniqueResult();
+
+				FinderCacheUtil.putResult(finderPath, finderArgs, count);
+			}
+			catch (Exception e) {
+				FinderCacheUtil.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	private static final String _FINDER_COLUMN_FORMIDANDACTIVE_FORMID_2 = "form.formId = ? AND form.active=true";
 
 	public FormPersistenceImpl() {
 		setModelClass(Form.class);
@@ -96,6 +315,9 @@ public class FormPersistenceImpl extends BasePersistenceImpl<Form>
 	public void cacheResult(Form form) {
 		EntityCacheUtil.putResult(FormModelImpl.ENTITY_CACHE_ENABLED,
 			FormImpl.class, form.getPrimaryKey(), form);
+
+		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_FORMIDANDACTIVE,
+			new Object[] { form.getFormId() }, form);
 
 		form.resetOriginalValues();
 	}
@@ -152,6 +374,8 @@ public class FormPersistenceImpl extends BasePersistenceImpl<Form>
 
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		clearUniqueFindersCache(form);
 	}
 
 	@Override
@@ -162,6 +386,51 @@ public class FormPersistenceImpl extends BasePersistenceImpl<Form>
 		for (Form form : forms) {
 			EntityCacheUtil.removeResult(FormModelImpl.ENTITY_CACHE_ENABLED,
 				FormImpl.class, form.getPrimaryKey());
+
+			clearUniqueFindersCache(form);
+		}
+	}
+
+	protected void cacheUniqueFindersCache(Form form) {
+		if (form.isNew()) {
+			Object[] args = new Object[] { form.getFormId() };
+
+			FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_FORMIDANDACTIVE,
+				args, Long.valueOf(1));
+			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_FORMIDANDACTIVE,
+				args, form);
+		}
+		else {
+			FormModelImpl formModelImpl = (FormModelImpl)form;
+
+			if ((formModelImpl.getColumnBitmask() &
+					FINDER_PATH_FETCH_BY_FORMIDANDACTIVE.getColumnBitmask()) != 0) {
+				Object[] args = new Object[] { form.getFormId() };
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_FORMIDANDACTIVE,
+					args, Long.valueOf(1));
+				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_FORMIDANDACTIVE,
+					args, form);
+			}
+		}
+	}
+
+	protected void clearUniqueFindersCache(Form form) {
+		FormModelImpl formModelImpl = (FormModelImpl)form;
+
+		Object[] args = new Object[] { form.getFormId() };
+
+		FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_FORMIDANDACTIVE, args);
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_FORMIDANDACTIVE, args);
+
+		if ((formModelImpl.getColumnBitmask() &
+				FINDER_PATH_FETCH_BY_FORMIDANDACTIVE.getColumnBitmask()) != 0) {
+			args = new Object[] { formModelImpl.getOriginalFormId() };
+
+			FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_FORMIDANDACTIVE,
+				args);
+			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_FORMIDANDACTIVE,
+				args);
 		}
 	}
 
@@ -295,12 +564,15 @@ public class FormPersistenceImpl extends BasePersistenceImpl<Form>
 
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
 
-		if (isNew) {
+		if (isNew || !FormModelImpl.COLUMN_BITMASK_ENABLED) {
 			FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 		}
 
 		EntityCacheUtil.putResult(FormModelImpl.ENTITY_CACHE_ENABLED,
 			FormImpl.class, form.getPrimaryKey(), form);
+
+		clearUniqueFindersCache(form);
+		cacheUniqueFindersCache(form);
 
 		return form;
 	}
@@ -646,9 +918,12 @@ public class FormPersistenceImpl extends BasePersistenceImpl<Form>
 	}
 
 	private static final String _SQL_SELECT_FORM = "SELECT form FROM Form form";
+	private static final String _SQL_SELECT_FORM_WHERE = "SELECT form FROM Form form WHERE ";
 	private static final String _SQL_COUNT_FORM = "SELECT COUNT(form) FROM Form form";
+	private static final String _SQL_COUNT_FORM_WHERE = "SELECT COUNT(form) FROM Form form WHERE ";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "form.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No Form exists with the primary key ";
+	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No Form exists with the key {";
 	private static final boolean _HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE = GetterUtil.getBoolean(PropsUtil.get(
 				PropsKeys.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE));
 	private static Log _log = LogFactoryUtil.getLog(FormPersistenceImpl.class);

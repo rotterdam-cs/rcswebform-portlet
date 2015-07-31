@@ -109,7 +109,7 @@ public class FormItemLocalServiceImpl extends FormItemLocalServiceBaseImpl {
 
     public List<FormItem> getFormItemByFormId(long formId) {
         try {
-            return FormItemUtil.findByFormId(formId);
+            return FormItemUtil.findByFormIdAndActive(formId);
         } catch (Exception e) {
             log.error("Exception while getting form item by id [" + formId + "] : " + e.getMessage(), e);
             return new ArrayList<FormItem>();

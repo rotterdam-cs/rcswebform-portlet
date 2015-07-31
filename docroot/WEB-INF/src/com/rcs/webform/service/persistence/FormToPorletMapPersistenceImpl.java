@@ -87,15 +87,16 @@ public class FormToPorletMapPersistenceImpl extends BasePersistenceImpl<FormToPo
 	public static final FinderPath FINDER_PATH_COUNT_ALL = new FinderPath(FormToPorletMapModelImpl.ENTITY_CACHE_ENABLED,
 			FormToPorletMapModelImpl.FINDER_CACHE_ENABLED, Long.class,
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countAll", new String[0]);
-	public static final FinderPath FINDER_PATH_FETCH_BY_PORTLETID = new FinderPath(FormToPorletMapModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_FETCH_BY_PORTLETIDANDACTIVE = new FinderPath(FormToPorletMapModelImpl.ENTITY_CACHE_ENABLED,
 			FormToPorletMapModelImpl.FINDER_CACHE_ENABLED,
 			FormToPorletMapImpl.class, FINDER_CLASS_NAME_ENTITY,
-			"fetchByPortletId", new String[] { String.class.getName() },
+			"fetchByPortletIdAndActive",
+			new String[] { String.class.getName() },
 			FormToPorletMapModelImpl.PORTLETID_COLUMN_BITMASK);
-	public static final FinderPath FINDER_PATH_COUNT_BY_PORTLETID = new FinderPath(FormToPorletMapModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_COUNT_BY_PORTLETIDANDACTIVE = new FinderPath(FormToPorletMapModelImpl.ENTITY_CACHE_ENABLED,
 			FormToPorletMapModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByPortletId",
-			new String[] { String.class.getName() });
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
+			"countByPortletIdAndActive", new String[] { String.class.getName() });
 
 	/**
 	 * Returns the form to porlet map where portletId = &#63; or throws a {@link com.rcs.webform.NoSuchFormToPorletMapException} if it could not be found.
@@ -106,9 +107,9 @@ public class FormToPorletMapPersistenceImpl extends BasePersistenceImpl<FormToPo
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public FormToPorletMap findByPortletId(String portletId)
+	public FormToPorletMap findByPortletIdAndActive(String portletId)
 		throws NoSuchFormToPorletMapException, SystemException {
-		FormToPorletMap formToPorletMap = fetchByPortletId(portletId);
+		FormToPorletMap formToPorletMap = fetchByPortletIdAndActive(portletId);
 
 		if (formToPorletMap == null) {
 			StringBundler msg = new StringBundler(4);
@@ -138,9 +139,9 @@ public class FormToPorletMapPersistenceImpl extends BasePersistenceImpl<FormToPo
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public FormToPorletMap fetchByPortletId(String portletId)
+	public FormToPorletMap fetchByPortletIdAndActive(String portletId)
 		throws SystemException {
-		return fetchByPortletId(portletId, true);
+		return fetchByPortletIdAndActive(portletId, true);
 	}
 
 	/**
@@ -152,14 +153,14 @@ public class FormToPorletMapPersistenceImpl extends BasePersistenceImpl<FormToPo
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public FormToPorletMap fetchByPortletId(String portletId,
+	public FormToPorletMap fetchByPortletIdAndActive(String portletId,
 		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] { portletId };
 
 		Object result = null;
 
 		if (retrieveFromCache) {
-			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_PORTLETID,
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_PORTLETIDANDACTIVE,
 					finderArgs, this);
 		}
 
@@ -179,15 +180,15 @@ public class FormToPorletMapPersistenceImpl extends BasePersistenceImpl<FormToPo
 			boolean bindPortletId = false;
 
 			if (portletId == null) {
-				query.append(_FINDER_COLUMN_PORTLETID_PORTLETID_1);
+				query.append(_FINDER_COLUMN_PORTLETIDANDACTIVE_PORTLETID_1);
 			}
 			else if (portletId.equals(StringPool.BLANK)) {
-				query.append(_FINDER_COLUMN_PORTLETID_PORTLETID_3);
+				query.append(_FINDER_COLUMN_PORTLETIDANDACTIVE_PORTLETID_3);
 			}
 			else {
 				bindPortletId = true;
 
-				query.append(_FINDER_COLUMN_PORTLETID_PORTLETID_2);
+				query.append(_FINDER_COLUMN_PORTLETIDANDACTIVE_PORTLETID_2);
 			}
 
 			String sql = query.toString();
@@ -208,13 +209,13 @@ public class FormToPorletMapPersistenceImpl extends BasePersistenceImpl<FormToPo
 				List<FormToPorletMap> list = q.list();
 
 				if (list.isEmpty()) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_PORTLETID,
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_PORTLETIDANDACTIVE,
 						finderArgs, list);
 				}
 				else {
 					if ((list.size() > 1) && _log.isWarnEnabled()) {
 						_log.warn(
-							"FormToPorletMapPersistenceImpl.fetchByPortletId(String, boolean) with parameters (" +
+							"FormToPorletMapPersistenceImpl.fetchByPortletIdAndActive(String, boolean) with parameters (" +
 							StringUtil.merge(finderArgs) +
 							") yields a result set with more than 1 result. This violates the logical unique restriction. There is no order guarantee on which result is returned by this finder.");
 					}
@@ -227,13 +228,13 @@ public class FormToPorletMapPersistenceImpl extends BasePersistenceImpl<FormToPo
 
 					if ((formToPorletMap.getPortletId() == null) ||
 							!formToPorletMap.getPortletId().equals(portletId)) {
-						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_PORTLETID,
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_PORTLETIDANDACTIVE,
 							finderArgs, formToPorletMap);
 					}
 				}
 			}
 			catch (Exception e) {
-				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_PORTLETID,
+				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_PORTLETIDANDACTIVE,
 					finderArgs);
 
 				throw processException(e);
@@ -259,9 +260,9 @@ public class FormToPorletMapPersistenceImpl extends BasePersistenceImpl<FormToPo
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public FormToPorletMap removeByPortletId(String portletId)
+	public FormToPorletMap removeByPortletIdAndActive(String portletId)
 		throws NoSuchFormToPorletMapException, SystemException {
-		FormToPorletMap formToPorletMap = findByPortletId(portletId);
+		FormToPorletMap formToPorletMap = findByPortletIdAndActive(portletId);
 
 		return remove(formToPorletMap);
 	}
@@ -274,8 +275,9 @@ public class FormToPorletMapPersistenceImpl extends BasePersistenceImpl<FormToPo
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public int countByPortletId(String portletId) throws SystemException {
-		FinderPath finderPath = FINDER_PATH_COUNT_BY_PORTLETID;
+	public int countByPortletIdAndActive(String portletId)
+		throws SystemException {
+		FinderPath finderPath = FINDER_PATH_COUNT_BY_PORTLETIDANDACTIVE;
 
 		Object[] finderArgs = new Object[] { portletId };
 
@@ -290,15 +292,15 @@ public class FormToPorletMapPersistenceImpl extends BasePersistenceImpl<FormToPo
 			boolean bindPortletId = false;
 
 			if (portletId == null) {
-				query.append(_FINDER_COLUMN_PORTLETID_PORTLETID_1);
+				query.append(_FINDER_COLUMN_PORTLETIDANDACTIVE_PORTLETID_1);
 			}
 			else if (portletId.equals(StringPool.BLANK)) {
-				query.append(_FINDER_COLUMN_PORTLETID_PORTLETID_3);
+				query.append(_FINDER_COLUMN_PORTLETIDANDACTIVE_PORTLETID_3);
 			}
 			else {
 				bindPortletId = true;
 
-				query.append(_FINDER_COLUMN_PORTLETID_PORTLETID_2);
+				query.append(_FINDER_COLUMN_PORTLETIDANDACTIVE_PORTLETID_2);
 			}
 
 			String sql = query.toString();
@@ -333,9 +335,9 @@ public class FormToPorletMapPersistenceImpl extends BasePersistenceImpl<FormToPo
 		return count.intValue();
 	}
 
-	private static final String _FINDER_COLUMN_PORTLETID_PORTLETID_1 = "formToPorletMap.portletId IS NULL";
-	private static final String _FINDER_COLUMN_PORTLETID_PORTLETID_2 = "formToPorletMap.portletId = ?";
-	private static final String _FINDER_COLUMN_PORTLETID_PORTLETID_3 = "(formToPorletMap.portletId IS NULL OR formToPorletMap.portletId = '')";
+	private static final String _FINDER_COLUMN_PORTLETIDANDACTIVE_PORTLETID_1 = "formToPorletMap.portletId IS NULL AND formToPorletMap.active=true";
+	private static final String _FINDER_COLUMN_PORTLETIDANDACTIVE_PORTLETID_2 = "formToPorletMap.portletId = ? AND formToPorletMap.active=true";
+	private static final String _FINDER_COLUMN_PORTLETIDANDACTIVE_PORTLETID_3 = "(formToPorletMap.portletId IS NULL OR formToPorletMap.portletId = '') AND formToPorletMap.active=true";
 
 	public FormToPorletMapPersistenceImpl() {
 		setModelClass(FormToPorletMap.class);
@@ -352,7 +354,7 @@ public class FormToPorletMapPersistenceImpl extends BasePersistenceImpl<FormToPo
 			FormToPorletMapImpl.class, formToPorletMap.getPrimaryKey(),
 			formToPorletMap);
 
-		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_PORTLETID,
+		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_PORTLETIDANDACTIVE,
 			new Object[] { formToPorletMap.getPortletId() }, formToPorletMap);
 
 		formToPorletMap.resetOriginalValues();
@@ -433,22 +435,22 @@ public class FormToPorletMapPersistenceImpl extends BasePersistenceImpl<FormToPo
 		if (formToPorletMap.isNew()) {
 			Object[] args = new Object[] { formToPorletMap.getPortletId() };
 
-			FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_PORTLETID, args,
-				Long.valueOf(1));
-			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_PORTLETID, args,
-				formToPorletMap);
+			FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_PORTLETIDANDACTIVE,
+				args, Long.valueOf(1));
+			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_PORTLETIDANDACTIVE,
+				args, formToPorletMap);
 		}
 		else {
 			FormToPorletMapModelImpl formToPorletMapModelImpl = (FormToPorletMapModelImpl)formToPorletMap;
 
 			if ((formToPorletMapModelImpl.getColumnBitmask() &
-					FINDER_PATH_FETCH_BY_PORTLETID.getColumnBitmask()) != 0) {
+					FINDER_PATH_FETCH_BY_PORTLETIDANDACTIVE.getColumnBitmask()) != 0) {
 				Object[] args = new Object[] { formToPorletMap.getPortletId() };
 
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_PORTLETID, args,
-					Long.valueOf(1));
-				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_PORTLETID, args,
-					formToPorletMap);
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_PORTLETIDANDACTIVE,
+					args, Long.valueOf(1));
+				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_PORTLETIDANDACTIVE,
+					args, formToPorletMap);
 			}
 		}
 	}
@@ -458,15 +460,19 @@ public class FormToPorletMapPersistenceImpl extends BasePersistenceImpl<FormToPo
 
 		Object[] args = new Object[] { formToPorletMap.getPortletId() };
 
-		FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_PORTLETID, args);
-		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_PORTLETID, args);
+		FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_PORTLETIDANDACTIVE,
+			args);
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_PORTLETIDANDACTIVE,
+			args);
 
 		if ((formToPorletMapModelImpl.getColumnBitmask() &
-				FINDER_PATH_FETCH_BY_PORTLETID.getColumnBitmask()) != 0) {
+				FINDER_PATH_FETCH_BY_PORTLETIDANDACTIVE.getColumnBitmask()) != 0) {
 			args = new Object[] { formToPorletMapModelImpl.getOriginalPortletId() };
 
-			FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_PORTLETID, args);
-			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_PORTLETID, args);
+			FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_PORTLETIDANDACTIVE,
+				args);
+			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_PORTLETIDANDACTIVE,
+				args);
 		}
 	}
 

@@ -35,6 +35,9 @@
         <order by="asc">
             <order-column name="formId"></order-column>
         </order>
+        <finder name="FormIdAndActive" return-type="Object" where="active=true">
+            <finder-column name="formId" comparator="="></finder-column>
+        </finder>
 	</entity>
 	<entity local-service="true" name="FormItem" remote-service="false" cache-enabled="false">
 
@@ -67,7 +70,7 @@
         <column name="errorValidationMessage" type="String" localized="true"></column>
         <column name="errorMandatoryMessage" type="String" localized="true"></column>
         <column name="hintMessage" type="String" localized="true"></column>
-        <finder name="FormId" return-type="Collection">
+        <finder name="FormIdAndActive" return-type="Collection" where="active=true">
             <finder-column name="formId" comparator="="></finder-column>
         </finder>
 	</entity>
@@ -113,7 +116,7 @@
 		<!-- Audit fields -->
         <column name="formId" type="long"></column>
         <column name="portletId" type="String"></column>
-        <finder name="PortletId" return-type="Form">
+        <finder name="PortletIdAndActive" return-type="Form" where="active=true">
             <finder-column name="portletId"></finder-column>
         </finder>
 	</entity>

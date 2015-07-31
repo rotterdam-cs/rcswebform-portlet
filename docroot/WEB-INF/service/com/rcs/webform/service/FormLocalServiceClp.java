@@ -123,6 +123,10 @@ public class FormLocalServiceClp implements FormLocalService {
 				"java.util.Map", "java.util.Map", "boolean", "java.util.Map",
 				"java.lang.String", "java.util.Map"
 			};
+
+		_methodName21 = "getFormByFormId";
+
+		_methodParameterTypes21 = new String[] { "long" };
 	}
 
 	@Override
@@ -760,6 +764,29 @@ public class FormLocalServiceClp implements FormLocalService {
 		return (com.rcs.webform.model.Form)ClpSerializer.translateOutput(returnObj);
 	}
 
+	@Override
+	public com.rcs.webform.model.Form getFormByFormId(long formId) {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableLocalService.invokeMethod(_methodName21,
+					_methodParameterTypes21, new Object[] { formId });
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (com.rcs.webform.model.Form)ClpSerializer.translateOutput(returnObj);
+	}
+
 	private InvokableLocalService _invokableLocalService;
 	private String _methodName0;
 	private String[] _methodParameterTypes0;
@@ -801,4 +828,6 @@ public class FormLocalServiceClp implements FormLocalService {
 	private String[] _methodParameterTypes19;
 	private String _methodName20;
 	private String[] _methodParameterTypes20;
+	private String _methodName21;
+	private String[] _methodParameterTypes21;
 }

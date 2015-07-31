@@ -45,7 +45,7 @@ public interface FormToPorletMapPersistence extends BasePersistence<FormToPorlet
 	* @throws com.rcs.webform.NoSuchFormToPorletMapException if a matching form to porlet map could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public com.rcs.webform.model.FormToPorletMap findByPortletId(
+	public com.rcs.webform.model.FormToPorletMap findByPortletIdAndActive(
 		java.lang.String portletId)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.rcs.webform.NoSuchFormToPorletMapException;
@@ -57,7 +57,7 @@ public interface FormToPorletMapPersistence extends BasePersistence<FormToPorlet
 	* @return the matching form to porlet map, or <code>null</code> if a matching form to porlet map could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public com.rcs.webform.model.FormToPorletMap fetchByPortletId(
+	public com.rcs.webform.model.FormToPorletMap fetchByPortletIdAndActive(
 		java.lang.String portletId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
@@ -69,7 +69,7 @@ public interface FormToPorletMapPersistence extends BasePersistence<FormToPorlet
 	* @return the matching form to porlet map, or <code>null</code> if a matching form to porlet map could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public com.rcs.webform.model.FormToPorletMap fetchByPortletId(
+	public com.rcs.webform.model.FormToPorletMap fetchByPortletIdAndActive(
 		java.lang.String portletId, boolean retrieveFromCache)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
@@ -80,7 +80,7 @@ public interface FormToPorletMapPersistence extends BasePersistence<FormToPorlet
 	* @return the form to porlet map that was removed
 	* @throws SystemException if a system exception occurred
 	*/
-	public com.rcs.webform.model.FormToPorletMap removeByPortletId(
+	public com.rcs.webform.model.FormToPorletMap removeByPortletIdAndActive(
 		java.lang.String portletId)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.rcs.webform.NoSuchFormToPorletMapException;
@@ -92,7 +92,7 @@ public interface FormToPorletMapPersistence extends BasePersistence<FormToPorlet
 	* @return the number of matching form to porlet maps
 	* @throws SystemException if a system exception occurred
 	*/
-	public int countByPortletId(java.lang.String portletId)
+	public int countByPortletIdAndActive(java.lang.String portletId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**

@@ -294,6 +294,10 @@ public class FormLocalServiceUtil {
 			useCaptcha, successMessageMap, successUrl, submitLabelMap);
 	}
 
+	public static com.rcs.webform.model.Form getFormByFormId(long formId) {
+		return getService().getFormByFormId(formId);
+	}
+
 	public static void clearService() {
 		_service = null;
 	}

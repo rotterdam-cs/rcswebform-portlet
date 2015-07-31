@@ -118,11 +118,11 @@ public class FormToPorletMapUtil {
 	* @throws com.rcs.webform.NoSuchFormToPorletMapException if a matching form to porlet map could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public static com.rcs.webform.model.FormToPorletMap findByPortletId(
+	public static com.rcs.webform.model.FormToPorletMap findByPortletIdAndActive(
 		java.lang.String portletId)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.rcs.webform.NoSuchFormToPorletMapException {
-		return getPersistence().findByPortletId(portletId);
+		return getPersistence().findByPortletIdAndActive(portletId);
 	}
 
 	/**
@@ -132,10 +132,10 @@ public class FormToPorletMapUtil {
 	* @return the matching form to porlet map, or <code>null</code> if a matching form to porlet map could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public static com.rcs.webform.model.FormToPorletMap fetchByPortletId(
+	public static com.rcs.webform.model.FormToPorletMap fetchByPortletIdAndActive(
 		java.lang.String portletId)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().fetchByPortletId(portletId);
+		return getPersistence().fetchByPortletIdAndActive(portletId);
 	}
 
 	/**
@@ -146,10 +146,11 @@ public class FormToPorletMapUtil {
 	* @return the matching form to porlet map, or <code>null</code> if a matching form to porlet map could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public static com.rcs.webform.model.FormToPorletMap fetchByPortletId(
+	public static com.rcs.webform.model.FormToPorletMap fetchByPortletIdAndActive(
 		java.lang.String portletId, boolean retrieveFromCache)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().fetchByPortletId(portletId, retrieveFromCache);
+		return getPersistence()
+				   .fetchByPortletIdAndActive(portletId, retrieveFromCache);
 	}
 
 	/**
@@ -159,11 +160,11 @@ public class FormToPorletMapUtil {
 	* @return the form to porlet map that was removed
 	* @throws SystemException if a system exception occurred
 	*/
-	public static com.rcs.webform.model.FormToPorletMap removeByPortletId(
+	public static com.rcs.webform.model.FormToPorletMap removeByPortletIdAndActive(
 		java.lang.String portletId)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.rcs.webform.NoSuchFormToPorletMapException {
-		return getPersistence().removeByPortletId(portletId);
+		return getPersistence().removeByPortletIdAndActive(portletId);
 	}
 
 	/**
@@ -173,9 +174,9 @@ public class FormToPorletMapUtil {
 	* @return the number of matching form to porlet maps
 	* @throws SystemException if a system exception occurred
 	*/
-	public static int countByPortletId(java.lang.String portletId)
+	public static int countByPortletIdAndActive(java.lang.String portletId)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().countByPortletId(portletId);
+		return getPersistence().countByPortletIdAndActive(portletId);
 	}
 
 	/**

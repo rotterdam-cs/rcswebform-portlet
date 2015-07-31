@@ -53,7 +53,7 @@ public class FormToPorletMapLocalServiceImpl extends FormToPorletMapLocalService
 
     public FormToPorletMap getFormToPortletMapByPortletId(final String portletId) {
         try {
-            return FormToPorletMapUtil.findByPortletId(portletId);
+            return FormToPorletMapUtil.findByPortletIdAndActive(portletId);
         } catch (Exception e) {
             log.error("Exception while getting form to portlet map by Portlet id [" + portletId + "] : " + e.getMessage());
             return null;

@@ -101,7 +101,10 @@ public class FormModelImpl extends BaseModelImpl<Form> implements FormModel {
 	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.util.service.ServiceProps.get(
 				"value.object.finder.cache.enabled.com.rcs.webform.model.Form"),
 			false);
-	public static final boolean COLUMN_BITMASK_ENABLED = false;
+	public static final boolean COLUMN_BITMASK_ENABLED = GetterUtil.getBoolean(com.liferay.util.service.ServiceProps.get(
+				"value.object.column.bitmask.enabled.com.rcs.webform.model.Form"),
+			true);
+	public static long FORMID_COLUMN_BITMASK = 1L;
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.util.service.ServiceProps.get(
 				"lock.expiration.time.com.rcs.webform.model.Form"));
 
@@ -289,7 +292,19 @@ public class FormModelImpl extends BaseModelImpl<Form> implements FormModel {
 
 	@Override
 	public void setFormId(long formId) {
+		_columnBitmask = -1L;
+
+		if (!_setOriginalFormId) {
+			_setOriginalFormId = true;
+
+			_originalFormId = _formId;
+		}
+
 		_formId = formId;
+	}
+
+	public long getOriginalFormId() {
+		return _originalFormId;
 	}
 
 	@Override
@@ -887,6 +902,10 @@ public class FormModelImpl extends BaseModelImpl<Form> implements FormModel {
 		_submitAttrClass = submitAttrClass;
 	}
 
+	public long getColumnBitmask() {
+		return _columnBitmask;
+	}
+
 	@Override
 	public ExpandoBridge getExpandoBridge() {
 		return ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
@@ -959,7 +978,9 @@ public class FormModelImpl extends BaseModelImpl<Form> implements FormModel {
 			return StringPool.BLANK;
 		}
 
-		return LocalizationUtil.getDefaultLanguageId(xml);
+		Locale defaultLocale = LocaleUtil.getDefault();
+
+		return LocalizationUtil.getDefaultLanguageId(xml, defaultLocale);
 	}
 
 	@Override
@@ -1104,6 +1125,13 @@ public class FormModelImpl extends BaseModelImpl<Form> implements FormModel {
 
 	@Override
 	public void resetOriginalValues() {
+		FormModelImpl formModelImpl = this;
+
+		formModelImpl._originalFormId = formModelImpl._formId;
+
+		formModelImpl._setOriginalFormId = false;
+
+		formModelImpl._columnBitmask = 0;
 	}
 
 	@Override
@@ -1371,6 +1399,8 @@ public class FormModelImpl extends BaseModelImpl<Form> implements FormModel {
 	private static ClassLoader _classLoader = Form.class.getClassLoader();
 	private static Class<?>[] _escapedModelInterfaces = new Class[] { Form.class };
 	private long _formId;
+	private long _originalFormId;
+	private boolean _setOriginalFormId;
 	private boolean _active;
 	private Date _creationDate;
 	private Date _modificationDate;
@@ -1394,5 +1424,6 @@ public class FormModelImpl extends BaseModelImpl<Form> implements FormModel {
 	private String _submitLabelCurrentLanguageId;
 	private String _submitAttrId;
 	private String _submitAttrClass;
+	private long _columnBitmask;
 	private Form _escapedModel;
 }
