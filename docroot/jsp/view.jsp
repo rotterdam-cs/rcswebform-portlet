@@ -1,6 +1,10 @@
 <%@ include file="/jsp/init.jsp" %>
 
-<aui:form action="#" method="POST" name="fm" onSubmit="event.preventDefault();">
+<portlet:actionURL var="submitFormURL">
+	<portlet:param name="<%= ActionRequest.ACTION_NAME %>" value="submitForm" />
+</portlet:actionURL>
+
+<aui:form action="<%= submitFormURL %>" method="POST" name="fm" onSubmit="event.preventDefault();">
 	<aui:fieldset label="${Data.data.title}">
 		<div id="formDescription">
 			${Data.data.desc}
@@ -14,16 +18,20 @@
 		
 		<!-- Hidden input -->
 		<aui:input name="redirect" type="hidden" value="${Data.data.successURL}"></aui:input>
+		<aui:input name="formId" type="hidden" value="${Data.data.formId}"></aui:input>
 		
-		<div id="<portlet:namespace />rcsWebForm" class="${Data.data.formAttrClass}">
-			<!-- Form will be put here -->
-			<div id="<portlet:namespace />rcsWebFormItem">
-				<span id="<portlet:namespace />rcsWebFormItemLabel" >Form Item 1 label</span>
-				<span id="<portlet:namespace />rcsWebFormItemInputWrapper" >
-					<input type="text" name="<portlet:namespace />rcsWebFormItemInput" id="<portlet:namespace />rcsWebFormItemInput" />
-				</span>
+		<div id="<portlet:namespace />${Data.data.formAttrId}" class="${Data.data.formAttrClass}">
+			<div id="<portlet:namespace />rcsWebForm">
+				<!-- Form will be put here -->
+				<div id="<portlet:namespace />rcsWebFormItem">
+					<span id="<portlet:namespace />rcsWebFormItemLabel" >Form Item 1 label</span>
+					<span id="<portlet:namespace />rcsWebFormItemInputWrapper" >
+						<input type="text" name="<portlet:namespace />rcsWebFormItemInput" id="<portlet:namespace />rcsWebFormItemInput" />
+					</span>
+				</div>
 			</div>
 		</div>
+		
 		<c:if test="${Data.data.useCaptcha}">
 			<div id="<portlet:namespace />rcsWebFormCaptcha">
 				<portlet:resourceURL var="captchaURL">
@@ -39,6 +47,7 @@
 
 <aui:script use="aui-base,node,aui-form-validator,aui-datepicker">
 	var Data = <%= renderRequest.getAttribute("Data")%>;
+	console.log(Data);
 	if(Data) {
 		console.log('t0');
 		var divForm = A.one('#<portlet:namespace />rcsWebForm');

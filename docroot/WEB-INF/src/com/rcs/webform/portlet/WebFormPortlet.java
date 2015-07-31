@@ -23,6 +23,8 @@ import com.liferay.util.bridges.mvc.MVCPortlet;
 import com.rcs.webform.action.ConfigurationActionImpl;
 import com.rcs.webform.common.JsonResponse;
 import com.rcs.webform.common.util.EntityDtoConverter;
+import com.rcs.webform.common.util.WebFormUtil;
+import com.rcs.webform.entity.dto.FormDTO;
 import com.rcs.webform.model.Form;
 import com.rcs.webform.model.FormItem;
 import com.rcs.webform.model.FormToPorletMap;
@@ -39,29 +41,28 @@ public class WebFormPortlet extends MVCPortlet {
  
     @Override
     public void doView(RenderRequest renderRequest, RenderResponse renderResponse) throws IOException, PortletException {
-        try {
-            JsonResponse jsonResponse = new JsonResponse();
-            String portletId = PortalUtil.getPortletId(renderRequest);
-            log.info("Portlet id : "+portletId);
-                       
+    	JsonResponse jsonResponse = new JsonResponse();
+        String portletId = PortalUtil.getPortletId(renderRequest);
+        FormDTO formDto = new FormDTO();
+        try {    
             FormToPorletMap formToPorletMap = FormToPorletMapLocalServiceUtil.getFormToPortletMapByPortletId(portletId);
             
             Form form = FormLocalServiceUtil.getForm(formToPorletMap.getFormId());
             List<FormItem> formItems = FormItemLocalServiceUtil.getFormItemsByFormId(form.getFormId());
             
-            jsonResponse.setMessage(renderRequest.getLocale().getDisplayCountry());
-            jsonResponse.setData(EntityDtoConverter.formEntityToDto(form, formItems, renderRequest.getLocale()));
-            renderRequest.setAttribute("Data", jsonResponse);
-            renderRequest.setAttribute("Form", EntityDtoConverter.formEntityToDto(form, formItems, renderRequest.getLocale()));
-            
+            formDto = EntityDtoConverter.formEntityToDto(form, formItems, renderRequest.getLocale());
         } catch (Exception e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+        	log.info("No form data found on this portlet. Default form information is used.");
+        	formDto = WebFormUtil.createDefaultFormInformation();
         }
+        jsonResponse.setData(formDto);
+        jsonResponse.setMessage(renderRequest.getLocale().getDisplayCountry());
+        renderRequest.setAttribute("Data", jsonResponse);
+        
         super.doView(renderRequest, renderResponse);
     }
     
-    public void submitForm(ActionRequest actionRequest, ActionResponse actionResponse) throws IOException, PortletException {
+    public void submitForm(ActionRequest actionRequest, ActionResponse actionResponse) throws Exception {
         
     }
     
