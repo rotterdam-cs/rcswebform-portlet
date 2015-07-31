@@ -1,6 +1,10 @@
 <%@ include file="/jsp/init.jsp" %>
 
-<aui:form action="#" method="POST" name="fm" onSubmit="event.preventDefault();">
+<portlet:actionURL var="submitFormURL">
+	<portlet:param name="<%= ActionRequest.ACTION_NAME %>" value="submitForm" />
+</portlet:actionURL>
+
+<aui:form action="<%= submitFormURL %>" method="POST" name="fm" onSubmit="event.preventDefault();">
 	<aui:fieldset label="${Data.data.title}">
 		<div id="formDescription">
 			${Data.data.desc}
