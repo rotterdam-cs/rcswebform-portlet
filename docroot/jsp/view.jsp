@@ -1,25 +1,39 @@
 <%@ include file="/jsp/init.jsp" %>
 
-<%-- <aui:form action="#" method="POST" name="fm"> --%>
 <aui:form action="#" method="POST" name="fm" onSubmit="event.preventDefault();">
 	<aui:fieldset label="${Data.data.title}">
-			<div id="formDescription">
-				${Data.data.desc}
-			</div>
+		<div id="formDescription">
+			${Data.data.desc}
+		</div>
 		
-		<liferay-ui:success key="success" message="Form information was sent successfully" />
+		<liferay-ui:success key="success" message="${Data.data.successMessage}" />
+		
+		<liferay-ui:error exception="<%= CaptchaMaxChallengesException.class %>" message="maximum-number-of-captcha-attempts-exceeded" />
+		<liferay-ui:error exception="<%= CaptchaTextException.class %>" message="text-verification-failed" />
 		<liferay-ui:error key="error" message="An error occurred while sending the form information" />
 		
-		<div id="<portlet:namespace />rcsWebForm" >
+		<!-- Hidden input -->
+		<aui:input name="redirect" type="hidden" value="${Data.data.successURL}"></aui:input>
+		
+		<div id="<portlet:namespace />rcsWebForm ${Data.data.formAttrId}" class="${Data.data.formAttrClass}">
 			<!-- Form will be put here -->
 			<div id="<portlet:namespace />rcsWebFormItem">
-			<span id="<portlet:namespace />rcsWebFormItemLabel" >Form Item 1 label</span>
-			<span id="<portlet:namespace />rcsWebFormItemInputWrapper" >
-				<input type="text" name="<portlet:namespace />rcsWebFormItemInput" id="<portlet:namespace />rcsWebFormItemInput" />
-			</span>
+				<span id="<portlet:namespace />rcsWebFormItemLabel" >Form Item 1 label</span>
+				<span id="<portlet:namespace />rcsWebFormItemInputWrapper" >
+					<input type="text" name="<portlet:namespace />rcsWebFormItemInput" id="<portlet:namespace />rcsWebFormItemInput" />
+				</span>
 			</div>
 		</div>
-	<input type="submit" value="${Data.data.submitLabel}" />
+		<c:if test="${Data.data.useCaptcha}">
+			<div id="<portlet:namespace />rcsWebFormCaptcha">
+				<portlet:resourceURL var="captchaURL">
+					<portlet:param name="<%= Constants.CMD %>" value="captcha" />
+				</portlet:resourceURL>
+	
+				<liferay-ui:captcha url="<%= captchaURL %>" />
+			</div>
+		</c:if>
+		<input type="submit" value="${Data.data.submitLabel}" id="${Data.data.submitAttrId}" class="${Data.data.submitAttrClass}" />
 	</aui:fieldset>
 </aui:form>
 
