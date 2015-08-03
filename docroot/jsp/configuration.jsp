@@ -41,6 +41,7 @@ try{
 }
 
 //Get values from portlet preferences
+int onSubmitValue = GetterUtil.getInteger(portletPreferences.getValue("onSubmitValue", "1"));
 boolean sendAsEmail = GetterUtil.getBoolean(portletPreferences.getValue("sendAsEmail", StringPool.BLANK));
 String emailFromName = portletPreferences.getValue("emailFromName", StringPool.BLANK);
 String emailFromAddress = portletPreferences.getValue("emailFromAddress", StringPool.BLANK);
@@ -83,6 +84,7 @@ boolean fieldsEditingDisabled = false;
 					Success message: <liferay-ui:input-localized name="submitSuccessMsg" xml="<%= submitSuccessMessage %>"></liferay-ui:input-localized>
 					<aui:input name="onSubmitData" type="radio" id="submitURLRadio" label="Redirect URL on success" value="2" checked="<%= successURLRadio %>"></aui:input>
 					URL redirect: <aui:input name="submitSuccessURL" type="text" label="" value="<%= successURL %>"></aui:input>
+					<aui:input name="preferences--onSubmit--" type="hidden" id="onSubmitHiddenValue" value="<%= onSubmitValue %>"></aui:input>
 				</aui:field-wrapper>
 				
 				<aui:field-wrapper label="Submit Button Label">
@@ -290,6 +292,14 @@ AUI().use('aui-base',function(A){
 		A.one('#<portlet:namespace />emailAddress').set('disabled',true);
 		A.one('#<portlet:namespace />subject').set('disabled',true);
 	</c:if>
+	
+	A.one('#<portlet:namespace />submitSuccessRadio').on('click', function(event){
+		A.one('#<portlet:namespace />onSubmitHiddenValue').set('value',this.val());
+	});
+	
+	A.one('#<portlet:namespace />submitURLRadio').on('click', function(event){
+		A.one('#<portlet:namespace />onSubmitHiddenValue').set('value',this.val());
+	});
 	
 	A.one('.sendAsEmailChkBox').on('click', function(event){
 		if(this.attr('checked')){
