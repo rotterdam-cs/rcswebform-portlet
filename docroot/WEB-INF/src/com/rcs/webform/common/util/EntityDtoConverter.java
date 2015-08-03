@@ -73,6 +73,7 @@ public class EntityDtoConverter {
         formItemDto.setValidationRegexValueString(formItem.getValidationRegexValue());
         formItemDto.setErrorValidationMessage(formItem.getErrorValidationMessage(locale));
         formItemDto.setErrorMandatoryMessage(formItem.getErrorMandatoryMessage(locale));
+        formItemDto.setHintMessage(formItem.getHintMessage(locale));
         return formItemDto;
     }
 

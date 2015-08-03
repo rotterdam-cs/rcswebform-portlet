@@ -21,6 +21,8 @@ import com.liferay.portal.service.ServiceContext;
 
 import com.liferay.portlet.expando.model.ExpandoBridge;
 
+import com.rcs.webform.service.persistence.SubmittedDataPK;
+
 import java.io.Serializable;
 
 import java.util.Date;
@@ -50,14 +52,14 @@ public interface SubmittedDataModel extends BaseModel<SubmittedData> {
 	 *
 	 * @return the primary key of this submitted data
 	 */
-	public long getPrimaryKey();
+	public SubmittedDataPK getPrimaryKey();
 
 	/**
 	 * Sets the primary key of this submitted data.
 	 *
 	 * @param primaryKey the primary key of this submitted data
 	 */
-	public void setPrimaryKey(long primaryKey);
+	public void setPrimaryKey(SubmittedDataPK primaryKey);
 
 	/**
 	 * Returns the submitted data ID of this submitted data.

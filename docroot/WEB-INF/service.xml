@@ -137,9 +137,9 @@
 		<column name="creationDate" type="Date"></column>
 		<column name="modificationDate" type="Date"></column>
         <column name="modificationUser" type="String"></column>
-        <column name="formId" type="long"></column>
-        <column name="portletId" type="String"></column>
-        <column name="formItemId" type="long"></column>
+        <column name="formId" type="long" primary="true"></column>
+        <column name="portletId" type="String" primary="true"></column>
+        <column name="formItemId" type="long" primary="true"></column>
         <column name="userInput" type="String"></column>
 	</entity>
 

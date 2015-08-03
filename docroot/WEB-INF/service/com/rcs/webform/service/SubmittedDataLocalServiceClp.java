@@ -33,11 +33,15 @@ public class SubmittedDataLocalServiceClp implements SubmittedDataLocalService {
 
 		_methodName1 = "createSubmittedData";
 
-		_methodParameterTypes1 = new String[] { "long" };
+		_methodParameterTypes1 = new String[] {
+				"com.rcs.webform.service.persistence.SubmittedDataPK"
+			};
 
 		_methodName2 = "deleteSubmittedData";
 
-		_methodParameterTypes2 = new String[] { "long" };
+		_methodParameterTypes2 = new String[] {
+				"com.rcs.webform.service.persistence.SubmittedDataPK"
+			};
 
 		_methodName3 = "deleteSubmittedData";
 
@@ -83,11 +87,15 @@ public class SubmittedDataLocalServiceClp implements SubmittedDataLocalService {
 
 		_methodName10 = "fetchSubmittedData";
 
-		_methodParameterTypes10 = new String[] { "long" };
+		_methodParameterTypes10 = new String[] {
+				"com.rcs.webform.service.persistence.SubmittedDataPK"
+			};
 
 		_methodName11 = "getSubmittedData";
 
-		_methodParameterTypes11 = new String[] { "long" };
+		_methodParameterTypes11 = new String[] {
+				"com.rcs.webform.service.persistence.SubmittedDataPK"
+			};
 
 		_methodName12 = "getPersistedModel";
 
@@ -148,12 +156,13 @@ public class SubmittedDataLocalServiceClp implements SubmittedDataLocalService {
 
 	@Override
 	public com.rcs.webform.model.SubmittedData createSubmittedData(
-		long submittedDataId) {
+		com.rcs.webform.service.persistence.SubmittedDataPK submittedDataPK) {
 		Object returnObj = null;
 
 		try {
 			returnObj = _invokableLocalService.invokeMethod(_methodName1,
-					_methodParameterTypes1, new Object[] { submittedDataId });
+					_methodParameterTypes1,
+					new Object[] { ClpSerializer.translateInput(submittedDataPK) });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -172,14 +181,15 @@ public class SubmittedDataLocalServiceClp implements SubmittedDataLocalService {
 
 	@Override
 	public com.rcs.webform.model.SubmittedData deleteSubmittedData(
-		long submittedDataId)
+		com.rcs.webform.service.persistence.SubmittedDataPK submittedDataPK)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
 
 		try {
 			returnObj = _invokableLocalService.invokeMethod(_methodName2,
-					_methodParameterTypes2, new Object[] { submittedDataId });
+					_methodParameterTypes2,
+					new Object[] { ClpSerializer.translateInput(submittedDataPK) });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -433,13 +443,14 @@ public class SubmittedDataLocalServiceClp implements SubmittedDataLocalService {
 
 	@Override
 	public com.rcs.webform.model.SubmittedData fetchSubmittedData(
-		long submittedDataId)
+		com.rcs.webform.service.persistence.SubmittedDataPK submittedDataPK)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
 
 		try {
 			returnObj = _invokableLocalService.invokeMethod(_methodName10,
-					_methodParameterTypes10, new Object[] { submittedDataId });
+					_methodParameterTypes10,
+					new Object[] { ClpSerializer.translateInput(submittedDataPK) });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -462,14 +473,15 @@ public class SubmittedDataLocalServiceClp implements SubmittedDataLocalService {
 
 	@Override
 	public com.rcs.webform.model.SubmittedData getSubmittedData(
-		long submittedDataId)
+		com.rcs.webform.service.persistence.SubmittedDataPK submittedDataPK)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
 
 		try {
 			returnObj = _invokableLocalService.invokeMethod(_methodName11,
-					_methodParameterTypes11, new Object[] { submittedDataId });
+					_methodParameterTypes11,
+					new Object[] { ClpSerializer.translateInput(submittedDataPK) });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);

@@ -48,29 +48,29 @@ public class SubmittedDataLocalServiceWrapper
 	/**
 	* Creates a new submitted data with the primary key. Does not add the submitted data to the database.
 	*
-	* @param submittedDataId the primary key for the new submitted data
+	* @param submittedDataPK the primary key for the new submitted data
 	* @return the new submitted data
 	*/
 	@Override
 	public com.rcs.webform.model.SubmittedData createSubmittedData(
-		long submittedDataId) {
-		return _submittedDataLocalService.createSubmittedData(submittedDataId);
+		com.rcs.webform.service.persistence.SubmittedDataPK submittedDataPK) {
+		return _submittedDataLocalService.createSubmittedData(submittedDataPK);
 	}
 
 	/**
 	* Deletes the submitted data with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param submittedDataId the primary key of the submitted data
+	* @param submittedDataPK the primary key of the submitted data
 	* @return the submitted data that was removed
 	* @throws PortalException if a submitted data with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
 	@Override
 	public com.rcs.webform.model.SubmittedData deleteSubmittedData(
-		long submittedDataId)
+		com.rcs.webform.service.persistence.SubmittedDataPK submittedDataPK)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return _submittedDataLocalService.deleteSubmittedData(submittedDataId);
+		return _submittedDataLocalService.deleteSubmittedData(submittedDataPK);
 	}
 
 	/**
@@ -186,25 +186,25 @@ public class SubmittedDataLocalServiceWrapper
 
 	@Override
 	public com.rcs.webform.model.SubmittedData fetchSubmittedData(
-		long submittedDataId)
+		com.rcs.webform.service.persistence.SubmittedDataPK submittedDataPK)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return _submittedDataLocalService.fetchSubmittedData(submittedDataId);
+		return _submittedDataLocalService.fetchSubmittedData(submittedDataPK);
 	}
 
 	/**
 	* Returns the submitted data with the primary key.
 	*
-	* @param submittedDataId the primary key of the submitted data
+	* @param submittedDataPK the primary key of the submitted data
 	* @return the submitted data
 	* @throws PortalException if a submitted data with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
 	@Override
 	public com.rcs.webform.model.SubmittedData getSubmittedData(
-		long submittedDataId)
+		com.rcs.webform.service.persistence.SubmittedDataPK submittedDataPK)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return _submittedDataLocalService.getSubmittedData(submittedDataId);
+		return _submittedDataLocalService.getSubmittedData(submittedDataPK);
 	}
 
 	@Override

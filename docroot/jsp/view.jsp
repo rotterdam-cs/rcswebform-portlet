@@ -1,7 +1,8 @@
 <%@ include file="/jsp/init.jsp" %>
 
+<portlet:actionURL var="submitFormURL" name="submitForm"/>
 <%-- <aui:form action="#" method="POST" name="fm" onSubmit="event.preventDefault();"> --%>
-<aui:form action="#" method="POST" name="fm">
+<aui:form action="<%=submitFormURL%>" method="POST" name="fm">
 	<aui:fieldset label="${Data.data.title}">
 		<div id="formDescription">
 			${Data.data.desc}
@@ -44,24 +45,20 @@
 	</aui:fieldset>
 </aui:form>
 
-<aui:script use="aui-base,node,aui-form-validator,aui-datepicker">
+<aui:script use="aui-base,aui-node,aui-form-validator,aui-datepicker">
 	var Data = <%= renderRequest.getAttribute("Data")%>;
+	console.log('data : ' + Data);
 	if(Data) {
-		console.log('t0');
 		var divForm = A.one('#<portlet:namespace />rcsWebForm');
-		console.log('t1');
 		var divTemplateFormItem = A.one('#<portlet:namespace />rcsWebFormItem');
 		divTemplateFormItem.hide();
-		console.log('t2');
 		var rules = new Object();
 		var fieldStrings = new Object();
 		if(divForm || divTemplateFormItem) {
-			console.log('s1');
 			for(formItemIdx in Data.data.formItems) { 
 				console.log('formItem = '+formItemIdx);
 				var divFormItem =  divTemplateFormItem.cloneNode(true);
 				if(divFormItem) {
-					console.log('s2');
 					
 					divFormItemLabel = divFormItem.one('#<portlet:namespace />rcsWebFormItemLabel');
 					divFormItemInputWrapper = divFormItem.one('#<portlet:namespace />rcsWebFormItemInputWrapper');
@@ -70,12 +67,10 @@
 					divFormItemInputRadio = divFormItem.one('#<portlet:namespace />rcsWebFormItemInputRadio');
 					divFormItemInputRadioLabel = divFormItem.one('#<portlet:namespace />rcsWebFormItemInputRadioLabel');
 
-					divFormItemLabel.set('class', Data.data.formItems[formItemIdx].labelAttrClass);
+					divFormItem.addClass(Data.data.formItems[formItemIdx].formItemAttrClass);
+					divFormItemLabel.addClass(Data.data.formItems[formItemIdx].labelAttrClass);
 					divFormItemLabel.set('text',Data.data.formItems[formItemIdx].label);
 
-					
-					console.log('s3');
-					
 					switch(Data.data.formItems[formItemIdx].type) {
 						case 'TEXT_FIELD' :
 							initUserInputText(divFormItemInputWrapper, divFormItemInputText, formItemIdx);
@@ -116,10 +111,8 @@
 							divFormItemInputCombo.remove();
 							break;
 						case 'SECTION' :
-							divFormItemInputRadio.remove();
-							divFormItemInputRadioLabel.remove();
-							divFormItemInputCombo.remove();
-							divFormItemInputText.remove();
+							console.log('section called');
+							divFormItemInputWrapper.remove();
 							break;
 						case 'OPTIONS' :
 							initUserInputCombo(divFormItemInputWrapper, divFormItemInputCombo, formItemIdx);
@@ -141,11 +134,8 @@
 							break;
 
 					}
-					
-					console.log('s4');
-					
 				} else {
-					console.log('e2');
+					console.log('fail cloning form item node');
 				}
 				divFormItem.show();
 				divFormItem.appendTo(divForm);
@@ -175,14 +165,15 @@
 			console.log('form or form item not found');
 		}
 	} else{
-		console.log('fail');
+		console.log('empty Data');
 	}	
 
 	function initUserInput(divFormItemInputWrapper, divFormItemInput, formItemIdx) {
 		divFormItemInput.set('id', '<portlet:namespace />'+Data.data.formItems[formItemIdx].label);
 		divFormItemInput.set('name', '<portlet:namespace />'+Data.data.formItems[formItemIdx].label);
 		
-		divFormItemInputWrapper.set('class', Data.data.formItems[formItemIdx].inputAttrClass);
+		divFormItemInputWrapper.addClass(Data.data.formItems[formItemIdx].inputAttrClass);
+		divFormItemInput.set('placeholder', Data.data.formItems[formItemIdx].hintMessage);
 		
 		var rule = new Object();
 		rule.required = Data.data.formItems[formItemIdx].mandatory;
@@ -202,6 +193,7 @@
 	
 	function initUserInputText(divFormItemInputWrapper, divFormItemInput, formItemIdx) {
 		initUserInput(divFormItemInputWrapper, divFormItemInput, formItemIdx);
+		divFormItemInputText.set('value', Data.data.formItems[formItemIdx].defaultValue);
 	}
 	
 	function initUserInputCombo(divFormItemInputWrapper, divFormItemInput, formItemIdx, templateOptionItem) {
@@ -239,6 +231,10 @@
 				radioButton.set('name', '<portlet:namespace />'+Data.data.formItems[formItemIdx].label);
 				radioButton.set('value',options[optionIdx]);
 				radioLabel.set('text',options[optionIdx]);
+				
+				if(options[optionIdx] == Data.data.formItems[formItemIdx].defaultValue) {
+					radioButton.set('checked','true');
+				}
 				
 				radioButton.appendTo(divFormItemInputWrapper);
 				radioLabel.appendTo(divFormItemInputWrapper);

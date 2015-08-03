@@ -61,23 +61,23 @@ public interface SubmittedDataLocalService extends BaseLocalService,
 	/**
 	* Creates a new submitted data with the primary key. Does not add the submitted data to the database.
 	*
-	* @param submittedDataId the primary key for the new submitted data
+	* @param submittedDataPK the primary key for the new submitted data
 	* @return the new submitted data
 	*/
 	public com.rcs.webform.model.SubmittedData createSubmittedData(
-		long submittedDataId);
+		com.rcs.webform.service.persistence.SubmittedDataPK submittedDataPK);
 
 	/**
 	* Deletes the submitted data with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param submittedDataId the primary key of the submitted data
+	* @param submittedDataPK the primary key of the submitted data
 	* @return the submitted data that was removed
 	* @throws PortalException if a submitted data with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
 	@com.liferay.portal.kernel.search.Indexable(type = IndexableType.DELETE)
 	public com.rcs.webform.model.SubmittedData deleteSubmittedData(
-		long submittedDataId)
+		com.rcs.webform.service.persistence.SubmittedDataPK submittedDataPK)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
@@ -172,20 +172,20 @@ public interface SubmittedDataLocalService extends BaseLocalService,
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.rcs.webform.model.SubmittedData fetchSubmittedData(
-		long submittedDataId)
+		com.rcs.webform.service.persistence.SubmittedDataPK submittedDataPK)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
 	* Returns the submitted data with the primary key.
 	*
-	* @param submittedDataId the primary key of the submitted data
+	* @param submittedDataPK the primary key of the submitted data
 	* @return the submitted data
 	* @throws PortalException if a submitted data with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.rcs.webform.model.SubmittedData getSubmittedData(
-		long submittedDataId)
+		com.rcs.webform.service.persistence.SubmittedDataPK submittedDataPK)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 

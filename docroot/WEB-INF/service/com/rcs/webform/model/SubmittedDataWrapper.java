@@ -140,7 +140,7 @@ public class SubmittedDataWrapper implements SubmittedData,
 	* @return the primary key of this submitted data
 	*/
 	@Override
-	public long getPrimaryKey() {
+	public com.rcs.webform.service.persistence.SubmittedDataPK getPrimaryKey() {
 		return _submittedData.getPrimaryKey();
 	}
 
@@ -150,7 +150,8 @@ public class SubmittedDataWrapper implements SubmittedData,
 	* @param primaryKey the primary key of this submitted data
 	*/
 	@Override
-	public void setPrimaryKey(long primaryKey) {
+	public void setPrimaryKey(
+		com.rcs.webform.service.persistence.SubmittedDataPK primaryKey) {
 		_submittedData.setPrimaryKey(primaryKey);
 	}
 
@@ -448,7 +449,7 @@ public class SubmittedDataWrapper implements SubmittedData,
 	}
 
 	@Override
-	public int compareTo(SubmittedData submittedData) {
+	public int compareTo(com.rcs.webform.model.SubmittedData submittedData) {
 		return _submittedData.compareTo(submittedData);
 	}
 
@@ -458,17 +459,17 @@ public class SubmittedDataWrapper implements SubmittedData,
 	}
 
 	@Override
-	public com.liferay.portal.model.CacheModel<SubmittedData> toCacheModel() {
+	public com.liferay.portal.model.CacheModel<com.rcs.webform.model.SubmittedData> toCacheModel() {
 		return _submittedData.toCacheModel();
 	}
 
 	@Override
-	public SubmittedData toEscapedModel() {
+	public com.rcs.webform.model.SubmittedData toEscapedModel() {
 		return new SubmittedDataWrapper(_submittedData.toEscapedModel());
 	}
 
 	@Override
-	public SubmittedData toUnescapedModel() {
+	public com.rcs.webform.model.SubmittedData toUnescapedModel() {
 		return new SubmittedDataWrapper(_submittedData.toUnescapedModel());
 	}
 

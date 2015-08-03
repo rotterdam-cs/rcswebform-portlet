@@ -36,6 +36,7 @@ import com.rcs.webform.service.SubmittedDataLocalService;
 import com.rcs.webform.service.persistence.FormItemPersistence;
 import com.rcs.webform.service.persistence.FormPersistence;
 import com.rcs.webform.service.persistence.FormToPorletMapPersistence;
+import com.rcs.webform.service.persistence.SubmittedDataPK;
 import com.rcs.webform.service.persistence.SubmittedDataPersistence;
 
 import java.io.Serializable;
@@ -84,27 +85,27 @@ public abstract class SubmittedDataLocalServiceBaseImpl
 	/**
 	 * Creates a new submitted data with the primary key. Does not add the submitted data to the database.
 	 *
-	 * @param submittedDataId the primary key for the new submitted data
+	 * @param submittedDataPK the primary key for the new submitted data
 	 * @return the new submitted data
 	 */
 	@Override
-	public SubmittedData createSubmittedData(long submittedDataId) {
-		return submittedDataPersistence.create(submittedDataId);
+	public SubmittedData createSubmittedData(SubmittedDataPK submittedDataPK) {
+		return submittedDataPersistence.create(submittedDataPK);
 	}
 
 	/**
 	 * Deletes the submitted data with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param submittedDataId the primary key of the submitted data
+	 * @param submittedDataPK the primary key of the submitted data
 	 * @return the submitted data that was removed
 	 * @throws PortalException if a submitted data with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Indexable(type = IndexableType.DELETE)
 	@Override
-	public SubmittedData deleteSubmittedData(long submittedDataId)
+	public SubmittedData deleteSubmittedData(SubmittedDataPK submittedDataPK)
 		throws PortalException, SystemException {
-		return submittedDataPersistence.remove(submittedDataId);
+		return submittedDataPersistence.remove(submittedDataPK);
 	}
 
 	/**
@@ -215,23 +216,23 @@ public abstract class SubmittedDataLocalServiceBaseImpl
 	}
 
 	@Override
-	public SubmittedData fetchSubmittedData(long submittedDataId)
+	public SubmittedData fetchSubmittedData(SubmittedDataPK submittedDataPK)
 		throws SystemException {
-		return submittedDataPersistence.fetchByPrimaryKey(submittedDataId);
+		return submittedDataPersistence.fetchByPrimaryKey(submittedDataPK);
 	}
 
 	/**
 	 * Returns the submitted data with the primary key.
 	 *
-	 * @param submittedDataId the primary key of the submitted data
+	 * @param submittedDataPK the primary key of the submitted data
 	 * @return the submitted data
 	 * @throws PortalException if a submitted data with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public SubmittedData getSubmittedData(long submittedDataId)
+	public SubmittedData getSubmittedData(SubmittedDataPK submittedDataPK)
 		throws PortalException, SystemException {
-		return submittedDataPersistence.findByPrimaryKey(submittedDataId);
+		return submittedDataPersistence.findByPrimaryKey(submittedDataPK);
 	}
 
 	@Override

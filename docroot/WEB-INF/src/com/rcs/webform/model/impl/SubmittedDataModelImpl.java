@@ -21,13 +21,10 @@ import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.CacheModel;
 import com.liferay.portal.model.impl.BaseModelImpl;
-import com.liferay.portal.service.ServiceContext;
-
-import com.liferay.portlet.expando.model.ExpandoBridge;
-import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 
 import com.rcs.webform.model.SubmittedData;
 import com.rcs.webform.model.SubmittedDataModel;
+import com.rcs.webform.service.persistence.SubmittedDataPK;
 
 import java.io.Serializable;
 
@@ -71,10 +68,10 @@ public class SubmittedDataModelImpl extends BaseModelImpl<SubmittedData>
 			{ "formItemId", Types.BIGINT },
 			{ "userInput", Types.VARCHAR }
 		};
-	public static final String TABLE_SQL_CREATE = "create table rcswebform_SubmittedData (submittedDataId LONG not null primary key,groupId LONG,companyId LONG,active_ BOOLEAN,creationDate DATE null,modificationDate DATE null,modificationUser VARCHAR(75) null,formId LONG,portletId VARCHAR(75) null,formItemId LONG,userInput STRING null)";
+	public static final String TABLE_SQL_CREATE = "create table rcswebform_SubmittedData (submittedDataId LONG not null,groupId LONG,companyId LONG,active_ BOOLEAN,creationDate DATE null,modificationDate DATE null,modificationUser VARCHAR(75) null,formId LONG not null,portletId VARCHAR(75) not null,formItemId LONG not null,userInput STRING null,primary key (submittedDataId, formId, portletId, formItemId))";
 	public static final String TABLE_SQL_DROP = "drop table rcswebform_SubmittedData";
-	public static final String ORDER_BY_JPQL = " ORDER BY submittedData.submittedDataId ASC";
-	public static final String ORDER_BY_SQL = " ORDER BY rcswebform_SubmittedData.submittedDataId ASC";
+	public static final String ORDER_BY_JPQL = " ORDER BY submittedData.id.submittedDataId ASC, submittedData.id.formId ASC, submittedData.id.portletId ASC, submittedData.id.formItemId ASC";
+	public static final String ORDER_BY_SQL = " ORDER BY rcswebform_SubmittedData.submittedDataId ASC, rcswebform_SubmittedData.formId ASC, rcswebform_SubmittedData.portletId ASC, rcswebform_SubmittedData.formItemId ASC";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
 	public static final String TX_MANAGER = "liferayTransactionManager";
@@ -92,23 +89,28 @@ public class SubmittedDataModelImpl extends BaseModelImpl<SubmittedData>
 	}
 
 	@Override
-	public long getPrimaryKey() {
-		return _submittedDataId;
+	public SubmittedDataPK getPrimaryKey() {
+		return new SubmittedDataPK(_submittedDataId, _formId, _portletId,
+			_formItemId);
 	}
 
 	@Override
-	public void setPrimaryKey(long primaryKey) {
-		setSubmittedDataId(primaryKey);
+	public void setPrimaryKey(SubmittedDataPK primaryKey) {
+		setSubmittedDataId(primaryKey.submittedDataId);
+		setFormId(primaryKey.formId);
+		setPortletId(primaryKey.portletId);
+		setFormItemId(primaryKey.formItemId);
 	}
 
 	@Override
 	public Serializable getPrimaryKeyObj() {
-		return _submittedDataId;
+		return new SubmittedDataPK(_submittedDataId, _formId, _portletId,
+			_formItemId);
 	}
 
 	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
-		setPrimaryKey(((Long)primaryKeyObj).longValue());
+		setPrimaryKey((SubmittedDataPK)primaryKeyObj);
 	}
 
 	@Override
@@ -340,19 +342,6 @@ public class SubmittedDataModelImpl extends BaseModelImpl<SubmittedData>
 	}
 
 	@Override
-	public ExpandoBridge getExpandoBridge() {
-		return ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
-			SubmittedData.class.getName(), getPrimaryKey());
-	}
-
-	@Override
-	public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
-		ExpandoBridge expandoBridge = getExpandoBridge();
-
-		expandoBridge.setAttributes(serviceContext);
-	}
-
-	@Override
 	public SubmittedData toEscapedModel() {
 		if (_escapedModel == null) {
 			_escapedModel = (SubmittedData)ProxyUtil.newProxyInstance(_classLoader,
@@ -385,17 +374,9 @@ public class SubmittedDataModelImpl extends BaseModelImpl<SubmittedData>
 
 	@Override
 	public int compareTo(SubmittedData submittedData) {
-		long primaryKey = submittedData.getPrimaryKey();
+		SubmittedDataPK primaryKey = submittedData.getPrimaryKey();
 
-		if (getPrimaryKey() < primaryKey) {
-			return -1;
-		}
-		else if (getPrimaryKey() > primaryKey) {
-			return 1;
-		}
-		else {
-			return 0;
-		}
+		return getPrimaryKey().compareTo(primaryKey);
 	}
 
 	@Override
@@ -410,9 +391,9 @@ public class SubmittedDataModelImpl extends BaseModelImpl<SubmittedData>
 
 		SubmittedData submittedData = (SubmittedData)obj;
 
-		long primaryKey = submittedData.getPrimaryKey();
+		SubmittedDataPK primaryKey = submittedData.getPrimaryKey();
 
-		if (getPrimaryKey() == primaryKey) {
+		if (getPrimaryKey().equals(primaryKey)) {
 			return true;
 		}
 		else {
@@ -422,7 +403,7 @@ public class SubmittedDataModelImpl extends BaseModelImpl<SubmittedData>
 
 	@Override
 	public int hashCode() {
-		return (int)getPrimaryKey();
+		return getPrimaryKey().hashCode();
 	}
 
 	@Override

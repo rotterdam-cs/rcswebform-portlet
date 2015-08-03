@@ -32,11 +32,15 @@ public class SubmittedDataLocalServiceClpInvoker {
 
 		_methodName1 = "createSubmittedData";
 
-		_methodParameterTypes1 = new String[] { "long" };
+		_methodParameterTypes1 = new String[] {
+				"com.rcs.webform.service.persistence.SubmittedDataPK"
+			};
 
 		_methodName2 = "deleteSubmittedData";
 
-		_methodParameterTypes2 = new String[] { "long" };
+		_methodParameterTypes2 = new String[] {
+				"com.rcs.webform.service.persistence.SubmittedDataPK"
+			};
 
 		_methodName3 = "deleteSubmittedData";
 
@@ -82,11 +86,15 @@ public class SubmittedDataLocalServiceClpInvoker {
 
 		_methodName10 = "fetchSubmittedData";
 
-		_methodParameterTypes10 = new String[] { "long" };
+		_methodParameterTypes10 = new String[] {
+				"com.rcs.webform.service.persistence.SubmittedDataPK"
+			};
 
 		_methodName11 = "getSubmittedData";
 
-		_methodParameterTypes11 = new String[] { "long" };
+		_methodParameterTypes11 = new String[] {
+				"com.rcs.webform.service.persistence.SubmittedDataPK"
+			};
 
 		_methodName12 = "getPersistedModel";
 
@@ -124,12 +132,12 @@ public class SubmittedDataLocalServiceClpInvoker {
 
 		if (_methodName1.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes1, parameterTypes)) {
-			return SubmittedDataLocalServiceUtil.createSubmittedData(((Long)arguments[0]).longValue());
+			return SubmittedDataLocalServiceUtil.createSubmittedData((com.rcs.webform.service.persistence.SubmittedDataPK)arguments[0]);
 		}
 
 		if (_methodName2.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes2, parameterTypes)) {
-			return SubmittedDataLocalServiceUtil.deleteSubmittedData(((Long)arguments[0]).longValue());
+			return SubmittedDataLocalServiceUtil.deleteSubmittedData((com.rcs.webform.service.persistence.SubmittedDataPK)arguments[0]);
 		}
 
 		if (_methodName3.equals(name) &&
@@ -175,12 +183,12 @@ public class SubmittedDataLocalServiceClpInvoker {
 
 		if (_methodName10.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes10, parameterTypes)) {
-			return SubmittedDataLocalServiceUtil.fetchSubmittedData(((Long)arguments[0]).longValue());
+			return SubmittedDataLocalServiceUtil.fetchSubmittedData((com.rcs.webform.service.persistence.SubmittedDataPK)arguments[0]);
 		}
 
 		if (_methodName11.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes11, parameterTypes)) {
-			return SubmittedDataLocalServiceUtil.getSubmittedData(((Long)arguments[0]).longValue());
+			return SubmittedDataLocalServiceUtil.getSubmittedData((com.rcs.webform.service.persistence.SubmittedDataPK)arguments[0]);
 		}
 
 		if (_methodName12.equals(name) &&

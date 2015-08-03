@@ -23,6 +23,7 @@ import com.liferay.portal.model.impl.BaseModelImpl;
 
 import com.rcs.webform.service.ClpSerializer;
 import com.rcs.webform.service.SubmittedDataLocalServiceUtil;
+import com.rcs.webform.service.persistence.SubmittedDataPK;
 
 import java.io.Serializable;
 
@@ -51,23 +52,28 @@ public class SubmittedDataClp extends BaseModelImpl<SubmittedData>
 	}
 
 	@Override
-	public long getPrimaryKey() {
-		return _submittedDataId;
+	public SubmittedDataPK getPrimaryKey() {
+		return new SubmittedDataPK(_submittedDataId, _formId, _portletId,
+			_formItemId);
 	}
 
 	@Override
-	public void setPrimaryKey(long primaryKey) {
-		setSubmittedDataId(primaryKey);
+	public void setPrimaryKey(SubmittedDataPK primaryKey) {
+		setSubmittedDataId(primaryKey.submittedDataId);
+		setFormId(primaryKey.formId);
+		setPortletId(primaryKey.portletId);
+		setFormItemId(primaryKey.formItemId);
 	}
 
 	@Override
 	public Serializable getPrimaryKeyObj() {
-		return _submittedDataId;
+		return new SubmittedDataPK(_submittedDataId, _formId, _portletId,
+			_formItemId);
 	}
 
 	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
-		setPrimaryKey(((Long)primaryKeyObj).longValue());
+		setPrimaryKey((SubmittedDataPK)primaryKeyObj);
 	}
 
 	@Override
@@ -505,17 +511,9 @@ public class SubmittedDataClp extends BaseModelImpl<SubmittedData>
 
 	@Override
 	public int compareTo(SubmittedData submittedData) {
-		long primaryKey = submittedData.getPrimaryKey();
+		SubmittedDataPK primaryKey = submittedData.getPrimaryKey();
 
-		if (getPrimaryKey() < primaryKey) {
-			return -1;
-		}
-		else if (getPrimaryKey() > primaryKey) {
-			return 1;
-		}
-		else {
-			return 0;
-		}
+		return getPrimaryKey().compareTo(primaryKey);
 	}
 
 	@Override
@@ -530,9 +528,9 @@ public class SubmittedDataClp extends BaseModelImpl<SubmittedData>
 
 		SubmittedDataClp submittedData = (SubmittedDataClp)obj;
 
-		long primaryKey = submittedData.getPrimaryKey();
+		SubmittedDataPK primaryKey = submittedData.getPrimaryKey();
 
-		if (getPrimaryKey() == primaryKey) {
+		if (getPrimaryKey().equals(primaryKey)) {
 			return true;
 		}
 		else {
@@ -546,7 +544,7 @@ public class SubmittedDataClp extends BaseModelImpl<SubmittedData>
 
 	@Override
 	public int hashCode() {
-		return (int)getPrimaryKey();
+		return getPrimaryKey().hashCode();
 	}
 
 	@Override
