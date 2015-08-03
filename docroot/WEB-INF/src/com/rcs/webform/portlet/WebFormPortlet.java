@@ -271,7 +271,7 @@ public class WebFormPortlet extends MVCPortlet {
 			for (FormItem formItem : formItems){
 				String userInput = ParamUtil.get(actionRequest, formItem.getLabel(actionRequest.getLocale()), "");
 				
-				sb.append(formItem.getLabel());
+				sb.append(formItem.getLabel(actionRequest.getLocale()));
 				sb.append(" : ");
 				
 				if (formItem.getType().equals(FormItemType.CHECKBOX.toString())) {
