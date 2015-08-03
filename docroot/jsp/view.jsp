@@ -191,6 +191,15 @@
 		} else {
 			rule[Data.data.formItems[formItemIdx].validationType.toLowerCase()] = true;  
 		}
+		
+		if(Data.data.formItems[formItemIdx].minLength) {
+			rule.minLength = Data.data.formItems[formItemIdx].minLength; 
+		}
+		
+		if(Data.data.formItems[formItemIdx].maxLength) {
+			rule.maxLength = Data.data.formItems[formItemIdx].maxLength; 
+		}
+		
 		rules[divFormItemInput.attr('id')] = rule;
 		
 		var fieldString = new Object();

@@ -470,7 +470,7 @@ public class FormToPorletMapWrapper implements FormToPorletMap,
 	}
 
 	@Override
-	public int compareTo(com.rcs.webform.model.FormToPorletMap formToPorletMap) {
+	public int compareTo(FormToPorletMap formToPorletMap) {
 		return _formToPorletMap.compareTo(formToPorletMap);
 	}
 
@@ -480,17 +480,17 @@ public class FormToPorletMapWrapper implements FormToPorletMap,
 	}
 
 	@Override
-	public com.liferay.portal.model.CacheModel<com.rcs.webform.model.FormToPorletMap> toCacheModel() {
+	public com.liferay.portal.model.CacheModel<FormToPorletMap> toCacheModel() {
 		return _formToPorletMap.toCacheModel();
 	}
 
 	@Override
-	public com.rcs.webform.model.FormToPorletMap toEscapedModel() {
+	public FormToPorletMap toEscapedModel() {
 		return new FormToPorletMapWrapper(_formToPorletMap.toEscapedModel());
 	}
 
 	@Override
-	public com.rcs.webform.model.FormToPorletMap toUnescapedModel() {
+	public FormToPorletMap toUnescapedModel() {
 		return new FormToPorletMapWrapper(_formToPorletMap.toUnescapedModel());
 	}
 

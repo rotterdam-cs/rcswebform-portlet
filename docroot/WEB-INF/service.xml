@@ -67,8 +67,11 @@
         <column name="order" type="int"></column>
         <column name="validationType" type="String"></column>
         <column name="validationRegexValue" type="String"></column>
+        <column name="minLength" type="int"></column>
+        <column name="maxLength" type="int"></column>
         <column name="errorValidationMessage" type="String" localized="true"></column>
         <column name="errorMandatoryMessage" type="String" localized="true"></column>
+        <column name="errorLengthMessage" type="String" localized="true"></column>
         <column name="hintMessage" type="String" localized="true"></column>
         <finder name="FormIdAndActive" return-type="Collection" where="active=true">
             <finder-column name="formId" comparator="="></finder-column>

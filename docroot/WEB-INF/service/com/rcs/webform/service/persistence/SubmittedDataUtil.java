@@ -137,7 +137,7 @@ public class SubmittedDataUtil {
 	* @return the new submitted data
 	*/
 	public static com.rcs.webform.model.SubmittedData create(
-		com.rcs.webform.service.persistence.SubmittedDataPK submittedDataPK) {
+		SubmittedDataPK submittedDataPK) {
 		return getPersistence().create(submittedDataPK);
 	}
 
@@ -150,7 +150,7 @@ public class SubmittedDataUtil {
 	* @throws SystemException if a system exception occurred
 	*/
 	public static com.rcs.webform.model.SubmittedData remove(
-		com.rcs.webform.service.persistence.SubmittedDataPK submittedDataPK)
+		SubmittedDataPK submittedDataPK)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.rcs.webform.NoSuchSubmittedDataException {
 		return getPersistence().remove(submittedDataPK);
@@ -171,7 +171,7 @@ public class SubmittedDataUtil {
 	* @throws SystemException if a system exception occurred
 	*/
 	public static com.rcs.webform.model.SubmittedData findByPrimaryKey(
-		com.rcs.webform.service.persistence.SubmittedDataPK submittedDataPK)
+		SubmittedDataPK submittedDataPK)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.rcs.webform.NoSuchSubmittedDataException {
 		return getPersistence().findByPrimaryKey(submittedDataPK);
@@ -185,7 +185,7 @@ public class SubmittedDataUtil {
 	* @throws SystemException if a system exception occurred
 	*/
 	public static com.rcs.webform.model.SubmittedData fetchByPrimaryKey(
-		com.rcs.webform.service.persistence.SubmittedDataPK submittedDataPK)
+		SubmittedDataPK submittedDataPK)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().fetchByPrimaryKey(submittedDataPK);
 	}

@@ -102,8 +102,11 @@ public class FormItemClp extends BaseModelImpl<FormItem> implements FormItem {
 		attributes.put("order", getOrder());
 		attributes.put("validationType", getValidationType());
 		attributes.put("validationRegexValue", getValidationRegexValue());
+		attributes.put("minLength", getMinLength());
+		attributes.put("maxLength", getMaxLength());
 		attributes.put("errorValidationMessage", getErrorValidationMessage());
 		attributes.put("errorMandatoryMessage", getErrorMandatoryMessage());
+		attributes.put("errorLengthMessage", getErrorLengthMessage());
 		attributes.put("hintMessage", getHintMessage());
 
 		return attributes;
@@ -232,6 +235,18 @@ public class FormItemClp extends BaseModelImpl<FormItem> implements FormItem {
 			setValidationRegexValue(validationRegexValue);
 		}
 
+		Integer minLength = (Integer)attributes.get("minLength");
+
+		if (minLength != null) {
+			setMinLength(minLength);
+		}
+
+		Integer maxLength = (Integer)attributes.get("maxLength");
+
+		if (maxLength != null) {
+			setMaxLength(maxLength);
+		}
+
 		String errorValidationMessage = (String)attributes.get(
 				"errorValidationMessage");
 
@@ -244,6 +259,12 @@ public class FormItemClp extends BaseModelImpl<FormItem> implements FormItem {
 
 		if (errorMandatoryMessage != null) {
 			setErrorMandatoryMessage(errorMandatoryMessage);
+		}
+
+		String errorLengthMessage = (String)attributes.get("errorLengthMessage");
+
+		if (errorLengthMessage != null) {
+			setErrorLengthMessage(errorLengthMessage);
 		}
 
 		String hintMessage = (String)attributes.get("hintMessage");
@@ -1035,6 +1056,52 @@ public class FormItemClp extends BaseModelImpl<FormItem> implements FormItem {
 	}
 
 	@Override
+	public int getMinLength() {
+		return _minLength;
+	}
+
+	@Override
+	public void setMinLength(int minLength) {
+		_minLength = minLength;
+
+		if (_formItemRemoteModel != null) {
+			try {
+				Class<?> clazz = _formItemRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setMinLength", int.class);
+
+				method.invoke(_formItemRemoteModel, minLength);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public int getMaxLength() {
+		return _maxLength;
+	}
+
+	@Override
+	public void setMaxLength(int maxLength) {
+		_maxLength = maxLength;
+
+		if (_formItemRemoteModel != null) {
+			try {
+				Class<?> clazz = _formItemRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setMaxLength", int.class);
+
+				method.invoke(_formItemRemoteModel, maxLength);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
 	public String getErrorValidationMessage() {
 		return _errorValidationMessage;
 	}
@@ -1304,6 +1371,136 @@ public class FormItemClp extends BaseModelImpl<FormItem> implements FormItem {
 	}
 
 	@Override
+	public String getErrorLengthMessage() {
+		return _errorLengthMessage;
+	}
+
+	@Override
+	public String getErrorLengthMessage(Locale locale) {
+		String languageId = LocaleUtil.toLanguageId(locale);
+
+		return getErrorLengthMessage(languageId);
+	}
+
+	@Override
+	public String getErrorLengthMessage(Locale locale, boolean useDefault) {
+		String languageId = LocaleUtil.toLanguageId(locale);
+
+		return getErrorLengthMessage(languageId, useDefault);
+	}
+
+	@Override
+	public String getErrorLengthMessage(String languageId) {
+		return LocalizationUtil.getLocalization(getErrorLengthMessage(),
+			languageId);
+	}
+
+	@Override
+	public String getErrorLengthMessage(String languageId, boolean useDefault) {
+		return LocalizationUtil.getLocalization(getErrorLengthMessage(),
+			languageId, useDefault);
+	}
+
+	@Override
+	public String getErrorLengthMessageCurrentLanguageId() {
+		return _errorLengthMessageCurrentLanguageId;
+	}
+
+	@Override
+	public String getErrorLengthMessageCurrentValue() {
+		Locale locale = getLocale(_errorLengthMessageCurrentLanguageId);
+
+		return getErrorLengthMessage(locale);
+	}
+
+	@Override
+	public Map<Locale, String> getErrorLengthMessageMap() {
+		return LocalizationUtil.getLocalizationMap(getErrorLengthMessage());
+	}
+
+	@Override
+	public void setErrorLengthMessage(String errorLengthMessage) {
+		_errorLengthMessage = errorLengthMessage;
+
+		if (_formItemRemoteModel != null) {
+			try {
+				Class<?> clazz = _formItemRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setErrorLengthMessage",
+						String.class);
+
+				method.invoke(_formItemRemoteModel, errorLengthMessage);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public void setErrorLengthMessage(String errorLengthMessage, Locale locale) {
+		setErrorLengthMessage(errorLengthMessage, locale,
+			LocaleUtil.getDefault());
+	}
+
+	@Override
+	public void setErrorLengthMessage(String errorLengthMessage, Locale locale,
+		Locale defaultLocale) {
+		String languageId = LocaleUtil.toLanguageId(locale);
+		String defaultLanguageId = LocaleUtil.toLanguageId(defaultLocale);
+
+		if (Validator.isNotNull(errorLengthMessage)) {
+			setErrorLengthMessage(LocalizationUtil.updateLocalization(
+					getErrorLengthMessage(), "ErrorLengthMessage",
+					errorLengthMessage, languageId, defaultLanguageId));
+		}
+		else {
+			setErrorLengthMessage(LocalizationUtil.removeLocalization(
+					getErrorLengthMessage(), "ErrorLengthMessage", languageId));
+		}
+	}
+
+	@Override
+	public void setErrorLengthMessageCurrentLanguageId(String languageId) {
+		_errorLengthMessageCurrentLanguageId = languageId;
+	}
+
+	@Override
+	public void setErrorLengthMessageMap(
+		Map<Locale, String> errorLengthMessageMap) {
+		setErrorLengthMessageMap(errorLengthMessageMap, LocaleUtil.getDefault());
+	}
+
+	@Override
+	public void setErrorLengthMessageMap(
+		Map<Locale, String> errorLengthMessageMap, Locale defaultLocale) {
+		if (errorLengthMessageMap == null) {
+			return;
+		}
+
+		ClassLoader portalClassLoader = PortalClassLoaderUtil.getClassLoader();
+
+		Thread currentThread = Thread.currentThread();
+
+		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
+
+		try {
+			if (contextClassLoader != portalClassLoader) {
+				currentThread.setContextClassLoader(portalClassLoader);
+			}
+
+			setErrorLengthMessage(LocalizationUtil.updateLocalization(
+					errorLengthMessageMap, getErrorLengthMessage(),
+					"ErrorLengthMessage", LocaleUtil.toLanguageId(defaultLocale)));
+		}
+		finally {
+			if (contextClassLoader != portalClassLoader) {
+				currentThread.setContextClassLoader(contextClassLoader);
+			}
+		}
+	}
+
+	@Override
 	public String getHintMessage() {
 		return _hintMessage;
 	}
@@ -1547,6 +1744,17 @@ public class FormItemClp extends BaseModelImpl<FormItem> implements FormItem {
 			}
 		}
 
+		Map<Locale, String> errorLengthMessageMap = getErrorLengthMessageMap();
+
+		for (Map.Entry<Locale, String> entry : errorLengthMessageMap.entrySet()) {
+			Locale locale = entry.getKey();
+			String value = entry.getValue();
+
+			if (Validator.isNotNull(value)) {
+				availableLanguageIds.add(LocaleUtil.toLanguageId(locale));
+			}
+		}
+
 		Map<Locale, String> hintMessageMap = getHintMessageMap();
 
 		for (Map.Entry<Locale, String> entry : hintMessageMap.entrySet()) {
@@ -1569,7 +1777,9 @@ public class FormItemClp extends BaseModelImpl<FormItem> implements FormItem {
 			return StringPool.BLANK;
 		}
 
-		return LocalizationUtil.getDefaultLanguageId(xml);
+		Locale defaultLocale = LocaleUtil.getDefault();
+
+		return LocalizationUtil.getDefaultLanguageId(xml, defaultLocale);
 	}
 
 	@Override
@@ -1636,6 +1846,17 @@ public class FormItemClp extends BaseModelImpl<FormItem> implements FormItem {
 				defaultLocale, defaultLocale);
 		}
 
+		String errorLengthMessage = getErrorLengthMessage(defaultLocale);
+
+		if (Validator.isNull(errorLengthMessage)) {
+			setErrorLengthMessage(getErrorLengthMessage(modelDefaultLanguageId),
+				defaultLocale);
+		}
+		else {
+			setErrorLengthMessage(getErrorLengthMessage(defaultLocale),
+				defaultLocale, defaultLocale);
+		}
+
 		String hintMessage = getHintMessage(defaultLocale);
 
 		if (Validator.isNull(hintMessage)) {
@@ -1677,8 +1898,11 @@ public class FormItemClp extends BaseModelImpl<FormItem> implements FormItem {
 		clone.setOrder(getOrder());
 		clone.setValidationType(getValidationType());
 		clone.setValidationRegexValue(getValidationRegexValue());
+		clone.setMinLength(getMinLength());
+		clone.setMaxLength(getMaxLength());
 		clone.setErrorValidationMessage(getErrorValidationMessage());
 		clone.setErrorMandatoryMessage(getErrorMandatoryMessage());
+		clone.setErrorLengthMessage(getErrorLengthMessage());
 		clone.setHintMessage(getHintMessage());
 
 		return clone;
@@ -1721,6 +1945,10 @@ public class FormItemClp extends BaseModelImpl<FormItem> implements FormItem {
 		}
 	}
 
+	public Class<?> getClpSerializerClass() {
+		return _clpSerializerClass;
+	}
+
 	@Override
 	public int hashCode() {
 		return (int)getPrimaryKey();
@@ -1728,7 +1956,7 @@ public class FormItemClp extends BaseModelImpl<FormItem> implements FormItem {
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(47);
+		StringBundler sb = new StringBundler(53);
 
 		sb.append("{formItemId=");
 		sb.append(getFormItemId());
@@ -1770,10 +1998,16 @@ public class FormItemClp extends BaseModelImpl<FormItem> implements FormItem {
 		sb.append(getValidationType());
 		sb.append(", validationRegexValue=");
 		sb.append(getValidationRegexValue());
+		sb.append(", minLength=");
+		sb.append(getMinLength());
+		sb.append(", maxLength=");
+		sb.append(getMaxLength());
 		sb.append(", errorValidationMessage=");
 		sb.append(getErrorValidationMessage());
 		sb.append(", errorMandatoryMessage=");
 		sb.append(getErrorMandatoryMessage());
+		sb.append(", errorLengthMessage=");
+		sb.append(getErrorLengthMessage());
 		sb.append(", hintMessage=");
 		sb.append(getHintMessage());
 		sb.append("}");
@@ -1783,7 +2017,7 @@ public class FormItemClp extends BaseModelImpl<FormItem> implements FormItem {
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(73);
+		StringBundler sb = new StringBundler(82);
 
 		sb.append("<model><model-name>");
 		sb.append("com.rcs.webform.model.FormItem");
@@ -1870,12 +2104,24 @@ public class FormItemClp extends BaseModelImpl<FormItem> implements FormItem {
 		sb.append(getValidationRegexValue());
 		sb.append("]]></column-value></column>");
 		sb.append(
+			"<column><column-name>minLength</column-name><column-value><![CDATA[");
+		sb.append(getMinLength());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>maxLength</column-name><column-value><![CDATA[");
+		sb.append(getMaxLength());
+		sb.append("]]></column-value></column>");
+		sb.append(
 			"<column><column-name>errorValidationMessage</column-name><column-value><![CDATA[");
 		sb.append(getErrorValidationMessage());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>errorMandatoryMessage</column-name><column-value><![CDATA[");
 		sb.append(getErrorMandatoryMessage());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>errorLengthMessage</column-name><column-value><![CDATA[");
+		sb.append(getErrorLengthMessage());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>hintMessage</column-name><column-value><![CDATA[");
@@ -1910,11 +2156,16 @@ public class FormItemClp extends BaseModelImpl<FormItem> implements FormItem {
 	private int _order;
 	private String _validationType;
 	private String _validationRegexValue;
+	private int _minLength;
+	private int _maxLength;
 	private String _errorValidationMessage;
 	private String _errorValidationMessageCurrentLanguageId;
 	private String _errorMandatoryMessage;
 	private String _errorMandatoryMessageCurrentLanguageId;
+	private String _errorLengthMessage;
+	private String _errorLengthMessageCurrentLanguageId;
 	private String _hintMessage;
 	private String _hintMessageCurrentLanguageId;
 	private BaseModel<?> _formItemRemoteModel;
+	private Class<?> _clpSerializerClass = com.rcs.webform.service.ClpSerializer.class;
 }

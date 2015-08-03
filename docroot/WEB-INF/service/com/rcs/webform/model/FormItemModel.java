@@ -625,6 +625,34 @@ public interface FormItemModel extends BaseModel<FormItem> {
 	public void setValidationRegexValue(String validationRegexValue);
 
 	/**
+	 * Returns the min length of this form item.
+	 *
+	 * @return the min length of this form item
+	 */
+	public int getMinLength();
+
+	/**
+	 * Sets the min length of this form item.
+	 *
+	 * @param minLength the min length of this form item
+	 */
+	public void setMinLength(int minLength);
+
+	/**
+	 * Returns the max length of this form item.
+	 *
+	 * @return the max length of this form item
+	 */
+	public int getMaxLength();
+
+	/**
+	 * Sets the max length of this form item.
+	 *
+	 * @param maxLength the max length of this form item
+	 */
+	public void setMaxLength(int maxLength);
+
+	/**
 	 * Returns the error validation message of this form item.
 	 *
 	 * @return the error validation message of this form item
@@ -830,6 +858,108 @@ public interface FormItemModel extends BaseModel<FormItem> {
 	 */
 	public void setErrorMandatoryMessageMap(
 		Map<Locale, String> errorMandatoryMessageMap, Locale defaultLocale);
+
+	/**
+	 * Returns the error length message of this form item.
+	 *
+	 * @return the error length message of this form item
+	 */
+	public String getErrorLengthMessage();
+
+	/**
+	 * Returns the localized error length message of this form item in the language. Uses the default language if no localization exists for the requested language.
+	 *
+	 * @param locale the locale of the language
+	 * @return the localized error length message of this form item
+	 */
+	@AutoEscape
+	public String getErrorLengthMessage(Locale locale);
+
+	/**
+	 * Returns the localized error length message of this form item in the language, optionally using the default language if no localization exists for the requested language.
+	 *
+	 * @param locale the local of the language
+	 * @param useDefault whether to use the default language if no localization exists for the requested language
+	 * @return the localized error length message of this form item. If <code>useDefault</code> is <code>false</code> and no localization exists for the requested language, an empty string will be returned.
+	 */
+	@AutoEscape
+	public String getErrorLengthMessage(Locale locale, boolean useDefault);
+
+	/**
+	 * Returns the localized error length message of this form item in the language. Uses the default language if no localization exists for the requested language.
+	 *
+	 * @param languageId the ID of the language
+	 * @return the localized error length message of this form item
+	 */
+	@AutoEscape
+	public String getErrorLengthMessage(String languageId);
+
+	/**
+	 * Returns the localized error length message of this form item in the language, optionally using the default language if no localization exists for the requested language.
+	 *
+	 * @param languageId the ID of the language
+	 * @param useDefault whether to use the default language if no localization exists for the requested language
+	 * @return the localized error length message of this form item
+	 */
+	@AutoEscape
+	public String getErrorLengthMessage(String languageId, boolean useDefault);
+
+	@AutoEscape
+	public String getErrorLengthMessageCurrentLanguageId();
+
+	@AutoEscape
+	public String getErrorLengthMessageCurrentValue();
+
+	/**
+	 * Returns a map of the locales and localized error length messages of this form item.
+	 *
+	 * @return the locales and localized error length messages of this form item
+	 */
+	public Map<Locale, String> getErrorLengthMessageMap();
+
+	/**
+	 * Sets the error length message of this form item.
+	 *
+	 * @param errorLengthMessage the error length message of this form item
+	 */
+	public void setErrorLengthMessage(String errorLengthMessage);
+
+	/**
+	 * Sets the localized error length message of this form item in the language.
+	 *
+	 * @param errorLengthMessage the localized error length message of this form item
+	 * @param locale the locale of the language
+	 */
+	public void setErrorLengthMessage(String errorLengthMessage, Locale locale);
+
+	/**
+	 * Sets the localized error length message of this form item in the language, and sets the default locale.
+	 *
+	 * @param errorLengthMessage the localized error length message of this form item
+	 * @param locale the locale of the language
+	 * @param defaultLocale the default locale
+	 */
+	public void setErrorLengthMessage(String errorLengthMessage, Locale locale,
+		Locale defaultLocale);
+
+	public void setErrorLengthMessageCurrentLanguageId(String languageId);
+
+	/**
+	 * Sets the localized error length messages of this form item from the map of locales and localized error length messages.
+	 *
+	 * @param errorLengthMessageMap the locales and localized error length messages of this form item
+	 */
+	public void setErrorLengthMessageMap(
+		Map<Locale, String> errorLengthMessageMap);
+
+	/**
+	 * Sets the localized error length messages of this form item from the map of locales and localized error length messages, and sets the default locale.
+	 *
+	 * @param errorLengthMessageMap the locales and localized error length messages of this form item
+	 * @param defaultLocale the default locale
+	 */
+	public void setErrorLengthMessageMap(
+		Map<Locale, String> errorLengthMessageMap, Locale defaultLocale);
 
 	/**
 	 * Returns the hint message of this form item.
