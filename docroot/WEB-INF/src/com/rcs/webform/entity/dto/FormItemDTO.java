@@ -28,10 +28,43 @@ public class FormItemDTO extends GenericEntityDTO {
 	private int order;
 	private ValidationType validationType;
 	private String validationRegexValueString;
-	private String errorValidationMessage;
+	private int minLength;
+	private int maxLength;
+    private String errorValidationMessage;
 	private String errorMandatoryMessage;
-	private String hintMessage;
+	private String errorLengthMessage;
+    private String hintMessage;
     
+    
+    public int getMinLength() {
+        return minLength;
+    }
+
+    
+    public void setMinLength(int minLength) {
+        this.minLength = minLength;
+    }
+
+    
+    public int getMaxLength() {
+        return maxLength;
+    }
+
+    
+    public void setMaxLength(int maxLength) {
+        this.maxLength = maxLength;
+    }
+
+    
+    public String getErrorLengthMessage() {
+        return errorLengthMessage;
+    }
+
+    
+    public void setErrorLengthMessage(String errorLengthMessage) {
+        this.errorLengthMessage = errorLengthMessage;
+    }
+
     public long getFormItemId() {
         return formItemId;
     }

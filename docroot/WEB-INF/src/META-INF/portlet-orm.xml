@@ -82,11 +82,16 @@
 			</basic>
 			<basic name="validationType" />
 			<basic name="validationRegexValue" />
+			<basic name="minLength" />
+			<basic name="maxLength" />
 			<basic name="errorValidationMessage" />
 			<basic name="errorMandatoryMessage" />
+			<basic name="errorLengthMessage" />
 			<basic name="hintMessage" />
 			<transient name="defaultValueCurrentLanguageId" />
 			<transient name="defaultValueMap" />
+			<transient name="errorLengthMessageCurrentLanguageId" />
+			<transient name="errorLengthMessageMap" />
 			<transient name="errorMandatoryMessageCurrentLanguageId" />
 			<transient name="errorMandatoryMessageMap" />
 			<transient name="errorValidationMessageCurrentLanguageId" />

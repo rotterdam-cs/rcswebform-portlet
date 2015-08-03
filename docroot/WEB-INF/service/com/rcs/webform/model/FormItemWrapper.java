@@ -69,8 +69,11 @@ public class FormItemWrapper implements FormItem, ModelWrapper<FormItem> {
 		attributes.put("order", getOrder());
 		attributes.put("validationType", getValidationType());
 		attributes.put("validationRegexValue", getValidationRegexValue());
+		attributes.put("minLength", getMinLength());
+		attributes.put("maxLength", getMaxLength());
 		attributes.put("errorValidationMessage", getErrorValidationMessage());
 		attributes.put("errorMandatoryMessage", getErrorMandatoryMessage());
+		attributes.put("errorLengthMessage", getErrorLengthMessage());
 		attributes.put("hintMessage", getHintMessage());
 
 		return attributes;
@@ -199,6 +202,18 @@ public class FormItemWrapper implements FormItem, ModelWrapper<FormItem> {
 			setValidationRegexValue(validationRegexValue);
 		}
 
+		Integer minLength = (Integer)attributes.get("minLength");
+
+		if (minLength != null) {
+			setMinLength(minLength);
+		}
+
+		Integer maxLength = (Integer)attributes.get("maxLength");
+
+		if (maxLength != null) {
+			setMaxLength(maxLength);
+		}
+
 		String errorValidationMessage = (String)attributes.get(
 				"errorValidationMessage");
 
@@ -211,6 +226,12 @@ public class FormItemWrapper implements FormItem, ModelWrapper<FormItem> {
 
 		if (errorMandatoryMessage != null) {
 			setErrorMandatoryMessage(errorMandatoryMessage);
+		}
+
+		String errorLengthMessage = (String)attributes.get("errorLengthMessage");
+
+		if (errorLengthMessage != null) {
+			setErrorLengthMessage(errorLengthMessage);
 		}
 
 		String hintMessage = (String)attributes.get("hintMessage");
@@ -1024,6 +1045,46 @@ public class FormItemWrapper implements FormItem, ModelWrapper<FormItem> {
 	}
 
 	/**
+	* Returns the min length of this form item.
+	*
+	* @return the min length of this form item
+	*/
+	@Override
+	public int getMinLength() {
+		return _formItem.getMinLength();
+	}
+
+	/**
+	* Sets the min length of this form item.
+	*
+	* @param minLength the min length of this form item
+	*/
+	@Override
+	public void setMinLength(int minLength) {
+		_formItem.setMinLength(minLength);
+	}
+
+	/**
+	* Returns the max length of this form item.
+	*
+	* @return the max length of this form item
+	*/
+	@Override
+	public int getMaxLength() {
+		return _formItem.getMaxLength();
+	}
+
+	/**
+	* Sets the max length of this form item.
+	*
+	* @param maxLength the max length of this form item
+	*/
+	@Override
+	public void setMaxLength(int maxLength) {
+		_formItem.setMaxLength(maxLength);
+	}
+
+	/**
 	* Returns the error validation message of this form item.
 	*
 	* @return the error validation message of this form item
@@ -1319,6 +1380,150 @@ public class FormItemWrapper implements FormItem, ModelWrapper<FormItem> {
 	}
 
 	/**
+	* Returns the error length message of this form item.
+	*
+	* @return the error length message of this form item
+	*/
+	@Override
+	public java.lang.String getErrorLengthMessage() {
+		return _formItem.getErrorLengthMessage();
+	}
+
+	/**
+	* Returns the localized error length message of this form item in the language. Uses the default language if no localization exists for the requested language.
+	*
+	* @param locale the locale of the language
+	* @return the localized error length message of this form item
+	*/
+	@Override
+	public java.lang.String getErrorLengthMessage(java.util.Locale locale) {
+		return _formItem.getErrorLengthMessage(locale);
+	}
+
+	/**
+	* Returns the localized error length message of this form item in the language, optionally using the default language if no localization exists for the requested language.
+	*
+	* @param locale the local of the language
+	* @param useDefault whether to use the default language if no localization exists for the requested language
+	* @return the localized error length message of this form item. If <code>useDefault</code> is <code>false</code> and no localization exists for the requested language, an empty string will be returned.
+	*/
+	@Override
+	public java.lang.String getErrorLengthMessage(java.util.Locale locale,
+		boolean useDefault) {
+		return _formItem.getErrorLengthMessage(locale, useDefault);
+	}
+
+	/**
+	* Returns the localized error length message of this form item in the language. Uses the default language if no localization exists for the requested language.
+	*
+	* @param languageId the ID of the language
+	* @return the localized error length message of this form item
+	*/
+	@Override
+	public java.lang.String getErrorLengthMessage(java.lang.String languageId) {
+		return _formItem.getErrorLengthMessage(languageId);
+	}
+
+	/**
+	* Returns the localized error length message of this form item in the language, optionally using the default language if no localization exists for the requested language.
+	*
+	* @param languageId the ID of the language
+	* @param useDefault whether to use the default language if no localization exists for the requested language
+	* @return the localized error length message of this form item
+	*/
+	@Override
+	public java.lang.String getErrorLengthMessage(java.lang.String languageId,
+		boolean useDefault) {
+		return _formItem.getErrorLengthMessage(languageId, useDefault);
+	}
+
+	@Override
+	public java.lang.String getErrorLengthMessageCurrentLanguageId() {
+		return _formItem.getErrorLengthMessageCurrentLanguageId();
+	}
+
+	@Override
+	public java.lang.String getErrorLengthMessageCurrentValue() {
+		return _formItem.getErrorLengthMessageCurrentValue();
+	}
+
+	/**
+	* Returns a map of the locales and localized error length messages of this form item.
+	*
+	* @return the locales and localized error length messages of this form item
+	*/
+	@Override
+	public java.util.Map<java.util.Locale, java.lang.String> getErrorLengthMessageMap() {
+		return _formItem.getErrorLengthMessageMap();
+	}
+
+	/**
+	* Sets the error length message of this form item.
+	*
+	* @param errorLengthMessage the error length message of this form item
+	*/
+	@Override
+	public void setErrorLengthMessage(java.lang.String errorLengthMessage) {
+		_formItem.setErrorLengthMessage(errorLengthMessage);
+	}
+
+	/**
+	* Sets the localized error length message of this form item in the language.
+	*
+	* @param errorLengthMessage the localized error length message of this form item
+	* @param locale the locale of the language
+	*/
+	@Override
+	public void setErrorLengthMessage(java.lang.String errorLengthMessage,
+		java.util.Locale locale) {
+		_formItem.setErrorLengthMessage(errorLengthMessage, locale);
+	}
+
+	/**
+	* Sets the localized error length message of this form item in the language, and sets the default locale.
+	*
+	* @param errorLengthMessage the localized error length message of this form item
+	* @param locale the locale of the language
+	* @param defaultLocale the default locale
+	*/
+	@Override
+	public void setErrorLengthMessage(java.lang.String errorLengthMessage,
+		java.util.Locale locale, java.util.Locale defaultLocale) {
+		_formItem.setErrorLengthMessage(errorLengthMessage, locale,
+			defaultLocale);
+	}
+
+	@Override
+	public void setErrorLengthMessageCurrentLanguageId(
+		java.lang.String languageId) {
+		_formItem.setErrorLengthMessageCurrentLanguageId(languageId);
+	}
+
+	/**
+	* Sets the localized error length messages of this form item from the map of locales and localized error length messages.
+	*
+	* @param errorLengthMessageMap the locales and localized error length messages of this form item
+	*/
+	@Override
+	public void setErrorLengthMessageMap(
+		java.util.Map<java.util.Locale, java.lang.String> errorLengthMessageMap) {
+		_formItem.setErrorLengthMessageMap(errorLengthMessageMap);
+	}
+
+	/**
+	* Sets the localized error length messages of this form item from the map of locales and localized error length messages, and sets the default locale.
+	*
+	* @param errorLengthMessageMap the locales and localized error length messages of this form item
+	* @param defaultLocale the default locale
+	*/
+	@Override
+	public void setErrorLengthMessageMap(
+		java.util.Map<java.util.Locale, java.lang.String> errorLengthMessageMap,
+		java.util.Locale defaultLocale) {
+		_formItem.setErrorLengthMessageMap(errorLengthMessageMap, defaultLocale);
+	}
+
+	/**
 	* Returns the hint message of this form item.
 	*
 	* @return the hint message of this form item
@@ -1547,7 +1752,7 @@ public class FormItemWrapper implements FormItem, ModelWrapper<FormItem> {
 	}
 
 	@Override
-	public int compareTo(FormItem formItem) {
+	public int compareTo(com.rcs.webform.model.FormItem formItem) {
 		return _formItem.compareTo(formItem);
 	}
 
@@ -1557,17 +1762,17 @@ public class FormItemWrapper implements FormItem, ModelWrapper<FormItem> {
 	}
 
 	@Override
-	public com.liferay.portal.model.CacheModel<FormItem> toCacheModel() {
+	public com.liferay.portal.model.CacheModel<com.rcs.webform.model.FormItem> toCacheModel() {
 		return _formItem.toCacheModel();
 	}
 
 	@Override
-	public FormItem toEscapedModel() {
+	public com.rcs.webform.model.FormItem toEscapedModel() {
 		return new FormItemWrapper(_formItem.toEscapedModel());
 	}
 
 	@Override
-	public FormItem toUnescapedModel() {
+	public com.rcs.webform.model.FormItem toUnescapedModel() {
 		return new FormItemWrapper(_formItem.toUnescapedModel());
 	}
 

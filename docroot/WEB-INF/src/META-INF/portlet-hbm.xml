@@ -52,8 +52,11 @@
 		<property name="order" type="com.liferay.portal.dao.orm.hibernate.IntegerType" column="order_" />
 		<property name="validationType" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="validationRegexValue" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="minLength" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="maxLength" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
 		<property name="errorValidationMessage" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="errorMandatoryMessage" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="errorLengthMessage" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="hintMessage" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 	</class>
 	<class name="com.rcs.webform.model.impl.FormToPorletMapImpl" table="rcswebform_FormToPorletMap">
