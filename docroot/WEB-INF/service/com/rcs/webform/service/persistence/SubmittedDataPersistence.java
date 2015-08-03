@@ -59,7 +59,7 @@ public interface SubmittedDataPersistence extends BasePersistence<SubmittedData>
 	* @return the new submitted data
 	*/
 	public com.rcs.webform.model.SubmittedData create(
-		com.rcs.webform.service.persistence.SubmittedDataPK submittedDataPK);
+		SubmittedDataPK submittedDataPK);
 
 	/**
 	* Removes the submitted data with the primary key from the database. Also notifies the appropriate model listeners.
@@ -70,7 +70,7 @@ public interface SubmittedDataPersistence extends BasePersistence<SubmittedData>
 	* @throws SystemException if a system exception occurred
 	*/
 	public com.rcs.webform.model.SubmittedData remove(
-		com.rcs.webform.service.persistence.SubmittedDataPK submittedDataPK)
+		SubmittedDataPK submittedDataPK)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.rcs.webform.NoSuchSubmittedDataException;
 
@@ -87,7 +87,7 @@ public interface SubmittedDataPersistence extends BasePersistence<SubmittedData>
 	* @throws SystemException if a system exception occurred
 	*/
 	public com.rcs.webform.model.SubmittedData findByPrimaryKey(
-		com.rcs.webform.service.persistence.SubmittedDataPK submittedDataPK)
+		SubmittedDataPK submittedDataPK)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.rcs.webform.NoSuchSubmittedDataException;
 
@@ -99,7 +99,7 @@ public interface SubmittedDataPersistence extends BasePersistence<SubmittedData>
 	* @throws SystemException if a system exception occurred
 	*/
 	public com.rcs.webform.model.SubmittedData fetchByPrimaryKey(
-		com.rcs.webform.service.persistence.SubmittedDataPK submittedDataPK)
+		SubmittedDataPK submittedDataPK)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
