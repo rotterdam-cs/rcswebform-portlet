@@ -185,46 +185,53 @@ boolean fieldsEditingDisabled = false;
 				optionsDiv.all('label').show();
 				optionsDiv.show();
 			}
-			else if (value == 'paragraph') {
-
-				// Show just the text field and not the labels since there
-				// are multiple choice inputs
-
-				optionsDiv.all('label').hide();
-				optionsDiv.show();
-			}
 			else {
 				optionsDiv.hide();
+			}
+			
+			var textFieldInputTypeDiv = formRow.one('.text-field-input-type');
+	
+			if (value == 'TEXT_FIELD') {
+				textFieldInputTypeDiv.all('label').show();
+				textFieldInputTypeDiv.show();
+			}
+			else {
+				textFieldInputTypeDiv.hide();
 			}
 
 			var optionalControl = formRow.one('.optional-control').ancestor();
 			var labelName = formRow.one('.label-name');
+			optionalControl.show();
+			labelName.show();
+			
+		};
+		
+		var inputTypeToggleOptions = function(event) {
+			var select = this;
 
-			if (value == 'paragraph') {
-				var inputName = labelName.one('input.field');
-
-				var formFieldsIndex = select.attr('id').match(/\d+$/);
-
-				inputName.val('<liferay-ui:message key="paragraph" />' + formFieldsIndex);
-				inputName.fire('change');
-
-				labelName.hide();
-				optionalControl.hide();
-
-				optionalControl.all('input[type="checkbox"]').attr('checked', 'true');
-				optionalControl.all('input[type="hidden"]').attr('value', 'true');
+			var formRow = select.ancestor('.lfr-form-row');
+			var value = select.val().split(":")[0];
+			
+			var inputMaxLengthDiv = formRow.one('.input-max-length');
+	
+			if ((value == 'ALPHA') || (value == 'NUMBER')) {
+				inputMaxLengthDiv.all('label').show();
+				inputMaxLengthDiv.show();
 			}
 			else {
-				optionalControl.show();
-				labelName.show();
+				inputMaxLengthDiv.hide();
 			}
 		};
 
 		var webFields = A.one('.webFields');
 
-		webFields.all('select').each(toggleOptions);
+		webFields.all('select.field-type').each(toggleOptions);
 
-		webFields.delegate(['change', 'click', 'keydown'], toggleOptions, 'select');
+		webFields.delegate(['change', 'click', 'keydown'], toggleOptions, 'select.field-type');
+		
+		webFields.all('select.text-field-input-type').each(inputTypeToggleOptions);
+
+		webFields.delegate(['change', 'click', 'keydown'], inputTypeToggleOptions, 'select.text-field-input-type');
 
 		<c:if test="false">
 			var toggleValidationOptions = function(event) {

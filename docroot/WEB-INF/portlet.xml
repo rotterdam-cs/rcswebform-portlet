@@ -17,6 +17,7 @@
 			<mime-type>text/html</mime-type>
 			<portlet-mode>view</portlet-mode>
 		</supports>
+        <resource-bundle>content.Language</resource-bundle>
 		<portlet-info>
 			<title>RCS Web Form</title>
 			<short-title>Rcs Web Form</short-title>

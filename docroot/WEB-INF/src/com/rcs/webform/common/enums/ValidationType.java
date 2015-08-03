@@ -24,6 +24,7 @@ public enum ValidationType {
 	
 	//list custom validation type
 	REGEX,
+	PHONE_NUMBER,
 	NONE,
 	;
 }
