@@ -34,6 +34,7 @@ String fieldOptions = "";
 String fieldValidationScript = "";
 String fieldValidationErrorMessage = "";
 String fieldTextFieldInputType = "ALPHA";
+String fieldHintMessageXml = "";
 
 if(formItems != null && !formItems.isEmpty()){
 	formItemId = formItems.get(formFieldsIndex).getFormItemId();
@@ -45,7 +46,8 @@ if(formItems != null && !formItems.isEmpty()){
 	fieldOptions = LocalizationUtil.getLocalization(fieldOptionsXml, themeDisplay.getLanguageId());
 	fieldTextFieldInputType = formItems.get(formFieldsIndex).getValidationType();
 	fieldValidationScript = PrefsParamUtil.getString(portletPreferences, request, "fieldValidationScript" + formFieldsIndex);
-	fieldValidationErrorMessage = PrefsParamUtil.getString(portletPreferences, request, "fieldValidationErrorMessage" + formFieldsIndex);	
+	fieldValidationErrorMessage = PrefsParamUtil.getString(portletPreferences, request, "fieldValidationErrorMessage" + formFieldsIndex);
+	fieldHintMessageXml = formItems.get(formFieldsIndex).getHintMessage();
 }
 
 boolean ignoreRequestValue = (index != formFieldsIndex);
@@ -141,6 +143,14 @@ boolean ignoreRequestValue = (index != formFieldsIndex);
 		</c:when>
 	</c:choose>
 	
+	<c:choose>
+		<c:when test="<%= !fieldsEditingDisabled %>">
+				<aui:field-wrapper cssClass='<%= "input-hint-message" + ((Validator.isNull(fieldType) || (!fieldType.equals("TEXT_FIELD"))) ? " hide" : StringPool.BLANK) %>' label="Hint Message" helpMessage='Set Field Hint Message / Placeholder'>
+					<liferay-ui:input-localized ignoreRequestValue="<%= ignoreRequestValue %>" name='<%= "fieldHintMessage" + index %>' xml="<%= fieldHintMessageXml %>" />
+				</aui:field-wrapper>
+		</c:when>
+	</c:choose>
+
 	<c:choose>
 		<c:when test="<%= !fieldsEditingDisabled %>">
 			<aui:field-wrapper cssClass='<%= "text-field-input-type" + ((Validator.isNull(fieldType) || (!fieldType.equals("TEXT_FIELD"))) ? " hide" : StringPool.BLANK) %>' >

@@ -132,14 +132,15 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 					Map<Locale, String> fieldOptionsMap = LocalizationUtil.getLocalizationMap(actionRequest, "fieldOptions" + formFieldsIndex);
 					String fieldValidationScript = ParamUtil.getString(actionRequest, "fieldValidationScript" + formFieldsIndex);
 					String fieldValidationErrorMessage = ParamUtil.getString(actionRequest, "fieldValidationErrorMessage" + formFieldsIndex);
-					
+					Map<Locale, String> fieldHintMessageMap = LocalizationUtil.getLocalizationMap(actionRequest, "fieldHintMessage" + formFieldsIndex);
+				    
 					if (Validator.isNotNull(fieldValidationScript) ^ Validator.isNotNull(fieldValidationErrorMessage)) {
 	
 						SessionErrors.add(actionRequest, "validationDefinitionInvalid" + i);
 					}
 	
 					FormItemLocalServiceUtil.save(formItemId, formId, fieldLabelMap, fieldType, fieldOptionsMap, fieldOptional,
-							fieldValidationScript, validationType, fieldValidationErrorMessage, formFieldsIndex, serviceContext);
+							fieldValidationScript, validationType, fieldValidationErrorMessage, formFieldsIndex, fieldHintMessageMap, serviceContext);
 	
 					i++;
 				}

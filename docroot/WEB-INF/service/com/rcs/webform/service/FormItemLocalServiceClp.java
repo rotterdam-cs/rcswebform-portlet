@@ -114,7 +114,8 @@ public class FormItemLocalServiceClp implements FormItemLocalService {
 				"java.lang.Long", "java.lang.Long", "java.util.Map",
 				"java.lang.String", "java.util.Map", "boolean",
 				"java.lang.String", "java.lang.String", "java.lang.String",
-				"int", "com.liferay.portal.service.ServiceContext"
+				"int", "java.util.Map",
+				"com.liferay.portal.service.ServiceContext"
 			};
 
 		_methodName20 = "getFormItemByFormId";
@@ -687,6 +688,7 @@ public class FormItemLocalServiceClp implements FormItemLocalService {
 		boolean mandatory, java.lang.String validationRegexValue,
 		java.lang.String validationType,
 		java.lang.String errorValidationMessage, int order,
+		java.util.Map<java.util.Locale, java.lang.String> hintMessage,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		Object returnObj = null;
 
@@ -713,6 +715,8 @@ public class FormItemLocalServiceClp implements FormItemLocalService {
 					ClpSerializer.translateInput(errorValidationMessage),
 						
 					order,
+						
+					ClpSerializer.translateInput(hintMessage),
 						
 					ClpSerializer.translateInput(serviceContext)
 					});

@@ -294,11 +294,12 @@ public class FormItemLocalServiceUtil {
 		boolean mandatory, java.lang.String validationRegexValue,
 		java.lang.String validationType,
 		java.lang.String errorValidationMessage, int order,
+		java.util.Map<java.util.Locale, java.lang.String> hintMessage,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		return getService()
 				   .save(formItemId, formId, label, type, options, mandatory,
 			validationRegexValue, validationType, errorValidationMessage,
-			order, serviceContext);
+			order, hintMessage, serviceContext);
 	}
 
 	public static java.util.List<com.rcs.webform.model.FormItem> getFormItemByFormId(
