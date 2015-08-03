@@ -2,6 +2,7 @@ package com.rcs.webform.common.util;
 
 import java.util.List;
 
+import com.rcs.webform.entity.dto.FormDTO;
 import com.rcs.webform.model.Form;
 import com.rcs.webform.model.FormItem;
 import com.rcs.webform.model.FormToPorletMap;
@@ -50,6 +51,19 @@ public class WebFormUtil {
 		}
 		return null;
 	}
+	
+	public static FormDTO createDefaultFormInformation(){
+		FormDTO formDto = new FormDTO();
+		formDto.setTitle("Title");
+		formDto.setDesc("Description");
+		formDto.setSuccessMessage("Successfully saved the form data");
+		formDto.setSuccessURL("");
+		formDto.setUseCaptcha(false);
+		formDto.setSubmitLabel("Submit");
+		return formDto;
+	}
+	
+	
 
 	
 }

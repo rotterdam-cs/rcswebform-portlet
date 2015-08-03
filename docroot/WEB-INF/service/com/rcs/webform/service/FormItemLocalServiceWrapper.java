@@ -331,6 +331,19 @@ public class FormItemLocalServiceWrapper implements FormItemLocalService,
 	}
 
 	/**
+	* Soft Delete Form Item
+	*
+	* @param formItemId
+	* @param serviceContext
+	* @return
+	*/
+	@Override
+	public com.rcs.webform.model.FormItem delete(java.lang.Long formItemId,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return _formItemLocalService.delete(formItemId, serviceContext);
+	}
+
+	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */
 	public FormItemLocalService getWrappedFormItemLocalService() {

@@ -1,8 +1,10 @@
 <%@ include file="/jsp/init.jsp" %>
 
-<portlet:actionURL var="submitFormURL" name="submitForm"/>
-<%-- <aui:form action="#" method="POST" name="fm" onSubmit="event.preventDefault();"> --%>
-<aui:form action="<%=submitFormURL%>" method="POST" name="fm">
+<portlet:actionURL var="submitFormURL">
+	<portlet:param name="<%= ActionRequest.ACTION_NAME %>" value="submitForm" />
+</portlet:actionURL>
+
+<aui:form action="<%= submitFormURL %>" method="POST" name="fm">
 	<aui:fieldset label="${Data.data.title}">
 		<div id="formDescription">
 			${Data.data.desc}
@@ -16,6 +18,7 @@
 		
 		<!-- Hidden input -->
 		<aui:input name="redirect" type="hidden" value="${Data.data.successURL}"></aui:input>
+		<aui:input name="formId" type="hidden" value="${Data.data.formId}"></aui:input>
 		
 		<div id="<portlet:namespace />rcsWebForm" class="${Data.data.formAttrClass}">
 			<!-- Form will be put here -->
@@ -32,6 +35,7 @@
 			</span>
 			</div>
 		</div>
+		
 		<c:if test="${Data.data.useCaptcha}">
 			<div id="<portlet:namespace />rcsWebFormCaptcha">
 				<portlet:resourceURL var="captchaURL">
@@ -47,11 +51,13 @@
 
 <aui:script use="aui-base,aui-node,aui-form-validator,aui-datepicker">
 	var Data = <%= renderRequest.getAttribute("Data")%>;
-	console.log('data : ' + Data);
 	if(Data) {
+		console.log('t0');
 		var divForm = A.one('#<portlet:namespace />rcsWebForm');
+		console.log('t1');
 		var divTemplateFormItem = A.one('#<portlet:namespace />rcsWebFormItem');
 		divTemplateFormItem.hide();
+		console.log('t2');
 		var rules = new Object();
 		var fieldStrings = new Object();
 		if(divForm || divTemplateFormItem) {
@@ -59,6 +65,7 @@
 				console.log('formItem = '+formItemIdx);
 				var divFormItem =  divTemplateFormItem.cloneNode(true);
 				if(divFormItem) {
+					console.log('s2');
 					
 					divFormItemLabel = divFormItem.one('#<portlet:namespace />rcsWebFormItemLabel');
 					divFormItemInputWrapper = divFormItem.one('#<portlet:namespace />rcsWebFormItemInputWrapper');
@@ -134,6 +141,8 @@
 							break;
 
 					}
+					
+					
 				} else {
 					console.log('fail cloning form item node');
 				}

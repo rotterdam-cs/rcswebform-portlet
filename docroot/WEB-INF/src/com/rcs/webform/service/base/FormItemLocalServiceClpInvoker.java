@@ -124,6 +124,12 @@ public class FormItemLocalServiceClpInvoker {
 		_methodName52 = "getFormItemsByFormId";
 
 		_methodParameterTypes52 = new String[] { "java.lang.Long" };
+
+		_methodName53 = "delete";
+
+		_methodParameterTypes53 = new String[] {
+				"java.lang.Long", "com.liferay.portal.service.ServiceContext"
+			};
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -251,6 +257,12 @@ public class FormItemLocalServiceClpInvoker {
 			return FormItemLocalServiceUtil.getFormItemsByFormId((java.lang.Long)arguments[0]);
 		}
 
+		if (_methodName53.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes53, parameterTypes)) {
+			return FormItemLocalServiceUtil.delete((java.lang.Long)arguments[0],
+				(com.liferay.portal.service.ServiceContext)arguments[1]);
+		}
+
 		throw new UnsupportedOperationException();
 	}
 
@@ -296,4 +308,6 @@ public class FormItemLocalServiceClpInvoker {
 	private String[] _methodParameterTypes51;
 	private String _methodName52;
 	private String[] _methodParameterTypes52;
+	private String _methodName53;
+	private String[] _methodParameterTypes53;
 }

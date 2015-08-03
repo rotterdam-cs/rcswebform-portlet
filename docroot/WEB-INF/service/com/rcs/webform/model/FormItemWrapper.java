@@ -1547,7 +1547,7 @@ public class FormItemWrapper implements FormItem, ModelWrapper<FormItem> {
 	}
 
 	@Override
-	public int compareTo(com.rcs.webform.model.FormItem formItem) {
+	public int compareTo(FormItem formItem) {
 		return _formItem.compareTo(formItem);
 	}
 
@@ -1557,17 +1557,17 @@ public class FormItemWrapper implements FormItem, ModelWrapper<FormItem> {
 	}
 
 	@Override
-	public com.liferay.portal.model.CacheModel<com.rcs.webform.model.FormItem> toCacheModel() {
+	public com.liferay.portal.model.CacheModel<FormItem> toCacheModel() {
 		return _formItem.toCacheModel();
 	}
 
 	@Override
-	public com.rcs.webform.model.FormItem toEscapedModel() {
+	public FormItem toEscapedModel() {
 		return new FormItemWrapper(_formItem.toEscapedModel());
 	}
 
 	@Override
-	public com.rcs.webform.model.FormItem toUnescapedModel() {
+	public FormItem toUnescapedModel() {
 		return new FormItemWrapper(_formItem.toUnescapedModel());
 	}
 

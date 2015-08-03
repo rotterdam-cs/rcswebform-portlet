@@ -124,6 +124,12 @@ public class FormItemLocalServiceClp implements FormItemLocalService {
 		_methodName21 = "getFormItemsByFormId";
 
 		_methodParameterTypes21 = new String[] { "java.lang.Long" };
+
+		_methodName22 = "delete";
+
+		_methodParameterTypes22 = new String[] {
+				"java.lang.Long", "com.liferay.portal.service.ServiceContext"
+			};
 	}
 
 	@Override
@@ -775,6 +781,35 @@ public class FormItemLocalServiceClp implements FormItemLocalService {
 		return (java.util.List<com.rcs.webform.model.FormItem>)ClpSerializer.translateOutput(returnObj);
 	}
 
+	@Override
+	public com.rcs.webform.model.FormItem delete(java.lang.Long formItemId,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableLocalService.invokeMethod(_methodName22,
+					_methodParameterTypes22,
+					new Object[] {
+						ClpSerializer.translateInput(formItemId),
+						
+					ClpSerializer.translateInput(serviceContext)
+					});
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (com.rcs.webform.model.FormItem)ClpSerializer.translateOutput(returnObj);
+	}
+
 	private InvokableLocalService _invokableLocalService;
 	private String _methodName0;
 	private String[] _methodParameterTypes0;
@@ -818,4 +853,6 @@ public class FormItemLocalServiceClp implements FormItemLocalService {
 	private String[] _methodParameterTypes20;
 	private String _methodName21;
 	private String[] _methodParameterTypes21;
+	private String _methodName22;
+	private String[] _methodParameterTypes22;
 }

@@ -317,6 +317,19 @@ public class FormItemLocalServiceUtil {
 		return getService().getFormItemsByFormId(formId);
 	}
 
+	/**
+	* Soft Delete Form Item
+	*
+	* @param formItemId
+	* @param serviceContext
+	* @return
+	*/
+	public static com.rcs.webform.model.FormItem delete(
+		java.lang.Long formItemId,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return getService().delete(formItemId, serviceContext);
+	}
+
 	public static void clearService() {
 		_service = null;
 	}

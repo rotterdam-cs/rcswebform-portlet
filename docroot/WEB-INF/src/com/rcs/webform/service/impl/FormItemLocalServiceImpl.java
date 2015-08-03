@@ -141,4 +141,31 @@ public class FormItemLocalServiceImpl extends FormItemLocalServiceBaseImpl {
             return new ArrayList<FormItem>();
         }
     }
+    
+    /**
+     * Soft Delete Form Item
+     * 
+     * @param formItemId
+     * @param serviceContext
+     * @return
+     */
+    public FormItem delete(Long formItemId, ServiceContext serviceContext){
+    	User user = null;
+        FormItem formItem = null;
+        Date now = new Date();
+        try {
+            user = userLocalService.getUserById(serviceContext.getUserId());
+            formItem = formItemPersistence.fetchByPrimaryKey(formItemId);
+            formItem.setActive(false);
+            formItem.setCreationDate(serviceContext.getCreateDate(now));
+            formItem.setModificationDate(serviceContext.getModifiedDate(now));
+            formItem.setModificationUser(user.getFullName());
+            
+            formItemPersistence.update(formItem);
+        } catch (Exception e) {
+            log.error("Exception while deleting form item: " + e.getMessage(), e);
+        }
+
+        return formItem;
+    }
 }
