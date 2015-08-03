@@ -4,7 +4,7 @@
 	<portlet:param name="<%= ActionRequest.ACTION_NAME %>" value="submitForm" />
 </portlet:actionURL>
 
-<aui:form action="<%= submitFormURL %>" method="POST" name="fm" onSubmit="event.preventDefault();">
+<aui:form action="<%= submitFormURL %>" method="POST" name="fm">
 	<aui:fieldset label="${Data.data.title}">
 		<div id="formDescription">
 			${Data.data.desc}
