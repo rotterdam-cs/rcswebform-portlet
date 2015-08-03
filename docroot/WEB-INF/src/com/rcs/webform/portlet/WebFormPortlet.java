@@ -35,6 +35,8 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.util.WebKeys;
+import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.util.bridges.mvc.MVCPortlet;
@@ -86,6 +88,7 @@ public class WebFormPortlet extends MVCPortlet {
     public void submitForm(ActionRequest actionRequest, ActionResponse actionResponse) throws Exception {
         log.info("##### Processing submitted form data #####");
 
+        ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(WebKeys.THEME_DISPLAY);
         String portletId = PortalUtil.getPortletId(actionRequest);
         PortletPreferences preferences = PortletPreferencesFactoryUtil.getPortletSetup(actionRequest, portletId);
 
@@ -136,7 +139,7 @@ public class WebFormPortlet extends MVCPortlet {
 
             // Send submitted form data as email
             if (sendAsEmail) {
-                emailSuccess = sendAsEmail(preferences, portletId, actionRequest);
+                emailSuccess = sendAsEmail(preferences, portletId, actionRequest, themeDisplay.getCompanyId());
             }
 
             // Save submitted form data to database
@@ -225,15 +228,14 @@ public class WebFormPortlet extends MVCPortlet {
         }
     }
 
-    protected boolean sendAsEmail(PortletPreferences preferences, String portletId, ActionRequest actionRequest) {
+    protected boolean sendAsEmail(PortletPreferences preferences, String portletId, 
+    		ActionRequest actionRequest, long companyId) {
         try {
-            String emailFrom = preferences.getValue("emailFromAddress", StringPool.BLANK);
-            String nameFrom = preferences.getValue("emailFromName", StringPool.BLANK);
             String emailAdresses = preferences.getValue("emailAddress", StringPool.BLANK);
             String subject = preferences.getValue("subject", StringPool.BLANK);
             String body = getMailBody(portletId, actionRequest);
             
-            if (Validator.isNull(emailAdresses) || Validator.isNull(emailFrom)){
+            if (Validator.isNull(emailAdresses)){
                 log.error("Email could not be sent. No email address is configured.");
                 return false;
             }
@@ -243,7 +245,9 @@ public class WebFormPortlet extends MVCPortlet {
                 return false;
             }
             
-            InternetAddress emailAddressFrom = new InternetAddress(emailFrom, nameFrom);
+            InternetAddress emailAddressFrom = new InternetAddress(
+            		WebFormUtil.getEmailFromAddress(preferences, companyId), 
+            		WebFormUtil.getEmailFromName(preferences, companyId));
             MailMessage mailMessage = new MailMessage(emailAddressFrom, subject, body, false);
             InternetAddress[] toAddresses = InternetAddress.parse(emailAdresses);
             mailMessage.setTo(toAddresses);
