@@ -310,6 +310,10 @@ public class FormLocalServiceUtil {
 			successUrl, submitLabelMap, submitAttrId, submitAttrclass);
 	}
 
+	public static com.rcs.webform.model.Form getFormByFormId(long formId) {
+		return getService().getFormByFormId(formId);
+	}
+
 	public static void clearService() {
 		_service = null;
 	}

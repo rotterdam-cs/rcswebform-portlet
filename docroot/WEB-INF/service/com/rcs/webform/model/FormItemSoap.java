@@ -50,8 +50,11 @@ public class FormItemSoap implements Serializable {
 		soapModel.setOrder(model.getOrder());
 		soapModel.setValidationType(model.getValidationType());
 		soapModel.setValidationRegexValue(model.getValidationRegexValue());
+		soapModel.setMinLength(model.getMinLength());
+		soapModel.setMaxLength(model.getMaxLength());
 		soapModel.setErrorValidationMessage(model.getErrorValidationMessage());
 		soapModel.setErrorMandatoryMessage(model.getErrorMandatoryMessage());
+		soapModel.setErrorLengthMessage(model.getErrorLengthMessage());
 		soapModel.setHintMessage(model.getHintMessage());
 
 		return soapModel;
@@ -273,6 +276,22 @@ public class FormItemSoap implements Serializable {
 		_validationRegexValue = validationRegexValue;
 	}
 
+	public int getMinLength() {
+		return _minLength;
+	}
+
+	public void setMinLength(int minLength) {
+		_minLength = minLength;
+	}
+
+	public int getMaxLength() {
+		return _maxLength;
+	}
+
+	public void setMaxLength(int maxLength) {
+		_maxLength = maxLength;
+	}
+
 	public String getErrorValidationMessage() {
 		return _errorValidationMessage;
 	}
@@ -287,6 +306,14 @@ public class FormItemSoap implements Serializable {
 
 	public void setErrorMandatoryMessage(String errorMandatoryMessage) {
 		_errorMandatoryMessage = errorMandatoryMessage;
+	}
+
+	public String getErrorLengthMessage() {
+		return _errorLengthMessage;
+	}
+
+	public void setErrorLengthMessage(String errorLengthMessage) {
+		_errorLengthMessage = errorLengthMessage;
 	}
 
 	public String getHintMessage() {
@@ -317,7 +344,10 @@ public class FormItemSoap implements Serializable {
 	private int _order;
 	private String _validationType;
 	private String _validationRegexValue;
+	private int _minLength;
+	private int _maxLength;
 	private String _errorValidationMessage;
 	private String _errorMandatoryMessage;
+	private String _errorLengthMessage;
 	private String _hintMessage;
 }

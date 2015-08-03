@@ -70,9 +70,13 @@ public class EntityDtoConverter {
         formItemDto.setOrder(formItem.getOrder());
         formItemDto.setValidationType(formItem.getValidationType().isEmpty() ? ValidationType.valueOf("NONE") : ValidationType
                 .valueOf(formItem.getValidationType()));
+        formItemDto.setMinLength(formItem.getMinLength());
+        formItemDto.setMaxLength(formItem.getMaxLength());
         formItemDto.setValidationRegexValueString(formItem.getValidationRegexValue());
         formItemDto.setErrorValidationMessage(formItem.getErrorValidationMessage(locale));
         formItemDto.setErrorMandatoryMessage(formItem.getErrorMandatoryMessage(locale));
+        formItemDto.setErrorLengthMessage(formItem.getErrorLengthMessage(locale));
+        formItemDto.setHintMessage(formItem.getHintMessage(locale));
         return formItemDto;
     }
 

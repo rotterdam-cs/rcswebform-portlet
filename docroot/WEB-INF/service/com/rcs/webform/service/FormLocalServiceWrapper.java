@@ -319,6 +319,11 @@ public class FormLocalServiceWrapper implements FormLocalService,
 			submitAttrclass);
 	}
 
+	@Override
+	public com.rcs.webform.model.Form getFormByFormId(long formId) {
+		return _formLocalService.getFormByFormId(formId);
+	}
+
 	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */

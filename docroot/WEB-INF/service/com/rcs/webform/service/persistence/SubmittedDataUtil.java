@@ -133,27 +133,27 @@ public class SubmittedDataUtil {
 	/**
 	* Creates a new submitted data with the primary key. Does not add the submitted data to the database.
 	*
-	* @param submittedDataId the primary key for the new submitted data
+	* @param submittedDataPK the primary key for the new submitted data
 	* @return the new submitted data
 	*/
 	public static com.rcs.webform.model.SubmittedData create(
-		long submittedDataId) {
-		return getPersistence().create(submittedDataId);
+		SubmittedDataPK submittedDataPK) {
+		return getPersistence().create(submittedDataPK);
 	}
 
 	/**
 	* Removes the submitted data with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param submittedDataId the primary key of the submitted data
+	* @param submittedDataPK the primary key of the submitted data
 	* @return the submitted data that was removed
 	* @throws com.rcs.webform.NoSuchSubmittedDataException if a submitted data with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
 	public static com.rcs.webform.model.SubmittedData remove(
-		long submittedDataId)
+		SubmittedDataPK submittedDataPK)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.rcs.webform.NoSuchSubmittedDataException {
-		return getPersistence().remove(submittedDataId);
+		return getPersistence().remove(submittedDataPK);
 	}
 
 	public static com.rcs.webform.model.SubmittedData updateImpl(
@@ -165,29 +165,29 @@ public class SubmittedDataUtil {
 	/**
 	* Returns the submitted data with the primary key or throws a {@link com.rcs.webform.NoSuchSubmittedDataException} if it could not be found.
 	*
-	* @param submittedDataId the primary key of the submitted data
+	* @param submittedDataPK the primary key of the submitted data
 	* @return the submitted data
 	* @throws com.rcs.webform.NoSuchSubmittedDataException if a submitted data with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
 	public static com.rcs.webform.model.SubmittedData findByPrimaryKey(
-		long submittedDataId)
+		SubmittedDataPK submittedDataPK)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.rcs.webform.NoSuchSubmittedDataException {
-		return getPersistence().findByPrimaryKey(submittedDataId);
+		return getPersistence().findByPrimaryKey(submittedDataPK);
 	}
 
 	/**
 	* Returns the submitted data with the primary key or returns <code>null</code> if it could not be found.
 	*
-	* @param submittedDataId the primary key of the submitted data
+	* @param submittedDataPK the primary key of the submitted data
 	* @return the submitted data, or <code>null</code> if a submitted data with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
 	public static com.rcs.webform.model.SubmittedData fetchByPrimaryKey(
-		long submittedDataId)
+		SubmittedDataPK submittedDataPK)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().fetchByPrimaryKey(submittedDataId);
+		return getPersistence().fetchByPrimaryKey(submittedDataPK);
 	}
 
 	/**

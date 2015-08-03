@@ -172,15 +172,15 @@ public class SubmittedDataPersistenceImpl extends BasePersistenceImpl<SubmittedD
 	/**
 	 * Creates a new submitted data with the primary key. Does not add the submitted data to the database.
 	 *
-	 * @param submittedDataId the primary key for the new submitted data
+	 * @param submittedDataPK the primary key for the new submitted data
 	 * @return the new submitted data
 	 */
 	@Override
-	public SubmittedData create(long submittedDataId) {
+	public SubmittedData create(SubmittedDataPK submittedDataPK) {
 		SubmittedData submittedData = new SubmittedDataImpl();
 
 		submittedData.setNew(true);
-		submittedData.setPrimaryKey(submittedDataId);
+		submittedData.setPrimaryKey(submittedDataPK);
 
 		return submittedData;
 	}
@@ -188,15 +188,15 @@ public class SubmittedDataPersistenceImpl extends BasePersistenceImpl<SubmittedD
 	/**
 	 * Removes the submitted data with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param submittedDataId the primary key of the submitted data
+	 * @param submittedDataPK the primary key of the submitted data
 	 * @return the submitted data that was removed
 	 * @throws com.rcs.webform.NoSuchSubmittedDataException if a submitted data with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public SubmittedData remove(long submittedDataId)
+	public SubmittedData remove(SubmittedDataPK submittedDataPK)
 		throws NoSuchSubmittedDataException, SystemException {
-		return remove((Serializable)submittedDataId);
+		return remove((Serializable)submittedDataPK);
 	}
 
 	/**
@@ -368,15 +368,15 @@ public class SubmittedDataPersistenceImpl extends BasePersistenceImpl<SubmittedD
 	/**
 	 * Returns the submitted data with the primary key or throws a {@link com.rcs.webform.NoSuchSubmittedDataException} if it could not be found.
 	 *
-	 * @param submittedDataId the primary key of the submitted data
+	 * @param submittedDataPK the primary key of the submitted data
 	 * @return the submitted data
 	 * @throws com.rcs.webform.NoSuchSubmittedDataException if a submitted data with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public SubmittedData findByPrimaryKey(long submittedDataId)
+	public SubmittedData findByPrimaryKey(SubmittedDataPK submittedDataPK)
 		throws NoSuchSubmittedDataException, SystemException {
-		return findByPrimaryKey((Serializable)submittedDataId);
+		return findByPrimaryKey((Serializable)submittedDataPK);
 	}
 
 	/**
@@ -430,14 +430,14 @@ public class SubmittedDataPersistenceImpl extends BasePersistenceImpl<SubmittedD
 	/**
 	 * Returns the submitted data with the primary key or returns <code>null</code> if it could not be found.
 	 *
-	 * @param submittedDataId the primary key of the submitted data
+	 * @param submittedDataPK the primary key of the submitted data
 	 * @return the submitted data, or <code>null</code> if a submitted data with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public SubmittedData fetchByPrimaryKey(long submittedDataId)
+	public SubmittedData fetchByPrimaryKey(SubmittedDataPK submittedDataPK)
 		throws SystemException {
-		return fetchByPrimaryKey((Serializable)submittedDataId);
+		return fetchByPrimaryKey((Serializable)submittedDataPK);
 	}
 
 	/**

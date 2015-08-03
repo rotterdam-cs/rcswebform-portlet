@@ -109,6 +109,72 @@ public class FormUtil {
 	}
 
 	/**
+	* Returns the form where formId = &#63; or throws a {@link com.rcs.webform.NoSuchFormException} if it could not be found.
+	*
+	* @param formId the form ID
+	* @return the matching form
+	* @throws com.rcs.webform.NoSuchFormException if a matching form could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.rcs.webform.model.Form findByFormIdAndActive(long formId)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.rcs.webform.NoSuchFormException {
+		return getPersistence().findByFormIdAndActive(formId);
+	}
+
+	/**
+	* Returns the form where formId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	*
+	* @param formId the form ID
+	* @return the matching form, or <code>null</code> if a matching form could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.rcs.webform.model.Form fetchByFormIdAndActive(long formId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().fetchByFormIdAndActive(formId);
+	}
+
+	/**
+	* Returns the form where formId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	*
+	* @param formId the form ID
+	* @param retrieveFromCache whether to use the finder cache
+	* @return the matching form, or <code>null</code> if a matching form could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.rcs.webform.model.Form fetchByFormIdAndActive(
+		long formId, boolean retrieveFromCache)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().fetchByFormIdAndActive(formId, retrieveFromCache);
+	}
+
+	/**
+	* Removes the form where formId = &#63; from the database.
+	*
+	* @param formId the form ID
+	* @return the form that was removed
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.rcs.webform.model.Form removeByFormIdAndActive(
+		long formId)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.rcs.webform.NoSuchFormException {
+		return getPersistence().removeByFormIdAndActive(formId);
+	}
+
+	/**
+	* Returns the number of forms where formId = &#63;.
+	*
+	* @param formId the form ID
+	* @return the number of matching forms
+	* @throws SystemException if a system exception occurred
+	*/
+	public static int countByFormIdAndActive(long formId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().countByFormIdAndActive(formId);
+	}
+
+	/**
 	* Caches the form in the entity cache if it is enabled.
 	*
 	* @param form the form

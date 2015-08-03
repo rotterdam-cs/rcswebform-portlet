@@ -43,8 +43,11 @@
 		<field name="order" type="int" />
 		<field name="validationType" type="String" />
 		<field name="validationRegexValue" type="String" />
+		<field name="minLength" type="int" />
+		<field name="maxLength" type="int" />
 		<field name="errorValidationMessage" type="String" localized="true" />
 		<field name="errorMandatoryMessage" type="String" localized="true" />
+		<field name="errorLengthMessage" type="String" localized="true" />
 		<field name="hintMessage" type="String" localized="true" />
 	</model>
 	<model name="com.rcs.webform.model.FormToPorletMap">

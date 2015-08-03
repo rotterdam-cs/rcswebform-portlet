@@ -32,6 +32,6 @@ public abstract class SubmittedDataActionableDynamicQuery
 
 		setClassLoader(com.rcs.webform.service.ClpSerializer.class.getClassLoader());
 
-		setPrimaryKeyPropertyName("submittedDataId");
+		setPrimaryKeyPropertyName("primaryKey.submittedDataId");
 	}
 }

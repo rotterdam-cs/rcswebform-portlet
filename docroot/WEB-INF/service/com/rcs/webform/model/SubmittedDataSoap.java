@@ -14,6 +14,8 @@
 
 package com.rcs.webform.model;
 
+import com.rcs.webform.service.persistence.SubmittedDataPK;
+
 import java.io.Serializable;
 
 import java.util.ArrayList;
@@ -85,12 +87,16 @@ public class SubmittedDataSoap implements Serializable {
 	public SubmittedDataSoap() {
 	}
 
-	public long getPrimaryKey() {
-		return _submittedDataId;
+	public SubmittedDataPK getPrimaryKey() {
+		return new SubmittedDataPK(_submittedDataId, _formId, _portletId,
+			_formItemId);
 	}
 
-	public void setPrimaryKey(long pk) {
-		setSubmittedDataId(pk);
+	public void setPrimaryKey(SubmittedDataPK pk) {
+		setSubmittedDataId(pk.submittedDataId);
+		setFormId(pk.formId);
+		setPortletId(pk.portletId);
+		setFormItemId(pk.formItemId);
 	}
 
 	public long getSubmittedDataId() {

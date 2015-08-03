@@ -82,11 +82,16 @@
 			</basic>
 			<basic name="validationType" />
 			<basic name="validationRegexValue" />
+			<basic name="minLength" />
+			<basic name="maxLength" />
 			<basic name="errorValidationMessage" />
 			<basic name="errorMandatoryMessage" />
+			<basic name="errorLengthMessage" />
 			<basic name="hintMessage" />
 			<transient name="defaultValueCurrentLanguageId" />
 			<transient name="defaultValueMap" />
+			<transient name="errorLengthMessageCurrentLanguageId" />
+			<transient name="errorLengthMessageMap" />
 			<transient name="errorMandatoryMessageCurrentLanguageId" />
 			<transient name="errorMandatoryMessageMap" />
 			<transient name="errorValidationMessageCurrentLanguageId" />
@@ -128,8 +133,12 @@
 		</attributes>
 	</mapped-superclass>
 	<mapped-superclass class="com.rcs.webform.model.impl.SubmittedDataModelImpl">
+		<id-class class="com.rcs.webform.service.persistence.SubmittedDataPK" />
 		<attributes>
 			<id name="submittedDataId" />
+			<id name="formId" />
+			<id name="portletId" />
+			<id name="formItemId" />
 			<basic name="groupId" />
 			<basic name="companyId" />
 			<basic name="active">
@@ -142,9 +151,6 @@
 				<temporal>TIMESTAMP</temporal>
 			</basic>
 			<basic name="modificationUser" />
-			<basic name="formId" />
-			<basic name="portletId" />
-			<basic name="formItemId" />
 			<basic name="userInput" />
 			<transient name="modelAttributes" />
 			<transient name="primaryKey" />

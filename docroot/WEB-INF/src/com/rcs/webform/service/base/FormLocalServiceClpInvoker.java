@@ -132,6 +132,10 @@ public class FormLocalServiceClpInvoker {
 				"java.util.Map", "boolean", "java.util.Map", "java.lang.String",
 				"java.util.Map", "java.lang.String", "java.lang.String"
 			};
+
+		_methodName53 = "getFormByFormId";
+
+		_methodParameterTypes53 = new String[] { "long" };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -271,6 +275,11 @@ public class FormLocalServiceClpInvoker {
 				(java.lang.String)arguments[10], (java.lang.String)arguments[11]);
 		}
 
+		if (_methodName53.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes53, parameterTypes)) {
+			return FormLocalServiceUtil.getFormByFormId(((Long)arguments[0]).longValue());
+		}
+
 		throw new UnsupportedOperationException();
 	}
 
@@ -316,4 +325,6 @@ public class FormLocalServiceClpInvoker {
 	private String[] _methodParameterTypes51;
 	private String _methodName52;
 	private String[] _methodParameterTypes52;
+	private String _methodName53;
+	private String[] _methodParameterTypes53;
 }

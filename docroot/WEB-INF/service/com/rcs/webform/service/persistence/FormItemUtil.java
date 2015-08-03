@@ -116,9 +116,9 @@ public class FormItemUtil {
 	* @return the matching form items
 	* @throws SystemException if a system exception occurred
 	*/
-	public static java.util.List<com.rcs.webform.model.FormItem> findByFormId(
+	public static java.util.List<com.rcs.webform.model.FormItem> findByFormIdAndActive(
 		long formId) throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByFormId(formId);
+		return getPersistence().findByFormIdAndActive(formId);
 	}
 
 	/**
@@ -134,10 +134,10 @@ public class FormItemUtil {
 	* @return the range of matching form items
 	* @throws SystemException if a system exception occurred
 	*/
-	public static java.util.List<com.rcs.webform.model.FormItem> findByFormId(
+	public static java.util.List<com.rcs.webform.model.FormItem> findByFormIdAndActive(
 		long formId, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByFormId(formId, start, end);
+		return getPersistence().findByFormIdAndActive(formId, start, end);
 	}
 
 	/**
@@ -154,12 +154,12 @@ public class FormItemUtil {
 	* @return the ordered range of matching form items
 	* @throws SystemException if a system exception occurred
 	*/
-	public static java.util.List<com.rcs.webform.model.FormItem> findByFormId(
+	public static java.util.List<com.rcs.webform.model.FormItem> findByFormIdAndActive(
 		long formId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
-				   .findByFormId(formId, start, end, orderByComparator);
+				   .findByFormIdAndActive(formId, start, end, orderByComparator);
 	}
 
 	/**
@@ -171,12 +171,13 @@ public class FormItemUtil {
 	* @throws com.rcs.webform.NoSuchFormItemException if a matching form item could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public static com.rcs.webform.model.FormItem findByFormId_First(
+	public static com.rcs.webform.model.FormItem findByFormIdAndActive_First(
 		long formId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.rcs.webform.NoSuchFormItemException {
-		return getPersistence().findByFormId_First(formId, orderByComparator);
+		return getPersistence()
+				   .findByFormIdAndActive_First(formId, orderByComparator);
 	}
 
 	/**
@@ -187,11 +188,12 @@ public class FormItemUtil {
 	* @return the first matching form item, or <code>null</code> if a matching form item could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public static com.rcs.webform.model.FormItem fetchByFormId_First(
+	public static com.rcs.webform.model.FormItem fetchByFormIdAndActive_First(
 		long formId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().fetchByFormId_First(formId, orderByComparator);
+		return getPersistence()
+				   .fetchByFormIdAndActive_First(formId, orderByComparator);
 	}
 
 	/**
@@ -203,12 +205,13 @@ public class FormItemUtil {
 	* @throws com.rcs.webform.NoSuchFormItemException if a matching form item could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public static com.rcs.webform.model.FormItem findByFormId_Last(
+	public static com.rcs.webform.model.FormItem findByFormIdAndActive_Last(
 		long formId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.rcs.webform.NoSuchFormItemException {
-		return getPersistence().findByFormId_Last(formId, orderByComparator);
+		return getPersistence()
+				   .findByFormIdAndActive_Last(formId, orderByComparator);
 	}
 
 	/**
@@ -219,11 +222,12 @@ public class FormItemUtil {
 	* @return the last matching form item, or <code>null</code> if a matching form item could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public static com.rcs.webform.model.FormItem fetchByFormId_Last(
+	public static com.rcs.webform.model.FormItem fetchByFormIdAndActive_Last(
 		long formId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().fetchByFormId_Last(formId, orderByComparator);
+		return getPersistence()
+				   .fetchByFormIdAndActive_Last(formId, orderByComparator);
 	}
 
 	/**
@@ -236,13 +240,13 @@ public class FormItemUtil {
 	* @throws com.rcs.webform.NoSuchFormItemException if a form item with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public static com.rcs.webform.model.FormItem[] findByFormId_PrevAndNext(
+	public static com.rcs.webform.model.FormItem[] findByFormIdAndActive_PrevAndNext(
 		long formItemId, long formId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.rcs.webform.NoSuchFormItemException {
 		return getPersistence()
-				   .findByFormId_PrevAndNext(formItemId, formId,
+				   .findByFormIdAndActive_PrevAndNext(formItemId, formId,
 			orderByComparator);
 	}
 
@@ -252,9 +256,9 @@ public class FormItemUtil {
 	* @param formId the form ID
 	* @throws SystemException if a system exception occurred
 	*/
-	public static void removeByFormId(long formId)
+	public static void removeByFormIdAndActive(long formId)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		getPersistence().removeByFormId(formId);
+		getPersistence().removeByFormIdAndActive(formId);
 	}
 
 	/**
@@ -264,9 +268,9 @@ public class FormItemUtil {
 	* @return the number of matching form items
 	* @throws SystemException if a system exception occurred
 	*/
-	public static int countByFormId(long formId)
+	public static int countByFormIdAndActive(long formId)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().countByFormId(formId);
+		return getPersistence().countByFormIdAndActive(formId);
 	}
 
 	/**

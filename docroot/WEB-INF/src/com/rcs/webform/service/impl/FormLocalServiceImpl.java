@@ -14,7 +14,9 @@
 
 package com.rcs.webform.service.impl;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
@@ -23,7 +25,9 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.ServiceContext;
 import com.rcs.webform.model.Form;
+import com.rcs.webform.model.FormItem;
 import com.rcs.webform.service.base.FormLocalServiceBaseImpl;
+import com.rcs.webform.service.persistence.FormUtil;
 
 /**
  * The implementation of the form local service.
@@ -99,5 +103,15 @@ public class FormLocalServiceImpl extends FormLocalServiceBaseImpl {
 		
 		return form;
 	}
+	
+    public Form getFormByFormId(long formId) {
+        try {
+            return FormUtil.findByFormIdAndActive(formId);
+        } catch (Exception e) {
+            log.error("Exception while getting form by id [" + formId + "] : " + e.getMessage());
+            return null;
+        }
+    }
+
 	
 }

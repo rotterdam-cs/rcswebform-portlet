@@ -52,8 +52,11 @@
 		<property name="order" type="com.liferay.portal.dao.orm.hibernate.IntegerType" column="order_" />
 		<property name="validationType" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="validationRegexValue" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="minLength" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="maxLength" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
 		<property name="errorValidationMessage" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="errorMandatoryMessage" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="errorLengthMessage" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="hintMessage" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 	</class>
 	<class name="com.rcs.webform.model.impl.FormToPorletMapImpl" table="rcswebform_FormToPorletMap">
@@ -73,18 +76,18 @@
 	</class>
 	<class name="com.rcs.webform.model.impl.SubmittedDataImpl" table="rcswebform_SubmittedData">
 		<cache usage="read-write" />
-		<id name="submittedDataId" type="long">
-			<generator class="assigned" />
-		</id>
+		<composite-id name="primaryKey" class="com.rcs.webform.service.persistence.SubmittedDataPK">
+			<key-property name="submittedDataId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+			<key-property name="formId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+			<key-property name="portletId" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+			<key-property name="formItemId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		</composite-id>
 		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="active" type="com.liferay.portal.dao.orm.hibernate.BooleanType" column="active_" />
 		<property name="creationDate" type="org.hibernate.type.TimestampType" />
 		<property name="modificationDate" type="org.hibernate.type.TimestampType" />
 		<property name="modificationUser" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="formId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
-		<property name="portletId" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="formItemId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="userInput" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 	</class>
 </hibernate-mapping>

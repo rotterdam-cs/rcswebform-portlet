@@ -2,6 +2,11 @@ package com.rcs.webform.common.util;
 
 import java.util.List;
 
+import javax.portlet.PortletPreferences;
+
+import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.util.PortalUtil;
 import com.rcs.webform.entity.dto.FormDTO;
 import com.rcs.webform.model.Form;
 import com.rcs.webform.model.FormItem;
@@ -63,7 +68,21 @@ public class WebFormUtil {
 		return formDto;
 	}
 	
+	public static String getEmailFromAddress(PortletPreferences preferences, long companyId){
+		try {
+			return PortalUtil.getEmailFromAddress(preferences, companyId, StringPool.BLANK);
+		} catch (SystemException e) {
+			return StringPool.BLANK;
+		}
+		
+	}
 	
-
+	public static String getEmailFromName(PortletPreferences preferences, long companyId) {
+		try {
+			return PortalUtil.getEmailFromName(preferences, companyId, StringPool.BLANK);
+		} catch (SystemException e) {
+			return StringPool.BLANK;
+		}
+	}
 	
 }
