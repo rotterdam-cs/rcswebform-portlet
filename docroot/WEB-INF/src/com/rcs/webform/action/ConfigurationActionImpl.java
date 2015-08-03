@@ -22,6 +22,7 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
+import com.rcs.webform.common.enums.FormItemType;
 import com.rcs.webform.model.Form;
 import com.rcs.webform.model.FormItem;
 import com.rcs.webform.model.FormToPorletMap;
@@ -126,8 +127,9 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 					}
 					
 					Long formItemId = ParamUtil.getLong(actionRequest, "formItemId" + formFieldsIndex);
-					String fieldType = ParamUtil.getString(actionRequest, "fieldType" + formFieldsIndex).split(":")[0];
-					String validationType = ParamUtil.getString(actionRequest, "fieldType" + formFieldsIndex).split(":")[1];
+					String fieldType = ParamUtil.getString(actionRequest, "fieldType" + formFieldsIndex);
+					String validationType = ParamUtil.getString(actionRequest, "fieldInputType" + formFieldsIndex);
+					int inputTypeMaxLength = ParamUtil.getInteger(actionRequest, "inputMaxLength" + formFieldsIndex);
 					boolean fieldOptional = ParamUtil.getBoolean(actionRequest, "fieldOptional" + formFieldsIndex);
 					Map<Locale, String> fieldOptionsMap = LocalizationUtil.getLocalizationMap(actionRequest, "fieldOptions" + formFieldsIndex);
 					String fieldValidationScript = ParamUtil.getString(actionRequest, "fieldValidationScript" + formFieldsIndex);
@@ -137,9 +139,14 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 	
 						SessionErrors.add(actionRequest, "validationDefinitionInvalid" + i);
 					}
+					
+					if(!fieldType.equals(FormItemType.TEXT_FIELD.name())){
+						validationType = FormItemType.NONE.name();
+						inputTypeMaxLength = 0;
+					}
 	
 					FormItemLocalServiceUtil.save(formItemId, formId, fieldLabelMap, fieldType, fieldOptionsMap, fieldOptional,
-							fieldValidationScript, validationType, fieldValidationErrorMessage, formFieldsIndex, serviceContext);
+							fieldValidationScript, validationType, fieldValidationErrorMessage, formFieldsIndex, inputTypeMaxLength, serviceContext);
 	
 					i++;
 				}

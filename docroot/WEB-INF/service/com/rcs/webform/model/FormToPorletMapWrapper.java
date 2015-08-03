@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -470,7 +470,7 @@ public class FormToPorletMapWrapper implements FormToPorletMap,
 	}
 
 	@Override
-	public int compareTo(FormToPorletMap formToPorletMap) {
+	public int compareTo(com.rcs.webform.model.FormToPorletMap formToPorletMap) {
 		return _formToPorletMap.compareTo(formToPorletMap);
 	}
 
@@ -480,17 +480,17 @@ public class FormToPorletMapWrapper implements FormToPorletMap,
 	}
 
 	@Override
-	public com.liferay.portal.model.CacheModel<FormToPorletMap> toCacheModel() {
+	public com.liferay.portal.model.CacheModel<com.rcs.webform.model.FormToPorletMap> toCacheModel() {
 		return _formToPorletMap.toCacheModel();
 	}
 
 	@Override
-	public FormToPorletMap toEscapedModel() {
+	public com.rcs.webform.model.FormToPorletMap toEscapedModel() {
 		return new FormToPorletMapWrapper(_formToPorletMap.toEscapedModel());
 	}
 
 	@Override
-	public FormToPorletMap toUnescapedModel() {
+	public com.rcs.webform.model.FormToPorletMap toUnescapedModel() {
 		return new FormToPorletMapWrapper(_formToPorletMap.toUnescapedModel());
 	}
 

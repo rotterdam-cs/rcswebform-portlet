@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -114,7 +114,7 @@ public class FormItemLocalServiceClp implements FormItemLocalService {
 				"java.lang.Long", "java.lang.Long", "java.util.Map",
 				"java.lang.String", "java.util.Map", "boolean",
 				"java.lang.String", "java.lang.String", "java.lang.String",
-				"int", "com.liferay.portal.service.ServiceContext"
+				"int", "int", "com.liferay.portal.service.ServiceContext"
 			};
 
 		_methodName20 = "getFormItemByFormId";
@@ -686,7 +686,7 @@ public class FormItemLocalServiceClp implements FormItemLocalService {
 		java.util.Map<java.util.Locale, java.lang.String> options,
 		boolean mandatory, java.lang.String validationRegexValue,
 		java.lang.String validationType,
-		java.lang.String errorValidationMessage, int order,
+		java.lang.String errorValidationMessage, int order, int maxLength,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		Object returnObj = null;
 
@@ -713,6 +713,8 @@ public class FormItemLocalServiceClp implements FormItemLocalService {
 					ClpSerializer.translateInput(errorValidationMessage),
 						
 					order,
+						
+					maxLength,
 						
 					ClpSerializer.translateInput(serviceContext)
 					});

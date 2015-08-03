@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -59,7 +59,7 @@ public interface SubmittedDataPersistence extends BasePersistence<SubmittedData>
 	* @return the new submitted data
 	*/
 	public com.rcs.webform.model.SubmittedData create(
-		SubmittedDataPK submittedDataPK);
+		com.rcs.webform.service.persistence.SubmittedDataPK submittedDataPK);
 
 	/**
 	* Removes the submitted data with the primary key from the database. Also notifies the appropriate model listeners.
@@ -70,7 +70,7 @@ public interface SubmittedDataPersistence extends BasePersistence<SubmittedData>
 	* @throws SystemException if a system exception occurred
 	*/
 	public com.rcs.webform.model.SubmittedData remove(
-		SubmittedDataPK submittedDataPK)
+		com.rcs.webform.service.persistence.SubmittedDataPK submittedDataPK)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.rcs.webform.NoSuchSubmittedDataException;
 
@@ -87,7 +87,7 @@ public interface SubmittedDataPersistence extends BasePersistence<SubmittedData>
 	* @throws SystemException if a system exception occurred
 	*/
 	public com.rcs.webform.model.SubmittedData findByPrimaryKey(
-		SubmittedDataPK submittedDataPK)
+		com.rcs.webform.service.persistence.SubmittedDataPK submittedDataPK)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.rcs.webform.NoSuchSubmittedDataException;
 
@@ -99,7 +99,7 @@ public interface SubmittedDataPersistence extends BasePersistence<SubmittedData>
 	* @throws SystemException if a system exception occurred
 	*/
 	public com.rcs.webform.model.SubmittedData fetchByPrimaryKey(
-		SubmittedDataPK submittedDataPK)
+		com.rcs.webform.service.persistence.SubmittedDataPK submittedDataPK)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**

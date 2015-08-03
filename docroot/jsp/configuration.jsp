@@ -177,7 +177,7 @@ boolean fieldsEditingDisabled = false;
 			var select = this;
 
 			var formRow = select.ancestor('.lfr-form-row');
-			var value = select.val().split(":")[0];
+			var value = select.val();
 
 			var optionsDiv = formRow.one('.options');
 

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -137,7 +137,7 @@ public class SubmittedDataUtil {
 	* @return the new submitted data
 	*/
 	public static com.rcs.webform.model.SubmittedData create(
-		SubmittedDataPK submittedDataPK) {
+		com.rcs.webform.service.persistence.SubmittedDataPK submittedDataPK) {
 		return getPersistence().create(submittedDataPK);
 	}
 
@@ -150,7 +150,7 @@ public class SubmittedDataUtil {
 	* @throws SystemException if a system exception occurred
 	*/
 	public static com.rcs.webform.model.SubmittedData remove(
-		SubmittedDataPK submittedDataPK)
+		com.rcs.webform.service.persistence.SubmittedDataPK submittedDataPK)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.rcs.webform.NoSuchSubmittedDataException {
 		return getPersistence().remove(submittedDataPK);
@@ -171,7 +171,7 @@ public class SubmittedDataUtil {
 	* @throws SystemException if a system exception occurred
 	*/
 	public static com.rcs.webform.model.SubmittedData findByPrimaryKey(
-		SubmittedDataPK submittedDataPK)
+		com.rcs.webform.service.persistence.SubmittedDataPK submittedDataPK)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.rcs.webform.NoSuchSubmittedDataException {
 		return getPersistence().findByPrimaryKey(submittedDataPK);
@@ -185,7 +185,7 @@ public class SubmittedDataUtil {
 	* @throws SystemException if a system exception occurred
 	*/
 	public static com.rcs.webform.model.SubmittedData fetchByPrimaryKey(
-		SubmittedDataPK submittedDataPK)
+		com.rcs.webform.service.persistence.SubmittedDataPK submittedDataPK)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().fetchByPrimaryKey(submittedDataPK);
 	}

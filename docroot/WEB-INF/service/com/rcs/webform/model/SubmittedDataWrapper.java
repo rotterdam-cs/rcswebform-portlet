@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -449,7 +449,7 @@ public class SubmittedDataWrapper implements SubmittedData,
 	}
 
 	@Override
-	public int compareTo(SubmittedData submittedData) {
+	public int compareTo(com.rcs.webform.model.SubmittedData submittedData) {
 		return _submittedData.compareTo(submittedData);
 	}
 
@@ -459,17 +459,17 @@ public class SubmittedDataWrapper implements SubmittedData,
 	}
 
 	@Override
-	public com.liferay.portal.model.CacheModel<SubmittedData> toCacheModel() {
+	public com.liferay.portal.model.CacheModel<com.rcs.webform.model.SubmittedData> toCacheModel() {
 		return _submittedData.toCacheModel();
 	}
 
 	@Override
-	public SubmittedData toEscapedModel() {
+	public com.rcs.webform.model.SubmittedData toEscapedModel() {
 		return new SubmittedDataWrapper(_submittedData.toEscapedModel());
 	}
 
 	@Override
-	public SubmittedData toUnescapedModel() {
+	public com.rcs.webform.model.SubmittedData toUnescapedModel() {
 		return new SubmittedDataWrapper(_submittedData.toUnescapedModel());
 	}
 

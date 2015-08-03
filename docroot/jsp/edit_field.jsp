@@ -34,6 +34,7 @@ String fieldOptions = "";
 String fieldValidationScript = "";
 String fieldValidationErrorMessage = "";
 String fieldTextFieldInputType = "ALPHA";
+int inputMaxLength = 0;
 
 if(formItems != null && !formItems.isEmpty()){
 	formItemId = formItems.get(formFieldsIndex).getFormItemId();
@@ -44,6 +45,7 @@ if(formItems != null && !formItems.isEmpty()){
 	fieldOptionsXml = formItems.get(formFieldsIndex).getOptions();
 	fieldOptions = LocalizationUtil.getLocalization(fieldOptionsXml, themeDisplay.getLanguageId());
 	fieldTextFieldInputType = formItems.get(formFieldsIndex).getValidationType();
+	inputMaxLength = formItems.get(formFieldsIndex).getMaxLength();
 	fieldValidationScript = PrefsParamUtil.getString(portletPreferences, request, "fieldValidationScript" + formFieldsIndex);
 	fieldValidationErrorMessage = PrefsParamUtil.getString(portletPreferences, request, "fieldValidationErrorMessage" + formFieldsIndex);	
 }
@@ -91,14 +93,14 @@ boolean ignoreRequestValue = (index != formFieldsIndex);
 	<c:choose>
 		<c:when test="<%= !fieldsEditingDisabled %>">
 			<aui:select cssClass='field-type' ignoreRequestValue="<%= ignoreRequestValue %>" label="type" name='<%= "fieldType" + index %>' >
-				<aui:option selected='<%= fieldType.equals("TEXT_FIELD") %>' value="TEXT_FIELD:NONE"><liferay-ui:message key="text" /></aui:option>
-				<aui:option selected='<%= fieldType.equals("TEXT_BOX") %>' value="TEXT_BOX:NONE"><liferay-ui:message key="text-box" /></aui:option>
-				<aui:option selected='<%= fieldType.equals("PASSWORD") %>' value="PASSWORD:NONE"><liferay-ui:message key="password" /></aui:option>
-				<aui:option selected='<%= fieldType.equals("OPTIONS") %>' value="OPTIONS:NONE"><liferay-ui:message key="options" /></aui:option>
-				<aui:option selected='<%= fieldType.equals("RADIO_BUTTON") %>' value="RADIO_BUTTON:NONE"><liferay-ui:message key="radio-buttons" /></aui:option>
-				<aui:option selected='<%= fieldType.equals("CHECKBOX") %>' value="CHECKBOX:NONE"><liferay-ui:message key="check-box" /></aui:option>
-				<aui:option selected='<%= fieldType.equals("DATE") %>' value="DATE:NONE"><liferay-ui:message key="date" /></aui:option>
-				<aui:option selected='<%= fieldType.equals("SECTION") %>' value="SECTION:NONE"><liferay-ui:message key="Section" /></aui:option>
+				<aui:option selected='<%= fieldType.equals("TEXT_FIELD") %>' value="TEXT_FIELD"><liferay-ui:message key="text" /></aui:option>
+				<aui:option selected='<%= fieldType.equals("TEXT_BOX") %>' value="TEXT_BOX"><liferay-ui:message key="text-box" /></aui:option>
+				<aui:option selected='<%= fieldType.equals("PASSWORD") %>' value="PASSWORD"><liferay-ui:message key="password" /></aui:option>
+				<aui:option selected='<%= fieldType.equals("OPTIONS") %>' value="OPTIONS"><liferay-ui:message key="options" /></aui:option>
+				<aui:option selected='<%= fieldType.equals("RADIO_BUTTON") %>' value="RADIO_BUTTON"><liferay-ui:message key="radio-buttons" /></aui:option>
+				<aui:option selected='<%= fieldType.equals("CHECKBOX") %>' value="CHECKBOX"><liferay-ui:message key="check-box" /></aui:option>
+				<aui:option selected='<%= fieldType.equals("DATE") %>' value="DATE"><liferay-ui:message key="date" /></aui:option>
+				<aui:option selected='<%= fieldType.equals("SECTION") %>' value="SECTION"><liferay-ui:message key="Section" /></aui:option>
 			</aui:select>
 		</c:when>
 		<c:otherwise>
@@ -152,7 +154,7 @@ boolean ignoreRequestValue = (index != formFieldsIndex);
 				</aui:select>
 				
 				<aui:field-wrapper cssClass='<%= "input-max-length" + ((Validator.isNull(fieldTextFieldInputType) || (!fieldTextFieldInputType.equals("ALPHA") && !fieldTextFieldInputType.equals("NUMBER"))) ? " hide" : StringPool.BLANK) %>' >
-					<aui:input ignoreRequestValue="<%= ignoreRequestValue %>" label="Max Length" name='<%= "inputMaxLength" + index %>' helpMessage="Set max number of allowed characters" type="text" value="" />
+					<aui:input ignoreRequestValue="<%= ignoreRequestValue %>" label="Max Length" name='<%= "inputMaxLength" + index %>' helpMessage="Set max number of allowed characters" type="text" value="<%= inputMaxLength %>" />
 				</aui:field-wrapper>
 			</aui:field-wrapper>
 		</c:when>

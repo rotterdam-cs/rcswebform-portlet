@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -272,7 +272,7 @@ public interface FormItemLocalService extends BaseLocalService,
 		java.util.Map<java.util.Locale, java.lang.String> options,
 		boolean mandatory, java.lang.String validationRegexValue,
 		java.lang.String validationType,
-		java.lang.String errorValidationMessage, int order,
+		java.lang.String errorValidationMessage, int order, int maxLength,
 		com.liferay.portal.service.ServiceContext serviceContext);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)

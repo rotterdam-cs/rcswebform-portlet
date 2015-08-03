@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -114,7 +114,7 @@ public class FormItemLocalServiceClpInvoker {
 				"java.lang.Long", "java.lang.Long", "java.util.Map",
 				"java.lang.String", "java.util.Map", "boolean",
 				"java.lang.String", "java.lang.String", "java.lang.String",
-				"int", "com.liferay.portal.service.ServiceContext"
+				"int", "int", "com.liferay.portal.service.ServiceContext"
 			};
 
 		_methodName51 = "getFormItemByFormId";
@@ -244,7 +244,8 @@ public class FormItemLocalServiceClpInvoker {
 				(java.lang.String)arguments[6], (java.lang.String)arguments[7],
 				(java.lang.String)arguments[8],
 				((Integer)arguments[9]).intValue(),
-				(com.liferay.portal.service.ServiceContext)arguments[10]);
+				((Integer)arguments[10]).intValue(),
+				(com.liferay.portal.service.ServiceContext)arguments[11]);
 		}
 
 		if (_methodName51.equals(name) &&
