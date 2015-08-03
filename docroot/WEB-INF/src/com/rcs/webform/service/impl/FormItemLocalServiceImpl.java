@@ -69,7 +69,7 @@ public class FormItemLocalServiceImpl extends FormItemLocalServiceBaseImpl {
      * @return
      */
     public FormItem save(Long formItemId, Long formId, Map<Locale, String> label, String type, Map<Locale, String> options, boolean mandatory, String validationRegexValue,
-            String validationType, String errorValidationMessage, int order, int maxLength, ServiceContext serviceContext) {
+            String validationType, String errorValidationMessage, int order, int maxLength, Map<Locale, String> hintMessage, ServiceContext serviceContext) {
 
         User user = null;
         FormItem formItem = null;
@@ -99,6 +99,7 @@ public class FormItemLocalServiceImpl extends FormItemLocalServiceBaseImpl {
             formItem.setMandatory(mandatory);
             formItem.setDefaultValue("");
             formItem.setOrder(order);
+            formItem.setHintMessageMap(hintMessage);
             formItem.setValidationType(validationType);
             formItem.setValidationRegexValue(validationRegexValue);
             formItem.setErrorMandatoryMessage("");

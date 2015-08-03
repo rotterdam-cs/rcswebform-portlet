@@ -306,10 +306,12 @@ public class FormItemLocalServiceWrapper implements FormItemLocalService,
 		boolean mandatory, java.lang.String validationRegexValue,
 		java.lang.String validationType,
 		java.lang.String errorValidationMessage, int order, int maxLength,
+		java.util.Map<java.util.Locale, java.lang.String> hintMessage,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		return _formItemLocalService.save(formItemId, formId, label, type,
 			options, mandatory, validationRegexValue, validationType,
-			errorValidationMessage, order, maxLength, serviceContext);
+			errorValidationMessage, order, maxLength, hintMessage,
+			serviceContext);
 	}
 
 	@Override
