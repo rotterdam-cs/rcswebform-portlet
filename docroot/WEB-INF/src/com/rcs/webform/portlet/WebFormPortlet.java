@@ -180,7 +180,6 @@ public class WebFormPortlet extends MVCPortlet {
         try {
             String portletId = PortalUtil.getPortletId(actionRequest);
             Date now = new Date();
-            Locale userLocale = actionRequest.getLocale();
 
             FormToPorletMap formToPorletMap = FormToPorletMapLocalServiceUtil.getFormToPortletMapByPortletId(portletId);
             Form form = FormLocalServiceUtil.getForm(formToPorletMap.getFormId());
@@ -198,26 +197,7 @@ public class WebFormPortlet extends MVCPortlet {
                     submittedData.setActive(true);
                     submittedData.setCreationDate(now);
                     submittedData.setModificationDate(now);
-
-                    // clean user input
-                    String userInput = ParamUtil.get(actionRequest, formItem.getLabel(actionRequest.getLocale()), "");
-                    if (formItem.getType().equals(FormItemType.CHECKBOX.toString())) {
-                        StringBuilder cbInputBuilder = new StringBuilder();
-                        for (String entry : Arrays.asList(ParamUtil.getParameterValues(actionRequest, formItem.getLabel(actionRequest.getLocale())))) {
-                            cbInputBuilder.append(entry);
-                            cbInputBuilder.append(",");
-                        }
-                        userInput = cbInputBuilder.substring(0, cbInputBuilder.lastIndexOf(","));
-                    } else {
-                        if (userInput == null) {
-                            userInput = "";
-                        } else if (formItem.getType().equals(FormItemType.OPTIONS.toString())
-                                || formItem.getType().equals(FormItemType.RADIO_BUTTON.toString())) {
-                            userInput = formItem.getOptions(Locale.ENGLISH).split(",")[getOptionIdxInDefaultLanguage(formItem.getOptionsMap(), userInput,
-                                    userLocale)];
-                        }
-                    }
-                    submittedData.setUserInput(userInput);
+                    submittedData.setUserInput(getCleanUserInput(actionRequest, formItem));
                     SubmittedDataLocalServiceUtil.updateSubmittedData(submittedData);
                 }
             }
@@ -269,30 +249,12 @@ public class WebFormPortlet extends MVCPortlet {
 			List<FormItem> formItems = FormItemLocalServiceUtil.getFormItemByFormId(form.getFormId());
 			
 			for (FormItem formItem : formItems){
-				String userInput = ParamUtil.get(actionRequest, formItem.getLabel(actionRequest.getLocale()), "");
-				
-				sb.append(formItem.getLabel(actionRequest.getLocale()));
-				sb.append(" : ");
-				
-				if (formItem.getType().equals(FormItemType.CHECKBOX.toString())) {
-                    StringBuilder cbInputBuilder = new StringBuilder();
-                    for (String entry : Arrays.asList(ParamUtil.getParameterValues(actionRequest, formItem.getLabel(actionRequest.getLocale())))) {
-                        cbInputBuilder.append(entry);
-                        cbInputBuilder.append(",");
-                    }
-                    userInput = cbInputBuilder.substring(0, cbInputBuilder.lastIndexOf(","));
-                } else {
-                    if (userInput == null) {
-                        userInput = "";
-                    } else if (formItem.getType().equals(FormItemType.OPTIONS.toString())
-                            || formItem.getType().equals(FormItemType.RADIO_BUTTON.toString())) {
-                        userInput = formItem.getOptions(Locale.ENGLISH).split(",")[getOptionIdxInDefaultLanguage(formItem.getOptionsMap(), userInput,
-                        		actionRequest.getLocale())];
-                    }
-                }
-				
-				sb.append(userInput);
-				sb.append(CharPool.NEW_LINE);
+				if (!formItem.getType().equals(FormItemType.SECTION.toString())){
+					sb.append(formItem.getLabel(actionRequest.getLocale()));
+					sb.append(" : ");
+					sb.append(getCleanUserInput(actionRequest, formItem));
+					sb.append(CharPool.NEW_LINE);
+				}
 			}
 			
 			mailBody = sb.toString();
@@ -302,6 +264,27 @@ public class WebFormPortlet extends MVCPortlet {
     	return mailBody;
     }
 
+    protected String getCleanUserInput(ActionRequest actionRequest, FormItem formItem){
+    	String userInput = ParamUtil.get(actionRequest, formItem.getLabel(actionRequest.getLocale()), "");
+    	if (formItem.getType().equals(FormItemType.CHECKBOX.toString())) {
+            StringBuilder cbInputBuilder = new StringBuilder();
+            for (String entry : Arrays.asList(ParamUtil.getParameterValues(actionRequest, formItem.getLabel(actionRequest.getLocale())))) {
+                cbInputBuilder.append(entry);
+                cbInputBuilder.append(",");
+            }
+            userInput = cbInputBuilder.substring(0, cbInputBuilder.lastIndexOf(","));
+        } else {
+            if (userInput == null) {
+                userInput = "";
+            } else if (formItem.getType().equals(FormItemType.OPTIONS.toString())
+                    || formItem.getType().equals(FormItemType.RADIO_BUTTON.toString())) {
+                userInput = formItem.getOptions(Locale.ENGLISH).split(",")[getOptionIdxInDefaultLanguage(formItem.getOptionsMap(), userInput,
+                        actionRequest.getLocale())];
+            }
+        }
+    	return userInput;
+    }
+    
     private int getOptionIdxInDefaultLanguage(Map<Locale, String> optionsMap, String userInput, Locale userLocale) {
         ArrayList<String> options = new ArrayList<String>(Arrays.asList(optionsMap.get(userLocale).split(",")));
         return options.indexOf(userInput);
