@@ -50,14 +50,55 @@
 </aui:form>
 
 <aui:script use="aui-base,aui-node,aui-form-validator,aui-datepicker">
+	var DEFAULTS_FORM_VALIDATOR = A.config.FormValidator;
+
+	var phone = function(val, node, ruleValue) {
+	    if(node.attr('value') == node.attr('placeholder') ){
+	        return false;
+	    }   
+	
+	 	// valid phone number match
+	    var phoneRegExp = /^((\+)?[1-9]{1,2})?([-\s\.])?((\(\d{1,4}\))|\d{1,4})(([-\s\.])?[0-9]{1,12}){1,2}$/;
+
+	    if (phoneRegExp.test(val)) {
+	        return true;
+	    }
+	    return false;
+	}
+	
+	var regex = function(val, node, ruleValue) {
+	    if(node.attr('value') == node.attr('placeholder') ){
+	        return false;
+	    }   
+	
+	    var regExp = new RegExp(ruleValue);
+	    
+	    return regExp.test(val);
+	}
+	
+	A.mix(
+	    DEFAULTS_FORM_VALIDATOR.RULES,
+	    {
+	        phone_number    : phone,
+	        regex    : regex
+	    },
+	    true
+	);      
+	
+	A.mix(
+	    DEFAULTS_FORM_VALIDATOR.STRINGS,
+	    {
+	        phone    : 'Please enter valid phone number',
+	        regex    : 'Please enter valid input'
+	    },
+	    true
+	);
+
 	var Data = <%= renderRequest.getAttribute("Data")%>;
 	if(Data) {
-		console.log('t0');
 		var divForm = A.one('#<portlet:namespace />rcsWebForm');
-		console.log('t1');
 		var divTemplateFormItem = A.one('#<portlet:namespace />rcsWebFormItem');
 		divTemplateFormItem.hide();
-		console.log('t2');
 		var rules = new Object();
 		var fieldStrings = new Object();
 		if(divForm || divTemplateFormItem) {
@@ -65,7 +106,6 @@
 				console.log('formItem = '+formItemIdx);
 				var divFormItem =  divTemplateFormItem.cloneNode(true);
 				if(divFormItem) {
-					console.log('s2');
 					
 					divFormItemLabel = divFormItem.one('#<portlet:namespace />rcsWebFormItemLabel');
 					divFormItemInputWrapper = divFormItem.one('#<portlet:namespace />rcsWebFormItemInputWrapper');
@@ -185,25 +225,30 @@
 		divFormItemInput.set('placeholder', Data.data.formItems[formItemIdx].hintMessage);
 		
 		var rule = new Object();
+		var fieldString = new Object();
+		
 		rule.required = Data.data.formItems[formItemIdx].mandatory;
+		fieldString.required = Data.data.formItems[formItemIdx].errorMandatoryMessage;
+
 		if(Data.data.formItems[formItemIdx].validationType === 'REGEX'){
-			console.log('regex');						
+			console.log('Data.data.formItems[formItemIdx].validationRegexValue : '+Data.data.formItems[formItemIdx].validationRegexValue);
+			rule[Data.data.formItems[formItemIdx].validationType.toLowerCase()] = Data.data.formItems[formItemIdx].validationRegexValue;
 		} else {
 			rule[Data.data.formItems[formItemIdx].validationType.toLowerCase()] = true;  
 		}
 		
 		if(Data.data.formItems[formItemIdx].minLength) {
-			rule.minLength = Data.data.formItems[formItemIdx].minLength; 
+			rule.minLength = Data.data.formItems[formItemIdx].minLength;
+			fieldString.minLength = Data.data.formItems[formItemIdx].errorLengthMessage;
 		}
 		
 		if(Data.data.formItems[formItemIdx].maxLength) {
-			rule.maxLength = Data.data.formItems[formItemIdx].maxLength; 
+			rule.maxLength = Data.data.formItems[formItemIdx].maxLength;
+			fieldString.maxLength = Data.data.formItems[formItemIdx].errorLengthMessage;
 		}
 		
 		rules[divFormItemInput.attr('id')] = rule;
 		
-		var fieldString = new Object();
-		fieldString.required = Data.data.formItems[formItemIdx].errorMandatoryMessage;
 		fieldString[Data.data.formItems[formItemIdx].validationType.toLowerCase()] = Data.data.formItems[formItemIdx].errorValidationMessage;
 		fieldStrings[divFormItemInput.attr('id')] = fieldString;
 
@@ -262,6 +307,5 @@
 			divFormItemInput.remove();
 			divFormItemInputLabel.remove();
 		}
-	}		
-	
+	}	
 </aui:script>

@@ -72,7 +72,7 @@ public class EntityDtoConverter {
                 .valueOf(formItem.getValidationType()));
         formItemDto.setMinLength(formItem.getMinLength());
         formItemDto.setMaxLength(formItem.getMaxLength());
-        formItemDto.setValidationRegexValueString(formItem.getValidationRegexValue());
+        formItemDto.setValidationRegexValue(formItem.getValidationRegexValue());
         formItemDto.setErrorValidationMessage(formItem.getErrorValidationMessage(locale));
         formItemDto.setErrorMandatoryMessage(formItem.getErrorMandatoryMessage(locale));
         formItemDto.setErrorLengthMessage(formItem.getErrorLengthMessage(locale));

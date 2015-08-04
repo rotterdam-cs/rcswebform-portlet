@@ -27,7 +27,7 @@ public class FormItemDTO extends GenericEntityDTO {
 	private String defaultValue;
 	private int order;
 	private ValidationType validationType;
-	private String validationRegexValueString;
+	private String validationRegexValue;
 	private int minLength;
 	private int maxLength;
     private String errorValidationMessage;
@@ -217,12 +217,12 @@ public class FormItemDTO extends GenericEntityDTO {
         this.validationType = validationType;
     }
     
-    public String getValidationRegexValueString() {
-        return validationRegexValueString;
+    public String getValidationRegexValue() {
+        return validationRegexValue;
     }
     
-    public void setValidationRegexValueString(String validationRegexValueString) {
-        this.validationRegexValueString = validationRegexValueString;
+    public void setValidationRegexValue(String validationRegexValue) {
+        this.validationRegexValue = validationRegexValue;
     }
     
     public String getErrorValidationMessage() {
