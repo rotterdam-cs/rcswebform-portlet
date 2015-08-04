@@ -142,17 +142,22 @@
 							break;
 						case 'DATE' :
 							initUserInputText(divFormItemInputWrapper, divFormItemInputText, formItemIdx);
-							divFormItemInputText.set('type','date');
 							new A.DatePicker(
 								      {
-								    	  mask:'%d/%m/%y',
+								    	  mask:'%d/%m/%Y',
 								          trigger: '#'+divFormItemInputText.attr('id'),
 								          popover: {
-								          zIndex: 1
+								          zIndex: 1,
+								          calendar: {
+								              on: {
+								                  dateClick: function(event) {
+								                      input.set('value', A.Date.format(event.date,{format:datePicker.get('mask')}));
+								                  }
+								              }
+								          }
 								        }
 								      }
 								    );
-							rule.date = true;
 							divFormItemInputRadio.remove();
 							divFormItemInputRadioLabel.remove();
 							divFormItemInputCombo.remove();
@@ -245,6 +250,10 @@
 		if(Data.data.formItems[formItemIdx].maxLength) {
 			rule.maxLength = Data.data.formItems[formItemIdx].maxLength;
 			fieldString.maxLength = Data.data.formItems[formItemIdx].errorLengthMessage;
+		}
+		
+		if(Data.data.formItems[formItemIdx].type === 'DATE') {
+			rule.date = true;
 		}
 		
 		rules[divFormItemInput.attr('id')] = rule;
