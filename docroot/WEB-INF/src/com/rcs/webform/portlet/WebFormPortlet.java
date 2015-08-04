@@ -249,10 +249,12 @@ public class WebFormPortlet extends MVCPortlet {
 			List<FormItem> formItems = FormItemLocalServiceUtil.getFormItemByFormId(form.getFormId());
 			
 			for (FormItem formItem : formItems){
-				sb.append(formItem.getLabel(actionRequest.getLocale()));
-				sb.append(" : ");
-				sb.append(getCleanUserInput(actionRequest, formItem));
-				sb.append(CharPool.NEW_LINE);
+				if (!formItem.getType().equals(FormItemType.SECTION.toString())){
+					sb.append(formItem.getLabel(actionRequest.getLocale()));
+					sb.append(" : ");
+					sb.append(getCleanUserInput(actionRequest, formItem));
+					sb.append(CharPool.NEW_LINE);
+				}
 			}
 			
 			mailBody = sb.toString();
