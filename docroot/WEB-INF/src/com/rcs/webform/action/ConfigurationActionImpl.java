@@ -130,7 +130,7 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 					String fieldType = ParamUtil.getString(actionRequest, "fieldType" + formFieldsIndex);
 					String validationType = ParamUtil.getString(actionRequest, "fieldInputType" + formFieldsIndex);
 					int inputTypeMaxLength = ParamUtil.getInteger(actionRequest, "inputMaxLength" + formFieldsIndex);
-					boolean fieldOptional = ParamUtil.getBoolean(actionRequest, "fieldOptional" + formFieldsIndex);
+					boolean fieldOptional = !ParamUtil.getBoolean(actionRequest, "fieldOptional" + formFieldsIndex);
 					Map<Locale, String> fieldOptionsMap = LocalizationUtil.getLocalizationMap(actionRequest, "fieldOptions" + formFieldsIndex);
 					String fieldValidationScript = ParamUtil.getString(actionRequest, "fieldValidationScript" + formFieldsIndex);
 					String fieldValidationErrorMessage = ParamUtil.getString(actionRequest, "fieldValidationErrorMessage" + formFieldsIndex);
