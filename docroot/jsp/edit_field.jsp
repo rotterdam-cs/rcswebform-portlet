@@ -57,7 +57,7 @@ boolean ignoreRequestValue = (index != formFieldsIndex);
 
 <liferay-ui:error key='<%= "fieldSizeInvalid" + formFieldsIndex %>' message="please-enter-no-more-than-75-characters" />
 
-<div class="field-row field-row">
+<div class="field-row form-items-row">
 	<div class="field-title">
 		<c:choose>
 			<c:when test='<%= fieldType.equals("paragraph") %>'>
@@ -77,7 +77,7 @@ boolean ignoreRequestValue = (index != formFieldsIndex);
 			<aui:input name='<%= "_field" + index %>' type="hidden" />
 			<aui:input cssClass="formItemId" name='<%= "formItemId" + index %>' type="hidden" value='<%=formItemId%>'/>
 
-			<aui:field-wrapper cssClass="label-name" label="name">
+			<aui:field-wrapper cssClass="label-name left-row" label="name">
 				<liferay-ui:input-localized ignoreRequestValue="<%= ignoreRequestValue %>" name='<%= "fieldLabel" + index %>' xml="<%= fieldLabelXml %>" />
 			</aui:field-wrapper>
 		</c:when>
@@ -94,16 +94,18 @@ boolean ignoreRequestValue = (index != formFieldsIndex);
 
 	<c:choose>
 		<c:when test="<%= !fieldsEditingDisabled %>">
-			<aui:select cssClass='field-type' ignoreRequestValue="<%= ignoreRequestValue %>" label="type" name='<%= "fieldType" + index %>' >
-				<aui:option selected='<%= fieldType.equals("TEXT_FIELD") %>' value="TEXT_FIELD"><liferay-ui:message key="text" /></aui:option>
-				<aui:option selected='<%= fieldType.equals("TEXT_BOX") %>' value="TEXT_BOX"><liferay-ui:message key="text-box" /></aui:option>
-				<aui:option selected='<%= fieldType.equals("PASSWORD") %>' value="PASSWORD"><liferay-ui:message key="password" /></aui:option>
-				<aui:option selected='<%= fieldType.equals("OPTIONS") %>' value="OPTIONS"><liferay-ui:message key="options" /></aui:option>
-				<aui:option selected='<%= fieldType.equals("RADIO_BUTTON") %>' value="RADIO_BUTTON"><liferay-ui:message key="radio-buttons" /></aui:option>
-				<aui:option selected='<%= fieldType.equals("CHECKBOX") %>' value="CHECKBOX"><liferay-ui:message key="check-box" /></aui:option>
-				<aui:option selected='<%= fieldType.equals("DATE") %>' value="DATE"><liferay-ui:message key="date" /></aui:option>
-				<aui:option selected='<%= fieldType.equals("SECTION") %>' value="SECTION"><liferay-ui:message key="Section" /></aui:option>
-			</aui:select>
+			<aui:field-wrapper cssClass="left-row">
+				<aui:select cssClass='field-type' ignoreRequestValue="<%= ignoreRequestValue %>" label="type" name='<%= "fieldType" + index %>' >
+					<aui:option selected='<%= fieldType.equals("TEXT_FIELD") %>' value="TEXT_FIELD"><liferay-ui:message key="text" /></aui:option>
+					<aui:option selected='<%= fieldType.equals("TEXT_BOX") %>' value="TEXT_BOX"><liferay-ui:message key="text-box" /></aui:option>
+					<aui:option selected='<%= fieldType.equals("PASSWORD") %>' value="PASSWORD"><liferay-ui:message key="password" /></aui:option>
+					<aui:option selected='<%= fieldType.equals("OPTIONS") %>' value="OPTIONS"><liferay-ui:message key="options" /></aui:option>
+					<aui:option selected='<%= fieldType.equals("RADIO_BUTTON") %>' value="RADIO_BUTTON"><liferay-ui:message key="radio-buttons" /></aui:option>
+					<aui:option selected='<%= fieldType.equals("CHECKBOX") %>' value="CHECKBOX"><liferay-ui:message key="check-box" /></aui:option>
+					<aui:option selected='<%= fieldType.equals("DATE") %>' value="DATE"><liferay-ui:message key="date" /></aui:option>
+					<aui:option selected='<%= fieldType.equals("SECTION") %>' value="SECTION"><liferay-ui:message key="Section" /></aui:option>
+				</aui:select>
+			</aui:field-wrapper>
 		</c:when>
 		<c:otherwise>
 				<dt>
@@ -117,21 +119,7 @@ boolean ignoreRequestValue = (index != formFieldsIndex);
 
 	<c:choose>
 		<c:when test="<%= !fieldsEditingDisabled %>">
-			<aui:input cssClass="optional-control" ignoreRequestValue="<%= ignoreRequestValue %>" label="optional" name='<%= "fieldOptional" + index %>' type="checkbox" value="<%= fieldOptional %>" />
-		</c:when>
-		<c:otherwise>
-				<dt>
-					<liferay-ui:message key="optional" />
-				</dt>
-				<dd>
-					<liferay-ui:message key='<%= fieldOptional ? "yes" : "no" %>' />
-				</dd>
-		</c:otherwise>
-	</c:choose>
-
-	<c:choose>
-		<c:when test="<%= !fieldsEditingDisabled %>">
-			<aui:field-wrapper cssClass='<%= "options" + ((Validator.isNull(fieldType) || (!fieldType.equals("OPTIONS") && !fieldType.equals("RADIO_BUTTON"))) ? " hide" : StringPool.BLANK) %>' helpMessage="add-options-separated-by-commas" label="options">
+			<aui:field-wrapper cssClass='<%= "left-row options" + ((Validator.isNull(fieldType) || (!fieldType.equals("OPTIONS") && !fieldType.equals("RADIO_BUTTON"))) ? " hide" : StringPool.BLANK) %>' helpMessage="add-options-separated-by-commas" label="options">
 				<liferay-ui:input-localized ignoreRequestValue="<%= ignoreRequestValue %>" name='<%= "fieldOptions" + index %>' xml="<%= fieldOptionsXml %>" />
 			</aui:field-wrapper>
 		</c:when>
@@ -147,24 +135,42 @@ boolean ignoreRequestValue = (index != formFieldsIndex);
 	
 	<c:choose>
 		<c:when test="<%= !fieldsEditingDisabled %>">
-				<aui:field-wrapper cssClass='<%= "input-hint-message" + ((Validator.isNull(fieldType) || (!fieldType.equals("TEXT_FIELD"))) ? " hide" : StringPool.BLANK) %>' label="Hint Message" helpMessage='Set Field Hint Message / Placeholder'>
+				<aui:field-wrapper cssClass='<%= "left-row input-hint-message" + ((Validator.isNull(fieldType) || (!fieldType.equals("TEXT_FIELD"))) ? " hide" : StringPool.BLANK) %>' label="Hint Message" helpMessage='Set Field Hint Message / Placeholder'>
 					<liferay-ui:input-localized ignoreRequestValue="<%= ignoreRequestValue %>" name='<%= "fieldHintMessage" + index %>' xml="<%= fieldHintMessageXml %>" />
 				</aui:field-wrapper>
 		</c:when>
+	</c:choose>
+	
+	<c:choose>
+		<c:when test="<%= !fieldsEditingDisabled %>">
+			<aui:input cssClass="optional-control left-row-clear-right" ignoreRequestValue="<%= ignoreRequestValue %>" label="optional" name='<%= "fieldOptional" + index %>' type="checkbox" value="<%= fieldOptional %>" />
+		</c:when>
+		<c:otherwise>
+				<dt>
+					<liferay-ui:message key="optional" />
+				</dt>
+				<dd>
+					<liferay-ui:message key='<%= fieldOptional ? "yes" : "no" %>' />
+				</dd>
+		</c:otherwise>
 	</c:choose>
 
 	<c:choose>
 		<c:when test="<%= !fieldsEditingDisabled %>">
 			<aui:field-wrapper cssClass='<%= "text-field-input-type" + ((Validator.isNull(fieldType) || (!fieldType.equals("TEXT_FIELD"))) ? " hide" : StringPool.BLANK) %>' >
-				<aui:select cssClass="text-field-input-type" ignoreRequestValue="<%= ignoreRequestValue %>" name='<%= "fieldInputType" + index %>' helpMessage='Set Text Field Input Type' label="Input Type">
-					<aui:option selected='<%= fieldTextFieldInputType.equals("ALPHA") %>' value="ALPHA"><liferay-ui:message key="text" /></aui:option>
-					<aui:option selected='<%= fieldTextFieldInputType.equals("NUMBER") %>' value="NUMBER"><liferay-ui:message key="number" /></aui:option>
-					<aui:option selected='<%= fieldTextFieldInputType.equals("PHONE_NUMBER") %>' value="PHONE_NUMBER"><liferay-ui:message key="phone-number" /></aui:option>
-					<aui:option selected='<%= fieldTextFieldInputType.equals("EMAIL") %>' value="EMAIL"><liferay-ui:message key="email" /></aui:option>
-				</aui:select>
+				<aui:field-wrapper cssClass="left-row-clear-left">
+					<aui:select cssClass="text-field-input-type" ignoreRequestValue="<%= ignoreRequestValue %>" name='<%= "fieldInputType" + index %>' helpMessage='Set Text Field Input Type' label="Input Type">
+						<aui:option selected='<%= fieldTextFieldInputType.equals("ALPHA") %>' value="ALPHA"><liferay-ui:message key="text" /></aui:option>
+						<aui:option selected='<%= fieldTextFieldInputType.equals("NUMBER") %>' value="NUMBER"><liferay-ui:message key="number" /></aui:option>
+						<aui:option selected='<%= fieldTextFieldInputType.equals("PHONE_NUMBER") %>' value="PHONE_NUMBER"><liferay-ui:message key="phone-number" /></aui:option>
+						<aui:option selected='<%= fieldTextFieldInputType.equals("EMAIL") %>' value="EMAIL"><liferay-ui:message key="email" /></aui:option>
+					</aui:select>
+				</aui:field-wrapper>
 				
-				<aui:field-wrapper cssClass='<%= "input-max-length" + ((Validator.isNull(fieldTextFieldInputType) || (!fieldTextFieldInputType.equals("ALPHA") && !fieldTextFieldInputType.equals("NUMBER"))) ? " hide" : StringPool.BLANK) %>' >
-					<aui:input ignoreRequestValue="<%= ignoreRequestValue %>" label="Max Length" name='<%= "inputMaxLength" + index %>' helpMessage="Set max number of allowed characters" type="text" value="<%= inputMaxLength %>" />
+				<aui:field-wrapper cssClass='<%= "left-row-clear-right input-max-length" + ((Validator.isNull(fieldTextFieldInputType) || (!fieldTextFieldInputType.equals("ALPHA") && !fieldTextFieldInputType.equals("NUMBER"))) ? " hide" : StringPool.BLANK) %>' >
+					<aui:input ignoreRequestValue="<%= ignoreRequestValue %>" label="Max Length" name='<%= "inputMaxLength" + index %>' helpMessage="Set max number of allowed characters" type="text" value="<%= inputMaxLength %>" >
+						<aui:validator name="number"></aui:validator>
+					</aui:input>
 				</aui:field-wrapper>
 			</aui:field-wrapper>
 		</c:when>

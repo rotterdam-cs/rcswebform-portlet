@@ -190,13 +190,17 @@ boolean fieldsEditingDisabled = false;
 			}
 			
 			var textFieldInputTypeDiv = formRow.one('.text-field-input-type');
+			var textFieldHintDiv = formRow.one('.input-hint-message');
 	
 			if (value == 'TEXT_FIELD') {
 				textFieldInputTypeDiv.all('label').show();
+				textFieldHintDiv.all('label').show();
 				textFieldInputTypeDiv.show();
+				textFieldHintDiv.show();
 			}
 			else {
 				textFieldInputTypeDiv.hide();
+				textFieldHintDiv.hide();
 			}
 
 			var optionalControl = formRow.one('.optional-control').ancestor();

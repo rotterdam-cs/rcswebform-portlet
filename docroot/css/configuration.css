@@ -1,0 +1,20 @@
+/* form items configuration style */
+.form-items-row{
+	.left-row{
+		float : left;
+		margin-right : 30px;
+	}
+	
+	.left-row-clear-right{
+		float : left;
+		clear : right;
+	}
+	
+	.left-row-clear-left{
+		float : left;
+		clear : left;
+		margin-right: 30px;
+	}
+}
+
+/* end form items configuration style */
