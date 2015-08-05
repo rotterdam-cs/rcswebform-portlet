@@ -64,8 +64,8 @@ boolean fieldsEditingDisabled = false;
 
 	<liferay-ui:error exception="<%= DuplicateColumnNameException.class %>" message="please-enter-unique-field-names" />
 	
-	<liferay-ui:panel-container extended="true" id="webFormConfiguration">
-		<liferay-ui:panel collapsible="true" extended="true" id="webFormGeneral" persistState="true" title="Form Information">
+	<liferay-ui:tabs names="Form Information, Submitted Data to be Stored, Form Fields" refresh="false">
+		<liferay-ui:section>
 			<aui:fieldset>
 				<aui:field-wrapper label="Title">
 					<liferay-ui:input-localized name="title" xml="<%= titleXml %>"></liferay-ui:input-localized>
@@ -99,9 +99,8 @@ boolean fieldsEditingDisabled = false;
 				</aui:field-wrapper>
 				
 			</aui:fieldset>
-		</liferay-ui:panel>
-		
-		<liferay-ui:panel collapsible="true" extended="true" id="webFormData" persistState="true" title="Submitted Data to be Stored">
+		</liferay-ui:section>
+		<liferay-ui:section>
 			<aui:fieldset label="Email">
 				<liferay-ui:error key="emailAddressInvalid" message="Please enter a valid email address" />
 				<liferay-ui:error key="emailAddressRequired" message="Please enter an email address" />
@@ -124,9 +123,8 @@ boolean fieldsEditingDisabled = false;
 			<aui:fieldset label="Database">
 				<aui:input name="preferences--saveToDatabase--" label="Save data to database" type="checkbox" value="<%= saveToDatabase %>"></aui:input>
 			</aui:fieldset>
-		</liferay-ui:panel>
-		
-		<liferay-ui:panel collapsible="true" extended="true" id="webFormFields" persistState="true" title="Form Fields">
+		</liferay-ui:section>
+		<liferay-ui:section>
 			<aui:fieldset cssClass="rows-container webFields">
 
 				<aui:input name="updateFields" type="hidden" value="<%= !fieldsEditingDisabled %>" />
@@ -161,9 +159,8 @@ boolean fieldsEditingDisabled = false;
 				%>
 
 			</aui:fieldset>
-		</liferay-ui:panel>
-		
-	</liferay-ui:panel-container>
+		</liferay-ui:section>
+	</liferay-ui:tabs>
 	
 	<aui:button-row>
 		<aui:button type="submit"></aui:button>
