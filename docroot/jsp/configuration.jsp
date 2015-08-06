@@ -186,6 +186,16 @@ boolean fieldsEditingDisabled = false;
 				optionsDiv.hide();
 			}
 			
+			var optionalDiv = formRow.one('.optionalChk');
+			
+			if (!(value == 'SECTION')) {
+				optionalDiv.all('label').show();
+				optionalDiv.show();
+			}
+			else {
+				optionalDiv.hide();
+			}
+			
 			var textFieldInputTypeDiv = formRow.one('.text-field-input-type');
 			var textFieldHintDiv = formRow.one('.input-hint-message');
 	
