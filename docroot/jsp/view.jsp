@@ -45,7 +45,9 @@
 				<liferay-ui:captcha url="<%= captchaURL %>" />
 			</div>
 		</c:if>
-		<input type="submit" value="${Data.data.submitLabel}" id="${Data.data.submitAttrId}" class="${Data.data.submitAttrClass}" />
+		<aui:button-row>
+			<aui:button type="submit" cssClass="${Data.data.submitAttrClass}" value="${Data.data.submitLabel}"></aui:button>
+		</aui:button-row>
 	</aui:fieldset>
 </aui:form>
 
