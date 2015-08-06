@@ -19,7 +19,7 @@
 		<!-- Hidden input -->
 		<aui:input name="redirect" type="hidden" value="${Data.data.successURL}"></aui:input>
 		<aui:input name="formId" type="hidden" value="${Data.data.formId}"></aui:input>
-		
+
 		<div id="<portlet:namespace />rcsWebForm" class="${Data.data.formAttrClass}">
 			<!-- Form will be put here -->
 			<div id="<portlet:namespace />rcsWebFormItem">
@@ -76,11 +76,52 @@
 	    return regExp.test(val);
 	}
 	
+	var custom_date = function(val, node, ruleValue) {
+	    if(node.attr('value') == node.attr('placeholder') ){
+	        return false;
+	    }   
+	
+		return isValidDate(val);
+	}
+ 
+	function isValidDate(str) {
+	    var parts = str.split('/');
+	    if (parts.length < 3)
+	        return false;
+	    else {
+	        var day = parseInt(parts[0]);
+	        var month = parseInt(parts[1]);
+	        var year = parseInt(parts[2]);
+	        if (isNaN(day) || isNaN(month) || isNaN(year)) {
+	            return false;
+	        }
+	        if (day < 1 || year < 1)
+	            return false;
+	        if(month>12||month<1)
+	            return false;
+	        if ((month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12) && day > 31)
+	            return false;
+	        if ((month == 4 || month == 6 || month == 9 || month == 11 ) && day > 30)
+	            return false;
+	        if (month == 2) {
+	            if (((year % 4) == 0 && (year % 100) != 0) || ((year % 400) == 0 && (year % 100) == 0)) {
+	                if (day > 29)
+	                    return false;
+	            } else {
+	                if (day > 28)
+	                    return false;
+	            }      
+	        }
+	        return true;
+	    }
+	}
+	
 	A.mix(
 	    DEFAULTS_FORM_VALIDATOR.RULES,
 	    {
 	        phone_number    : phone,
-	        regex    : regex
+	        regex    : regex,
+	        custom_date : custom_date
 	    },
 	    true
 	);      
@@ -89,7 +130,8 @@
 	    DEFAULTS_FORM_VALIDATOR.STRINGS,
 	    {
 	        phone    : 'Please enter valid phone number',
-	        regex    : 'Please enter valid input'
+	        regex    : 'Please enter valid input',
+	        custom_date : 'Please enter valid date'
 	    },
 	    true
 	);
@@ -147,14 +189,7 @@
 								    	  mask:'%d/%m/%Y',
 								          trigger: '#'+divFormItemInputText.attr('id'),
 								          popover: {
-								          zIndex: 1,
-								          calendar: {
-								              on: {
-								                  dateClick: function(event) {
-								                      input.set('value', A.Date.format(event.date,{format:datePicker.get('mask')}));
-								                  }
-								              }
-								          }
+									      	zIndex: 1
 								        }
 								      }
 								    );
@@ -236,7 +271,6 @@
 		fieldString.required = Data.data.formItems[formItemIdx].errorMandatoryMessage;
 
 		if(Data.data.formItems[formItemIdx].validationType === 'REGEX'){
-			console.log('Data.data.formItems[formItemIdx].validationRegexValue : '+Data.data.formItems[formItemIdx].validationRegexValue);
 			rule[Data.data.formItems[formItemIdx].validationType.toLowerCase()] = Data.data.formItems[formItemIdx].validationRegexValue;
 		} else {
 			rule[Data.data.formItems[formItemIdx].validationType.toLowerCase()] = true;  
@@ -253,7 +287,7 @@
 		}
 		
 		if(Data.data.formItems[formItemIdx].type === 'DATE') {
-			rule.date = true;
+			rule.custom_date = true;
 		}
 		
 		rules[divFormItemInput.attr('id')] = rule;
@@ -271,7 +305,6 @@
 	function initUserInputCombo(divFormItemInputWrapper, divFormItemInput, formItemIdx, templateOptionItem) {
 		initUserInput(divFormItemInputWrapper, divFormItemInput, formItemIdx);
 		var options = Data.data.formItems[formItemIdx].options.split(',');
-		console.log('divFormItemInput.attr("id") '+divFormItemInput.attr('id'));
 		var templateOptionItem =  divFormItemInput.one('#<portlet:namespace />rcsWebFormItemOption');
 		
 		if(templateOptionItem){

@@ -86,7 +86,7 @@ public class WebFormPortlet extends MVCPortlet {
     public void submitForm(ActionRequest actionRequest, ActionResponse actionResponse) throws Exception {
         log.info("##### Processing submitted form data #####");
 
-        ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(WebKeys.THEME_DISPLAY);
+        ThemeDisplay themeDisplay = (ThemeDisplay) actionRequest.getAttribute(WebKeys.THEME_DISPLAY);
         String portletId = PortalUtil.getPortletId(actionRequest);
         PortletPreferences preferences = PortletPreferencesFactoryUtil.getPortletSetup(actionRequest, portletId);
 
@@ -119,7 +119,7 @@ public class WebFormPortlet extends MVCPortlet {
                 return;
             }
         }
-        
+
         // Send submitted form data as email
         boolean emailSuccess = true;
         if (sendAsEmail) {
@@ -190,30 +190,28 @@ public class WebFormPortlet extends MVCPortlet {
         }
     }
 
-    protected boolean sendAsEmail(PortletPreferences preferences, String portletId, 
-    		ActionRequest actionRequest, long companyId) {
+    protected boolean sendAsEmail(PortletPreferences preferences, String portletId, ActionRequest actionRequest, long companyId) {
         try {
             String emailAdresses = preferences.getValue("emailAddress", StringPool.BLANK);
             String subject = preferences.getValue("subject", StringPool.BLANK);
             String body = getMailBody(portletId, actionRequest);
-            
-            if (Validator.isNull(emailAdresses)){
+
+            if (Validator.isNull(emailAdresses)) {
                 log.error("Email could not be sent. No email address is configured.");
                 return false;
             }
-            
-            if (Validator.isNull(body)){
-            	log.error("Email could not be sent. Empty email body.");
+
+            if (Validator.isNull(body)) {
+                log.error("Email could not be sent. Empty email body.");
                 return false;
             }
-            
-            InternetAddress emailAddressFrom = new InternetAddress(
-            		WebFormUtil.getEmailFromAddress(preferences, companyId), 
-            		WebFormUtil.getEmailFromName(preferences, companyId));
+
+            InternetAddress emailAddressFrom = new InternetAddress(WebFormUtil.getEmailFromAddress(preferences, companyId), WebFormUtil.getEmailFromName(
+                    preferences, companyId));
             MailMessage mailMessage = new MailMessage(emailAddressFrom, subject, body, false);
             InternetAddress[] toAddresses = InternetAddress.parse(emailAdresses);
             mailMessage.setTo(toAddresses);
-            
+
             MailServiceUtil.sendEmail(mailMessage);
         } catch (Exception e) {
             log.error("Email could not be sent: " + e.getMessage(), e);
@@ -221,52 +219,50 @@ public class WebFormPortlet extends MVCPortlet {
         }
         return true;
     }
-    
-    protected String getMailBody(String portletId, ActionRequest actionRequest){
-    	String mailBody = "";
-    	try {
-			StringBundler sb = new StringBundler();
-			
-			Form form = WebFormUtil.getPortletForm(portletId);
-			List<FormItem> formItems = FormItemLocalServiceUtil.getFormItemByFormId(form.getFormId());
-			
-			for (FormItem formItem : formItems){
-				if (!formItem.getType().equals(FormItemType.SECTION.toString())){
-					sb.append(formItem.getLabel(actionRequest.getLocale()));
-					sb.append(" : ");
-					sb.append(getCleanUserInput(actionRequest, formItem));
-					sb.append(CharPool.NEW_LINE);
-				}
-			}
-			
-			mailBody = sb.toString();
-		} catch (Exception e) {
-			log.error("Exception while getting mail body : " + e.getMessage(), e);
-		}
-    	return mailBody;
+
+    protected String getMailBody(String portletId, ActionRequest actionRequest) {
+        String mailBody = "";
+        try {
+            StringBundler sb = new StringBundler();
+
+            Form form = WebFormUtil.getPortletForm(portletId);
+            List<FormItem> formItems = FormItemLocalServiceUtil.getFormItemByFormId(form.getFormId());
+
+            for (FormItem formItem : formItems) {
+                if (!formItem.getType().equals(FormItemType.SECTION.toString())) {
+                    sb.append(formItem.getLabel(actionRequest.getLocale()));
+                    sb.append(" : ");
+                    sb.append(getCleanUserInput(actionRequest, formItem));
+                    sb.append(CharPool.NEW_LINE);
+                }
+            }
+
+            mailBody = sb.toString();
+        } catch (Exception e) {
+            log.error("Exception while getting mail body : " + e.getMessage(), e);
+        }
+        return mailBody;
     }
 
-    protected String getCleanUserInput(ActionRequest actionRequest, FormItem formItem){
-    	String userInput = ParamUtil.get(actionRequest, formItem.getLabel(actionRequest.getLocale()), "");
-    	if (formItem.getType().equals(FormItemType.CHECKBOX.toString())) {
-            StringBuilder cbInputBuilder = new StringBuilder();
-            for (String entry : Arrays.asList(ParamUtil.getParameterValues(actionRequest, formItem.getLabel(actionRequest.getLocale())))) {
-                cbInputBuilder.append(entry);
-                cbInputBuilder.append(",");
-            }
-            userInput = cbInputBuilder.substring(0, cbInputBuilder.lastIndexOf(","));
-        } else {
-            if (userInput == null) {
-                userInput = "";
-            } else if (formItem.getType().equals(FormItemType.OPTIONS.toString())
-                    || formItem.getType().equals(FormItemType.RADIO_BUTTON.toString())) {
+    protected String getCleanUserInput(ActionRequest actionRequest, FormItem formItem) {
+        String userInput = ParamUtil.get(actionRequest, formItem.getLabel(actionRequest.getLocale()), "");
+
+        if (!userInput.isEmpty()) {
+            if (formItem.getType().equals(FormItemType.CHECKBOX.toString())) {
+                StringBuilder cbInputBuilder = new StringBuilder();
+                for (String entry : Arrays.asList(ParamUtil.getParameterValues(actionRequest, formItem.getLabel(actionRequest.getLocale())))) {
+                    cbInputBuilder.append(entry);
+                    cbInputBuilder.append(",");
+                }
+                userInput = cbInputBuilder.substring(0, cbInputBuilder.lastIndexOf(","));
+            } else if (formItem.getType().equals(FormItemType.OPTIONS.toString()) || formItem.getType().equals(FormItemType.RADIO_BUTTON.toString())) {
                 userInput = formItem.getOptions(Locale.ENGLISH).split(",")[getOptionIdxInDefaultLanguage(formItem.getOptionsMap(), userInput,
                         actionRequest.getLocale())];
             }
         }
-    	return userInput;
+        return userInput;
     }
-    
+
     private int getOptionIdxInDefaultLanguage(Map<Locale, String> optionsMap, String userInput, Locale userLocale) {
         ArrayList<String> options = new ArrayList<String>(Arrays.asList(optionsMap.get(userLocale).split(",")));
         return options.indexOf(userInput);
