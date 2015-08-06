@@ -149,7 +149,9 @@ boolean ignoreRequestValue = (index != formFieldsIndex);
 	
 	<c:choose>
 		<c:when test="<%= !fieldsEditingDisabled %>">
-			<aui:input cssClass="optional-control left-row-clear-right" ignoreRequestValue="<%= ignoreRequestValue %>" label="optional" name='<%= "fieldOptional" + index %>' type="checkbox" value="<%= fieldOptional %>" />
+			<aui:field-wrapper cssClass='<%= "optionalChk left-row-clear-right" + ((Validator.isNull(fieldType) || (fieldType.equals("SECTION"))) ? " hide" : StringPool.BLANK) %>'>
+				<aui:input cssClass='optional-control' ignoreRequestValue="<%= ignoreRequestValue %>" label="optional" name='<%= "fieldOptional" + index %>' type="checkbox" value="<%= fieldOptional %>" />
+			</aui:field-wrapper>
 		</c:when>
 		<c:otherwise>
 				<dt>
