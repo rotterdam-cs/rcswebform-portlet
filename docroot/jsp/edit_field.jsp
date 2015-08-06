@@ -182,12 +182,23 @@ boolean ignoreRequestValue = (index != formFieldsIndex);
 		</c:when>
 	</c:choose>
 	
+	<!-- Advance settings toggle  -->
 	<c:choose>
 		<c:when test="<%= !fieldsEditingDisabled %>">
-			<aui:field-wrapper label="Form Item CSS Styling" cssClass="left-row-clear-left">
-				<aui:input name='<%= "formItemCssClass" + index %>' type="text" ignoreRequestValue="<%= ignoreRequestValue %>" label="Form Item CSS Class" value="<%= formItemCssClass %>"></aui:input>
-				<aui:input name='<%= "formLabelCssClass" + index %>' type="text" ignoreRequestValue="<%= ignoreRequestValue %>" label="Label CSS Class" value="<%= labelCssClass %>"></aui:input>
-				<aui:input name='<%= "formInputCssClass" + index %>' type="text" ignoreRequestValue="<%= ignoreRequestValue %>" label="Input CSS Class" value="<%= inputCssClass %>"></aui:input>
+			<aui:field-wrapper cssClass="left-row-clear-left">
+				<liferay-ui:toggle id='<%= "advanceSettings" + index %>' showMessage="Show Advance Settings" hideMessage="Hide Advance Settings" 
+				 	defaultShowContent="false" stateVar='<%= "advanceSettings" + index %>'></liferay-ui:toggle>
+				<div id='<%= "advanceSettings" + index %>' style="display: <liferay-ui:toggle-value id='<%= "advanceSettings" + index %>' />; padding-top: 10px;">
+					<aui:field-wrapper cssClass="left-row-clear-left">
+						<aui:input name='<%= "formItemCssClass" + index %>' type="text" ignoreRequestValue="<%= ignoreRequestValue %>" label="Form Item CSS Class" value="<%= formItemCssClass %>"></aui:input>
+					</aui:field-wrapper>
+					<aui:field-wrapper cssClass="left-row">
+						<aui:input name='<%= "formLabelCssClass" + index %>' type="text" ignoreRequestValue="<%= ignoreRequestValue %>" label="Label CSS Class" value="<%= labelCssClass %>"></aui:input>
+					</aui:field-wrapper>
+					<aui:field-wrapper cssClass="left-row-clear-right">
+						<aui:input name='<%= "formInputCssClass" + index %>' type="text" ignoreRequestValue="<%= ignoreRequestValue %>" label="Input CSS Class" value="<%= inputCssClass %>"></aui:input>
+					</aui:field-wrapper>
+				</div>
 			</aui:field-wrapper>
 		</c:when>
 	</c:choose>
@@ -238,15 +249,6 @@ boolean ignoreRequestValue = (index != formFieldsIndex);
 			</c:otherwise>
 		</c:choose>
 	</c:if>
-	
-	<!-- Advance settings toggle  -->
-	<aui:field-wrapper cssClass="left-row-clear-left">
-		<liferay-ui:toggle id='<%= "advanceSettings" + index %>' showMessage="Show Advance Settings" hideMessage="Hide Message Settings" 
-		 	defaultShowContent="false" stateVar='<%= "advanceSettings" + index %>'></liferay-ui:toggle>
-		<div id='<%= "advanceSettings" + index %>' style="display: <liferay-ui:toggle-value id='<%= "advanceSettings" + index %>' />; padding-top: 10px;">
-			This content is toggable.
-		</div>
-	</aui:field-wrapper>
 	
 	<c:if test="<%=fieldsEditingDisabled %>">
 		</dl>
