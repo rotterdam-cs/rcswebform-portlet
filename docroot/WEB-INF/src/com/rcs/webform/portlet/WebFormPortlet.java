@@ -22,6 +22,9 @@ import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.mail.service.MailServiceUtil;
 import com.liferay.portal.kernel.captcha.CaptchaTextException;
 import com.liferay.portal.kernel.captcha.CaptchaUtil;
+import com.liferay.portal.kernel.json.JSONArray;
+import com.liferay.portal.kernel.json.JSONFactoryUtil;
+import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.mail.MailMessage;
@@ -249,22 +252,21 @@ public class WebFormPortlet extends MVCPortlet {
 
         if (!userInput.isEmpty()) {
             if (formItem.getType().equals(FormItemType.CHECKBOX.toString())) {
-                StringBuilder cbInputBuilder = new StringBuilder();
+                JSONArray jsonUserInput = JSONFactoryUtil.createJSONArray(); 
                 for (String entry : Arrays.asList(ParamUtil.getParameterValues(actionRequest, formItem.getLabel(actionRequest.getLocale())))) {
-                    cbInputBuilder.append(entry);
-                    cbInputBuilder.append(",");
+                    jsonUserInput.put(entry);
                 }
-                userInput = cbInputBuilder.substring(0, cbInputBuilder.lastIndexOf(","));
-            } else if (formItem.getType().equals(FormItemType.OPTIONS.toString()) || formItem.getType().equals(FormItemType.RADIO_BUTTON.toString())) {
-                userInput = formItem.getOptionValues(Locale.ENGLISH).split(",")[getOptionIdxInDefaultLanguage(formItem.getOptionValuesMap(), userInput,
-                        actionRequest.getLocale())];
+                userInput = jsonUserInput.toString();
+//            } else if (formItem.getType().equals(FormItemType.OPTIONS.toString()) || formItem.getType().equals(FormItemType.RADIO_BUTTON.toString())) {
+//                userInput = formItem.getOptionValues(Locale.ENGLISH).split(",")[getOptionIdxInDefaultLanguage(formItem.getOptionValuesMap(), userInput,
+//                        actionRequest.getLocale())];
             }
         }
         return userInput;
     }
 
-    private int getOptionIdxInDefaultLanguage(Map<Locale, String> optionsMap, String userInput, Locale userLocale) {
-        ArrayList<String> options = new ArrayList<String>(Arrays.asList(optionsMap.get(userLocale).split(",")));
-        return options.indexOf(userInput);
-    }
+//    private int getOptionIdxInDefaultLanguage(Map<Locale, String> optionsMap, String userInput, Locale userLocale) {
+//        ArrayList<String> options = new ArrayList<String>(Arrays.asList(optionsMap.get(userLocale).split(",")));
+//        return options.indexOf(userInput);
+//    }
 }

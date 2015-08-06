@@ -147,7 +147,6 @@
 		var fieldStrings = new Object();
 		if(divForm || divTemplateFormItem) {
 			for(formItemIdx in Data.data.formItems) { 
-				console.log('formItem = '+formItemIdx);
 				var divFormItem =  divTemplateFormItem.cloneNode(true);
 				if(divFormItem) {
 					
@@ -221,10 +220,7 @@
 							divFormItemInputText.remove();
 							divFormItemInputCombo.remove();
 							break;
-
 					}
-					
-					
 				} else {
 					console.log('fail cloning form item node');
 				}
@@ -306,16 +302,17 @@
 	
 	function initUserInputCombo(divFormItemInputWrapper, divFormItemInput, formItemIdx, templateOptionItem) {
 		initUserInput(divFormItemInputWrapper, divFormItemInput, formItemIdx);
-		var options = Data.data.formItems[formItemIdx].options.split(',');
+		var optionKeys = JSON.parse(Data.data.formItems[formItemIdx].optionKeys);
+		var optionValues = JSON.parse(Data.data.formItems[formItemIdx].optionValues);
 		var templateOptionItem =  divFormItemInput.one('#<portlet:namespace />rcsWebFormItemOption');
 		
 		if(templateOptionItem){
-			for(optionIdx in options) { 
+			for(optionIdx in optionKeys) { 
 				var optionItem =  templateOptionItem.cloneNode(true);
 				if(optionItem) {
 					optionItem.set('id', '<portlet:namespace />'+Data.data.formItems[formItemIdx].label);
-					optionItem.set('value',options[optionIdx]);
-					optionItem.set('text',options[optionIdx]);
+					optionItem.set('value',optionKeys[optionIdx]);
+					optionItem.set('text',optionValues[optionIdx]);
 					optionItem.appendTo(divFormItemInput);
 				} else {
 					console.log('error cloning option');
@@ -330,16 +327,17 @@
 
 	function initUserInputRadioCheckbox(divFormItemInputWrapper, divFormItemInput, formItemIdx, divFormItemInputLabel) {
 		initUserInput(divFormItemInputWrapper, divFormItemInput, formItemIdx);
-		var options = Data.data.formItems[formItemIdx].options.split(',');
-		for(optionIdx in options) { 
+		var optionKeys = JSON.parse(Data.data.formItems[formItemIdx].optionKeys);
+		var optionValues = JSON.parse(Data.data.formItems[formItemIdx].optionValues);
+		for(optionIdx in optionKeys) { 
 			var radioButton =  divFormItemInput.cloneNode(true);
 			var radioLabel = divFormItemInputLabel.cloneNode(true);
 			if(radioButton && radioLabel) {
 				radioButton.set('name', '<portlet:namespace />'+Data.data.formItems[formItemIdx].label);
-				radioButton.set('value',options[optionIdx]);
-				radioLabel.set('text',options[optionIdx]);
+				radioButton.set('value',optionKeys[optionIdx]);
+				radioLabel.set('text',optionValues[optionIdx]);
 				
-				if(options[optionIdx] == Data.data.formItems[formItemIdx].defaultValue) {
+				if(optionKeys[optionIdx] == Data.data.formItems[formItemIdx].defaultValue) {
 					radioButton.set('checked','true');
 				}
 				
