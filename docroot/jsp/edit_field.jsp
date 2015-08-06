@@ -222,7 +222,16 @@ boolean ignoreRequestValue = (index != formFieldsIndex);
 			</c:otherwise>
 		</c:choose>
 	</c:if>
-
+	
+	<!-- Advance settings toggle  -->
+	<aui:field-wrapper cssClass="left-row-clear-left">
+		<liferay-ui:toggle id='<%= "advanceSettings" + index %>' showMessage="Show Advance Settings" hideMessage="Hide Message Settings" 
+		 	defaultShowContent="false" stateVar='<%= "advanceSettings" + index %>'></liferay-ui:toggle>
+		<div id='<%= "advanceSettings" + index %>' style="display: <liferay-ui:toggle-value id='<%= "advanceSettings" + index %>' />; padding-top: 10px;">
+			This content is toggable.
+		</div>
+	</aui:field-wrapper>
+	
 	<c:if test="<%=fieldsEditingDisabled %>">
 		</dl>
 	</c:if>
