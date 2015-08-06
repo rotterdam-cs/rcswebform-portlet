@@ -44,7 +44,8 @@ public class FormItemSoap implements Serializable {
 		soapModel.setInputAttrId(model.getInputAttrId());
 		soapModel.setInputAttrClass(model.getInputAttrClass());
 		soapModel.setType(model.getType());
-		soapModel.setOptions(model.getOptions());
+		soapModel.setOptionKeys(model.getOptionKeys());
+		soapModel.setOptionValues(model.getOptionValues());
 		soapModel.setMandatory(model.getMandatory());
 		soapModel.setDefaultValue(model.getDefaultValue());
 		soapModel.setOrder(model.getOrder());
@@ -224,12 +225,20 @@ public class FormItemSoap implements Serializable {
 		_type = type;
 	}
 
-	public String getOptions() {
-		return _options;
+	public String getOptionKeys() {
+		return _optionKeys;
 	}
 
-	public void setOptions(String options) {
-		_options = options;
+	public void setOptionKeys(String optionKeys) {
+		_optionKeys = optionKeys;
+	}
+
+	public String getOptionValues() {
+		return _optionValues;
+	}
+
+	public void setOptionValues(String optionValues) {
+		_optionValues = optionValues;
 	}
 
 	public boolean getMandatory() {
@@ -338,7 +347,8 @@ public class FormItemSoap implements Serializable {
 	private String _inputAttrId;
 	private String _inputAttrClass;
 	private String _type;
-	private String _options;
+	private String _optionKeys;
+	private String _optionValues;
 	private boolean _mandatory;
 	private String _defaultValue;
 	private int _order;

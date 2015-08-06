@@ -256,7 +256,7 @@ public class WebFormPortlet extends MVCPortlet {
                 }
                 userInput = cbInputBuilder.substring(0, cbInputBuilder.lastIndexOf(","));
             } else if (formItem.getType().equals(FormItemType.OPTIONS.toString()) || formItem.getType().equals(FormItemType.RADIO_BUTTON.toString())) {
-                userInput = formItem.getOptions(Locale.ENGLISH).split(",")[getOptionIdxInDefaultLanguage(formItem.getOptionsMap(), userInput,
+                userInput = formItem.getOptionValues(Locale.ENGLISH).split(",")[getOptionIdxInDefaultLanguage(formItem.getOptionValuesMap(), userInput,
                         actionRequest.getLocale())];
             }
         }

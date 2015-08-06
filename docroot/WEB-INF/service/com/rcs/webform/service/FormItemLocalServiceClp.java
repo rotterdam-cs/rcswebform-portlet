@@ -112,9 +112,9 @@ public class FormItemLocalServiceClp implements FormItemLocalService {
 
 		_methodParameterTypes19 = new String[] {
 				"java.lang.Long", "java.lang.Long", "java.util.Map",
-				"java.lang.String", "java.util.Map", "boolean",
-				"java.lang.String", "java.lang.String", "java.lang.String",
-				"int", "int", "java.util.Map",
+				"java.lang.String", "java.lang.String", "java.util.Map",
+				"boolean", "java.lang.String", "java.lang.String",
+				"java.lang.String", "int", "int", "java.util.Map",
 				"com.liferay.portal.service.ServiceContext", "java.lang.String",
 				"java.lang.String", "java.lang.String"
 			};
@@ -684,8 +684,8 @@ public class FormItemLocalServiceClp implements FormItemLocalService {
 	public com.rcs.webform.model.FormItem save(java.lang.Long formItemId,
 		java.lang.Long formId,
 		java.util.Map<java.util.Locale, java.lang.String> label,
-		java.lang.String type,
-		java.util.Map<java.util.Locale, java.lang.String> options,
+		java.lang.String type, java.lang.String optionKeys,
+		java.util.Map<java.util.Locale, java.lang.String> optionValues,
 		boolean mandatory, java.lang.String validationRegexValue,
 		java.lang.String validationType,
 		java.lang.String errorValidationMessage, int order, int maxLength,
@@ -707,7 +707,9 @@ public class FormItemLocalServiceClp implements FormItemLocalService {
 						
 					ClpSerializer.translateInput(type),
 						
-					ClpSerializer.translateInput(options),
+					ClpSerializer.translateInput(optionKeys),
+						
+					ClpSerializer.translateInput(optionValues),
 						
 					mandatory,
 						

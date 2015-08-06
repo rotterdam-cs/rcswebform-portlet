@@ -81,7 +81,8 @@ public class FormItemModelImpl extends BaseModelImpl<FormItem>
 			{ "inputAttrId", Types.VARCHAR },
 			{ "inputAttrClass", Types.VARCHAR },
 			{ "type_", Types.VARCHAR },
-			{ "options", Types.VARCHAR },
+			{ "optionKeys", Types.VARCHAR },
+			{ "optionValues", Types.VARCHAR },
 			{ "mandatory", Types.BOOLEAN },
 			{ "defaultValue", Types.VARCHAR },
 			{ "order_", Types.INTEGER },
@@ -94,7 +95,7 @@ public class FormItemModelImpl extends BaseModelImpl<FormItem>
 			{ "errorLengthMessage", Types.VARCHAR },
 			{ "hintMessage", Types.VARCHAR }
 		};
-	public static final String TABLE_SQL_CREATE = "create table rcswebform_FormItem (formItemId LONG not null primary key,active_ BOOLEAN,creationDate DATE null,modificationDate DATE null,modificationUser VARCHAR(75) null,formId LONG,formItemAttrId VARCHAR(75) null,formItemAttrClass VARCHAR(75) null,label STRING null,labelAttrId VARCHAR(75) null,labelAttrClass VARCHAR(75) null,inputAttrId VARCHAR(75) null,inputAttrClass VARCHAR(75) null,type_ VARCHAR(75) null,options STRING null,mandatory BOOLEAN,defaultValue STRING null,order_ INTEGER,validationType VARCHAR(75) null,validationRegexValue VARCHAR(75) null,minLength INTEGER,maxLength INTEGER,errorValidationMessage STRING null,errorMandatoryMessage STRING null,errorLengthMessage STRING null,hintMessage STRING null)";
+	public static final String TABLE_SQL_CREATE = "create table rcswebform_FormItem (formItemId LONG not null primary key,active_ BOOLEAN,creationDate DATE null,modificationDate DATE null,modificationUser VARCHAR(75) null,formId LONG,formItemAttrId VARCHAR(75) null,formItemAttrClass VARCHAR(75) null,label STRING null,labelAttrId VARCHAR(75) null,labelAttrClass VARCHAR(75) null,inputAttrId VARCHAR(75) null,inputAttrClass VARCHAR(75) null,type_ VARCHAR(75) null,optionKeys VARCHAR(75) null,optionValues STRING null,mandatory BOOLEAN,defaultValue STRING null,order_ INTEGER,validationType VARCHAR(75) null,validationRegexValue VARCHAR(75) null,minLength INTEGER,maxLength INTEGER,errorValidationMessage STRING null,errorMandatoryMessage STRING null,errorLengthMessage STRING null,hintMessage STRING null)";
 	public static final String TABLE_SQL_DROP = "drop table rcswebform_FormItem";
 	public static final String ORDER_BY_JPQL = " ORDER BY formItem.formItemId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY rcswebform_FormItem.formItemId ASC";
@@ -166,7 +167,8 @@ public class FormItemModelImpl extends BaseModelImpl<FormItem>
 		attributes.put("inputAttrId", getInputAttrId());
 		attributes.put("inputAttrClass", getInputAttrClass());
 		attributes.put("type", getType());
-		attributes.put("options", getOptions());
+		attributes.put("optionKeys", getOptionKeys());
+		attributes.put("optionValues", getOptionValues());
 		attributes.put("mandatory", getMandatory());
 		attributes.put("defaultValue", getDefaultValue());
 		attributes.put("order", getOrder());
@@ -268,10 +270,16 @@ public class FormItemModelImpl extends BaseModelImpl<FormItem>
 			setType(type);
 		}
 
-		String options = (String)attributes.get("options");
+		String optionKeys = (String)attributes.get("optionKeys");
 
-		if (options != null) {
-			setOptions(options);
+		if (optionKeys != null) {
+			setOptionKeys(optionKeys);
+		}
+
+		String optionValues = (String)attributes.get("optionValues");
+
+		if (optionValues != null) {
+			setOptionValues(optionValues);
 		}
 
 		Boolean mandatory = (Boolean)attributes.get("mandatory");
@@ -630,102 +638,120 @@ public class FormItemModelImpl extends BaseModelImpl<FormItem>
 	}
 
 	@Override
-	public String getOptions() {
-		if (_options == null) {
+	public String getOptionKeys() {
+		if (_optionKeys == null) {
 			return StringPool.BLANK;
 		}
 		else {
-			return _options;
+			return _optionKeys;
 		}
 	}
 
 	@Override
-	public String getOptions(Locale locale) {
+	public void setOptionKeys(String optionKeys) {
+		_optionKeys = optionKeys;
+	}
+
+	@Override
+	public String getOptionValues() {
+		if (_optionValues == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _optionValues;
+		}
+	}
+
+	@Override
+	public String getOptionValues(Locale locale) {
 		String languageId = LocaleUtil.toLanguageId(locale);
 
-		return getOptions(languageId);
+		return getOptionValues(languageId);
 	}
 
 	@Override
-	public String getOptions(Locale locale, boolean useDefault) {
+	public String getOptionValues(Locale locale, boolean useDefault) {
 		String languageId = LocaleUtil.toLanguageId(locale);
 
-		return getOptions(languageId, useDefault);
+		return getOptionValues(languageId, useDefault);
 	}
 
 	@Override
-	public String getOptions(String languageId) {
-		return LocalizationUtil.getLocalization(getOptions(), languageId);
+	public String getOptionValues(String languageId) {
+		return LocalizationUtil.getLocalization(getOptionValues(), languageId);
 	}
 
 	@Override
-	public String getOptions(String languageId, boolean useDefault) {
-		return LocalizationUtil.getLocalization(getOptions(), languageId,
+	public String getOptionValues(String languageId, boolean useDefault) {
+		return LocalizationUtil.getLocalization(getOptionValues(), languageId,
 			useDefault);
 	}
 
 	@Override
-	public String getOptionsCurrentLanguageId() {
-		return _optionsCurrentLanguageId;
+	public String getOptionValuesCurrentLanguageId() {
+		return _optionValuesCurrentLanguageId;
 	}
 
 	@JSON
 	@Override
-	public String getOptionsCurrentValue() {
-		Locale locale = getLocale(_optionsCurrentLanguageId);
+	public String getOptionValuesCurrentValue() {
+		Locale locale = getLocale(_optionValuesCurrentLanguageId);
 
-		return getOptions(locale);
+		return getOptionValues(locale);
 	}
 
 	@Override
-	public Map<Locale, String> getOptionsMap() {
-		return LocalizationUtil.getLocalizationMap(getOptions());
+	public Map<Locale, String> getOptionValuesMap() {
+		return LocalizationUtil.getLocalizationMap(getOptionValues());
 	}
 
 	@Override
-	public void setOptions(String options) {
-		_options = options;
+	public void setOptionValues(String optionValues) {
+		_optionValues = optionValues;
 	}
 
 	@Override
-	public void setOptions(String options, Locale locale) {
-		setOptions(options, locale, LocaleUtil.getDefault());
+	public void setOptionValues(String optionValues, Locale locale) {
+		setOptionValues(optionValues, locale, LocaleUtil.getDefault());
 	}
 
 	@Override
-	public void setOptions(String options, Locale locale, Locale defaultLocale) {
+	public void setOptionValues(String optionValues, Locale locale,
+		Locale defaultLocale) {
 		String languageId = LocaleUtil.toLanguageId(locale);
 		String defaultLanguageId = LocaleUtil.toLanguageId(defaultLocale);
 
-		if (Validator.isNotNull(options)) {
-			setOptions(LocalizationUtil.updateLocalization(getOptions(),
-					"Options", options, languageId, defaultLanguageId));
+		if (Validator.isNotNull(optionValues)) {
+			setOptionValues(LocalizationUtil.updateLocalization(
+					getOptionValues(), "OptionValues", optionValues,
+					languageId, defaultLanguageId));
 		}
 		else {
-			setOptions(LocalizationUtil.removeLocalization(getOptions(),
-					"Options", languageId));
+			setOptionValues(LocalizationUtil.removeLocalization(
+					getOptionValues(), "OptionValues", languageId));
 		}
 	}
 
 	@Override
-	public void setOptionsCurrentLanguageId(String languageId) {
-		_optionsCurrentLanguageId = languageId;
+	public void setOptionValuesCurrentLanguageId(String languageId) {
+		_optionValuesCurrentLanguageId = languageId;
 	}
 
 	@Override
-	public void setOptionsMap(Map<Locale, String> optionsMap) {
-		setOptionsMap(optionsMap, LocaleUtil.getDefault());
+	public void setOptionValuesMap(Map<Locale, String> optionValuesMap) {
+		setOptionValuesMap(optionValuesMap, LocaleUtil.getDefault());
 	}
 
 	@Override
-	public void setOptionsMap(Map<Locale, String> optionsMap,
+	public void setOptionValuesMap(Map<Locale, String> optionValuesMap,
 		Locale defaultLocale) {
-		if (optionsMap == null) {
+		if (optionValuesMap == null) {
 			return;
 		}
 
-		setOptions(LocalizationUtil.updateLocalization(optionsMap,
-				getOptions(), "Options", LocaleUtil.toLanguageId(defaultLocale)));
+		setOptionValues(LocalizationUtil.updateLocalization(optionValuesMap,
+				getOptionValues(), "OptionValues",
+				LocaleUtil.toLanguageId(defaultLocale)));
 	}
 
 	@Override
@@ -1361,9 +1387,9 @@ public class FormItemModelImpl extends BaseModelImpl<FormItem>
 			}
 		}
 
-		Map<Locale, String> optionsMap = getOptionsMap();
+		Map<Locale, String> optionValuesMap = getOptionValuesMap();
 
-		for (Map.Entry<Locale, String> entry : optionsMap.entrySet()) {
+		for (Map.Entry<Locale, String> entry : optionValuesMap.entrySet()) {
 			Locale locale = entry.getKey();
 			String value = entry.getValue();
 
@@ -1438,7 +1464,9 @@ public class FormItemModelImpl extends BaseModelImpl<FormItem>
 			return StringPool.BLANK;
 		}
 
-		return LocalizationUtil.getDefaultLanguageId(xml);
+		Locale defaultLocale = LocaleUtil.getDefault();
+
+		return LocalizationUtil.getDefaultLanguageId(xml, defaultLocale);
 	}
 
 	@Override
@@ -1463,13 +1491,15 @@ public class FormItemModelImpl extends BaseModelImpl<FormItem>
 			setLabel(getLabel(defaultLocale), defaultLocale, defaultLocale);
 		}
 
-		String options = getOptions(defaultLocale);
+		String optionValues = getOptionValues(defaultLocale);
 
-		if (Validator.isNull(options)) {
-			setOptions(getOptions(modelDefaultLanguageId), defaultLocale);
+		if (Validator.isNull(optionValues)) {
+			setOptionValues(getOptionValues(modelDefaultLanguageId),
+				defaultLocale);
 		}
 		else {
-			setOptions(getOptions(defaultLocale), defaultLocale, defaultLocale);
+			setOptionValues(getOptionValues(defaultLocale), defaultLocale,
+				defaultLocale);
 		}
 
 		String defaultValue = getDefaultValue(defaultLocale);
@@ -1555,7 +1585,8 @@ public class FormItemModelImpl extends BaseModelImpl<FormItem>
 		formItemImpl.setInputAttrId(getInputAttrId());
 		formItemImpl.setInputAttrClass(getInputAttrClass());
 		formItemImpl.setType(getType());
-		formItemImpl.setOptions(getOptions());
+		formItemImpl.setOptionKeys(getOptionKeys());
+		formItemImpl.setOptionValues(getOptionValues());
 		formItemImpl.setMandatory(getMandatory());
 		formItemImpl.setDefaultValue(getDefaultValue());
 		formItemImpl.setOrder(getOrder());
@@ -1726,12 +1757,20 @@ public class FormItemModelImpl extends BaseModelImpl<FormItem>
 			formItemCacheModel.type = null;
 		}
 
-		formItemCacheModel.options = getOptions();
+		formItemCacheModel.optionKeys = getOptionKeys();
 
-		String options = formItemCacheModel.options;
+		String optionKeys = formItemCacheModel.optionKeys;
 
-		if ((options != null) && (options.length() == 0)) {
-			formItemCacheModel.options = null;
+		if ((optionKeys != null) && (optionKeys.length() == 0)) {
+			formItemCacheModel.optionKeys = null;
+		}
+
+		formItemCacheModel.optionValues = getOptionValues();
+
+		String optionValues = formItemCacheModel.optionValues;
+
+		if ((optionValues != null) && (optionValues.length() == 0)) {
+			formItemCacheModel.optionValues = null;
 		}
 
 		formItemCacheModel.mandatory = getMandatory();
@@ -1806,7 +1845,7 @@ public class FormItemModelImpl extends BaseModelImpl<FormItem>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(53);
+		StringBundler sb = new StringBundler(55);
 
 		sb.append("{formItemId=");
 		sb.append(getFormItemId());
@@ -1836,8 +1875,10 @@ public class FormItemModelImpl extends BaseModelImpl<FormItem>
 		sb.append(getInputAttrClass());
 		sb.append(", type=");
 		sb.append(getType());
-		sb.append(", options=");
-		sb.append(getOptions());
+		sb.append(", optionKeys=");
+		sb.append(getOptionKeys());
+		sb.append(", optionValues=");
+		sb.append(getOptionValues());
 		sb.append(", mandatory=");
 		sb.append(getMandatory());
 		sb.append(", defaultValue=");
@@ -1867,7 +1908,7 @@ public class FormItemModelImpl extends BaseModelImpl<FormItem>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(82);
+		StringBundler sb = new StringBundler(85);
 
 		sb.append("<model><model-name>");
 		sb.append("com.rcs.webform.model.FormItem");
@@ -1930,8 +1971,12 @@ public class FormItemModelImpl extends BaseModelImpl<FormItem>
 		sb.append(getType());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>options</column-name><column-value><![CDATA[");
-		sb.append(getOptions());
+			"<column><column-name>optionKeys</column-name><column-value><![CDATA[");
+		sb.append(getOptionKeys());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>optionValues</column-name><column-value><![CDATA[");
+		sb.append(getOptionValues());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>mandatory</column-name><column-value><![CDATA[");
@@ -2004,8 +2049,9 @@ public class FormItemModelImpl extends BaseModelImpl<FormItem>
 	private String _inputAttrId;
 	private String _inputAttrClass;
 	private String _type;
-	private String _options;
-	private String _optionsCurrentLanguageId;
+	private String _optionKeys;
+	private String _optionValues;
+	private String _optionValuesCurrentLanguageId;
 	private boolean _mandatory;
 	private String _defaultValue;
 	private String _defaultValueCurrentLanguageId;

@@ -96,7 +96,8 @@ public class FormItemClp extends BaseModelImpl<FormItem> implements FormItem {
 		attributes.put("inputAttrId", getInputAttrId());
 		attributes.put("inputAttrClass", getInputAttrClass());
 		attributes.put("type", getType());
-		attributes.put("options", getOptions());
+		attributes.put("optionKeys", getOptionKeys());
+		attributes.put("optionValues", getOptionValues());
 		attributes.put("mandatory", getMandatory());
 		attributes.put("defaultValue", getDefaultValue());
 		attributes.put("order", getOrder());
@@ -198,10 +199,16 @@ public class FormItemClp extends BaseModelImpl<FormItem> implements FormItem {
 			setType(type);
 		}
 
-		String options = (String)attributes.get("options");
+		String optionKeys = (String)attributes.get("optionKeys");
 
-		if (options != null) {
-			setOptions(options);
+		if (optionKeys != null) {
+			setOptionKeys(optionKeys);
+		}
+
+		String optionValues = (String)attributes.get("optionValues");
+
+		if (optionValues != null) {
+			setOptionValues(optionValues);
 		}
 
 		Boolean mandatory = (Boolean)attributes.get("mandatory");
@@ -707,63 +714,21 @@ public class FormItemClp extends BaseModelImpl<FormItem> implements FormItem {
 	}
 
 	@Override
-	public String getOptions() {
-		return _options;
+	public String getOptionKeys() {
+		return _optionKeys;
 	}
 
 	@Override
-	public String getOptions(Locale locale) {
-		String languageId = LocaleUtil.toLanguageId(locale);
-
-		return getOptions(languageId);
-	}
-
-	@Override
-	public String getOptions(Locale locale, boolean useDefault) {
-		String languageId = LocaleUtil.toLanguageId(locale);
-
-		return getOptions(languageId, useDefault);
-	}
-
-	@Override
-	public String getOptions(String languageId) {
-		return LocalizationUtil.getLocalization(getOptions(), languageId);
-	}
-
-	@Override
-	public String getOptions(String languageId, boolean useDefault) {
-		return LocalizationUtil.getLocalization(getOptions(), languageId,
-			useDefault);
-	}
-
-	@Override
-	public String getOptionsCurrentLanguageId() {
-		return _optionsCurrentLanguageId;
-	}
-
-	@Override
-	public String getOptionsCurrentValue() {
-		Locale locale = getLocale(_optionsCurrentLanguageId);
-
-		return getOptions(locale);
-	}
-
-	@Override
-	public Map<Locale, String> getOptionsMap() {
-		return LocalizationUtil.getLocalizationMap(getOptions());
-	}
-
-	@Override
-	public void setOptions(String options) {
-		_options = options;
+	public void setOptionKeys(String optionKeys) {
+		_optionKeys = optionKeys;
 
 		if (_formItemRemoteModel != null) {
 			try {
 				Class<?> clazz = _formItemRemoteModel.getClass();
 
-				Method method = clazz.getMethod("setOptions", String.class);
+				Method method = clazz.getMethod("setOptionKeys", String.class);
 
-				method.invoke(_formItemRemoteModel, options);
+				method.invoke(_formItemRemoteModel, optionKeys);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -772,39 +737,106 @@ public class FormItemClp extends BaseModelImpl<FormItem> implements FormItem {
 	}
 
 	@Override
-	public void setOptions(String options, Locale locale) {
-		setOptions(options, locale, LocaleUtil.getDefault());
+	public String getOptionValues() {
+		return _optionValues;
 	}
 
 	@Override
-	public void setOptions(String options, Locale locale, Locale defaultLocale) {
+	public String getOptionValues(Locale locale) {
+		String languageId = LocaleUtil.toLanguageId(locale);
+
+		return getOptionValues(languageId);
+	}
+
+	@Override
+	public String getOptionValues(Locale locale, boolean useDefault) {
+		String languageId = LocaleUtil.toLanguageId(locale);
+
+		return getOptionValues(languageId, useDefault);
+	}
+
+	@Override
+	public String getOptionValues(String languageId) {
+		return LocalizationUtil.getLocalization(getOptionValues(), languageId);
+	}
+
+	@Override
+	public String getOptionValues(String languageId, boolean useDefault) {
+		return LocalizationUtil.getLocalization(getOptionValues(), languageId,
+			useDefault);
+	}
+
+	@Override
+	public String getOptionValuesCurrentLanguageId() {
+		return _optionValuesCurrentLanguageId;
+	}
+
+	@Override
+	public String getOptionValuesCurrentValue() {
+		Locale locale = getLocale(_optionValuesCurrentLanguageId);
+
+		return getOptionValues(locale);
+	}
+
+	@Override
+	public Map<Locale, String> getOptionValuesMap() {
+		return LocalizationUtil.getLocalizationMap(getOptionValues());
+	}
+
+	@Override
+	public void setOptionValues(String optionValues) {
+		_optionValues = optionValues;
+
+		if (_formItemRemoteModel != null) {
+			try {
+				Class<?> clazz = _formItemRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setOptionValues", String.class);
+
+				method.invoke(_formItemRemoteModel, optionValues);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public void setOptionValues(String optionValues, Locale locale) {
+		setOptionValues(optionValues, locale, LocaleUtil.getDefault());
+	}
+
+	@Override
+	public void setOptionValues(String optionValues, Locale locale,
+		Locale defaultLocale) {
 		String languageId = LocaleUtil.toLanguageId(locale);
 		String defaultLanguageId = LocaleUtil.toLanguageId(defaultLocale);
 
-		if (Validator.isNotNull(options)) {
-			setOptions(LocalizationUtil.updateLocalization(getOptions(),
-					"Options", options, languageId, defaultLanguageId));
+		if (Validator.isNotNull(optionValues)) {
+			setOptionValues(LocalizationUtil.updateLocalization(
+					getOptionValues(), "OptionValues", optionValues,
+					languageId, defaultLanguageId));
 		}
 		else {
-			setOptions(LocalizationUtil.removeLocalization(getOptions(),
-					"Options", languageId));
+			setOptionValues(LocalizationUtil.removeLocalization(
+					getOptionValues(), "OptionValues", languageId));
 		}
 	}
 
 	@Override
-	public void setOptionsCurrentLanguageId(String languageId) {
-		_optionsCurrentLanguageId = languageId;
+	public void setOptionValuesCurrentLanguageId(String languageId) {
+		_optionValuesCurrentLanguageId = languageId;
 	}
 
 	@Override
-	public void setOptionsMap(Map<Locale, String> optionsMap) {
-		setOptionsMap(optionsMap, LocaleUtil.getDefault());
+	public void setOptionValuesMap(Map<Locale, String> optionValuesMap) {
+		setOptionValuesMap(optionValuesMap, LocaleUtil.getDefault());
 	}
 
 	@Override
-	public void setOptionsMap(Map<Locale, String> optionsMap,
+	public void setOptionValuesMap(Map<Locale, String> optionValuesMap,
 		Locale defaultLocale) {
-		if (optionsMap == null) {
+		if (optionValuesMap == null) {
 			return;
 		}
 
@@ -819,8 +851,8 @@ public class FormItemClp extends BaseModelImpl<FormItem> implements FormItem {
 				currentThread.setContextClassLoader(portalClassLoader);
 			}
 
-			setOptions(LocalizationUtil.updateLocalization(optionsMap,
-					getOptions(), "Options",
+			setOptionValues(LocalizationUtil.updateLocalization(
+					optionValuesMap, getOptionValues(), "OptionValues",
 					LocaleUtil.toLanguageId(defaultLocale)));
 		}
 		finally {
@@ -1700,9 +1732,9 @@ public class FormItemClp extends BaseModelImpl<FormItem> implements FormItem {
 			}
 		}
 
-		Map<Locale, String> optionsMap = getOptionsMap();
+		Map<Locale, String> optionValuesMap = getOptionValuesMap();
 
-		for (Map.Entry<Locale, String> entry : optionsMap.entrySet()) {
+		for (Map.Entry<Locale, String> entry : optionValuesMap.entrySet()) {
 			Locale locale = entry.getKey();
 			String value = entry.getValue();
 
@@ -1777,7 +1809,9 @@ public class FormItemClp extends BaseModelImpl<FormItem> implements FormItem {
 			return StringPool.BLANK;
 		}
 
-		return LocalizationUtil.getDefaultLanguageId(xml);
+		Locale defaultLocale = LocaleUtil.getDefault();
+
+		return LocalizationUtil.getDefaultLanguageId(xml, defaultLocale);
 	}
 
 	@Override
@@ -1802,13 +1836,15 @@ public class FormItemClp extends BaseModelImpl<FormItem> implements FormItem {
 			setLabel(getLabel(defaultLocale), defaultLocale, defaultLocale);
 		}
 
-		String options = getOptions(defaultLocale);
+		String optionValues = getOptionValues(defaultLocale);
 
-		if (Validator.isNull(options)) {
-			setOptions(getOptions(modelDefaultLanguageId), defaultLocale);
+		if (Validator.isNull(optionValues)) {
+			setOptionValues(getOptionValues(modelDefaultLanguageId),
+				defaultLocale);
 		}
 		else {
-			setOptions(getOptions(defaultLocale), defaultLocale, defaultLocale);
+			setOptionValues(getOptionValues(defaultLocale), defaultLocale,
+				defaultLocale);
 		}
 
 		String defaultValue = getDefaultValue(defaultLocale);
@@ -1890,7 +1926,8 @@ public class FormItemClp extends BaseModelImpl<FormItem> implements FormItem {
 		clone.setInputAttrId(getInputAttrId());
 		clone.setInputAttrClass(getInputAttrClass());
 		clone.setType(getType());
-		clone.setOptions(getOptions());
+		clone.setOptionKeys(getOptionKeys());
+		clone.setOptionValues(getOptionValues());
 		clone.setMandatory(getMandatory());
 		clone.setDefaultValue(getDefaultValue());
 		clone.setOrder(getOrder());
@@ -1943,6 +1980,10 @@ public class FormItemClp extends BaseModelImpl<FormItem> implements FormItem {
 		}
 	}
 
+	public Class<?> getClpSerializerClass() {
+		return _clpSerializerClass;
+	}
+
 	@Override
 	public int hashCode() {
 		return (int)getPrimaryKey();
@@ -1950,7 +1991,7 @@ public class FormItemClp extends BaseModelImpl<FormItem> implements FormItem {
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(53);
+		StringBundler sb = new StringBundler(55);
 
 		sb.append("{formItemId=");
 		sb.append(getFormItemId());
@@ -1980,8 +2021,10 @@ public class FormItemClp extends BaseModelImpl<FormItem> implements FormItem {
 		sb.append(getInputAttrClass());
 		sb.append(", type=");
 		sb.append(getType());
-		sb.append(", options=");
-		sb.append(getOptions());
+		sb.append(", optionKeys=");
+		sb.append(getOptionKeys());
+		sb.append(", optionValues=");
+		sb.append(getOptionValues());
 		sb.append(", mandatory=");
 		sb.append(getMandatory());
 		sb.append(", defaultValue=");
@@ -2011,7 +2054,7 @@ public class FormItemClp extends BaseModelImpl<FormItem> implements FormItem {
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(82);
+		StringBundler sb = new StringBundler(85);
 
 		sb.append("<model><model-name>");
 		sb.append("com.rcs.webform.model.FormItem");
@@ -2074,8 +2117,12 @@ public class FormItemClp extends BaseModelImpl<FormItem> implements FormItem {
 		sb.append(getType());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>options</column-name><column-value><![CDATA[");
-		sb.append(getOptions());
+			"<column><column-name>optionKeys</column-name><column-value><![CDATA[");
+		sb.append(getOptionKeys());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>optionValues</column-name><column-value><![CDATA[");
+		sb.append(getOptionValues());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>mandatory</column-name><column-value><![CDATA[");
@@ -2142,8 +2189,9 @@ public class FormItemClp extends BaseModelImpl<FormItem> implements FormItem {
 	private String _inputAttrId;
 	private String _inputAttrClass;
 	private String _type;
-	private String _options;
-	private String _optionsCurrentLanguageId;
+	private String _optionKeys;
+	private String _optionValues;
+	private String _optionValuesCurrentLanguageId;
 	private boolean _mandatory;
 	private String _defaultValue;
 	private String _defaultValueCurrentLanguageId;
@@ -2161,4 +2209,5 @@ public class FormItemClp extends BaseModelImpl<FormItem> implements FormItem {
 	private String _hintMessage;
 	private String _hintMessageCurrentLanguageId;
 	private BaseModel<?> _formItemRemoteModel;
+	private Class<?> _clpSerializerClass = com.rcs.webform.service.ClpSerializer.class;
 }

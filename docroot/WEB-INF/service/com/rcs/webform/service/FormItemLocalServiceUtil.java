@@ -289,8 +289,8 @@ public class FormItemLocalServiceUtil {
 	public static com.rcs.webform.model.FormItem save(
 		java.lang.Long formItemId, java.lang.Long formId,
 		java.util.Map<java.util.Locale, java.lang.String> label,
-		java.lang.String type,
-		java.util.Map<java.util.Locale, java.lang.String> options,
+		java.lang.String type, java.lang.String optionKeys,
+		java.util.Map<java.util.Locale, java.lang.String> optionValues,
 		boolean mandatory, java.lang.String validationRegexValue,
 		java.lang.String validationType,
 		java.lang.String errorValidationMessage, int order, int maxLength,
@@ -299,10 +299,10 @@ public class FormItemLocalServiceUtil {
 		java.lang.String formItemAttrClass, java.lang.String labelAttrClass,
 		java.lang.String inputAttrClass) {
 		return getService()
-				   .save(formItemId, formId, label, type, options, mandatory,
-			validationRegexValue, validationType, errorValidationMessage,
-			order, maxLength, hintMessage, serviceContext, formItemAttrClass,
-			labelAttrClass, inputAttrClass);
+				   .save(formItemId, formId, label, type, optionKeys,
+			optionValues, mandatory, validationRegexValue, validationType,
+			errorValidationMessage, order, maxLength, hintMessage,
+			serviceContext, formItemAttrClass, labelAttrClass, inputAttrClass);
 	}
 
 	public static java.util.List<com.rcs.webform.model.FormItem> getFormItemByFormId(

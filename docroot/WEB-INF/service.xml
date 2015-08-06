@@ -61,7 +61,8 @@
         <column name="inputAttrId" type="String"></column>
         <column name="inputAttrClass" type="String"></column>
         <column name="type" type="String"></column>
-        <column name="options" type="String" localized="true"></column>
+        <column name="optionKeys" type="String"></column>
+        <column name="optionValues" type="String" localized="true"></column>
         <column name="mandatory" type="boolean"></column>
         <column name="defaultValue" type="String" localized="true"></column>
         <column name="order" type="int"></column>

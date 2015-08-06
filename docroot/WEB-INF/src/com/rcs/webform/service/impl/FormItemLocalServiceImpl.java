@@ -68,7 +68,7 @@ public class FormItemLocalServiceImpl extends FormItemLocalServiceBaseImpl {
      * @param serviceContext
      * @return
      */
-    public FormItem save(Long formItemId, Long formId, Map<Locale, String> label, String type, Map<Locale, String> options, boolean mandatory, String validationRegexValue,
+    public FormItem save(Long formItemId, Long formId, Map<Locale, String> label, String type, String optionKeys, Map<Locale, String> optionValues, boolean mandatory, String validationRegexValue,
             String validationType, String errorValidationMessage, int order, int maxLength, Map<Locale, String> hintMessage, ServiceContext serviceContext,
             String formItemAttrClass, String labelAttrClass, String inputAttrClass) {
 
@@ -96,7 +96,8 @@ public class FormItemLocalServiceImpl extends FormItemLocalServiceBaseImpl {
             formItem.setInputAttrId("");
             formItem.setInputAttrClass(inputAttrClass);
             formItem.setType(type);
-            formItem.setOptionsMap(options);
+            formItem.setOptionKeys(optionKeys);
+            formItem.setOptionValuesMap(optionValues);
             formItem.setMandatory(mandatory);
             formItem.setDefaultValue("");
             formItem.setOrder(order);

@@ -22,8 +22,9 @@ public class FormItemDTO extends GenericEntityDTO {
 	private String inputAttrId;
 	private String inputAttrClass;
 	private FormItemType type;
-	private String options;
-	private boolean mandatory;
+	private String optionKeys;
+	private String optionValues;
+    private boolean mandatory;
 	private String defaultValue;
 	private int order;
 	private ValidationType validationType;
@@ -176,15 +177,23 @@ public class FormItemDTO extends GenericEntityDTO {
     public void setType(FormItemType type) {
         this.type = type;
     }
-    
-    public String getOptions() {
-        return options;
+        
+    public String getOptionKeys() {
+        return optionKeys;
+    }
+
+    public void setOptionKeys(String optionKeys) {
+        this.optionKeys = optionKeys;
     }
     
-    public void setOptions(String options) {
-        this.options = options;
+    public String getOptionValues() {
+        return optionValues;
     }
     
+    public void setOptionValues(String optionValues) {
+        this.optionValues = optionValues;
+    }
+
     public boolean isMandatory() {
         return mandatory;
     }

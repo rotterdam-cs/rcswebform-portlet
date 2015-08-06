@@ -850,7 +850,8 @@ public class FormItemPersistenceImpl extends BasePersistenceImpl<FormItem>
 		formItemImpl.setInputAttrId(formItem.getInputAttrId());
 		formItemImpl.setInputAttrClass(formItem.getInputAttrClass());
 		formItemImpl.setType(formItem.getType());
-		formItemImpl.setOptions(formItem.getOptions());
+		formItemImpl.setOptionKeys(formItem.getOptionKeys());
+		formItemImpl.setOptionValues(formItem.getOptionValues());
 		formItemImpl.setMandatory(formItem.isMandatory());
 		formItemImpl.setDefaultValue(formItem.getDefaultValue());
 		formItemImpl.setOrder(formItem.getOrder());

@@ -37,7 +37,8 @@
 		<field name="inputAttrId" type="String" />
 		<field name="inputAttrClass" type="String" />
 		<field name="type" type="String" />
-		<field name="options" type="String" localized="true" />
+		<field name="optionKeys" type="String" />
+		<field name="optionValues" type="String" localized="true" />
 		<field name="mandatory" type="boolean" />
 		<field name="defaultValue" type="String" localized="true" />
 		<field name="order" type="int" />

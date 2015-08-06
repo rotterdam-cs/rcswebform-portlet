@@ -74,7 +74,8 @@
 			<basic name="type">
 				<column name="TYPE_" />
 			</basic>
-			<basic name="options" />
+			<basic name="optionKeys" />
+			<basic name="optionValues" />
 			<basic name="mandatory" />
 			<basic name="defaultValue" />
 			<basic name="order">
@@ -101,8 +102,8 @@
 			<transient name="labelCurrentLanguageId" />
 			<transient name="labelMap" />
 			<transient name="modelAttributes" />
-			<transient name="optionsCurrentLanguageId" />
-			<transient name="optionsMap" />
+			<transient name="optionValuesCurrentLanguageId" />
+			<transient name="optionValuesMap" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />
 		</attributes>

@@ -64,7 +64,8 @@ public class EntityDtoConverter {
         formItemDto.setInputAttrId(formItem.getInputAttrId());
         formItemDto.setInputAttrClass(formItem.getInputAttrClass());
         formItemDto.setType(formItem.getType().isEmpty() ? FormItemType.valueOf("NONE") : FormItemType.valueOf(formItem.getType()));
-        formItemDto.setOptions(formItem.getOptions(locale));
+        formItemDto.setOptionKeys(formItem.getOptionKeys());
+        formItemDto.setOptionValues(formItem.getOptionValues(locale));
         formItemDto.setMandatory(formItem.getMandatory());
         formItemDto.setDefaultValue(formItem.getDefaultValue(locale));
         formItemDto.setOrder(formItem.getOrder());

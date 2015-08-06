@@ -37,7 +37,7 @@ import java.util.Date;
 public class FormItemCacheModel implements CacheModel<FormItem>, Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(53);
+		StringBundler sb = new StringBundler(55);
 
 		sb.append("{formItemId=");
 		sb.append(formItemId);
@@ -67,8 +67,10 @@ public class FormItemCacheModel implements CacheModel<FormItem>, Externalizable 
 		sb.append(inputAttrClass);
 		sb.append(", type=");
 		sb.append(type);
-		sb.append(", options=");
-		sb.append(options);
+		sb.append(", optionKeys=");
+		sb.append(optionKeys);
+		sb.append(", optionValues=");
+		sb.append(optionValues);
 		sb.append(", mandatory=");
 		sb.append(mandatory);
 		sb.append(", defaultValue=");
@@ -182,11 +184,18 @@ public class FormItemCacheModel implements CacheModel<FormItem>, Externalizable 
 			formItemImpl.setType(type);
 		}
 
-		if (options == null) {
-			formItemImpl.setOptions(StringPool.BLANK);
+		if (optionKeys == null) {
+			formItemImpl.setOptionKeys(StringPool.BLANK);
 		}
 		else {
-			formItemImpl.setOptions(options);
+			formItemImpl.setOptionKeys(optionKeys);
+		}
+
+		if (optionValues == null) {
+			formItemImpl.setOptionValues(StringPool.BLANK);
+		}
+		else {
+			formItemImpl.setOptionValues(optionValues);
 		}
 
 		formItemImpl.setMandatory(mandatory);
@@ -266,7 +275,8 @@ public class FormItemCacheModel implements CacheModel<FormItem>, Externalizable 
 		inputAttrId = objectInput.readUTF();
 		inputAttrClass = objectInput.readUTF();
 		type = objectInput.readUTF();
-		options = objectInput.readUTF();
+		optionKeys = objectInput.readUTF();
+		optionValues = objectInput.readUTF();
 		mandatory = objectInput.readBoolean();
 		defaultValue = objectInput.readUTF();
 		order = objectInput.readInt();
@@ -353,11 +363,18 @@ public class FormItemCacheModel implements CacheModel<FormItem>, Externalizable 
 			objectOutput.writeUTF(type);
 		}
 
-		if (options == null) {
+		if (optionKeys == null) {
 			objectOutput.writeUTF(StringPool.BLANK);
 		}
 		else {
-			objectOutput.writeUTF(options);
+			objectOutput.writeUTF(optionKeys);
+		}
+
+		if (optionValues == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(optionValues);
 		}
 
 		objectOutput.writeBoolean(mandatory);
@@ -431,7 +448,8 @@ public class FormItemCacheModel implements CacheModel<FormItem>, Externalizable 
 	public String inputAttrId;
 	public String inputAttrClass;
 	public String type;
-	public String options;
+	public String optionKeys;
+	public String optionValues;
 	public boolean mandatory;
 	public String defaultValue;
 	public int order;

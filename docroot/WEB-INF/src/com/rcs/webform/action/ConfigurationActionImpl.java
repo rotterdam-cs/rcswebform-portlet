@@ -131,7 +131,8 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 					String validationType = ParamUtil.getString(actionRequest, "fieldInputType" + formFieldsIndex);
 					int inputTypeMaxLength = ParamUtil.getInteger(actionRequest, "inputMaxLength" + formFieldsIndex);
 					boolean fieldOptional = !ParamUtil.getBoolean(actionRequest, "fieldOptional" + formFieldsIndex);
-					Map<Locale, String> fieldOptionsMap = LocalizationUtil.getLocalizationMap(actionRequest, "fieldOptions" + formFieldsIndex);
+					String fieldOptionKeys = ParamUtil.getString(actionRequest, "fieldOptionKeys" + formFieldsIndex);
+                    Map<Locale, String> fieldOptionValuesMap = LocalizationUtil.getLocalizationMap(actionRequest, "fieldOptionValues" + formFieldsIndex);
 					String fieldValidationScript = ParamUtil.getString(actionRequest, "fieldValidationScript" + formFieldsIndex);
 					String fieldValidationErrorMessage = ParamUtil.getString(actionRequest, "fieldValidationErrorMessage" + formFieldsIndex);
 					Map<Locale, String> fieldHintMessageMap = LocalizationUtil.getLocalizationMap(actionRequest, "fieldHintMessage" + formFieldsIndex);
@@ -149,7 +150,7 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 						inputTypeMaxLength = 0;
 					}
 	
-					FormItemLocalServiceUtil.save(formItemId, formId, fieldLabelMap, fieldType, fieldOptionsMap, fieldOptional,
+					FormItemLocalServiceUtil.save(formItemId, formId, fieldLabelMap, fieldType, fieldOptionKeys, fieldOptionValuesMap, fieldOptional,
 							fieldValidationScript, validationType, fieldValidationErrorMessage, formFieldsIndex, inputTypeMaxLength, fieldHintMessageMap, serviceContext,
 							formItemAttrClass, labelAttrClass, inputAttrClass);
 	

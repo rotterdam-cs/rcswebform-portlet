@@ -16,6 +16,7 @@ package com.rcs.webform.service;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.search.IndexableType;
 import com.liferay.portal.kernel.transaction.Isolation;
 import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.transaction.Transactional;
@@ -52,6 +53,7 @@ public interface FormToPorletMapLocalService extends BaseLocalService,
 	* @return the form to porlet map that was added
 	* @throws SystemException if a system exception occurred
 	*/
+	@com.liferay.portal.kernel.search.Indexable(type = IndexableType.REINDEX)
 	public com.rcs.webform.model.FormToPorletMap addFormToPorletMap(
 		com.rcs.webform.model.FormToPorletMap formToPorletMap)
 		throws com.liferay.portal.kernel.exception.SystemException;
@@ -73,6 +75,7 @@ public interface FormToPorletMapLocalService extends BaseLocalService,
 	* @throws PortalException if a form to porlet map with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
+	@com.liferay.portal.kernel.search.Indexable(type = IndexableType.DELETE)
 	public com.rcs.webform.model.FormToPorletMap deleteFormToPorletMap(
 		long formToPorletMapId)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -85,6 +88,7 @@ public interface FormToPorletMapLocalService extends BaseLocalService,
 	* @return the form to porlet map that was removed
 	* @throws SystemException if a system exception occurred
 	*/
+	@com.liferay.portal.kernel.search.Indexable(type = IndexableType.DELETE)
 	public com.rcs.webform.model.FormToPorletMap deleteFormToPorletMap(
 		com.rcs.webform.model.FormToPorletMap formToPorletMap)
 		throws com.liferay.portal.kernel.exception.SystemException;
@@ -226,6 +230,7 @@ public interface FormToPorletMapLocalService extends BaseLocalService,
 	* @return the form to porlet map that was updated
 	* @throws SystemException if a system exception occurred
 	*/
+	@com.liferay.portal.kernel.search.Indexable(type = IndexableType.REINDEX)
 	public com.rcs.webform.model.FormToPorletMap updateFormToPorletMap(
 		com.rcs.webform.model.FormToPorletMap formToPorletMap)
 		throws com.liferay.portal.kernel.exception.SystemException;
