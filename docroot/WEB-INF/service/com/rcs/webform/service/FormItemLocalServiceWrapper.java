@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -307,11 +307,13 @@ public class FormItemLocalServiceWrapper implements FormItemLocalService,
 		java.lang.String validationType,
 		java.lang.String errorValidationMessage, int order, int maxLength,
 		java.util.Map<java.util.Locale, java.lang.String> hintMessage,
-		com.liferay.portal.service.ServiceContext serviceContext) {
+		com.liferay.portal.service.ServiceContext serviceContext,
+		java.lang.String formItemAttrClass, java.lang.String labelAttrClass,
+		java.lang.String inputAttrClass) {
 		return _formItemLocalService.save(formItemId, formId, label, type,
 			options, mandatory, validationRegexValue, validationType,
 			errorValidationMessage, order, maxLength, hintMessage,
-			serviceContext);
+			serviceContext, formItemAttrClass, labelAttrClass, inputAttrClass);
 	}
 
 	@Override

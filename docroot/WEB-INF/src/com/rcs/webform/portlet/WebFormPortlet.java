@@ -4,11 +4,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Set;
 
 import javax.mail.internet.InternetAddress;
 import javax.portlet.ActionRequest;
@@ -121,48 +119,32 @@ public class WebFormPortlet extends MVCPortlet {
                 return;
             }
         }
-
-        // --Build submitted form data here--
-
-        // Validate submitted form data
-        Set<String> validationErrors = new HashSet<String>();
-        try {
-            // --Add validation method here--
-        } catch (Exception e) {
-            SessionErrors.add(actionRequest, "validationScriptError", e.getMessage().trim());
-            return;
+        
+        // Send submitted form data as email
+        boolean emailSuccess = true;
+        if (sendAsEmail) {
+            emailSuccess = sendAsEmail(preferences, portletId, actionRequest, themeDisplay.getCompanyId());
         }
 
-        if (validationErrors.isEmpty()) {
-            boolean emailSuccess = true;
-            boolean databaseSuccess = true;
+        // Save submitted form data to database
+        boolean databaseSuccess = true;
+        if (saveToDatabase) {
+            databaseSuccess = saveToDatabase(actionRequest);
+        }
 
-            // Send submitted form data as email
-            if (sendAsEmail) {
-                emailSuccess = sendAsEmail(preferences, portletId, actionRequest, themeDisplay.getCompanyId());
+        // On successfully submitted value
+        // Including successfully send as email and save to database
+        if (emailSuccess && databaseSuccess) {
+            if (onSubmitValue == 1) {
+                SessionMessages.add(actionRequest, "success");
+            } else if (onSubmitValue == 2) {
+                SessionMessages.add(actionRequest, portletId + SessionMessages.KEY_SUFFIX_HIDE_DEFAULT_SUCCESS_MESSAGE);
             }
-
-            // Save submitted form data to database
-            if (saveToDatabase) {
-                databaseSuccess = saveToDatabase(actionRequest);
-            }
-
-            // On successfully submitted value
-            // Including successfully send as email and save to database
-            if (emailSuccess && databaseSuccess) {
-                if (onSubmitValue == 1) {
-                    SessionMessages.add(actionRequest, "success");
-                } else if (onSubmitValue == 2) {
-                    SessionMessages.add(actionRequest, portletId + SessionMessages.KEY_SUFFIX_HIDE_DEFAULT_SUCCESS_MESSAGE);
-                }
-            } else {
-                SessionErrors.add(actionRequest, "error");
-            }
-
         } else {
-            // --Build form validation error here--
+            SessionErrors.add(actionRequest, "error");
         }
 
+        // Redirect to specified URL if there are no errors and the URL is not empty string or null
         if (SessionErrors.isEmpty(actionRequest) && Validator.isNotNull(successUrl)) {
             actionResponse.sendRedirect(successUrl);
         }

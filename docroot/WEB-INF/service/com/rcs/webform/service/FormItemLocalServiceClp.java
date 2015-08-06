@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -115,7 +115,8 @@ public class FormItemLocalServiceClp implements FormItemLocalService {
 				"java.lang.String", "java.util.Map", "boolean",
 				"java.lang.String", "java.lang.String", "java.lang.String",
 				"int", "int", "java.util.Map",
-				"com.liferay.portal.service.ServiceContext"
+				"com.liferay.portal.service.ServiceContext", "java.lang.String",
+				"java.lang.String", "java.lang.String"
 			};
 
 		_methodName20 = "getFormItemByFormId";
@@ -689,7 +690,9 @@ public class FormItemLocalServiceClp implements FormItemLocalService {
 		java.lang.String validationType,
 		java.lang.String errorValidationMessage, int order, int maxLength,
 		java.util.Map<java.util.Locale, java.lang.String> hintMessage,
-		com.liferay.portal.service.ServiceContext serviceContext) {
+		com.liferay.portal.service.ServiceContext serviceContext,
+		java.lang.String formItemAttrClass, java.lang.String labelAttrClass,
+		java.lang.String inputAttrClass) {
 		Object returnObj = null;
 
 		try {
@@ -720,7 +723,13 @@ public class FormItemLocalServiceClp implements FormItemLocalService {
 						
 					ClpSerializer.translateInput(hintMessage),
 						
-					ClpSerializer.translateInput(serviceContext)
+					ClpSerializer.translateInput(serviceContext),
+						
+					ClpSerializer.translateInput(formItemAttrClass),
+						
+					ClpSerializer.translateInput(labelAttrClass),
+						
+					ClpSerializer.translateInput(inputAttrClass)
 					});
 		}
 		catch (Throwable t) {

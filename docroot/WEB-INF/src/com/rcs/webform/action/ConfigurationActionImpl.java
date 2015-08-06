@@ -135,6 +135,9 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 					String fieldValidationScript = ParamUtil.getString(actionRequest, "fieldValidationScript" + formFieldsIndex);
 					String fieldValidationErrorMessage = ParamUtil.getString(actionRequest, "fieldValidationErrorMessage" + formFieldsIndex);
 					Map<Locale, String> fieldHintMessageMap = LocalizationUtil.getLocalizationMap(actionRequest, "fieldHintMessage" + formFieldsIndex);
+					String formItemAttrClass = ParamUtil.getString(actionRequest, "formItemCssClass" + formFieldsIndex);
+					String labelAttrClass = ParamUtil.getString(actionRequest, "formLabelCssClass" + formFieldsIndex);
+					String inputAttrClass = ParamUtil.getString(actionRequest, "formInputCssClass" + formFieldsIndex);;
 				    
 					if (Validator.isNotNull(fieldValidationScript) ^ Validator.isNotNull(fieldValidationErrorMessage)) {
 	
@@ -147,7 +150,8 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 					}
 	
 					FormItemLocalServiceUtil.save(formItemId, formId, fieldLabelMap, fieldType, fieldOptionsMap, fieldOptional,
-							fieldValidationScript, validationType, fieldValidationErrorMessage, formFieldsIndex, inputTypeMaxLength, fieldHintMessageMap, serviceContext);
+							fieldValidationScript, validationType, fieldValidationErrorMessage, formFieldsIndex, inputTypeMaxLength, fieldHintMessageMap, serviceContext,
+							formItemAttrClass, labelAttrClass, inputAttrClass);
 	
 					i++;
 				}
