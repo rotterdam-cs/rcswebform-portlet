@@ -269,7 +269,9 @@ public interface FormItemLocalService extends BaseLocalService,
 		java.lang.String validationType,
 		java.lang.String errorValidationMessage, int order, int maxLength,
 		java.util.Map<java.util.Locale, java.lang.String> hintMessage,
-		com.liferay.portal.service.ServiceContext serviceContext);
+		com.liferay.portal.service.ServiceContext serviceContext,
+		java.lang.String formItemAttrClass, java.lang.String labelAttrClass,
+		java.lang.String inputAttrClass);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.rcs.webform.model.FormItem> getFormItemByFormId(

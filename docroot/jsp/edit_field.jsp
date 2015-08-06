@@ -36,6 +36,9 @@ String fieldValidationErrorMessage = "";
 String fieldTextFieldInputType = "ALPHA";
 String fieldHintMessageXml = "";
 int inputMaxLength = 0;
+String formItemCssClass = "";
+String labelCssClass = "";
+String inputCssClass = "";
 
 if(formItems != null && !formItems.isEmpty()){
 	formItemId = formItems.get(formFieldsIndex).getFormItemId();
@@ -50,6 +53,9 @@ if(formItems != null && !formItems.isEmpty()){
 	fieldValidationScript = PrefsParamUtil.getString(portletPreferences, request, "fieldValidationScript" + formFieldsIndex);
 	fieldValidationErrorMessage = PrefsParamUtil.getString(portletPreferences, request, "fieldValidationErrorMessage" + formFieldsIndex);
 	fieldHintMessageXml = formItems.get(formFieldsIndex).getHintMessage();
+	formItemCssClass = formItems.get(formFieldsIndex).getFormItemAttrClass();
+	labelCssClass = formItems.get(formFieldsIndex).getLabelAttrClass();
+	inputCssClass = formItems.get(formFieldsIndex).getInputAttrClass();
 }
 
 boolean ignoreRequestValue = (index != formFieldsIndex);
@@ -172,6 +178,16 @@ boolean ignoreRequestValue = (index != formFieldsIndex);
 						<aui:validator name="number"></aui:validator>
 					</aui:input>
 				</aui:field-wrapper>
+			</aui:field-wrapper>
+		</c:when>
+	</c:choose>
+	
+	<c:choose>
+		<c:when test="<%= !fieldsEditingDisabled %>">
+			<aui:field-wrapper label="Form Item CSS Styling" cssClass="left-row-clear-left">
+				<aui:input name='<%= "formItemCssClass" + index %>' type="text" ignoreRequestValue="<%= ignoreRequestValue %>" label="Form Item CSS Class" value="<%= formItemCssClass %>"></aui:input>
+				<aui:input name='<%= "formLabelCssClass" + index %>' type="text" ignoreRequestValue="<%= ignoreRequestValue %>" label="Label CSS Class" value="<%= labelCssClass %>"></aui:input>
+				<aui:input name='<%= "formInputCssClass" + index %>' type="text" ignoreRequestValue="<%= ignoreRequestValue %>" label="Input CSS Class" value="<%= inputCssClass %>"></aui:input>
 			</aui:field-wrapper>
 		</c:when>
 	</c:choose>

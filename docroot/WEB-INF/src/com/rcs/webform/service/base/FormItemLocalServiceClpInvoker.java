@@ -115,7 +115,8 @@ public class FormItemLocalServiceClpInvoker {
 				"java.lang.String", "java.util.Map", "boolean",
 				"java.lang.String", "java.lang.String", "java.lang.String",
 				"int", "int", "java.util.Map",
-				"com.liferay.portal.service.ServiceContext"
+				"com.liferay.portal.service.ServiceContext", "java.lang.String",
+				"java.lang.String", "java.lang.String"
 			};
 
 		_methodName51 = "getFormItemByFormId";
@@ -247,7 +248,9 @@ public class FormItemLocalServiceClpInvoker {
 				((Integer)arguments[9]).intValue(),
 				((Integer)arguments[10]).intValue(),
 				(java.util.Map<java.util.Locale, java.lang.String>)arguments[11],
-				(com.liferay.portal.service.ServiceContext)arguments[12]);
+				(com.liferay.portal.service.ServiceContext)arguments[12],
+				(java.lang.String)arguments[13],
+				(java.lang.String)arguments[14], (java.lang.String)arguments[15]);
 		}
 
 		if (_methodName51.equals(name) &&
