@@ -3,6 +3,8 @@
 <%@ include file="/jsp/init.jsp" %>
 
 <%
+String tabValues = portletPreferences.getValue("tabsValue", "Form Information");
+
 //Get values from the database
 List<FormItem> formItems = WebFormUtil.getPortletFormItems(portletResource);
 FormToPorletMap formToPortletMap = WebFormUtil.getFormToPortletMap(portletResource);
@@ -61,10 +63,11 @@ boolean fieldsEditingDisabled = false;
 	<aui:input name="formToPortletMapId" type="hidden" value="<%= formToPortletId %>"/>
 	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
 	<aui:input name="redirect" type="hidden" value="<%= configurationRenderURL %>" />
+	<aui:input name="preferences--tabsValue--" type="hidden" value="<%= tabValues %>"></aui:input>
 
 	<liferay-ui:error exception="<%= DuplicateColumnNameException.class %>" message="please-enter-unique-field-names" />
 	
-	<liferay-ui:tabs names="Form Information, Submitted Data to be Stored, Form Fields" refresh="false">
+	<liferay-ui:tabs names="Form Information,Submitted Data to be Stored,Form Fields" onClick="onClickTabs(this)" refresh="false" value="<%= tabValues %>">
 		<liferay-ui:section>
 			<aui:fieldset>
 				<aui:field-wrapper label="Title">
@@ -302,6 +305,10 @@ boolean fieldsEditingDisabled = false;
 </c:if>
 
 <aui:script>
+function onClickTabs(_this){
+	document.getElementById("<portlet:namespace />tabsValue").value = _this.innerHTML.trim();
+}
+
 AUI().use('aui-base',function(A){
 	
 	<c:if test="<%= !sendAsEmail %>">
