@@ -4,7 +4,7 @@
 	<portlet:param name="<%= ActionRequest.ACTION_NAME %>" value="submitForm" />
 </portlet:actionURL>
 
-<aui:form action="<%= submitFormURL %>" method="POST" name="fm">
+<aui:form action="<%= submitFormURL %>" method="POST" name="fm" autocomplete="off">
 	<aui:fieldset label="${Data.data.title}">
 		<div id="formDescription">
 			${Data.data.desc}
@@ -140,6 +140,7 @@
 
 	var Data = <%= renderRequest.getAttribute("Data")%>;
 	if(Data) {
+		var validator;
 		var divForm = A.one('#<portlet:namespace />rcsWebForm');
 		var divTemplateFormItem = A.one('#<portlet:namespace />rcsWebFormItem');
 		divTemplateFormItem.hide();
@@ -150,75 +151,86 @@
 				var divFormItem =  divTemplateFormItem.cloneNode(true);
 				if(divFormItem) {
 					
-					divFormItemLabel = divFormItem.one('#<portlet:namespace />rcsWebFormItemLabel');
-					divFormItemInputWrapper = divFormItem.one('#<portlet:namespace />rcsWebFormItemInputWrapper');
-					divFormItemInputCombo = divFormItem.one('#<portlet:namespace />rcsWebFormItemInputCombo');
-					divFormItemInputText = divFormItem.one('#<portlet:namespace />rcsWebFormItemInputText');
-					divFormItemInputRadio = divFormItem.one('#<portlet:namespace />rcsWebFormItemInputRadio');
-					divFormItemInputRadioLabel = divFormItem.one('#<portlet:namespace />rcsWebFormItemInputRadioLabel');
+					formItemLabel = divFormItem.one('#<portlet:namespace />rcsWebFormItemLabel');
+					formItemInputWrapper = divFormItem.one('#<portlet:namespace />rcsWebFormItemInputWrapper');
+					formItemInputCombo = divFormItem.one('#<portlet:namespace />rcsWebFormItemInputCombo');
+					formItemInputText = divFormItem.one('#<portlet:namespace />rcsWebFormItemInputText');
+					formItemInputRadio = divFormItem.one('#<portlet:namespace />rcsWebFormItemInputRadio');
+					formItemInputRadioLabel = divFormItem.one('#<portlet:namespace />rcsWebFormItemInputRadioLabel');
 
 					divFormItem.addClass(Data.data.formItems[formItemIdx].formItemAttrClass);
-					divFormItemLabel.addClass(Data.data.formItems[formItemIdx].labelAttrClass);
-					divFormItemLabel.set('text',Data.data.formItems[formItemIdx].label);
+					formItemLabel.addClass(Data.data.formItems[formItemIdx].labelAttrClass);
+					formItemLabel.set('text',Data.data.formItems[formItemIdx].label);
 
 					switch(Data.data.formItems[formItemIdx].type) {
 						case 'TEXT_FIELD' :
-							initUserInputText(divFormItemInputWrapper, divFormItemInputText, formItemIdx);
-							divFormItemInputText.set('type','text');
-							divFormItemInputRadio.remove();
-							divFormItemInputRadioLabel.remove();
-							divFormItemInputCombo.remove();
+							initUserInputText(formItemInputWrapper, formItemInputText, formItemIdx);
+							formItemInputText.set('type','text');
+							formItemInputRadio.remove();
+							formItemInputRadioLabel.remove();
+							formItemInputCombo.remove();
 							break;
 						case 'TEXT_BOX' :
-							initUserInputText(divFormItemInputWrapper, divFormItemInputText, formItemIdx);
-							divFormItemInputText.set('type','textarea');					
-							divFormItemInputRadio.remove();
-							divFormItemInputRadioLabel.remove();
-							divFormItemInputCombo.remove();
+							initUserInputText(formItemInputWrapper, formItemInputText, formItemIdx);
+							formItemInputText.set('type','textarea');					
+							formItemInputRadio.remove();
+							formItemInputRadioLabel.remove();
+							formItemInputCombo.remove();
 							break;
 						case 'PASSWORD' :
-							initUserInputText(divFormItemInputWrapper, divFormItemInputText, formItemIdx);
-							divFormItemInputText.set('type','password');
-							divFormItemInputRadio.remove();
-							divFormItemInputRadioLabel.remove();
-							divFormItemInputCombo.remove();
+							initUserInputText(formItemInputWrapper, formItemInputText, formItemIdx);
+							formItemInputText.set('type','password');
+							formItemInputRadio.remove();
+							formItemInputRadioLabel.remove();
+							formItemInputCombo.remove();
 							break;
 						case 'DATE' :
-							initUserInputText(divFormItemInputWrapper, divFormItemInputText, formItemIdx);
-							new A.DatePicker(
+							initUserInputText(formItemInputWrapper, formItemInputText, formItemIdx);
+							
+							var datePicker = new A.DatePicker(
 								      {
 								    	  mask:'%d/%m/%Y',
-								          trigger: '#'+divFormItemInputText.attr('id'),
+								          trigger: '#'+formItemInputText.attr('id'),
+								          setValue: true,
 								          popover: {
 									      	zIndex: 1
-								        }
+								          }
 								      }
 								    );
-							divFormItemInputRadio.remove();
-							divFormItemInputRadioLabel.remove();
-							divFormItemInputCombo.remove();
+							
+							datePicker.getCalendar().on('dateClick', function(){
+								if(validator) {
+									validator.validate();
+								} else {
+									console.log('validator not initialized');
+								}
+							});
+							
+							formItemInputRadio.remove();
+							formItemInputRadioLabel.remove();
+							formItemInputCombo.remove();
 							break;
 						case 'SECTION' :
 							console.log('section called');
-							divFormItemInputWrapper.remove();
+							formItemInputWrapper.remove();
 							break;
 						case 'OPTIONS' :
-							initUserInputCombo(divFormItemInputWrapper, divFormItemInputCombo, formItemIdx);
-							divFormItemInputRadio.remove();
-							divFormItemInputRadioLabel.remove();
-							divFormItemInputText.remove();
+							initUserInputCombo(formItemInputWrapper, formItemInputCombo, formItemIdx);
+							formItemInputRadio.remove();
+							formItemInputRadioLabel.remove();
+							formItemInputText.remove();
 							break;
 						case 'RADIO_BUTTON' :
-							divFormItemInputRadio.set('type','radio');
-							initUserInputRadioCheckbox(divFormItemInputWrapper, divFormItemInputRadio, formItemIdx, divFormItemInputRadioLabel);
-							divFormItemInputText.remove();
-							divFormItemInputCombo.remove();
+							formItemInputRadio.set('type','radio');
+							initUserInputRadioCheckbox(formItemInputWrapper, formItemInputRadio, formItemIdx, formItemInputRadioLabel);
+							formItemInputText.remove();
+							formItemInputCombo.remove();
 							break;
 						case 'CHECKBOX' :
-							divFormItemInputRadio.set('type','checkbox');
-							initUserInputRadioCheckbox(divFormItemInputWrapper, divFormItemInputRadio, formItemIdx, divFormItemInputRadioLabel);
-							divFormItemInputText.remove();
-							divFormItemInputCombo.remove();
+							formItemInputRadio.set('type','checkbox');
+							initUserInputRadioCheckbox(formItemInputWrapper, formItemInputRadio, formItemIdx, formItemInputRadioLabel);
+							formItemInputText.remove();
+							formItemInputCombo.remove();
 							break;
 					}
 				} else {
@@ -230,7 +242,7 @@
 			console.log('rules : '+JSON.stringify(rules));
 			console.log('fieldStrings : '+JSON.stringify(fieldStrings));
 			
-		 	var validator = new A.FormValidator(
+		 	validator = new A.FormValidator(
 		 		{
 					boundingBox:'#<portlet:namespace />fm',
 					rules:rules,
@@ -255,12 +267,12 @@
 		console.log('empty Data');
 	}	
 
-	function initUserInput(divFormItemInputWrapper, divFormItemInput, formItemIdx) {
-		divFormItemInput.set('id', '<portlet:namespace />'+Data.data.formItems[formItemIdx].label);
-		divFormItemInput.set('name', '<portlet:namespace />'+Data.data.formItems[formItemIdx].label);
+	function initUserInput(formItemInputWrapper, formItemInput, formItemIdx) {
+		formItemInput.set('id', '<portlet:namespace />'+Data.data.formItems[formItemIdx].label);
+		formItemInput.set('name', '<portlet:namespace />'+Data.data.formItems[formItemIdx].label);
 		
-		divFormItemInputWrapper.addClass(Data.data.formItems[formItemIdx].inputAttrClass);
-		divFormItemInput.set('placeholder', Data.data.formItems[formItemIdx].hintMessage);
+		formItemInputWrapper.addClass(Data.data.formItems[formItemIdx].inputAttrClass);
+		formItemInput.set('placeholder', Data.data.formItems[formItemIdx].hintMessage);
 		
 		var rule = new Object();
 		var fieldString = new Object();
@@ -288,23 +300,25 @@
 			rule.custom_date = true;
 		}
 		
-		rules[divFormItemInput.attr('id')] = rule;
+		rules[formItemInput.attr('id')] = rule;
 		
 		fieldString[Data.data.formItems[formItemIdx].validationType.toLowerCase()] = Data.data.formItems[formItemIdx].errorValidationMessage;
-		fieldStrings[divFormItemInput.attr('id')] = fieldString;
+		fieldStrings[formItemInput.attr('id')] = fieldString;
 
 	}
 	
-	function initUserInputText(divFormItemInputWrapper, divFormItemInput, formItemIdx) {
-		initUserInput(divFormItemInputWrapper, divFormItemInput, formItemIdx);
-		divFormItemInputText.set('value', Data.data.formItems[formItemIdx].defaultValue);
+	function initUserInputText(formItemInputWrapper, formItemInput, formItemIdx) {
+		initUserInput(formItemInputWrapper, formItemInput, formItemIdx);
+		if(Data.data.formItems[formItemIdx].type === 'TEXT') {
+			formItemInputText.set('value', Data.data.formItems[formItemIdx].defaultValue);
+		}
 	}
 	
-	function initUserInputCombo(divFormItemInputWrapper, divFormItemInput, formItemIdx, templateOptionItem) {
-		initUserInput(divFormItemInputWrapper, divFormItemInput, formItemIdx);
+	function initUserInputCombo(formItemInputWrapper, formItemInput, formItemIdx, templateOptionItem) {
+		initUserInput(formItemInputWrapper, formItemInput, formItemIdx);
 		var optionKeys = JSON.parse(Data.data.formItems[formItemIdx].optionKeys);
 		var optionValues = JSON.parse(Data.data.formItems[formItemIdx].optionValues);
-		var templateOptionItem =  divFormItemInput.one('#<portlet:namespace />rcsWebFormItemOption');
+		var templateOptionItem =  formItemInput.one('#<portlet:namespace />rcsWebFormItemOption');
 		
 		if(templateOptionItem){
 			for(optionIdx in optionKeys) { 
@@ -313,7 +327,7 @@
 					optionItem.set('id', '<portlet:namespace />'+Data.data.formItems[formItemIdx].label);
 					optionItem.set('value',optionKeys[optionIdx]);
 					optionItem.set('text',optionValues[optionIdx]);
-					optionItem.appendTo(divFormItemInput);
+					optionItem.appendTo(formItemInput);
 				} else {
 					console.log('error cloning option');
 				}
@@ -325,13 +339,13 @@
 	}
 	
 
-	function initUserInputRadioCheckbox(divFormItemInputWrapper, divFormItemInput, formItemIdx, divFormItemInputLabel) {
-		initUserInput(divFormItemInputWrapper, divFormItemInput, formItemIdx);
+	function initUserInputRadioCheckbox(formItemInputWrapper, formItemInput, formItemIdx, formItemInputLabel) {
+		initUserInput(formItemInputWrapper, formItemInput, formItemIdx);
 		var optionKeys = JSON.parse(Data.data.formItems[formItemIdx].optionKeys);
 		var optionValues = JSON.parse(Data.data.formItems[formItemIdx].optionValues);
 		for(optionIdx in optionKeys) { 
-			var radioButton =  divFormItemInput.cloneNode(true);
-			var radioLabel = divFormItemInputLabel.cloneNode(true);
+			var radioButton =  formItemInput.cloneNode(true);
+			var radioLabel = formItemInputLabel.cloneNode(true);
 			if(radioButton && radioLabel) {
 				radioButton.set('name', '<portlet:namespace />'+Data.data.formItems[formItemIdx].label);
 				radioButton.set('value',optionKeys[optionIdx]);
@@ -341,13 +355,13 @@
 					radioButton.set('checked','true');
 				}
 				
-				radioButton.appendTo(divFormItemInputWrapper);
-				radioLabel.appendTo(divFormItemInputWrapper);
+				radioButton.appendTo(formItemInputWrapper);
+				radioLabel.appendTo(formItemInputWrapper);
 			} else {
 				console.log('error cloning option');
 			}
-			divFormItemInput.remove();
-			divFormItemInputLabel.remove();
+			formItemInput.remove();
+			formItemInputLabel.remove();
 		}
 	}	
 </aui:script>
