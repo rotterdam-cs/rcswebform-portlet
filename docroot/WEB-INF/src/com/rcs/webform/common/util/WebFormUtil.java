@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.portlet.PortletPreferences;
 
+import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.util.PortalUtil;
@@ -83,6 +84,15 @@ public class WebFormUtil {
 		} catch (SystemException e) {
 			return StringPool.BLANK;
 		}
+	}
+	
+	public static List<Form> getAllForms(){
+		try {
+			return FormLocalServiceUtil.getForms(QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+		} catch (Exception e) {
+			return null;
+		}
+		
 	}
 	
 }
