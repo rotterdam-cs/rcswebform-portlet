@@ -288,6 +288,12 @@ public class SubmittedDataLocalServiceWrapper
 			arguments);
 	}
 
+	@Override
+	public java.util.List<com.rcs.webform.model.SubmittedData> getSubmittedDataByForm(
+		java.lang.Long formId) {
+		return _submittedDataLocalService.getSubmittedDataByForm(formId);
+	}
+
 	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */

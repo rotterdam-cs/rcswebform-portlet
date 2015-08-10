@@ -248,4 +248,8 @@ public interface SubmittedDataLocalService extends BaseLocalService,
 	public java.lang.Object invokeMethod(java.lang.String name,
 		java.lang.String[] parameterTypes, java.lang.Object[] arguments)
 		throws java.lang.Throwable;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<com.rcs.webform.model.SubmittedData> getSubmittedDataByForm(
+		java.lang.Long formId);
 }
