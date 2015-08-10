@@ -42,4 +42,37 @@
 			<role-name>user</role-name>
 		</security-role-ref>
 	</portlet>
+	<portlet>
+		<portlet-name>rcs-web-form-report</portlet-name>
+		<display-name>RCS Web Form Report</display-name>
+		<portlet-class>
+			com.rcs.webform.portlet.WebFormReportPortlet
+		</portlet-class>
+		<init-param>
+			<name>view-template</name>
+			<value>/jsp/report/view.jsp</value>
+		</init-param>
+		<expiration-cache>0</expiration-cache>
+		<supports>
+			<mime-type>text/html</mime-type>
+			<portlet-mode>view</portlet-mode>
+		</supports>
+		<portlet-info>
+			<title>RCS Web Form Report</title>
+			<short-title>Rcs Web Form Report</short-title>
+			<keywords></keywords>
+		</portlet-info>
+		<security-role-ref>
+			<role-name>administrator</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>guest</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>power-user</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>user</role-name>
+		</security-role-ref>
+	</portlet>
 </portlet-app>
