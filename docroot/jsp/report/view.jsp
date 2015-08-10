@@ -12,7 +12,6 @@
 		<script>
 		AUI().use('aui-base',function(A){
 			var data = <%= renderRequest.getAttribute("data")%>;
-			console.log(data);
 			
 			var tableContent = "<thead><tr>";
 			for(var i = 0; i < data.data.formDto.formItems.length; i++){
@@ -22,13 +21,12 @@
 			
 			var formItemsLength = data.data.formDto.formItems.length;
 			var submittedData = data.data.dataDtoList;
-			console.log(submittedData);
 			for(var i = 0; i < submittedData.length; i++){
 				if ((i % formItemsLength)==0){
 					tableContent += "<tr>";
 				}
 				tableContent += "<td>"+submittedData[i].userInput+"</td>";
-				if (((i+1) % formItemsLength)==0){
+				if (((i+1) / formItemsLength)==0){
 					tableContent += "</tr>";
 				}
 			}
