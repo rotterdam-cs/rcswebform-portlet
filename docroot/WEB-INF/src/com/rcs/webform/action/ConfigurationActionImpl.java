@@ -53,6 +53,9 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 		LocalizationUtil.setLocalizedPreferencesValues(actionRequest, preferences, "title");
 		LocalizationUtil.setLocalizedPreferencesValues(actionRequest, preferences, "description");
 
+		String tabValue = ParamUtil.getString(actionRequest, "tabsValue", "Form Information");
+		actionRequest.setAttribute("tabsValue", tabValue);
+		
 		//Save form configuration to database
 		ServiceContext formServiceContext = ServiceContextFactory.getInstance(Form.class.getName(), actionRequest);
 		Long formId = null;

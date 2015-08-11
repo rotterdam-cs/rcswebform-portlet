@@ -553,10 +553,6 @@ public class FormToPorletMapClp extends BaseModelImpl<FormToPorletMap>
 		}
 	}
 
-	public Class<?> getClpSerializerClass() {
-		return _clpSerializerClass;
-	}
-
 	@Override
 	public int hashCode() {
 		return (int)getPrimaryKey();
@@ -664,5 +660,4 @@ public class FormToPorletMapClp extends BaseModelImpl<FormToPorletMap>
 	private long _formId;
 	private String _portletId;
 	private BaseModel<?> _formToPorletMapRemoteModel;
-	private Class<?> _clpSerializerClass = com.rcs.webform.service.ClpSerializer.class;
 }

@@ -9,8 +9,10 @@ import com.rcs.webform.common.enums.FormItemType;
 import com.rcs.webform.common.enums.ValidationType;
 import com.rcs.webform.entity.dto.FormDTO;
 import com.rcs.webform.entity.dto.FormItemDTO;
+import com.rcs.webform.entity.dto.SubmittedDataDTO;
 import com.rcs.webform.model.Form;
 import com.rcs.webform.model.FormItem;
+import com.rcs.webform.model.SubmittedData;
 
 public class EntityDtoConverter {
 
@@ -79,6 +81,22 @@ public class EntityDtoConverter {
         formItemDto.setErrorLengthMessage(formItem.getErrorLengthMessage(locale));
         formItemDto.setHintMessage(formItem.getHintMessage(locale));
         return formItemDto;
+    }
+    
+    public static final SubmittedDataDTO submittedDataEntityToDTO(final SubmittedData submittedData){
+    	SubmittedDataDTO submittedDataDTO = new SubmittedDataDTO();
+    	submittedDataDTO.setActive(submittedData.getActive());
+    	submittedDataDTO.setCompanyId(submittedData.getCompanyId());
+    	submittedDataDTO.setCreationDate(submittedData.getCreationDate());
+    	submittedDataDTO.setFormId(submittedData.getFormId());
+    	submittedDataDTO.setFormItemId(submittedData.getFormItemId());
+    	submittedDataDTO.setGroupId(submittedData.getGroupId());
+    	submittedDataDTO.setModificationDate(submittedData.getModificationDate());
+    	submittedDataDTO.setModificationUser(submittedData.getModificationUser());
+    	submittedDataDTO.setPortletId(submittedData.getPortletId());
+    	submittedDataDTO.setSubmittedDataId(submittedData.getSubmittedDataId());
+    	submittedDataDTO.setUserInput(submittedData.getUserInput());
+    	return submittedDataDTO;
     }
 
 }

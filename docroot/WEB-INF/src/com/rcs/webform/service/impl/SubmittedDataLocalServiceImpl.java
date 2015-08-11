@@ -14,6 +14,15 @@
 
 package com.rcs.webform.service.impl;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.PropertyFactoryUtil;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.rcs.webform.model.SubmittedData;
 import com.rcs.webform.service.base.SubmittedDataLocalServiceBaseImpl;
 
 /**
@@ -32,9 +41,22 @@ import com.rcs.webform.service.base.SubmittedDataLocalServiceBaseImpl;
  */
 public class SubmittedDataLocalServiceImpl
 	extends SubmittedDataLocalServiceBaseImpl {
-	/*
-	 * NOTE FOR DEVELOPERS:
-	 *
-	 * Never reference this interface directly. Always use {@link com.rcs.webform.service.SubmittedDataLocalServiceUtil} to access the submitted data local service.
-	 */
+	
+	private static Log log = LogFactoryUtil.getLog(SubmittedDataLocalServiceImpl.class);
+	
+	@SuppressWarnings("unchecked")
+	public List<SubmittedData> getSubmittedDataByForm(Long formId) {
+		try {
+			DynamicQuery query = DynamicQueryFactoryUtil.forClass(SubmittedData.class)
+					.add(PropertyFactoryUtil.forName("primaryKey.formId").eq(formId))
+					.add(PropertyFactoryUtil.forName("active").eq(true));
+			
+			List<SubmittedData> results = submittedDataPersistence.findWithDynamicQuery(query);
+			return results;
+		} catch (Exception e) {
+			log.error("Exception while getting form items by id [" + formId + "] : " + e.getMessage(), e);
+            return new ArrayList<SubmittedData>();
+		}
+	}
+	
 }

@@ -275,6 +275,11 @@ public class SubmittedDataLocalServiceUtil {
 		return getService().invokeMethod(name, parameterTypes, arguments);
 	}
 
+	public static java.util.List<com.rcs.webform.model.SubmittedData> getSubmittedDataByForm(
+		java.lang.Long formId) {
+		return getService().getSubmittedDataByForm(formId);
+	}
+
 	public static void clearService() {
 		_service = null;
 	}
