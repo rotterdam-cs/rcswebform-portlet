@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -27,6 +27,7 @@ import com.liferay.portal.model.BaseModel;
 
 import com.rcs.webform.model.FormClp;
 import com.rcs.webform.model.FormItemClp;
+import com.rcs.webform.model.FormItemOptionClp;
 import com.rcs.webform.model.FormToPorletMapClp;
 import com.rcs.webform.model.SubmittedDataClp;
 
@@ -113,6 +114,10 @@ public class ClpSerializer {
 			return translateInputFormItem(oldModel);
 		}
 
+		if (oldModelClassName.equals(FormItemOptionClp.class.getName())) {
+			return translateInputFormItemOption(oldModel);
+		}
+
 		if (oldModelClassName.equals(FormToPorletMapClp.class.getName())) {
 			return translateInputFormToPorletMap(oldModel);
 		}
@@ -150,6 +155,16 @@ public class ClpSerializer {
 		FormItemClp oldClpModel = (FormItemClp)oldModel;
 
 		BaseModel<?> newModel = oldClpModel.getFormItemRemoteModel();
+
+		newModel.setModelAttributes(oldClpModel.getModelAttributes());
+
+		return newModel;
+	}
+
+	public static Object translateInputFormItemOption(BaseModel<?> oldModel) {
+		FormItemOptionClp oldClpModel = (FormItemOptionClp)oldModel;
+
+		BaseModel<?> newModel = oldClpModel.getFormItemOptionRemoteModel();
 
 		newModel.setModelAttributes(oldClpModel.getModelAttributes());
 
@@ -231,6 +246,43 @@ public class ClpSerializer {
 
 		if (oldModelClassName.equals("com.rcs.webform.model.impl.FormItemImpl")) {
 			return translateOutputFormItem(oldModel);
+		}
+		else if (oldModelClassName.endsWith("Clp")) {
+			try {
+				ClassLoader classLoader = ClpSerializer.class.getClassLoader();
+
+				Method getClpSerializerClassMethod = oldModelClass.getMethod(
+						"getClpSerializerClass");
+
+				Class<?> oldClpSerializerClass = (Class<?>)getClpSerializerClassMethod.invoke(oldModel);
+
+				Class<?> newClpSerializerClass = classLoader.loadClass(oldClpSerializerClass.getName());
+
+				Method translateOutputMethod = newClpSerializerClass.getMethod("translateOutput",
+						BaseModel.class);
+
+				Class<?> oldModelModelClass = oldModel.getModelClass();
+
+				Method getRemoteModelMethod = oldModelClass.getMethod("get" +
+						oldModelModelClass.getSimpleName() + "RemoteModel");
+
+				Object oldRemoteModel = getRemoteModelMethod.invoke(oldModel);
+
+				BaseModel<?> newModel = (BaseModel<?>)translateOutputMethod.invoke(null,
+						oldRemoteModel);
+
+				return newModel;
+			}
+			catch (Throwable t) {
+				if (_log.isInfoEnabled()) {
+					_log.info("Unable to translate " + oldModelClassName, t);
+				}
+			}
+		}
+
+		if (oldModelClassName.equals(
+					"com.rcs.webform.model.impl.FormItemOptionImpl")) {
+			return translateOutputFormItemOption(oldModel);
 		}
 		else if (oldModelClassName.endsWith("Clp")) {
 			try {
@@ -427,6 +479,10 @@ public class ClpSerializer {
 			return new com.rcs.webform.NoSuchFormItemException();
 		}
 
+		if (className.equals("com.rcs.webform.NoSuchFormItemOptionException")) {
+			return new com.rcs.webform.NoSuchFormItemOptionException();
+		}
+
 		if (className.equals("com.rcs.webform.NoSuchFormToPorletMapException")) {
 			return new com.rcs.webform.NoSuchFormToPorletMapException();
 		}
@@ -454,6 +510,16 @@ public class ClpSerializer {
 		newModel.setModelAttributes(oldModel.getModelAttributes());
 
 		newModel.setFormItemRemoteModel(oldModel);
+
+		return newModel;
+	}
+
+	public static Object translateOutputFormItemOption(BaseModel<?> oldModel) {
+		FormItemOptionClp newModel = new FormItemOptionClp();
+
+		newModel.setModelAttributes(oldModel.getModelAttributes());
+
+		newModel.setFormItemOptionRemoteModel(oldModel);
 
 		return newModel;
 	}

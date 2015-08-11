@@ -14,6 +14,7 @@
  */
 --%>
 
+<%@page import="com.rcs.webform.model.FormItemOption"%>
 <%@page import="java.util.List"%>
 <%@page import="com.rcs.webform.model.FormItem"%>
 <%@page import="com.rcs.webform.model.FormItemSoap"%>
@@ -24,12 +25,17 @@ int index = ParamUtil.getInteger(renderRequest, "index", GetterUtil.getInteger((
 int formFieldsIndex = GetterUtil.getInteger((String)request.getAttribute("configuration.jsp-formFieldsIndex"));
 boolean fieldsEditingDisabled = GetterUtil.getBoolean((String)request.getAttribute("configuration.jsp-fieldsEditingDisabled"));
 List<FormItem> formItems = (List<FormItem>) GetterUtil.getObject(request.getAttribute("formItems"));
+String portletId = PortalUtil.getPortletId(request);
+int fieldOptionsIndex = 0;
 Long formItemId = null;
 String fieldLabelXml = "";
 String fieldLabel = "";
 String fieldType = "TEXT_FIELD";
 boolean fieldOptional = true;
 String fieldOptionsXml = "";
+String formItemOptionLabelMap = "";
+String formItemOptionValueMap = "";
+Long formItemOptionId = null;
 String fieldOptions = "";
 String fieldValidationScript = "";
 String fieldValidationErrorMessage = "";
@@ -46,7 +52,7 @@ if(formItems != null && !formItems.isEmpty()){
 	fieldLabel = LocalizationUtil.getLocalization(fieldLabelXml, themeDisplay.getLanguageId());
 	fieldType = formItems.get(formFieldsIndex).getType();
 	fieldOptional = !formItems.get(formFieldsIndex).getMandatory();
-	fieldOptionsXml = formItems.get(formFieldsIndex).getOptions();
+	fieldOptionsXml = formItems.get(formFieldsIndex).getOptionKeys();
 	fieldOptions = LocalizationUtil.getLocalization(fieldOptionsXml, themeDisplay.getLanguageId());
 	fieldTextFieldInputType = formItems.get(formFieldsIndex).getValidationType();
 	inputMaxLength = formItems.get(formFieldsIndex).getMaxLength();
@@ -58,8 +64,26 @@ if(formItems != null && !formItems.isEmpty()){
 	inputCssClass = formItems.get(formFieldsIndex).getInputAttrClass();
 }
 
+List<FormItemOption> formItemOptions = null;
+if(fieldType.equals("OPTIONS") || fieldType.equals("RADIO_BUTTON")){
+	formItemOptions = WebFormUtil.getFormItemOptions(formItemId);
+	if(formItemOptions != null && !formItemOptions.isEmpty()){
+		fieldOptionsIndex = formItemOptions.size();
+		formItemOptionId = formItemOptions.get(0).getFormitemoptionId();
+		formItemOptionLabelMap = formItemOptions.get(0).getOptionKey();
+		formItemOptionValueMap = formItemOptions.get(0).getOptionValue();
+	}
+}
+
 boolean ignoreRequestValue = (index != formFieldsIndex);
 %>
+
+<liferay-portlet:renderURL portletConfiguration="true"  var="optionFieldURL" windowState="<%=LiferayWindowState.EXCLUSIVE.toString()%>">
+	<portlet:param name="type" value="optionField" />
+	<portlet:param name="fieldOptionsIndex" value='<%= "fieldOptionsIndex0" %>' />
+	<portlet:param name="formItemIndex" value='<%= String.valueOf(index) %>' />
+	<portlet:param name="ignoreRequestValue" value='<%= String.valueOf(ignoreRequestValue) %>' />
+</liferay-portlet:renderURL> 
 
 <liferay-ui:error key='<%= "fieldSizeInvalid" + formFieldsIndex %>' message="please-enter-no-more-than-75-characters" />
 
@@ -122,22 +146,6 @@ boolean ignoreRequestValue = (index != formFieldsIndex);
 				</dd>
 		</c:otherwise>
 	</c:choose>
-
-	<c:choose>
-		<c:when test="<%= !fieldsEditingDisabled %>">
-			<aui:field-wrapper cssClass='<%= "left-row options" + ((Validator.isNull(fieldType) || (!fieldType.equals("OPTIONS") && !fieldType.equals("RADIO_BUTTON"))) ? " hide" : StringPool.BLANK) %>' helpMessage="add-options-separated-by-commas" label="options">
-				<liferay-ui:input-localized ignoreRequestValue="<%= ignoreRequestValue %>" name='<%= "fieldOptions" + index %>' xml="<%= fieldOptionsXml %>" />
-			</aui:field-wrapper>
-		</c:when>
-		<c:when test="<%= Validator.isNotNull(fieldOptions) %>">
-				<dt>
-					<liferay-ui:message key="options" />
-				</dt>
-				<dd>
-					<%= fieldOptions %>
-				</dd>
-		</c:when>
-	</c:choose>
 	
 	<c:choose>
 		<c:when test="<%= !fieldsEditingDisabled %>">
@@ -161,6 +169,48 @@ boolean ignoreRequestValue = (index != formFieldsIndex);
 					<liferay-ui:message key='<%= fieldOptional ? "yes" : "no" %>' />
 				</dd>
 		</c:otherwise>
+	</c:choose>
+	
+	<c:choose>
+		<c:when test="<%= !fieldsEditingDisabled %>">
+		<aui:input cssClass="fieldOptionsIndex" name='<%= "fieldOptionsIndex" + index %>' type="hidden" value='<%=fieldOptionsIndex%>'/>
+		<div class="options-field">
+			<aui:input name='<%= "formItemOptionId0_" + index %>' type="hidden" value='<%=formItemOptionId%>'/>
+			<aui:field-wrapper cssClass='<%= "left-row-clear-left options" + ((Validator.isNull(fieldType) || (!fieldType.equals("OPTIONS") && !fieldType.equals("RADIO_BUTTON"))) ? " hide" : StringPool.BLANK) %>' label="Options Label">
+				<liferay-ui:input-localized ignoreRequestValue="<%= ignoreRequestValue %>" name='<%= "fieldOptionsLabel0_" + index %>' xml="<%= formItemOptionLabelMap %>" />
+			</aui:field-wrapper>
+			<aui:field-wrapper cssClass='<%= "left-row options" + ((Validator.isNull(fieldType) || (!fieldType.equals("OPTIONS") && !fieldType.equals("RADIO_BUTTON"))) ? " hide" : StringPool.BLANK) %>' label="Options Value">
+				<liferay-ui:input-localized ignoreRequestValue="<%= ignoreRequestValue %>" name='<%= "fieldOptionsValue0_" + index %>' xml="<%= formItemOptionValueMap %>" />
+			</aui:field-wrapper>
+			<aui:field-wrapper cssClass='<%= "left-row-clear-right options" + ((Validator.isNull(fieldType) || (!fieldType.equals("OPTIONS") && !fieldType.equals("RADIO_BUTTON"))) ? " hide" : StringPool.BLANK) %>' helpMessage="" label="Action">
+				<button type="button" id='<%= "btn-add-option" + index %>' class="btn-add-option btn btn-primary btn-content btn btn-icon-only " title="Add option"><span class="btn-icon icon icon-plus"></span></button>
+<!-- 				<button type="button" class="btn-remove-option btn btn-primary btn-content btn btn-icon-only " title="Remove option"><span class="btn-icon icon icon-minus"></span></button> -->
+			</aui:field-wrapper>
+			
+			<%
+				
+				request.setAttribute("formItemOptions", formItemOptions);
+
+				for (int optionIndex = 1; optionIndex < fieldOptionsIndex; optionIndex++) {
+					request.setAttribute("fieldOptionsIndex", String.valueOf(optionIndex));
+					request.setAttribute("formItemIndex", String.valueOf(index));
+				%>
+				
+				<liferay-util:include page="/jsp/option_field.jsp" servletContext="<%= application %>" />
+
+				<%
+				}
+			%>
+		</div>
+		</c:when>
+		<c:when test="<%= Validator.isNotNull(fieldOptions) %>">
+				<dt>
+					<liferay-ui:message key="options" />
+				</dt>
+				<dd>
+					<%= fieldOptions %>
+				</dd>
+		</c:when>
 	</c:choose>
 
 	<c:choose>
@@ -256,3 +306,37 @@ boolean ignoreRequestValue = (index != formFieldsIndex);
 		</dl>
 	</c:if>
 </div>
+
+<aui:script use="aui-base,liferay-auto-fields, aui-node,liferay-portlet-url,aui-io-request">
+A.one('<%= "#btn-add-option" + index %>').on('click', function(event){
+	var index = '<%= index %>';
+	var responseText='';
+	var fieldOptionsIndex = Number(A.one('#<portlet:namespace />fieldOptionsIndex' + index).val());
+		
+	var optionFieldURL = '<%= optionFieldURL %>';
+	var targetString = "fieldOptionsIndex0";
+	var replacedString = "fieldOptionsIndex" + fieldOptionsIndex;
+
+	optionFieldURL = optionFieldURL.replace(targetString, replacedString);
+	
+	A.io.request(optionFieldURL, {
+  		on: {
+   			success: function() {
+    	 		responseText=this.get('responseData');
+    	 		A.Node.create(responseText).appendTo(event.currentTarget.ancestorsByClassName("options-field").getDOM()[0]);
+    	 		
+    	 		A.all('.btn-remove-option').on('click', function(event){
+    	 			event.currentTarget.ancestorsByClassName('added-option-field').remove();
+    	 		});
+    	 		fieldOptionsIndex++; 
+    	 		A.one('#<portlet:namespace />fieldOptionsIndex' + index).set('value',fieldOptionsIndex);
+
+   			}
+  		}
+	});
+});
+
+A.all('.btn-remove-option').on('click', function(event){
+	event.currentTarget.ancestorsByClassName('added-option-field').remove();
+});
+</aui:script>

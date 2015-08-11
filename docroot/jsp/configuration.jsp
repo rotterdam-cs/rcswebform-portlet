@@ -56,6 +56,10 @@ boolean fieldsEditingDisabled = false;
 
 <liferay-portlet:renderURL portletConfiguration="true" var="configurationRenderURL" />
 
+<liferay-portlet:renderURL portletConfiguration="true" var="formItemURL" windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>">
+	<portlet:param name="type" value="formItem" />
+</liferay-portlet:renderURL>
+
 <aui:form action="<%= configurationActionURL %>" method="POST" name="fmConfig">
 	<aui:input name="formId" type="hidden" value="<%= formId %>"/>
 	<aui:input name="formToPortletMapId" type="hidden" value="<%= formToPortletId %>"/>
@@ -169,14 +173,14 @@ boolean fieldsEditingDisabled = false;
 </aui:form>
 
 <c:if test="<%= !fieldsEditingDisabled %>">
-	<aui:script use="aui-base,liferay-auto-fields">
+	<aui:script use="aui-base,liferay-auto-fields, aui-node,liferay-portlet-url,aui-io-request">
 		var toggleOptions = function(event) {
 			var select = this;
 
 			var formRow = select.ancestor('.lfr-form-row');
 			var value = select.val();
 
-			var optionsDiv = formRow.one('.options');
+			var optionsDiv = formRow.all('.options');
 
 			if ((value == 'OPTIONS') || (value == 'RADIO_BUTTON')) {
 				optionsDiv.all('label').show();
@@ -273,12 +277,7 @@ boolean fieldsEditingDisabled = false;
 				namespace: '<portlet:namespace />',
 				sortable: true,
 				sortableHandle: '.field-label',
-
-				<liferay-portlet:renderURL portletConfiguration="true" var="editFieldURL" windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>">
-					<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.ADD %>" />
-				</liferay-portlet:renderURL>
-
-				url: '<%= editFieldURL %>'
+				url: '<%= formItemURL %>'
 			});
 			
 		// delete row event

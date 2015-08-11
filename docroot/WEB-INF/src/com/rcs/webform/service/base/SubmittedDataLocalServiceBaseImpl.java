@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -33,6 +33,7 @@ import com.liferay.portal.service.persistence.UserPersistence;
 
 import com.rcs.webform.model.SubmittedData;
 import com.rcs.webform.service.SubmittedDataLocalService;
+import com.rcs.webform.service.persistence.FormItemOptionPersistence;
 import com.rcs.webform.service.persistence.FormItemPersistence;
 import com.rcs.webform.service.persistence.FormPersistence;
 import com.rcs.webform.service.persistence.FormToPorletMapPersistence;
@@ -359,6 +360,44 @@ public abstract class SubmittedDataLocalServiceBaseImpl
 	}
 
 	/**
+	 * Returns the form item option local service.
+	 *
+	 * @return the form item option local service
+	 */
+	public com.rcs.webform.service.FormItemOptionLocalService getFormItemOptionLocalService() {
+		return formItemOptionLocalService;
+	}
+
+	/**
+	 * Sets the form item option local service.
+	 *
+	 * @param formItemOptionLocalService the form item option local service
+	 */
+	public void setFormItemOptionLocalService(
+		com.rcs.webform.service.FormItemOptionLocalService formItemOptionLocalService) {
+		this.formItemOptionLocalService = formItemOptionLocalService;
+	}
+
+	/**
+	 * Returns the form item option persistence.
+	 *
+	 * @return the form item option persistence
+	 */
+	public FormItemOptionPersistence getFormItemOptionPersistence() {
+		return formItemOptionPersistence;
+	}
+
+	/**
+	 * Sets the form item option persistence.
+	 *
+	 * @param formItemOptionPersistence the form item option persistence
+	 */
+	public void setFormItemOptionPersistence(
+		FormItemOptionPersistence formItemOptionPersistence) {
+		this.formItemOptionPersistence = formItemOptionPersistence;
+	}
+
+	/**
 	 * Returns the form to porlet map local service.
 	 *
 	 * @return the form to porlet map local service
@@ -618,6 +657,10 @@ public abstract class SubmittedDataLocalServiceBaseImpl
 	protected com.rcs.webform.service.FormItemLocalService formItemLocalService;
 	@BeanReference(type = FormItemPersistence.class)
 	protected FormItemPersistence formItemPersistence;
+	@BeanReference(type = com.rcs.webform.service.FormItemOptionLocalService.class)
+	protected com.rcs.webform.service.FormItemOptionLocalService formItemOptionLocalService;
+	@BeanReference(type = FormItemOptionPersistence.class)
+	protected FormItemOptionPersistence formItemOptionPersistence;
 	@BeanReference(type = com.rcs.webform.service.FormToPorletMapLocalService.class)
 	protected com.rcs.webform.service.FormToPorletMapLocalService formToPorletMapLocalService;
 	@BeanReference(type = FormToPorletMapPersistence.class)

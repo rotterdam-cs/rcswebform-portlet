@@ -25,8 +25,10 @@ import com.liferay.portal.service.ServiceContextFactory;
 import com.rcs.webform.common.enums.FormItemType;
 import com.rcs.webform.model.Form;
 import com.rcs.webform.model.FormItem;
+import com.rcs.webform.model.FormItemOption;
 import com.rcs.webform.model.FormToPorletMap;
 import com.rcs.webform.service.FormItemLocalServiceUtil;
+import com.rcs.webform.service.FormItemOptionLocalServiceUtil;
 import com.rcs.webform.service.FormLocalServiceUtil;
 import com.rcs.webform.service.FormToPorletMapLocalServiceUtil;
 
@@ -91,12 +93,21 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 	}
 
 	public String render(PortletConfig portletConfig, RenderRequest renderRequest, RenderResponse renderResponse) throws Exception {
-		String cmd = ParamUtil.getString(renderRequest, Constants.CMD);
-
-		if (cmd.equals(Constants.ADD)) {
-			return "/jsp/edit_field.jsp";
-		} else {
-			return "/jsp/configuration.jsp";
+		String type = ParamUtil.getString(renderRequest, "type");
+		switch (type) {
+			case "formItem":
+				return "/jsp/edit_field.jsp";
+			case "optionField":
+				String formItemIndex = ParamUtil.getString(renderRequest, "formItemIndex");
+				String fieldOptionsValue = ParamUtil.getString(renderRequest, "fieldOptionsIndex");
+				boolean ignoreRequestValue = ParamUtil.getBoolean(renderRequest, "ignoreRequestValue");
+				int fieldOptionsIndex = Integer.parseInt(fieldOptionsValue.substring(17));
+				renderRequest.setAttribute("fieldOptionsIndex", fieldOptionsIndex);
+				renderRequest.setAttribute("formItemIndex", formItemIndex);
+				renderRequest.setAttribute("ignoreRequestValue", ignoreRequestValue);
+				return "/jsp/option_field.jsp";
+			default:
+				return "/jsp/configuration.jsp";
 		}
 	}
 	
@@ -138,7 +149,7 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 					Map<Locale, String> fieldHintMessageMap = LocalizationUtil.getLocalizationMap(actionRequest, "fieldHintMessage" + formFieldsIndex);
 					String formItemAttrClass = ParamUtil.getString(actionRequest, "formItemCssClass" + formFieldsIndex);
 					String labelAttrClass = ParamUtil.getString(actionRequest, "formLabelCssClass" + formFieldsIndex);
-					String inputAttrClass = ParamUtil.getString(actionRequest, "formInputCssClass" + formFieldsIndex);;
+					String inputAttrClass = ParamUtil.getString(actionRequest, "formInputCssClass" + formFieldsIndex);
 				    
 					if (Validator.isNotNull(fieldValidationScript) ^ Validator.isNotNull(fieldValidationErrorMessage)) {
 	
@@ -150,9 +161,23 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 						inputTypeMaxLength = 0;
 					}
 	
-					FormItemLocalServiceUtil.save(formItemId, formId, fieldLabelMap, fieldType, fieldOptionKeys, fieldOptionValuesMap, fieldOptional,
+					FormItem formItem = FormItemLocalServiceUtil.save(formItemId, formId, fieldLabelMap, fieldType, fieldOptionKeys, fieldOptionValuesMap, fieldOptional,
 							fieldValidationScript, validationType, fieldValidationErrorMessage, formFieldsIndex, inputTypeMaxLength, fieldHintMessageMap, serviceContext,
 							formItemAttrClass, labelAttrClass, inputAttrClass);
+					
+					
+					//options handler
+					int optionsIndex = ParamUtil.getInteger(actionRequest, "fieldOptionsIndex" + formFieldsIndex);
+					for(int index = 0; index <= optionsIndex ; index ++){
+						Long formItemOptionId = ParamUtil.getLong(actionRequest, "formItemOptionId" + index + "_" + formFieldsIndex);
+						Map<Locale, String> optionLabelMap = LocalizationUtil.getLocalizationMap(actionRequest, "fieldOptionsLabel" + index + "_" + formFieldsIndex);
+						Map<Locale, String> optionValueMap = LocalizationUtil.getLocalizationMap(actionRequest, "fieldOptionsValue" + index + "_" + formFieldsIndex);
+						if (Validator.isNull(optionLabelMap.get(defaultLocale)) || Validator.isNull(optionValueMap.get(defaultLocale))) {
+							continue;
+						}
+						
+						FormItemOptionLocalServiceUtil.save(formItemOptionId, formItem.getFormItemId(), optionLabelMap, optionValueMap, serviceContext);
+					}
 	
 					i++;
 				}

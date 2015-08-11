@@ -4,6 +4,7 @@
 <hibernate-mapping default-lazy="false" auto-import="false">
 	<import class="com.rcs.webform.model.Form" />
 	<import class="com.rcs.webform.model.FormItem" />
+	<import class="com.rcs.webform.model.FormItemOption" />
 	<import class="com.rcs.webform.model.FormToPorletMap" />
 	<import class="com.rcs.webform.model.SubmittedData" />
 	<class name="com.rcs.webform.model.impl.FormImpl" table="rcswebform_Form">
@@ -59,6 +60,18 @@
 		<property name="errorMandatoryMessage" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="errorLengthMessage" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="hintMessage" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+	<class name="com.rcs.webform.model.impl.FormItemOptionImpl" table="rcswebform_FormItemOption">
+		<cache usage="read-write" />
+		<id name="formitemoptionId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="creationDate" type="org.hibernate.type.TimestampType" />
+		<property name="modificationDate" type="org.hibernate.type.TimestampType" />
+		<property name="modificationUser" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="formItemId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="optionKey" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="optionValue" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 	</class>
 	<class name="com.rcs.webform.model.impl.FormToPorletMapImpl" table="rcswebform_FormToPorletMap">
 		<id name="formToPorletMapId" type="long">

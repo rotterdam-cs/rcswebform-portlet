@@ -146,6 +146,25 @@
         <column name="formItemId" type="long" primary="true"></column>
         <column name="userInput" type="String"></column>
 	</entity>
+	<entity name="FormItemOption" remote-service="false"
+		local-service="true">
+
+		<!-- PK fields -->
+
+		<column name="formitemoptionId" type="long"
+			primary="true">
+		</column>
+
+		<!-- Group instance -->
+
+		<!-- Audit fields -->
+		<column name="creationDate" type="Date"></column>
+		<column name="modificationDate" type="Date"></column>
+		<column name="modificationUser" type="String"></column>
+        <column name="formItemId" type="long" primary="false"></column>
+        <column name="optionKey" type="String" localized="true"></column>
+        <column name="optionValue" type="String" localized="true"></column>
+	</entity>
 
 
 </service-builder>

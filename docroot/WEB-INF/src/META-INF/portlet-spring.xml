@@ -5,6 +5,8 @@
 	<bean id="com.rcs.webform.service.persistence.FormPersistence" class="com.rcs.webform.service.persistence.FormPersistenceImpl" parent="basePersistence" />
 	<bean id="com.rcs.webform.service.FormItemLocalService" class="com.rcs.webform.service.impl.FormItemLocalServiceImpl" />
 	<bean id="com.rcs.webform.service.persistence.FormItemPersistence" class="com.rcs.webform.service.persistence.FormItemPersistenceImpl" parent="basePersistence" />
+	<bean id="com.rcs.webform.service.FormItemOptionLocalService" class="com.rcs.webform.service.impl.FormItemOptionLocalServiceImpl" />
+	<bean id="com.rcs.webform.service.persistence.FormItemOptionPersistence" class="com.rcs.webform.service.persistence.FormItemOptionPersistenceImpl" parent="basePersistence" />
 	<bean id="com.rcs.webform.service.FormToPorletMapLocalService" class="com.rcs.webform.service.impl.FormToPorletMapLocalServiceImpl" />
 	<bean id="com.rcs.webform.service.persistence.FormToPorletMapPersistence" class="com.rcs.webform.service.persistence.FormToPorletMapPersistenceImpl" parent="basePersistence" />
 	<bean id="com.rcs.webform.service.SubmittedDataLocalService" class="com.rcs.webform.service.impl.SubmittedDataLocalServiceImpl" />

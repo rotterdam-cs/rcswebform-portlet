@@ -306,7 +306,8 @@
 	
 	function initUserInputCombo(divFormItemInputWrapper, divFormItemInput, formItemIdx, templateOptionItem) {
 		initUserInput(divFormItemInputWrapper, divFormItemInput, formItemIdx);
-		var options = Data.data.formItems[formItemIdx].options.split(',');
+		<!-- var options = Data.data.formItems[formItemIdx].options.split(','); -->
+		var options= "";
 		var templateOptionItem =  divFormItemInput.one('#<portlet:namespace />rcsWebFormItemOption');
 		
 		if(templateOptionItem){
@@ -330,7 +331,8 @@
 
 	function initUserInputRadioCheckbox(divFormItemInputWrapper, divFormItemInput, formItemIdx, divFormItemInputLabel) {
 		initUserInput(divFormItemInputWrapper, divFormItemInput, formItemIdx);
-		var options = Data.data.formItems[formItemIdx].options.split(',');
+<!-- 		var options = Data.data.formItems[formItemIdx].options.split(','); -->
+		var options= "";
 		for(optionIdx in options) { 
 			var radioButton =  divFormItemInput.cloneNode(true);
 			var radioLabel = divFormItemInputLabel.cloneNode(true);

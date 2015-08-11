@@ -10,8 +10,10 @@ import com.liferay.portal.util.PortalUtil;
 import com.rcs.webform.entity.dto.FormDTO;
 import com.rcs.webform.model.Form;
 import com.rcs.webform.model.FormItem;
+import com.rcs.webform.model.FormItemOption;
 import com.rcs.webform.model.FormToPorletMap;
 import com.rcs.webform.service.FormItemLocalServiceUtil;
+import com.rcs.webform.service.FormItemOptionLocalServiceUtil;
 import com.rcs.webform.service.FormLocalServiceUtil;
 import com.rcs.webform.service.FormToPorletMapLocalServiceUtil;
 
@@ -83,6 +85,20 @@ public class WebFormUtil {
 		} catch (SystemException e) {
 			return StringPool.BLANK;
 		}
+	}
+	
+	/**
+	 * get FormItemOptions 
+	 * 
+	 * @param formItemId
+	 * @return
+	 */
+	public static List<FormItemOption> getFormItemOptions(Long formItemId){
+		try {
+			return FormItemOptionLocalServiceUtil.getFormItemOptionsByFormItemId(formItemId);
+		} catch (Exception ignored) {
+		}
+		return null;
 	}
 	
 }

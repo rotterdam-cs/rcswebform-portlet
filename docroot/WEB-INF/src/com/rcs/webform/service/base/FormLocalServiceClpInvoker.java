@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -100,42 +100,42 @@ public class FormLocalServiceClpInvoker {
 
 		_methodParameterTypes15 = new String[] { "com.rcs.webform.model.Form" };
 
-		_methodName44 = "getBeanIdentifier";
+		_methodName48 = "getBeanIdentifier";
 
-		_methodParameterTypes44 = new String[] {  };
+		_methodParameterTypes48 = new String[] {  };
 
-		_methodName45 = "setBeanIdentifier";
+		_methodName49 = "setBeanIdentifier";
 
-		_methodParameterTypes45 = new String[] { "java.lang.String" };
+		_methodParameterTypes49 = new String[] { "java.lang.String" };
 
-		_methodName50 = "add";
+		_methodName54 = "add";
 
-		_methodParameterTypes50 = new String[] {
+		_methodParameterTypes54 = new String[] {
 				"java.lang.Long", "com.liferay.portal.service.ServiceContext",
 				"java.lang.String", "java.lang.String", "boolean",
 				"java.lang.String", "java.lang.String", "java.lang.String"
 			};
 
-		_methodName51 = "save";
+		_methodName55 = "save";
 
-		_methodParameterTypes51 = new String[] {
+		_methodParameterTypes55 = new String[] {
 				"java.lang.Long", "com.liferay.portal.service.ServiceContext",
 				"java.util.Map", "java.util.Map", "boolean", "java.util.Map",
 				"java.lang.String", "java.util.Map"
 			};
 
-		_methodName52 = "save";
+		_methodName56 = "save";
 
-		_methodParameterTypes52 = new String[] {
+		_methodParameterTypes56 = new String[] {
 				"java.lang.Long", "com.liferay.portal.service.ServiceContext",
 				"java.lang.String", "java.lang.String", "java.util.Map",
 				"java.util.Map", "boolean", "java.util.Map", "java.lang.String",
 				"java.util.Map", "java.lang.String", "java.lang.String"
 			};
 
-		_methodName53 = "getFormByFormId";
+		_methodName57 = "getFormByFormId";
 
-		_methodParameterTypes53 = new String[] { "long" };
+		_methodParameterTypes57 = new String[] { "long" };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -227,20 +227,20 @@ public class FormLocalServiceClpInvoker {
 			return FormLocalServiceUtil.updateForm((com.rcs.webform.model.Form)arguments[0]);
 		}
 
-		if (_methodName44.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes44, parameterTypes)) {
+		if (_methodName48.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes48, parameterTypes)) {
 			return FormLocalServiceUtil.getBeanIdentifier();
 		}
 
-		if (_methodName45.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes45, parameterTypes)) {
+		if (_methodName49.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes49, parameterTypes)) {
 			FormLocalServiceUtil.setBeanIdentifier((java.lang.String)arguments[0]);
 
 			return null;
 		}
 
-		if (_methodName50.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes50, parameterTypes)) {
+		if (_methodName54.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes54, parameterTypes)) {
 			return FormLocalServiceUtil.add((java.lang.Long)arguments[0],
 				(com.liferay.portal.service.ServiceContext)arguments[1],
 				(java.lang.String)arguments[2], (java.lang.String)arguments[3],
@@ -249,8 +249,8 @@ public class FormLocalServiceClpInvoker {
 				(java.lang.String)arguments[7]);
 		}
 
-		if (_methodName51.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes51, parameterTypes)) {
+		if (_methodName55.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes55, parameterTypes)) {
 			return FormLocalServiceUtil.save((java.lang.Long)arguments[0],
 				(com.liferay.portal.service.ServiceContext)arguments[1],
 				(java.util.Map<java.util.Locale, java.lang.String>)arguments[2],
@@ -261,8 +261,8 @@ public class FormLocalServiceClpInvoker {
 				(java.util.Map<java.util.Locale, java.lang.String>)arguments[7]);
 		}
 
-		if (_methodName52.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes52, parameterTypes)) {
+		if (_methodName56.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes56, parameterTypes)) {
 			return FormLocalServiceUtil.save((java.lang.Long)arguments[0],
 				(com.liferay.portal.service.ServiceContext)arguments[1],
 				(java.lang.String)arguments[2], (java.lang.String)arguments[3],
@@ -275,8 +275,8 @@ public class FormLocalServiceClpInvoker {
 				(java.lang.String)arguments[10], (java.lang.String)arguments[11]);
 		}
 
-		if (_methodName53.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes53, parameterTypes)) {
+		if (_methodName57.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes57, parameterTypes)) {
 			return FormLocalServiceUtil.getFormByFormId(((Long)arguments[0]).longValue());
 		}
 
@@ -315,16 +315,16 @@ public class FormLocalServiceClpInvoker {
 	private String[] _methodParameterTypes14;
 	private String _methodName15;
 	private String[] _methodParameterTypes15;
-	private String _methodName44;
-	private String[] _methodParameterTypes44;
-	private String _methodName45;
-	private String[] _methodParameterTypes45;
-	private String _methodName50;
-	private String[] _methodParameterTypes50;
-	private String _methodName51;
-	private String[] _methodParameterTypes51;
-	private String _methodName52;
-	private String[] _methodParameterTypes52;
-	private String _methodName53;
-	private String[] _methodParameterTypes53;
+	private String _methodName48;
+	private String[] _methodParameterTypes48;
+	private String _methodName49;
+	private String[] _methodParameterTypes49;
+	private String _methodName54;
+	private String[] _methodParameterTypes54;
+	private String _methodName55;
+	private String[] _methodParameterTypes55;
+	private String _methodName56;
+	private String[] _methodParameterTypes56;
+	private String _methodName57;
+	private String[] _methodParameterTypes57;
 }

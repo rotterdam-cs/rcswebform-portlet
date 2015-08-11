@@ -50,6 +50,27 @@ create table rcswebform_FormItem (
 	hintMessage STRING null
 );
 
+create table rcswebform_FormItemOption (
+	formitemoptionId LONG not null primary key,
+	creationDate DATE null,
+	modificationDate DATE null,
+	modificationUser VARCHAR(75) null,
+	formItemId LONG,
+	optionKey STRING null,
+	optionValue STRING null
+);
+
+create table rcswebform_FormItemOptions (
+	formitemoptionsId LONG not null,
+	creationDate DATE null,
+	modificationDate DATE null,
+	modificationUser VARCHAR(75) null,
+	formItemId LONG not null,
+	optionKey STRING null,
+	optionValue STRING null,
+	primary key (formitemoptionsId, formItemId)
+);
+
 create table rcswebform_FormToPorletMap (
 	formToPorletMapId LONG not null primary key,
 	active_ BOOLEAN,
