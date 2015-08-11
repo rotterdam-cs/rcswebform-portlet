@@ -4,35 +4,55 @@
 	<c:when test="${data.success}">
 		<aui:fieldset label="${data.data.formDto.title} Report">
 			<div id="<portlet:namespace />rcsWebFormReport" class="rcsWebFormReport">
-				<table id="<portlet:namespace />rcsWebFormReportTable" style="width:100%; border: 1px solid black;">
-				</table>
+				
 			</div>
 		</aui:fieldset>
 		
 		<script>
-		AUI().use('aui-base',function(A){
+		function replaceAll(find, replace, str) {
+			return str.replace(new RegExp(find, 'g'), replace);
+		}
+		
+		AUI().use('aui-datatable','aui-datatype','datatable-sort',function(A){
 			var data = <%= renderRequest.getAttribute("data")%>;
 			
-			var tableContent = "<thead><tr>";
-			for(var i = 0; i < data.data.formDto.formItems.length; i++){
-				tableContent += "<th>"+data.data.formDto.formItems[i].label+"</th>";
-			}
-			tableContent += "</tr></thead><tbody>";
+			var tableColumn = [];
+			var tableData = [];
 			
-			var formItemsLength = data.data.formDto.formItems.length;
+			var formItems = data.data.formDto.formItems;
 			var submittedData = data.data.dataDtoList;
+			var tableRow;
+			var j;
+			
+			// Build table header of form items
+			for(var i = 0; i < formItems.length; i++){
+				var tableHeader = {};
+				tableHeader["key"] = replaceAll(' ', '_', formItems[i].label);
+				tableHeader["sortable"] = true;
+				tableColumn.push(tableHeader);
+			}
+			
+			// Build table content of submitted data
 			for(var i = 0; i < submittedData.length; i++){
-				if ((i % formItemsLength)==0){
-					tableContent += "<tr>";
+				if ((i % formItems.length)==0){
+					j = 0;
+					tableRow = {};
 				}
-				tableContent += "<td>"+submittedData[i].userInput+"</td>";
-				if (((i+1) / formItemsLength)==0){
-					tableContent += "</tr>";
+				
+				tableRow[""+replaceAll(' ', '_', formItems[j].label)+""] = submittedData[i].userInput;
+				j++;
+				
+				if (((i+1) % formItems.length)==0){
+					tableData.push(tableRow);
 				}
 			}
 			
-			tableContent += "</tbody>";
-			document.getElementById("<portlet:namespace />rcsWebFormReportTable").innerHTML = tableContent;
+			new A.DataTable(
+		      {
+		        columns: tableColumn,
+		        data: tableData
+		      }
+		    ).render("#<portlet:namespace />rcsWebFormReport");
 		});
 		</script>
 	</c:when>
