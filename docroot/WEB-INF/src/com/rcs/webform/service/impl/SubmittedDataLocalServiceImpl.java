@@ -15,6 +15,7 @@
 package com.rcs.webform.service.impl;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
@@ -22,6 +23,8 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.PropertyFactoryUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.model.User;
+import com.liferay.portal.service.ServiceContext;
 import com.rcs.webform.model.SubmittedData;
 import com.rcs.webform.service.base.SubmittedDataLocalServiceBaseImpl;
 
@@ -57,6 +60,34 @@ public class SubmittedDataLocalServiceImpl
 			log.error("Exception while getting form items by id [" + formId + "] : " + e.getMessage(), e);
             return new ArrayList<SubmittedData>();
 		}
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<SubmittedData> delete(Long submittedDataId, ServiceContext serviceContext){
+		User user = null;
+		List<SubmittedData> submitDataList = null;
+		Date now = new Date();
+		try {
+			user = userLocalService.getUserById(serviceContext.getUserId());
+			
+			DynamicQuery query = DynamicQueryFactoryUtil.forClass(SubmittedData.class)
+					.add(PropertyFactoryUtil.forName("primaryKey.submittedDataId").eq(submittedDataId))
+					.add(PropertyFactoryUtil.forName("active").eq(true));
+			
+			submitDataList = submittedDataPersistence.findWithDynamicQuery(query);
+			
+			for (SubmittedData submitData : submitDataList){
+				submitData.setActive(false);
+				submitData.setModificationDate(serviceContext.getModifiedDate(now));
+				submitData.setModificationUser(user.getFullName());
+				
+				submittedDataPersistence.update(submitData);
+			}
+			
+		} catch (Exception e) {
+			log.error("Exception while deleting submitted data: " + e.getMessage(), e);
+		}
+		return submitDataList;
 	}
 	
 }
