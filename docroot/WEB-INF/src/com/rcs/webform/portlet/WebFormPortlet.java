@@ -48,9 +48,12 @@ import com.rcs.webform.common.util.WebFormUtil;
 import com.rcs.webform.entity.dto.FormDTO;
 import com.rcs.webform.model.Form;
 import com.rcs.webform.model.FormItem;
+import com.rcs.webform.model.FormItemOption;
 import com.rcs.webform.model.FormToPorletMap;
 import com.rcs.webform.model.SubmittedData;
 import com.rcs.webform.service.FormItemLocalServiceUtil;
+import com.rcs.webform.service.FormItemOptionLocalService;
+import com.rcs.webform.service.FormItemOptionLocalServiceUtil;
 import com.rcs.webform.service.FormLocalServiceUtil;
 import com.rcs.webform.service.FormToPorletMapLocalServiceUtil;
 import com.rcs.webform.service.SubmittedDataLocalServiceUtil;
@@ -73,7 +76,7 @@ public class WebFormPortlet extends MVCPortlet {
 
             Form form = FormLocalServiceUtil.getFormByFormId(formToPorletMap.getFormId());
             List<FormItem> formItems = FormItemLocalServiceUtil.getFormItemsByFormId(form.getFormId());
-
+            
             formDto = EntityDtoConverter.formEntityToDto(form, formItems, renderRequest.getLocale());
         } catch (Exception e) {
             log.info("No form data found on this portlet. Default form information is used.");
@@ -257,16 +260,8 @@ public class WebFormPortlet extends MVCPortlet {
                     jsonUserInput.put(entry);
                 }
                 userInput = jsonUserInput.toString();
-//            } else if (formItem.getType().equals(FormItemType.OPTIONS.toString()) || formItem.getType().equals(FormItemType.RADIO_BUTTON.toString())) {
-//                userInput = formItem.getOptionValues(Locale.ENGLISH).split(",")[getOptionIdxInDefaultLanguage(formItem.getOptionValuesMap(), userInput,
-//                        actionRequest.getLocale())];
             }
         }
         return userInput;
     }
-
-//    private int getOptionIdxInDefaultLanguage(Map<Locale, String> optionsMap, String userInput, Locale userLocale) {
-//        ArrayList<String> options = new ArrayList<String>(Arrays.asList(optionsMap.get(userLocale).split(",")));
-//        return options.indexOf(userInput);
-//    }
 }

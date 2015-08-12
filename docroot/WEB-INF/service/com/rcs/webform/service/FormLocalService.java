@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -16,6 +16,7 @@ package com.rcs.webform.service;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.search.IndexableType;
 import com.liferay.portal.kernel.transaction.Isolation;
 import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.transaction.Transactional;
@@ -52,6 +53,7 @@ public interface FormLocalService extends BaseLocalService, InvokableLocalServic
 	* @return the form that was added
 	* @throws SystemException if a system exception occurred
 	*/
+	@com.liferay.portal.kernel.search.Indexable(type = IndexableType.REINDEX)
 	public com.rcs.webform.model.Form addForm(com.rcs.webform.model.Form form)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
@@ -71,6 +73,7 @@ public interface FormLocalService extends BaseLocalService, InvokableLocalServic
 	* @throws PortalException if a form with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
+	@com.liferay.portal.kernel.search.Indexable(type = IndexableType.DELETE)
 	public com.rcs.webform.model.Form deleteForm(long formId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
@@ -82,6 +85,7 @@ public interface FormLocalService extends BaseLocalService, InvokableLocalServic
 	* @return the form that was removed
 	* @throws SystemException if a system exception occurred
 	*/
+	@com.liferay.portal.kernel.search.Indexable(type = IndexableType.DELETE)
 	public com.rcs.webform.model.Form deleteForm(
 		com.rcs.webform.model.Form form)
 		throws com.liferay.portal.kernel.exception.SystemException;
@@ -220,6 +224,7 @@ public interface FormLocalService extends BaseLocalService, InvokableLocalServic
 	* @return the form that was updated
 	* @throws SystemException if a system exception occurred
 	*/
+	@com.liferay.portal.kernel.search.Indexable(type = IndexableType.REINDEX)
 	public com.rcs.webform.model.Form updateForm(
 		com.rcs.webform.model.Form form)
 		throws com.liferay.portal.kernel.exception.SystemException;

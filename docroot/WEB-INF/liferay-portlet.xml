@@ -12,7 +12,7 @@
 		<footer-portlet-javascript>
 			/js/main.js
 		</footer-portlet-javascript>
-		<css-class-wrapper>rcs-web-form-portlet</css-class-wrapper>
+<!-- 		<css-class-wrapper>rcs-web-form-portlet</css-class-wrapper> -->
 	</portlet>
 	<portlet>
 		<portlet-name>rcs-web-form-report</portlet-name>

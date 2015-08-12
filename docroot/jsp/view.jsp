@@ -22,18 +22,21 @@
 
 		<div id="<portlet:namespace />rcsWebForm" class="${Data.data.formAttrClass}">
 			<!-- Form will be put here -->
-			<div id="<portlet:namespace />rcsWebFormItem">
+			<fieldset id="<portlet:namespace />rcsWebFormItem">
 			<span id="<portlet:namespace />rcsWebFormItemLabel" >Form Item 1 label</span>
 			<span id="<portlet:namespace />rcsWebFormItemInputWrapper" >
 				<input type="text" name="<portlet:namespace />rcsWebFormItemInputText" id="<portlet:namespace />rcsWebFormItemInputText" />
+				<textarea name="<portlet:namespace />rcsWebFormItemInputTextArea" id="<portlet:namespace />rcsWebFormItemInputTextArea"></textarea>
 				<select name="<portlet:namespace />rcsWebFormItemInputCombo" id="<portlet:namespace />rcsWebFormItemInputCombo">
 					<option id="<portlet:namespace />rcsWebFormItemOption" value="">Please Select</option>
 				</select>
-				<input type="checkbox" name="<portlet:namespace />rcsWebFormItemInputRadio" id="<portlet:namespace />rcsWebFormItemInputRadio" />
-				<span id="<portlet:namespace />rcsWebFormItemInputRadioLabel" ></span>
-				
+				<span id="<portlet:namespace />rcsWebFormItemInputRadioWrapper">
+					<input type="checkbox" name="<portlet:namespace />rcsWebFormItemInputRadio" id="<portlet:namespace />rcsWebFormItemInputRadio" />
+					<span id="<portlet:namespace />rcsWebFormItemInputRadioLabel" ></span>
+					<br/>
+				</span>
 			</span>
-			</div>
+			</fieldset>
 		</div>
 		
 		<c:if test="${Data.data.useCaptcha}">
@@ -139,6 +142,7 @@
 	);
 
 	var Data = <%= renderRequest.getAttribute("Data")%>;
+// 	console.log('data : '+JSON.stringify(Data));
 	if(Data) {
 		var validator;
 		var divForm = A.one('#<portlet:namespace />rcsWebForm');
@@ -155,8 +159,10 @@
 					formItemInputWrapper = divFormItem.one('#<portlet:namespace />rcsWebFormItemInputWrapper');
 					formItemInputCombo = divFormItem.one('#<portlet:namespace />rcsWebFormItemInputCombo');
 					formItemInputText = divFormItem.one('#<portlet:namespace />rcsWebFormItemInputText');
-					formItemInputRadio = divFormItem.one('#<portlet:namespace />rcsWebFormItemInputRadio');
-					formItemInputRadioLabel = divFormItem.one('#<portlet:namespace />rcsWebFormItemInputRadioLabel');
+					formItemInputTextArea = divFormItem.one('#<portlet:namespace />rcsWebFormItemInputTextArea');
+					formItemInputRadioWrapper = divFormItem.one('#<portlet:namespace />rcsWebFormItemInputRadioWrapper');
+// 					formItemInputRadio = formItemInputRadioWrapper.one('#<portlet:namespace />rcsWebFormItemInputRadio');
+// 					formItemInputRadioLabel = formItemInputRadioWrapper.one('#<portlet:namespace />rcsWebFormItemInputRadioLabel');
 
 					divFormItem.addClass(Data.data.formItems[formItemIdx].formItemAttrClass);
 					formItemLabel.addClass(Data.data.formItems[formItemIdx].labelAttrClass);
@@ -166,22 +172,24 @@
 						case 'TEXT_FIELD' :
 							initUserInputText(formItemInputWrapper, formItemInputText, formItemIdx);
 							formItemInputText.set('type','text');
-							formItemInputRadio.remove();
-							formItemInputRadioLabel.remove();
+							formItemInputTextArea.remove();
+							formItemInputRadioWrapper.remove();
+// 							formItemInputRadioLabel.remove();
 							formItemInputCombo.remove();
 							break;
 						case 'TEXT_BOX' :
-							initUserInputText(formItemInputWrapper, formItemInputText, formItemIdx);
-							formItemInputText.set('type','textarea');					
-							formItemInputRadio.remove();
-							formItemInputRadioLabel.remove();
+							initUserInputText(formItemInputWrapper, formItemInputTextArea, formItemIdx);
+							formItemInputText.remove();
+							formItemInputRadioWrapper.remove();
+// 							formItemInputRadioLabel.remove();
 							formItemInputCombo.remove();
 							break;
 						case 'PASSWORD' :
 							initUserInputText(formItemInputWrapper, formItemInputText, formItemIdx);
 							formItemInputText.set('type','password');
-							formItemInputRadio.remove();
-							formItemInputRadioLabel.remove();
+							formItemInputTextArea.remove();
+							formItemInputRadioWrapper.remove();
+// 							formItemInputRadioLabel.remove();
 							formItemInputCombo.remove();
 							break;
 						case 'DATE' :
@@ -198,6 +206,9 @@
 								      }
 								    );
 							
+							datePicker.on('blur', function() {
+								datePicker.close();
+							})
 							datePicker.getCalendar().on('dateClick', function(){
 								if(validator) {
 									validator.validate();
@@ -206,8 +217,9 @@
 								}
 							});
 							
-							formItemInputRadio.remove();
-							formItemInputRadioLabel.remove();
+							formItemInputTextArea.remove();
+							formItemInputRadioWrapper.remove();
+// 							formItemInputRadioLabel.remove();
 							formItemInputCombo.remove();
 							break;
 						case 'SECTION' :
@@ -216,19 +228,20 @@
 							break;
 						case 'OPTIONS' :
 							initUserInputCombo(formItemInputWrapper, formItemInputCombo, formItemIdx);
-							formItemInputRadio.remove();
-							formItemInputRadioLabel.remove();
+							formItemInputTextArea.remove();
+							formItemInputRadioWrapper.remove();
+// 							formItemInputRadioLabel.remove();
 							formItemInputText.remove();
 							break;
 						case 'RADIO_BUTTON' :
-							formItemInputRadio.set('type','radio');
-							initUserInputRadioCheckbox(formItemInputWrapper, formItemInputRadio, formItemIdx, formItemInputRadioLabel);
+							initUserInputRadio(formItemInputWrapper, formItemInputRadioWrapper, formItemIdx);
+							formItemInputTextArea.remove();
 							formItemInputText.remove();
 							formItemInputCombo.remove();
 							break;
 						case 'CHECKBOX' :
-							formItemInputRadio.set('type','checkbox');
-							initUserInputRadioCheckbox(formItemInputWrapper, formItemInputRadio, formItemIdx, formItemInputRadioLabel);
+							initUserInputCheckbox(formItemInputWrapper, formItemInputRadioWrapper, formItemIdx);
+							formItemInputTextArea.remove();
 							formItemInputText.remove();
 							formItemInputCombo.remove();
 							break;
@@ -239,8 +252,8 @@
 				divFormItem.show();
 				divFormItem.appendTo(divForm);
 			};
-			console.log('rules : '+JSON.stringify(rules));
-			console.log('fieldStrings : '+JSON.stringify(fieldStrings));
+// 			console.log('rules : '+JSON.stringify(rules));
+// 			console.log('fieldStrings : '+JSON.stringify(fieldStrings));
 			
 		 	validator = new A.FormValidator(
 		 		{
@@ -268,10 +281,16 @@
 	}	
 
 	function initUserInput(formItemInputWrapper, formItemInput, formItemIdx) {
-		formItemInput.set('id', '<portlet:namespace />'+Data.data.formItems[formItemIdx].label);
+		formItemInput.set('id', '<portlet:namespace />'+Data.data.formItems[formItemIdx].label.replace(/\ /g,'-'));
 		formItemInput.set('name', '<portlet:namespace />'+Data.data.formItems[formItemIdx].label);
+		formItemInput.setStyles({
+			   height: '100%'
+			});
 		
-		formItemInputWrapper.addClass(Data.data.formItems[formItemIdx].inputAttrClass);
+// 		if(Data.data.formItems[formItemIdx].type !== 'RADIO_BUTTON') {
+			formItemInputWrapper.addClass(Data.data.formItems[formItemIdx].inputAttrClass);
+// 		}
+		
 		formItemInput.set('placeholder', Data.data.formItems[formItemIdx].hintMessage);
 		
 		var rule = new Object();
@@ -338,15 +357,26 @@
 		}
 	}
 	
-
-	function initUserInputRadioCheckbox(formItemInputWrapper, formItemInput, formItemIdx, formItemInputLabel) {
-		initUserInput(formItemInputWrapper, formItemInput, formItemIdx);
+	function initUserInputRadio(formItemInputWrapper, formItemInputRadioWrapper, formItemIdx) {
+		initUserInputRadioCheckbox(formItemInputWrapper, formItemInputRadioWrapper, formItemIdx, 'radio');
+	}
+	function initUserInputCheckbox(formItemInputWrapper, formItemInputRadioWrapper, formItemIdx) {
+		initUserInputRadioCheckbox(formItemInputWrapper, formItemInputRadioWrapper, formItemIdx, 'checkbox');
+		
+	}
+	function initUserInputRadioCheckbox(formItemInputWrapper, formItemInputRadioWrapper, formItemIdx, type) {
+		initUserInput(formItemInputWrapper, formItemInputRadioWrapper, formItemIdx);
+		
 		var optionKeys = JSON.parse(Data.data.formItems[formItemIdx].optionKeys);
 		var optionValues = JSON.parse(Data.data.formItems[formItemIdx].optionValues);
 		for(optionIdx in optionKeys) { 
-			var radioButton =  formItemInput.cloneNode(true);
-			var radioLabel = formItemInputLabel.cloneNode(true);
+			var radioWrapper = formItemInputRadioWrapper.cloneNode(true); 
+// 			radioWrapper.addClass(Data.data.formItems[formItemIdx].inputAttrClass);
+			var radioButton =  radioWrapper.one('#<portlet:namespace />rcsWebFormItemInputRadio');
+			var radioLabel = radioWrapper.one('#<portlet:namespace />rcsWebFormItemInputRadioLabel');
+			console.log('rb order ['+optionIdx+'] : '+optionKeys[optionIdx]);
 			if(radioButton && radioLabel) {
+				radioButton.set('type',type);
 				radioButton.set('name', '<portlet:namespace />'+Data.data.formItems[formItemIdx].label);
 				radioButton.set('value',optionKeys[optionIdx]);
 				radioLabel.set('text',optionValues[optionIdx]);
@@ -355,13 +385,14 @@
 					radioButton.set('checked','true');
 				}
 				
-				radioButton.appendTo(formItemInputWrapper);
-				radioLabel.appendTo(formItemInputWrapper);
+				radioWrapper.appendTo(formItemInputWrapper);
+// 				radioLabel.appendTo(formItemInputWrapper);
 			} else {
 				console.log('error cloning option');
 			}
-			formItemInput.remove();
-			formItemInputLabel.remove();
+			formItemInputRadioWrapper.remove();
+// 			formItemInput.remove();
+// 			formItemInputLabel.remove();
 		}
 	}	
 </aui:script>

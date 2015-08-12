@@ -185,7 +185,7 @@ boolean fieldsEditingDisabled = false;
 
 			var optionsDiv = formRow.all('.options');
 
-			if ((value == 'OPTIONS') || (value == 'RADIO_BUTTON')) {
+			if ((value == 'OPTIONS') || (value == 'RADIO_BUTTON') || (value == 'CHECKBOX')) {
 				optionsDiv.all('label').show();
 				optionsDiv.show();
 			}

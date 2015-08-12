@@ -42,9 +42,11 @@ String fieldValidationErrorMessage = "";
 String fieldTextFieldInputType = "ALPHA";
 String fieldHintMessageXml = "";
 int inputMaxLength = 0;
-String formItemCssClass = "";
-String labelCssClass = "";
-String inputCssClass = "";
+String sectionCssClass = "rcs-section";
+String sectionLabelCssClass = "rcs-sectioni-label";
+String formItemCssClass = "rcs-form-input";
+String labelCssClass = "rcs-label";
+String inputCssClass = "rcs-input";
 
 if(formItems != null && !formItems.isEmpty()){
 	formItemId = formItems.get(formFieldsIndex).getFormItemId();
@@ -65,7 +67,7 @@ if(formItems != null && !formItems.isEmpty()){
 }
 
 List<FormItemOption> formItemOptions = null;
-if(fieldType.equals("OPTIONS") || fieldType.equals("RADIO_BUTTON")){
+if(fieldType.equals("OPTIONS") || fieldType.equals("RADIO_BUTTON") || fieldType.equals("CHECKBOX")){
 	formItemOptions = WebFormUtil.getFormItemOptions(formItemId);
 	if(formItemOptions != null && !formItemOptions.isEmpty()){
 		fieldOptionsIndex = formItemOptions.size();
@@ -176,13 +178,13 @@ boolean ignoreRequestValue = (index != formFieldsIndex);
 		<aui:input cssClass="fieldOptionsIndex" name='<%= "fieldOptionsIndex" + index %>' type="hidden" value='<%=fieldOptionsIndex%>'/>
 		<div class="options-field">
 			<aui:input name='<%= "formItemOptionId0_" + index %>' type="hidden" value='<%=formItemOptionId%>'/>
-			<aui:field-wrapper cssClass='<%= "left-row-clear-left options" + ((Validator.isNull(fieldType) || (!fieldType.equals("OPTIONS") && !fieldType.equals("RADIO_BUTTON"))) ? " hide" : StringPool.BLANK) %>' label="Options Label">
+			<aui:field-wrapper cssClass='<%= "left-row-clear-left options" + ((Validator.isNull(fieldType) || (!fieldType.equals("OPTIONS") && !fieldType.equals("RADIO_BUTTON") && !fieldType.equals("CHECKBOX"))) ? " hide" : StringPool.BLANK) %>' label="Options Label">
 				<liferay-ui:input-localized ignoreRequestValue="<%= ignoreRequestValue %>" name='<%= "fieldOptionsLabel0_" + index %>' xml="<%= formItemOptionLabelMap %>" />
 			</aui:field-wrapper>
-			<aui:field-wrapper cssClass='<%= "left-row options" + ((Validator.isNull(fieldType) || (!fieldType.equals("OPTIONS") && !fieldType.equals("RADIO_BUTTON"))) ? " hide" : StringPool.BLANK) %>' label="Options Value">
+			<aui:field-wrapper cssClass='<%= "left-row options" + ((Validator.isNull(fieldType) || (!fieldType.equals("OPTIONS") && !fieldType.equals("RADIO_BUTTON") && !fieldType.equals("CHECKBOX"))) ? " hide" : StringPool.BLANK) %>' label="Options Value">
 				<liferay-ui:input-localized ignoreRequestValue="<%= ignoreRequestValue %>" name='<%= "fieldOptionsValue0_" + index %>' xml="<%= formItemOptionValueMap %>" />
 			</aui:field-wrapper>
-			<aui:field-wrapper cssClass='<%= "left-row-clear-right options" + ((Validator.isNull(fieldType) || (!fieldType.equals("OPTIONS") && !fieldType.equals("RADIO_BUTTON"))) ? " hide" : StringPool.BLANK) %>' helpMessage="" label="Action">
+			<aui:field-wrapper cssClass='<%= "left-row-clear-right options" + ((Validator.isNull(fieldType) || (!fieldType.equals("OPTIONS") && !fieldType.equals("RADIO_BUTTON") && !fieldType.equals("CHECKBOX"))) ? " hide" : StringPool.BLANK) %>' helpMessage="" label="Action">
 				<button type="button" id='<%= "btn-add-option" + index %>' class="btn-add-option btn btn-primary btn-content btn btn-icon-only " title="Add option"><span class="btn-icon icon icon-plus"></span></button>
 <!-- 				<button type="button" class="btn-remove-option btn btn-primary btn-content btn btn-icon-only " title="Remove option"><span class="btn-icon icon icon-minus"></span></button> -->
 			</aui:field-wrapper>
@@ -324,8 +326,7 @@ A.one('<%= "#btn-add-option" + index %>').on('click', function(event){
    			success: function() {
     	 		responseText=this.get('responseData');
     	 		A.Node.create(responseText).appendTo(event.currentTarget.ancestorsByClassName("options-field").getDOM()[0]);
-    	 		
-    	 		A.all('.btn-remove-option').on('click', function(event){
+				A.all('.btn-remove-option').on('click', function(event){
     	 			event.currentTarget.ancestorsByClassName('added-option-field').remove();
     	 		});
     	 		fieldOptionsIndex++; 
@@ -338,5 +339,10 @@ A.one('<%= "#btn-add-option" + index %>').on('click', function(event){
 
 A.all('.btn-remove-option').on('click', function(event){
 	event.currentTarget.ancestorsByClassName('added-option-field').remove();
+});
+
+A.one('#<portlet:namespace /><%= "field-type" + index %>').on('change', function(event) {
+	
+	console.log('<%= "fieldType" + index %>');
 });
 </aui:script>

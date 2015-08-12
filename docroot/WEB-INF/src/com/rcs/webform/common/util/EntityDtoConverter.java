@@ -1,9 +1,14 @@
 package com.rcs.webform.common.util;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
+import com.liferay.portal.kernel.json.JSONArray;
+import com.liferay.portal.kernel.json.JSONFactoryUtil;
+import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.rcs.webform.common.enums.FormItemType;
 import com.rcs.webform.common.enums.ValidationType;
@@ -12,9 +17,16 @@ import com.rcs.webform.entity.dto.FormItemDTO;
 import com.rcs.webform.entity.dto.SubmittedDataDTO;
 import com.rcs.webform.model.Form;
 import com.rcs.webform.model.FormItem;
+import com.rcs.webform.model.FormItemOption;
 import com.rcs.webform.model.SubmittedData;
+import com.rcs.webform.service.FormItemOptionLocalServiceUtil;
+import com.sun.corba.se.spi.orb.StringPair;
 
 public class EntityDtoConverter {
+    
+    private static final String NONE = "NONE";
+    private static final String KEY = "KEY";
+    private static final String VALUE = "VALUE";
 
     public static final FormDTO formEntityToDto(final Form form, final List<FormItem> formItems, final Locale locale) {
 
@@ -65,13 +77,14 @@ public class EntityDtoConverter {
         formItemDto.setLabelAttrClass(formItem.getLabelAttrClass());
         formItemDto.setInputAttrId(formItem.getInputAttrId());
         formItemDto.setInputAttrClass(formItem.getInputAttrClass());
-        formItemDto.setType(formItem.getType().isEmpty() ? FormItemType.valueOf("NONE") : FormItemType.valueOf(formItem.getType()));
-        formItemDto.setOptionKeys(formItem.getOptionKeys());
-        formItemDto.setOptionValues(formItem.getOptionValues(locale));
+        formItemDto.setType(formItem.getType().isEmpty() ? FormItemType.valueOf(NONE) : FormItemType.valueOf(formItem.getType()));
+        Map<String, String> optionKeyValueMap = getOptionKeyValueMap(formItem, locale);
+        formItemDto.setOptionKeys(optionKeyValueMap.get(KEY));
+        formItemDto.setOptionValues(optionKeyValueMap.get(VALUE));
         formItemDto.setMandatory(formItem.getMandatory());
         formItemDto.setDefaultValue(formItem.getDefaultValue(locale));
         formItemDto.setOrder(formItem.getOrder());
-        formItemDto.setValidationType(formItem.getValidationType().isEmpty() ? ValidationType.valueOf("NONE") : ValidationType
+        formItemDto.setValidationType(formItem.getValidationType().isEmpty() ? ValidationType.valueOf(NONE) : ValidationType
                 .valueOf(formItem.getValidationType()));
         formItemDto.setMinLength(formItem.getMinLength());
         formItemDto.setMaxLength(formItem.getMaxLength());
@@ -81,6 +94,20 @@ public class EntityDtoConverter {
         formItemDto.setErrorLengthMessage(formItem.getErrorLengthMessage(locale));
         formItemDto.setHintMessage(formItem.getHintMessage(locale));
         return formItemDto;
+    }
+    
+    private static final Map<String, String> getOptionKeyValueMap(final FormItem formItem, final Locale locale){
+        HashMap<String, String> optionKeyValueMap = new HashMap<String, String>();
+        List<FormItemOption> formItemOptions = FormItemOptionLocalServiceUtil.getFormItemOptionsByFormItemId(formItem.getFormItemId());
+        JSONArray optionKeyArray = JSONFactoryUtil.createJSONArray();
+        JSONArray optionValueArray = JSONFactoryUtil.createJSONArray();
+        for(FormItemOption formItemOption : formItemOptions) {
+            optionKeyArray.put(formItemOption.getOptionKey(locale));
+            optionValueArray.put(formItemOption.getOptionValue(locale));
+        }
+        optionKeyValueMap.put(KEY, optionKeyArray.toString());
+        optionKeyValueMap.put(VALUE, optionValueArray.toString());
+        return optionKeyValueMap;
     }
     
     public static final SubmittedDataDTO submittedDataEntityToDTO(final SubmittedData submittedData){
