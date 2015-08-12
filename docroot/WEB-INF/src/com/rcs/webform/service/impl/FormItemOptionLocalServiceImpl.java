@@ -111,4 +111,26 @@ public class FormItemOptionLocalServiceImpl extends FormItemOptionLocalServiceBa
             return new ArrayList<FormItemOption>();
         }
     }
+	
+	/**
+     * Hard Delete Form Item Option By Form Item Id
+     * 
+     * @param formItemId
+     * @return
+     */
+    public List<FormItemOption> deleteFormItemOptionByFormItem(Long formItemId){
+    	List<FormItemOption> formItemOptions = null;
+        try {
+        	formItemOptions = getFormItemOptionsByFormItemId(formItemId);
+        	if(formItemOptions != null && !formItemOptions.isEmpty()){
+        		for(FormItemOption formItemOption : formItemOptions){
+        			formItemOptionPersistence.remove(formItemOption);
+        		}
+        	}
+        } catch (Exception e) {
+            log.error("Exception while deleting form item option: " + e.getMessage(), e);
+        }
+
+        return formItemOptions;
+    }
 }

@@ -345,12 +345,4 @@ A.one('<%= "#btn-add-option" + index %>').on('click', function(event){
 	}); 
 });
 
-A.all('.btn-remove-option').on('click', function(event){
-	event.currentTarget.ancestorsByClassName('added-option-field').remove();
-});
-
-// A.one('#<portlet:namespace /><%= "field-type" + index %>').on('change', function(event) {
-	
-// 	console.log('<%= "fieldType" + index %>');
-// });
 </aui:script>

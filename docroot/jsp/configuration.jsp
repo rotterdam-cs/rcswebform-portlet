@@ -136,6 +136,7 @@ boolean fieldsEditingDisabled = false;
 
 				<aui:input name="updateFields" type="hidden" value="<%= !fieldsEditingDisabled %>" />
 				<aui:input id="deletedFormItemIds" name="deletedFormItemIds" type="hidden" value="" />
+				<aui:input id="deletedFormItemOptionIds" name="deletedFormItemOptionIds" type="hidden" value="" />
 
 				<%
 				

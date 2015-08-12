@@ -124,6 +124,10 @@ public class FormItemOptionLocalServiceClpInvoker {
 		_methodName55 = "getFormItemOptionsByFormItemId";
 
 		_methodParameterTypes55 = new String[] { "java.lang.Long" };
+
+		_methodName56 = "deleteFormItemOptionByFormItem";
+
+		_methodParameterTypes56 = new String[] { "java.lang.Long" };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -241,6 +245,11 @@ public class FormItemOptionLocalServiceClpInvoker {
 			return FormItemOptionLocalServiceUtil.getFormItemOptionsByFormItemId((java.lang.Long)arguments[0]);
 		}
 
+		if (_methodName56.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes56, parameterTypes)) {
+			return FormItemOptionLocalServiceUtil.deleteFormItemOptionByFormItem((java.lang.Long)arguments[0]);
+		}
+
 		throw new UnsupportedOperationException();
 	}
 
@@ -284,4 +293,6 @@ public class FormItemOptionLocalServiceClpInvoker {
 	private String[] _methodParameterTypes54;
 	private String _methodName55;
 	private String[] _methodParameterTypes55;
+	private String _methodName56;
+	private String[] _methodParameterTypes56;
 }
