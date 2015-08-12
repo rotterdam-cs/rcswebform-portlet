@@ -43,7 +43,7 @@ String fieldTextFieldInputType = "ALPHA";
 String fieldHintMessageXml = "";
 int inputMaxLength = 0;
 String sectionCssClass = "rcs-section";
-String sectionLabelCssClass = "rcs-sectioni-label";
+String sectionLabelCssClass = "rcs-section-label";
 String formItemCssClass = "rcs-form-input";
 String labelCssClass = "rcs-label";
 String inputCssClass = "rcs-input";
@@ -131,7 +131,8 @@ boolean ignoreRequestValue = (index != formFieldsIndex);
 	<c:choose>
 		<c:when test="<%= !fieldsEditingDisabled %>">
 			<aui:field-wrapper cssClass="left-row">
-				<aui:select cssClass='field-type' ignoreRequestValue="<%= ignoreRequestValue %>" label="type" name='<%= "fieldType" + index %>' >
+<%-- 			<select name='<%= "fieldType" + index %>' id='<%= "fieldType" + index %>' > --%>
+				<aui:select cssClass='field-type' ignoreRequestValue="<%= ignoreRequestValue %>" label="type" name='<%= "fieldType" + index %>' id='<%= "fieldType" + index %>' >
 					<aui:option selected='<%= fieldType.equals("TEXT_FIELD") %>' value="TEXT_FIELD"><liferay-ui:message key="text" /></aui:option>
 					<aui:option selected='<%= fieldType.equals("TEXT_BOX") %>' value="TEXT_BOX"><liferay-ui:message key="text-box" /></aui:option>
 					<aui:option selected='<%= fieldType.equals("PASSWORD") %>' value="PASSWORD"><liferay-ui:message key="password" /></aui:option>
@@ -140,6 +141,7 @@ boolean ignoreRequestValue = (index != formFieldsIndex);
 					<aui:option selected='<%= fieldType.equals("CHECKBOX") %>' value="CHECKBOX"><liferay-ui:message key="check-box" /></aui:option>
 					<aui:option selected='<%= fieldType.equals("DATE") %>' value="DATE"><liferay-ui:message key="date" /></aui:option>
 					<aui:option selected='<%= fieldType.equals("SECTION") %>' value="SECTION"><liferay-ui:message key="Section" /></aui:option>
+<!-- 				</select> -->
 				</aui:select>
 			</aui:field-wrapper>
 		</c:when>
@@ -349,8 +351,33 @@ A.all('.btn-remove-option').on('click', function(event){
 	event.currentTarget.ancestorsByClassName('added-option-field').remove();
 });
 
-// A.one('#<portlet:namespace /><%= "field-type" + index %>').on('change', function(event) {
+</aui:script>
+
+<aui:script use='aui-node'>
+var fieldType = A.one('#<portlet:namespace />fieldType<%= index %>');
+if(fieldType) {
+	var formItemClass = A.one('#<portlet:namespace />formItemCssClass<%= index %>');
+	var labelClass = A.one('#<portlet:namespace />formLabelCssClass<%= index %>');
+	var inputClass = A.one('#<portlet:namespace />formInputCssClass<%= index %>');
+
+	if(fieldType.val()==='SECTION') {
+		inputClass.get('parentNode').hide();
+	}
 	
-// 	console.log('<%= "fieldType" + index %>');
-// });
+	fieldType.on('change', function(event) {
+		if(event.currentTarget.val()==='SECTION') {
+			if(formItemClass && labelClass && inputClass) {
+				formItemClass.set('value','<%= sectionCssClass %>');
+				labelClass.set('value','<%= sectionLabelCssClass %>');
+				inputClass.get('parentNode').hide();
+			}
+		} else {
+			formItemClass.set('value','<%= formItemCssClass %>');
+			labelClass.set('value','<%= labelCssClass %>');
+			inputClass.get('parentNode').show();
+		}
+	});
+} else {
+	console.log('#<portlet:namespace />fieldType<%= index %> not found');
+}
 </aui:script>
