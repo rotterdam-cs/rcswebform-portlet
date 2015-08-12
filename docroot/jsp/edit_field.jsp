@@ -77,6 +77,10 @@ if(fieldType.equals("OPTIONS") || fieldType.equals("RADIO_BUTTON") || fieldType.
 	}
 }
 
+if(fieldOptionsIndex == 0){
+	fieldOptionsIndex = 1;
+}
+
 boolean ignoreRequestValue = (index != formFieldsIndex);
 %>
 
