@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -605,9 +605,7 @@ public class FormItemOptionClp extends BaseModelImpl<FormItemOption>
 			return StringPool.BLANK;
 		}
 
-		Locale defaultLocale = LocaleUtil.getDefault();
-
-		return LocalizationUtil.getDefaultLanguageId(xml, defaultLocale);
+		return LocalizationUtil.getDefaultLanguageId(xml);
 	}
 
 	@Override
@@ -703,10 +701,6 @@ public class FormItemOptionClp extends BaseModelImpl<FormItemOption>
 		}
 	}
 
-	public Class<?> getClpSerializerClass() {
-		return _clpSerializerClass;
-	}
-
 	@Override
 	public int hashCode() {
 		return (int)getPrimaryKey();
@@ -787,5 +781,4 @@ public class FormItemOptionClp extends BaseModelImpl<FormItemOption>
 	private String _optionValue;
 	private String _optionValueCurrentLanguageId;
 	private BaseModel<?> _formItemOptionRemoteModel;
-	private Class<?> _clpSerializerClass = com.rcs.webform.service.ClpSerializer.class;
 }

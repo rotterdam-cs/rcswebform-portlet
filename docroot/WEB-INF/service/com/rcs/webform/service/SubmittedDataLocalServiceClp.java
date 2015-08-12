@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -126,6 +126,12 @@ public class SubmittedDataLocalServiceClp implements SubmittedDataLocalService {
 		_methodName19 = "getSubmittedDataByForm";
 
 		_methodParameterTypes19 = new String[] { "java.lang.Long" };
+
+		_methodName20 = "delete";
+
+		_methodParameterTypes20 = new String[] {
+				"java.lang.Long", "com.liferay.portal.service.ServiceContext"
+			};
 	}
 
 	@Override
@@ -707,6 +713,36 @@ public class SubmittedDataLocalServiceClp implements SubmittedDataLocalService {
 		return (java.util.List<com.rcs.webform.model.SubmittedData>)ClpSerializer.translateOutput(returnObj);
 	}
 
+	@Override
+	public java.util.List<com.rcs.webform.model.SubmittedData> delete(
+		java.lang.Long submittedDataId,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableLocalService.invokeMethod(_methodName20,
+					_methodParameterTypes20,
+					new Object[] {
+						ClpSerializer.translateInput(submittedDataId),
+						
+					ClpSerializer.translateInput(serviceContext)
+					});
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (java.util.List<com.rcs.webform.model.SubmittedData>)ClpSerializer.translateOutput(returnObj);
+	}
+
 	private InvokableLocalService _invokableLocalService;
 	private String _methodName0;
 	private String[] _methodParameterTypes0;
@@ -746,4 +782,6 @@ public class SubmittedDataLocalServiceClp implements SubmittedDataLocalService {
 	private String[] _methodParameterTypes17;
 	private String _methodName19;
 	private String[] _methodParameterTypes19;
+	private String _methodName20;
+	private String[] _methodParameterTypes20;
 }

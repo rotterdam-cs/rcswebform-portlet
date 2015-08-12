@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -292,6 +292,13 @@ public class SubmittedDataLocalServiceWrapper
 	public java.util.List<com.rcs.webform.model.SubmittedData> getSubmittedDataByForm(
 		java.lang.Long formId) {
 		return _submittedDataLocalService.getSubmittedDataByForm(formId);
+	}
+
+	@Override
+	public java.util.List<com.rcs.webform.model.SubmittedData> delete(
+		java.lang.Long submittedDataId,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return _submittedDataLocalService.delete(submittedDataId, serviceContext);
 	}
 
 	/**
