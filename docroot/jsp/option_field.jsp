@@ -18,7 +18,7 @@ if(formItemOptions != null && !formItemOptions.isEmpty()){
 %>
 
 <div class='added-option-field'>
-	<aui:input name='<%= "formItemOptionId" + fieldOptionsIndex + "_" + index %>' ignoreRequestValue="<%= ignoreRequestValue %>" type="hidden" value='<%=formItemOptionId%>'/>
+	<aui:input cssClass='formItemOptionId' name='<%= "formItemOptionId" + fieldOptionsIndex + "_" + index %>' ignoreRequestValue="<%= ignoreRequestValue %>" type="hidden" value='<%=formItemOptionId%>'/>
 	<aui:field-wrapper cssClass='left-row-clear-left options'>
 		<liferay-ui:input-localized ignoreRequestValue="<%= ignoreRequestValue %>" name='<%= "fieldOptionsLabel" + fieldOptionsIndex + "_" + index %>' xml="<%= formItemOptionLabelMap %>" />
 	</aui:field-wrapper>
@@ -27,6 +27,24 @@ if(formItemOptions != null && !formItemOptions.isEmpty()){
 	</aui:field-wrapper>
 	<aui:field-wrapper cssClass='left-row-clear-right options'>
 	<!-- 	<button type="button" class="btn-add-option btn btn-primary btn-content btn btn-icon-only " title="Add option"><span class="btn-icon icon icon-plus"></span></button> -->
-		<button type="button" class="btn-remove-option btn btn-primary btn-content btn btn-icon-only " title="Remove option"><span class="btn-icon icon icon-minus"></span></button>
+		<button type="button" id='<%= "btn-remove-option" + fieldOptionsIndex  + "_" + index %>' class="btn-remove-option btn btn-primary btn-content btn btn-icon-only " title="Remove option"><span class="btn-icon icon icon-minus"></span></button>
 	</aui:field-wrapper>
 </div>
+
+<aui:script use="aui-base,aui-node">
+A.one('<%= "#btn-remove-option" + fieldOptionsIndex  + "_" + index %>').on('click', function(event){
+   	var rowFormItemOptionId = event.currentTarget.ancestorsByClassName('added-option-field').getDOM()[0].getElementsByClassName('formItemOptionId')[0].value;
+   	
+   	var rowFormItemOptionIds = A.one('#<portlet:namespace />deletedFormItemOptionIds').val();
+   	
+   	if(rowFormItemOptionIds != ""){
+   		rowFormItemOptionIds += "," + rowFormItemOptionId;
+   	}else{
+   		rowFormItemOptionIds += rowFormItemOptionId;
+   	}
+   	
+   	A.one('#<portlet:namespace />deletedFormItemOptionIds').val(rowFormItemOptionIds);
+
+	event.currentTarget.ancestorsByClassName('added-option-field').remove();
+});
+</aui:script>

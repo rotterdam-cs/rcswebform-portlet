@@ -279,4 +279,13 @@ public interface FormItemOptionLocalService extends BaseLocalService,
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.rcs.webform.model.FormItemOption> getFormItemOptionsByFormItemId(
 		java.lang.Long formItemId);
+
+	/**
+	* Hard Delete Form Item Option By Form Item Id
+	*
+	* @param formItemId
+	* @return
+	*/
+	public java.util.List<com.rcs.webform.model.FormItemOption> deleteFormItemOptionByFormItem(
+		java.lang.Long formItemId);
 }

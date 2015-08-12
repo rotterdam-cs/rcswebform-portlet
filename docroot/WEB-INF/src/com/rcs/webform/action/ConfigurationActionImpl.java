@@ -185,10 +185,21 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 					i++;
 				}
 				
+				/* hard delete form item options */
+				String[] deletedFormItemOptionIds = ParamUtil.getString(actionRequest, "deletedFormItemOptionIds").split(",");
+				if(deletedFormItemOptionIds[0] != ""){
+					for(String formItemOptionId : deletedFormItemOptionIds){
+						FormItemOptionLocalServiceUtil.deleteFormItemOption(Long.parseLong(formItemOptionId));
+					}
+				}
+				
 				/* soft delete form items */
 				String[] deletedFormItemIds = ParamUtil.getString(actionRequest, "deletedFormItemIds").split(",");
 				if(deletedFormItemIds[0] != ""){
 					for(String formItemId : deletedFormItemIds){
+						//hard delete form item options
+						FormItemOptionLocalServiceUtil.deleteFormItemOptionByFormItem(Long.parseLong(formItemId));
+						
 						FormItemLocalServiceUtil.delete(Long.parseLong(formItemId), serviceContext);
 					}
 				}

@@ -321,6 +321,18 @@ public class FormItemOptionLocalServiceWrapper
 	}
 
 	/**
+	* Hard Delete Form Item Option By Form Item Id
+	*
+	* @param formItemId
+	* @return
+	*/
+	@Override
+	public java.util.List<com.rcs.webform.model.FormItemOption> deleteFormItemOptionByFormItem(
+		java.lang.Long formItemId) {
+		return _formItemOptionLocalService.deleteFormItemOptionByFormItem(formItemId);
+	}
+
+	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */
 	public FormItemOptionLocalService getWrappedFormItemOptionLocalService() {

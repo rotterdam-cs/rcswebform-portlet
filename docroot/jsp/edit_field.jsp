@@ -44,7 +44,7 @@ String fieldHintMessageXml = "";
 int inputMaxLength = 0;
 String sectionCssClass = "rcs-section";
 String sectionLabelCssClass = "rcs-section-label";
-String formItemCssClass = "rcs-form-input";
+String formItemCssClass = "rcs-form-item";
 String labelCssClass = "rcs-label";
 String inputCssClass = "rcs-input";
 
@@ -131,8 +131,7 @@ boolean ignoreRequestValue = (index != formFieldsIndex);
 	<c:choose>
 		<c:when test="<%= !fieldsEditingDisabled %>">
 			<aui:field-wrapper cssClass="left-row">
-<%-- 			<select name='<%= "fieldType" + index %>' id='<%= "fieldType" + index %>' > --%>
-				<aui:select cssClass='field-type' ignoreRequestValue="<%= ignoreRequestValue %>" label="type" name='<%= "fieldType" + index %>' id='<%= "fieldType" + index %>' >
+				<aui:select cssClass='field-type' ignoreRequestValue="<%= ignoreRequestValue %>" label="type" name='<%= "fieldType" + index %>' >
 					<aui:option selected='<%= fieldType.equals("TEXT_FIELD") %>' value="TEXT_FIELD"><liferay-ui:message key="text" /></aui:option>
 					<aui:option selected='<%= fieldType.equals("TEXT_BOX") %>' value="TEXT_BOX"><liferay-ui:message key="text-box" /></aui:option>
 					<aui:option selected='<%= fieldType.equals("PASSWORD") %>' value="PASSWORD"><liferay-ui:message key="password" /></aui:option>
@@ -141,7 +140,6 @@ boolean ignoreRequestValue = (index != formFieldsIndex);
 					<aui:option selected='<%= fieldType.equals("CHECKBOX") %>' value="CHECKBOX"><liferay-ui:message key="check-box" /></aui:option>
 					<aui:option selected='<%= fieldType.equals("DATE") %>' value="DATE"><liferay-ui:message key="date" /></aui:option>
 					<aui:option selected='<%= fieldType.equals("SECTION") %>' value="SECTION"><liferay-ui:message key="Section" /></aui:option>
-<!-- 				</select> -->
 				</aui:select>
 			</aui:field-wrapper>
 		</c:when>

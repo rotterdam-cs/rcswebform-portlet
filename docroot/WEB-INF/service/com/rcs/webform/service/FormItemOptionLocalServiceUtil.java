@@ -306,6 +306,17 @@ public class FormItemOptionLocalServiceUtil {
 		return getService().getFormItemOptionsByFormItemId(formItemId);
 	}
 
+	/**
+	* Hard Delete Form Item Option By Form Item Id
+	*
+	* @param formItemId
+	* @return
+	*/
+	public static java.util.List<com.rcs.webform.model.FormItemOption> deleteFormItemOptionByFormItem(
+		java.lang.Long formItemId) {
+		return getService().deleteFormItemOptionByFormItem(formItemId);
+	}
+
 	public static void clearService() {
 		_service = null;
 	}
