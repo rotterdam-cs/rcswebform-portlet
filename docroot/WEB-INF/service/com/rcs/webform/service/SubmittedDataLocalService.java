@@ -257,4 +257,8 @@ public interface SubmittedDataLocalService extends BaseLocalService,
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.rcs.webform.model.SubmittedData> getSubmittedDataByForm(
 		java.lang.Long formId);
+
+	public java.util.List<com.rcs.webform.model.SubmittedData> delete(
+		java.lang.Long submittedDataId,
+		com.liferay.portal.service.ServiceContext serviceContext);
 }

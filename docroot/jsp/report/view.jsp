@@ -3,9 +3,7 @@
 <c:choose>
 	<c:when test="${data.success}">
 		<aui:fieldset label="${data.data.formDto.title} Report">
-			<div id="<portlet:namespace />rcsWebFormReport" class="rcsWebFormReport">
-				
-			</div>
+			<div id="<portlet:namespace />rcsWebFormReport" class="rcsWebFormReport"></div>
 		</aui:fieldset>
 		
 		<script>
@@ -13,18 +11,10 @@
 			return str.replace(new RegExp(find, 'g'), replace);
 		}
 		
-		AUI().use('aui-datatable','aui-datatype','datatable-sort',function(A){
-			var data = <%= renderRequest.getAttribute("data")%>;
-			
+		function buildTableColumn(data){
 			var tableColumn = [];
-			var tableData = [];
-			
 			var formItems = data.data.formDto.formItems;
-			var submittedData = data.data.dataDtoList;
-			var tableRow;
-			var j;
 			
-			// Build table header of form items
 			for(var i = 0; i < formItems.length; i++){
 				var tableHeader = {};
 				tableHeader["key"] = replaceAll(' ', '_', formItems[i].label);
@@ -32,7 +22,16 @@
 				tableColumn.push(tableHeader);
 			}
 			
-			// Build table content of submitted data
+			return tableColumn;
+		}
+		
+		function buildTableData(data){
+			var tableData = [];
+			var formItems = data.data.formDto.formItems;
+			var submittedData = data.data.dataDtoList;
+			var tableRow;
+			var j;
+			
 			for(var i = 0; i < submittedData.length; i++){
 				if ((i % formItems.length)==0){
 					j = 0;
@@ -47,10 +46,20 @@
 				}
 			}
 			
-			new A.DataTable(
+			return tableData;
+		}
+		
+		AUI().use('aui-datatable','datatable-sort','datatable-paginator',function(A){
+			var data = <%= renderRequest.getAttribute("data")%>;
+			
+			var tableColumn = buildTableColumn(data);
+			var tableData = buildTableData(data);
+			
+			var datatable = new A.DataTable(
 		      {
 		        columns: tableColumn,
-		        data: tableData
+		        data: tableData,
+		        rowsPerPage: 10
 		      }
 		    ).render("#<portlet:namespace />rcsWebFormReport");
 		});

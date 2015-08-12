@@ -294,6 +294,13 @@ public class SubmittedDataLocalServiceWrapper
 		return _submittedDataLocalService.getSubmittedDataByForm(formId);
 	}
 
+	@Override
+	public java.util.List<com.rcs.webform.model.SubmittedData> delete(
+		java.lang.Long submittedDataId,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return _submittedDataLocalService.delete(submittedDataId, serviceContext);
+	}
+
 	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */

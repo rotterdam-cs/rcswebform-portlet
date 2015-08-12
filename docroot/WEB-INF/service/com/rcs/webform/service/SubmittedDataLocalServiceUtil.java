@@ -280,6 +280,12 @@ public class SubmittedDataLocalServiceUtil {
 		return getService().getSubmittedDataByForm(formId);
 	}
 
+	public static java.util.List<com.rcs.webform.model.SubmittedData> delete(
+		java.lang.Long submittedDataId,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return getService().delete(submittedDataId, serviceContext);
+	}
+
 	public static void clearService() {
 		_service = null;
 	}
