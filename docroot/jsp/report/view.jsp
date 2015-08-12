@@ -49,7 +49,7 @@
 			return tableData;
 		}
 		
-		AUI().use('aui-datatable','datatable-sort',function(A){
+		AUI().use('aui-datatable','datatable-sort','datatable-paginator',function(A){
 			var data = <%= renderRequest.getAttribute("data")%>;
 			
 			var tableColumn = buildTableColumn(data);
@@ -58,7 +58,8 @@
 			var datatable = new A.DataTable(
 		      {
 		        columns: tableColumn,
-		        data: tableData
+		        data: tableData,
+		        rowsPerPage: 10
 		      }
 		    ).render("#<portlet:namespace />rcsWebFormReport");
 		});
