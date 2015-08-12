@@ -9,6 +9,7 @@
 		<configuration-action-class>com.rcs.webform.action.ConfigurationActionImpl</configuration-action-class>
 		<instanceable>true</instanceable>
 		<header-portlet-css>/css/main.css</header-portlet-css>
+		<header-portlet-javascript>/js/custom.js</header-portlet-javascript>
 		<footer-portlet-javascript>
 			/js/main.js
 		</footer-portlet-javascript>

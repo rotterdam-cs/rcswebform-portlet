@@ -319,12 +319,15 @@ A.one('<%= "#btn-add-option" + index %>').on('click', function(event){
 
 	optionFieldURL = optionFieldURL.replace(targetString, replacedString);
 	
-	A.io.request(optionFieldURL, {
+	 A.io.request(optionFieldURL, {
   		on: {
    			success: function() {
     	 		responseText=this.get('responseData');
     	 		A.Node.create(responseText).appendTo(event.currentTarget.ancestorsByClassName("options-field").getDOM()[0]);
-    	 		
+				var node = document.createElement("div");
+				node.innerHTML = responseText;
+				var scripts = node.getElementsByTagName("script");
+				webFormCustomFunction.evalScript(scripts);
     	 		A.all('.btn-remove-option').on('click', function(event){
     	 			event.currentTarget.ancestorsByClassName('added-option-field').remove();
     	 		});
@@ -333,7 +336,7 @@ A.one('<%= "#btn-add-option" + index %>').on('click', function(event){
 
    			}
   		}
-	});
+	}); 
 });
 
 A.all('.btn-remove-option').on('click', function(event){

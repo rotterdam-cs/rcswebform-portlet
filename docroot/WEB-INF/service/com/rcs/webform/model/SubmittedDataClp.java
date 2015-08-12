@@ -538,6 +538,10 @@ public class SubmittedDataClp extends BaseModelImpl<SubmittedData>
 		}
 	}
 
+	public Class<?> getClpSerializerClass() {
+		return _clpSerializerClass;
+	}
+
 	@Override
 	public int hashCode() {
 		return getPrimaryKey().hashCode();
@@ -644,4 +648,5 @@ public class SubmittedDataClp extends BaseModelImpl<SubmittedData>
 	private long _formItemId;
 	private String _userInput;
 	private BaseModel<?> _submittedDataRemoteModel;
+	private Class<?> _clpSerializerClass = com.rcs.webform.service.ClpSerializer.class;
 }

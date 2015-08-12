@@ -21,6 +21,7 @@ import java.io.Serializable;
 
 /**
  * @author ryusuf
+ * @generated
  */
 public class SubmittedDataPK implements Comparable<SubmittedDataPK>,
 	Serializable {
