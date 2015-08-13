@@ -245,7 +245,7 @@ boolean ignoreRequestValue = (index != formFieldsIndex);
 		<c:when test="<%= !fieldsEditingDisabled %>">
 			<aui:field-wrapper cssClass="left-row-clear-left">
 				<liferay-ui:toggle id='<%= "advanceSettings" + index %>' showMessage="Show Advance Settings" hideMessage="Hide Advance Settings" 
-				 	defaultShowContent="false" stateVar='<%= "advanceSettings" + index %>'></liferay-ui:toggle>
+ 				 	defaultShowContent="false" stateVar='<%= "advanceSettings" + index %>'></liferay-ui:toggle> 
 				<div id='<%= "advanceSettings" + index %>' style="display: <liferay-ui:toggle-value id='<%= "advanceSettings" + index %>' />; padding-top: 10px;">
 					<aui:field-wrapper cssClass="left-row-clear-left">
 						<aui:input name='<%= "formItemCssClass" + index %>' type="text" ignoreRequestValue="<%= ignoreRequestValue %>" label="Form Item CSS Class" value="<%= formItemCssClass %>"></aui:input>
@@ -314,8 +314,9 @@ boolean ignoreRequestValue = (index != formFieldsIndex);
 </div>
 
 <aui:script use="aui-base,liferay-auto-fields, aui-node,liferay-portlet-url,aui-io-request">
+var index = '<%= index %>';
+// <%= "advanceSettings" + index + "Toggle"%>();
 A.one('<%= "#btn-add-option" + index %>').on('click', function(event){
-	var index = '<%= index %>';
 	var responseText='';
 	var fieldOptionsIndex = Number(A.one('#<portlet:namespace />fieldOptionsIndex' + index).val());
 		
