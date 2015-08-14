@@ -70,8 +70,9 @@ public class FormItemLocalServiceImpl extends FormItemLocalServiceBaseImpl {
      * @return
      */
     public FormItem save(Long formItemId, Long formId, Map<Locale, String> label, String type, boolean mandatory, String validationRegexValue,
-            String validationType, String errorValidationMessage, int order, int maxLength, Map<Locale, String> hintMessage, ServiceContext serviceContext,
-            String formItemAttrClass, String labelAttrClass, String inputAttrClass, Map<Locale, String> mandatoryErrorMessageMap, Map<Locale, String> validationErrorMessageMap, Map<Locale, String> maxLengthErrorMessageMap) {
+            String validationType, int order, int maxLength, Map<Locale, String> hintMessage, ServiceContext serviceContext,
+            String formItemAttrClass, String labelAttrClass, String inputAttrClass, Map<Locale, String> mandatoryErrorMessageMap,
+            Map<Locale, String> validationErrorMessageMap, Map<Locale, String> maxLengthErrorMessageMap) {
 
         User user = null;
         FormItem formItem = null;
@@ -82,7 +83,7 @@ public class FormItemLocalServiceImpl extends FormItemLocalServiceBaseImpl {
                 formItemId = counterLocalService.increment(FormItem.class.getName());
                 formItem = formItemPersistence.create(formItemId);
             } else {
-            	formItem = formItemPersistence.fetchByPrimaryKey(formItemId);
+                formItem = formItemPersistence.fetchByPrimaryKey(formItemId);
             }
             formItem.setActive(true);
             formItem.setCreationDate(serviceContext.getCreateDate(now));
@@ -124,7 +125,7 @@ public class FormItemLocalServiceImpl extends FormItemLocalServiceBaseImpl {
             return new ArrayList<FormItem>();
         }
     }
-    
+
     /**
      * get Form Items
      * 
@@ -133,19 +134,17 @@ public class FormItemLocalServiceImpl extends FormItemLocalServiceBaseImpl {
      */
     public List<FormItem> getFormItemsByFormId(Long formId) {
         try {
-        	DynamicQuery query = DynamicQueryFactoryUtil.forClass(FormItem.class)
-        			.add(PropertyFactoryUtil.forName("formId").eq(formId))
-        			.add(PropertyFactoryUtil.forName("active").eq(true))
-        			.addOrder(OrderFactoryUtil.asc("order"));
-        	
-        	List<FormItem> results = (List<FormItem>) formItemPersistence.findWithDynamicQuery(query);
+            DynamicQuery query = DynamicQueryFactoryUtil.forClass(FormItem.class).add(PropertyFactoryUtil.forName("formId").eq(formId))
+                    .add(PropertyFactoryUtil.forName("active").eq(true)).addOrder(OrderFactoryUtil.asc("order"));
+
+            List<FormItem> results = (List<FormItem>) formItemPersistence.findWithDynamicQuery(query);
             return results;
         } catch (Exception e) {
             log.error("Exception while getting form items by id [" + formId + "] : " + e.getMessage(), e);
             return new ArrayList<FormItem>();
         }
     }
-    
+
     /**
      * Soft Delete Form Item
      * 
@@ -153,8 +152,8 @@ public class FormItemLocalServiceImpl extends FormItemLocalServiceBaseImpl {
      * @param serviceContext
      * @return
      */
-    public FormItem delete(Long formItemId, ServiceContext serviceContext){
-    	User user = null;
+    public FormItem delete(Long formItemId, ServiceContext serviceContext) {
+        User user = null;
         FormItem formItem = null;
         Date now = new Date();
         try {
@@ -164,7 +163,7 @@ public class FormItemLocalServiceImpl extends FormItemLocalServiceBaseImpl {
             formItem.setCreationDate(serviceContext.getCreateDate(now));
             formItem.setModificationDate(serviceContext.getModifiedDate(now));
             formItem.setModificationUser(user.getFullName());
-            
+
             formItemPersistence.update(formItem);
         } catch (Exception e) {
             log.error("Exception while deleting form item: " + e.getMessage(), e);

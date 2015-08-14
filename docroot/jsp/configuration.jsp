@@ -247,6 +247,14 @@ boolean fieldsEditingDisabled = false;
 			} else {
 				validationErrorMessageDiv.show();
 			}
+			
+			var validationRegexDiv = formRow.one('.field-validation-regex');
+			if (value == 'REGEX') {
+				 validationRegexDiv.show();
+			} else {
+				 validationRegexDiv.hide();
+			}
+			
 		};
 		
 		var webFields = A.one('.webFields');

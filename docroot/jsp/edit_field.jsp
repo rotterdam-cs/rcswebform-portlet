@@ -50,6 +50,7 @@ String inputCssClass = "rcs-input";
 String mandatoryErrorMessageXml = "";
 String validationErrorMessageXml = "";
 String maxLengthErrorMessageXml = "";
+String fieldValidationRegex = "";
 
 if(formItems != null && !formItems.isEmpty()){
 	formItemId = formItems.get(formFieldsIndex).getFormItemId();
@@ -68,6 +69,7 @@ if(formItems != null && !formItems.isEmpty()){
 	mandatoryErrorMessageXml = formItems.get(formFieldsIndex).getErrorMandatoryMessage();
 	validationErrorMessageXml = formItems.get(formFieldsIndex).getErrorValidationMessage();
 	maxLengthErrorMessageXml = formItems.get(formFieldsIndex).getErrorLengthMessage();
+	fieldValidationRegex = formItems.get(formFieldsIndex).getValidationRegexValue();
 }
 
 List<FormItemOption> formItemOptions = null;
@@ -229,11 +231,15 @@ boolean ignoreRequestValue = (index != formFieldsIndex);
 				<aui:field-wrapper cssClass="left-row-clear-left">
 					<aui:select cssClass="text-field-input-type" ignoreRequestValue="<%= ignoreRequestValue %>" name='<%= "fieldInputType" + index %>' helpMessage='Set Text Field Input Type' label="Input Type">
 						<aui:option selected='<%= fieldTextFieldInputType.equals("ALPHANUM") %>' value="ALPHANUM"><liferay-ui:message key="text" /></aui:option>
-						<aui:option selected='<%= fieldTextFieldInputType.equals("ALPHA") %>' value="ALPHA"><liferay-ui:message key="com.rcs.template.alphabet" /></aui:option>
+						<aui:option selected='<%= fieldTextFieldInputType.equals("ALPHA") %>' value="ALPHA"><liferay-ui:message key="com.rcs.rcswebform.alphabet" /></aui:option>
 						<aui:option selected='<%= fieldTextFieldInputType.equals("NUMBER") %>' value="NUMBER"><liferay-ui:message key="number" /></aui:option>
 						<aui:option selected='<%= fieldTextFieldInputType.equals("PHONE_NUMBER") %>' value="PHONE_NUMBER"><liferay-ui:message key="phone-number" /></aui:option>
 						<aui:option selected='<%= fieldTextFieldInputType.equals("EMAIL") %>' value="EMAIL"><liferay-ui:message key="email" /></aui:option>
+						<aui:option selected='<%= fieldTextFieldInputType.equals("REGEX") %>' value="REGEX"><liferay-ui:message key="com.rcs.rcswebform.regex" /></aui:option>
 					</aui:select>
+				</aui:field-wrapper>
+				<aui:field-wrapper cssClass='<%= "field-validation-regex left-row input-max-length" + (( Validator.isNull(fieldTextFieldInputType) || !fieldTextFieldInputType.equals("REGEX")) ? " hide" : StringPool.BLANK) %>' > 
+					<aui:input ignoreRequestValue="<%= ignoreRequestValue %>" label="Regex Pattern" name='<%= "fieldValidationRegex" + index %>' helpMessage="Set regex pattern to validate input" type="text" value="<%= fieldValidationRegex %>" ></aui:input>
 				</aui:field-wrapper>
 				<aui:field-wrapper cssClass='<%= "left-row-clear-right input-max-length" + (( Validator.isNull(fieldTextFieldInputType) || (!fieldTextFieldInputType.equals("ALPHANUM") && !fieldTextFieldInputType.equals("ALPHA") && !fieldTextFieldInputType.equals("NUMBER"))) ? " hide" : StringPool.BLANK) %>' > 
 					<aui:input ignoreRequestValue="<%= ignoreRequestValue %>" label="Max Length" name='<%= "inputMaxLength" + index %>' helpMessage="Set max number of allowed characters" type="text" value="<%= inputMaxLength %>" >

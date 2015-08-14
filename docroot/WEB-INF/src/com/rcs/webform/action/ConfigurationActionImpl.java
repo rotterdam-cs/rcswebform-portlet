@@ -154,6 +154,7 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 					Map<Locale, String> mandatoryErrorMessageMap = LocalizationUtil.getLocalizationMap(actionRequest, "mandatoryErrorMessage" + formFieldsIndex);
                     Map<Locale, String> validationErrorMessageMap = LocalizationUtil.getLocalizationMap(actionRequest, "validationErrorMessage" + formFieldsIndex);
                     Map<Locale, String> maxLengthErrorMessageMap = LocalizationUtil.getLocalizationMap(actionRequest, "maxLengthErrorMessage" + formFieldsIndex);
+                    String fieldValidationRegex = ParamUtil.getString(actionRequest, "fieldValidationRegex" + formFieldsIndex);
                     
 					if (Validator.isNotNull(fieldValidationScript) ^ Validator.isNotNull(fieldValidationErrorMessage)) {
 	
@@ -166,7 +167,7 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 					}
 	
 					FormItem formItem = FormItemLocalServiceUtil.save(formItemId, formId, fieldLabelMap, fieldType, fieldOptional,
-							fieldValidationScript, validationType, fieldValidationErrorMessage, formFieldsIndex, inputTypeMaxLength, fieldHintMessageMap, serviceContext,
+					        fieldValidationRegex, validationType, formFieldsIndex, inputTypeMaxLength, fieldHintMessageMap, serviceContext,
 							formItemAttrClass, labelAttrClass, inputAttrClass, mandatoryErrorMessageMap, validationErrorMessageMap, maxLengthErrorMessageMap);
 					
 					

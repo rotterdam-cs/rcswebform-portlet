@@ -113,10 +113,10 @@ public class FormItemLocalServiceClpInvoker {
 		_methodParameterTypes54 = new String[] {
 				"java.lang.Long", "java.lang.Long", "java.util.Map",
 				"java.lang.String", "boolean", "java.lang.String",
-				"java.lang.String", "java.lang.String", "int", "int",
-				"java.util.Map", "com.liferay.portal.service.ServiceContext",
-				"java.lang.String", "java.lang.String", "java.lang.String",
-				"java.util.Map", "java.util.Map", "java.util.Map"
+				"java.lang.String", "int", "int", "java.util.Map",
+				"com.liferay.portal.service.ServiceContext", "java.lang.String",
+				"java.lang.String", "java.lang.String", "java.util.Map",
+				"java.util.Map", "java.util.Map"
 			};
 
 		_methodName55 = "getFormItemByFormId";
@@ -243,17 +243,16 @@ public class FormItemLocalServiceClpInvoker {
 				(java.lang.String)arguments[3],
 				((Boolean)arguments[4]).booleanValue(),
 				(java.lang.String)arguments[5], (java.lang.String)arguments[6],
-				(java.lang.String)arguments[7],
+				((Integer)arguments[7]).intValue(),
 				((Integer)arguments[8]).intValue(),
-				((Integer)arguments[9]).intValue(),
-				(java.util.Map<java.util.Locale, java.lang.String>)arguments[10],
-				(com.liferay.portal.service.ServiceContext)arguments[11],
+				(java.util.Map<java.util.Locale, java.lang.String>)arguments[9],
+				(com.liferay.portal.service.ServiceContext)arguments[10],
+				(java.lang.String)arguments[11],
 				(java.lang.String)arguments[12],
 				(java.lang.String)arguments[13],
-				(java.lang.String)arguments[14],
+				(java.util.Map<java.util.Locale, java.lang.String>)arguments[14],
 				(java.util.Map<java.util.Locale, java.lang.String>)arguments[15],
-				(java.util.Map<java.util.Locale, java.lang.String>)arguments[16],
-				(java.util.Map<java.util.Locale, java.lang.String>)arguments[17]);
+				(java.util.Map<java.util.Locale, java.lang.String>)arguments[16]);
 		}
 
 		if (_methodName55.equals(name) &&

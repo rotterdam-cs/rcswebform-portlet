@@ -39,7 +39,7 @@ create table rcswebform_FormItem (
 	defaultValue STRING null,
 	order_ INTEGER,
 	validationType VARCHAR(75) null,
-	validationRegexValue VARCHAR(75) null,
+	validationRegexValue STRING null,
 	minLength INTEGER,
 	maxLength INTEGER,
 	errorValidationMessage STRING null,

@@ -303,7 +303,7 @@ public class FormItemLocalServiceWrapper implements FormItemLocalService,
 		java.util.Map<java.util.Locale, java.lang.String> label,
 		java.lang.String type, boolean mandatory,
 		java.lang.String validationRegexValue, java.lang.String validationType,
-		java.lang.String errorValidationMessage, int order, int maxLength,
+		int order, int maxLength,
 		java.util.Map<java.util.Locale, java.lang.String> hintMessage,
 		com.liferay.portal.service.ServiceContext serviceContext,
 		java.lang.String formItemAttrClass, java.lang.String labelAttrClass,
@@ -312,11 +312,10 @@ public class FormItemLocalServiceWrapper implements FormItemLocalService,
 		java.util.Map<java.util.Locale, java.lang.String> validationErrorMessageMap,
 		java.util.Map<java.util.Locale, java.lang.String> maxLengthErrorMessageMap) {
 		return _formItemLocalService.save(formItemId, formId, label, type,
-			mandatory, validationRegexValue, validationType,
-			errorValidationMessage, order, maxLength, hintMessage,
-			serviceContext, formItemAttrClass, labelAttrClass, inputAttrClass,
-			mandatoryErrorMessageMap, validationErrorMessageMap,
-			maxLengthErrorMessageMap);
+			mandatory, validationRegexValue, validationType, order, maxLength,
+			hintMessage, serviceContext, formItemAttrClass, labelAttrClass,
+			inputAttrClass, mandatoryErrorMessageMap,
+			validationErrorMessageMap, maxLengthErrorMessageMap);
 	}
 
 	@Override

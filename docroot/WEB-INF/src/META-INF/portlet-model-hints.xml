@@ -41,7 +41,9 @@
 		<field name="defaultValue" type="String" localized="true" />
 		<field name="order" type="int" />
 		<field name="validationType" type="String" />
-		<field name="validationRegexValue" type="String" />
+		<field name="validationRegexValue" type="String">
+			<hint name="max-length">4000</hint>
+		</field>
 		<field name="minLength" type="int" />
 		<field name="maxLength" type="int" />
 		<field name="errorValidationMessage" type="String" localized="true" />

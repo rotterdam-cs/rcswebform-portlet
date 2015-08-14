@@ -81,10 +81,15 @@
 	    if(node.attr('value') == node.attr('placeholder') ){
 	        return false;
 	    }   
-	
 	    var regExp = new RegExp(ruleValue);
 	    
-	    return regExp.test(val);
+	    if(regExp.test(val)) {
+	    	console.log('true');
+	    	return true;
+	    } else {
+	    	console.log('false');
+	    	return false
+	    }
 	}
 	
 	var custom_date = function(val, node, ruleValue) {

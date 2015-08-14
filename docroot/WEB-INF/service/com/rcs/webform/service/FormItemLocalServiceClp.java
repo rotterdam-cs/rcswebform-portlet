@@ -113,10 +113,10 @@ public class FormItemLocalServiceClp implements FormItemLocalService {
 		_methodParameterTypes19 = new String[] {
 				"java.lang.Long", "java.lang.Long", "java.util.Map",
 				"java.lang.String", "boolean", "java.lang.String",
-				"java.lang.String", "java.lang.String", "int", "int",
-				"java.util.Map", "com.liferay.portal.service.ServiceContext",
-				"java.lang.String", "java.lang.String", "java.lang.String",
-				"java.util.Map", "java.util.Map", "java.util.Map"
+				"java.lang.String", "int", "int", "java.util.Map",
+				"com.liferay.portal.service.ServiceContext", "java.lang.String",
+				"java.lang.String", "java.lang.String", "java.util.Map",
+				"java.util.Map", "java.util.Map"
 			};
 
 		_methodName20 = "getFormItemByFormId";
@@ -686,7 +686,7 @@ public class FormItemLocalServiceClp implements FormItemLocalService {
 		java.util.Map<java.util.Locale, java.lang.String> label,
 		java.lang.String type, boolean mandatory,
 		java.lang.String validationRegexValue, java.lang.String validationType,
-		java.lang.String errorValidationMessage, int order, int maxLength,
+		int order, int maxLength,
 		java.util.Map<java.util.Locale, java.lang.String> hintMessage,
 		com.liferay.portal.service.ServiceContext serviceContext,
 		java.lang.String formItemAttrClass, java.lang.String labelAttrClass,
@@ -713,8 +713,6 @@ public class FormItemLocalServiceClp implements FormItemLocalService {
 					ClpSerializer.translateInput(validationRegexValue),
 						
 					ClpSerializer.translateInput(validationType),
-						
-					ClpSerializer.translateInput(errorValidationMessage),
 						
 					order,
 						
