@@ -61,8 +61,8 @@
         <column name="inputAttrId" type="String"></column>
         <column name="inputAttrClass" type="String"></column>
         <column name="type" type="String"></column>
-        <column name="optionKeys" type="String"></column>
-        <column name="optionValues" type="String" localized="true"></column>
+<!--         <column name="optionKeys" type="String"></column> -->
+<!--         <column name="optionValues" type="String" localized="true"></column> -->
         <column name="mandatory" type="boolean"></column>
         <column name="defaultValue" type="String" localized="true"></column>
         <column name="order" type="int"></column>
@@ -151,7 +151,7 @@
 
 		<!-- PK fields -->
 
-		<column name="formitemoptionId" type="long"
+		<column name="formItemOptionId" type="long"
 			primary="true">
 		</column>
 
@@ -162,7 +162,7 @@
 		<column name="modificationDate" type="Date"></column>
 		<column name="modificationUser" type="String"></column>
         <column name="formItemId" type="long" primary="false"></column>
-        <column name="optionKey" type="String" localized="true"></column>
+        <column name="optionKey" type="String" localized="false"></column>
         <column name="optionValue" type="String" localized="true"></column>
 	</entity>
 

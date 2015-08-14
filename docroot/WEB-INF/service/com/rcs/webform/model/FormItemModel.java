@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -357,122 +357,6 @@ public interface FormItemModel extends BaseModel<FormItem> {
 	 * @param type the type of this form item
 	 */
 	public void setType(String type);
-
-	/**
-	 * Returns the option keys of this form item.
-	 *
-	 * @return the option keys of this form item
-	 */
-	@AutoEscape
-	public String getOptionKeys();
-
-	/**
-	 * Sets the option keys of this form item.
-	 *
-	 * @param optionKeys the option keys of this form item
-	 */
-	public void setOptionKeys(String optionKeys);
-
-	/**
-	 * Returns the option values of this form item.
-	 *
-	 * @return the option values of this form item
-	 */
-	public String getOptionValues();
-
-	/**
-	 * Returns the localized option values of this form item in the language. Uses the default language if no localization exists for the requested language.
-	 *
-	 * @param locale the locale of the language
-	 * @return the localized option values of this form item
-	 */
-	@AutoEscape
-	public String getOptionValues(Locale locale);
-
-	/**
-	 * Returns the localized option values of this form item in the language, optionally using the default language if no localization exists for the requested language.
-	 *
-	 * @param locale the local of the language
-	 * @param useDefault whether to use the default language if no localization exists for the requested language
-	 * @return the localized option values of this form item. If <code>useDefault</code> is <code>false</code> and no localization exists for the requested language, an empty string will be returned.
-	 */
-	@AutoEscape
-	public String getOptionValues(Locale locale, boolean useDefault);
-
-	/**
-	 * Returns the localized option values of this form item in the language. Uses the default language if no localization exists for the requested language.
-	 *
-	 * @param languageId the ID of the language
-	 * @return the localized option values of this form item
-	 */
-	@AutoEscape
-	public String getOptionValues(String languageId);
-
-	/**
-	 * Returns the localized option values of this form item in the language, optionally using the default language if no localization exists for the requested language.
-	 *
-	 * @param languageId the ID of the language
-	 * @param useDefault whether to use the default language if no localization exists for the requested language
-	 * @return the localized option values of this form item
-	 */
-	@AutoEscape
-	public String getOptionValues(String languageId, boolean useDefault);
-
-	@AutoEscape
-	public String getOptionValuesCurrentLanguageId();
-
-	@AutoEscape
-	public String getOptionValuesCurrentValue();
-
-	/**
-	 * Returns a map of the locales and localized option valueses of this form item.
-	 *
-	 * @return the locales and localized option valueses of this form item
-	 */
-	public Map<Locale, String> getOptionValuesMap();
-
-	/**
-	 * Sets the option values of this form item.
-	 *
-	 * @param optionValues the option values of this form item
-	 */
-	public void setOptionValues(String optionValues);
-
-	/**
-	 * Sets the localized option values of this form item in the language.
-	 *
-	 * @param optionValues the localized option values of this form item
-	 * @param locale the locale of the language
-	 */
-	public void setOptionValues(String optionValues, Locale locale);
-
-	/**
-	 * Sets the localized option values of this form item in the language, and sets the default locale.
-	 *
-	 * @param optionValues the localized option values of this form item
-	 * @param locale the locale of the language
-	 * @param defaultLocale the default locale
-	 */
-	public void setOptionValues(String optionValues, Locale locale,
-		Locale defaultLocale);
-
-	public void setOptionValuesCurrentLanguageId(String languageId);
-
-	/**
-	 * Sets the localized option valueses of this form item from the map of locales and localized option valueses.
-	 *
-	 * @param optionValuesMap the locales and localized option valueses of this form item
-	 */
-	public void setOptionValuesMap(Map<Locale, String> optionValuesMap);
-
-	/**
-	 * Sets the localized option valueses of this form item from the map of locales and localized option valueses, and sets the default locale.
-	 *
-	 * @param optionValuesMap the locales and localized option valueses of this form item
-	 * @param defaultLocale the default locale
-	 */
-	public void setOptionValuesMap(Map<Locale, String> optionValuesMap,
-		Locale defaultLocale);
 
 	/**
 	 * Returns the mandatory of this form item.

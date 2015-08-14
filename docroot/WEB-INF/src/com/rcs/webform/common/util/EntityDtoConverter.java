@@ -102,7 +102,7 @@ public class EntityDtoConverter {
         JSONArray optionKeyArray = JSONFactoryUtil.createJSONArray();
         JSONArray optionValueArray = JSONFactoryUtil.createJSONArray();
         for(FormItemOption formItemOption : formItemOptions) {
-            optionKeyArray.put(formItemOption.getOptionKey(locale));
+            optionKeyArray.put(formItemOption.getOptionKey());
             optionValueArray.put(formItemOption.getOptionValue(locale));
         }
         optionKeyValueMap.put(KEY, optionKeyArray.toString());

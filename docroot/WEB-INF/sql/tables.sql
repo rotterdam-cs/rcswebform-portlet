@@ -35,8 +35,6 @@ create table rcswebform_FormItem (
 	inputAttrId VARCHAR(75) null,
 	inputAttrClass VARCHAR(75) null,
 	type_ VARCHAR(75) null,
-	optionKeys VARCHAR(75) null,
-	optionValues STRING null,
 	mandatory BOOLEAN,
 	defaultValue STRING null,
 	order_ INTEGER,
@@ -51,12 +49,12 @@ create table rcswebform_FormItem (
 );
 
 create table rcswebform_FormItemOption (
-	formitemoptionId LONG not null primary key,
+	formItemOptionId LONG not null primary key,
 	creationDate DATE null,
 	modificationDate DATE null,
 	modificationUser VARCHAR(75) null,
 	formItemId LONG,
-	optionKey STRING null,
+	optionKey VARCHAR(75) null,
 	optionValue STRING null
 );
 

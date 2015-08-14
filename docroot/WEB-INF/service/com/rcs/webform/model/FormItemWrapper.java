@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -63,8 +63,6 @@ public class FormItemWrapper implements FormItem, ModelWrapper<FormItem> {
 		attributes.put("inputAttrId", getInputAttrId());
 		attributes.put("inputAttrClass", getInputAttrClass());
 		attributes.put("type", getType());
-		attributes.put("optionKeys", getOptionKeys());
-		attributes.put("optionValues", getOptionValues());
 		attributes.put("mandatory", getMandatory());
 		attributes.put("defaultValue", getDefaultValue());
 		attributes.put("order", getOrder());
@@ -164,18 +162,6 @@ public class FormItemWrapper implements FormItem, ModelWrapper<FormItem> {
 
 		if (type != null) {
 			setType(type);
-		}
-
-		String optionKeys = (String)attributes.get("optionKeys");
-
-		if (optionKeys != null) {
-			setOptionKeys(optionKeys);
-		}
-
-		String optionValues = (String)attributes.get("optionValues");
-
-		if (optionValues != null) {
-			setOptionValues(optionValues);
 		}
 
 		Boolean mandatory = (Boolean)attributes.get("mandatory");
@@ -676,168 +662,6 @@ public class FormItemWrapper implements FormItem, ModelWrapper<FormItem> {
 	@Override
 	public void setType(java.lang.String type) {
 		_formItem.setType(type);
-	}
-
-	/**
-	* Returns the option keys of this form item.
-	*
-	* @return the option keys of this form item
-	*/
-	@Override
-	public java.lang.String getOptionKeys() {
-		return _formItem.getOptionKeys();
-	}
-
-	/**
-	* Sets the option keys of this form item.
-	*
-	* @param optionKeys the option keys of this form item
-	*/
-	@Override
-	public void setOptionKeys(java.lang.String optionKeys) {
-		_formItem.setOptionKeys(optionKeys);
-	}
-
-	/**
-	* Returns the option values of this form item.
-	*
-	* @return the option values of this form item
-	*/
-	@Override
-	public java.lang.String getOptionValues() {
-		return _formItem.getOptionValues();
-	}
-
-	/**
-	* Returns the localized option values of this form item in the language. Uses the default language if no localization exists for the requested language.
-	*
-	* @param locale the locale of the language
-	* @return the localized option values of this form item
-	*/
-	@Override
-	public java.lang.String getOptionValues(java.util.Locale locale) {
-		return _formItem.getOptionValues(locale);
-	}
-
-	/**
-	* Returns the localized option values of this form item in the language, optionally using the default language if no localization exists for the requested language.
-	*
-	* @param locale the local of the language
-	* @param useDefault whether to use the default language if no localization exists for the requested language
-	* @return the localized option values of this form item. If <code>useDefault</code> is <code>false</code> and no localization exists for the requested language, an empty string will be returned.
-	*/
-	@Override
-	public java.lang.String getOptionValues(java.util.Locale locale,
-		boolean useDefault) {
-		return _formItem.getOptionValues(locale, useDefault);
-	}
-
-	/**
-	* Returns the localized option values of this form item in the language. Uses the default language if no localization exists for the requested language.
-	*
-	* @param languageId the ID of the language
-	* @return the localized option values of this form item
-	*/
-	@Override
-	public java.lang.String getOptionValues(java.lang.String languageId) {
-		return _formItem.getOptionValues(languageId);
-	}
-
-	/**
-	* Returns the localized option values of this form item in the language, optionally using the default language if no localization exists for the requested language.
-	*
-	* @param languageId the ID of the language
-	* @param useDefault whether to use the default language if no localization exists for the requested language
-	* @return the localized option values of this form item
-	*/
-	@Override
-	public java.lang.String getOptionValues(java.lang.String languageId,
-		boolean useDefault) {
-		return _formItem.getOptionValues(languageId, useDefault);
-	}
-
-	@Override
-	public java.lang.String getOptionValuesCurrentLanguageId() {
-		return _formItem.getOptionValuesCurrentLanguageId();
-	}
-
-	@Override
-	public java.lang.String getOptionValuesCurrentValue() {
-		return _formItem.getOptionValuesCurrentValue();
-	}
-
-	/**
-	* Returns a map of the locales and localized option valueses of this form item.
-	*
-	* @return the locales and localized option valueses of this form item
-	*/
-	@Override
-	public java.util.Map<java.util.Locale, java.lang.String> getOptionValuesMap() {
-		return _formItem.getOptionValuesMap();
-	}
-
-	/**
-	* Sets the option values of this form item.
-	*
-	* @param optionValues the option values of this form item
-	*/
-	@Override
-	public void setOptionValues(java.lang.String optionValues) {
-		_formItem.setOptionValues(optionValues);
-	}
-
-	/**
-	* Sets the localized option values of this form item in the language.
-	*
-	* @param optionValues the localized option values of this form item
-	* @param locale the locale of the language
-	*/
-	@Override
-	public void setOptionValues(java.lang.String optionValues,
-		java.util.Locale locale) {
-		_formItem.setOptionValues(optionValues, locale);
-	}
-
-	/**
-	* Sets the localized option values of this form item in the language, and sets the default locale.
-	*
-	* @param optionValues the localized option values of this form item
-	* @param locale the locale of the language
-	* @param defaultLocale the default locale
-	*/
-	@Override
-	public void setOptionValues(java.lang.String optionValues,
-		java.util.Locale locale, java.util.Locale defaultLocale) {
-		_formItem.setOptionValues(optionValues, locale, defaultLocale);
-	}
-
-	@Override
-	public void setOptionValuesCurrentLanguageId(java.lang.String languageId) {
-		_formItem.setOptionValuesCurrentLanguageId(languageId);
-	}
-
-	/**
-	* Sets the localized option valueses of this form item from the map of locales and localized option valueses.
-	*
-	* @param optionValuesMap the locales and localized option valueses of this form item
-	*/
-	@Override
-	public void setOptionValuesMap(
-		java.util.Map<java.util.Locale, java.lang.String> optionValuesMap) {
-		_formItem.setOptionValuesMap(optionValuesMap);
-	}
-
-	/**
-	* Sets the localized option valueses of this form item from the map of locales and localized option valueses, and sets the default locale.
-	*
-	* @param optionValuesMap the locales and localized option valueses of this form item
-	* @param defaultLocale the default locale
-	*/
-	@Override
-	public void setOptionValuesMap(
-		java.util.Map<java.util.Locale, java.lang.String> optionValuesMap,
-		java.util.Locale defaultLocale) {
-		_formItem.setOptionValuesMap(optionValuesMap, defaultLocale);
 	}
 
 	/**

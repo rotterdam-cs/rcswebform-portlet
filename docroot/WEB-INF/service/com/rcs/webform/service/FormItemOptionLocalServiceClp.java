@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -118,7 +118,7 @@ public class FormItemOptionLocalServiceClp implements FormItemOptionLocalService
 		_methodName19 = "save";
 
 		_methodParameterTypes19 = new String[] {
-				"java.lang.Long", "java.lang.Long", "java.util.Map",
+				"java.lang.Long", "java.lang.Long", "java.lang.String",
 				"java.util.Map", "com.liferay.portal.service.ServiceContext"
 			};
 
@@ -163,12 +163,12 @@ public class FormItemOptionLocalServiceClp implements FormItemOptionLocalService
 
 	@Override
 	public com.rcs.webform.model.FormItemOption createFormItemOption(
-		long formitemoptionId) {
+		long formItemOptionId) {
 		Object returnObj = null;
 
 		try {
 			returnObj = _invokableLocalService.invokeMethod(_methodName1,
-					_methodParameterTypes1, new Object[] { formitemoptionId });
+					_methodParameterTypes1, new Object[] { formItemOptionId });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -187,14 +187,14 @@ public class FormItemOptionLocalServiceClp implements FormItemOptionLocalService
 
 	@Override
 	public com.rcs.webform.model.FormItemOption deleteFormItemOption(
-		long formitemoptionId)
+		long formItemOptionId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
 
 		try {
 			returnObj = _invokableLocalService.invokeMethod(_methodName2,
-					_methodParameterTypes2, new Object[] { formitemoptionId });
+					_methodParameterTypes2, new Object[] { formItemOptionId });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -448,13 +448,13 @@ public class FormItemOptionLocalServiceClp implements FormItemOptionLocalService
 
 	@Override
 	public com.rcs.webform.model.FormItemOption fetchFormItemOption(
-		long formitemoptionId)
+		long formItemOptionId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
 
 		try {
 			returnObj = _invokableLocalService.invokeMethod(_methodName10,
-					_methodParameterTypes10, new Object[] { formitemoptionId });
+					_methodParameterTypes10, new Object[] { formItemOptionId });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -477,14 +477,14 @@ public class FormItemOptionLocalServiceClp implements FormItemOptionLocalService
 
 	@Override
 	public com.rcs.webform.model.FormItemOption getFormItemOption(
-		long formitemoptionId)
+		long formItemOptionId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
 
 		try {
 			returnObj = _invokableLocalService.invokeMethod(_methodName11,
-					_methodParameterTypes11, new Object[] { formitemoptionId });
+					_methodParameterTypes11, new Object[] { formItemOptionId });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -684,7 +684,7 @@ public class FormItemOptionLocalServiceClp implements FormItemOptionLocalService
 	@Override
 	public com.rcs.webform.model.FormItemOption save(
 		java.lang.Long formItemOptionId, java.lang.Long formItemId,
-		java.util.Map<java.util.Locale, java.lang.String> optionLabel,
+		java.lang.String optionLabel,
 		java.util.Map<java.util.Locale, java.lang.String> optionValue,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		Object returnObj = null;

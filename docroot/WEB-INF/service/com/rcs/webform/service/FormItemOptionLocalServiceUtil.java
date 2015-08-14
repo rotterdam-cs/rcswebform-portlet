@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -55,27 +55,27 @@ public class FormItemOptionLocalServiceUtil {
 	/**
 	* Creates a new form item option with the primary key. Does not add the form item option to the database.
 	*
-	* @param formitemoptionId the primary key for the new form item option
+	* @param formItemOptionId the primary key for the new form item option
 	* @return the new form item option
 	*/
 	public static com.rcs.webform.model.FormItemOption createFormItemOption(
-		long formitemoptionId) {
-		return getService().createFormItemOption(formitemoptionId);
+		long formItemOptionId) {
+		return getService().createFormItemOption(formItemOptionId);
 	}
 
 	/**
 	* Deletes the form item option with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param formitemoptionId the primary key of the form item option
+	* @param formItemOptionId the primary key of the form item option
 	* @return the form item option that was removed
 	* @throws PortalException if a form item option with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
 	public static com.rcs.webform.model.FormItemOption deleteFormItemOption(
-		long formitemoptionId)
+		long formItemOptionId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return getService().deleteFormItemOption(formitemoptionId);
+		return getService().deleteFormItemOption(formItemOptionId);
 	}
 
 	/**
@@ -182,24 +182,24 @@ public class FormItemOptionLocalServiceUtil {
 	}
 
 	public static com.rcs.webform.model.FormItemOption fetchFormItemOption(
-		long formitemoptionId)
+		long formItemOptionId)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().fetchFormItemOption(formitemoptionId);
+		return getService().fetchFormItemOption(formItemOptionId);
 	}
 
 	/**
 	* Returns the form item option with the primary key.
 	*
-	* @param formitemoptionId the primary key of the form item option
+	* @param formItemOptionId the primary key of the form item option
 	* @return the form item option
 	* @throws PortalException if a form item option with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
 	public static com.rcs.webform.model.FormItemOption getFormItemOption(
-		long formitemoptionId)
+		long formItemOptionId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return getService().getFormItemOption(formitemoptionId);
+		return getService().getFormItemOption(formItemOptionId);
 	}
 
 	public static com.liferay.portal.model.PersistedModel getPersistedModel(
@@ -287,7 +287,7 @@ public class FormItemOptionLocalServiceUtil {
 	*/
 	public static com.rcs.webform.model.FormItemOption save(
 		java.lang.Long formItemOptionId, java.lang.Long formItemId,
-		java.util.Map<java.util.Locale, java.lang.String> optionLabel,
+		java.lang.String optionLabel,
 		java.util.Map<java.util.Locale, java.lang.String> optionValue,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		return getService()

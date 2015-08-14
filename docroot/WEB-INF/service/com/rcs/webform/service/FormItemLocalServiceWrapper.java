@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -301,20 +301,22 @@ public class FormItemLocalServiceWrapper implements FormItemLocalService,
 	public com.rcs.webform.model.FormItem save(java.lang.Long formItemId,
 		java.lang.Long formId,
 		java.util.Map<java.util.Locale, java.lang.String> label,
-		java.lang.String type, java.lang.String optionKeys,
-		java.util.Map<java.util.Locale, java.lang.String> optionValues,
-		boolean mandatory, java.lang.String validationRegexValue,
-		java.lang.String validationType,
+		java.lang.String type, boolean mandatory,
+		java.lang.String validationRegexValue, java.lang.String validationType,
 		java.lang.String errorValidationMessage, int order, int maxLength,
 		java.util.Map<java.util.Locale, java.lang.String> hintMessage,
 		com.liferay.portal.service.ServiceContext serviceContext,
 		java.lang.String formItemAttrClass, java.lang.String labelAttrClass,
-		java.lang.String inputAttrClass) {
+		java.lang.String inputAttrClass,
+		java.util.Map<java.util.Locale, java.lang.String> mandatoryErrorMessageMap,
+		java.util.Map<java.util.Locale, java.lang.String> validationErrorMessageMap,
+		java.util.Map<java.util.Locale, java.lang.String> maxLengthErrorMessageMap) {
 		return _formItemLocalService.save(formItemId, formId, label, type,
-			optionKeys, optionValues, mandatory, validationRegexValue,
-			validationType, errorValidationMessage, order, maxLength,
-			hintMessage, serviceContext, formItemAttrClass, labelAttrClass,
-			inputAttrClass);
+			mandatory, validationRegexValue, validationType,
+			errorValidationMessage, order, maxLength, hintMessage,
+			serviceContext, formItemAttrClass, labelAttrClass, inputAttrClass,
+			mandatoryErrorMessageMap, validationErrorMessageMap,
+			maxLengthErrorMessageMap);
 	}
 
 	@Override

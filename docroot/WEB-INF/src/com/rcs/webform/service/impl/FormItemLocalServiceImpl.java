@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.dao.orm.OrderFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.PropertyFactoryUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.LocalizationUtil;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.ServiceContext;
 import com.rcs.webform.model.FormItem;
@@ -68,9 +69,9 @@ public class FormItemLocalServiceImpl extends FormItemLocalServiceBaseImpl {
      * @param serviceContext
      * @return
      */
-    public FormItem save(Long formItemId, Long formId, Map<Locale, String> label, String type, String optionKeys, Map<Locale, String> optionValues, boolean mandatory, String validationRegexValue,
+    public FormItem save(Long formItemId, Long formId, Map<Locale, String> label, String type, boolean mandatory, String validationRegexValue,
             String validationType, String errorValidationMessage, int order, int maxLength, Map<Locale, String> hintMessage, ServiceContext serviceContext,
-            String formItemAttrClass, String labelAttrClass, String inputAttrClass) {
+            String formItemAttrClass, String labelAttrClass, String inputAttrClass, Map<Locale, String> mandatoryErrorMessageMap, Map<Locale, String> validationErrorMessageMap, Map<Locale, String> maxLengthErrorMessageMap) {
 
         User user = null;
         FormItem formItem = null;
@@ -96,17 +97,16 @@ public class FormItemLocalServiceImpl extends FormItemLocalServiceBaseImpl {
             formItem.setInputAttrId("");
             formItem.setInputAttrClass(inputAttrClass);
             formItem.setType(type);
-            formItem.setOptionKeys(optionKeys);
-            formItem.setOptionValuesMap(optionValues);
             formItem.setMandatory(mandatory);
             formItem.setDefaultValue("");
             formItem.setOrder(order);
             formItem.setHintMessageMap(hintMessage);
             formItem.setValidationType(validationType);
             formItem.setValidationRegexValue(validationRegexValue);
-            formItem.setErrorMandatoryMessage("");
-            formItem.setErrorValidationMessage(errorValidationMessage);
             formItem.setMaxLength(maxLength);
+            formItem.setErrorMandatoryMessageMap(mandatoryErrorMessageMap);
+            formItem.setErrorValidationMessageMap(validationErrorMessageMap);
+            formItem.setErrorLengthMessageMap(maxLengthErrorMessageMap);
 
             formItemPersistence.update(formItem);
         } catch (Exception e) {

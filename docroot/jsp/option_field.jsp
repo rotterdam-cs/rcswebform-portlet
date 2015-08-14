@@ -6,13 +6,13 @@
 int fieldOptionsIndex = GetterUtil.getInteger(request.getAttribute("fieldOptionsIndex"));
 int index = GetterUtil.getInteger(request.getAttribute("formItemIndex"));
 boolean ignoreRequestValue = GetterUtil.getBoolean(request.getAttribute("ignoreRequestValue"));
-String formItemOptionLabelMap = "";
+String formItemOptionLabel = "";
 String formItemOptionValueMap = "";
 Long formItemOptionId = null;
 List<FormItemOption> formItemOptions = (List<FormItemOption>) GetterUtil.getObject(request.getAttribute("formItemOptions"));
 if(formItemOptions != null && !formItemOptions.isEmpty()){
-	formItemOptionId = formItemOptions.get(fieldOptionsIndex).getFormitemoptionId();
-	formItemOptionLabelMap = formItemOptions.get(fieldOptionsIndex).getOptionKey();
+	formItemOptionId = formItemOptions.get(fieldOptionsIndex).getFormItemOptionId();
+	formItemOptionLabel = formItemOptions.get(fieldOptionsIndex).getOptionKey();
 	formItemOptionValueMap = formItemOptions.get(fieldOptionsIndex).getOptionValue();
 }
 %>
@@ -20,8 +20,9 @@ if(formItemOptions != null && !formItemOptions.isEmpty()){
 <div class='added-option-field'>
 	<aui:input cssClass='formItemOptionId' name='<%= "formItemOptionId" + fieldOptionsIndex + "_" + index %>' ignoreRequestValue="<%= ignoreRequestValue %>" type="hidden" value='<%=formItemOptionId%>'/>
 	<aui:field-wrapper cssClass='left-row-clear-left options'>
-		<liferay-ui:input-localized ignoreRequestValue="<%= ignoreRequestValue %>" name='<%= "fieldOptionsLabel" + fieldOptionsIndex + "_" + index %>' xml="<%= formItemOptionLabelMap %>" />
+		<aui:input name='<%= "fieldOptionsLabel" + fieldOptionsIndex + "_" + index %>' type="text" ignoreRequestValue="<%= ignoreRequestValue %>" label="" value="<%= formItemOptionLabel %>"></aui:input>
 	</aui:field-wrapper>
+	
 	<aui:field-wrapper cssClass='left-row options'>
 		<liferay-ui:input-localized ignoreRequestValue="<%= ignoreRequestValue %>" name='<%= "fieldOptionsValue" + fieldOptionsIndex  + "_" + index %>' xml="<%= formItemOptionValueMap %>" />
 	</aui:field-wrapper>

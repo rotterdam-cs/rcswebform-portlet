@@ -33,13 +33,13 @@ String fieldLabel = "";
 String fieldType = "TEXT_FIELD";
 boolean fieldOptional = true;
 String fieldOptionsXml = "";
-String formItemOptionLabelMap = "";
+String formItemOptionLabel = "";
 String formItemOptionValueMap = "";
 Long formItemOptionId = null;
 String fieldOptions = "";
 String fieldValidationScript = "";
 String fieldValidationErrorMessage = "";
-String fieldTextFieldInputType = "ALPHA";
+String fieldTextFieldInputType = "ALPHANUM";
 String fieldHintMessageXml = "";
 int inputMaxLength = 0;
 String sectionCssClass = "rcs-section";
@@ -47,6 +47,9 @@ String sectionLabelCssClass = "rcs-section-label";
 String formItemCssClass = "rcs-form-item";
 String labelCssClass = "rcs-label";
 String inputCssClass = "rcs-input";
+String mandatoryErrorMessageXml = "";
+String validationErrorMessageXml = "";
+String maxLengthErrorMessageXml = "";
 
 if(formItems != null && !formItems.isEmpty()){
 	formItemId = formItems.get(formFieldsIndex).getFormItemId();
@@ -54,8 +57,6 @@ if(formItems != null && !formItems.isEmpty()){
 	fieldLabel = LocalizationUtil.getLocalization(fieldLabelXml, themeDisplay.getLanguageId());
 	fieldType = formItems.get(formFieldsIndex).getType();
 	fieldOptional = !formItems.get(formFieldsIndex).getMandatory();
-	fieldOptionsXml = formItems.get(formFieldsIndex).getOptionValues();
-	fieldOptions = LocalizationUtil.getLocalization(fieldOptionsXml, themeDisplay.getLanguageId());
 	fieldTextFieldInputType = formItems.get(formFieldsIndex).getValidationType();
 	inputMaxLength = formItems.get(formFieldsIndex).getMaxLength();
 	fieldValidationScript = PrefsParamUtil.getString(portletPreferences, request, "fieldValidationScript" + formFieldsIndex);
@@ -64,6 +65,9 @@ if(formItems != null && !formItems.isEmpty()){
 	formItemCssClass = formItems.get(formFieldsIndex).getFormItemAttrClass();
 	labelCssClass = formItems.get(formFieldsIndex).getLabelAttrClass();
 	inputCssClass = formItems.get(formFieldsIndex).getInputAttrClass();
+	mandatoryErrorMessageXml = formItems.get(formFieldsIndex).getErrorMandatoryMessage();
+	validationErrorMessageXml = formItems.get(formFieldsIndex).getErrorValidationMessage();
+	maxLengthErrorMessageXml = formItems.get(formFieldsIndex).getErrorLengthMessage();
 }
 
 List<FormItemOption> formItemOptions = null;
@@ -71,8 +75,8 @@ if(fieldType.equals("OPTIONS") || fieldType.equals("RADIO_BUTTON") || fieldType.
 	formItemOptions = WebFormUtil.getFormItemOptions(formItemId);
 	if(formItemOptions != null && !formItemOptions.isEmpty()){
 		fieldOptionsIndex = formItemOptions.size();
-		formItemOptionId = formItemOptions.get(0).getFormitemoptionId();
-		formItemOptionLabelMap = formItemOptions.get(0).getOptionKey();
+		formItemOptionId = formItemOptions.get(0).getFormItemOptionId();
+		formItemOptionLabel = formItemOptions.get(0).getOptionKey();
 		formItemOptionValueMap = formItemOptions.get(0).getOptionValue();
 	}
 }
@@ -182,8 +186,8 @@ boolean ignoreRequestValue = (index != formFieldsIndex);
 		<aui:input cssClass="fieldOptionsIndex" name='<%= "fieldOptionsIndex" + index %>' type="hidden" value='<%=fieldOptionsIndex%>'/>
 		<div class="options-field">
 			<aui:input name='<%= "formItemOptionId0_" + index %>' type="hidden" value='<%=formItemOptionId%>'/>
-			<aui:field-wrapper cssClass='<%= "left-row-clear-left options" + ((Validator.isNull(fieldType) || (!fieldType.equals("OPTIONS") && !fieldType.equals("RADIO_BUTTON") && !fieldType.equals("CHECKBOX"))) ? " hide" : StringPool.BLANK) %>' label="Options Label">
-				<liferay-ui:input-localized ignoreRequestValue="<%= ignoreRequestValue %>" name='<%= "fieldOptionsLabel0_" + index %>' xml="<%= formItemOptionLabelMap %>" />
+			<aui:field-wrapper cssClass='<%= "left-row-clear-left options" + ((Validator.isNull(fieldType) || (!fieldType.equals("OPTIONS") && !fieldType.equals("RADIO_BUTTON") && !fieldType.equals("CHECKBOX"))) ? " hide" : StringPool.BLANK) %>'>
+				<aui:input name='<%= "fieldOptionsLabel0_" + index %>' type="text" ignoreRequestValue="<%= ignoreRequestValue %>" label="Options Label" value="<%= formItemOptionLabel %>"></aui:input>
 			</aui:field-wrapper>
 			<aui:field-wrapper cssClass='<%= "left-row options" + ((Validator.isNull(fieldType) || (!fieldType.equals("OPTIONS") && !fieldType.equals("RADIO_BUTTON") && !fieldType.equals("CHECKBOX"))) ? " hide" : StringPool.BLANK) %>' label="Options Value">
 				<liferay-ui:input-localized ignoreRequestValue="<%= ignoreRequestValue %>" name='<%= "fieldOptionsValue0_" + index %>' xml="<%= formItemOptionValueMap %>" />
@@ -224,14 +228,14 @@ boolean ignoreRequestValue = (index != formFieldsIndex);
 			<aui:field-wrapper cssClass='<%= "text-field-input-type" + ((Validator.isNull(fieldType) || (!fieldType.equals("TEXT_FIELD"))) ? " hide" : StringPool.BLANK) %>' >
 				<aui:field-wrapper cssClass="left-row-clear-left">
 					<aui:select cssClass="text-field-input-type" ignoreRequestValue="<%= ignoreRequestValue %>" name='<%= "fieldInputType" + index %>' helpMessage='Set Text Field Input Type' label="Input Type">
-						<aui:option selected='<%= fieldTextFieldInputType.equals("ALPHA") %>' value="ALPHA"><liferay-ui:message key="text" /></aui:option>
+						<aui:option selected='<%= fieldTextFieldInputType.equals("ALPHANUM") %>' value="ALPHANUM"><liferay-ui:message key="text" /></aui:option>
+						<aui:option selected='<%= fieldTextFieldInputType.equals("ALPHA") %>' value="ALPHA"><liferay-ui:message key="com.rcs.template.alphabet" /></aui:option>
 						<aui:option selected='<%= fieldTextFieldInputType.equals("NUMBER") %>' value="NUMBER"><liferay-ui:message key="number" /></aui:option>
 						<aui:option selected='<%= fieldTextFieldInputType.equals("PHONE_NUMBER") %>' value="PHONE_NUMBER"><liferay-ui:message key="phone-number" /></aui:option>
 						<aui:option selected='<%= fieldTextFieldInputType.equals("EMAIL") %>' value="EMAIL"><liferay-ui:message key="email" /></aui:option>
 					</aui:select>
 				</aui:field-wrapper>
-				
-				<aui:field-wrapper cssClass='<%= "left-row-clear-right input-max-length" + ((Validator.isNull(fieldTextFieldInputType) || (!fieldTextFieldInputType.equals("ALPHA") && !fieldTextFieldInputType.equals("NUMBER"))) ? " hide" : StringPool.BLANK) %>' >
+				<aui:field-wrapper cssClass='<%= "left-row-clear-right input-max-length" + (( Validator.isNull(fieldTextFieldInputType) || (!fieldTextFieldInputType.equals("ALPHANUM") && !fieldTextFieldInputType.equals("ALPHA") && !fieldTextFieldInputType.equals("NUMBER"))) ? " hide" : StringPool.BLANK) %>' > 
 					<aui:input ignoreRequestValue="<%= ignoreRequestValue %>" label="Max Length" name='<%= "inputMaxLength" + index %>' helpMessage="Set max number of allowed characters" type="text" value="<%= inputMaxLength %>" >
 						<aui:validator name="number"></aui:validator>
 					</aui:input>
@@ -245,7 +249,7 @@ boolean ignoreRequestValue = (index != formFieldsIndex);
 		<c:when test="<%= !fieldsEditingDisabled %>">
 			<aui:field-wrapper cssClass="left-row-clear-left">
 				<liferay-ui:toggle id='<%= "advanceSettings" + index %>' showMessage="Show Advance Settings" hideMessage="Hide Advance Settings" 
- 				 	defaultShowContent="false" stateVar='<%= "advanceSettings" + index %>'></liferay-ui:toggle> 
+ 				 	defaultShowContent="true" stateVar='<%= "advanceSettings" + index %>'></liferay-ui:toggle> 
 				<div id='<%= "advanceSettings" + index %>' style="display: <liferay-ui:toggle-value id='<%= "advanceSettings" + index %>' />; padding-top: 10px;">
 					<aui:field-wrapper cssClass="left-row-clear-left">
 						<aui:input name='<%= "formItemCssClass" + index %>' type="text" ignoreRequestValue="<%= ignoreRequestValue %>" label="Form Item CSS Class" value="<%= formItemCssClass %>"></aui:input>
@@ -256,7 +260,17 @@ boolean ignoreRequestValue = (index != formFieldsIndex);
 					<aui:field-wrapper cssClass="left-row-clear-right">
 						<aui:input name='<%= "formInputCssClass" + index %>' type="text" ignoreRequestValue="<%= ignoreRequestValue %>" label="Input CSS Class" value="<%= inputCssClass %>"></aui:input>
 					</aui:field-wrapper>
-				</div>
+					<br/>
+					<aui:field-wrapper cssClass='<%= "mandatory-error-message left-row"+ ( (fieldOptional) || (fieldType.equals("SECTION")) ? " hide" : StringPool.BLANK) %>' label="Mandatory field error message">
+						<liferay-ui:input-localized ignoreRequestValue="<%= ignoreRequestValue %>" name='<%= "mandatoryErrorMessage" + index %>' xml="<%= mandatoryErrorMessageXml %>" />
+					</aui:field-wrapper>
+					<aui:field-wrapper cssClass='<%= "validation-error-message left-row"+ (!(fieldType.equals("TEXT_FIELD") && !fieldTextFieldInputType.equals("ALPHANUM")) ? " hide" : StringPool.BLANK) %>'  label="Validation error message">
+						<liferay-ui:input-localized ignoreRequestValue="<%= ignoreRequestValue %>" name='<%= "validationErrorMessage" + index %>' xml="<%= validationErrorMessageXml %>" />
+					</aui:field-wrapper>
+					<aui:field-wrapper cssClass='<%= "max-length-error-message left-row" + (inputMaxLength == 0 ? " hide" : StringPool.BLANK) %>' label="More than max length error message">
+						<liferay-ui:input-localized ignoreRequestValue="<%= ignoreRequestValue %>" name='<%= "maxLengthErrorMessage" + index %>' xml="<%= maxLengthErrorMessageXml %>" />
+					</aui:field-wrapper>
+			</div>
 			</aui:field-wrapper>
 		</c:when>
 	</c:choose>
@@ -315,7 +329,10 @@ boolean ignoreRequestValue = (index != formFieldsIndex);
 
 <aui:script use="aui-base,liferay-auto-fields, aui-node,liferay-portlet-url,aui-io-request">
 var index = '<%= index %>';
-// <%= "advanceSettings" + index + "Toggle"%>();
+if(A.one('#advanceSettings' + index).getStyle('display')==='block') {
+	<%= "advanceSettings" + index + "Toggle"%>();
+}
+
 A.one('<%= "#btn-add-option" + index %>').on('click', function(event){
 	var responseText='';
 	var fieldOptionsIndex = Number(A.one('#<portlet:namespace />fieldOptionsIndex' + index).val());
@@ -350,10 +367,7 @@ A.all('.btn-remove-option').on('click', function(event){
 	event.currentTarget.ancestorsByClassName('added-option-field').remove();
 });
 
-</aui:script>
-
-<aui:script use='aui-node'>
-var fieldType = A.one('#<portlet:namespace />fieldType<%= index %>');
+var fieldType = A.one('#<portlet:namespace />fieldType'+index);
 if(fieldType) {
 	var formItemClass = A.one('#<portlet:namespace />formItemCssClass<%= index %>');
 	var labelClass = A.one('#<portlet:namespace />formLabelCssClass<%= index %>');
@@ -364,6 +378,7 @@ if(fieldType) {
 	}
 	
 	fieldType.on('change', function(event) {
+		console.log('<%= ( (!fieldOptional) ? "hide" : "BLANK") %>');
 		if(event.currentTarget.val()==='SECTION') {
 			if(formItemClass && labelClass && inputClass) {
 				formItemClass.set('value','<%= sectionCssClass %>');
@@ -377,6 +392,18 @@ if(fieldType) {
 		}
 	});
 } else {
-	console.log('#<portlet:namespace />fieldType<%= index %> not found');
+	console.log('#<portlet:namespace />fieldType'+index+' not found');
 }
+
+var optionalCheckbox = A.one('#<portlet:namespace />fieldOptional' + index + 'Checkbox');
+optionalCheckbox.on('click', function(event) {
+	var optionalInput = A.one('#<portlet:namespace />fieldOptional' + index);
+	var mandatoryErrorMessageDiv = A.one('#<portlet:namespace />mandatoryErrorMessage' + index).ancestor('.field-wrapper');
+	if(optionalInput.val()==='true') {
+		mandatoryErrorMessageDiv.hide();
+	} else {
+		mandatoryErrorMessageDiv.show();
+	}
+	
+});
 </aui:script>

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -133,27 +133,27 @@ public class FormItemOptionUtil {
 	/**
 	* Creates a new form item option with the primary key. Does not add the form item option to the database.
 	*
-	* @param formitemoptionId the primary key for the new form item option
+	* @param formItemOptionId the primary key for the new form item option
 	* @return the new form item option
 	*/
 	public static com.rcs.webform.model.FormItemOption create(
-		long formitemoptionId) {
-		return getPersistence().create(formitemoptionId);
+		long formItemOptionId) {
+		return getPersistence().create(formItemOptionId);
 	}
 
 	/**
 	* Removes the form item option with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param formitemoptionId the primary key of the form item option
+	* @param formItemOptionId the primary key of the form item option
 	* @return the form item option that was removed
 	* @throws com.rcs.webform.NoSuchFormItemOptionException if a form item option with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
 	public static com.rcs.webform.model.FormItemOption remove(
-		long formitemoptionId)
+		long formItemOptionId)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.rcs.webform.NoSuchFormItemOptionException {
-		return getPersistence().remove(formitemoptionId);
+		return getPersistence().remove(formItemOptionId);
 	}
 
 	public static com.rcs.webform.model.FormItemOption updateImpl(
@@ -165,29 +165,29 @@ public class FormItemOptionUtil {
 	/**
 	* Returns the form item option with the primary key or throws a {@link com.rcs.webform.NoSuchFormItemOptionException} if it could not be found.
 	*
-	* @param formitemoptionId the primary key of the form item option
+	* @param formItemOptionId the primary key of the form item option
 	* @return the form item option
 	* @throws com.rcs.webform.NoSuchFormItemOptionException if a form item option with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
 	public static com.rcs.webform.model.FormItemOption findByPrimaryKey(
-		long formitemoptionId)
+		long formItemOptionId)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.rcs.webform.NoSuchFormItemOptionException {
-		return getPersistence().findByPrimaryKey(formitemoptionId);
+		return getPersistence().findByPrimaryKey(formItemOptionId);
 	}
 
 	/**
 	* Returns the form item option with the primary key or returns <code>null</code> if it could not be found.
 	*
-	* @param formitemoptionId the primary key of the form item option
+	* @param formItemOptionId the primary key of the form item option
 	* @return the form item option, or <code>null</code> if a form item option with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
 	public static com.rcs.webform.model.FormItemOption fetchByPrimaryKey(
-		long formitemoptionId)
+		long formItemOptionId)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().fetchByPrimaryKey(formitemoptionId);
+		return getPersistence().fetchByPrimaryKey(formItemOptionId);
 	}
 
 	/**

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -170,15 +170,15 @@ public class FormItemOptionPersistenceImpl extends BasePersistenceImpl<FormItemO
 	/**
 	 * Creates a new form item option with the primary key. Does not add the form item option to the database.
 	 *
-	 * @param formitemoptionId the primary key for the new form item option
+	 * @param formItemOptionId the primary key for the new form item option
 	 * @return the new form item option
 	 */
 	@Override
-	public FormItemOption create(long formitemoptionId) {
+	public FormItemOption create(long formItemOptionId) {
 		FormItemOption formItemOption = new FormItemOptionImpl();
 
 		formItemOption.setNew(true);
-		formItemOption.setPrimaryKey(formitemoptionId);
+		formItemOption.setPrimaryKey(formItemOptionId);
 
 		return formItemOption;
 	}
@@ -186,15 +186,15 @@ public class FormItemOptionPersistenceImpl extends BasePersistenceImpl<FormItemO
 	/**
 	 * Removes the form item option with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param formitemoptionId the primary key of the form item option
+	 * @param formItemOptionId the primary key of the form item option
 	 * @return the form item option that was removed
 	 * @throws com.rcs.webform.NoSuchFormItemOptionException if a form item option with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public FormItemOption remove(long formitemoptionId)
+	public FormItemOption remove(long formItemOptionId)
 		throws NoSuchFormItemOptionException, SystemException {
-		return remove((Serializable)formitemoptionId);
+		return remove((Serializable)formItemOptionId);
 	}
 
 	/**
@@ -323,7 +323,7 @@ public class FormItemOptionPersistenceImpl extends BasePersistenceImpl<FormItemO
 		formItemOptionImpl.setNew(formItemOption.isNew());
 		formItemOptionImpl.setPrimaryKey(formItemOption.getPrimaryKey());
 
-		formItemOptionImpl.setFormitemoptionId(formItemOption.getFormitemoptionId());
+		formItemOptionImpl.setFormItemOptionId(formItemOption.getFormItemOptionId());
 		formItemOptionImpl.setCreationDate(formItemOption.getCreationDate());
 		formItemOptionImpl.setModificationDate(formItemOption.getModificationDate());
 		formItemOptionImpl.setModificationUser(formItemOption.getModificationUser());
@@ -362,15 +362,15 @@ public class FormItemOptionPersistenceImpl extends BasePersistenceImpl<FormItemO
 	/**
 	 * Returns the form item option with the primary key or throws a {@link com.rcs.webform.NoSuchFormItemOptionException} if it could not be found.
 	 *
-	 * @param formitemoptionId the primary key of the form item option
+	 * @param formItemOptionId the primary key of the form item option
 	 * @return the form item option
 	 * @throws com.rcs.webform.NoSuchFormItemOptionException if a form item option with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public FormItemOption findByPrimaryKey(long formitemoptionId)
+	public FormItemOption findByPrimaryKey(long formItemOptionId)
 		throws NoSuchFormItemOptionException, SystemException {
-		return findByPrimaryKey((Serializable)formitemoptionId);
+		return findByPrimaryKey((Serializable)formItemOptionId);
 	}
 
 	/**
@@ -425,14 +425,14 @@ public class FormItemOptionPersistenceImpl extends BasePersistenceImpl<FormItemO
 	/**
 	 * Returns the form item option with the primary key or returns <code>null</code> if it could not be found.
 	 *
-	 * @param formitemoptionId the primary key of the form item option
+	 * @param formItemOptionId the primary key of the form item option
 	 * @return the form item option, or <code>null</code> if a form item option with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public FormItemOption fetchByPrimaryKey(long formitemoptionId)
+	public FormItemOption fetchByPrimaryKey(long formItemOptionId)
 		throws SystemException {
-		return fetchByPrimaryKey((Serializable)formitemoptionId);
+		return fetchByPrimaryKey((Serializable)formItemOptionId);
 	}
 
 	/**

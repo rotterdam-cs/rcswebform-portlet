@@ -74,8 +74,6 @@
 			<basic name="type">
 				<column name="TYPE_" />
 			</basic>
-			<basic name="optionKeys" />
-			<basic name="optionValues" />
 			<basic name="mandatory" />
 			<basic name="defaultValue" />
 			<basic name="order">
@@ -102,15 +100,13 @@
 			<transient name="labelCurrentLanguageId" />
 			<transient name="labelMap" />
 			<transient name="modelAttributes" />
-			<transient name="optionValuesCurrentLanguageId" />
-			<transient name="optionValuesMap" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />
 		</attributes>
 	</mapped-superclass>
 	<mapped-superclass class="com.rcs.webform.model.impl.FormItemOptionModelImpl">
 		<attributes>
-			<id name="formitemoptionId" />
+			<id name="formItemOptionId" />
 			<basic name="creationDate">
 				<temporal>TIMESTAMP</temporal>
 			</basic>
@@ -122,8 +118,6 @@
 			<basic name="optionKey" />
 			<basic name="optionValue" />
 			<transient name="modelAttributes" />
-			<transient name="optionKeyCurrentLanguageId" />
-			<transient name="optionKeyMap" />
 			<transient name="optionValueCurrentLanguageId" />
 			<transient name="optionValueMap" />
 			<transient name="primaryKey" />

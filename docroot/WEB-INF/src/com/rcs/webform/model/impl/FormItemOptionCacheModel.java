@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -40,8 +40,8 @@ public class FormItemOptionCacheModel implements CacheModel<FormItemOption>,
 	public String toString() {
 		StringBundler sb = new StringBundler(15);
 
-		sb.append("{formitemoptionId=");
-		sb.append(formitemoptionId);
+		sb.append("{formItemOptionId=");
+		sb.append(formItemOptionId);
 		sb.append(", creationDate=");
 		sb.append(creationDate);
 		sb.append(", modificationDate=");
@@ -63,7 +63,7 @@ public class FormItemOptionCacheModel implements CacheModel<FormItemOption>,
 	public FormItemOption toEntityModel() {
 		FormItemOptionImpl formItemOptionImpl = new FormItemOptionImpl();
 
-		formItemOptionImpl.setFormitemoptionId(formitemoptionId);
+		formItemOptionImpl.setFormItemOptionId(formItemOptionId);
 
 		if (creationDate == Long.MIN_VALUE) {
 			formItemOptionImpl.setCreationDate(null);
@@ -109,7 +109,7 @@ public class FormItemOptionCacheModel implements CacheModel<FormItemOption>,
 
 	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
-		formitemoptionId = objectInput.readLong();
+		formItemOptionId = objectInput.readLong();
 		creationDate = objectInput.readLong();
 		modificationDate = objectInput.readLong();
 		modificationUser = objectInput.readUTF();
@@ -121,7 +121,7 @@ public class FormItemOptionCacheModel implements CacheModel<FormItemOption>,
 	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
-		objectOutput.writeLong(formitemoptionId);
+		objectOutput.writeLong(formItemOptionId);
 		objectOutput.writeLong(creationDate);
 		objectOutput.writeLong(modificationDate);
 
@@ -149,7 +149,7 @@ public class FormItemOptionCacheModel implements CacheModel<FormItemOption>,
 		}
 	}
 
-	public long formitemoptionId;
+	public long formItemOptionId;
 	public long creationDate;
 	public long modificationDate;
 	public String modificationUser;

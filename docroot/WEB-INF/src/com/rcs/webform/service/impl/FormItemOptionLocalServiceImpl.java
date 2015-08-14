@@ -63,7 +63,7 @@ public class FormItemOptionLocalServiceImpl extends FormItemOptionLocalServiceBa
 	 * @param serviceContext
 	 * @return
 	 */
-	public FormItemOption save(Long formItemOptionId, Long formItemId, Map<Locale, String> optionLabel, Map<Locale, String> optionValue,
+	public FormItemOption save(Long formItemOptionId, Long formItemId, String optionLabel, Map<Locale, String> optionValue,
 			ServiceContext serviceContext) {
 		User user = null;
 		FormItemOption formItemOption = null;
@@ -81,7 +81,7 @@ public class FormItemOptionLocalServiceImpl extends FormItemOptionLocalServiceBa
 			formItemOption.setModificationDate(serviceContext.getModifiedDate(now));
 			formItemOption.setModificationUser(user.getFullName());
 			formItemOption.setFormItemId(formItemId);
-			formItemOption.setOptionKeyMap(optionLabel);
+			formItemOption.setOptionKey(optionLabel);
 			formItemOption.setOptionValueMap(optionValue);
 
 			formItemOptionPersistence.update(formItemOption);

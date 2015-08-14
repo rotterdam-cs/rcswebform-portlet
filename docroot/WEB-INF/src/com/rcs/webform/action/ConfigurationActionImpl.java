@@ -145,15 +145,16 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 					String validationType = ParamUtil.getString(actionRequest, "fieldInputType" + formFieldsIndex);
 					int inputTypeMaxLength = ParamUtil.getInteger(actionRequest, "inputMaxLength" + formFieldsIndex);
 					boolean fieldOptional = !ParamUtil.getBoolean(actionRequest, "fieldOptional" + formFieldsIndex);
-					String fieldOptionKeys = ParamUtil.getString(actionRequest, "fieldOptionKeys" + formFieldsIndex);
-                    Map<Locale, String> fieldOptionValuesMap = LocalizationUtil.getLocalizationMap(actionRequest, "fieldOptionValues" + formFieldsIndex);
 					String fieldValidationScript = ParamUtil.getString(actionRequest, "fieldValidationScript" + formFieldsIndex);
 					String fieldValidationErrorMessage = ParamUtil.getString(actionRequest, "fieldValidationErrorMessage" + formFieldsIndex);
 					Map<Locale, String> fieldHintMessageMap = LocalizationUtil.getLocalizationMap(actionRequest, "fieldHintMessage" + formFieldsIndex);
 					String formItemAttrClass = ParamUtil.getString(actionRequest, "formItemCssClass" + formFieldsIndex);
 					String labelAttrClass = ParamUtil.getString(actionRequest, "formLabelCssClass" + formFieldsIndex);
 					String inputAttrClass = ParamUtil.getString(actionRequest, "formInputCssClass" + formFieldsIndex);
-				    
+					Map<Locale, String> mandatoryErrorMessageMap = LocalizationUtil.getLocalizationMap(actionRequest, "mandatoryErrorMessage" + formFieldsIndex);
+                    Map<Locale, String> validationErrorMessageMap = LocalizationUtil.getLocalizationMap(actionRequest, "validationErrorMessage" + formFieldsIndex);
+                    Map<Locale, String> maxLengthErrorMessageMap = LocalizationUtil.getLocalizationMap(actionRequest, "maxLengthErrorMessage" + formFieldsIndex);
+                    
 					if (Validator.isNotNull(fieldValidationScript) ^ Validator.isNotNull(fieldValidationErrorMessage)) {
 	
 						SessionErrors.add(actionRequest, "validationDefinitionInvalid" + i);
@@ -164,22 +165,22 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 						inputTypeMaxLength = 0;
 					}
 	
-					FormItem formItem = FormItemLocalServiceUtil.save(formItemId, formId, fieldLabelMap, fieldType, fieldOptionKeys, fieldOptionValuesMap, fieldOptional,
+					FormItem formItem = FormItemLocalServiceUtil.save(formItemId, formId, fieldLabelMap, fieldType, fieldOptional,
 							fieldValidationScript, validationType, fieldValidationErrorMessage, formFieldsIndex, inputTypeMaxLength, fieldHintMessageMap, serviceContext,
-							formItemAttrClass, labelAttrClass, inputAttrClass);
+							formItemAttrClass, labelAttrClass, inputAttrClass, mandatoryErrorMessageMap, validationErrorMessageMap, maxLengthErrorMessageMap);
 					
 					
 					//options handler
 					int optionsIndex = ParamUtil.getInteger(actionRequest, "fieldOptionsIndex" + formFieldsIndex);
 					for(int index = 0; index <= optionsIndex ; index ++){
 						Long formItemOptionId = ParamUtil.getLong(actionRequest, "formItemOptionId" + index + "_" + formFieldsIndex);
-						Map<Locale, String> optionLabelMap = LocalizationUtil.getLocalizationMap(actionRequest, "fieldOptionsLabel" + index + "_" + formFieldsIndex);
+						String optionLabel = ParamUtil.getString(actionRequest, "fieldOptionsLabel" + index + "_" + formFieldsIndex);
 						Map<Locale, String> optionValueMap = LocalizationUtil.getLocalizationMap(actionRequest, "fieldOptionsValue" + index + "_" + formFieldsIndex);
-						if (Validator.isNull(optionLabelMap.get(defaultLocale)) || Validator.isNull(optionValueMap.get(defaultLocale))) {
+						if (Validator.isNull(optionLabel) || Validator.isNull(optionValueMap.get(defaultLocale))) {
 							continue;
 						}
 						
-						FormItemOptionLocalServiceUtil.save(formItemOptionId, formItem.getFormItemId(), optionLabelMap, optionValueMap, serviceContext);
+						FormItemOptionLocalServiceUtil.save(formItemOptionId, formItem.getFormItemId(), optionLabel, optionValueMap, serviceContext);
 					}
 	
 					i++;

@@ -37,8 +37,6 @@
 		<field name="inputAttrId" type="String" />
 		<field name="inputAttrClass" type="String" />
 		<field name="type" type="String" />
-		<field name="optionKeys" type="String" />
-		<field name="optionValues" type="String" localized="true" />
 		<field name="mandatory" type="boolean" />
 		<field name="defaultValue" type="String" localized="true" />
 		<field name="order" type="int" />
@@ -52,12 +50,12 @@
 		<field name="hintMessage" type="String" localized="true" />
 	</model>
 	<model name="com.rcs.webform.model.FormItemOption">
-		<field name="formitemoptionId" type="long" />
+		<field name="formItemOptionId" type="long" />
 		<field name="creationDate" type="Date" />
 		<field name="modificationDate" type="Date" />
 		<field name="modificationUser" type="String" />
 		<field name="formItemId" type="long" />
-		<field name="optionKey" type="String" localized="true" />
+		<field name="optionKey" type="String" />
 		<field name="optionValue" type="String" localized="true" />
 	</model>
 	<model name="com.rcs.webform.model.FormToPorletMap">

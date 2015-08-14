@@ -5,6 +5,11 @@
 </portlet:actionURL>
 
 <aui:form action="<%= submitFormURL %>" method="POST" name="fm" autocomplete="off">
+
+	<!-- fake fields are a workaround for chrome/firefox autofill getting the wrong fields -->
+	<input style="display:none" type="text" name="fakeusernameremembered"/>
+	<input style="display:none" type="password" name="fakepasswordremembered"/>
+	
 	<aui:fieldset label="${Data.data.title}">
 		<div id="formDescription">
 			${Data.data.desc}
@@ -25,8 +30,9 @@
 			<fieldset id="<portlet:namespace />rcsWebFormItem">
 			<span id="<portlet:namespace />rcsWebFormItemLabel" >Form Item 1 label</span>
 			<span id="<portlet:namespace />rcsWebFormItemInputWrapper" >
-				<input type="text" name="<portlet:namespace />rcsWebFormItemInputText" id="<portlet:namespace />rcsWebFormItemInputText" />
-				<textarea name="<portlet:namespace />rcsWebFormItemInputTextArea" id="<portlet:namespace />rcsWebFormItemInputTextArea"></textarea>
+			
+				<input type="text" name="<portlet:namespace />rcsWebFormItemInputText" id="<portlet:namespace />rcsWebFormItemInputText" autocomplete="off"/>
+				<textarea name="<portlet:namespace />rcsWebFormItemInputTextArea" id="<portlet:namespace />rcsWebFormItemInputTextArea" autocomplete="off"></textarea>
 				<select name="<portlet:namespace />rcsWebFormItemInputCombo" id="<portlet:namespace />rcsWebFormItemInputCombo">
 					<option id="<portlet:namespace />rcsWebFormItemOption" value="">Please Select</option>
 				</select>
@@ -244,6 +250,8 @@
 				divFormItem.appendTo(divForm);
 			};
 			
+			console.log(JSON.stringify(rules));
+			console.log(JSON.stringify(fieldStrings));
 		 	validator = new A.FormValidator(
 		 		{
 					boundingBox:'#<portlet:namespace />fm',

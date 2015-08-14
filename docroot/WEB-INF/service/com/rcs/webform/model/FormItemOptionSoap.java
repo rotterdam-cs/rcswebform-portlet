@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -30,7 +30,7 @@ public class FormItemOptionSoap implements Serializable {
 	public static FormItemOptionSoap toSoapModel(FormItemOption model) {
 		FormItemOptionSoap soapModel = new FormItemOptionSoap();
 
-		soapModel.setFormitemoptionId(model.getFormitemoptionId());
+		soapModel.setFormItemOptionId(model.getFormItemOptionId());
 		soapModel.setCreationDate(model.getCreationDate());
 		soapModel.setModificationDate(model.getModificationDate());
 		soapModel.setModificationUser(model.getModificationUser());
@@ -82,19 +82,19 @@ public class FormItemOptionSoap implements Serializable {
 	}
 
 	public long getPrimaryKey() {
-		return _formitemoptionId;
+		return _formItemOptionId;
 	}
 
 	public void setPrimaryKey(long pk) {
-		setFormitemoptionId(pk);
+		setFormItemOptionId(pk);
 	}
 
-	public long getFormitemoptionId() {
-		return _formitemoptionId;
+	public long getFormItemOptionId() {
+		return _formItemOptionId;
 	}
 
-	public void setFormitemoptionId(long formitemoptionId) {
-		_formitemoptionId = formitemoptionId;
+	public void setFormItemOptionId(long formItemOptionId) {
+		_formItemOptionId = formItemOptionId;
 	}
 
 	public Date getCreationDate() {
@@ -145,7 +145,7 @@ public class FormItemOptionSoap implements Serializable {
 		_optionValue = optionValue;
 	}
 
-	private long _formitemoptionId;
+	private long _formItemOptionId;
 	private Date _creationDate;
 	private Date _modificationDate;
 	private String _modificationUser;

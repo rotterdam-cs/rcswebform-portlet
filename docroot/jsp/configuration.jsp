@@ -233,15 +233,22 @@ boolean fieldsEditingDisabled = false;
 			
 			var inputMaxLengthDiv = formRow.one('.input-max-length');
 	
-			if ((value == 'ALPHA') || (value == 'NUMBER')) {
+			if ((value == 'ALPHANUM') || (value == 'ALPHA') || (value == 'NUMBER')) {
 				inputMaxLengthDiv.all('label').show();
 				inputMaxLengthDiv.show();
 			}
 			else {
 				inputMaxLengthDiv.hide();
 			}
+			
+			var validationErrorMessageDiv = formRow.one('.validation-error-message');
+			if (value == 'ALPHANUM') {
+				validationErrorMessageDiv.hide();
+			} else {
+				validationErrorMessageDiv.show();
+			}
 		};
-
+		
 		var webFields = A.one('.webFields');
 
 		webFields.all('select.field-type').each(toggleOptions);

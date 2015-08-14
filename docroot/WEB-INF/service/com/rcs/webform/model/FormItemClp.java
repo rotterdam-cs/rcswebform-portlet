@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -96,8 +96,6 @@ public class FormItemClp extends BaseModelImpl<FormItem> implements FormItem {
 		attributes.put("inputAttrId", getInputAttrId());
 		attributes.put("inputAttrClass", getInputAttrClass());
 		attributes.put("type", getType());
-		attributes.put("optionKeys", getOptionKeys());
-		attributes.put("optionValues", getOptionValues());
 		attributes.put("mandatory", getMandatory());
 		attributes.put("defaultValue", getDefaultValue());
 		attributes.put("order", getOrder());
@@ -197,18 +195,6 @@ public class FormItemClp extends BaseModelImpl<FormItem> implements FormItem {
 
 		if (type != null) {
 			setType(type);
-		}
-
-		String optionKeys = (String)attributes.get("optionKeys");
-
-		if (optionKeys != null) {
-			setOptionKeys(optionKeys);
-		}
-
-		String optionValues = (String)attributes.get("optionValues");
-
-		if (optionValues != null) {
-			setOptionValues(optionValues);
 		}
 
 		Boolean mandatory = (Boolean)attributes.get("mandatory");
@@ -709,155 +695,6 @@ public class FormItemClp extends BaseModelImpl<FormItem> implements FormItem {
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
-			}
-		}
-	}
-
-	@Override
-	public String getOptionKeys() {
-		return _optionKeys;
-	}
-
-	@Override
-	public void setOptionKeys(String optionKeys) {
-		_optionKeys = optionKeys;
-
-		if (_formItemRemoteModel != null) {
-			try {
-				Class<?> clazz = _formItemRemoteModel.getClass();
-
-				Method method = clazz.getMethod("setOptionKeys", String.class);
-
-				method.invoke(_formItemRemoteModel, optionKeys);
-			}
-			catch (Exception e) {
-				throw new UnsupportedOperationException(e);
-			}
-		}
-	}
-
-	@Override
-	public String getOptionValues() {
-		return _optionValues;
-	}
-
-	@Override
-	public String getOptionValues(Locale locale) {
-		String languageId = LocaleUtil.toLanguageId(locale);
-
-		return getOptionValues(languageId);
-	}
-
-	@Override
-	public String getOptionValues(Locale locale, boolean useDefault) {
-		String languageId = LocaleUtil.toLanguageId(locale);
-
-		return getOptionValues(languageId, useDefault);
-	}
-
-	@Override
-	public String getOptionValues(String languageId) {
-		return LocalizationUtil.getLocalization(getOptionValues(), languageId);
-	}
-
-	@Override
-	public String getOptionValues(String languageId, boolean useDefault) {
-		return LocalizationUtil.getLocalization(getOptionValues(), languageId,
-			useDefault);
-	}
-
-	@Override
-	public String getOptionValuesCurrentLanguageId() {
-		return _optionValuesCurrentLanguageId;
-	}
-
-	@Override
-	public String getOptionValuesCurrentValue() {
-		Locale locale = getLocale(_optionValuesCurrentLanguageId);
-
-		return getOptionValues(locale);
-	}
-
-	@Override
-	public Map<Locale, String> getOptionValuesMap() {
-		return LocalizationUtil.getLocalizationMap(getOptionValues());
-	}
-
-	@Override
-	public void setOptionValues(String optionValues) {
-		_optionValues = optionValues;
-
-		if (_formItemRemoteModel != null) {
-			try {
-				Class<?> clazz = _formItemRemoteModel.getClass();
-
-				Method method = clazz.getMethod("setOptionValues", String.class);
-
-				method.invoke(_formItemRemoteModel, optionValues);
-			}
-			catch (Exception e) {
-				throw new UnsupportedOperationException(e);
-			}
-		}
-	}
-
-	@Override
-	public void setOptionValues(String optionValues, Locale locale) {
-		setOptionValues(optionValues, locale, LocaleUtil.getDefault());
-	}
-
-	@Override
-	public void setOptionValues(String optionValues, Locale locale,
-		Locale defaultLocale) {
-		String languageId = LocaleUtil.toLanguageId(locale);
-		String defaultLanguageId = LocaleUtil.toLanguageId(defaultLocale);
-
-		if (Validator.isNotNull(optionValues)) {
-			setOptionValues(LocalizationUtil.updateLocalization(
-					getOptionValues(), "OptionValues", optionValues,
-					languageId, defaultLanguageId));
-		}
-		else {
-			setOptionValues(LocalizationUtil.removeLocalization(
-					getOptionValues(), "OptionValues", languageId));
-		}
-	}
-
-	@Override
-	public void setOptionValuesCurrentLanguageId(String languageId) {
-		_optionValuesCurrentLanguageId = languageId;
-	}
-
-	@Override
-	public void setOptionValuesMap(Map<Locale, String> optionValuesMap) {
-		setOptionValuesMap(optionValuesMap, LocaleUtil.getDefault());
-	}
-
-	@Override
-	public void setOptionValuesMap(Map<Locale, String> optionValuesMap,
-		Locale defaultLocale) {
-		if (optionValuesMap == null) {
-			return;
-		}
-
-		ClassLoader portalClassLoader = PortalClassLoaderUtil.getClassLoader();
-
-		Thread currentThread = Thread.currentThread();
-
-		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
-
-		try {
-			if (contextClassLoader != portalClassLoader) {
-				currentThread.setContextClassLoader(portalClassLoader);
-			}
-
-			setOptionValues(LocalizationUtil.updateLocalization(
-					optionValuesMap, getOptionValues(), "OptionValues",
-					LocaleUtil.toLanguageId(defaultLocale)));
-		}
-		finally {
-			if (contextClassLoader != portalClassLoader) {
-				currentThread.setContextClassLoader(contextClassLoader);
 			}
 		}
 	}
@@ -1732,17 +1569,6 @@ public class FormItemClp extends BaseModelImpl<FormItem> implements FormItem {
 			}
 		}
 
-		Map<Locale, String> optionValuesMap = getOptionValuesMap();
-
-		for (Map.Entry<Locale, String> entry : optionValuesMap.entrySet()) {
-			Locale locale = entry.getKey();
-			String value = entry.getValue();
-
-			if (Validator.isNotNull(value)) {
-				availableLanguageIds.add(LocaleUtil.toLanguageId(locale));
-			}
-		}
-
 		Map<Locale, String> defaultValueMap = getDefaultValueMap();
 
 		for (Map.Entry<Locale, String> entry : defaultValueMap.entrySet()) {
@@ -1836,17 +1662,6 @@ public class FormItemClp extends BaseModelImpl<FormItem> implements FormItem {
 			setLabel(getLabel(defaultLocale), defaultLocale, defaultLocale);
 		}
 
-		String optionValues = getOptionValues(defaultLocale);
-
-		if (Validator.isNull(optionValues)) {
-			setOptionValues(getOptionValues(modelDefaultLanguageId),
-				defaultLocale);
-		}
-		else {
-			setOptionValues(getOptionValues(defaultLocale), defaultLocale,
-				defaultLocale);
-		}
-
 		String defaultValue = getDefaultValue(defaultLocale);
 
 		if (Validator.isNull(defaultValue)) {
@@ -1926,8 +1741,6 @@ public class FormItemClp extends BaseModelImpl<FormItem> implements FormItem {
 		clone.setInputAttrId(getInputAttrId());
 		clone.setInputAttrClass(getInputAttrClass());
 		clone.setType(getType());
-		clone.setOptionKeys(getOptionKeys());
-		clone.setOptionValues(getOptionValues());
 		clone.setMandatory(getMandatory());
 		clone.setDefaultValue(getDefaultValue());
 		clone.setOrder(getOrder());
@@ -1991,7 +1804,7 @@ public class FormItemClp extends BaseModelImpl<FormItem> implements FormItem {
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(55);
+		StringBundler sb = new StringBundler(51);
 
 		sb.append("{formItemId=");
 		sb.append(getFormItemId());
@@ -2021,10 +1834,6 @@ public class FormItemClp extends BaseModelImpl<FormItem> implements FormItem {
 		sb.append(getInputAttrClass());
 		sb.append(", type=");
 		sb.append(getType());
-		sb.append(", optionKeys=");
-		sb.append(getOptionKeys());
-		sb.append(", optionValues=");
-		sb.append(getOptionValues());
 		sb.append(", mandatory=");
 		sb.append(getMandatory());
 		sb.append(", defaultValue=");
@@ -2054,7 +1863,7 @@ public class FormItemClp extends BaseModelImpl<FormItem> implements FormItem {
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(85);
+		StringBundler sb = new StringBundler(79);
 
 		sb.append("<model><model-name>");
 		sb.append("com.rcs.webform.model.FormItem");
@@ -2115,14 +1924,6 @@ public class FormItemClp extends BaseModelImpl<FormItem> implements FormItem {
 		sb.append(
 			"<column><column-name>type</column-name><column-value><![CDATA[");
 		sb.append(getType());
-		sb.append("]]></column-value></column>");
-		sb.append(
-			"<column><column-name>optionKeys</column-name><column-value><![CDATA[");
-		sb.append(getOptionKeys());
-		sb.append("]]></column-value></column>");
-		sb.append(
-			"<column><column-name>optionValues</column-name><column-value><![CDATA[");
-		sb.append(getOptionValues());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>mandatory</column-name><column-value><![CDATA[");
@@ -2189,9 +1990,6 @@ public class FormItemClp extends BaseModelImpl<FormItem> implements FormItem {
 	private String _inputAttrId;
 	private String _inputAttrClass;
 	private String _type;
-	private String _optionKeys;
-	private String _optionValues;
-	private String _optionValuesCurrentLanguageId;
 	private boolean _mandatory;
 	private String _defaultValue;
 	private String _defaultValueCurrentLanguageId;

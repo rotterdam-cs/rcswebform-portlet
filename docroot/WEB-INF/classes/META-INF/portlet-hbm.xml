@@ -47,8 +47,6 @@
 		<property name="inputAttrId" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="inputAttrClass" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="type" type="com.liferay.portal.dao.orm.hibernate.StringType" column="type_" />
-		<property name="optionKeys" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="optionValues" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="mandatory" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
 		<property name="defaultValue" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="order" type="com.liferay.portal.dao.orm.hibernate.IntegerType" column="order_" />
@@ -63,7 +61,7 @@
 	</class>
 	<class name="com.rcs.webform.model.impl.FormItemOptionImpl" table="rcswebform_FormItemOption">
 		<cache usage="read-write" />
-		<id name="formitemoptionId" type="long">
+		<id name="formItemOptionId" type="long">
 			<generator class="assigned" />
 		</id>
 		<property name="creationDate" type="org.hibernate.type.TimestampType" />
