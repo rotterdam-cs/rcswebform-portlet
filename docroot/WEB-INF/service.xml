@@ -74,6 +74,7 @@
         <column name="errorMandatoryMessage" type="String" localized="true"></column>
         <column name="errorLengthMessage" type="String" localized="true"></column>
         <column name="hintMessage" type="String" localized="true"></column>
+        <column name="formLayout" type="String"></column>
         <finder name="FormIdAndActive" return-type="Collection" where="active=true">
             <finder-column name="formId" comparator="="></finder-column>
         </finder>

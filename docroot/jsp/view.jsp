@@ -1,4 +1,8 @@
 <%@ include file="/jsp/init.jsp" %>
+<%
+String formLayout = portletPreferences.getValue("formLayout", StringPool.BLANK);
+%>
+
 
 <portlet:actionURL var="submitFormURL">
 	<portlet:param name="<%= ActionRequest.ACTION_NAME %>" value="submitForm" />
@@ -29,6 +33,12 @@
 			<!-- Form will be put here -->
 			<fieldset id="<portlet:namespace />rcsWebFormItem">
 			<span id="<portlet:namespace />rcsWebFormItemLabel" >Form Item 1 label</span>
+<%-- 			<c:choose> --%>
+<%-- 				<c:when test='<%= formLayout.equals("TWO_COLUMN") %>'> --%>
+<!-- 					<br /> -->
+<%-- 				</c:when> --%>
+<%-- 			</c:choose> --%>
+	
 			<span id="<portlet:namespace />rcsWebFormItemInputWrapper" >
 			
 				<input type="text" name="<portlet:namespace />rcsWebFormItemInputText" id="<portlet:namespace />rcsWebFormItemInputText" autocomplete="off"/>

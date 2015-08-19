@@ -72,7 +72,7 @@ public class FormItemLocalServiceImpl extends FormItemLocalServiceBaseImpl {
     public FormItem save(Long formItemId, Long formId, Map<Locale, String> label, String type, boolean mandatory, String validationRegexValue,
             String validationType, int order, int maxLength, Map<Locale, String> hintMessage, ServiceContext serviceContext,
             String formItemAttrClass, String labelAttrClass, String inputAttrClass, Map<Locale, String> mandatoryErrorMessageMap,
-            Map<Locale, String> validationErrorMessageMap, Map<Locale, String> maxLengthErrorMessageMap) {
+            Map<Locale, String> validationErrorMessageMap, Map<Locale, String> maxLengthErrorMessageMap, String formLayout) {
 
         User user = null;
         FormItem formItem = null;
@@ -108,6 +108,7 @@ public class FormItemLocalServiceImpl extends FormItemLocalServiceBaseImpl {
             formItem.setErrorMandatoryMessageMap(mandatoryErrorMessageMap);
             formItem.setErrorValidationMessageMap(validationErrorMessageMap);
             formItem.setErrorLengthMessageMap(maxLengthErrorMessageMap);
+            formItem.setFormLayout(formLayout);
 
             formItemPersistence.update(formItem);
         } catch (Exception e) {

@@ -55,6 +55,7 @@ public class FormItemSoap implements Serializable {
 		soapModel.setErrorMandatoryMessage(model.getErrorMandatoryMessage());
 		soapModel.setErrorLengthMessage(model.getErrorLengthMessage());
 		soapModel.setHintMessage(model.getHintMessage());
+		soapModel.setFormLayout(model.getFormLayout());
 
 		return soapModel;
 	}
@@ -315,6 +316,14 @@ public class FormItemSoap implements Serializable {
 		_hintMessage = hintMessage;
 	}
 
+	public String getFormLayout() {
+		return _formLayout;
+	}
+
+	public void setFormLayout(String formLayout) {
+		_formLayout = formLayout;
+	}
+
 	private long _formItemId;
 	private boolean _active;
 	private Date _creationDate;
@@ -340,4 +349,5 @@ public class FormItemSoap implements Serializable {
 	private String _errorMandatoryMessage;
 	private String _errorLengthMessage;
 	private String _hintMessage;
+	private String _formLayout;
 }

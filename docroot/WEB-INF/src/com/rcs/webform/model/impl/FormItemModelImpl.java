@@ -91,9 +91,10 @@ public class FormItemModelImpl extends BaseModelImpl<FormItem>
 			{ "errorValidationMessage", Types.VARCHAR },
 			{ "errorMandatoryMessage", Types.VARCHAR },
 			{ "errorLengthMessage", Types.VARCHAR },
-			{ "hintMessage", Types.VARCHAR }
+			{ "hintMessage", Types.VARCHAR },
+			{ "formLayout", Types.VARCHAR }
 		};
-	public static final String TABLE_SQL_CREATE = "create table rcswebform_FormItem (formItemId LONG not null primary key,active_ BOOLEAN,creationDate DATE null,modificationDate DATE null,modificationUser VARCHAR(75) null,formId LONG,formItemAttrId VARCHAR(75) null,formItemAttrClass VARCHAR(75) null,label STRING null,labelAttrId VARCHAR(75) null,labelAttrClass VARCHAR(75) null,inputAttrId VARCHAR(75) null,inputAttrClass VARCHAR(75) null,type_ VARCHAR(75) null,mandatory BOOLEAN,defaultValue STRING null,order_ INTEGER,validationType VARCHAR(75) null,validationRegexValue STRING null,minLength INTEGER,maxLength INTEGER,errorValidationMessage STRING null,errorMandatoryMessage STRING null,errorLengthMessage STRING null,hintMessage STRING null)";
+	public static final String TABLE_SQL_CREATE = "create table rcswebform_FormItem (formItemId LONG not null primary key,active_ BOOLEAN,creationDate DATE null,modificationDate DATE null,modificationUser VARCHAR(75) null,formId LONG,formItemAttrId VARCHAR(75) null,formItemAttrClass VARCHAR(75) null,label STRING null,labelAttrId VARCHAR(75) null,labelAttrClass VARCHAR(75) null,inputAttrId VARCHAR(75) null,inputAttrClass VARCHAR(75) null,type_ VARCHAR(75) null,mandatory BOOLEAN,defaultValue STRING null,order_ INTEGER,validationType VARCHAR(75) null,validationRegexValue STRING null,minLength INTEGER,maxLength INTEGER,errorValidationMessage STRING null,errorMandatoryMessage STRING null,errorLengthMessage STRING null,hintMessage STRING null,formLayout VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table rcswebform_FormItem";
 	public static final String ORDER_BY_JPQL = " ORDER BY formItem.formItemId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY rcswebform_FormItem.formItemId ASC";
@@ -176,6 +177,7 @@ public class FormItemModelImpl extends BaseModelImpl<FormItem>
 		attributes.put("errorMandatoryMessage", getErrorMandatoryMessage());
 		attributes.put("errorLengthMessage", getErrorLengthMessage());
 		attributes.put("hintMessage", getHintMessage());
+		attributes.put("formLayout", getFormLayout());
 
 		return attributes;
 	}
@@ -333,6 +335,12 @@ public class FormItemModelImpl extends BaseModelImpl<FormItem>
 
 		if (hintMessage != null) {
 			setHintMessage(hintMessage);
+		}
+
+		String formLayout = (String)attributes.get("formLayout");
+
+		if (formLayout != null) {
+			setFormLayout(formLayout);
 		}
 	}
 
@@ -1222,6 +1230,21 @@ public class FormItemModelImpl extends BaseModelImpl<FormItem>
 				LocaleUtil.toLanguageId(defaultLocale)));
 	}
 
+	@Override
+	public String getFormLayout() {
+		if (_formLayout == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _formLayout;
+		}
+	}
+
+	@Override
+	public void setFormLayout(String formLayout) {
+		_formLayout = formLayout;
+	}
+
 	public long getColumnBitmask() {
 		return _columnBitmask;
 	}
@@ -1441,6 +1464,7 @@ public class FormItemModelImpl extends BaseModelImpl<FormItem>
 		formItemImpl.setErrorMandatoryMessage(getErrorMandatoryMessage());
 		formItemImpl.setErrorLengthMessage(getErrorLengthMessage());
 		formItemImpl.setHintMessage(getHintMessage());
+		formItemImpl.setFormLayout(getFormLayout());
 
 		formItemImpl.resetOriginalValues();
 
@@ -1667,12 +1691,20 @@ public class FormItemModelImpl extends BaseModelImpl<FormItem>
 			formItemCacheModel.hintMessage = null;
 		}
 
+		formItemCacheModel.formLayout = getFormLayout();
+
+		String formLayout = formItemCacheModel.formLayout;
+
+		if ((formLayout != null) && (formLayout.length() == 0)) {
+			formItemCacheModel.formLayout = null;
+		}
+
 		return formItemCacheModel;
 	}
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(51);
+		StringBundler sb = new StringBundler(53);
 
 		sb.append("{formItemId=");
 		sb.append(getFormItemId());
@@ -1724,6 +1756,8 @@ public class FormItemModelImpl extends BaseModelImpl<FormItem>
 		sb.append(getErrorLengthMessage());
 		sb.append(", hintMessage=");
 		sb.append(getHintMessage());
+		sb.append(", formLayout=");
+		sb.append(getFormLayout());
 		sb.append("}");
 
 		return sb.toString();
@@ -1731,7 +1765,7 @@ public class FormItemModelImpl extends BaseModelImpl<FormItem>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(79);
+		StringBundler sb = new StringBundler(82);
 
 		sb.append("<model><model-name>");
 		sb.append("com.rcs.webform.model.FormItem");
@@ -1837,6 +1871,10 @@ public class FormItemModelImpl extends BaseModelImpl<FormItem>
 			"<column><column-name>hintMessage</column-name><column-value><![CDATA[");
 		sb.append(getHintMessage());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>formLayout</column-name><column-value><![CDATA[");
+		sb.append(getFormLayout());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -1880,6 +1918,7 @@ public class FormItemModelImpl extends BaseModelImpl<FormItem>
 	private String _errorLengthMessageCurrentLanguageId;
 	private String _hintMessage;
 	private String _hintMessageCurrentLanguageId;
+	private String _formLayout;
 	private long _columnBitmask;
 	private FormItem _escapedModel;
 }

@@ -310,12 +310,13 @@ public class FormItemLocalServiceWrapper implements FormItemLocalService,
 		java.lang.String inputAttrClass,
 		java.util.Map<java.util.Locale, java.lang.String> mandatoryErrorMessageMap,
 		java.util.Map<java.util.Locale, java.lang.String> validationErrorMessageMap,
-		java.util.Map<java.util.Locale, java.lang.String> maxLengthErrorMessageMap) {
+		java.util.Map<java.util.Locale, java.lang.String> maxLengthErrorMessageMap,
+		java.lang.String formLayout) {
 		return _formItemLocalService.save(formItemId, formId, label, type,
 			mandatory, validationRegexValue, validationType, order, maxLength,
 			hintMessage, serviceContext, formItemAttrClass, labelAttrClass,
 			inputAttrClass, mandatoryErrorMessageMap,
-			validationErrorMessageMap, maxLengthErrorMessageMap);
+			validationErrorMessageMap, maxLengthErrorMessageMap, formLayout);
 	}
 
 	@Override

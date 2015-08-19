@@ -107,6 +107,7 @@ public class FormItemClp extends BaseModelImpl<FormItem> implements FormItem {
 		attributes.put("errorMandatoryMessage", getErrorMandatoryMessage());
 		attributes.put("errorLengthMessage", getErrorLengthMessage());
 		attributes.put("hintMessage", getHintMessage());
+		attributes.put("formLayout", getFormLayout());
 
 		return attributes;
 	}
@@ -264,6 +265,12 @@ public class FormItemClp extends BaseModelImpl<FormItem> implements FormItem {
 
 		if (hintMessage != null) {
 			setHintMessage(hintMessage);
+		}
+
+		String formLayout = (String)attributes.get("formLayout");
+
+		if (formLayout != null) {
+			setFormLayout(formLayout);
 		}
 	}
 
@@ -1495,6 +1502,29 @@ public class FormItemClp extends BaseModelImpl<FormItem> implements FormItem {
 		}
 	}
 
+	@Override
+	public String getFormLayout() {
+		return _formLayout;
+	}
+
+	@Override
+	public void setFormLayout(String formLayout) {
+		_formLayout = formLayout;
+
+		if (_formItemRemoteModel != null) {
+			try {
+				Class<?> clazz = _formItemRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setFormLayout", String.class);
+
+				method.invoke(_formItemRemoteModel, formLayout);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
 	public BaseModel<?> getFormItemRemoteModel() {
 		return _formItemRemoteModel;
 	}
@@ -1752,6 +1782,7 @@ public class FormItemClp extends BaseModelImpl<FormItem> implements FormItem {
 		clone.setErrorMandatoryMessage(getErrorMandatoryMessage());
 		clone.setErrorLengthMessage(getErrorLengthMessage());
 		clone.setHintMessage(getHintMessage());
+		clone.setFormLayout(getFormLayout());
 
 		return clone;
 	}
@@ -1804,7 +1835,7 @@ public class FormItemClp extends BaseModelImpl<FormItem> implements FormItem {
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(51);
+		StringBundler sb = new StringBundler(53);
 
 		sb.append("{formItemId=");
 		sb.append(getFormItemId());
@@ -1856,6 +1887,8 @@ public class FormItemClp extends BaseModelImpl<FormItem> implements FormItem {
 		sb.append(getErrorLengthMessage());
 		sb.append(", hintMessage=");
 		sb.append(getHintMessage());
+		sb.append(", formLayout=");
+		sb.append(getFormLayout());
 		sb.append("}");
 
 		return sb.toString();
@@ -1863,7 +1896,7 @@ public class FormItemClp extends BaseModelImpl<FormItem> implements FormItem {
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(79);
+		StringBundler sb = new StringBundler(82);
 
 		sb.append("<model><model-name>");
 		sb.append("com.rcs.webform.model.FormItem");
@@ -1969,6 +2002,10 @@ public class FormItemClp extends BaseModelImpl<FormItem> implements FormItem {
 			"<column><column-name>hintMessage</column-name><column-value><![CDATA[");
 		sb.append(getHintMessage());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>formLayout</column-name><column-value><![CDATA[");
+		sb.append(getFormLayout());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -2006,6 +2043,7 @@ public class FormItemClp extends BaseModelImpl<FormItem> implements FormItem {
 	private String _errorLengthMessageCurrentLanguageId;
 	private String _hintMessage;
 	private String _hintMessageCurrentLanguageId;
+	private String _formLayout;
 	private BaseModel<?> _formItemRemoteModel;
 	private Class<?> _clpSerializerClass = com.rcs.webform.service.ClpSerializer.class;
 }

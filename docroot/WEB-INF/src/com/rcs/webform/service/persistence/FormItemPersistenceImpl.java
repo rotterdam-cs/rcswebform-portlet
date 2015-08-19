@@ -861,6 +861,7 @@ public class FormItemPersistenceImpl extends BasePersistenceImpl<FormItem>
 		formItemImpl.setErrorMandatoryMessage(formItem.getErrorMandatoryMessage());
 		formItemImpl.setErrorLengthMessage(formItem.getErrorLengthMessage());
 		formItemImpl.setHintMessage(formItem.getHintMessage());
+		formItemImpl.setFormLayout(formItem.getFormLayout());
 
 		return formItemImpl;
 	}

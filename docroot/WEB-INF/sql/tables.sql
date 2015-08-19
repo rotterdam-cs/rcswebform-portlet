@@ -45,7 +45,8 @@ create table rcswebform_FormItem (
 	errorValidationMessage STRING null,
 	errorMandatoryMessage STRING null,
 	errorLengthMessage STRING null,
-	hintMessage STRING null
+	hintMessage STRING null,
+	formLayout VARCHAR(75) null
 );
 
 create table rcswebform_FormItemOption (

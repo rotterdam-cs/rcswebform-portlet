@@ -58,6 +58,7 @@
 		<property name="errorMandatoryMessage" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="errorLengthMessage" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="hintMessage" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="formLayout" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 	</class>
 	<class name="com.rcs.webform.model.impl.FormItemOptionImpl" table="rcswebform_FormItemOption">
 		<cache usage="read-write" />

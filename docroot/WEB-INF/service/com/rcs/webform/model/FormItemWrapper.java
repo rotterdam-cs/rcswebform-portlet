@@ -74,6 +74,7 @@ public class FormItemWrapper implements FormItem, ModelWrapper<FormItem> {
 		attributes.put("errorMandatoryMessage", getErrorMandatoryMessage());
 		attributes.put("errorLengthMessage", getErrorLengthMessage());
 		attributes.put("hintMessage", getHintMessage());
+		attributes.put("formLayout", getFormLayout());
 
 		return attributes;
 	}
@@ -231,6 +232,12 @@ public class FormItemWrapper implements FormItem, ModelWrapper<FormItem> {
 
 		if (hintMessage != null) {
 			setHintMessage(hintMessage);
+		}
+
+		String formLayout = (String)attributes.get("formLayout");
+
+		if (formLayout != null) {
+			setFormLayout(formLayout);
 		}
 	}
 
@@ -1515,6 +1522,26 @@ public class FormItemWrapper implements FormItem, ModelWrapper<FormItem> {
 		java.util.Map<java.util.Locale, java.lang.String> hintMessageMap,
 		java.util.Locale defaultLocale) {
 		_formItem.setHintMessageMap(hintMessageMap, defaultLocale);
+	}
+
+	/**
+	* Returns the form layout of this form item.
+	*
+	* @return the form layout of this form item
+	*/
+	@Override
+	public java.lang.String getFormLayout() {
+		return _formItem.getFormLayout();
+	}
+
+	/**
+	* Sets the form layout of this form item.
+	*
+	* @param formLayout the form layout of this form item
+	*/
+	@Override
+	public void setFormLayout(java.lang.String formLayout) {
+		_formItem.setFormLayout(formLayout);
 	}
 
 	@Override

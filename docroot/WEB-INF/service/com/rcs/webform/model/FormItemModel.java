@@ -962,6 +962,21 @@ public interface FormItemModel extends BaseModel<FormItem> {
 	public void setHintMessageMap(Map<Locale, String> hintMessageMap,
 		Locale defaultLocale);
 
+	/**
+	 * Returns the form layout of this form item.
+	 *
+	 * @return the form layout of this form item
+	 */
+	@AutoEscape
+	public String getFormLayout();
+
+	/**
+	 * Sets the form layout of this form item.
+	 *
+	 * @param formLayout the form layout of this form item
+	 */
+	public void setFormLayout(String formLayout);
+
 	@Override
 	public boolean isNew();
 

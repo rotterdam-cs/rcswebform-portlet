@@ -47,10 +47,16 @@ String sectionLabelCssClass = "rcs-section-label";
 String formItemCssClass = "rcs-form-item";
 String labelCssClass = "rcs-label";
 String inputCssClass = "rcs-input";
+String oneColumnLabelCssClass = "rcs-label-single";
+String oneColumnInputCssClass = "rcs-input-single";
+String twoColumnLabelCssClass = "rcs-label";
+String twoColumnInputCssClass = "rcs-input";
 String mandatoryErrorMessageXml = "";
 String validationErrorMessageXml = "";
 String maxLengthErrorMessageXml = "";
 String fieldValidationRegex = "";
+String formLayout = "";
+
 
 if(formItems != null && !formItems.isEmpty()){
 	formItemId = formItems.get(formFieldsIndex).getFormItemId();
@@ -70,6 +76,7 @@ if(formItems != null && !formItems.isEmpty()){
 	validationErrorMessageXml = formItems.get(formFieldsIndex).getErrorValidationMessage();
 	maxLengthErrorMessageXml = formItems.get(formFieldsIndex).getErrorLengthMessage();
 	fieldValidationRegex = formItems.get(formFieldsIndex).getValidationRegexValue();
+	formLayout = formItems.get(formFieldsIndex).getFormLayout();
 }
 
 List<FormItemOption> formItemOptions = null;
@@ -231,11 +238,11 @@ boolean ignoreRequestValue = (index != formFieldsIndex);
 				<aui:field-wrapper cssClass="left-row-clear-left">
 					<aui:select cssClass="text-field-input-type" ignoreRequestValue="<%= ignoreRequestValue %>" name='<%= "fieldInputType" + index %>' helpMessage='Set Text Field Input Type' label="Input Type">
 						<aui:option selected='<%= fieldTextFieldInputType.equals("ALPHANUM") %>' value="ALPHANUM"><liferay-ui:message key="text" /></aui:option>
-						<aui:option selected='<%= fieldTextFieldInputType.equals("ALPHA") %>' value="ALPHA"><liferay-ui:message key="com.rcs.rcswebform.alphabet" /></aui:option>
+						<aui:option selected='<%= fieldTextFieldInputType.equals("ALPHA") %>' value="ALPHA"><liferay-ui:message key="com.rcs.rcswebform.validation.alphabet" /></aui:option>
 						<aui:option selected='<%= fieldTextFieldInputType.equals("NUMBER") %>' value="NUMBER"><liferay-ui:message key="number" /></aui:option>
 						<aui:option selected='<%= fieldTextFieldInputType.equals("PHONE_NUMBER") %>' value="PHONE_NUMBER"><liferay-ui:message key="phone-number" /></aui:option>
 						<aui:option selected='<%= fieldTextFieldInputType.equals("EMAIL") %>' value="EMAIL"><liferay-ui:message key="email" /></aui:option>
-						<aui:option selected='<%= fieldTextFieldInputType.equals("REGEX") %>' value="REGEX"><liferay-ui:message key="com.rcs.rcswebform.regex" /></aui:option>
+						<aui:option selected='<%= fieldTextFieldInputType.equals("REGEX") %>' value="REGEX"><liferay-ui:message key="com.rcs.rcswebform.validation.regex" /></aui:option>
 					</aui:select>
 				</aui:field-wrapper>
 				<aui:field-wrapper cssClass='<%= "field-validation-regex left-row input-max-length" + (( Validator.isNull(fieldTextFieldInputType) || !fieldTextFieldInputType.equals("REGEX")) ? " hide" : StringPool.BLANK) %>' > 
@@ -249,6 +256,19 @@ boolean ignoreRequestValue = (index != formFieldsIndex);
 			</aui:field-wrapper>
 		</c:when>
 	</c:choose>
+	
+	<c:choose>
+		<c:when test="<%= !fieldsEditingDisabled %>">
+			<aui:field-wrapper cssClass="left-row-clear-left">
+				<aui:select name='<%= "formLayout" + index %>' label="Form Layout">
+					<aui:option selected='<%= formLayout.equals("TWO_COLUMN") %>' value="TWO_COLUMN"><liferay-ui:message key="com.rcs.rcswebform.layout.twoColumn" /></aui:option>
+					<aui:option selected='<%= formLayout.equals("ONE_COLUMN") %>' value="ONE_COLUMN"><liferay-ui:message key="com.rcs.rcswebform.layout.oneColumn" /></aui:option>
+				</aui:select>
+			</aui:field-wrapper>
+		</c:when>
+	</c:choose>
+					
+	
 	
 	<!-- Advance settings toggle  -->
 	<c:choose>
@@ -374,6 +394,7 @@ A.all('.btn-remove-option').on('click', function(event){
 });
 
 var fieldType = A.one('#<portlet:namespace />fieldType'+index);
+var formLayout = A.one('#<portlet:namespace />formLayout'+index);
 if(fieldType) {
 	var formItemClass = A.one('#<portlet:namespace />formItemCssClass<%= index %>');
 	var labelClass = A.one('#<portlet:namespace />formLabelCssClass<%= index %>');
@@ -384,7 +405,6 @@ if(fieldType) {
 	}
 	
 	fieldType.on('change', function(event) {
-		console.log('<%= ( (!fieldOptional) ? "hide" : "BLANK") %>');
 		if(event.currentTarget.val()==='SECTION') {
 			if(formItemClass && labelClass && inputClass) {
 				formItemClass.set('value','<%= sectionCssClass %>');
@@ -395,6 +415,20 @@ if(fieldType) {
 			formItemClass.set('value','<%= formItemCssClass %>');
 			labelClass.set('value','<%= labelCssClass %>');
 			inputClass.get('parentNode').show();
+		}
+	});
+	
+	formLayout.on('change', function(event) {
+		if(event.currentTarget.val()==='TWO_COLUMN') {
+			if(labelClass && inputClass) {
+				inputClass.set('value','<%= twoColumnInputCssClass %>');
+				labelClass.set('value','<%= twoColumnLabelCssClass %>');
+			}
+		} else if(event.currentTarget.val()==='ONE_COLUMN') {
+			if(labelClass && inputClass) {
+				inputClass.set('value','<%= oneColumnInputCssClass %>');
+				labelClass.set('value','<%= oneColumnLabelCssClass %>');
+			}
 		}
 	});
 } else {
