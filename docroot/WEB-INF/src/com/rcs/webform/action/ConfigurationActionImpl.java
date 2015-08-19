@@ -167,7 +167,7 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 					}
 	
 					FormItem formItem = FormItemLocalServiceUtil.save(formItemId, formId, fieldLabelMap, fieldType, fieldOptional,
-					        fieldValidationRegex, validationType, formFieldsIndex, inputTypeMaxLength, fieldHintMessageMap, serviceContext,
+					        fieldValidationRegex, validationType, i, inputTypeMaxLength, fieldHintMessageMap, serviceContext,
 							formItemAttrClass, labelAttrClass, inputAttrClass, mandatoryErrorMessageMap, validationErrorMessageMap, maxLengthErrorMessageMap);
 					
 					
