@@ -62,7 +62,7 @@
 	</aui:fieldset>
 </aui:form>
 
-<aui:script use="aui-base,aui-node,aui-form-validator,aui-datepicker">
+<aui:script use="aui-base,aui-node,aui-form-validator,aui-datepicker,aui-datepicker-popover">
 	var DEFAULTS_FORM_VALIDATOR = A.config.FormValidator;
 
 	var phone = function(val, node, ruleValue) {
@@ -141,7 +141,7 @@
 	    },
 	    true
 	);
-
+	
 	var Data = <%= renderRequest.getAttribute("Data")%>;
 	if(Data) {
 		var validator;
@@ -198,9 +198,18 @@
 						          setValue: true,
 						          popover: {
 							      	zIndex: 1,
+							      	on: {
+							      		click:function(event) {
+			 								if(validator) {
+		 										validator.validateField(formItemInputText);
+		 									}
+							      		}
+		 								 
+							      	}
 						          }
 						      }
 						    );
+
 							formItemInputTextArea.remove();
 							formItemInputRadioWrapper.remove();
 							formItemInputCombo.remove();
@@ -239,8 +248,8 @@
 					fieldStrings:fieldStrings,
 					fieldContainer:'fieldset',
 					containerErrorClass: 'error',
-					validateOnBlur: false,
-					validateOnInput: true,
+// 					validateOnBlur: false,
+// 					validateOnInput: true,
 				});
 		 	
 		}
