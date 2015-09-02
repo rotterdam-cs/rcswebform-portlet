@@ -1,41 +1,42 @@
-.rcs-label{
+.rcs.control-label{
 	padding-top: 10px;
 	padding-left: 5px;
-	width: 25%;
 	float: left;
 	margin: 0px 15px 15px 0px;
 	clear: left;
 }
 
-.rcs-label-single{
-	padding-top: 10px;
-	padding-left: 5px;
-	float: left;
-	margin: 0px 15px 15px 0px;
+.rcs.control-label.single{
 }
 
-.rcs-section-label{
+.rcs.control-label.dual{
+	width: 25%;
+	clear: left;
+}
+
+.rcs.section-label{
 	margin: 0px 15px 15px 0px;
 	padding-left: 5px;
 }
 
-.rcs-form-item{
+.rcs.control-group{
 	width: 100%;
 }
 
-.rcs-input{
-	width: 65%;
+.rcs.field{
 	padding-top: 10px;
-	float: right;
 }
 
-.rcs-input-single{
-	padding-top: 10px;
+.rcs.field.dual{
+	width: 65%;
+	float: right;
+}
+.rcs.field.single{
 	float: left;
 	clear: left;
 }
 
-.rcs-section{
+.rcs.section{
 	background-color: #D3D3D3;
     font-weight: bold;
 }

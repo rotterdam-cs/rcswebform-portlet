@@ -278,7 +278,8 @@ public interface FormItemLocalService extends BaseLocalService,
 		java.util.Map<java.util.Locale, java.lang.String> mandatoryErrorMessageMap,
 		java.util.Map<java.util.Locale, java.lang.String> validationErrorMessageMap,
 		java.util.Map<java.util.Locale, java.lang.String> maxLengthErrorMessageMap,
-		java.lang.String formLayout);
+		java.lang.String formLayout,
+		java.util.Map<java.util.Locale, java.lang.String> defaultValueMap);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.rcs.webform.model.FormItem> getFormItemByFormId(

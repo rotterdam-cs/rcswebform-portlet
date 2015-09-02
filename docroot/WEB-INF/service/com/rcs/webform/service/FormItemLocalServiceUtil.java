@@ -299,13 +299,15 @@ public class FormItemLocalServiceUtil {
 		java.util.Map<java.util.Locale, java.lang.String> mandatoryErrorMessageMap,
 		java.util.Map<java.util.Locale, java.lang.String> validationErrorMessageMap,
 		java.util.Map<java.util.Locale, java.lang.String> maxLengthErrorMessageMap,
-		java.lang.String formLayout) {
+		java.lang.String formLayout,
+		java.util.Map<java.util.Locale, java.lang.String> defaultValueMap) {
 		return getService()
 				   .save(formItemId, formId, label, type, mandatory,
 			validationRegexValue, validationType, order, maxLength,
 			hintMessage, serviceContext, formItemAttrClass, labelAttrClass,
 			inputAttrClass, mandatoryErrorMessageMap,
-			validationErrorMessageMap, maxLengthErrorMessageMap, formLayout);
+			validationErrorMessageMap, maxLengthErrorMessageMap, formLayout,
+			defaultValueMap);
 	}
 
 	public static java.util.List<com.rcs.webform.model.FormItem> getFormItemByFormId(

@@ -68,6 +68,7 @@ public class WebFormUtil {
 		formDto.setSuccessURL("");
 		formDto.setUseCaptcha(false);
 		formDto.setSubmitLabel("Submit");
+		formDto.setSubmitAttrClass("btn btn-primary");
 		return formDto;
 	}
 	

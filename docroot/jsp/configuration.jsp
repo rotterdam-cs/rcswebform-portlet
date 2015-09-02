@@ -18,11 +18,14 @@ String submitSuccessMessage = "";
 boolean submitSuccessMessageRadio = true;
 String successURL = "";
 boolean successURLRadio = false;
-String submitButtonLabel = "";
-String formCssId = "";
-String formCssClass = "";
-String submitBtnCssId = "";
-String submitBtnCssClass = "";
+String submitButtonLabel = "Submit";
+String formCssClass = "form";
+String submitBtnCssClass = "btn btn-primary";
+
+String oneColumnLabelCssClass = "rcs control-label single";
+String oneColumnInputCssClass = "rcs field single";
+String twoColumnLabelCssClass = "rcs control-label dual";
+String twoColumnInputCssClass = "rcs field dual";
 
 try{
 	formToPortletId = GetterUtil.getLong(formToPortletMap.getFormToPorletMapId(), 0);
@@ -35,9 +38,7 @@ try{
 	successURL = GetterUtil.getString(thisForm.getSuccessURL(), StringPool.BLANK);
 	successURLRadio = !successURL.equals(StringPool.BLANK);
 	submitButtonLabel = GetterUtil.getString(thisForm.getSubmitLabel(), StringPool.BLANK);
-	formCssId = GetterUtil.getString(thisForm.getFormAttrId(), StringPool.BLANK);
 	formCssClass = GetterUtil.getString(thisForm.getFormAttrClass(), StringPool.BLANK);
-	submitBtnCssId = GetterUtil.getString(thisForm.getSubmitAttrId(), StringPool.BLANK);
 	submitBtnCssClass = GetterUtil.getString(thisForm.getSubmitAttrClass(), StringPool.BLANK);
 } catch(Exception ignored){
 }
@@ -49,7 +50,7 @@ String emailFromName = WebFormUtil.getEmailFromName(portletPreferences, company.
 String emailFromAddress = WebFormUtil.getEmailFromAddress(portletPreferences, company.getCompanyId());
 String emailAddress = portletPreferences.getValue("emailAddress", StringPool.BLANK);
 String subject = portletPreferences.getValue("subject", StringPool.BLANK);
-boolean saveToDatabase = GetterUtil.getBoolean(portletPreferences.getValue("saveToDatabase", StringPool.BLANK));
+boolean saveToDatabase = GetterUtil.getBoolean(portletPreferences.getValue("saveToDatabase", StringPool.TRUE));
 
 boolean fieldsEditingDisabled = false;
 %>
@@ -70,8 +71,9 @@ boolean fieldsEditingDisabled = false;
 	<aui:input name="tabsValue" type="hidden" value="<%= tabValues %>"></aui:input>
 
 	<liferay-ui:error exception="<%= DuplicateColumnNameException.class %>" message="please-enter-unique-field-names" />
+	<liferay-ui:error key="error-storage-not-choosen" message="Please choose at least one storage for submitted data" />
 	
-	<liferay-ui:tabs names="Form Information,Submitted Data to be Stored,Form Fields" onClick="onClickTabs(this)" refresh="false" value="<%= tabValues %>">
+	<liferay-ui:tabs names="Form Information,Form Submit Action,Form Fields" onClick="onClickTabs(this)" refresh="false" value="<%= tabValues %>">
 		<liferay-ui:section>
 			<aui:fieldset>
 				<aui:field-wrapper label="Title">
@@ -99,9 +101,7 @@ boolean fieldsEditingDisabled = false;
 				</aui:field-wrapper>
 				
 				<aui:field-wrapper label="Form CSS Styling">
-					<aui:input name="formCssId" type="text" label="Form Id" value="<%= formCssId %>"></aui:input>
 					<aui:input name="formCssClass" type="text" label="Form Class" value="<%= formCssClass %>"></aui:input>
-					<aui:input name="submitCssId" type="text" label="Submit Button Id" value="<%= submitBtnCssId %>"></aui:input>
 					<aui:input name="submitCssClass" type="text" label="Submit Button Class" value="<%= submitBtnCssClass %>"></aui:input>
 				</aui:field-wrapper>
 				
@@ -206,16 +206,20 @@ boolean fieldsEditingDisabled = false;
 			
 			var textFieldInputTypeDiv = formRow.one('.text-field-input-type');
 			var textFieldHintDiv = formRow.one('.input-hint-message');
-	
+			var textFieldDefaultValueDiv = formRow.one('.input-default-value');
+			
+
 			if (value == 'TEXT_FIELD') {
 				textFieldInputTypeDiv.all('label').show();
 				textFieldHintDiv.all('label').show();
 				textFieldInputTypeDiv.show();
 				textFieldHintDiv.show();
+				textFieldDefaultValueDiv.show();
 			}
 			else {
 				textFieldInputTypeDiv.hide();
 				textFieldHintDiv.hide();
+				textFieldDefaultValueDiv.hide();
 			}
 
 			var optionalControl = formRow.one('.optional-control').ancestor();
@@ -223,7 +227,19 @@ boolean fieldsEditingDisabled = false;
 			optionalControl.show();
 			labelName.show();
 			
+			var optionalInput = optionalDiv.one('input').val();
+			var mandatoryErrorMessageDiv = formRow.one('.mandatory-error-message');
+			mandatoryChanged(value, optionalInput, mandatoryErrorMessageDiv);
+			
+			var maxLengthInput = formRow.one('.input-max-length').one('input').val();
+			var maxLengthErrorMessageDiv = formRow.one('.max-length-error-message');
+			maxLengthChanged(value, maxLengthInput, maxLengthErrorMessageDiv);
+
+			var inputType = textFieldInputTypeDiv.one('select').val().split(":")[0];
+			var validationErrorMessageDiv = formRow.one('.validation-error-message');
+			validationChanged(value, inputType, validationErrorMessageDiv);
 		};
+		
 		
 		var inputTypeToggleOptions = function(event) {
 			var select = this;
@@ -233,7 +249,7 @@ boolean fieldsEditingDisabled = false;
 			
 			var inputMaxLengthDiv = formRow.one('.input-max-length');
 	
-			if ((value == 'ALPHANUM') || (value == 'ALPHA') || (value == 'NUMBER')) {
+			if ( (value == 'NONE') || (value == 'ALPHANUM') || (value == 'ALPHA') || (value == 'NUMBER') || (value == '')) {
 				inputMaxLengthDiv.all('label').show();
 				inputMaxLengthDiv.show();
 			}
@@ -241,12 +257,9 @@ boolean fieldsEditingDisabled = false;
 				inputMaxLengthDiv.hide();
 			}
 			
+			var fieldType = formRow.one('select.field-type').val().split(":")[0];
 			var validationErrorMessageDiv = formRow.one('.validation-error-message');
-			if (value == 'ALPHANUM') {
-				validationErrorMessageDiv.hide();
-			} else {
-				validationErrorMessageDiv.show();
-			}
+			validationChanged(fieldType, value, validationErrorMessageDiv);
 			
 			var validationRegexDiv = formRow.one('.field-validation-regex');
 			if (value == 'REGEX') {
@@ -256,7 +269,7 @@ boolean fieldsEditingDisabled = false;
 			}
 			
 		};
-		
+
 		var webFields = A.one('.webFields');
 
 		webFields.all('select.field-type').each(toggleOptions);
@@ -356,4 +369,53 @@ AUI().use('aui-base',function(A){
 	});
 	
 });
+
+var autoFillOptionKeyValue = function(fieldOptionValue, fieldOptionLabel, fieldOptionLabelDefaultLocale) {
+	if( fieldOptionLabel && fieldOptionLabel && fieldOptionLabelDefaultLocale) {
+		if(fieldOptionLabel.val().length === 0) {
+			fieldOptionLabel.set('value', fieldOptionValue.val());
+			fieldOptionLabelDefaultLocale.set('value', fieldOptionValue.val());
+		}
+		if(fieldOptionValue.val().length === 0) {
+			fieldOptionValue.set('value', fieldOptionLabel.val());
+		}
+	}
+};
+
+var mandatoryChanged = function(fieldType, optional, mandatoryErrorMessageDiv) {
+	if(fieldType !== 'SECTION' && optional ==='false') {
+		mandatoryErrorMessageDiv.show();
+	} else {
+		mandatoryErrorMessageDiv.hide();
+	}
+}
+
+var maxLengthChanged = function(fieldType, maxLength, maxLengthErrorMessageDiv) {
+	if(fieldType === 'TEXT_FIELD' && maxLength > 0) {
+		maxLengthErrorMessageDiv.show();
+	} else {
+		maxLengthErrorMessageDiv.hide();
+	}
+}
+
+var validationChanged = function(fieldType, inputType, validationErrorMessageDiv) {
+	if(fieldType === 'TEXT_FIELD' && inputType !== 'NONE') {
+		validationErrorMessageDiv.show();
+	} else {
+		validationErrorMessageDiv.hide();
+	}
+}
+
+var formLayoutChanged = function(formLayout, label, input) {
+	if(label && input) {
+		if(formLayout==='TWO_COLUMN') {
+			input.set('value','<%= twoColumnInputCssClass %>');
+			label.set('value','<%= twoColumnLabelCssClass %>');
+		} else if(formLayout==='ONE_COLUMN') {
+			input.set('value','<%= oneColumnInputCssClass %>');
+			label.set('value','<%= oneColumnLabelCssClass %>');
+		}
+	}
+
+}
 </aui:script>

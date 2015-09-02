@@ -3,31 +3,32 @@
 <%@ include file="/jsp/init.jsp" %>
 
 <%
+String defaultLocale = themeDisplay.getLocale().toString();
 int fieldOptionsIndex = GetterUtil.getInteger(request.getAttribute("fieldOptionsIndex"));
 int index = GetterUtil.getInteger(request.getAttribute("formItemIndex"));
 boolean ignoreRequestValue = GetterUtil.getBoolean(request.getAttribute("ignoreRequestValue"));
-String formItemOptionLabel = "";
-String formItemOptionValueMap = "";
+String formItemOptionValue = "";
+String formItemOptionLabelMap = "";
 Long formItemOptionId = null;
 List<FormItemOption> formItemOptions = (List<FormItemOption>) GetterUtil.getObject(request.getAttribute("formItemOptions"));
 if(formItemOptions != null && !formItemOptions.isEmpty()){
 	formItemOptionId = formItemOptions.get(fieldOptionsIndex).getFormItemOptionId();
-	formItemOptionLabel = formItemOptions.get(fieldOptionsIndex).getOptionKey();
-	formItemOptionValueMap = formItemOptions.get(fieldOptionsIndex).getOptionValue();
+	formItemOptionValue = formItemOptions.get(fieldOptionsIndex).getOptionKey();
+	formItemOptionLabelMap = formItemOptions.get(fieldOptionsIndex).getOptionValue();
 }
 %>
 
 <div class='added-option-field'>
 	<aui:input cssClass='formItemOptionId' name='<%= "formItemOptionId" + fieldOptionsIndex + "_" + index %>' ignoreRequestValue="<%= ignoreRequestValue %>" type="hidden" value='<%=formItemOptionId%>'/>
 	<aui:field-wrapper cssClass='left-row-clear-left options'>
-		<aui:input name='<%= "fieldOptionsLabel" + fieldOptionsIndex + "_" + index %>' type="text" ignoreRequestValue="<%= ignoreRequestValue %>" label="" value="<%= formItemOptionLabel %>"></aui:input>
+		<aui:input name='<%= "fieldOptionsValue" + fieldOptionsIndex + "_" + index %>' type="text" ignoreRequestValue="<%= ignoreRequestValue %>" label="" value="<%= formItemOptionValue %>"></aui:input>
 	</aui:field-wrapper>
 	
 	<aui:field-wrapper cssClass='left-row options'>
-		<liferay-ui:input-localized ignoreRequestValue="<%= ignoreRequestValue %>" name='<%= "fieldOptionsValue" + fieldOptionsIndex  + "_" + index %>' xml="<%= formItemOptionValueMap %>" />
+		<liferay-ui:input-localized ignoreRequestValue="<%= ignoreRequestValue %>" name='<%= "fieldOptionsLabel" + fieldOptionsIndex  + "_" + index %>' xml="<%= formItemOptionLabelMap %>" />
 	</aui:field-wrapper>
 	<aui:field-wrapper cssClass='left-row-clear-right options'>
-	<!-- 	<button type="button" class="btn-add-option btn btn-primary btn-content btn btn-icon-only " title="Add option"><span class="btn-icon icon icon-plus"></span></button> -->
+<!-- 		<button type="button" class="btn-add-option btn btn-primary btn-content btn btn-icon-only " title="Add option"><span class="btn-icon icon icon-plus"></span></button> -->
 		<button type="button" id='<%= "btn-remove-option" + fieldOptionsIndex  + "_" + index %>' class="btn-remove-option btn btn-primary btn-content btn btn-icon-only " title="Remove option"><span class="btn-icon icon icon-minus"></span></button>
 	</aui:field-wrapper>
 </div>
@@ -40,12 +41,23 @@ A.one('<%= "#btn-remove-option" + fieldOptionsIndex  + "_" + index %>').on('clic
    	
    	if(rowFormItemOptionIds != ""){
    		rowFormItemOptionIds += "," + rowFormItemOptionId;
-   	}else{
+   	} else{
    		rowFormItemOptionIds += rowFormItemOptionId;
    	}
    	
    	A.one('#<portlet:namespace />deletedFormItemOptionIds').val(rowFormItemOptionIds);
 
 	event.currentTarget.ancestorsByClassName('added-option-field').remove();
+});
+
+var fieldOptionValue = A.one('input#<portlet:namespace /><%= "fieldOptionsValue" + fieldOptionsIndex  + "_" + index %>.field');
+var fieldOptionLabel = A.one('input#<portlet:namespace /><%= "fieldOptionsLabel" + fieldOptionsIndex  + "__" + index%>.language-value');
+var fieldOptionLabelDefaultLocale = A.one('input#<portlet:namespace /><%= "fieldOptionsLabel" + fieldOptionsIndex  + "__" + index + "_" + defaultLocale%>.field');
+
+fieldOptionValue.on('change', function (event) {
+	autoFillOptionKeyValue(fieldOptionValue, fieldOptionLabel, fieldOptionLabelDefaultLocale);
+});
+fieldOptionLabel.on('change', function (event) {
+	autoFillOptionKeyValue(fieldOptionValue, fieldOptionLabel, fieldOptionLabelDefaultLocale);
 });
 </aui:script>

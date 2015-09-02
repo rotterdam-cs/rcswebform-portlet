@@ -116,7 +116,8 @@ public class FormItemLocalServiceClp implements FormItemLocalService {
 				"java.lang.String", "int", "int", "java.util.Map",
 				"com.liferay.portal.service.ServiceContext", "java.lang.String",
 				"java.lang.String", "java.lang.String", "java.util.Map",
-				"java.util.Map", "java.util.Map", "java.lang.String"
+				"java.util.Map", "java.util.Map", "java.lang.String",
+				"java.util.Map"
 			};
 
 		_methodName20 = "getFormItemByFormId";
@@ -694,7 +695,8 @@ public class FormItemLocalServiceClp implements FormItemLocalService {
 		java.util.Map<java.util.Locale, java.lang.String> mandatoryErrorMessageMap,
 		java.util.Map<java.util.Locale, java.lang.String> validationErrorMessageMap,
 		java.util.Map<java.util.Locale, java.lang.String> maxLengthErrorMessageMap,
-		java.lang.String formLayout) {
+		java.lang.String formLayout,
+		java.util.Map<java.util.Locale, java.lang.String> defaultValueMap) {
 		Object returnObj = null;
 
 		try {
@@ -735,7 +737,9 @@ public class FormItemLocalServiceClp implements FormItemLocalService {
 						
 					ClpSerializer.translateInput(maxLengthErrorMessageMap),
 						
-					ClpSerializer.translateInput(formLayout)
+					ClpSerializer.translateInput(formLayout),
+						
+					ClpSerializer.translateInput(defaultValueMap)
 					});
 		}
 		catch (Throwable t) {
