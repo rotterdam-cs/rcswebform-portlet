@@ -19,10 +19,9 @@
 		<liferay-ui:error key="error" message="An error occurred while sending the form information" />
 
 	<aui:fieldset label="${Data.data.title}">
-		<div id="formDescription">
+		<div id="formDescription" class="rcs description">
 			${Data.data.desc}
 		</div>
-		
 		
 		<!-- Hidden input -->
 		<aui:input name="redirect" type="hidden" value="${Data.data.successURL}"></aui:input>
@@ -62,7 +61,7 @@
 	</aui:fieldset>
 </aui:form>
 
-<aui:script use="aui-base,aui-node,aui-form-validator,aui-datepicker,aui-datepicker-popover">
+<aui:script use="aui-base,aui-node,aui-form-validator,aui-datepicker,aui-toolbar, aui-popover, aui-calendar">
 	var DEFAULTS_FORM_VALIDATOR = A.config.FormValidator;
 
 	var phone = function(val, node, ruleValue) {
@@ -150,6 +149,8 @@
 		divTemplateFormItem.hide();
 		var rules = new Object();
 		var fieldStrings = new Object();
+		var focusedDate;
+		var datePicker;
 		if(divForm || divTemplateFormItem) {
 			for(formItemIdx in Data.data.formItems) { 
 				var divFormItem =  divTemplateFormItem.cloneNode(true);
@@ -191,25 +192,60 @@
 						case 'DATE' :
 							initUserInputText(formItemInputWrapper, formItemInputText, formItemIdx);
 							formItemInputText.addClass('date');
-							var datePicker = new A.DatePicker(
-						      {
-						    	  mask:'%d/%m/%Y',
-						          trigger: '#'+formItemInputText.attr('id'),
-						          setValue: true,
-						          popover: {
-							      	zIndex: 1,
-							      	on: {
-							      		click:function(event) {
-			 								if(validator) {
-		 										validator.validateField(formItemInputText);
-		 									}
-							      		}
-		 								 
-							      	}
-						          }
-						      }
-						    );
-
+							
+							formItemInputText.datePicker = new A.DatePicker(
+									{
+									      mask: Data.data.formItems[formItemIdx].dateFormat,
+		 						          trigger: '#'+formItemInputText.attr('id'),
+		 						          setValue: true,
+		 						          popover: {
+		 							      	zIndex: 1,
+		 							      	on: {
+		 							      		click:function(event) {
+		 							      			if(validator) {
+		 		 										validator.validateField(focusedDate);
+		 		 									}
+		 							      		}
+		 							      	},
+		 							      	toolbars: {
+									            header: [[
+									              {
+									                label: 'previous year',
+									                on: {
+									                  click: function(event) {
+									                	  focusedDate.datePicker.getCalendar().subtractYear();
+									                  }
+									                }
+									              },
+									              {
+									                label: 'today',
+									                on: {
+									                  click: function() {
+									                	  focusedDate.datePicker.clearSelection();
+									                	  focusedDate.datePicker.selectDates(new Date());
+									                  }
+									                }
+									              },
+									              {
+										                label: 'next year',
+										                on: {
+										                  click: function() {
+										                	  focusedDate.datePicker.getCalendar().addYear();
+										                  }
+										                }
+										              }
+									            ]]
+		 						          }
+							          }
+									}
+								);
+							formItemInputText.on('click', function(event) {
+								focusedDate = event.currentTarget;
+								if(event.currentTarget.val().length == 0) {
+									event.currentTarget.datePicker.selectDates(new Date());
+								}
+							})
+							
 							formItemInputTextArea.remove();
 							formItemInputRadioWrapper.remove();
 							formItemInputCombo.remove();
@@ -248,11 +284,13 @@
 					fieldStrings:fieldStrings,
 					fieldContainer:'fieldset',
 					containerErrorClass: 'error',
-// 					validateOnBlur: false,
-// 					validateOnInput: true,
+					validateOnBlur: false,
+					validateOnInput: true,
 				});
-		 	
+			
 		}
+		
+
 	}
 	
 	function initUserInput(formItemInputWrapper, formItemInput, formItemIdx) {

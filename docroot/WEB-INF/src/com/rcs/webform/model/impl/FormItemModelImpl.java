@@ -92,9 +92,10 @@ public class FormItemModelImpl extends BaseModelImpl<FormItem>
 			{ "errorMandatoryMessage", Types.VARCHAR },
 			{ "errorLengthMessage", Types.VARCHAR },
 			{ "hintMessage", Types.VARCHAR },
-			{ "formLayout", Types.VARCHAR }
+			{ "formLayout", Types.VARCHAR },
+			{ "dateFormat", Types.VARCHAR }
 		};
-	public static final String TABLE_SQL_CREATE = "create table rcswebform_FormItem (formItemId LONG not null primary key,active_ BOOLEAN,creationDate DATE null,modificationDate DATE null,modificationUser VARCHAR(75) null,formId LONG,formItemAttrId VARCHAR(75) null,formItemAttrClass VARCHAR(75) null,label STRING null,labelAttrId VARCHAR(75) null,labelAttrClass VARCHAR(75) null,inputAttrId VARCHAR(75) null,inputAttrClass VARCHAR(75) null,type_ VARCHAR(75) null,mandatory BOOLEAN,defaultValue STRING null,order_ INTEGER,validationType VARCHAR(75) null,validationRegexValue STRING null,minLength INTEGER,maxLength INTEGER,errorValidationMessage STRING null,errorMandatoryMessage STRING null,errorLengthMessage STRING null,hintMessage STRING null,formLayout VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table rcswebform_FormItem (formItemId LONG not null primary key,active_ BOOLEAN,creationDate DATE null,modificationDate DATE null,modificationUser VARCHAR(75) null,formId LONG,formItemAttrId VARCHAR(75) null,formItemAttrClass VARCHAR(75) null,label STRING null,labelAttrId VARCHAR(75) null,labelAttrClass VARCHAR(75) null,inputAttrId VARCHAR(75) null,inputAttrClass VARCHAR(75) null,type_ VARCHAR(75) null,mandatory BOOLEAN,defaultValue STRING null,order_ INTEGER,validationType VARCHAR(75) null,validationRegexValue STRING null,minLength INTEGER,maxLength INTEGER,errorValidationMessage STRING null,errorMandatoryMessage STRING null,errorLengthMessage STRING null,hintMessage STRING null,formLayout VARCHAR(75) null,dateFormat VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table rcswebform_FormItem";
 	public static final String ORDER_BY_JPQL = " ORDER BY formItem.formItemId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY rcswebform_FormItem.formItemId ASC";
@@ -178,6 +179,7 @@ public class FormItemModelImpl extends BaseModelImpl<FormItem>
 		attributes.put("errorLengthMessage", getErrorLengthMessage());
 		attributes.put("hintMessage", getHintMessage());
 		attributes.put("formLayout", getFormLayout());
+		attributes.put("dateFormat", getDateFormat());
 
 		return attributes;
 	}
@@ -341,6 +343,12 @@ public class FormItemModelImpl extends BaseModelImpl<FormItem>
 
 		if (formLayout != null) {
 			setFormLayout(formLayout);
+		}
+
+		String dateFormat = (String)attributes.get("dateFormat");
+
+		if (dateFormat != null) {
+			setDateFormat(dateFormat);
 		}
 	}
 
@@ -1245,6 +1253,21 @@ public class FormItemModelImpl extends BaseModelImpl<FormItem>
 		_formLayout = formLayout;
 	}
 
+	@Override
+	public String getDateFormat() {
+		if (_dateFormat == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _dateFormat;
+		}
+	}
+
+	@Override
+	public void setDateFormat(String dateFormat) {
+		_dateFormat = dateFormat;
+	}
+
 	public long getColumnBitmask() {
 		return _columnBitmask;
 	}
@@ -1465,6 +1488,7 @@ public class FormItemModelImpl extends BaseModelImpl<FormItem>
 		formItemImpl.setErrorLengthMessage(getErrorLengthMessage());
 		formItemImpl.setHintMessage(getHintMessage());
 		formItemImpl.setFormLayout(getFormLayout());
+		formItemImpl.setDateFormat(getDateFormat());
 
 		formItemImpl.resetOriginalValues();
 
@@ -1699,12 +1723,20 @@ public class FormItemModelImpl extends BaseModelImpl<FormItem>
 			formItemCacheModel.formLayout = null;
 		}
 
+		formItemCacheModel.dateFormat = getDateFormat();
+
+		String dateFormat = formItemCacheModel.dateFormat;
+
+		if ((dateFormat != null) && (dateFormat.length() == 0)) {
+			formItemCacheModel.dateFormat = null;
+		}
+
 		return formItemCacheModel;
 	}
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(53);
+		StringBundler sb = new StringBundler(55);
 
 		sb.append("{formItemId=");
 		sb.append(getFormItemId());
@@ -1758,6 +1790,8 @@ public class FormItemModelImpl extends BaseModelImpl<FormItem>
 		sb.append(getHintMessage());
 		sb.append(", formLayout=");
 		sb.append(getFormLayout());
+		sb.append(", dateFormat=");
+		sb.append(getDateFormat());
 		sb.append("}");
 
 		return sb.toString();
@@ -1765,7 +1799,7 @@ public class FormItemModelImpl extends BaseModelImpl<FormItem>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(82);
+		StringBundler sb = new StringBundler(85);
 
 		sb.append("<model><model-name>");
 		sb.append("com.rcs.webform.model.FormItem");
@@ -1875,6 +1909,10 @@ public class FormItemModelImpl extends BaseModelImpl<FormItem>
 			"<column><column-name>formLayout</column-name><column-value><![CDATA[");
 		sb.append(getFormLayout());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>dateFormat</column-name><column-value><![CDATA[");
+		sb.append(getDateFormat());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -1919,6 +1957,7 @@ public class FormItemModelImpl extends BaseModelImpl<FormItem>
 	private String _hintMessage;
 	private String _hintMessageCurrentLanguageId;
 	private String _formLayout;
+	private String _dateFormat;
 	private long _columnBitmask;
 	private FormItem _escapedModel;
 }

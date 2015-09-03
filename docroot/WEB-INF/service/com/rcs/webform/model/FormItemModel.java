@@ -977,6 +977,21 @@ public interface FormItemModel extends BaseModel<FormItem> {
 	 */
 	public void setFormLayout(String formLayout);
 
+	/**
+	 * Returns the date format of this form item.
+	 *
+	 * @return the date format of this form item
+	 */
+	@AutoEscape
+	public String getDateFormat();
+
+	/**
+	 * Sets the date format of this form item.
+	 *
+	 * @param dateFormat the date format of this form item
+	 */
+	public void setDateFormat(String dateFormat);
+
 	@Override
 	public boolean isNew();
 

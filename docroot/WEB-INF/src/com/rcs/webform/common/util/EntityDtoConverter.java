@@ -93,6 +93,7 @@ public class EntityDtoConverter {
         formItemDto.setErrorMandatoryMessage(formItem.getErrorMandatoryMessage(locale));
         formItemDto.setErrorLengthMessage(formItem.getErrorLengthMessage(locale));
         formItemDto.setHintMessage(formItem.getHintMessage(locale));
+        formItemDto.setDateFormat(formItem.getDateFormat());
         return formItemDto;
     }
     

@@ -173,7 +173,8 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
                     String fieldValidationRegex = ParamUtil.getString(actionRequest, "fieldValidationRegex" + formFieldsIndex);
                     String formLayout = ParamUtil.getString(actionRequest, "formLayout" + formFieldsIndex);
                     Map<Locale, String> fieldDefaultValueMap = LocalizationUtil.getLocalizationMap(actionRequest, "fieldDefaultValue" + formFieldsIndex);
-
+                    String dateFormat = ParamUtil.getString(actionRequest, "dateFormat" + formFieldsIndex);
+                    
                     if (Validator.isNotNull(fieldValidationScript) ^ Validator.isNotNull(fieldValidationErrorMessage)) {
 
                         SessionErrors.add(actionRequest, "validationDefinitionInvalid" + i);
@@ -186,7 +187,7 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 
                     FormItem formItem = FormItemLocalServiceUtil.save(formItemId, formId, fieldLabelMap, fieldType, fieldOptional, fieldValidationRegex,
                             validationType, i, inputTypeMaxLength, fieldHintMessageMap, serviceContext, formItemAttrClass, labelAttrClass, inputAttrClass,
-                            mandatoryErrorMessageMap, validationErrorMessageMap, maxLengthErrorMessageMap, formLayout, fieldDefaultValueMap);
+                            mandatoryErrorMessageMap, validationErrorMessageMap, maxLengthErrorMessageMap, formLayout, fieldDefaultValueMap, dateFormat);
 
                     // options handler
                     int optionsIndex = ParamUtil.getInteger(actionRequest, "fieldOptionsIndex" + formFieldsIndex);

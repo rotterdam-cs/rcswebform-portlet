@@ -75,6 +75,7 @@ public class FormItemWrapper implements FormItem, ModelWrapper<FormItem> {
 		attributes.put("errorLengthMessage", getErrorLengthMessage());
 		attributes.put("hintMessage", getHintMessage());
 		attributes.put("formLayout", getFormLayout());
+		attributes.put("dateFormat", getDateFormat());
 
 		return attributes;
 	}
@@ -238,6 +239,12 @@ public class FormItemWrapper implements FormItem, ModelWrapper<FormItem> {
 
 		if (formLayout != null) {
 			setFormLayout(formLayout);
+		}
+
+		String dateFormat = (String)attributes.get("dateFormat");
+
+		if (dateFormat != null) {
+			setDateFormat(dateFormat);
 		}
 	}
 
@@ -1542,6 +1549,26 @@ public class FormItemWrapper implements FormItem, ModelWrapper<FormItem> {
 	@Override
 	public void setFormLayout(java.lang.String formLayout) {
 		_formItem.setFormLayout(formLayout);
+	}
+
+	/**
+	* Returns the date format of this form item.
+	*
+	* @return the date format of this form item
+	*/
+	@Override
+	public java.lang.String getDateFormat() {
+		return _formItem.getDateFormat();
+	}
+
+	/**
+	* Sets the date format of this form item.
+	*
+	* @param dateFormat the date format of this form item
+	*/
+	@Override
+	public void setDateFormat(java.lang.String dateFormat) {
+		_formItem.setDateFormat(dateFormat);
 	}
 
 	@Override

@@ -35,6 +35,7 @@ public class FormItemDTO extends GenericEntityDTO {
 	private String errorMandatoryMessage;
 	private String errorLengthMessage;
     private String hintMessage;
+    private String dateFormat;
     
     
     public int getMinLength() {
@@ -256,5 +257,15 @@ public class FormItemDTO extends GenericEntityDTO {
     
     public void setHintMessage(String hintMessage) {
         this.hintMessage = hintMessage;
+    }
+
+
+    public String getDateFormat() {
+        return dateFormat;
+    }
+
+
+    public void setDateFormat(String dateFormat) {
+        this.dateFormat = dateFormat;
     }
 }

@@ -51,6 +51,7 @@
 		<field name="errorLengthMessage" type="String" localized="true" />
 		<field name="hintMessage" type="String" localized="true" />
 		<field name="formLayout" type="String" />
+		<field name="dateFormat" type="String" />
 	</model>
 	<model name="com.rcs.webform.model.FormItemOption">
 		<field name="formItemOptionId" type="long" />

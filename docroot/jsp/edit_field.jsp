@@ -61,7 +61,7 @@ String validationErrorMessageXml = "";
 String maxLengthErrorMessageXml = "";
 String fieldValidationRegex = "";
 String formLayout = "";
-
+String dateFormat = "%d/%m/%Y";
 
 if(formItems != null && !formItems.isEmpty()){
 	formItemId = formItems.get(formFieldsIndex).getFormItemId();
@@ -83,6 +83,7 @@ if(formItems != null && !formItems.isEmpty()){
 	maxLengthErrorMessageXml = formItems.get(formFieldsIndex).getErrorLengthMessage();
 	fieldValidationRegex = formItems.get(formFieldsIndex).getValidationRegexValue();
 	formLayout = formItems.get(formFieldsIndex).getFormLayout();
+	dateFormat = formItems.get(formFieldsIndex).getDateFormat();
 }
 
 List<FormItemOption> formItemOptions = null;
@@ -311,6 +312,10 @@ boolean ignoreRequestValue = (index != formFieldsIndex);
 					</aui:field-wrapper>
 					<aui:field-wrapper cssClass='<%= "max-length-error-message left-row" + (inputMaxLength == 0 ? " hide" : StringPool.BLANK) %>' label="More than max length error message">
 						<liferay-ui:input-localized ignoreRequestValue="<%= ignoreRequestValue %>" name='<%= "maxLengthErrorMessage" + index %>' xml="<%= maxLengthErrorMessageXml %>" />
+					</aui:field-wrapper>
+					<br/>
+					<aui:field-wrapper cssClass='<%= "date-format left-row"+ ( (!fieldType.equals("DATE")) ? " hide" : StringPool.BLANK) %>' >
+						<aui:input  name='<%= "dateFormat" + index %>' label="Date Format" ignoreRequestValue="<%= ignoreRequestValue %>" value="<%= dateFormat %>" helpMessage="Set date format for this input." />
 					</aui:field-wrapper>
 			</div>
 			</aui:field-wrapper>

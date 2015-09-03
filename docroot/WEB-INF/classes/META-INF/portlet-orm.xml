@@ -88,6 +88,7 @@
 			<basic name="errorLengthMessage" />
 			<basic name="hintMessage" />
 			<basic name="formLayout" />
+			<basic name="dateFormat" />
 			<transient name="defaultValueCurrentLanguageId" />
 			<transient name="defaultValueMap" />
 			<transient name="errorLengthMessageCurrentLanguageId" />

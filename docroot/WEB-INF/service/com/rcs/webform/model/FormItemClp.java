@@ -108,6 +108,7 @@ public class FormItemClp extends BaseModelImpl<FormItem> implements FormItem {
 		attributes.put("errorLengthMessage", getErrorLengthMessage());
 		attributes.put("hintMessage", getHintMessage());
 		attributes.put("formLayout", getFormLayout());
+		attributes.put("dateFormat", getDateFormat());
 
 		return attributes;
 	}
@@ -271,6 +272,12 @@ public class FormItemClp extends BaseModelImpl<FormItem> implements FormItem {
 
 		if (formLayout != null) {
 			setFormLayout(formLayout);
+		}
+
+		String dateFormat = (String)attributes.get("dateFormat");
+
+		if (dateFormat != null) {
+			setDateFormat(dateFormat);
 		}
 	}
 
@@ -1525,6 +1532,29 @@ public class FormItemClp extends BaseModelImpl<FormItem> implements FormItem {
 		}
 	}
 
+	@Override
+	public String getDateFormat() {
+		return _dateFormat;
+	}
+
+	@Override
+	public void setDateFormat(String dateFormat) {
+		_dateFormat = dateFormat;
+
+		if (_formItemRemoteModel != null) {
+			try {
+				Class<?> clazz = _formItemRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setDateFormat", String.class);
+
+				method.invoke(_formItemRemoteModel, dateFormat);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
 	public BaseModel<?> getFormItemRemoteModel() {
 		return _formItemRemoteModel;
 	}
@@ -1783,6 +1813,7 @@ public class FormItemClp extends BaseModelImpl<FormItem> implements FormItem {
 		clone.setErrorLengthMessage(getErrorLengthMessage());
 		clone.setHintMessage(getHintMessage());
 		clone.setFormLayout(getFormLayout());
+		clone.setDateFormat(getDateFormat());
 
 		return clone;
 	}
@@ -1835,7 +1866,7 @@ public class FormItemClp extends BaseModelImpl<FormItem> implements FormItem {
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(53);
+		StringBundler sb = new StringBundler(55);
 
 		sb.append("{formItemId=");
 		sb.append(getFormItemId());
@@ -1889,6 +1920,8 @@ public class FormItemClp extends BaseModelImpl<FormItem> implements FormItem {
 		sb.append(getHintMessage());
 		sb.append(", formLayout=");
 		sb.append(getFormLayout());
+		sb.append(", dateFormat=");
+		sb.append(getDateFormat());
 		sb.append("}");
 
 		return sb.toString();
@@ -1896,7 +1929,7 @@ public class FormItemClp extends BaseModelImpl<FormItem> implements FormItem {
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(82);
+		StringBundler sb = new StringBundler(85);
 
 		sb.append("<model><model-name>");
 		sb.append("com.rcs.webform.model.FormItem");
@@ -2006,6 +2039,10 @@ public class FormItemClp extends BaseModelImpl<FormItem> implements FormItem {
 			"<column><column-name>formLayout</column-name><column-value><![CDATA[");
 		sb.append(getFormLayout());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>dateFormat</column-name><column-value><![CDATA[");
+		sb.append(getDateFormat());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -2044,6 +2081,7 @@ public class FormItemClp extends BaseModelImpl<FormItem> implements FormItem {
 	private String _hintMessage;
 	private String _hintMessageCurrentLanguageId;
 	private String _formLayout;
+	private String _dateFormat;
 	private BaseModel<?> _formItemRemoteModel;
 	private Class<?> _clpSerializerClass = com.rcs.webform.service.ClpSerializer.class;
 }

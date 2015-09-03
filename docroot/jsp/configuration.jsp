@@ -221,7 +221,15 @@ boolean fieldsEditingDisabled = false;
 				textFieldHintDiv.hide();
 				textFieldDefaultValueDiv.hide();
 			}
-
+			
+			var dateFormatDiv = formRow.one('.date-format');
+			if (value == 'DATE') {
+				dateFormatDiv.show();
+			}
+			else {
+				dateFormatDiv.hide();
+			}
+			
 			var optionalControl = formRow.one('.optional-control').ancestor();
 			var labelName = formRow.one('.label-name');
 			optionalControl.show();
