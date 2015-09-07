@@ -27,7 +27,8 @@ page import="com.liferay.portal.util.PortalUtil" %><%@
 page import="com.liferay.portlet.expando.DuplicateColumnNameException" %><%@ 
 page import="com.rcs.webform.common.util.WebFormUtil" %><%@
 page import="com.rcs.webform.model.Form" %><%@
-page import="com.rcs.webform.model.FormToPorletMap" %>
+page import="com.rcs.webform.model.FormToPorletMap" %><%@
+page import="com.liferay.portlet.PortletURLFactoryUtil"%>
 
 <%@ page import="javax.portlet.ActionRequest" %>
 

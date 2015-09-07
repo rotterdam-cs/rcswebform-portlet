@@ -132,6 +132,13 @@ public class SubmittedDataLocalServiceClp implements SubmittedDataLocalService {
 		_methodParameterTypes20 = new String[] {
 				"java.lang.Long", "com.liferay.portal.service.ServiceContext"
 			};
+
+		_methodName21 = "deleteBySubmittedDataIdAndFormId";
+
+		_methodParameterTypes21 = new String[] {
+				"java.lang.Long", "java.lang.Long",
+				"com.liferay.portal.service.ServiceContext"
+			};
 	}
 
 	@Override
@@ -743,6 +750,48 @@ public class SubmittedDataLocalServiceClp implements SubmittedDataLocalService {
 		return (java.util.List<com.rcs.webform.model.SubmittedData>)ClpSerializer.translateOutput(returnObj);
 	}
 
+	@Override
+	public java.util.List<com.rcs.webform.model.SubmittedData> deleteBySubmittedDataIdAndFormId(
+		java.lang.Long submittedDataId, java.lang.Long formId,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableLocalService.invokeMethod(_methodName21,
+					_methodParameterTypes21,
+					new Object[] {
+						ClpSerializer.translateInput(submittedDataId),
+						
+					ClpSerializer.translateInput(formId),
+						
+					ClpSerializer.translateInput(serviceContext)
+					});
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof com.liferay.portal.kernel.exception.PortalException) {
+				throw (com.liferay.portal.kernel.exception.PortalException)t;
+			}
+
+			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+				throw (com.liferay.portal.kernel.exception.SystemException)t;
+			}
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (java.util.List<com.rcs.webform.model.SubmittedData>)ClpSerializer.translateOutput(returnObj);
+	}
+
 	private InvokableLocalService _invokableLocalService;
 	private String _methodName0;
 	private String[] _methodParameterTypes0;
@@ -784,4 +833,6 @@ public class SubmittedDataLocalServiceClp implements SubmittedDataLocalService {
 	private String[] _methodParameterTypes19;
 	private String _methodName20;
 	private String[] _methodParameterTypes20;
+	private String _methodName21;
+	private String[] _methodParameterTypes21;
 }

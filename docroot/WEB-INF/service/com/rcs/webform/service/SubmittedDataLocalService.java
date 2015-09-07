@@ -261,4 +261,10 @@ public interface SubmittedDataLocalService extends BaseLocalService,
 	public java.util.List<com.rcs.webform.model.SubmittedData> delete(
 		java.lang.Long submittedDataId,
 		com.liferay.portal.service.ServiceContext serviceContext);
+
+	public java.util.List<com.rcs.webform.model.SubmittedData> deleteBySubmittedDataIdAndFormId(
+		java.lang.Long submittedDataId, java.lang.Long formId,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
 }

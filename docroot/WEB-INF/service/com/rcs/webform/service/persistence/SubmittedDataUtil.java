@@ -111,6 +111,194 @@ public class SubmittedDataUtil {
 	}
 
 	/**
+	* Returns all the submitted datas where formId = &#63; and submittedDataId = &#63;.
+	*
+	* @param formId the form ID
+	* @param submittedDataId the submitted data ID
+	* @return the matching submitted datas
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<com.rcs.webform.model.SubmittedData> findByFormIdSubmittedIdAndActive(
+		long formId, long submittedDataId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .findByFormIdSubmittedIdAndActive(formId, submittedDataId);
+	}
+
+	/**
+	* Returns a range of all the submitted datas where formId = &#63; and submittedDataId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.rcs.webform.model.impl.SubmittedDataModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param formId the form ID
+	* @param submittedDataId the submitted data ID
+	* @param start the lower bound of the range of submitted datas
+	* @param end the upper bound of the range of submitted datas (not inclusive)
+	* @return the range of matching submitted datas
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<com.rcs.webform.model.SubmittedData> findByFormIdSubmittedIdAndActive(
+		long formId, long submittedDataId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .findByFormIdSubmittedIdAndActive(formId, submittedDataId,
+			start, end);
+	}
+
+	/**
+	* Returns an ordered range of all the submitted datas where formId = &#63; and submittedDataId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.rcs.webform.model.impl.SubmittedDataModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param formId the form ID
+	* @param submittedDataId the submitted data ID
+	* @param start the lower bound of the range of submitted datas
+	* @param end the upper bound of the range of submitted datas (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @return the ordered range of matching submitted datas
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<com.rcs.webform.model.SubmittedData> findByFormIdSubmittedIdAndActive(
+		long formId, long submittedDataId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .findByFormIdSubmittedIdAndActive(formId, submittedDataId,
+			start, end, orderByComparator);
+	}
+
+	/**
+	* Returns the first submitted data in the ordered set where formId = &#63; and submittedDataId = &#63;.
+	*
+	* @param formId the form ID
+	* @param submittedDataId the submitted data ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching submitted data
+	* @throws com.rcs.webform.NoSuchSubmittedDataException if a matching submitted data could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.rcs.webform.model.SubmittedData findByFormIdSubmittedIdAndActive_First(
+		long formId, long submittedDataId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.rcs.webform.NoSuchSubmittedDataException {
+		return getPersistence()
+				   .findByFormIdSubmittedIdAndActive_First(formId,
+			submittedDataId, orderByComparator);
+	}
+
+	/**
+	* Returns the first submitted data in the ordered set where formId = &#63; and submittedDataId = &#63;.
+	*
+	* @param formId the form ID
+	* @param submittedDataId the submitted data ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching submitted data, or <code>null</code> if a matching submitted data could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.rcs.webform.model.SubmittedData fetchByFormIdSubmittedIdAndActive_First(
+		long formId, long submittedDataId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .fetchByFormIdSubmittedIdAndActive_First(formId,
+			submittedDataId, orderByComparator);
+	}
+
+	/**
+	* Returns the last submitted data in the ordered set where formId = &#63; and submittedDataId = &#63;.
+	*
+	* @param formId the form ID
+	* @param submittedDataId the submitted data ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching submitted data
+	* @throws com.rcs.webform.NoSuchSubmittedDataException if a matching submitted data could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.rcs.webform.model.SubmittedData findByFormIdSubmittedIdAndActive_Last(
+		long formId, long submittedDataId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.rcs.webform.NoSuchSubmittedDataException {
+		return getPersistence()
+				   .findByFormIdSubmittedIdAndActive_Last(formId,
+			submittedDataId, orderByComparator);
+	}
+
+	/**
+	* Returns the last submitted data in the ordered set where formId = &#63; and submittedDataId = &#63;.
+	*
+	* @param formId the form ID
+	* @param submittedDataId the submitted data ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching submitted data, or <code>null</code> if a matching submitted data could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.rcs.webform.model.SubmittedData fetchByFormIdSubmittedIdAndActive_Last(
+		long formId, long submittedDataId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .fetchByFormIdSubmittedIdAndActive_Last(formId,
+			submittedDataId, orderByComparator);
+	}
+
+	/**
+	* Returns the submitted datas before and after the current submitted data in the ordered set where formId = &#63; and submittedDataId = &#63;.
+	*
+	* @param submittedDataPK the primary key of the current submitted data
+	* @param formId the form ID
+	* @param submittedDataId the submitted data ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the previous, current, and next submitted data
+	* @throws com.rcs.webform.NoSuchSubmittedDataException if a submitted data with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.rcs.webform.model.SubmittedData[] findByFormIdSubmittedIdAndActive_PrevAndNext(
+		com.rcs.webform.service.persistence.SubmittedDataPK submittedDataPK,
+		long formId, long submittedDataId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.rcs.webform.NoSuchSubmittedDataException {
+		return getPersistence()
+				   .findByFormIdSubmittedIdAndActive_PrevAndNext(submittedDataPK,
+			formId, submittedDataId, orderByComparator);
+	}
+
+	/**
+	* Removes all the submitted datas where formId = &#63; and submittedDataId = &#63; from the database.
+	*
+	* @param formId the form ID
+	* @param submittedDataId the submitted data ID
+	* @throws SystemException if a system exception occurred
+	*/
+	public static void removeByFormIdSubmittedIdAndActive(long formId,
+		long submittedDataId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getPersistence()
+			.removeByFormIdSubmittedIdAndActive(formId, submittedDataId);
+	}
+
+	/**
+	* Returns the number of submitted datas where formId = &#63; and submittedDataId = &#63;.
+	*
+	* @param formId the form ID
+	* @param submittedDataId the submitted data ID
+	* @return the number of matching submitted datas
+	* @throws SystemException if a system exception occurred
+	*/
+	public static int countByFormIdSubmittedIdAndActive(long formId,
+		long submittedDataId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .countByFormIdSubmittedIdAndActive(formId, submittedDataId);
+	}
+
+	/**
 	* Caches the submitted data in the entity cache if it is enabled.
 	*
 	* @param submittedData the submitted data

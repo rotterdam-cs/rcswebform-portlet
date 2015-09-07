@@ -131,6 +131,13 @@ public class SubmittedDataLocalServiceClpInvoker {
 		_methodParameterTypes55 = new String[] {
 				"java.lang.Long", "com.liferay.portal.service.ServiceContext"
 			};
+
+		_methodName56 = "deleteBySubmittedDataIdAndFormId";
+
+		_methodParameterTypes56 = new String[] {
+				"java.lang.Long", "java.lang.Long",
+				"com.liferay.portal.service.ServiceContext"
+			};
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -245,6 +252,13 @@ public class SubmittedDataLocalServiceClpInvoker {
 				(com.liferay.portal.service.ServiceContext)arguments[1]);
 		}
 
+		if (_methodName56.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes56, parameterTypes)) {
+			return SubmittedDataLocalServiceUtil.deleteBySubmittedDataIdAndFormId((java.lang.Long)arguments[0],
+				(java.lang.Long)arguments[1],
+				(com.liferay.portal.service.ServiceContext)arguments[2]);
+		}
+
 		throw new UnsupportedOperationException();
 	}
 
@@ -288,4 +302,6 @@ public class SubmittedDataLocalServiceClpInvoker {
 	private String[] _methodParameterTypes54;
 	private String _methodName55;
 	private String[] _methodParameterTypes55;
+	private String _methodName56;
+	private String[] _methodParameterTypes56;
 }

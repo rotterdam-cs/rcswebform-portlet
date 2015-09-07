@@ -147,6 +147,10 @@
         <column name="portletId" type="String" primary="true"></column>
         <column name="formItemId" type="long" primary="true"></column>
         <column name="userInput" type="String"></column>
+        <finder name="FormIdSubmittedIdAndActive" return-type="Collection" where="active=true">
+            <finder-column name="formId"></finder-column>
+            <finder-column name="submittedDataId"></finder-column>
+        </finder>
 	</entity>
 	<entity name="FormItemOption" remote-service="false"
 		local-service="true">

@@ -18,15 +18,21 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.portlet.PortletException;
+
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.PropertyFactoryUtil;
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.ServiceContext;
+import com.rcs.webform.model.Form;
 import com.rcs.webform.model.SubmittedData;
 import com.rcs.webform.service.base.SubmittedDataLocalServiceBaseImpl;
+import com.rcs.webform.service.persistence.FormUtil;
 
 /**
  * The implementation of the submitted data local service.
@@ -89,5 +95,28 @@ public class SubmittedDataLocalServiceImpl
 		}
 		return submitDataList;
 	}
-	
+
+	   @SuppressWarnings("unchecked")
+	    public List<SubmittedData> deleteBySubmittedDataIdAndFormId(Long submittedDataId, Long formId, ServiceContext serviceContext) throws SystemException, PortalException{
+	        User user = null;
+	        List<SubmittedData> submitDataList = null;
+	        Date now = new Date();
+	        try {
+	            user = userLocalService.getUserById(serviceContext.getUserId());
+	            
+	            submitDataList = submittedDataPersistence.findByFormIdSubmittedIdAndActive(formId, submittedDataId);
+	            for (SubmittedData submitData : submitDataList){
+	                submitData.setActive(false);
+	                submitData.setModificationDate(serviceContext.getModifiedDate(now));
+	                submitData.setModificationUser(user.getFullName());
+	                
+	                submittedDataPersistence.update(submitData);
+	            }
+	            
+	        } catch (Exception e) {
+	            log.error("Exception while deleting submitted data: " + e.getMessage(), e);
+	            throw e;
+	        }
+	        return submitDataList;
+	    }
 }

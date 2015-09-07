@@ -253,7 +253,7 @@ boolean ignoreRequestValue = (index != formFieldsIndex);
 			<aui:field-wrapper cssClass='<%= "text-field-input-type" + ((Validator.isNull(fieldType) || (!fieldType.equals("TEXT_FIELD"))) ? " hide" : StringPool.BLANK) %>' >
 				<aui:field-wrapper cssClass="left-row-clear-left">
 					<aui:select cssClass="text-field-input-type" ignoreRequestValue="<%= ignoreRequestValue %>" name='<%= "fieldInputType" + index %>' helpMessage='Set Text Field Input Type' label="Input Type">
-						<aui:option selected='<%= fieldTextFieldInputType.equals("NONE") %>' value="NONE"><liferay-ui:message key="text" /></aui:option>
+						<aui:option selected='<%= fieldTextFieldInputType.equals("NONE") %>' value="NONE"><liferay-ui:message key="any" /></aui:option>
 						<aui:option selected='<%= fieldTextFieldInputType.equals("ALPHANUM") %>' value="ALPHANUM"><liferay-ui:message key="com.rcs.rcswebform.validation.alphanumeric" /></aui:option>
 						<aui:option selected='<%= fieldTextFieldInputType.equals("ALPHA") %>' value="ALPHA"><liferay-ui:message key="com.rcs.rcswebform.validation.alphabet" /></aui:option>
 						<aui:option selected='<%= fieldTextFieldInputType.equals("NUMBER") %>' value="NUMBER"><liferay-ui:message key="number" /></aui:option>
@@ -291,7 +291,7 @@ boolean ignoreRequestValue = (index != formFieldsIndex);
 	<c:choose>
 		<c:when test="<%= !fieldsEditingDisabled %>">
 			<aui:field-wrapper cssClass="left-row-clear-left">
-				<liferay-ui:toggle id='<%= "advanceSettings" + index %>' showMessage="Show Advance Settings" hideMessage="Hide Advance Settings" 
+				<liferay-ui:toggle id='<%= "advanceSettings" + index %>' showMessage="Show Advanced Settings" hideMessage="Hide Advanced Settings" 
  				 	defaultShowContent="true" stateVar='<%= "advanceSettings" + index %>'></liferay-ui:toggle> 
 				<div id='<%= "advanceSettings" + index %>' style="display: <liferay-ui:toggle-value id='<%= "advanceSettings" + index %>' />; padding-top: 10px;">
 					<aui:field-wrapper cssClass="left-row-clear-left form-item-css-class">

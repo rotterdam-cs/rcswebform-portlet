@@ -81,7 +81,13 @@ public class SubmittedDataModelImpl extends BaseModelImpl<SubmittedData>
 	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.util.service.ServiceProps.get(
 				"value.object.finder.cache.enabled.com.rcs.webform.model.SubmittedData"),
 			true);
-	public static final boolean COLUMN_BITMASK_ENABLED = false;
+	public static final boolean COLUMN_BITMASK_ENABLED = GetterUtil.getBoolean(com.liferay.util.service.ServiceProps.get(
+				"value.object.column.bitmask.enabled.com.rcs.webform.model.SubmittedData"),
+			true);
+	public static long FORMID_COLUMN_BITMASK = 1L;
+	public static long SUBMITTEDDATAID_COLUMN_BITMASK = 2L;
+	public static long PORTLETID_COLUMN_BITMASK = 4L;
+	public static long FORMITEMID_COLUMN_BITMASK = 8L;
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.util.service.ServiceProps.get(
 				"lock.expiration.time.com.rcs.webform.model.SubmittedData"));
 
@@ -218,7 +224,19 @@ public class SubmittedDataModelImpl extends BaseModelImpl<SubmittedData>
 
 	@Override
 	public void setSubmittedDataId(long submittedDataId) {
+		_columnBitmask |= SUBMITTEDDATAID_COLUMN_BITMASK;
+
+		if (!_setOriginalSubmittedDataId) {
+			_setOriginalSubmittedDataId = true;
+
+			_originalSubmittedDataId = _submittedDataId;
+		}
+
 		_submittedDataId = submittedDataId;
+	}
+
+	public long getOriginalSubmittedDataId() {
+		return _originalSubmittedDataId;
 	}
 
 	@Override
@@ -298,7 +316,19 @@ public class SubmittedDataModelImpl extends BaseModelImpl<SubmittedData>
 
 	@Override
 	public void setFormId(long formId) {
+		_columnBitmask |= FORMID_COLUMN_BITMASK;
+
+		if (!_setOriginalFormId) {
+			_setOriginalFormId = true;
+
+			_originalFormId = _formId;
+		}
+
 		_formId = formId;
+	}
+
+	public long getOriginalFormId() {
+		return _originalFormId;
 	}
 
 	@Override
@@ -339,6 +369,10 @@ public class SubmittedDataModelImpl extends BaseModelImpl<SubmittedData>
 	@Override
 	public void setUserInput(String userInput) {
 		_userInput = userInput;
+	}
+
+	public long getColumnBitmask() {
+		return _columnBitmask;
 	}
 
 	@Override
@@ -408,6 +442,17 @@ public class SubmittedDataModelImpl extends BaseModelImpl<SubmittedData>
 
 	@Override
 	public void resetOriginalValues() {
+		SubmittedDataModelImpl submittedDataModelImpl = this;
+
+		submittedDataModelImpl._originalSubmittedDataId = submittedDataModelImpl._submittedDataId;
+
+		submittedDataModelImpl._setOriginalSubmittedDataId = false;
+
+		submittedDataModelImpl._originalFormId = submittedDataModelImpl._formId;
+
+		submittedDataModelImpl._setOriginalFormId = false;
+
+		submittedDataModelImpl._columnBitmask = 0;
 	}
 
 	@Override
@@ -565,6 +610,8 @@ public class SubmittedDataModelImpl extends BaseModelImpl<SubmittedData>
 			SubmittedData.class
 		};
 	private long _submittedDataId;
+	private long _originalSubmittedDataId;
+	private boolean _setOriginalSubmittedDataId;
 	private long _groupId;
 	private long _companyId;
 	private boolean _active;
@@ -572,8 +619,11 @@ public class SubmittedDataModelImpl extends BaseModelImpl<SubmittedData>
 	private Date _modificationDate;
 	private String _modificationUser;
 	private long _formId;
+	private long _originalFormId;
+	private boolean _setOriginalFormId;
 	private String _portletId;
 	private long _formItemId;
 	private String _userInput;
+	private long _columnBitmask;
 	private SubmittedData _escapedModel;
 }
