@@ -166,7 +166,11 @@
 					var formItemClasses = Data.data.formItems[formItemIdx].formItemAttrClass;
 					divFormItem.addClass(formItemClasses);
 					formItemLabel.addClass(Data.data.formItems[formItemIdx].labelAttrClass);
-					formItemLabel.set('text',Data.data.formItems[formItemIdx].label);
+					var label = Data.data.formItems[formItemIdx].label;
+					if (Data.data.formItems[formItemIdx].mandatory == true) {
+						label = label + ' (Required)';
+					}
+					formItemLabel.set('text', label);	
 
 					switch(Data.data.formItems[formItemIdx].type) {
 						case 'TEXT_FIELD' :
@@ -310,7 +314,7 @@
 		rule.required = Data.data.formItems[formItemIdx].mandatory;
 		fieldString.required = Data.data.formItems[formItemIdx].errorMandatoryMessage;
 
-		if(Data.data.formItems[formItemIdx].validationType === 'REGEX'){
+		if(Data.data.formItems[formItemIdx].validationType == 'REGEX'){
 			rule[Data.data.formItems[formItemIdx].validationType.toLowerCase()] = Data.data.formItems[formItemIdx].validationRegexValue;
 		} else {
 			rule[Data.data.formItems[formItemIdx].validationType.toLowerCase()] = true;  
@@ -335,8 +339,8 @@
 	
 	function initUserInputText(formItemInputWrapper, formItemInput, formItemIdx) {
 		initUserInput(formItemInputWrapper, formItemInput, formItemIdx);
-		if(Data.data.formItems[formItemIdx].type === 'TEXT_FIELD') {
-			formItemInputText.set('value', Data.data.formItems[formItemIdx].defaultValue);
+		if(Data.data.formItems[formItemIdx].type == 'TEXT_FIELD') {
+			formItemInput.set('value', Data.data.formItems[formItemIdx].defaultValue);
 		}
 	}
 	

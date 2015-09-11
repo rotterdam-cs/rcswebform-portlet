@@ -34,12 +34,12 @@
 							isSubmittedDataActive = false;
 							continue;
 						}
-						tableRow[""+replaceAll(' ', '_', formItems[formItemId].label)+""] = submittedData[submittedDataId][formItemId].userInput;	
+						tableRow[formItems[formItemId].label] = submittedData[submittedDataId][formItemId].userInput;
 					}
 					if(isSubmittedDataActive) {
 						submittedData[submittedDataId]['table_row_index'] = tableData.length;
 						creationDate = new Date(submittedData[submittedDataId][formItemId].creationDate);
-						tableRow["submit_date"] = A.Date.format(creationDate, {format : "%c"});
+						tableRow["submit date"] = A.Date.format(creationDate, {format : "%c"});
 						tableRow[" "] = submittedDataId;
 						tableData.push(tableRow);
 					}
@@ -88,14 +88,14 @@
 				for(var i = 0; i < formItems.length; i++){
 					tableHeader = {};
 					if(formItems[i].type != 'SECTION') {
-						tableHeader["key"] = replaceAll(' ', '_', formItems[i].label);
+						tableHeader["key"] = formItems[i].label;
 						tableHeader["sortable"] = true;
 						tableColumn.push(tableHeader);
 					}
 				}
 				
 				tableHeader = {};
-				tableHeader["key"] = "submit_date";
+				tableHeader["key"] = "submit date";
 				tableHeader["sortable"] = true;
 				tableColumn.push(tableHeader);
 				
