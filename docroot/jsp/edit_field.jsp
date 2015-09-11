@@ -209,19 +209,22 @@ boolean ignoreRequestValue = (index != formFieldsIndex);
 	<c:choose>
 		<c:when test="<%= !fieldsEditingDisabled %>">
 		<aui:input cssClass="fieldOptionsIndex" name='<%= "fieldOptionsIndex" + index %>' type="hidden" value='<%=fieldOptionsIndex%>'/>
-		<div class="options-field">
-			<aui:input name='<%= "formItemOptionId0_" + index %>' type="hidden" value='<%=formItemOptionId%>'/>
-			<aui:field-wrapper cssClass='<%= "left-row-clear-left options" + ((Validator.isNull(fieldType) || (!fieldType.equals("OPTIONS") && !fieldType.equals("RADIO_BUTTON") && !fieldType.equals("CHECKBOX"))) ? " hide" : StringPool.BLANK) %>'>
-				<aui:input name='<%= "fieldOptionsValue0_" + index %>' type="text" ignoreRequestValue="<%= ignoreRequestValue %>" label="Options Value" value="<%= formItemOptionValue %>"></aui:input>
-			</aui:field-wrapper>
-			<aui:field-wrapper cssClass='<%= "left-row options" + ((Validator.isNull(fieldType) || (!fieldType.equals("OPTIONS") && !fieldType.equals("RADIO_BUTTON") && !fieldType.equals("CHECKBOX"))) ? " hide" : StringPool.BLANK) %>' label="Options Label">
-				<liferay-ui:input-localized ignoreRequestValue="<%= ignoreRequestValue %>" name='<%= "fieldOptionsLabel0_" + index %>' xml="<%= formItemOptionLabelMap %>" />
-			</aui:field-wrapper>
-			<aui:field-wrapper cssClass='<%= "left-row-clear-right options" + ((Validator.isNull(fieldType) || (!fieldType.equals("OPTIONS") && !fieldType.equals("RADIO_BUTTON") && !fieldType.equals("CHECKBOX"))) ? " hide" : StringPool.BLANK) %>' helpMessage="" label="Action">
-				<button type="button" id='<%= "btn-add-option" + index %>' class="btn-add-option btn btn-primary btn-content btn btn-icon-only " title="Add option"><span class="btn-icon icon icon-plus"></span></button>
-<!-- 				<button type="button" class="btn-remove-option btn btn-primary btn-content btn btn-icon-only " title="Remove option"><span class="btn-icon icon icon-minus"></span></button> -->
-			</aui:field-wrapper>
+		<div class='<%="options-field" + ((Validator.isNull(fieldType) || (!fieldType.equals("OPTIONS") && !fieldType.equals("RADIO_BUTTON") && !fieldType.equals("CHECKBOX"))) ? " hide" : StringPool.BLANK) %>'>
+			<div class='first-option-field'>
 			
+				<aui:input name='<%= "formItemOptionId0_" + index %>' type="hidden" value='<%=formItemOptionId%>'/>
+
+				<aui:field-wrapper cssClass='left-row-clear-left options'>
+					<aui:input name='<%= "fieldOptionsValue0_" + index %>' type="text" ignoreRequestValue="<%= ignoreRequestValue %>" label="Options Value" value="<%= formItemOptionValue %>"></aui:input>
+				</aui:field-wrapper>
+				<aui:field-wrapper cssClass='left-row options' label="Options Label">
+					<liferay-ui:input-localized ignoreRequestValue="<%= ignoreRequestValue %>" name='<%= "fieldOptionsLabel0_" + index %>' xml="<%= formItemOptionLabelMap %>" />
+				</aui:field-wrapper>
+				<aui:field-wrapper cssClass='left-row-clear-right options' helpMessage="" label="Action">
+					<button type="button" id='<%= "btn-add-option" + index %>' class="btn-add-option btn btn-primary btn-content btn btn-icon-only " title="Add option"><span class="btn-icon icon icon-plus"></span></button>
+	<!-- 				<button type="button" class="btn-remove-option btn btn-primary btn-content btn btn-icon-only " title="Remove option"><span class="btn-icon icon icon-minus"></span></button> -->
+				</aui:field-wrapper>
+			</div>
 			<%
 				
 				request.setAttribute("formItemOptions", formItemOptions);

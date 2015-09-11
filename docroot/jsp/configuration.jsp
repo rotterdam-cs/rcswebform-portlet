@@ -73,7 +73,7 @@ boolean fieldsEditingDisabled = false;
 	<liferay-ui:error exception="<%= DuplicateColumnNameException.class %>" message="please-enter-unique-field-names" />
 	<liferay-ui:error key="error-storage-not-choosen" message="Please choose at least one storage for submitted data" />
 	
-	<liferay-ui:tabs names="Form Information,Form Submit Action,Form Fields" onClick="onClickTabs(this)" refresh="false" value="<%= tabValues %>">
+	<liferay-ui:tabs names="Form Information,Form Submit Handling,Form Fields,Extra Settings" onClick="onClickTabs(this)" refresh="false" value="<%= tabValues %>">
 		<liferay-ui:section>
 			<aui:fieldset>
 				<aui:field-wrapper label="Title">
@@ -84,52 +84,45 @@ boolean fieldsEditingDisabled = false;
 					<liferay-ui:input-localized name="description" xml="<%= descriptionXml %>" type="editor"></liferay-ui:input-localized>
 				</aui:field-wrapper>
 				
-				<aui:field-wrapper>
-					<aui:input name="requireCaptcha" type="checkbox" label="Require Captcha" value="<%= requireCaptcha %>"></aui:input>
-				</aui:field-wrapper>
-				
-				<aui:field-wrapper label="On Valid Submitted Data">
-					<aui:input name="onSubmitData" type="radio" id="submitSuccessRadio" label="Show Success Message" value="1" checked="<%= submitSuccessMessageRadio %>" ></aui:input>
-					Success message: <liferay-ui:input-localized name="submitSuccessMsg" xml="<%= submitSuccessMessage %>"></liferay-ui:input-localized>
-					<aui:input name="onSubmitData" type="radio" id="submitURLRadio" label="Redirect URL on success" value="2" checked="<%= successURLRadio %>"></aui:input>
-					URL redirect: <aui:input name="submitSuccessURL" type="text" label="" value="<%= successURL %>"></aui:input>
-					<aui:input name="preferences--onSubmit--" type="hidden" id="onSubmitHiddenValue" value="<%= onSubmitValue %>"></aui:input>
-				</aui:field-wrapper>
-				
-				<aui:field-wrapper label="Submit Button Label">
-					<liferay-ui:input-localized name="submitBtnLabel" xml="<%= submitButtonLabel %>"></liferay-ui:input-localized>
-				</aui:field-wrapper>
-				
-				<aui:field-wrapper label="Form CSS Styling">
-					<aui:input name="formCssClass" type="text" label="Form Class" value="<%= formCssClass %>"></aui:input>
-					<aui:input name="submitCssClass" type="text" label="Submit Button Class" value="<%= submitBtnCssClass %>"></aui:input>
-				</aui:field-wrapper>
-				
 			</aui:fieldset>
 		</liferay-ui:section>
 		<liferay-ui:section>
-			<aui:fieldset label="Email">
-				<liferay-ui:error key="emailAddressInvalid" message="Please enter a valid email address" />
-				<liferay-ui:error key="emailAddressRequired" message="Please enter an email address" />
-				<liferay-ui:error key="fileNameInvalid" message="Please enter a valid path and file name" />
-				<liferay-ui:error key="handlingRequired" message="Please select an action for the handling of form data" />
-				<liferay-ui:error key="subjectRequired" message="Please enter a subject" />
+				<aui:field-wrapper label="How submitted data handled">
+					<aui:input name="preferences--saveToDatabase--" label="Save data to database" type="checkbox" value="<%= saveToDatabase %>"></aui:input>
+					
+					<aui:input name="preferences--sendAsEmail--" cssClass="sendAsEmailChkBox" label="Send data as email" type="checkbox" value="<%= sendAsEmail %>"></aui:input>
+					
+					<div id='<%= "email"%>' class=' <%="email-form" + (sendAsEmail ? StringPool.BLANK : " hide") %>'>
+					
+						<liferay-ui:error key="emailAddressInvalid" message="Please enter a valid email address" />
+						<liferay-ui:error key="emailAddressRequired" message="Please enter an email address" />
+						<liferay-ui:error key="fileNameInvalid" message="Please enter a valid path and file name" />
+						<liferay-ui:error key="handlingRequired" message="Please select an action for the handling of form data" />
+						<liferay-ui:error key="subjectRequired" message="Please enter a subject" />
+						
+						<aui:fieldset>
+							<aui:input name="preferences--emailFromName--" label="Name From" value="<%= emailFromName %>"></aui:input>
+							<aui:input name="preferences--emailFromAddress--" label="Address From" value="<%= emailFromAddress %>"></aui:input>
+						</aui:fieldset>
+						
+						<aui:input name="preferences--emailAddress--" label="Adresses To" helpMessage="Add email addresses separated by commas" value="<%= emailAddress %>"></aui:input>
+						
+						<aui:input name="preferences--subject--" label="Subject" value="<%= subject %>"></aui:input>
+					</div>
+				</aui:field-wrapper>
 				
-				<aui:input name="preferences--sendAsEmail--" cssClass="sendAsEmailChkBox" label="Send data as email" type="checkbox" value="<%= sendAsEmail %>"></aui:input>
+				<aui:field-wrapper label="What to do after data submitted">
+					<aui:input name="onSubmitData" type="radio" id="submitSuccessRadio" label="Show Success Message" value="1" checked="<%= submitSuccessMessageRadio %>" ></aui:input>
+					<aui:field-wrapper cssClass='<%= "rcs submit-success-msg-wrapper" + ( onSubmitValue == 1 ? StringPool.BLANK:" hide")%>' label="Success message:"> 
+						<liferay-ui:input-localized name="submitSuccessMsg" cssClass='rcs.control-group' xml="<%= submitSuccessMessage %>"></liferay-ui:input-localized>
+					</aui:field-wrapper>
+					<aui:input name="onSubmitData" type="radio" id="submitURLRadio" label="Redirect to" value="2" checked="<%= successURLRadio %>"></aui:input>
+					<aui:field-wrapper cssClass='<%= "submit-success-url-wrapper" + (onSubmitValue == 2 ? StringPool.BLANK:" hide")%>' label="URL : "> 
+						<aui:input name="submitSuccessURL" type="text" label="" value="<%= successURL %>"></aui:input>
+					</aui:field-wrapper>
+					<aui:input name="preferences--onSubmit--" type="hidden" id="onSubmitHiddenValue" value="<%= onSubmitValue %>"></aui:input>
+				</aui:field-wrapper>
 				
-				<aui:fieldset>
-					<aui:input name="preferences--emailFromName--" label="Name From" value="<%= emailFromName %>"></aui:input>
-					<aui:input name="preferences--emailFromAddress--" label="Address From" value="<%= emailFromAddress %>"></aui:input>
-				</aui:fieldset>
-				
-				<aui:input name="preferences--emailAddress--" label="Adresses To" helpMessage="Add email addresses separated by commas" value="<%= emailAddress %>"></aui:input>
-				
-				<aui:input name="preferences--subject--" label="Subject" value="<%= subject %>"></aui:input>
-			</aui:fieldset>
-			
-			<aui:fieldset label="Database">
-				<aui:input name="preferences--saveToDatabase--" label="Save data to database" type="checkbox" value="<%= saveToDatabase %>"></aui:input>
-			</aui:fieldset>
 		</liferay-ui:section>
 		<liferay-ui:section>
 			<aui:fieldset cssClass="rows-container webFields">
@@ -168,6 +161,21 @@ boolean fieldsEditingDisabled = false;
 
 			</aui:fieldset>
 		</liferay-ui:section>
+		<liferay-ui:section>
+			<aui:field-wrapper>
+				<aui:input name="requireCaptcha" type="checkbox" label="Use Captcha" value="<%= requireCaptcha %>"></aui:input>
+			</aui:field-wrapper>
+			<aui:field-wrapper>
+				<aui:input name="formCssClass" type="text" label="Form Class" value="<%= formCssClass %>"></aui:input>
+			</aui:field-wrapper>
+			<aui:field-wrapper label="Submit Button Label">
+				<liferay-ui:input-localized name="submitBtnLabel" xml="<%= submitButtonLabel %>"></liferay-ui:input-localized>
+			</aui:field-wrapper>
+			<aui:field-wrapper>
+				<aui:input name="submitCssClass" type="text" label="Submit Button Class" value="<%= submitBtnCssClass %>"></aui:input>
+			</aui:field-wrapper>
+		</liferay-ui:section>
+		
 	</liferay-ui:tabs>
 	
 	<aui:button-row>
@@ -184,7 +192,7 @@ boolean fieldsEditingDisabled = false;
 			var formRow = select.ancestor('.lfr-form-row');
 			var value = select.val();
 
-			var optionsDiv = formRow.all('.options');
+			var optionsDiv = formRow.one('.options-field');
 
 			if ((value == 'OPTIONS') || (value == 'RADIO_BUTTON') || (value == 'CHECKBOX')) {
 				optionsDiv.all('label').show();
@@ -354,21 +362,39 @@ AUI().use('aui-base',function(A){
 		A.one('#<portlet:namespace />subject').set('disabled',true);
 	</c:if>
 	
+	
+	var onSubmitHiddenValueNode = A.one('#<portlet:namespace />onSubmitHiddenValue');
+	function onValidSubmitActionToggle() {
+		var submitSuccessMsgWrapper = A.one('.submit-success-msg-wrapper');
+		var submitSuccessURLWrapper = A.one('.submit-success-url-wrapper');
+		if(onSubmitHiddenValueNode.val() == '1') {
+			submitSuccessMsgWrapper.show();
+			submitSuccessURLWrapper.hide();
+		} else if (onSubmitHiddenValueNode.val() == '2') {
+			submitSuccessMsgWrapper.hide();
+			submitSuccessURLWrapper.show();
+		}
+	};
+
 	A.one('#<portlet:namespace />submitSuccessRadio').on('click', function(event){
-		A.one('#<portlet:namespace />onSubmitHiddenValue').set('value',this.val());
+		onSubmitHiddenValueNode.set('value',this.val());
+		onValidSubmitActionToggle();
 	});
 	
 	A.one('#<portlet:namespace />submitURLRadio').on('click', function(event){
-		A.one('#<portlet:namespace />onSubmitHiddenValue').set('value',this.val());
+		onSubmitHiddenValueNode.set('value',this.val());
+		onValidSubmitActionToggle();
 	});
 	
 	A.one('.sendAsEmailChkBox').on('click', function(event){
 		if(this.attr('checked')){
+			A.one('.email-form').show();
 			A.one('#<portlet:namespace />emailFromName').set('disabled',false);
 			A.one('#<portlet:namespace />emailFromAddress').set('disabled',false);
 			A.one('#<portlet:namespace />emailAddress').set('disabled',false);
 			A.one('#<portlet:namespace />subject').set('disabled',false);
 		} else {
+			A.one('.email-form').hide();	
 			A.one('#<portlet:namespace />emailFromName').set('disabled',true);
 			A.one('#<portlet:namespace />emailFromAddress').set('disabled',true);
 			A.one('#<portlet:namespace />emailAddress').set('disabled',true);

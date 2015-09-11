@@ -1,3 +1,4 @@
+<%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.List"%>
 <%@ include file="/jsp/init.jsp" %>
 
@@ -14,27 +15,27 @@ long selectedFormId = GetterUtil.getLong(portletPreferences.getValue("selectedFo
 	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
 	
 	<aui:fieldset>
-		<aui:field-wrapper label="Select Form">
+<%-- 		<aui:field-wrapper label="Select Form"> --%>
 			<%
 			if (formList.isEmpty()){
 				out.println("List of form is empty");
 			} else {
 			%>
-			<select name="<portlet:namespace />selectedRcsWebForm" id="<portlet:namespace />selectedRcsWebForm">
+			<aui:select name="selectedRcsWebForm" label="Select Form">
 				<%
 				for (Form form : formList){
 				%>
-					<option value="<%= form.getFormId() %>" <%if(form.getFormId()==selectedFormId){%>selected<%}%>>
-						<%= form.getTitle(locale) %>
-					</option>
+						<aui:option value="<%= form.getFormId() %>"  selected="<%= form.getFormId()==selectedFormId %>">
+						<%= form.getTitle(locale) %>  - created on <%= new SimpleDateFormat("YYYY-MM-dd HH:mm").format(form.getCreationDate()) %>
+					</aui:option>
 				<%
 				}
 				%>
-			</select>
+			</aui:select>
 			<%
 			}
 			%>
-		</aui:field-wrapper>
+<%-- 		</aui:field-wrapper> --%>
 	</aui:fieldset>
 	
 	<aui:button-row>
