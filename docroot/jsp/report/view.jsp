@@ -18,7 +18,7 @@
 		</div>
 		<aui:form action="<%= deleteRowURL %>" method="POST" name="deleteRowForm" autocomplete="off" cssClass="hidden" >
 			<input type="hidden" name="<portlet:namespace />submitId" id="<portlet:namespace />submitId" />
-			<button class="btn icon-remove" id="<portlet:namespace />deleteRow" type="submit"></button>			
+			<button class="btn icon-remove" id="<portlet:namespace />deleteRow" type="submit" ></button>			
 		</aui:form>
 		
 		<aui:script use="aui-node,aui-datatype,aui-datatable,datatable-sort,datatable-paginator">
@@ -67,13 +67,15 @@
 			if(tableData.length == 0) {
 				A.one('.table-data').getDOMNode().innerHTML = '<tr  class="table-even"><td style="text-align:center;" colspan="'+tableColumn.length+'" class="table-cell " >No Data</td></tr>';
 			}
-			
+
 			</aui:script>
 			
 			<aui:script>
 			var deleteRow = function (event) {
 				document.getElementById('<portlet:namespace />submitId').value = event.currentTarget.value;
-				document.getElementById('<portlet:namespace />deleteRow').click();
+				if(confirm('Are you sure you want to delete this record?')) {
+					document.getElementById('<portlet:namespace />deleteRowForm').submit();	
+				}
 			}
 			
 			function replaceAll(find, replace, str) {
