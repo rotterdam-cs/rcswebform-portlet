@@ -8,7 +8,6 @@ import java.util.Map;
 
 import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
-import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.rcs.webform.common.enums.FormItemType;
 import com.rcs.webform.common.enums.ValidationType;
@@ -20,7 +19,6 @@ import com.rcs.webform.model.FormItem;
 import com.rcs.webform.model.FormItemOption;
 import com.rcs.webform.model.SubmittedData;
 import com.rcs.webform.service.FormItemOptionLocalServiceUtil;
-import com.sun.corba.se.spi.orb.StringPair;
 
 public class EntityDtoConverter {
     

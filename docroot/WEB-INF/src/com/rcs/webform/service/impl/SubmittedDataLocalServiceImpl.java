@@ -113,10 +113,9 @@ public class SubmittedDataLocalServiceImpl
 	                submittedDataPersistence.update(submitData);
 	            }
 	            
-	        } catch (Exception e) {
-	            log.error("Exception while deleting submitted data: " + e.getMessage(), e);
-	            throw e;
-	        }
+	        }  catch (Exception e) {
+                log.error("Exception while deleting submitted data: " + e.getMessage(), e);
+            }
 	        return submitDataList;
 	    }
 }

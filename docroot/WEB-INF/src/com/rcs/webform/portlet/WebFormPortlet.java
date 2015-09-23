@@ -1,12 +1,14 @@
 package com.rcs.webform.portlet;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.logging.Logger;
 
 import javax.mail.internet.InternetAddress;
 import javax.portlet.ActionRequest;
@@ -112,7 +114,9 @@ public class WebFormPortlet extends MVCPortlet {
 
         if (form != null) {
             requireCaptcha = form.getUseCaptcha();
-            if (onSubmitValue == 2) successUrl = form.getSuccessURL();
+            if (onSubmitValue == 2) {
+                successUrl = form.getSuccessURL();
+            }
 
         }
 
@@ -152,6 +156,9 @@ public class WebFormPortlet extends MVCPortlet {
 
         // Redirect to specified URL if there are no errors and the URL is not empty string or null
         if (SessionErrors.isEmpty(actionRequest) && Validator.isNotNull(successUrl)) {
+            if(!successUrl.contains("://")) {
+                successUrl = "http://" + successUrl;
+            }
             actionResponse.sendRedirect(successUrl);
         }
 

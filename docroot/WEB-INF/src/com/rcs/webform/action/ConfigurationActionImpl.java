@@ -43,7 +43,6 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 
     public void processAction(PortletConfig portletConfig, ActionRequest actionRequest, ActionResponse actionResponse) throws Exception {
 
-        
         if (!SessionErrors.isEmpty(actionRequest)) {
             return;
         }
@@ -54,7 +53,7 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
         String portletResource = ParamUtil.getString(actionRequest, "portletResource");
 
         PortletPreferences preferences = actionRequest.getPreferences();
-        
+
         // Save title and description to portlet preferences
         LocalizationUtil.setLocalizedPreferencesValues(actionRequest, preferences, "title");
         LocalizationUtil.setLocalizedPreferencesValues(actionRequest, preferences, "description");
@@ -105,21 +104,21 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 
     public String render(PortletConfig portletConfig, RenderRequest renderRequest, RenderResponse renderResponse) throws Exception {
         String type = ParamUtil.getString(renderRequest, "type");
-        switch (type) {
-            case "formItem":
-                return "/jsp/edit_field.jsp";
-            case "optionField":
-                String formItemIndex = ParamUtil.getString(renderRequest, "formItemIndex");
-                String fieldOptionsValue = ParamUtil.getString(renderRequest, "fieldOptionsIndex");
-                boolean ignoreRequestValue = ParamUtil.getBoolean(renderRequest, "ignoreRequestValue");
-                int fieldOptionsIndex = Integer.parseInt(fieldOptionsValue.substring(17));
-                renderRequest.setAttribute("fieldOptionsIndex", fieldOptionsIndex);
-                renderRequest.setAttribute("formItemIndex", formItemIndex);
-                renderRequest.setAttribute("ignoreRequestValue", ignoreRequestValue);
-                return "/jsp/option_field.jsp";
-            default:
-                return "/jsp/configuration.jsp";
+        if (type.equals("formItem")) {
+            return "/jsp/edit_field.jsp";
+        } else if (type.equals("optionField")) {
+            String formItemIndex = ParamUtil.getString(renderRequest, "formItemIndex");
+            String fieldOptionsValue = ParamUtil.getString(renderRequest, "fieldOptionsIndex");
+            boolean ignoreRequestValue = ParamUtil.getBoolean(renderRequest, "ignoreRequestValue");
+            int fieldOptionsIndex = Integer.parseInt(fieldOptionsValue.substring(17));
+            renderRequest.setAttribute("fieldOptionsIndex", fieldOptionsIndex);
+            renderRequest.setAttribute("formItemIndex", formItemIndex);
+            renderRequest.setAttribute("ignoreRequestValue", ignoreRequestValue);
+            return "/jsp/option_field.jsp";
+        } else {
+            return "/jsp/configuration.jsp";
         }
+
     }
 
     /**
@@ -132,19 +131,19 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
     private void saveFormItems(ActionRequest actionRequest, Locale defaultLocale, Long formId) {
         try {
             boolean updateFields = ParamUtil.getBoolean(actionRequest, "updateFields");
-            
+
             boolean sendAsEmail = ParamUtil.getBoolean(actionRequest, "preferences--sendAsEmail--");
             boolean saveToDatabase = ParamUtil.getBoolean(actionRequest, "preferences--saveToDatabase--");
-            if(!sendAsEmail && !saveToDatabase) {
+            if (!sendAsEmail && !saveToDatabase) {
                 SessionErrors.add(actionRequest, "error-storage-not-choosen");
             }
-            
+
             if (updateFields) {
                 int i = 1;
 
                 int[] formFieldsIndexes = StringUtil.split(ParamUtil.getString(actionRequest, "formFieldsIndexes"), 0);
                 ServiceContext serviceContext = ServiceContextFactory.getInstance(FormItem.class.getName(), actionRequest);
-                
+
                 /* save form items */
                 for (int formFieldsIndex : formFieldsIndexes) {
                     Map<Locale, String> fieldLabelMap = LocalizationUtil.getLocalizationMap(actionRequest, "fieldLabel" + formFieldsIndex);
@@ -152,7 +151,7 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
                     if (Validator.isNull(fieldLabelMap.get(defaultLocale))) {
                         continue;
                     }
-                    
+
                     Long formItemId = ParamUtil.getLong(actionRequest, "formItemId" + formFieldsIndex);
                     String fieldType = ParamUtil.getString(actionRequest, "fieldType" + formFieldsIndex);
                     String validationType = ParamUtil.getString(actionRequest, "fieldInputType" + formFieldsIndex);
@@ -174,7 +173,7 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
                     String formLayout = ParamUtil.getString(actionRequest, "formLayout" + formFieldsIndex);
                     Map<Locale, String> fieldDefaultValueMap = LocalizationUtil.getLocalizationMap(actionRequest, "fieldDefaultValue" + formFieldsIndex);
                     String dateFormat = ParamUtil.getString(actionRequest, "dateFormat" + formFieldsIndex);
-                    
+
                     if (Validator.isNotNull(fieldValidationScript) ^ Validator.isNotNull(fieldValidationErrorMessage)) {
 
                         SessionErrors.add(actionRequest, "validationDefinitionInvalid" + i);

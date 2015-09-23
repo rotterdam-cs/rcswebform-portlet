@@ -120,7 +120,7 @@ boolean fieldsEditingDisabled = false;
 					<aui:field-wrapper cssClass='<%= "submit-success-url-wrapper" + (onSubmitValue == 2 ? StringPool.BLANK:" hide")%>' label="URL : "> 
 						<aui:input name="submitSuccessURL" type="text" label="" value="<%= successURL %>"></aui:input>
 					</aui:field-wrapper>
-					<aui:input name="preferences--onSubmit--" type="hidden" id="onSubmitHiddenValue" value="<%= onSubmitValue %>"></aui:input>
+					<aui:input name="preferences--onSubmitValue--" type="hidden" id="onSubmitHiddenValue" value="<%= onSubmitValue %>"></aui:input>
 				</aui:field-wrapper>
 				
 		</liferay-ui:section>
