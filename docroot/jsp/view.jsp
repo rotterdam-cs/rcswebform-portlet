@@ -29,7 +29,7 @@
 
 		<div id="<portlet:namespace />rcsWebForm" class="${Data.data.formAttrClass}" >
 			<!-- Form will be put here -->
-			<fieldset id="<portlet:namespace />rcsWebFormItem">
+			<fieldset id="<portlet:namespace />rcsWebFormItem" class="hide">
 			<span id="<portlet:namespace />rcsWebFormItemLabel">Form Item 1 label</span>
 			<span id="<portlet:namespace />rcsWebFormItemInputWrapper" >
 				<input type="text" name="<portlet:namespace />rcsWebFormItemInputText" id="<portlet:namespace />rcsWebFormItemInputText" autocomplete="off"/>
@@ -146,7 +146,6 @@
 		var validator;
 		var divForm = A.one('#<portlet:namespace />rcsWebForm');
 		var divTemplateFormItem = A.one('#<portlet:namespace />rcsWebFormItem');
-		divTemplateFormItem.hide();
 		var rules = new Object();
 		var fieldStrings = new Object();
 		var focusedDate;

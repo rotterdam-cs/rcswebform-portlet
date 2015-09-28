@@ -214,11 +214,11 @@ boolean ignoreRequestValue = (index != formFieldsIndex);
 			
 				<aui:input name='<%= "formItemOptionId0_" + index %>' type="hidden" value='<%=formItemOptionId%>'/>
 
-				<aui:field-wrapper cssClass='left-row-clear-left options'>
+				<aui:field-wrapper cssClass='left-row-clear-left options option-value'>
 					<aui:input name='<%= "fieldOptionsValue0_" + index %>' type="text" ignoreRequestValue="<%= ignoreRequestValue %>" label="Options Value" value="<%= formItemOptionValue %>"></aui:input>
 				</aui:field-wrapper>
-				<aui:field-wrapper cssClass='left-row options' label="Options Label">
-					<liferay-ui:input-localized ignoreRequestValue="<%= ignoreRequestValue %>" name='<%= "fieldOptionsLabel0_" + index %>' xml="<%= formItemOptionLabelMap %>" />
+				<aui:field-wrapper cssClass='left-row options option-label' label="Options Label">
+					<liferay-ui:input-localized ignoreRequestValue="<%= ignoreRequestValue %>" name='<%= "fieldOptionsLabel0_" + index %>' id='<%= "fieldOptionsLabel0_" + index %>' xml="<%= formItemOptionLabelMap %>" />
 				</aui:field-wrapper>
 				<aui:field-wrapper cssClass='left-row-clear-right options' helpMessage="" label="Action">
 					<button type="button" id='<%= "btn-add-option" + index %>' class="btn-add-option btn btn-primary btn-content btn btn-icon-only " title="Add option"><span class="btn-icon icon icon-plus"></span></button>
@@ -383,6 +383,27 @@ if(A.one('#advanceSettings' + index).getStyle('display')==='block') {
 	<%= "advanceSettings" + index + "Toggle"%>();
 }
 
+var addAutoFillOptionOnChange = function() {
+	A.all('.option-label').each(function(event){
+		this.all('.language-value').each(function(event) {
+			var labelNode = this;
+			var parentNode = this.ancestor('.option-label');
+			var valueNode = parentNode.previous().one('.field');
+			var labelDefaultLocaleNode = parentNode.one('#' + labelNode.get('id')+'_' + '<%=defaultLocale%>');
+			
+			labelNode.on('change', function(){
+				autoFillOptionKeyValue(valueNode, labelNode , labelDefaultLocaleNode );
+			})
+			valueNode.on('change', function(){
+				autoFillOptionKeyValue(valueNode, labelNode , labelDefaultLocaleNode );
+			})
+			
+		});
+	});
+};
+
+addAutoFillOptionOnChange();
+
 A.one('<%= "#btn-add-option" + index %>').on('click', function(event){
 	var responseText='';
 	var fieldOptionsIndex = Number(A.one('#<portlet:namespace />fieldOptionsIndex' + index).val());
@@ -407,6 +428,7 @@ A.one('<%= "#btn-add-option" + index %>').on('click', function(event){
     	 		});
     	 		fieldOptionsIndex++; 
     	 		A.one('#<portlet:namespace />fieldOptionsIndex' + index).set('value',fieldOptionsIndex);
+    	 		addAutoFillOptionOnChange();
 
    			}
   		}
@@ -465,18 +487,6 @@ optionalCheckbox.on('click', function(event) {
 	var fieldType = formRow.one('select.field-type').val().split(":")[0];
 	var mandatoryErrorMessageDiv = formRow.one('.mandatory-error-message');
 	mandatoryChanged(fieldType, value, mandatoryErrorMessageDiv);
-});
-
-var fieldOptionValue = A.one('input#<portlet:namespace />fieldOptionsValue0_' + index + '.field');
-var fieldOptionLabel = A.one('input#<portlet:namespace />fieldOptionsLabel0__' + index + '.language-value');
-var fieldOptionLabelDefaultLocale = A.one('input#<portlet:namespace /><%= "fieldOptionsLabel0__" + index + "_" + defaultLocale%>.field');
-
-fieldOptionValue.on('change', function (event) {
-	autoFillOptionKeyValue(fieldOptionValue, fieldOptionLabel, fieldOptionLabelDefaultLocale);
-});
-
-fieldOptionLabel.on('change', function (event) {
-	autoFillOptionKeyValue(fieldOptionValue, fieldOptionLabel, fieldOptionLabelDefaultLocale);
 });
 
 var maxLengthInput = A.one('input#<portlet:namespace />inputMaxLength' + index + '.field');

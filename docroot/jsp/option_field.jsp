@@ -20,11 +20,11 @@ if(formItemOptions != null && !formItemOptions.isEmpty()){
 
 <div class='added-option-field'>
 	<aui:input cssClass='formItemOptionId' name='<%= "formItemOptionId" + fieldOptionsIndex + "_" + index %>' ignoreRequestValue="<%= ignoreRequestValue %>" type="hidden" value='<%=formItemOptionId%>'/>
-	<aui:field-wrapper cssClass='left-row-clear-left options'>
+	<aui:field-wrapper cssClass='left-row-clear-left options option-value'>
 		<aui:input name='<%= "fieldOptionsValue" + fieldOptionsIndex + "_" + index %>' type="text" ignoreRequestValue="<%= ignoreRequestValue %>" label="" value="<%= formItemOptionValue %>"></aui:input>
 	</aui:field-wrapper>
 	
-	<aui:field-wrapper cssClass='left-row options'>
+	<aui:field-wrapper cssClass='left-row options option-label' >
 		<liferay-ui:input-localized ignoreRequestValue="<%= ignoreRequestValue %>" name='<%= "fieldOptionsLabel" + fieldOptionsIndex  + "_" + index %>' xml="<%= formItemOptionLabelMap %>" />
 	</aui:field-wrapper>
 	<aui:field-wrapper cssClass='left-row-clear-right options'>
@@ -48,16 +48,5 @@ A.one('<%= "#btn-remove-option" + fieldOptionsIndex  + "_" + index %>').on('clic
    	A.one('#<portlet:namespace />deletedFormItemOptionIds').val(rowFormItemOptionIds);
 
 	event.currentTarget.ancestorsByClassName('added-option-field').remove();
-});
-
-var fieldOptionValue = A.one('input#<portlet:namespace /><%= "fieldOptionsValue" + fieldOptionsIndex  + "_" + index %>.field');
-var fieldOptionLabel = A.one('input#<portlet:namespace /><%= "fieldOptionsLabel" + fieldOptionsIndex  + "__" + index%>.language-value');
-var fieldOptionLabelDefaultLocale = A.one('input#<portlet:namespace /><%= "fieldOptionsLabel" + fieldOptionsIndex  + "__" + index + "_" + defaultLocale%>.field');
-
-fieldOptionValue.on('change', function (event) {
-	autoFillOptionKeyValue(fieldOptionValue, fieldOptionLabel, fieldOptionLabelDefaultLocale);
-});
-fieldOptionLabel.on('change', function (event) {
-	autoFillOptionKeyValue(fieldOptionValue, fieldOptionLabel, fieldOptionLabelDefaultLocale);
 });
 </aui:script>

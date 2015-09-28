@@ -4,6 +4,7 @@
 
 <%
 String tabValues = ParamUtil.getString(request, "tabsValue", "Form Information");
+String defaultLocale = themeDisplay.getLocale().toString();
 
 //Get values from the database
 List<FormItem> formItems = WebFormUtil.getPortletFormItems(portletResource);
@@ -450,6 +451,5 @@ var formLayoutChanged = function(formLayout, label, input) {
 			label.set('value','<%= oneColumnLabelCssClass %>');
 		}
 	}
-
 }
 </aui:script>
