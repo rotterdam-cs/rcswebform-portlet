@@ -1,14 +1,9 @@
 package com.rcs.webform.portlet;
 
 import java.io.IOException;
-import java.net.URL;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.logging.Logger;
 
 import javax.mail.internet.InternetAddress;
 import javax.portlet.ActionRequest;
@@ -26,7 +21,6 @@ import com.liferay.portal.kernel.captcha.CaptchaTextException;
 import com.liferay.portal.kernel.captcha.CaptchaUtil;
 import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
-import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.mail.MailMessage;
@@ -50,12 +44,9 @@ import com.rcs.webform.common.util.WebFormUtil;
 import com.rcs.webform.entity.dto.FormDTO;
 import com.rcs.webform.model.Form;
 import com.rcs.webform.model.FormItem;
-import com.rcs.webform.model.FormItemOption;
 import com.rcs.webform.model.FormToPorletMap;
 import com.rcs.webform.model.SubmittedData;
 import com.rcs.webform.service.FormItemLocalServiceUtil;
-import com.rcs.webform.service.FormItemOptionLocalService;
-import com.rcs.webform.service.FormItemOptionLocalServiceUtil;
 import com.rcs.webform.service.FormLocalServiceUtil;
 import com.rcs.webform.service.FormToPorletMapLocalServiceUtil;
 import com.rcs.webform.service.SubmittedDataLocalServiceUtil;

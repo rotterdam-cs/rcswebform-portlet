@@ -28,6 +28,7 @@ import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.portal.util.PortalUtil;
 import com.rcs.webform.common.enums.FormItemType;
+import com.rcs.webform.common.enums.ValidationType;
 import com.rcs.webform.model.Form;
 import com.rcs.webform.model.FormItem;
 import com.rcs.webform.model.FormItemOption;
@@ -183,6 +184,13 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
                         validationType = FormItemType.NONE.name();
                         inputTypeMaxLength = 0;
                     }
+                    
+                    if (validationType.equals(ValidationType.PHONE_NUMBER.name())
+                            || validationType.equals(ValidationType.EMAIL.name())
+                            || validationType.equals(ValidationType.REGEX.name())) {
+                        inputTypeMaxLength = 0;
+                    }
+
 
                     FormItem formItem = FormItemLocalServiceUtil.save(formItemId, formId, fieldLabelMap, fieldType, fieldOptional, fieldValidationRegex,
                             validationType, i, inputTypeMaxLength, fieldHintMessageMap, serviceContext, formItemAttrClass, labelAttrClass, inputAttrClass,
